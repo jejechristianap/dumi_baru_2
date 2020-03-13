@@ -87,5 +87,11 @@
     <string name="pinjaman">Pinjaman</string>
     <string name="daftar">Daftar</string>
     <string name="login">Login</string>
+    <string name="nip">NIP</string>
+    <string name="masukan_nip">Masukan NIP</string>
+    <string name="masukan_email">Masukan Email</string>
+    <string name="masukan_pin">Masukan Pin (Min 6 Angka)</string>
+    <string name="ulangi_pin">Ulangi Pin</string>
+    <string name="lanjut">Lanjut</string>
 
 </resources>
