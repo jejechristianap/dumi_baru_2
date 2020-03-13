@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/beranda"
+        android:id="@+id/bottom_navigation_beranda"
+        android:icon="@drawable/ic_beranda"/>
+
+    <item android:title="@string/inbox"
+        android:id="@+id/bottom_navigation_inbox"
+        android:icon="@drawable/ic_inbox"/>
+
+    <item android:title="@string/pinjaman"
+        android:id="@+id/bottom_navigation_mitra"
+        android:icon="@drawable/ic_pinjaman"
+        />
+    <item android:title="@string/bantuan"
+        android:id="@+id/bottom_navigation_bantuan"
+        android:icon="@drawable/ic_bantuan"
+        />
+    <item android:title="@string/akun"
+        android:id="@+id/bottom_navigation_akun"
+        android:icon="@drawable/ic_akun"/>
+</menu>
