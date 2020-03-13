@@ -85,5 +85,7 @@
     <string name="rp_1jt">Rp1.000.000</string>
     <string name="biaya_asuransi_regular">Biaya Asuransi</string>
     <string name="pinjaman">Pinjaman</string>
+    <string name="daftar">Daftar</string>
+    <string name="login">Login</string>
 
 </resources>
