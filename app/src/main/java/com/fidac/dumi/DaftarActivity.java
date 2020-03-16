@@ -75,8 +75,6 @@ public class DaftarActivity extends AppCompatActivity {
                     masukanPasswordEt.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     cekPasswordEt.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
-
-                Toast.makeText(DaftarActivity.this, "bool " + isValid, Toast.LENGTH_SHORT).show();
             }
         });
 
