@@ -5,4 +5,9 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhite">#FFF</color>
     <color name="colorBlue">#1560DB</color>
+
+    <!--Switch Color-->
+    <color name="disable_forground_grey">#42221f1f</color>
+    <color name="disable_thumb_grey">#1c000000</color>
+    <color name="enable_thumb_green">#1560DB</color>
 </resources>

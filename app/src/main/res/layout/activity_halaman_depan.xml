@@ -39,7 +39,7 @@
 
     <Button
         android:textAllCaps="false"
-        android:id="@+id/login_button"
+        android:id="@+id/masuk_button"
         style="?android:attr/buttonBarButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

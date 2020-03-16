@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +21,7 @@ public class DaftarActivity extends AppCompatActivity {
     private EditText masukanEmailEt;
     private EditText masukanPasswordEt;
     private EditText cekPasswordEt;
+    private Boolean isValid;
 
     private CheckBox passwordCheckBox;
 
@@ -51,6 +53,16 @@ public class DaftarActivity extends AppCompatActivity {
         lanjutButton = findViewById(R.id.daftar_lanjut_button);
         syaratSwitch = findViewById(R.id.switch_syarat);
 
+        masukanNipEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            String nip = masukanNipEt.getText().toString();
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+
+                }
+            }
+        });
+
         passwordCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -63,58 +75,63 @@ public class DaftarActivity extends AppCompatActivity {
                     masukanPasswordEt.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     cekPasswordEt.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
+
+                Toast.makeText(DaftarActivity.this, "bool " + isValid, Toast.LENGTH_SHORT).show();
             }
         });
 
         syaratSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                lanjutButton.setVisibility(View.VISIBLE);
+                lanjutButton.setEnabled(true);
+                lanjutButton.setBackgroundResource(R.drawable.button_design_login_register);
+                lanjutButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String nip = masukanNipEt.getText().toString();
+                        String email = masukanEmailEt.getText().toString();
+                        String password = masukanPasswordEt.getText().toString();
+                        String cekPass = cekPasswordEt.getText().toString();
+
+                        if(TextUtils.isEmpty(nip)){
+                            masukanNipEt.setError("Kolom ini tidak boleh kosong..");
+                        } else {
+                            masukanNipEt.setError(null);
+                        }
+
+                        if (TextUtils.isEmpty(email)){
+                            masukanEmailEt.setError("Kolom ini tidak boleh kosong..");
+                        } else if(!EMAIL_ADDRESS_PATTERN.matcher(email).matches()){
+                            masukanEmailEt.setError("Email tidak valid");
+                        } else {
+                            masukanEmailEt.setError(null);
+                        }
+
+                        if (TextUtils.isEmpty(password)){
+                            masukanPasswordEt.setError("Kolom ini tidak boleh kosong..");
+                        } else if (password.length() < 6){
+                            masukanPasswordEt.setError("Minimal Password 6 Karakter");
+                        } else {
+                            masukanPasswordEt.setError(null);
+                        }
+
+                        if(TextUtils.isEmpty(cekPass)){
+                            cekPasswordEt.setError("Kolom ini tidak boleh kosong..");
+                        } else if(!cekPass.equals(password)) {
+                            cekPasswordEt.setError("Password Tidak Sama");
+                        } else {
+                            cekPasswordEt.setError(null);
+                        }
+                    }
+                });
                 if (!isChecked){
-                    lanjutButton.setVisibility(View.GONE);
+                    lanjutButton.setEnabled(false);
+                    lanjutButton.setBackgroundResource(R.drawable.button_lanjut_design);
                 }
             }
         });
 
-        lanjutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String nip = masukanNipEt.getText().toString();
-                String email = masukanEmailEt.getText().toString();
-                String password = masukanPasswordEt.getText().toString();
-                String cekPass = cekPasswordEt.getText().toString();
 
-                if(TextUtils.isEmpty(nip)){
-                    masukanNipEt.setError("Kolom ini tidak boleh kosong..");
-                } else {
-                    masukanNipEt.setError(null);
-                }
-
-                if (TextUtils.isEmpty(email)){
-                    masukanEmailEt.setError("Kolom ini tidak boleh kosong..");
-                } else if(!EMAIL_ADDRESS_PATTERN.matcher(email).matches()){
-                    masukanEmailEt.setError("Email tidak valid");
-                } else {
-                    masukanEmailEt.setError(null);
-                }
-
-                if (TextUtils.isEmpty(password)){
-                    masukanPasswordEt.setError("Kolom ini tidak boleh kosong..");
-                } else if (password.length() < 6){
-                    masukanPasswordEt.setError("Minimal Password 6 Karakter");
-                } else {
-                    masukanPasswordEt.setError(null);
-                }
-
-                if(TextUtils.isEmpty(cekPass)){
-                    cekPasswordEt.setError("Kolom ini tidak boleh kosong..");
-                } else if(!cekPass.equals(password)) {
-                    cekPasswordEt.setError("Password Tidak Sama");
-                } else {
-                    cekPasswordEt.setError(null);
-                }
-            }
-        });
 
 
     }

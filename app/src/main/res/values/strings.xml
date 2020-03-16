@@ -97,5 +97,7 @@
     <string name="daftarkan_diri_anda">Daftarkan diri Anda untuk menjadi Sobat Dumi</string>
     <string name="lihat_password">Lihat Password</string>
     <string name="syarat_dan_ketentuan">Saya menyetujui segala syarat dan ketentuan</string>
+    <string name="password">Masukan Password</string>
+    <string name="selamat_datang">Selamat datang kembali!</string>
 
 </resources>

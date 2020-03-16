@@ -7,21 +7,21 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
-    <style name="Theme.MyApp" parent="Theme.AppCompat.Light.NoActionBar">
-    </style>
+    <!--Splash Theme-->
+  <!--  <style name="Theme.MyApp" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>-->
 
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@color/colorBlue</item>
     </style>
-
+<!--
     <style name="Splash" parent="android:Theme">
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowDisablePreview">true</item>
-    </style>
+    </style>-->
 
     <!--Only Show Views like Image, Text, etc Without background-->
     <style name="Theme.Transparent" parent="android:Theme">
@@ -31,6 +31,19 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <!--Switch Theme-->
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">#46bdbf</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#f1f1f1
+        </item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">#42221f1f
+        </item>
     </style>
 
 </resources>

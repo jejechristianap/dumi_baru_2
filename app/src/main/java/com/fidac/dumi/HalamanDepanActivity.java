@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class HalamanDepanActivity extends AppCompatActivity {
     private Button daftarButton;
+    private Button masukButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,14 @@ public class HalamanDepanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class));
+            }
+        });
+
+        masukButton = findViewById(R.id.masuk_button);
+        masukButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HalamanDepanActivity.this, MasukActivity.class));
             }
         });
     }
