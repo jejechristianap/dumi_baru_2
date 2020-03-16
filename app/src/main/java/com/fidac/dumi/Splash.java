@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import androidx.annotation.Nullable;
-
 public class Splash extends Activity {
     private final int SPLASH_DISPLAY_LENGTH = 1000;
 
@@ -17,7 +15,7 @@ public class Splash extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(Splash.this, LoginActivity.class);
+                Intent mainIntent = new Intent(Splash.this, HalamanDepanActivity.class);
                 Splash.this.startActivity(mainIntent);
                 Splash.this.finish();
             }
