@@ -36,4 +36,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     /*Bottom Navigation*/
     implementation 'com.google.android.material:material:1.2.0-alpha01'
+    /*Material Design*/
+    implementation 'com.google.android.material:material:1.2.0-alpha05'
+    /*Volley Library*/
+    implementation 'com.android.volley:volley:1.1.1'
 }

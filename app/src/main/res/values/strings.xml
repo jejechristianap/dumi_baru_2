@@ -90,8 +90,12 @@
     <string name="nip">NIP</string>
     <string name="masukan_nip">Masukan NIP</string>
     <string name="masukan_email">Masukan Email</string>
-    <string name="masukan_pin">Masukan Pin (Min 6 Angka)</string>
-    <string name="ulangi_pin">Ulangi Pin</string>
+    <string name="masukan_password">Masukan Password (Min 6 Karakter)</string>
+    <string name="ulangi_password">Ulangi Password</string>
     <string name="lanjut">Lanjut</string>
+    <string name="masuk">Masuk</string>
+    <string name="daftarkan_diri_anda">Daftarkan diri Anda untuk menjadi Sobat Dumi</string>
+    <string name="lihat_password">Lihat Password</string>
+    <string name="syarat_dan_ketentuan">Saya menyetujui segala syarat dan ketentuan</string>
 
 </resources>

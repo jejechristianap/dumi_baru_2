@@ -20,6 +20,7 @@
         <activity android:name=".jenispinjaman.PinjamanRegularActivity" />
         <activity android:name=".jenispinjaman.PinjamanKilatActivity" />
         <activity android:name=".LihatSemuaActivity" />
+        <activity android:name=".DaftarActivity"/>
         <activity android:name=".MainActivity">
 
         </activity>
