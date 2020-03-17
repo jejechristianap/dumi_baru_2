@@ -46,4 +46,12 @@
         </item>
     </style>
 
+    <!--CheckBox Custom-->
+    <style name="MyCheckbox" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:colorControlNormal">#46bdbf</item>
+        <item name="android:colorControlActivated">#46bdbf</item>
+        <item name="android:colorControlHighlight">#c51162</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+    </style>
+
 </resources>
