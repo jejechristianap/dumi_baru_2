@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".OtpVerify"></activity>
         <activity android:name=".HalamanDepanActivity" />
         <activity
             android:name=".Splash"
@@ -26,8 +27,8 @@
         <activity android:name=".jenispinjaman.PinjamanKilatActivity" />
         <activity android:name=".LihatSemuaActivity" />
         <activity android:name=".DaftarActivity" />
-        <activity android:name=".MasukActivity"/>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MasukActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

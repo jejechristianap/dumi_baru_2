@@ -100,5 +100,8 @@
     <string name="password">Masukan Password</string>
     <string name="selamat_datang">Selamat datang kembali!</string>
     <string name="masukan_no_telp">Masukan Nomor Telp (081xxxxx)</string>
+    <string name="masukan_kode">Masukan Kode Verifikasi</string>
+    <string name="verifikasi">Verifikasi</string>
+    <string name="kirim_otp">Kirim Otp</string>
 
 </resources>

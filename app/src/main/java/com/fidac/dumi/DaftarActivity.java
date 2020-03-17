@@ -1,5 +1,6 @@
 package com.fidac.dumi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -21,6 +22,7 @@ public class DaftarActivity extends AppCompatActivity {
     private EditText masukanEmailEt;
     private EditText masukanPasswordEt;
     private EditText cekPasswordEt;
+    private EditText masukanNoTelp;
     private Boolean isValid;
 
     private CheckBox passwordCheckBox;
@@ -44,6 +46,7 @@ public class DaftarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar);
 
+//        masukanNoTelp = findViewById(R.id.daftar_no_telp_et);
         masukanNipEt = findViewById(R.id.daftar_nip_et);
         masukanEmailEt = findViewById(R.id.daftar_email_et);
         masukanPasswordEt = findViewById(R.id.daftar_password_et);
@@ -90,11 +93,16 @@ public class DaftarActivity extends AppCompatActivity {
                         String email = masukanEmailEt.getText().toString();
                         String password = masukanPasswordEt.getText().toString();
                         String cekPass = cekPasswordEt.getText().toString();
+//                        String number = masukanNoTelp.getText().toString();
+                        boolean mNip = false;
+                        boolean mEmail = false;
+                        boolean mCekPass = false;
 
                         if(TextUtils.isEmpty(nip)){
                             masukanNipEt.setError("Kolom ini tidak boleh kosong..");
                         } else {
                             masukanNipEt.setError(null);
+                            mNip = true;
                         }
 
                         if (TextUtils.isEmpty(email)){
@@ -103,6 +111,7 @@ public class DaftarActivity extends AppCompatActivity {
                             masukanEmailEt.setError("Email tidak valid");
                         } else {
                             masukanEmailEt.setError(null);
+                            mEmail = true;
                         }
 
                         if (TextUtils.isEmpty(password)){
@@ -117,9 +126,18 @@ public class DaftarActivity extends AppCompatActivity {
                             cekPasswordEt.setError("Kolom ini tidak boleh kosong..");
                         } else if(!cekPass.equals(password)) {
                             cekPasswordEt.setError("Password Tidak Sama");
+                            
                         } else {
                             cekPasswordEt.setError(null);
+                            mCekPass = true;
                         }
+
+                        if(!mNip && !mEmail && !mCekPass){
+                            Toast.makeText(DaftarActivity.this, "Test", Toast.LENGTH_SHORT).show();
+                        } else {
+                            startActivity(new Intent(DaftarActivity.this, OtpVerify.class));
+                        }
+
                     }
                 });
                 if (!isChecked){
@@ -128,10 +146,7 @@ public class DaftarActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
     }
+
 
 }

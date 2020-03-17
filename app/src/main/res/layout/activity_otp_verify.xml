@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OtpVerify">
+
+    <LinearLayout
+        android:id="@+id/nomor_telp"
+        android:visibility="visible"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/daftar_no_telp_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:autofillHints=""
+            android:backgroundTint="#1560DB"
+            android:ems="10"
+            android:hint="@string/masukan_no_telp"
+            android:inputType="number"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/button_design_login_register"
+            android:textColor="@android:color/white"
+            android:textAllCaps="false"
+            android:textSize="22sp"
+            android:id="@+id/kirim_kode_otp_button"
+            android:text="@string/kirim_otp"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/verifikasi_kode"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:hint="@string/masukan_kode"
+            android:inputType="number"
+            android:id="@+id/kodeOtp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/button_design_login_register"
+            android:textColor="@android:color/white"
+            android:textAllCaps="false"
+            android:textSize="22sp"
+            android:id="@+id/verifikasi_button"
+            android:text="@string/verifikasi"/>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

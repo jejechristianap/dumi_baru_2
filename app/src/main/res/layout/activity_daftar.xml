@@ -54,18 +54,7 @@
                 android:inputType="textEmailAddress"
                 android:autofillHints="" />
 
-            <EditText
-                android:id="@+id/daftar_no_telp_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="32dp"
-                android:autofillHints=""
-                android:backgroundTint="#1560DB"
-                android:ems="10"
-                android:hint="@string/masukan_no_telp"
-                android:inputType="number"/>
+
 
             <EditText
                 android:id="@+id/daftar_password_et"
