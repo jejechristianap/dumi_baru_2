@@ -1,6 +1,7 @@
 package com.fidac.dumi;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,8 +21,10 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+
 
 import java.util.concurrent.TimeUnit;
 
@@ -30,6 +34,7 @@ public class OtpVerify extends AppCompatActivity {
     private EditText nomorTelpEt;
     private Button kirimOtpButton;
     private Button verifikasiButton;
+    private Button keluarButton;
     private String nomorTelp;
     private String kodeOtp;
 
@@ -39,6 +44,11 @@ public class OtpVerify extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String mVerifikasiId;
 
+    private static final int RC_SIGN_IN = 101;
+
+    private LinearLayout progressBar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +56,22 @@ public class OtpVerify extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        /*keluarButton = findViewById(R.id.logout);
+        keluarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+            }
+        });*/
+
         kodeEt = findViewById(R.id.kodeOtp);
 
         nomorTelpEt = findViewById(R.id.daftar_no_telp_et);
 
         noTelpLl = findViewById(R.id.nomor_telp);
         verifikasiKodeLl = findViewById(R.id.verifikasi_kode);
+
+        progressBar = findViewById(R.id.progress_bar);
 
 
         kirimOtpButton = findViewById(R.id.kirim_kode_otp_button);
@@ -63,9 +83,11 @@ public class OtpVerify extends AppCompatActivity {
                     nomorTelpEt.setError("Kolom ini tidak boleh kosong..");
                 } else if(nomorTelp.length() < 9 || nomorTelp.length() > 12){
                     nomorTelpEt.setError("Nomor tidak valid");
+                    nomorTelpEt.requestFocus();
                 } else {
                     nomorTelpEt.setError(null);
                     sendVerificationCode(nomorTelp);
+//                    progressBar.setVisibility(View.VISIBLE);
                     noTelpLl.setVisibility(View.GONE);
                     verifikasiKodeLl.setVisibility(View.VISIBLE);
                     return;
@@ -84,8 +106,8 @@ public class OtpVerify extends AppCompatActivity {
                 } else {
                     kodeEt.setError(null);
                     verifyVerificationCode(kodeOtp);
-                    noTelpLl.setVisibility(View.VISIBLE);
                     verifikasiKodeLl.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.VISIBLE);
                     return;
                 }
 
@@ -102,6 +124,7 @@ public class OtpVerify extends AppCompatActivity {
                 mCallbacks);
     }
 
+
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
@@ -113,6 +136,9 @@ public class OtpVerify extends AppCompatActivity {
             //in this case the code will be null
             //so user has to manually enter the code
             if (code != null) {
+//                noTelpLl.setVisibility(View.GONE);
+//                progressBar.setVisibility(View.GONE);
+//                verifikasiKodeLl.setVisibility(View.VISIBLE);
                 kodeEt.setText(code);
                 //verifying the code
                 verifyVerificationCode(code);
@@ -148,7 +174,8 @@ public class OtpVerify extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //verification successful we will start the profile activity
-                            Intent intent = new Intent(OtpVerify.this, MainActivity.class);
+                            progressBar.setVisibility(View.GONE);
+                            Intent intent = new Intent(OtpVerify.this, MasukActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
 

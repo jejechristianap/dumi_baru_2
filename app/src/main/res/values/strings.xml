@@ -102,6 +102,8 @@
     <string name="masukan_no_telp">Masukan Nomor Telp (081xxxxx)</string>
     <string name="masukan_kode">Masukan Kode Verifikasi</string>
     <string name="verifikasi">Verifikasi</string>
-    <string name="kirim_otp">Kirim Otp</string>
+    <string name="kirim_otp">Kirim OTP</string>
+    <string name="mohon_menunggu">Mohon Menunggu</string>
+    <string name="keluar">Keluar</string>
 
 </resources>

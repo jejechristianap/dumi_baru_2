@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -8,12 +8,18 @@
     android:layout_height="match_parent"
     tools:context=".OtpVerify">
 
+    <!--Send OTP-->
     <LinearLayout
         android:id="@+id/nomor_telp"
-        android:visibility="visible"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <EditText
             android:id="@+id/daftar_no_telp_et"
             android:layout_width="match_parent"
@@ -26,53 +32,107 @@
             android:backgroundTint="#1560DB"
             android:ems="10"
             android:hint="@string/masukan_no_telp"
-            android:inputType="number"/>
+            android:inputType="number" />
+
         <Button
+            android:id="@+id/kirim_kode_otp_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/button_design_login_register"
-            android:textColor="@android:color/white"
+            android:text="@string/kirim_otp"
             android:textAllCaps="false"
-            android:textSize="22sp"
-            android:id="@+id/kirim_kode_otp_button"
-            android:text="@string/kirim_otp"/>
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CCFFFFFF"
+        android:visibility="gone"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/pbText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/mohon_menunggu"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!--<include
+        android:id="@+id/progress_bar"
+        layout="@layout/progress_bar"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--OTP code validation-->
     <LinearLayout
         android:id="@+id/verifikasi_kode"
-        android:visibility="gone"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
+            android:id="@+id/kodeOtp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
             android:hint="@string/masukan_kode"
-            android:inputType="number"
-            android:id="@+id/kodeOtp"/>
+            android:inputType="number" />
 
         <Button
+            android:id="@+id/verifikasi_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/button_design_login_register"
-            android:textColor="@android:color/white"
+            android:text="@string/verifikasi"
             android:textAllCaps="false"
-            android:textSize="22sp"
-            android:id="@+id/verifikasi_button"
-            android:text="@string/verifikasi"/>
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
     </LinearLayout>
 
+    <!--<Button
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="128dp"
+        android:background="@drawable/button_design_login_register"
+        android:text="@string/keluar"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />-->
 
 
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

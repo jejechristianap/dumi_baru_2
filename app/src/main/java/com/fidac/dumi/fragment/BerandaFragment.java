@@ -57,4 +57,5 @@ public class BerandaFragment extends Fragment {
 
         return view;
     }
+
 }

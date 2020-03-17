@@ -58,4 +58,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
         return loadFragment(fragment);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        moveTaskToBack(true);
+    }
 }

@@ -57,7 +57,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <EditText
-                android:id="@+id/daftar_password_et"
+                android:id="@+id/masuk_password_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -73,7 +73,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/masuk_nip_et" />
 
             <Button
-                android:id="@+id/daftar_lanjut_button"
+                android:id="@+id/masuk_user_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
