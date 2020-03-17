@@ -271,6 +271,8 @@ public class DaftarActivity extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(req, tag_json_obj);
     }*/
 
+
+
     private void postUsingVolley() {
         final String url = "http://app.ternak-burung.top/api/user/insert";
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -279,7 +281,7 @@ public class DaftarActivity extends AppCompatActivity {
         final String email = masukanEmailEt.getText().toString();
         final String password = masukanPasswordEt.getText().toString();
 
-        Toast.makeText(this, "nip: " + nip + ", email: " + email + ", pass: " + password, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "nip: " + nip + ", email: " + email + ", pass: " + password, Toast.LENGTH_SHORT).show();
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
