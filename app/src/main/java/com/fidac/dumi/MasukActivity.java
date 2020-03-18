@@ -25,8 +25,6 @@ import com.fidac.dumi.model.SharedPrefManager;
 import com.fidac.dumi.model.User;
 import com.fidac.dumi.model.VolleySingleton;
 import com.fidac.dumi.util.Url;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,9 +34,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
+
 
 public class MasukActivity extends AppCompatActivity {
 
