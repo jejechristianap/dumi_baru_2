@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -28,6 +29,10 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.fidac.dumi.model.SharedPrefManager;
+import com.fidac.dumi.model.User;
+import com.fidac.dumi.model.VolleySingleton;
+import com.fidac.dumi.util.Url;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,7 +48,7 @@ public class DaftarActivity extends AppCompatActivity {
     private EditText masukanEmailEt;
     private EditText masukanPasswordEt;
     private EditText cekPasswordEt;
-    private EditText masukanNoTelp;
+    private EditText masukkanNamaEt;
     private Boolean isValid;
 
     private Session session;
@@ -78,6 +83,7 @@ public class DaftarActivity extends AppCompatActivity {
         masukanEmailEt = findViewById(R.id.daftar_email_et);
         masukanPasswordEt = findViewById(R.id.daftar_password_et);
         cekPasswordEt = findViewById(R.id.daftar_ulangi_password_et);
+        masukkanNamaEt = findViewById(R.id.daftar_nama_et);
 
         passwordCheckBox = findViewById(R.id.checkbox_password);
         lanjutButton = findViewById(R.id.daftar_lanjut_button);
@@ -120,13 +126,16 @@ public class DaftarActivity extends AppCompatActivity {
                         String email = masukanEmailEt.getText().toString();
                         String password = masukanPasswordEt.getText().toString();
                         String cekPass = cekPasswordEt.getText().toString();
+                        String nama = masukkanNamaEt.getText().toString();
 //                        String number = masukanNoTelp.getText().toString();
                         boolean mNip = false;
                         boolean mEmail = false;
                         boolean mCekPass = false;
+                        boolean mNama = false;
 
                         if(TextUtils.isEmpty(nip)){
                             masukanNipEt.setError("Kolom ini tidak boleh kosong..");
+                            masukanNipEt.requestFocus();
                         } else {
                             masukanNipEt.setError(null);
                             mNip = true;
@@ -134,12 +143,22 @@ public class DaftarActivity extends AppCompatActivity {
 
                         if (TextUtils.isEmpty(email)){
                             masukanEmailEt.setError("Kolom ini tidak boleh kosong..");
+                            masukanEmailEt.requestFocus();
+                            return;
                         } else if(!EMAIL_ADDRESS_PATTERN.matcher(email).matches()){
                             masukanEmailEt.setError("Email tidak valid");
                             masukanEmailEt.requestFocus();
+                            return;
                         } else {
                             masukanEmailEt.setError(null);
                             mEmail = true;
+                        }
+
+                        if(TextUtils.isEmpty(nama)){
+                            masukkanNamaEt.setError("Kolom ini tidak boleh kosong..");
+                            masukkanNamaEt.requestFocus();
+                        } else {
+                            masukkanNamaEt.setError(null);
                         }
 
                         if (TextUtils.isEmpty(password)){
@@ -163,18 +182,7 @@ public class DaftarActivity extends AppCompatActivity {
                         if(!mNip || !mEmail || !mCekPass){
 
                         } else {
-                            try{
-
-                                // CALL GetText method to make post method call
-                                Toast.makeText(DaftarActivity.this, "Run", Toast.LENGTH_SHORT).show();
-                                postUsingVolley();
-                            }
-                            catch(Exception ex)
-                            {
-                                Toast.makeText(DaftarActivity.this, "error", Toast.LENGTH_SHORT).show();
-                            }
-
-                            startActivity(new Intent(DaftarActivity.this, OtpVerify.class));
+                            registerUser();
                         }
 
                     }
@@ -273,7 +281,7 @@ public class DaftarActivity extends AppCompatActivity {
 
 
 
-    private void postUsingVolley() {
+    /*private void postUsingVolley() {
         final String url = "http://app.ternak-burung.top/api/user/insert";
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -300,7 +308,7 @@ public class DaftarActivity extends AppCompatActivity {
                         Log.d("Error.Response", String.valueOf(error));
                     }
                 }
-        ) {
+        ) { nip: 123123123123, pass: 123456
             @Override
             protected Map<String, String> getParams()
             {
@@ -314,6 +322,73 @@ public class DaftarActivity extends AppCompatActivity {
             }
         };
         queue.add(postRequest);
+    }*/
+
+    private void registerUser() {
+        final String nip = masukanNipEt.getText().toString();
+        final String email = masukanEmailEt.getText().toString();
+        final String password = masukanPasswordEt.getText().toString();
+        final String nama = masukkanNamaEt.getText().toString();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Url.URL_REGISTER,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                        progressBar.setVisibility(View.GONE);
+                        Log.d("Response", response);
+
+                        try {
+                            //converting response to json object
+                            JSONObject obj = new JSONObject(response);
+
+                            //if no error in response
+                            Toast.makeText(DaftarActivity.this, obj.getString("status"), Toast.LENGTH_SHORT).show();
+                            if (obj.getBoolean("status")) {
+                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+
+                                //getting the user from the response
+                                JSONObject userJson = obj.getJSONObject("data");
+
+                                //creating a new user object
+                                User user = new User(
+                                        userJson.getInt("id"),
+                                        userJson.getString("username"),
+                                        userJson.getString("email"),
+                                        userJson.getString("nama")
+                                );
+
+                                //storing the user in shared preferences
+                                SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+
+                                //starting the profile activity
+                                finish();
+                                startActivity(new Intent(DaftarActivity.this, MasukActivity.class));
+                            } else {
+                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("nip", nip);
+                params.put("email", email);
+                params.put("nama", nama);
+                params.put("password", password);
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
 

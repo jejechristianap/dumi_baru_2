@@ -105,5 +105,6 @@
     <string name="kirim_otp">Kirim OTP</string>
     <string name="mohon_menunggu">Mohon Menunggu</string>
     <string name="keluar">Keluar</string>
+    <string name="masukan_nama">Masukkan Nama</string>
 
 </resources>
