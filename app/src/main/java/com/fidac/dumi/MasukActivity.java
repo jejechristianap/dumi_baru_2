@@ -2,6 +2,7 @@ package com.fidac.dumi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,12 +15,9 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.fidac.dumi.api.BaseApiService;
 import com.fidac.dumi.model.SharedPrefManager;
 import com.fidac.dumi.model.User;
@@ -30,7 +28,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,149 +63,28 @@ public class MasukActivity extends AppCompatActivity {
         startActivity(new Intent(MasukActivity.this, HalamanDepanActivity.class));
     }
 
-    /*private void requestLogin(){
-        final String nip = nipEt.getText().toString();
-        final String pass = passEt.getText().toString();
-        mApiService.loginRequest(nip, pass)
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-                        if(response.isSuccessful()){
-
-                            try {
-                                JsonObject jsonResult = new JsonObject(response.body().string());
-                                if (jsonResult.getString()) {
-                                    // Jika login berhasil maka data nama yang ada di response API
-                                    // akan diparsing ke activity selanjutnya.
-                                    Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
-//                                    String nama = jsonRESULTS.getJSONObject("user").getString("nama");
-//                                    sharedPrefManager.saveSPString(SharedPrefManager.SP_NAMA, nama);
-                                    // Shared Pref ini berfungsi untuk menjadi trigger session login
-                                    startActivity(new Intent(mContext, MainActivity.class)
-                                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                                    finish();
-                                }
-                                else {
-                                    // Jika login gagal
-                                    String error_message = jsonRESULTS.getString("error_msg");
-                                    Toast.makeText(mContext, error_message, Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-//                            loading.dismiss();
-                        }
-
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.e("debug", "onFailure: ERROR > " + t.toString());
-                        loading.dismiss();
-                    }
-                });
-    }*/
-
-    /*private void userLogin() {
-        final String url = "http://app.ternak-burung.top/api/user/get";
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        //first getting the values
-        final String nip = nipEt.getText().toString();
-        final String password = passEt.getText().toString();
-
-        //validating inputs
-        if (TextUtils.isEmpty(nip)) {
-            nipEt.setError("Masukkan NIP Anda");
-            nipEt.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(password)) {
-            passEt.setError("Masukkan Password Anda");
-            passEt.requestFocus();
-            return;
-        }
-
-        //if everything is fine
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-//                        progressBar.setVisibility(View.GONE);
-
-                        try {
-                            //converting response to json object
-                            JSONObject obj = new JSONObject(response);
-
-                            //if no error in response
-                            if (!obj.getBoolean("error")) {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-
-                                //getting the user from the response
-                                JSONObject userJson = obj.getJSONObject("user");
-
-                                //creating a new user object
-                                User user = new User(
-                                        userJson.getInt("id"),
-                                        userJson.getString("username"),
-                                        userJson.getString("email"),
-                                        userJson.getString("gender")
-                                );
-
-                                //storing the user in shared preferences
-                                SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
-
-                                //starting the profile activity
-                                finish();
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            } else {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("nip", nip);
-                params.put("password", password);
-                return params;
-            }
-        };
-
-        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
-    }*/
-
     private void userLogin() {
         //first getting the values
         final String nip = nipEt.getText().toString();
         final String password = passEt.getText().toString();
 
         //validating inputs
-        if (TextUtils.isEmpty(nip)) {
+        if (nip.isEmpty()) {
             nipEt.setError("Please enter your username");
             nipEt.requestFocus();
             return;
         }
 
-        if (TextUtils.isEmpty(password)) {
+        if (password.isEmpty()) {
             passEt.setError("Please enter your password");
             passEt.requestFocus();
             return;
         }
+
+        final ProgressDialog pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
 
         //if everything is fine
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Url.URL_LOGIN,
@@ -220,24 +96,23 @@ public class MasukActivity extends AppCompatActivity {
                         try {
                             //converting response to json object
                             JSONObject obj = new JSONObject(response);
-
+                            JSONArray jsonArray = obj.getJSONArray("data");
                             //if no error in response 12345678901234567890 123123123
                             if (obj.getBoolean("status")) {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
-                                //getting the user from the response
-                                JSONArray userJson = obj.getJSONArray("data");
+                                for(int i = 0; i < jsonArray.length(); i++){
+                                    JSONObject userObj = jsonArray.getJSONObject(i);
+                                    String id = userObj.getString("id_user");
+                                    String nip = userObj.getString("nip");
+                                    String nama = userObj.getString("nama");
+                                    Toast.makeText(MasukActivity.this, "Selamat datang " + nama , Toast.LENGTH_SHORT).show();
+                                    Log.d("User", "nama: " + nama + "\nNip: " + nip + "\nID: " + id);
+                                }
 
-                                //creating a new user object
-                                /*User user = new User(
-                                        userJson.getInt("id"),
-                                        userJson.getString("username"),
-                                        userJson.getString("email"),
-                                        userJson.getString("nama")
-                                );*/
 
                                 //storing the user in shared preferences
-                                /*SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);*/
+//                                SharedPrefManager.getInstance(getApplicationContext()).userLogin(jsonArray);
 
                                 //starting the profile activity
                                 finish();
@@ -247,6 +122,8 @@ public class MasukActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(MasukActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
+                            pDialog.hide();
                         }
                     }
                 },
@@ -254,6 +131,7 @@ public class MasukActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 }) {
             @Override

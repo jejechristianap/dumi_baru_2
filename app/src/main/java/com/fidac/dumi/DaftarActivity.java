@@ -362,7 +362,7 @@ public class DaftarActivity extends AppCompatActivity {
 
                                 //starting the profile activity
                                 finish();
-                                startActivity(new Intent(DaftarActivity.this, MasukActivity.class));
+                                Toast.makeText(DaftarActivity.this, "Registrasi berhasil!", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                             }
