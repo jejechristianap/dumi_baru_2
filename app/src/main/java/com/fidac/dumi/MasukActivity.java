@@ -106,8 +106,12 @@ public class MasukActivity extends AppCompatActivity {
                                     String id = userObj.getString("id_user");
                                     String nip = userObj.getString("nip");
                                     String nama = userObj.getString("nama");
+                                    String email = userObj.getString("email");
                                     Toast.makeText(MasukActivity.this, "Selamat datang " + nama , Toast.LENGTH_SHORT).show();
                                     Log.d("User", "nama: " + nama + "\nNip: " + nip + "\nID: " + id);
+                                    User user = new User(id, nip, nama, email);
+                                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+
                                 }
 
 
@@ -115,6 +119,7 @@ public class MasukActivity extends AppCompatActivity {
 //                                SharedPrefManager.getInstance(getApplicationContext()).userLogin(jsonArray);
 
                                 //starting the profile activity
+                                pDialog.dismiss();
                                 finish();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             } else {

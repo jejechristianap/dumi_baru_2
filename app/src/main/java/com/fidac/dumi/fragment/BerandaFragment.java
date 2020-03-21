@@ -17,6 +17,8 @@ import com.fidac.dumi.LihatSemuaActivity;
 import com.fidac.dumi.R;
 import com.fidac.dumi.jenispinjaman.PinjamanKilatActivity;
 import com.fidac.dumi.jenispinjaman.PinjamanRegularActivity;
+import com.fidac.dumi.model.SharedPrefManager;
+import com.fidac.dumi.model.User;
 
 
 public class BerandaFragment extends Fragment {
@@ -30,6 +32,17 @@ public class BerandaFragment extends Fragment {
         final TextView lihatSemuaTV = view.findViewById(R.id.lihat_semua);
         final Button dumiKilatButton = view.findViewById(R.id.dumi_kilat_button);
         final Button dumiRegularButton = view.findViewById(R.id.dumi_regular_button);
+
+        TextView userIdTv = view.findViewById(R.id.user_id);
+        TextView userNipTv = view.findViewById(R.id.user_nip);
+        TextView userEmailTv = view.findViewById(R.id.user_email);
+        TextView userNama = view.findViewById(R.id.user_nama);
+
+        User user = SharedPrefManager.getInstance(getActivity()).getUser();
+        userIdTv.setText(user.getId());
+        userNipTv.setText(user.getNip());
+        userEmailTv.setText(user.getEmail());
+        userNama.setText(user.getNama());
 
 
         lihatSemuaTV.setOnClickListener(new View.OnClickListener() {

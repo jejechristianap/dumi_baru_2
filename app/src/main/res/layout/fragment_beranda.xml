@@ -41,22 +41,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/saldo_pay_later"
-                android:textColor="@android:color/black"
-                app:autoSizeMinTextSize="14sp"
-                app:autoSizeTextType="uniform"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:autoSizeMaxTextSize="18sp"
-                tools:autoSizeStepGranularity="1sp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,14 +71,12 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="0dp"
+                    android:id="@+id/user_id"
+                    android:layout_width="match_parent"
                     android:layout_height="15dp"
-                    android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="start|center"
                     android:text="@string/riwayat"
@@ -107,13 +89,41 @@
                     tools:autoSizeStepGranularity="1sp" />
 
                 <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="0dp"
+                    android:id="@+id/user_nip"
+                    android:layout_width="match_parent"
                     android:layout_height="15dp"
                     android:layout_marginEnd="3dp"
-                    android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
-                    android:gravity="end|center"
+                    android:text="@string/transfer"
+                    android:textColor="#1560DB"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    tools:autoSizeMaxTextSize="12sp"
+                    tools:autoSizeStepGranularity="1sp" />
+                <TextView
+                    android:id="@+id/user_nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="3dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/transfer"
+                    android:textColor="#1560DB"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    tools:autoSizeMaxTextSize="12sp"
+                    tools:autoSizeStepGranularity="1sp" />
+                <TextView
+                    android:id="@+id/user_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="3dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="@string/transfer"
                     android:textColor="#1560DB"
                     app:autoSizeMinTextSize="8sp"

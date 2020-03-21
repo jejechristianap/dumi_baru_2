@@ -1,17 +1,18 @@
 package com.fidac.dumi.model;
 
 public class User {
-    private int id;
+    private String id;
     private String nip, nama, email;
 
     public User(){
 
     }
 
-    public User(int id, String nip, String email, String nama) {
+    public User(String id, String nip, String nama, String email) {
         this.id = id;
         this.nip = nip;
         this.email = email;
+        this.nama = nama;
 
     }
 
@@ -23,11 +24,11 @@ public class User {
         this.nama = nama;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
