@@ -11,8 +11,9 @@ public class User {
     public User(String id, String nip, String nama, String email) {
         this.id = id;
         this.nip = nip;
-        this.email = email;
         this.nama = nama;
+        this.email = email;
+
 
     }
 

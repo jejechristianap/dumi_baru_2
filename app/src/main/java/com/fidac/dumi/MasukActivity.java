@@ -18,7 +18,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.fidac.dumi.api.BaseApiService;
 import com.fidac.dumi.model.SharedPrefManager;
 import com.fidac.dumi.model.User;
 import com.fidac.dumi.model.VolleySingleton;
@@ -40,7 +39,6 @@ public class MasukActivity extends AppCompatActivity {
     private EditText passEt;
 
     Context mContext;
-    BaseApiService mApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,10 +106,12 @@ public class MasukActivity extends AppCompatActivity {
                                     String nama = userObj.getString("nama");
                                     String email = userObj.getString("email");
                                     Toast.makeText(MasukActivity.this, "Selamat datang " + nama , Toast.LENGTH_SHORT).show();
-                                    Log.d("User", "nama: " + nama + "\nNip: " + nip + "\nID: " + id);
+                                    Log.d("User", "\nNama: " + nama
+                                            + "\nNip: " + nip
+                                            + "\nID: " + id
+                                            + "\nEmail: " + email);
                                     User user = new User(id, nip, nama, email);
                                     SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
-
                                 }
 
 
