@@ -2,41 +2,20 @@ package com.fidac.dumi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.fidac.dumi.api.BaseApiService;
-import com.fidac.dumi.model.LoginInterface;
 import com.fidac.dumi.model.PreferenceHelper;
-import com.fidac.dumi.model.SharedPrefManager;
-import com.fidac.dumi.model.User;
-import com.fidac.dumi.model.VolleySingleton;
-import com.fidac.dumi.util.Url;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 public class MasukActivity extends AppCompatActivity {
@@ -75,7 +54,7 @@ public class MasukActivity extends AppCompatActivity {
         final String username = nipEt.getText().toString().trim();
         final String password = passEt.getText().toString().trim();
 
-        Retrofit retrofit = new Retrofit.Builder()
+        /*Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(LoginInterface.LOGINURL)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
@@ -83,35 +62,8 @@ public class MasukActivity extends AppCompatActivity {
         LoginInterface api = retrofit.create(LoginInterface.class);
 
         Call<String> call = api.getUserLogin(username,password);
+*/
 
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("Responsestring", response.body().toString());
-                //Toast.makeText()
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        Log.i("onSuccess", response.body().toString());
-
-                        String jsonresponse = response.body().toString();
-                        parseLoginData(jsonresponse);
-
-                    } else {
-                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
     }
 
     private void parseLoginData(String response){

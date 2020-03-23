@@ -1,25 +1,39 @@
 package com.fidac.dumi.model;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
+import com.fidac.dumi.api.CekNipBknInterface;
+import com.fidac.dumi.api.RegisterInterface;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    private static Retrofit retrofit = null;
 
-    public static Retrofit getClient(String baseUrl){
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+    private static final String BASE_URL = "http://app.ternak-burung.top/api/";
+    private static RetrofitClient mInstance;
+    private Retrofit retrofit;
 
-        if (retrofit == null){
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .client(client)
-                    .build();
-        }
-        return retrofit;
+    private RetrofitClient(){
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
     }
+
+    public static synchronized RetrofitClient getmInstance(){
+        if(mInstance == null){
+            mInstance = new RetrofitClient();
+        }
+        return mInstance;
+    }
+
+
+    public RegisterInterface getUserRegis(){
+        return retrofit.create(RegisterInterface.class);
+    }
+
+    public CekNipBknInterface getNip(){
+        return retrofit.create(CekNipBknInterface.class);
+    }
+
+
 }

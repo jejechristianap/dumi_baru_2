@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
+/*import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -33,8 +33,23 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Map;*/
+import com.fidac.dumi.api.CekNipBknInterface;
+import com.fidac.dumi.model.RetrofitClient;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import org.w3c.dom.Text;
+
+import java.io.IOException;
 import java.util.regex.Pattern;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DaftarActivity extends AppCompatActivity {
     private EditText masukanNipEt;
@@ -64,7 +79,7 @@ public class DaftarActivity extends AppCompatActivity {
     );
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar);
 
@@ -84,9 +99,10 @@ public class DaftarActivity extends AppCompatActivity {
         nipCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
 
-                    cekNipUser();
+                    /*cekNipUser();*/
+                    cekNip();
                 }
             }
         });
@@ -94,7 +110,7 @@ public class DaftarActivity extends AppCompatActivity {
         passwordCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     /*Show Password*/
                     masukanPasswordEt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     cekPasswordEt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
@@ -125,7 +141,7 @@ public class DaftarActivity extends AppCompatActivity {
                         boolean mCekPass = false;
                         boolean mNama = false;
 
-                        if(TextUtils.isEmpty(nip)){
+                        if (TextUtils.isEmpty(nip)) {
                             masukanNipEt.setError("Kolom ini tidak boleh kosong..");
                             masukanNipEt.requestFocus();
                         } else {
@@ -133,11 +149,11 @@ public class DaftarActivity extends AppCompatActivity {
                             mNip = true;
                         }
 
-                        if (TextUtils.isEmpty(email)){
+                        if (TextUtils.isEmpty(email)) {
                             masukanEmailEt.setError("Kolom ini tidak boleh kosong..");
                             masukanEmailEt.requestFocus();
                             return;
-                        } else if(!EMAIL_ADDRESS_PATTERN.matcher(email).matches()){
+                        } else if (!EMAIL_ADDRESS_PATTERN.matcher(email).matches()) {
                             masukanEmailEt.setError("Email tidak valid");
                             masukanEmailEt.requestFocus();
                             return;
@@ -146,40 +162,41 @@ public class DaftarActivity extends AppCompatActivity {
                             mEmail = true;
                         }
 
-                        if(TextUtils.isEmpty(nama)){
+                        if (TextUtils.isEmpty(nama)) {
                             masukkanNamaEt.setError("Kolom ini tidak boleh kosong..");
                             masukkanNamaEt.requestFocus();
                         } else {
                             masukkanNamaEt.setError(null);
                         }
 
-                        if (TextUtils.isEmpty(password)){
+                        if (TextUtils.isEmpty(password)) {
                             masukanPasswordEt.setError("Kolom ini tidak boleh kosong..");
-                        } else if (password.length() < 6){
+                        } else if (password.length() < 6) {
                             masukanPasswordEt.setError("Minimal Password 6 Karakter");
                         } else {
                             masukanPasswordEt.setError(null);
                         }
 
-                        if(TextUtils.isEmpty(cekPass)){
+                        if (TextUtils.isEmpty(cekPass)) {
                             cekPasswordEt.setError("Kolom ini tidak boleh kosong..");
-                        } else if(!cekPass.equals(password)) {
+                        } else if (!cekPass.equals(password)) {
                             cekPasswordEt.setError("Password Tidak Sama");
-                            
+
                         } else {
                             cekPasswordEt.setError(null);
                             mCekPass = true;
                         }
 
-                        if(!mNip || !mEmail || !mCekPass){
+                        if (!mNip || !mEmail || !mCekPass) {
 
                         } else {
-                            registerUser();
+                            /*registerUser();*/
+                            /*cekNip();*/
                         }
 
                     }
                 });
-                if (!isChecked){
+                if (!isChecked) {
                     lanjutButton.setEnabled(false);
                     lanjutButton.setBackgroundResource(R.drawable.button_lanjut_design);
                 }
@@ -187,6 +204,65 @@ public class DaftarActivity extends AppCompatActivity {
         });
     }
 
+    public void cekNip() {
+        String nip = masukanNipEt.getText().toString();
+        if(TextUtils.isEmpty(nip)){
+            masukanNipEt.setError("Kolom tidak boleh kosong...");
+            masukanNipEt.requestFocus();
+            return;
+        }
+
+        final ProgressDialog pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("base_url")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        CekNipBknInterface request = retrofit.create(CekNipBknInterface.class);
+        Call<JsonObject> call = request.cekBkn(nip);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                pDialog.dismiss();
+                String s = String.valueOf("status");
+//                JsonArray jsonArray = response.getAsJaonArray("data");
+                Toast.makeText(DaftarActivity.this, response.toString(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                pDialog.dismiss();
+            }
+        });
+
+        /*Call<String> call = RetrofitClient
+                .getmInstance()
+                .getNip()
+                .cekBkn(nip);*/
+
+        /*call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                String s = response.body();
+                Log.d("Response", "onResponse: " + s);
+                Toast.makeText(DaftarActivity.this, s, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(DaftarActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("Response", "onFailure: " + t.getMessage());
+            }
+        });*/
+    }
+
+}
+
+/*  Volley Library
     private void cekNipUser() {
 
         final String cekNip = masukanNipEt.getText().toString();
@@ -219,7 +295,8 @@ public class DaftarActivity extends AppCompatActivity {
 
 
 
-                                /*User 1
+                                */
+/*User 1
                                 nip: 123456789123456789;
                                 pass: dumi123;
 
@@ -233,7 +310,7 @@ public class DaftarActivity extends AppCompatActivity {
 
                                 user 4
                                 nip: 321654987321654987
-                                */
+                                *//*
 
 
                                 //storing the user in shared preferences
@@ -287,7 +364,6 @@ public class DaftarActivity extends AppCompatActivity {
 
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
-
     private void registerUser() {
         final String nip = masukanNipEt.getText().toString();
         final String email = masukanEmailEt.getText().toString();
@@ -315,7 +391,7 @@ public class DaftarActivity extends AppCompatActivity {
                             if (obj.getBoolean("status")) {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
-                                /*User 1
+                                *//*User 1
                                 nip: 123456789123456789;
                                 pass: dumi123;
 
@@ -329,7 +405,7 @@ public class DaftarActivity extends AppCompatActivity {
 
                                 user 4
                                 nip: 321654987321654987
-                                */
+                                *//*
 
 
 
@@ -366,7 +442,6 @@ public class DaftarActivity extends AppCompatActivity {
         };
 
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
-    }
+    }*/
 
 
-}
