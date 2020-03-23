@@ -13,32 +13,25 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.fidac.dumi.model.SharedPrefManager;
-import com.fidac.dumi.model.User;
 import com.fidac.dumi.model.VolleySingleton;
 import com.fidac.dumi.util.Url;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.ObjectOutput;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -54,6 +47,7 @@ public class DaftarActivity extends AppCompatActivity {
     private Session session;
 
     private CheckBox passwordCheckBox;
+    private CheckBox nipCheckBox;
 
     private Button lanjutButton;
 
@@ -74,27 +68,25 @@ public class DaftarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar);
 
-
-
-
-
 //        masukanNoTelp = findViewById(R.id.daftar_no_telp_et);
         masukanNipEt = findViewById(R.id.daftar_nip_et);
         masukanEmailEt = findViewById(R.id.daftar_email_et);
         masukanPasswordEt = findViewById(R.id.daftar_password_et);
         cekPasswordEt = findViewById(R.id.daftar_ulangi_password_et);
+
         masukkanNamaEt = findViewById(R.id.daftar_nama_et);
 
+        nipCheckBox = findViewById(R.id.cek_nip);
         passwordCheckBox = findViewById(R.id.checkbox_password);
         lanjutButton = findViewById(R.id.daftar_lanjut_button);
         syaratSwitch = findViewById(R.id.switch_syarat);
 
-        masukanNipEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            String nip = masukanNipEt.getText().toString();
+        nipCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
 
+                    cekNipUser();
                 }
             }
         });
@@ -195,140 +187,116 @@ public class DaftarActivity extends AppCompatActivity {
         });
     }
 
-    /*public void makePostUsingVolley()
-    {
-        session = new SessionManager(DaftarActivity.this);
-        session.checkLogin();
-        HashMap<String, String> user = session.getUserDetails();
+    private void cekNipUser() {
 
-        final String  token = user.get(SessionManager.KEY_NAME);
-
-        //Toast.makeText(getActivity().getApplicationContext(),name, Toast.LENGTH_SHORT).show();
-
-        final Map<String, String> params = new HashMap<String, String>();
-        //params.put("Employees",name);
-        String tag_json_obj = "json_obj_req";
-        String url = "enter your url";
-
-        final ProgressDialog pDialog = new ProgressDialog(getApplicationContext());
+        final String cekNip = masukanNipEt.getText().toString();
+        if(TextUtils.isEmpty(cekNip)){
+            masukanNipEt.setError("Silahkan masukan nip anda");
+            masukanNipEt.requestFocus();
+            return;
+        }
+        final ProgressDialog pDialog = new ProgressDialog(this);
         pDialog.setMessage("Loading...");
         pDialog.show();
 
-        StringRequest req = new StringRequest(Request.Method.GET,url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Url.URL_CEK_NIP,
                 new Response.Listener<String>() {
-                    // final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                    //"http://emservices.azurewebsites.net/Employee.asmx/CheckUserGet", new Response.Listener<JSONObject>() {
-
                     @Override
                     public void onResponse(String response) {
+//                        progressBar.setVisibility(View.GONE);
+                        Log.d("Response", response);
 
-                        JSONObject json;
-                        // Toast.makeText(getActivity().getApplicationContext(),"dfgghfhfgjhgjghjuhj", Toast.LENGTH_SHORT).show();
-
-
-
-                        //Toast.makeText(getActivity().getApplicationContext(),obb.length(), Toast.LENGTH_SHORT).show();
-
-
-
-                        // JSONObject data=obj.getJSONObject("Employee_Name");
-                        ObjectOutput out = null;
                         try {
+                            //converting response to json object
 
-                            json = new JSONObject(response);
+                            //if no error in response
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray jsonArray = obj.getJSONArray("data");
 
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                            if (obj.getBoolean("status")) {
+                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+
+
+
+
+                                /*User 1
+                                nip: 123456789123456789;
+                                pass: dumi123;
+
+                                user 2
+                                nip: 147258369147258369;
+                                pass: dumi123;
+
+                                user 3
+                                nip: 369258147369258147
+                                pass: dumi123;
+
+                                user 4
+                                nip: 321654987321654987
+                                */
+
+
+                                //storing the user in shared preferences
+                                //starting the profile activity
+                                Toast.makeText(DaftarActivity.this, "NIP Anda terdaftar", Toast.LENGTH_SHORT).show();
+                                pDialog.dismiss();
+                                finish();
+//                                Toast.makeText(DaftarActivity.this, "Registrasi berhasil!123", Toast.LENGTH_SHORT).show();
+//                                startActivity(new Intent(DaftarActivity.this, MasukActivity.class));
+                            } else {
+                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DaftarActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                                pDialog.dismiss();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(DaftarActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            pDialog.dismiss();
                         }
-
-
-
-
-                        pDialog.hide();
-                        // Toast.makeText(getApplicationContext(),"hi", Toast.LENGTH_SHORT).show();
-                        Log.d("", response);
-
-
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("", "Error: " + error.getMessage());
-                Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
-                pDialog.hide();
-                // hide the progress dialog
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("username",name);
-                params.put("password",password);
-
-                return params;
-            }
-
-        };
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(req, tag_json_obj);
-    }*/
-
-
-
-    /*private void postUsingVolley() {
-        final String url = "http://app.ternak-burung.top/api/user/insert";
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        final String nip = masukanNipEt.getText().toString();
-        final String email = masukanEmailEt.getText().toString();
-        final String password = masukanPasswordEt.getText().toString();
-
-//        Toast.makeText(this, "nip: " + nip + ", email: " + email + ", pass: " + password, Toast.LENGTH_SHORT).show();
-
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String response) {
-                        // response
-                        Log.d("Response", response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // error
-                        Log.d("Error.Response", String.valueOf(error));
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DaftarActivity.this, "Something wrong", Toast.LENGTH_SHORT).show();
+                        pDialog.dismiss();
                     }
-                }
-        ) { nip: 123123123123, pass: 123456
+                }) {
             @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<String, String>();
-                params.put("nip", nip);
-                params.put("nama", "fidacholdings");
-                params.put("email", email);
-                params.put("password", password);
-
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("nip", cekNip);
                 return params;
             }
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                String httpPostBody="grant_type=password&username=Alice&password=password123";
+                // usually you'd have a field with some values you'd want to escape, you need to do it yourself if overriding getBody. here's how you do it
+                try {
+                    httpPostBody=httpPostBody+"&randomFieldFilledWithAwkwardCharacters="+ URLEncoder.encode("{{%stuffToBe Escaped/","UTF-8");
+                } catch (UnsupportedEncodingException exception) {
+                    Log.e("ERROR", "exception", exception);
+                    // return null and don't pass any POST string if you encounter encoding error
+                    return null;
+                }
+                return httpPostBody.getBytes();
+            }
         };
-        queue.add(postRequest);
-    }*/
+
+        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+    }
 
     private void registerUser() {
         final String nip = masukanNipEt.getText().toString();
         final String email = masukanEmailEt.getText().toString();
         final String password = masukanPasswordEt.getText().toString();
         final String nama = masukkanNamaEt.getText().toString();
+
+        final ProgressDialog pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Url.URL_REGISTER,
                 new Response.Listener<String>() {
@@ -339,36 +307,44 @@ public class DaftarActivity extends AppCompatActivity {
 
                         try {
                             //converting response to json object
-                            JSONObject obj = new JSONObject(response);
 
                             //if no error in response
-                            Toast.makeText(DaftarActivity.this, obj.getString("status"), Toast.LENGTH_SHORT).show();
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray jsonArray = obj.getJSONArray("data");
+                            //if no error in response 12345678901234567890 123123123
                             if (obj.getBoolean("status")) {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
-                                //getting the user from the response
-                                /*JSONObject userJson = obj.getJSONObject("data");
+                                /*User 1
+                                nip: 123456789123456789;
+                                pass: dumi123;
 
-                                //creating a new user object
-                                User user = new User(
-                                        userJson.getString("id"),
-                                        userJson.getString("username"),
-                                        userJson.getString("email"),
-                                        userJson.getString("nama")
-                                );
+                                user 2
+                                nip: 147258369147258369;
+                                pass: dumi123;
 
-                                //storing the user in shared preferences
-                                SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);*/
+                                user 3
+                                nip: 369258147369258147
+                                pass: dumi123;
 
+                                user 4
+                                nip: 321654987321654987
+                                */
+
+
+
+                            //storing the user in shared preferences
                                 //starting the profile activity
+                                pDialog.dismiss();
                                 finish();
+//                                Toast.makeText(DaftarActivity.this, "Registrasi berhasil!123", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(DaftarActivity.this, MasukActivity.class));
-                                Toast.makeText(DaftarActivity.this, "Registrasi berhasil!", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            pDialog.dismiss();
                         }
                     }
                 },

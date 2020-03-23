@@ -41,7 +41,19 @@
                 android:hint="@string/masukan_nip"
                 android:inputType="number" />
 
+            <CheckBox
+                android:visibility="visible"
+                android:id="@+id/cek_nip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:theme="@style/MyCheckbox"
+                android:text="@string/cek_nip"/>
+
+
             <EditText
+                android:visibility="gone"
                 android:id="@+id/daftar_email_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,6 +67,7 @@
                 android:autofillHints="" />
 
             <EditText
+                android:visibility="gone"
                 android:id="@+id/daftar_nama_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,6 +81,7 @@
                 android:autofillHints="" />
 
             <EditText
+                android:visibility="gone"
                 android:id="@+id/daftar_password_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -81,6 +95,7 @@
                 android:inputType="textPassword"/>
 
             <EditText
+                android:visibility="gone"
                 android:id="@+id/daftar_ulangi_password_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,6 +109,7 @@
                 android:autofillHints="" />
 
             <CheckBox
+                android:visibility="gone"
                 android:id="@+id/checkbox_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -103,6 +119,7 @@
                 android:text="@string/lihat_password"/>
 
             <LinearLayout
+                android:visibility="gone"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

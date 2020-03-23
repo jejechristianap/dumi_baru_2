@@ -26,37 +26,7 @@
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:src="@drawable/dumi_logo_white" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/layout_rounded_saldo_home"
-            android:baselineAligned="false"
-            android:elevation="3dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/saldo_pay_later"
-                android:textColor="@android:color/black"
-                app:autoSizeMinTextSize="14sp"
-                app:autoSizeTextType="uniform"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:autoSizeMaxTextSize="18sp"
-                tools:autoSizeStepGranularity="1sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,7 +44,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/rp_1000000"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView9"
                     android:textSize="30sp" />
@@ -91,13 +61,13 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/user_id"
                     android:layout_width="match_parent"
                     android:layout_height="15dp"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="start|center"
                     android:text="@string/riwayat"
-                    android:textColor="#1560DB"
+                    android:textColor="@android:color/white"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     app:layout_constraintStart_toStartOf="parent"
@@ -112,9 +82,12 @@
                     android:layout_marginEnd="3dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/transfer"
-                    android:textColor="#1560DB"
+                    android:textColor="@android:color/white"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView"
                     tools:autoSizeMaxTextSize="12sp"
                     tools:autoSizeStepGranularity="1sp" />
                 <TextView
@@ -124,7 +97,7 @@
                     android:layout_marginEnd="3dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/transfer"
-                    android:textColor="#1560DB"
+                    android:textColor="@android:color/white"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -133,15 +106,13 @@
                     tools:autoSizeMaxTextSize="12sp"
                     tools:autoSizeStepGranularity="1sp" />
                 <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="0dp"
+                    android:id="@+id/user_email"
+                    android:layout_width="match_parent"
                     android:layout_height="15dp"
                     android:layout_marginEnd="3dp"
-                    android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
-                    android:gravity="end|center"
                     android:text="@string/transfer"
-                    android:textColor="#1560DB"
+                    android:textColor="@android:color/white"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -149,9 +120,9 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView"
                     tools:autoSizeMaxTextSize="12sp"
                     tools:autoSizeStepGranularity="1sp" />
-            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
 
     <ScrollView
         android:scrollbars="none"
