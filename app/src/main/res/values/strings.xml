@@ -107,5 +107,10 @@
     <string name="keluar">Keluar</string>
     <string name="masukan_nama">Masukkan Nama</string>
     <string name="cek_nip">Cek Nip Anda</string>
+    <string name="rincian_akun">Rincian Akun</string>
+    <string name="ubah_sandi">Ubah Sandi</string>
+    <string name="kebijakan_privasi">Kebijakan Privasi</string>
+    <string name="pusat_bantuan">Pusat Bantuan</string>
+    <string name="disclaimer">Disclaimer</string>
 
 </resources>
