@@ -123,36 +123,25 @@ public class DaftarActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-
-                    /*cekNipUser();*/
+                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                     cekNip();
                 }
             }
         });
 
         /*
-        syaratSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                lanjutButton.setEnabled(true);
-                lanjutButton.setBackgroundResource(R.drawable.button_design_login_register);
-                lanjutButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-                        if (TextUtils.isEmpty(email)) {
-                            masukanEmailEt.setError("Kolom ini tidak boleh kosong..");
-                            masukanEmailEt.requestFocus();
-                            return;
-                        } else if (!EMAIL_ADDRESS_PATTERN.matcher(email).matches()) {
-                            masukanEmailEt.setError("Email tidak valid");
-                            masukanEmailEt.requestFocus();
-                            return;
-                        } else {
-                            masukanEmailEt.setError(null);
-                            mEmail = true;
-                        }*/
+            if (TextUtils.isEmpty(email)) {
+                masukanEmailEt.setError("Kolom ini tidak boleh kosong..");
+                masukanEmailEt.requestFocus();
+                return;
+            } else if (!EMAIL_ADDRESS_PATTERN.matcher(email).matches()) {
+                masukanEmailEt.setError("Email tidak valid");
+                masukanEmailEt.requestFocus();
+                return;
+            } else {
+                masukanEmailEt.setError(null);
+                mEmail = true;
+            }*/
     }
 
     public void cekNip() {
