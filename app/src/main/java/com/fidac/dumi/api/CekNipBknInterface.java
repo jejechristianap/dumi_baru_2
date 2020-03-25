@@ -1,6 +1,7 @@
 package com.fidac.dumi.api;
 
 import com.fidac.dumi.retrofit.NipResources;
+import com.google.gson.JsonObject;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

@@ -38,6 +38,7 @@ import java.util.Map;*/
 import com.fidac.dumi.api.CekNipBknInterface;
 import com.fidac.dumi.model.RetrofitClient;
 import com.fidac.dumi.retrofit.NipResources;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -46,6 +47,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
@@ -245,6 +247,37 @@ public class DaftarActivity extends AppCompatActivity {
 
         CekNipBknInterface cek = RetrofitClient.getClient().create(CekNipBknInterface.class);
         /*196404181984032001*/
+
+        /*//Call with NipResources
+        Call<NipResources> call = cek.cekBkn(nip);
+        call.enqueue(new Callback<NipResources>() {
+            @Override
+            public void onResponse(Call<NipResources> call, Response<NipResources> response) {
+                if(response.isSuccessful()){
+                    Log.d("Successfull", "onResponse: " + response.body());
+                    pDialog.dismiss();
+                    String status = response.body().getMessage();
+                    List<NipResources.Datum> data = response.body().getData();
+                    for (int i = 0; i < data.size(); i++) {
+                        Log.d("Successfull", "Data: " + data.get(i));
+                    }
+
+                    Toast.makeText(DaftarActivity.this, "status: " + status, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DaftarActivity.this, "data: " + data, Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d("NotSuccessful", "onResponse: " + response.errorBody());
+                    pDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NipResources> call, Throwable t) {
+                Log.d("Fail", "onFailure: " + t.getMessage());
+                pDialog.dismiss();
+            }
+        });*/
+
+        // Call with ResponseBody
         Call<ResponseBody> call = cek.cekBkn(nip);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -258,19 +291,21 @@ public class DaftarActivity extends AppCompatActivity {
                         pDialog.dismiss();
                         Toast.makeText(DaftarActivity.this, "Data ditemukan", Toast.LENGTH_SHORT).show();
                         Log.d("OBJECTRESPONSE", "onResponse124: " + obj);
-                        /*Log.d("OBJECTRESPONSE", "json: " + jsonRESULTS);
-
-
-                        JSONArray dataPns = jsonRESULTS.getJSONArray("data");*/
+                        /*196404181984032001*/
 //                        Log.d("OBJECTRESPONSE", "onResponse12341234: " + dataPns);
+                        String dat = obj.getString("data");
+                        JSONArray dataArray = new JSONArray(dat);
+                        for (int i = 0; i < dataArray.length(); i++){
+                            JSONObject dataObj = dataArray.getJSONObject(i);
 
-                        /*for(int i = 0; i < dataPns.length(); i++){
-                            JSONObject userObj = dataPns.getJSONObject(i);
-                            String nama = userObj.getString("namaPns");
-                            String nipP = userObj.getString("nipBaru");
-                            nipPns.setText(nipP);
-                            namaPns.setText(nama);
-                        }*/
+                            String nipBaru = dataObj.getString("nipBaru");
+                            String namaP = dataObj.getString("namaPns");
+                            nipPns.setText(nipBaru);
+                            namaPns.setText(namaP);
+                        }
+
+
+
 
                         /*String nama = obj.getString("data");
                         nipPns.setText(nama);*/
@@ -297,47 +332,7 @@ public class DaftarActivity extends AppCompatActivity {
                 call.cancel();
             }
         });
-//        retrofit
 
-        /*Call<ResponseBody> call = request.cekBkn(nip);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                pDialog.dismiss();
-                boolean s = Boolean.parseBoolean(String.valueOf("status"));
-                String res = response.toString();
-                Log.d("Data", "onResponse: " + res);
-//                JsonArray jsonArray = response.("data");
-//                Toast.makeText(DaftarActivity.this, response.toString(),Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                pDialog.dismiss();
-                Toast.makeText(DaftarActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
-        /*Call<String> call = RetrofitClient
-                .getmInstance()
-                .getNip()
-                .cekBkn(nip);*/
-
-        /*call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-
-                String s = response.body();
-                Log.d("Response", "onResponse: " + s);
-                Toast.makeText(DaftarActivity.this, s, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(DaftarActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("Response", "onFailure: " + t.getMessage());
-            }
-        });*/
     }
 
 }
