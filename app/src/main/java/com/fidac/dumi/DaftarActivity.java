@@ -123,36 +123,25 @@ public class DaftarActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-
-                    /*cekNipUser();*/
+                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    masukanNipEt.setCursorVisible(false);
                     cekNip();
                 }
             }
         });
-
         /*
-        syaratSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                lanjutButton.setEnabled(true);
-                lanjutButton.setBackgroundResource(R.drawable.button_design_login_register);
-                lanjutButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-                        if (TextUtils.isEmpty(email)) {
-                            masukanEmailEt.setError("Kolom ini tidak boleh kosong..");
-                            masukanEmailEt.requestFocus();
-                            return;
-                        } else if (!EMAIL_ADDRESS_PATTERN.matcher(email).matches()) {
-                            masukanEmailEt.setError("Email tidak valid");
-                            masukanEmailEt.requestFocus();
-                            return;
-                        } else {
-                            masukanEmailEt.setError(null);
-                            mEmail = true;
-                        }*/
+        if (TextUtils.isEmpty(email)) {
+            masukanEmailEt.setError("Kolom ini tidak boleh kosong..");
+            masukanEmailEt.requestFocus();
+            return;
+        } else if (!EMAIL_ADDRESS_PATTERN.matcher(email).matches()) {
+            masukanEmailEt.setError("Email tidak valid");
+            masukanEmailEt.requestFocus();
+            return;
+        } else {
+            masukanEmailEt.setError(null);
+            mEmail = true;
+        }*/
     }
 
     public void cekNip() {
@@ -165,7 +154,7 @@ public class DaftarActivity extends AppCompatActivity {
         }
 
         final ProgressDialog pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Loading...");
+        pDialog.setMessage("Mohon Menunggu...");
         pDialog.show();
 
         CekNipBknInterface cek = RetrofitClient.getClient().create(CekNipBknInterface.class);
@@ -184,7 +173,7 @@ public class DaftarActivity extends AppCompatActivity {
                     if(status){
                         pDialog.dismiss();
                         dataNipLl.setVisibility(View.VISIBLE);
-                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+//                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         Toast.makeText(DaftarActivity.this, "Data ditemukan", Toast.LENGTH_SHORT).show();
                         Log.d("OBJECTRESPONSE", "onResponse124: " + obj);
                         /*196404181984032001*/
@@ -226,7 +215,7 @@ public class DaftarActivity extends AppCompatActivity {
 //                            jenisKelaminTv.setText(jenisKelamin);
                         }
                     }else{
-                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+//                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         Log.e("errorMessage", "onResponse: " + obj);
                         dataNipLl.setVisibility(View.GONE);
                         nipCheckBox.setChecked(false);
@@ -234,7 +223,7 @@ public class DaftarActivity extends AppCompatActivity {
                         Toast.makeText(DaftarActivity.this, "Mohon maaf NIP anda belum terdaftar", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+//                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                     nipCheckBox.setChecked(false);
                     dataNipLl.setVisibility(View.GONE);
                     pDialog.dismiss();
@@ -245,7 +234,7 @@ public class DaftarActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 dataNipLl.setVisibility(View.GONE);
-                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+//                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 Toast.makeText(DaftarActivity.this, "Something wrong", Toast.LENGTH_SHORT).show();
                 Log.d("Error", "onFailure: " + t.getMessage());
                 nipCheckBox.setChecked(false);
