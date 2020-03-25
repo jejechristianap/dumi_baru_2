@@ -252,21 +252,25 @@ public class DaftarActivity extends AppCompatActivity {
                 Log.d("Res", "onResponse: " +response.body());
                 try {
                     JSONObject obj = new JSONObject(response.body().string());
+//                    JSONObject jsonRESULTS = new JSONObject(response.body().string());
 
                     if(response.isSuccessful()){
                         pDialog.dismiss();
                         Toast.makeText(DaftarActivity.this, "Data ditemukan", Toast.LENGTH_SHORT).show();
-                        Log.d("obj", "onResponse124: " + obj);
+                        Log.d("OBJECTRESPONSE", "onResponse124: " + obj);
+                        /*Log.d("OBJECTRESPONSE", "json: " + jsonRESULTS);
 
-                        JSONArray dataPns = obj.getJSONArray("data");
 
-                        for(int i = 0; i < dataPns.length(); i++){
+                        JSONArray dataPns = jsonRESULTS.getJSONArray("data");*/
+//                        Log.d("OBJECTRESPONSE", "onResponse12341234: " + dataPns);
+
+                        /*for(int i = 0; i < dataPns.length(); i++){
                             JSONObject userObj = dataPns.getJSONObject(i);
                             String nama = userObj.getString("namaPns");
                             String nipP = userObj.getString("nipBaru");
                             nipPns.setText(nipP);
                             namaPns.setText(nama);
-                        }
+                        }*/
 
                         /*String nama = obj.getString("data");
                         nipPns.setText(nama);*/
@@ -282,26 +286,6 @@ public class DaftarActivity extends AppCompatActivity {
 
                 Toast.makeText(DaftarActivity.this, "Data ditemukan", Toast.LENGTH_SHORT).show();
                 pDialog.dismiss();
-                
-
-                
-
-                /*String nipResponse = "";
-                NipResources nipResources = response.body();
-                boolean status = nipResources.status;
-                String message = nipResources.message;
-                List<NipResources.Datum> dataList = nipResources.data;*/
-
-//                nipResponse = "\nStatus: " + status + "\nMessage: " + message;
-
-                /*for(NipResources.Datum data : dataList){
-                    nipPns.setText(data.nipBaru);
-                    namaPns.setText(data.namaJabatan);
-                }*/
-
-
-//                Log.d("NIP", "onResponse: " + nipResponse);
-
 
             }
 
