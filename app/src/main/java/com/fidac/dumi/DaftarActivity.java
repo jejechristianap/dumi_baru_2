@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,20 +37,28 @@ import java.util.HashMap;
 import java.util.Map;*/
 import com.fidac.dumi.api.CekNipBknInterface;
 import com.fidac.dumi.model.RetrofitClient;
+import com.fidac.dumi.retrofit.NipResources;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.POST;
 
 public class DaftarActivity extends AppCompatActivity {
     private EditText masukanNipEt;
@@ -67,6 +76,7 @@ public class DaftarActivity extends AppCompatActivity {
     private Button lanjutButton;
 
     private Switch syaratSwitch;
+    private CekNipBknInterface cekNipBknInterface;
 
     public static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
@@ -82,6 +92,7 @@ public class DaftarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar);
+        cekNipBknInterface = RetrofitClient.getClient().create(CekNipBknInterface.class);
 
 //        masukanNoTelp = findViewById(R.id.daftar_no_telp_et);
         masukanNipEt = findViewById(R.id.daftar_nip_et);
@@ -212,31 +223,116 @@ public class DaftarActivity extends AppCompatActivity {
             return;
         }
 
+        /*OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://app.ternak-burung.top/api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();*/
+
         final ProgressDialog pDialog = new ProgressDialog(this);
         pDialog.setMessage("Loading...");
         pDialog.show();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("base_url")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        TextView nipPns, namaPns;
+        nipPns = findViewById(R.id.nip_pns);
+        namaPns = findViewById(R.id.nama_pns);
 
-        CekNipBknInterface request = retrofit.create(CekNipBknInterface.class);
-        Call<JsonObject> call = request.cekBkn(nip);
-        call.enqueue(new Callback<JsonObject>() {
+        CekNipBknInterface cek = RetrofitClient.getClient().create(CekNipBknInterface.class);
+        /*196404181984032001*/
+        Call<ResponseBody> call = cek.cekBkn(nip);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("Res", "onResponse: " +response.body());
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+
+                    if(response.isSuccessful()){
+                        pDialog.dismiss();
+                        Toast.makeText(DaftarActivity.this, "Data ditemukan", Toast.LENGTH_SHORT).show();
+                        Log.d("obj", "onResponse124: " + obj);
+
+                        JSONArray dataPns = obj.getJSONArray("data");
+
+                        for(int i = 0; i < dataPns.length(); i++){
+                            JSONObject userObj = dataPns.getJSONObject(i);
+                            String nama = userObj.getString("namaPns");
+                            String nipP = userObj.getString("nipBaru");
+                            nipPns.setText(nipP);
+                            namaPns.setText(nama);
+                        }
+
+                        /*String nama = obj.getString("data");
+                        nipPns.setText(nama);*/
+//                        Toast.makeText(DaftarActivity.this, nama, Toast.LENGTH_SHORT).show();
+
+                    }else{
+                        Log.e("errorMessage", "onResponse: " + obj);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+                Toast.makeText(DaftarActivity.this, "Data ditemukan", Toast.LENGTH_SHORT).show();
                 pDialog.dismiss();
-                String s = String.valueOf("status");
-//                JsonArray jsonArray = response.getAsJaonArray("data");
-                Toast.makeText(DaftarActivity.this, response.toString(),Toast.LENGTH_SHORT).show();
+                
+
+                
+
+                /*String nipResponse = "";
+                NipResources nipResources = response.body();
+                boolean status = nipResources.status;
+                String message = nipResources.message;
+                List<NipResources.Datum> dataList = nipResources.data;*/
+
+//                nipResponse = "\nStatus: " + status + "\nMessage: " + message;
+
+                /*for(NipResources.Datum data : dataList){
+                    nipPns.setText(data.nipBaru);
+                    namaPns.setText(data.namaJabatan);
+                }*/
+
+
+//                Log.d("NIP", "onResponse: " + nipResponse);
+
+
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(DaftarActivity.this, "Something wrong", Toast.LENGTH_SHORT).show();
+                Log.d("Error", "onFailure: " + t.getMessage());
                 pDialog.dismiss();
+                call.cancel();
             }
         });
+//        retrofit
+
+        /*Call<ResponseBody> call = request.cekBkn(nip);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                pDialog.dismiss();
+                boolean s = Boolean.parseBoolean(String.valueOf("status"));
+                String res = response.toString();
+                Log.d("Data", "onResponse: " + res);
+//                JsonArray jsonArray = response.("data");
+//                Toast.makeText(DaftarActivity.this, response.toString(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                pDialog.dismiss();
+                Toast.makeText(DaftarActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
         /*Call<String> call = RetrofitClient
                 .getmInstance()

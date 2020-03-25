@@ -1,7 +1,8 @@
 package com.fidac.dumi.api;
 
-import com.google.gson.JsonObject;
+import com.fidac.dumi.retrofit.NipResources;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -11,9 +12,7 @@ public interface CekNipBknInterface {
 
     @FormUrlEncoded
     @POST("bkn/get")
-    Call<JsonObject> cekBkn(
+    Call<ResponseBody> cekBkn(
             @Field("nip") String nip
     );
-
-    Call<JsonObject> getJson();
 }

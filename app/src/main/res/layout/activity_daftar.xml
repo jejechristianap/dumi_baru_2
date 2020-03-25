@@ -51,6 +51,20 @@
                 android:theme="@style/MyCheckbox"
                 android:text="@string/cek_nip"/>
 
+            <TextView
+                android:id="@+id/nip_pns"
+                android:gravity="center"
+                android:text="NIP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/nama_pns"
+                android:gravity="center"
+                android:text="NAMA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
 
             <EditText
                 android:visibility="gone"
