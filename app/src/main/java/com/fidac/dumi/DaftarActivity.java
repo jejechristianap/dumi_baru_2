@@ -1,5 +1,6 @@
 package com.fidac.dumi;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +10,13 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,22 +67,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.POST;
 
 public class DaftarActivity extends AppCompatActivity {
+
     private EditText masukanNipEt;
-    private EditText masukanEmailEt;
-    private EditText masukanPasswordEt;
-    private EditText cekPasswordEt;
-    private EditText masukkanNamaEt;
-    private Boolean isValid;
-
-    private Session session;
-
-    private CheckBox passwordCheckBox;
     private CheckBox nipCheckBox;
 
-    private Button lanjutButton;
+    private TextView nipBaruTv, namaPnsTv, golonganTv, namaJabatanTv, tmtCpnsTv,
+                     mkBulanTv, mkTahunTv, inskerNamaTv, tempatLahirTv, tglLhrPnsTv,
+                     npwpNomorTv, noKtpTv, tmtPensiunTv, gajiPokokTv, jenisKelaminTv;
 
-    private Switch syaratSwitch;
-    private CekNipBknInterface cekNipBknInterface;
+    private InputMethodManager imm;
+
+    private LinearLayout dataNipLl;
 
     public static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
@@ -94,20 +93,31 @@ public class DaftarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar);
-        cekNipBknInterface = RetrofitClient.getClient().create(CekNipBknInterface.class);
 
-//        masukanNoTelp = findViewById(R.id.daftar_no_telp_et);
+        imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+
         masukanNipEt = findViewById(R.id.daftar_nip_et);
-        masukanEmailEt = findViewById(R.id.daftar_email_et);
-        masukanPasswordEt = findViewById(R.id.daftar_password_et);
-        cekPasswordEt = findViewById(R.id.daftar_ulangi_password_et);
-
-        masukkanNamaEt = findViewById(R.id.daftar_nama_et);
-
         nipCheckBox = findViewById(R.id.cek_nip);
-        passwordCheckBox = findViewById(R.id.checkbox_password);
-        lanjutButton = findViewById(R.id.daftar_lanjut_button);
-        syaratSwitch = findViewById(R.id.switch_syarat);
+
+        dataNipLl = findViewById(R.id.data_nip);
+
+        // Keterangan Data Pribadi
+        nipBaruTv = findViewById(R.id.nipBaru);
+        namaPnsTv = findViewById(R.id.namaPns);
+        golonganTv = findViewById(R.id.golongan);
+        namaJabatanTv = findViewById(R.id.namaJabatan);
+        tmtCpnsTv = findViewById(R.id.tmtCpns);
+        mkBulanTv = findViewById(R.id.mkBulan);
+        mkTahunTv = findViewById(R.id.mkTahun);
+        inskerNamaTv = findViewById(R.id.inskerNama);
+        tempatLahirTv = findViewById(R.id.tempatLahir);
+        tglLhrPnsTv = findViewById(R.id.tglLhrPns);
+        npwpNomorTv = findViewById(R.id.npwpNomor);
+        noKtpTv = findViewById(R.id.noKtp);
+        tmtPensiunTv = findViewById(R.id.tmtPensiun);
+        gajiPokokTv = findViewById(R.id.gajiPokok);
+        jenisKelaminTv = findViewById(R.id.jenis_kelamin);
+
 
         nipCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -120,21 +130,7 @@ public class DaftarActivity extends AppCompatActivity {
             }
         });
 
-        passwordCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    /*Show Password*/
-                    masukanPasswordEt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    cekPasswordEt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                } else {
-                    /*Hide Password*/
-                    masukanPasswordEt.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    cekPasswordEt.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                }
-            }
-        });
-
+        /*
         syaratSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -143,24 +139,7 @@ public class DaftarActivity extends AppCompatActivity {
                 lanjutButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String nip = masukanNipEt.getText().toString();
-                        String email = masukanEmailEt.getText().toString();
-                        String password = masukanPasswordEt.getText().toString();
-                        String cekPass = cekPasswordEt.getText().toString();
-                        String nama = masukkanNamaEt.getText().toString();
-//                        String number = masukanNoTelp.getText().toString();
-                        boolean mNip = false;
-                        boolean mEmail = false;
-                        boolean mCekPass = false;
-                        boolean mNama = false;
 
-                        if (TextUtils.isEmpty(nip)) {
-                            masukanNipEt.setError("Kolom ini tidak boleh kosong..");
-                            masukanNipEt.requestFocus();
-                        } else {
-                            masukanNipEt.setError(null);
-                            mNip = true;
-                        }
 
                         if (TextUtils.isEmpty(email)) {
                             masukanEmailEt.setError("Kolom ini tidak boleh kosong..");
@@ -173,48 +152,7 @@ public class DaftarActivity extends AppCompatActivity {
                         } else {
                             masukanEmailEt.setError(null);
                             mEmail = true;
-                        }
-
-                        if (TextUtils.isEmpty(nama)) {
-                            masukkanNamaEt.setError("Kolom ini tidak boleh kosong..");
-                            masukkanNamaEt.requestFocus();
-                        } else {
-                            masukkanNamaEt.setError(null);
-                        }
-
-                        if (TextUtils.isEmpty(password)) {
-                            masukanPasswordEt.setError("Kolom ini tidak boleh kosong..");
-                        } else if (password.length() < 6) {
-                            masukanPasswordEt.setError("Minimal Password 6 Karakter");
-                        } else {
-                            masukanPasswordEt.setError(null);
-                        }
-
-                        if (TextUtils.isEmpty(cekPass)) {
-                            cekPasswordEt.setError("Kolom ini tidak boleh kosong..");
-                        } else if (!cekPass.equals(password)) {
-                            cekPasswordEt.setError("Password Tidak Sama");
-
-                        } else {
-                            cekPasswordEt.setError(null);
-                            mCekPass = true;
-                        }
-
-                        if (!mNip || !mEmail || !mCekPass) {
-
-                        } else {
-                            /*registerUser();*/
-                            /*cekNip();*/
-                        }
-
-                    }
-                });
-                if (!isChecked) {
-                    lanjutButton.setEnabled(false);
-                    lanjutButton.setBackgroundResource(R.drawable.button_lanjut_design);
-                }
-            }
-        });
+                        }*/
     }
 
     public void cekNip() {
@@ -222,61 +160,17 @@ public class DaftarActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(nip)){
             masukanNipEt.setError("Kolom tidak boleh kosong...");
             masukanNipEt.requestFocus();
+            nipCheckBox.setChecked(false);
             return;
         }
-
-        /*OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://app.ternak-burung.top/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();*/
 
         final ProgressDialog pDialog = new ProgressDialog(this);
         pDialog.setMessage("Loading...");
         pDialog.show();
 
-        TextView nipPns, namaPns;
-        nipPns = findViewById(R.id.nip_pns);
-        namaPns = findViewById(R.id.nama_pns);
-
         CekNipBknInterface cek = RetrofitClient.getClient().create(CekNipBknInterface.class);
         /*196404181984032001*/
-
-        /*//Call with NipResources
-        Call<NipResources> call = cek.cekBkn(nip);
-        call.enqueue(new Callback<NipResources>() {
-            @Override
-            public void onResponse(Call<NipResources> call, Response<NipResources> response) {
-                if(response.isSuccessful()){
-                    Log.d("Successfull", "onResponse: " + response.body());
-                    pDialog.dismiss();
-                    String status = response.body().getMessage();
-                    List<NipResources.Datum> data = response.body().getData();
-                    for (int i = 0; i < data.size(); i++) {
-                        Log.d("Successfull", "Data: " + data.get(i));
-                    }
-
-                    Toast.makeText(DaftarActivity.this, "status: " + status, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(DaftarActivity.this, "data: " + data, Toast.LENGTH_SHORT).show();
-                } else {
-                    Log.d("NotSuccessful", "onResponse: " + response.errorBody());
-                    pDialog.dismiss();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NipResources> call, Throwable t) {
-                Log.d("Fail", "onFailure: " + t.getMessage());
-                pDialog.dismiss();
-            }
-        });*/
-
+        /*197301092000032001*/
         // Call with ResponseBody
         Call<ResponseBody> call = cek.cekBkn(nip);
         call.enqueue(new Callback<ResponseBody>() {
@@ -286,56 +180,88 @@ public class DaftarActivity extends AppCompatActivity {
                 try {
                     JSONObject obj = new JSONObject(response.body().string());
 //                    JSONObject jsonRESULTS = new JSONObject(response.body().string());
-
-                    if(response.isSuccessful()){
+                    boolean status = obj.getBoolean("status");
+                    if(status){
                         pDialog.dismiss();
+                        dataNipLl.setVisibility(View.VISIBLE);
+                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         Toast.makeText(DaftarActivity.this, "Data ditemukan", Toast.LENGTH_SHORT).show();
                         Log.d("OBJECTRESPONSE", "onResponse124: " + obj);
                         /*196404181984032001*/
-//                        Log.d("OBJECTRESPONSE", "onResponse12341234: " + dataPns);
+
                         String dat = obj.getString("data");
                         JSONArray dataArray = new JSONArray(dat);
                         for (int i = 0; i < dataArray.length(); i++){
                             JSONObject dataObj = dataArray.getJSONObject(i);
-
                             String nipBaru = dataObj.getString("nipBaru");
-                            String namaP = dataObj.getString("namaPns");
-                            nipPns.setText(nipBaru);
-                            namaPns.setText(namaP);
+                            String namaPns = dataObj.getString("namaPns");
+                            String golongan = dataObj.getString("golongan");
+                            String namaJabatan = dataObj.getString("namaJabatan");
+                            String tmtCpns = dataObj.getString("tmtCpns");
+                            String mkBulan = dataObj.getString("mkBulan");
+                            String mkTahun = dataObj.getString("mkTahun");
+                            String inskerNama = dataObj.getString("inskerNama");
+                            String tempatLahir = dataObj.getString("tempatLahir");
+                            String tglLhrPns = dataObj.getString("tglLhrPns");
+                            String npwpNomor = dataObj.getString("npwpNomor");
+                            String noKtp = dataObj.getString("noktp");
+                            String tmtPensiun = dataObj.getString("tmtPensiun");
+                            String gajiPokok = dataObj.getString("gajiPokok");
+//                            String jenisKelamin = dataObj.getString("jenis_kelamin");
+
+                            nipBaruTv.setText(nipBaru);
+                            namaPnsTv.setText(namaPns);
+                            golonganTv.setText(golongan);
+                            namaJabatanTv.setText(namaJabatan);
+                            tmtCpnsTv.setText(tmtCpns);
+                            mkBulanTv.setText(mkBulan);
+                            mkTahunTv.setText(mkTahun);
+                            inskerNamaTv.setText(inskerNama);
+                            tempatLahirTv.setText(tempatLahir);
+                            tglLhrPnsTv.setText(tglLhrPns);
+                            npwpNomorTv.setText(npwpNomor);
+                            noKtpTv.setText(noKtp);
+                            tmtPensiunTv.setText(tmtPensiun);
+                            gajiPokokTv.setText(gajiPokok);
+//                            jenisKelaminTv.setText(jenisKelamin);
                         }
-
-
-
-
-                        /*String nama = obj.getString("data");
-                        nipPns.setText(nama);*/
-//                        Toast.makeText(DaftarActivity.this, nama, Toast.LENGTH_SHORT).show();
-
                     }else{
+                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         Log.e("errorMessage", "onResponse: " + obj);
+                        dataNipLl.setVisibility(View.GONE);
+                        nipCheckBox.setChecked(false);
+                        pDialog.dismiss();
+                        Toast.makeText(DaftarActivity.this, "Mohon maaf NIP anda belum terdaftar", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
+                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    nipCheckBox.setChecked(false);
+                    dataNipLl.setVisibility(View.GONE);
+                    pDialog.dismiss();
                     e.printStackTrace();
                 }
-
-
-                Toast.makeText(DaftarActivity.this, "Data ditemukan", Toast.LENGTH_SHORT).show();
-                pDialog.dismiss();
-
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                dataNipLl.setVisibility(View.GONE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 Toast.makeText(DaftarActivity.this, "Something wrong", Toast.LENGTH_SHORT).show();
                 Log.d("Error", "onFailure: " + t.getMessage());
+                nipCheckBox.setChecked(false);
                 pDialog.dismiss();
                 call.cancel();
             }
         });
 
     }
-
 }
+
+
+
+
+
+
 
 /*  Volley Library
     private void cekNipUser() {

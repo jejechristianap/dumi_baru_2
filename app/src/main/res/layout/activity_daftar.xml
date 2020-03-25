@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
+            android:layout_marginBottom="20dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -27,7 +28,6 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="40sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
                 android:id="@+id/daftar_nip_et"
                 android:layout_width="match_parent"
@@ -40,7 +40,6 @@
                 android:ems="10"
                 android:hint="@string/masukan_nip"
                 android:inputType="number" />
-
             <CheckBox
                 android:visibility="visible"
                 android:id="@+id/cek_nip"
@@ -51,133 +50,528 @@
                 android:theme="@style/MyCheckbox"
                 android:text="@string/cek_nip"/>
 
-            <TextView
-                android:id="@+id/nip_pns"
-                android:gravity="center"
-                android:text="NIP"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/nama_pns"
-                android:gravity="center"
-                android:text="NAMA"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/daftar_email_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="32dp"
-                android:ems="10"
-                android:backgroundTint="#1560DB"
-                android:hint="@string/masukan_email"
-                android:inputType="textEmailAddress"
-                android:autofillHints="" />
-
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/daftar_nama_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="32dp"
-                android:ems="10"
-                android:backgroundTint="#1560DB"
-                android:hint="@string/masukan_nama"
-                android:inputType="text"
-                android:autofillHints="" />
-
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/daftar_password_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="32dp"
-                android:autofillHints=""
-                android:backgroundTint="#1560DB"
-                android:ems="10"
-                android:hint="@string/masukan_password"
-                android:inputType="textPassword"/>
-
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/daftar_ulangi_password_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="32dp"
-                android:ems="10"
-                android:hint="@string/ulangi_password"
-                android:backgroundTint="#1560DB"
-                android:inputType="textPassword"
-                android:autofillHints="" />
-
-            <CheckBox
-                android:visibility="gone"
-                android:id="@+id/checkbox_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:theme="@style/MyCheckbox"
-                android:text="@string/lihat_password"/>
-
             <LinearLayout
+                android:id="@+id/data_nip"
                 android:visibility="gone"
-                android:orientation="horizontal"
+                android:orientation="vertical"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="50dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <Switch
-                    android:id="@+id/switch_syarat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="27dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="10dp"
-                    android:theme="@style/SCBSwitch"/>
-
+                android:layout_height="match_parent">
                 <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="27dp"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@string/syarat_dan_ketentuan"
-                android:textColor="@android:color/black"
-                app:layout_constraintStart_toEndOf="@+id/switch_syarat"
-                app:layout_constraintTop_toBottomOf="@+id/checkbox_password" />
-            </LinearLayout>
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/mohon_cek_data"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="20sp"
+                    tools:autoSizeStepGranularity="1sp" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <Button
-            android:id="@+id/daftar_lanjut_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
-                android:layout_marginBottom="20dp"
-            android:background="@drawable/button_lanjut_design"
-            android:clickable="false"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/lanjut"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="22sp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/nip_baru"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/nipBaru"
+                        android:gravity="end"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="25dp"
+                        android:text="@string/nip"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/nama"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/namaPns"
+                        android:gravity="end"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="25dp"
+                        android:text="@string/nama"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/golongan"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/golongan"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="end"
+                        android:text="@string/golongan"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/nama_jabatan"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/namaJabatan"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="end"
+                        android:text="@string/nama_jabatan"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/tmtCpns"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/tmtCpns"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="end"
+                        android:text="@string/tmtCpns"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/mk_bulan"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/mkBulan"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="end"
+                        android:text="@string/mk_bulan"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/mk_tahun"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/mkTahun"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="end"
+                        android:text="@string/mk_tahun"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/inskerNama"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/inskerNama"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="end"
+                        android:text="@string/inskerNama"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/tempat_lahir"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/tempatLahir"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="end"
+                        android:text="@string/tempat_lahir"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/tglLahirPns"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/tglLhrPns"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="end"
+                        android:text="@string/tglLahirPns"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/npwp"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/npwpNomor"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="end"
+                        android:text="@string/npwp"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/no_ktp"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/noKtp"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="end"
+                        android:text="@string/no_ktp"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/tmt_pensiun"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/tmtPensiun"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="end"
+                        android:text="@string/tmt_pensiun"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/gaji_pokok"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/gajiPokok"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="end"
+                        android:text="@string/gaji_pokok"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/jenis_kelamin"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/jenis_kelamin"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:gravity="end"
+                        android:text="@string/jenis_kelamin"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

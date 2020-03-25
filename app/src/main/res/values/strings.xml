@@ -107,5 +107,21 @@
     <string name="keluar">Keluar</string>
     <string name="masukan_nama">Masukkan Nama</string>
     <string name="cek_nip">Cek Nip Anda</string>
+    <string name="nip_baru">NIP:</string>
+    <string name="mohon_cek_data">Mohon Cek Data Anda</string>
+    <string name="nama">Nama:</string>
+    <string name="golongan">Golongan:</string>
+    <string name="nama_jabatan">Nama Jabatan:</string>
+    <string name="tmtCpns">tmtCpns:</string>
+    <string name="mk_bulan">Masa Kerja (Bulan):</string>
+    <string name="mk_tahun">Masa Kerja (Tahun):</string>
+    <string name="inskerNama">inskerNama:</string>
+    <string name="tempat_lahir">Tempat Lahir:</string>
+    <string name="tglLahirPns">Tanggal Lahir:</string>
+    <string name="npwp">NPWP:</string>
+    <string name="no_ktp">No. KTP:</string>
+    <string name="tmt_pensiun">tmtPensiun:</string>
+    <string name="gaji_pokok">Gaji Pokok:</string>
+    <string name="jenis_kelamin">Jenis Kelamin:</string>
 
 </resources>
