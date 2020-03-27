@@ -80,6 +80,7 @@ public class LengkapiData extends AppCompatActivity {
             kodePos = kodePosEt.getText().toString();
 
             /*User Handling*/
+            // No KTP
             if (TextUtils.isEmpty(noKtp)){
                 noKtpEt.setError(KOLOM);
                 noKtpEt.requestFocus();
@@ -91,7 +92,7 @@ public class LengkapiData extends AppCompatActivity {
             } else {
                 noKtpEt.setError(null);
             }
-
+            // Nama Lengkap
             if(TextUtils.isEmpty(namaLengkap)){
                 namaLengkapEt.setError(KOLOM);
                 namaLengkapEt.requestFocus();
@@ -99,9 +100,70 @@ public class LengkapiData extends AppCompatActivity {
             } else {
                 namaLengkapEt.setError(null);
             }
-
-
-
+            // Keterangan Title
+            if(TextUtils.isEmpty(ketTitle)){
+                ketTitleEt.setError(KOLOM);
+                ketTitleEt.requestFocus();
+                return;
+            } else {
+                ketTitleEt.setError(null);
+            }
+            // RT
+            if(TextUtils.isEmpty(rt)){
+                rtEt.setError(KOLOM);
+                rtEt.requestFocus();
+                return;
+            } else {
+                rtEt.setError(null);
+            }
+            // RW
+            if(TextUtils.isEmpty(rw)){
+                rwEt.setError(KOLOM);
+                rwEt.requestFocus();
+                return;
+            } else {
+                rwEt.setError(null);
+            }
+            // Kelurahan
+            if(TextUtils.isEmpty(kelurahan)){
+                kelurahanEt.setError(KOLOM);
+                kelurahanEt.requestFocus();
+                return;
+            } else {
+                kelurahanEt.setError(null);
+            }
+            // Kecamatan
+            if(TextUtils.isEmpty(kecamatan)){
+                kecamatanEt.setError(KOLOM);
+                kecamatanEt.requestFocus();
+                return;
+            } else {
+                kecamatanEt.setError(null);
+            }
+            // Kota
+            if(TextUtils.isEmpty(kota)){
+                kotaEt.setError(KOLOM);
+                kotaEt.requestFocus();
+                return;
+            } else {
+                kotaEt.setError(null);
+            }
+            // Alamat
+            if(TextUtils.isEmpty(alamat)){
+                alamatEt.setError(KOLOM);
+                alamatEt.requestFocus();
+                return;
+            } else {
+                alamatEt.setError(null);
+            }
+            // Kode Pos
+            if(TextUtils.isEmpty(kodePos)){
+                kodePosEt.setError(KOLOM);
+                kodePosEt.requestFocus();
+                return;
+            } else {
+                kodePosEt.setError(null);
+            }
 
             startActivity(new Intent(LengkapiData.this, TakePicture.class));
         });
