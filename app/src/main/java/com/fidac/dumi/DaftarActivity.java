@@ -95,7 +95,6 @@ public class DaftarActivity extends AppCompatActivity {
         emailPassLl = findViewById(R.id.email_password);
 
 
-
         imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
 
 
@@ -107,13 +106,6 @@ public class DaftarActivity extends AppCompatActivity {
         emailEt = findViewById(R.id.email_daftar_et);
         passEt = findViewById(R.id.masuk_password_et);
         ulangiPassEt = findViewById(R.id.ulangi_password_et);
-
-        /*TITLE SPINNER*/
-        /*instansiSpinner = findViewById(R.id.pns_nonpns_spinner);
-        ArrayAdapter<CharSequence> langAdapter = new ArrayAdapter<>(DaftarActivity.this, R.layout.spinner_text, instansi);
-        langAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
-        instansiSpinner.setAdapter(langAdapter);
-        String instansi = instansiSpinner.getSelectedItem().toString();*/
 
         nipCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
