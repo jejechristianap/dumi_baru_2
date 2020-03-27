@@ -14,14 +14,6 @@
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@color/colorBlue</item>
     </style>
-<!--
-    <style name="Splash" parent="android:Theme">
-        <item name="windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowDisablePreview">true</item>
-    </style>-->
 
     <!--Only Show Views like Image, Text, etc Without background-->
     <style name="Theme.Transparent" parent="android:Theme">
@@ -32,6 +24,7 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+
     <!--Switch Theme-->
     <style name="SCBSwitch" parent="Theme.AppCompat.Light">
         <!-- active thumb & track color (30% transparency) -->
@@ -40,7 +33,6 @@
         <!-- inactive thumb color -->
         <item name="colorSwitchThumbNormal">#f1f1f1
         </item>
-
         <!-- inactive track color (30% transparency) -->
         <item name="android:colorForeground">#42221f1f
         </item>
@@ -53,5 +45,45 @@
         <item name="android:colorControlHighlight">#c51162</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
     </style>
+
+    <!--Spinner DropDown-->
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+    </style>
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+    </style>
+
+    <!--<style name="Theme.PopupMenu" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="popupMenuStyle">@style/Widget.MaterialComponents.PopupMenu</item>
+        <item name="actionOverflowMenuStyle">@style/Widget.MaterialComponents.PopupMenu.Overflow</item>
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        &lt;!&ndash;<item name="colorSecondary">@color/my_app_secondary_color</item>
+        <item name="android:colorBackground">@color/my_app_background_color</item>
+        <item name="colorError">@color/my_app_error_color</item>&ndash;&gt;
+
+        &lt;!&ndash; New MaterialComponents attributes. &ndash;&gt;
+       &lt;!&ndash; <item name="colorSurface">@color/my_app_surface_color</item>
+        <item name="colorOnPrimary">@color/my_app_color_on_primary</item>
+        <item name="colorOnSecondary">@color/my_app_color_on_secondary</item>
+        <item name="colorOnBackground">@color/my_app_color_on_background</item>
+        <item name="colorOnError">@color/my_app_color_on_error</item>
+        <item name="colorOnSurface">@color/my_app_color_on_surface</item>&ndash;&gt;
+        <item name="scrimBackground">@color/mtrl_scrim_color</item>
+        <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.MaterialComponents.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.MaterialComponents.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.MaterialComponents.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.MaterialComponents.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.MaterialComponents.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.MaterialComponents.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.MaterialComponents.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.MaterialComponents.Body2</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.MaterialComponents.Caption</item>
+        <item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item>
+    </style>-->
 
 </resources>

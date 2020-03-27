@@ -5,18 +5,22 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.se.omapi.Session;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,43 +45,35 @@ import java.util.HashMap;
 import java.util.Map;*/
 import com.fidac.dumi.api.CekNipBknInterface;
 import com.fidac.dumi.model.RetrofitClient;
-import com.fidac.dumi.retrofit.NipResources;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.POST;
 
 public class DaftarActivity extends AppCompatActivity {
 
     private EditText masukanNipEt;
     private CheckBox nipCheckBox;
+    private CheckBox showPassCheckBox;
 
-    private TextView nipBaruTv, namaPnsTv, golonganTv, namaJabatanTv, tmtCpnsTv,
-                     mkBulanTv, mkTahunTv, inskerNamaTv, tempatLahirTv, tglLhrPnsTv,
-                     npwpNomorTv, noKtpTv, tmtPensiunTv, gajiPokokTv, jenisKelaminTv;
-
+    /*Hide Soft Keyboard*/
     private InputMethodManager imm;
 
     private LinearLayout dataNipLl;
+    private LinearLayout cekNipLl;
+    private LinearLayout emailPassLl;
+
+    private Button lanjutButton;
+    private EditText emailEt, passEt, ulangiPassEt;
+
+    private String[] title = {"Tanpa Gelar","D-1","D-2","D-3", "D-4", "S-1", "S-2", "S-3"};
+    private String[] agama = {"Islam", "Kristen", "Khatolik", "Budha", "Hindu", "Konghucu"};
+    private String[] instansi = {"Pilih Mitra", "PNS", "Non-PNS"};
 
     public static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
@@ -94,54 +90,95 @@ public class DaftarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar);
 
+        /*Linear Layout*/
+        cekNipLl = findViewById(R.id.cek_nip_layout);
+        emailPassLl = findViewById(R.id.email_password);
+
+
+
         imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+
 
         masukanNipEt = findViewById(R.id.daftar_nip_et);
         nipCheckBox = findViewById(R.id.cek_nip);
+        showPassCheckBox = findViewById(R.id.show_password);
 
-        dataNipLl = findViewById(R.id.data_nip);
+        lanjutButton = findViewById(R.id.lanjut_button);
+        emailEt = findViewById(R.id.email_daftar_et);
+        passEt = findViewById(R.id.masuk_password_et);
+        ulangiPassEt = findViewById(R.id.ulangi_password_et);
 
-        // Keterangan Data Pribadi
-        nipBaruTv = findViewById(R.id.nipBaru);
-        namaPnsTv = findViewById(R.id.namaPns);
-        golonganTv = findViewById(R.id.golongan);
-        namaJabatanTv = findViewById(R.id.namaJabatan);
-        tmtCpnsTv = findViewById(R.id.tmtCpns);
-        mkBulanTv = findViewById(R.id.mkBulan);
-        mkTahunTv = findViewById(R.id.mkTahun);
-        inskerNamaTv = findViewById(R.id.inskerNama);
-        tempatLahirTv = findViewById(R.id.tempatLahir);
-        tglLhrPnsTv = findViewById(R.id.tglLhrPns);
-        npwpNomorTv = findViewById(R.id.npwpNomor);
-        noKtpTv = findViewById(R.id.noKtp);
-        tmtPensiunTv = findViewById(R.id.tmtPensiun);
-        gajiPokokTv = findViewById(R.id.gajiPokok);
-        jenisKelaminTv = findViewById(R.id.jenis_kelamin);
+        /*TITLE SPINNER*/
+        /*instansiSpinner = findViewById(R.id.pns_nonpns_spinner);
+        ArrayAdapter<CharSequence> langAdapter = new ArrayAdapter<>(DaftarActivity.this, R.layout.spinner_text, instansi);
+        langAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+        instansiSpinner.setAdapter(langAdapter);
+        String instansi = instansiSpinner.getSelectedItem().toString();*/
 
-
-        nipCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-                    masukanNipEt.setCursorVisible(false);
-                    cekNip();
-                }
+        nipCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                masukanNipEt.setCursorVisible(false);
+                cekNip();
             }
         });
-        /*
-        if (TextUtils.isEmpty(email)) {
-            masukanEmailEt.setError("Kolom ini tidak boleh kosong..");
-            masukanEmailEt.requestFocus();
-            return;
-        } else if (!EMAIL_ADDRESS_PATTERN.matcher(email).matches()) {
-            masukanEmailEt.setError("Email tidak valid");
-            masukanEmailEt.requestFocus();
-            return;
-        } else {
-            masukanEmailEt.setError(null);
-            mEmail = true;
-        }*/
+
+        showPassCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked){
+                passEt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                ulangiPassEt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            } else {
+                passEt.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                ulangiPassEt.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            }
+        });
+
+        lanjutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = emailEt.getText().toString();
+                String pass = passEt.getText().toString();
+                String ulangiPass = ulangiPassEt.getText().toString();
+
+                /*Email Handling*/
+                if (TextUtils.isEmpty(email)) {
+                    emailEt.setError("Kolom ini tidak boleh kosong..");
+                    emailEt.requestFocus();
+                    return;
+                } else if (!EMAIL_ADDRESS_PATTERN.matcher(email).matches()) {
+                    emailEt.setError("Email tidak valid");
+                    emailEt.requestFocus();
+                    return;
+                } else {
+                    emailEt.setError(null);
+                }
+                /*Password Handling*/
+                if (TextUtils.isEmpty(pass)){
+                    passEt.setError("Kolom ini tidak boleh kosong..");
+                    passEt.requestFocus();
+                    return;
+                } else if(pass.length() < 6){
+                    passEt.setError("Password minimal 6 karakter");
+                    passEt.requestFocus();
+                    return;
+                } else {
+                    passEt.setError(null);
+                }
+                /*Check is password match*/
+                if (!ulangiPass.equals(pass)){
+                    ulangiPassEt.setError("Password tidak sama..");
+                    ulangiPassEt.requestFocus();
+                    return;
+                } else {
+                    ulangiPassEt.setError(null);
+                }
+
+                startActivity(new Intent(DaftarActivity.this, LengkapiData.class));
+
+            }
+        });
+
+
     }
 
     public void cekNip() {
@@ -172,13 +209,11 @@ public class DaftarActivity extends AppCompatActivity {
                     boolean status = obj.getBoolean("status");
                     if(status){
                         pDialog.dismiss();
-                        dataNipLl.setVisibility(View.VISIBLE);
-//                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-                        Toast.makeText(DaftarActivity.this, "Data ditemukan", Toast.LENGTH_SHORT).show();
+                        emailPassLl.setVisibility(View.VISIBLE);
+                        Toast.makeText(DaftarActivity.this, "NIP anda ditemukan..", Toast.LENGTH_SHORT).show();
                         Log.d("OBJECTRESPONSE", "onResponse124: " + obj);
                         /*196404181984032001*/
-
-                        String dat = obj.getString("data");
+                        /*String dat = obj.getString("data");
                         JSONArray dataArray = new JSONArray(dat);
                         for (int i = 0; i < dataArray.length(); i++){
                             JSONObject dataObj = dataArray.getJSONObject(i);
@@ -196,31 +231,13 @@ public class DaftarActivity extends AppCompatActivity {
                             String noKtp = dataObj.getString("noktp");
                             String tmtPensiun = dataObj.getString("tmtPensiun");
                             String gajiPokok = dataObj.getString("gajiPokok");
-//                            String jenisKelamin = dataObj.getString("jenis_kelamin");
-
-                            nipBaruTv.setText(nipBaru);
-                            namaPnsTv.setText(namaPns);
-                            golonganTv.setText(golongan);
-                            namaJabatanTv.setText(namaJabatan);
-                            tmtCpnsTv.setText(tmtCpns);
-                            mkBulanTv.setText(mkBulan);
-                            mkTahunTv.setText(mkTahun);
-                            inskerNamaTv.setText(inskerNama);
-                            tempatLahirTv.setText(tempatLahir);
-                            tglLhrPnsTv.setText(tglLhrPns);
-                            npwpNomorTv.setText(npwpNomor);
-                            noKtpTv.setText(noKtp);
-                            tmtPensiunTv.setText(tmtPensiun);
-                            gajiPokokTv.setText(gajiPokok);
-//                            jenisKelaminTv.setText(jenisKelamin);
-                        }
+                        }*/
                     }else{
 //                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         Log.e("errorMessage", "onResponse: " + obj);
-                        dataNipLl.setVisibility(View.GONE);
                         nipCheckBox.setChecked(false);
                         pDialog.dismiss();
-                        Toast.makeText(DaftarActivity.this, "Mohon maaf NIP anda belum terdaftar", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DaftarActivity.this, "Mohon maaf Instansi anda belum bekerja sama", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
 //                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);

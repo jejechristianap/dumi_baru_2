@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TakePicture">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/login_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5">
+
+        <ImageView
+            android:id="@+id/iv_ktp"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ktp" />
+
+        <ImageView
+            android:id="@+id/imv_selfi"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/selfie_ktp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <Button
+            android:id="@+id/ktp_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/marginTop10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_design_login_register"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/foto_ktp"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="73dp"
+            tools:layout_editor_absoluteY="493dp" />
+
+        <Button
+            android:id="@+id/selfi_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/marginTop10dp"
+            android:background="@drawable/button_design_login_register"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/foto_selfi"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="73dp"
+            tools:layout_editor_absoluteY="493dp" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
