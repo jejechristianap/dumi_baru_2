@@ -150,5 +150,14 @@
     <string name="kirim_ulang_kode">Kirim Ulang Kode</string>
     <string name="belum_punya_akun">Belum punya akun? daftar disini</string>
     <string name="rp_0">Rp0</string>
+    <string name="sisa_tagihan">Sisa Tagihan</string>
+    <string name="bunga">Bunga</string>
+    <string name="asuransi">Asuransi</string>
+    <string name="administrasi">Administrasi</string>
+    <string name="rincian_akun">Rincian Akun</string>
+    <string name="ubah_sandi">Ubah Sandi</string>
+    <string name="kebijakan_privasi">Kebijakan Privasi</string>
+    <string name="pusat_bantuan">Pusat Bantuan</string>
+    <string name="disclaimer">Disclaimer</string>
 
 </resources>
