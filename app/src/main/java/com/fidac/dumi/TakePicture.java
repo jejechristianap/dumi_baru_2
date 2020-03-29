@@ -6,9 +6,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,8 +27,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.fidac.dumi.api.CekNipBknInterface;
+import com.fidac.dumi.api.RegisterInterface;
 import com.fidac.dumi.api.UploadImageInterface;
 import com.fidac.dumi.model.RetrofitClient;
+import com.fidac.dumi.model.SharedPrefManager;
 import com.fidac.dumi.util.FileUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -55,6 +59,9 @@ public class TakePicture extends AppCompatActivity {
     private ImageView imgKtpIv, imgSelfiIv;
     private Button ktpButton, selfiButton, konfirmasiButton;
 
+    private SharedPreferences pref;
+    ProgressDialog pDialog;
+
     private Uri imgKtp, imgSelfi;
     boolean ktp = false;
     boolean selfi = false;
@@ -64,6 +71,8 @@ public class TakePicture extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_picture);
+
+        pref = getApplicationContext().getSharedPreferences("Daftar", 0 );
 
         imgKtpIv = findViewById(R.id.iv_ktp);
         imgSelfiIv = findViewById(R.id.iv_selfi);
@@ -105,10 +114,57 @@ public class TakePicture extends AppCompatActivity {
         });
 
         konfirmasiButton.setOnClickListener(v -> {
-            uploadFile("197301092000032001", imgKtp, imgSelfi);
+//            uploadFile("197301092000032001", imgKtp, imgSelfi);
+            regisUser();
+
         });
 
 
+    }
+
+    public void regisUser(){
+        String nip = pref.getString("nip", null);
+        String email = pref.getString("email", null);
+        String pass = pref.getString("pass", null);
+        String noKtp = pref.getString("no_ktp", null);
+        String namaLengkap = pref.getString("nama_lengkap", null);
+        String title = pref.getString("title", null);
+        String ketTitle = pref.getString("ket_title", null);
+        String rt = pref.getString("rt", null);
+        String rw = pref.getString("rw", null);
+        String kelurahan = pref.getString("kelurahan", null);
+        String kecamatan = pref.getString("kecamatan", null);
+        String kota = pref.getString("kota", null);
+        String alamat = pref.getString("alamat", null);
+        String kodePos = pref.getString("kode_pos", null);
+        String jenisKelamin = pref.getString("jenis_kelamin", null);
+        String agama = pref.getString("agama", null);
+        String noTelp = pref.getString("no_telp", null);
+
+
+        /*pDialog.setMessage("Terima kasih, data anda sedang diproses...");
+        pDialog.show();*/
+        Log.d("USER", nip+"\n"+email+"\n"+pass+"\n"+noKtp+"\n"+namaLengkap+"\n"+title+"\n"+ketTitle+"\n"+
+                rt+"\n"+rw+"\n"+kelurahan+"\n"+kecamatan+"\n"+kota+"\n"+alamat+"\n"+kodePos+"\n"+jenisKelamin);
+
+        RegisterInterface regis = RetrofitClient.getClient().create(RegisterInterface.class);
+        Call<ResponseBody> call = regis.createUser(nip, email, pass, noKtp,
+                namaLengkap, jenisKelamin, agama, title, ketTitle, rt, rw, kelurahan,
+                kecamatan, kota, alamat, kodePos, noTelp);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("Res", "onResponse: " +response.body());
+//                pDialog.dismiss();
+                startActivity(new Intent(TakePicture.this, MainActivity.class));
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Error", "onFailure: " + t.getMessage());
+//                pDialog.dismiss();
+            }
+        });
     }
 
     @Override
@@ -215,6 +271,7 @@ public class TakePicture extends AppCompatActivity {
     }
 
 
+/*
     private void uploadFile(String nip, Uri ktp, Uri selfi) {
         // create upload service client
         UploadImageInterface service =
@@ -266,6 +323,7 @@ public class TakePicture extends AppCompatActivity {
         });
     }
 
+*/
 
 
 

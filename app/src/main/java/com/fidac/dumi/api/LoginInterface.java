@@ -1,5 +1,6 @@
 package com.fidac.dumi.api;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -9,8 +10,8 @@ public interface LoginInterface {
 
     @FormUrlEncoded
     @POST("user/get")
-    Call<String> getUserLogin(
-            @Field("nip") String nip,
-            @Field("password") String password
+    Call<ResponseBody> getUserLogin(
+            @Field("nipBaru") String nip,
+            @Field("sandi") String password
     );
 }

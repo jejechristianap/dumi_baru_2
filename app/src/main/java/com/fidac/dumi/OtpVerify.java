@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -51,11 +52,16 @@ public class OtpVerify extends AppCompatActivity {
 
     private LinearLayout progressBar;
 
+    private SharedPreferences.Editor editor;
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_verify);
+
+        pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
+        editor = pref.edit();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -93,7 +99,9 @@ public class OtpVerify extends AppCompatActivity {
                 verifyVerificationCode(kodeOtp);
                 verifikasiKodeLl.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
-                return;
+                String noTelp = nomorTelpEt.getText().toString();
+                editor.putString("no_telp", noTelp);
+                editor.apply();
             }
         });
 
@@ -191,6 +199,7 @@ public class OtpVerify extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //verification successful we will start the profile activity
+
                             progressBar.setVisibility(View.GONE);
                             Intent intent = new Intent(OtpVerify.this, LengkapiData.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -199,6 +208,7 @@ public class OtpVerify extends AppCompatActivity {
                         } else {
 
                             //verification unsuccessful.. display an error message
+                            progressBar.setVisibility(View.GONE);
                             String message = "Terjadi kesalahan mohon mencoba lagi";
                             Toast.makeText(OtpVerify.this, message, Toast.LENGTH_SHORT).show();
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {

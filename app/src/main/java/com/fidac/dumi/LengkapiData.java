@@ -40,12 +40,14 @@ public class LengkapiData extends AppCompatActivity {
     private String[] agama = {"Islam", "Kristen", "Khatolik", "Budha", "Hindu", "Konghucu"};
     private String[] jenisKelamin = {"L", "P"};
     private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lengkapi_data);
         pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
+        editor = pref.edit();
 
         /*Jenis Kelamin*/
         jenisKelaminSpinner = findViewById(R.id.jenis_kelamin_spinner);
@@ -190,26 +192,25 @@ public class LengkapiData extends AppCompatActivity {
         } else {
             kodePosEt.setError(null);
         }
-        final ProgressDialog pDialog = new ProgressDialog(this);
+        /*final ProgressDialog pDialog = new ProgressDialog(this);
         pDialog.setMessage("Mohon Menunggu...");
-        pDialog.show();
+        pDialog.show();*/
 
-        RegisterInterface regis = RetrofitClient.getClient().create(RegisterInterface.class);
-        Call<ResponseBody> call = regis.createUser(nipBaru, email, password, noKtp,
-                namaLengkap, jenisKelamin, agama, title, ketTitle, rt, rw, kelurahan,
-                kecamatan, kota, alamat, kodePos, "0812135168");
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d("Res", "onResponse: " +response.body());
-                pDialog.dismiss();
-            }
+        editor.putString("no_ktp", noKtp);
+        editor.putString("nama_lengkap", namaLengkap);
+        editor.putString("title", title);
+        editor.putString("ket_title", ketTitle);
+        editor.putString("rt", rt);
+        editor.putString("rw", rw);
+        editor.putString("kelurahan", kelurahan);
+        editor.putString("kecamatan", kecamatan);
+        editor.putString("kota", kota);
+        editor.putString("alamat", alamat);
+        editor.putString("kode_pos", kodePos);
+        editor.putString("jensi_kelamin", jenisKelamin);
+        editor.putString("agama", agama);
+        editor.commit();
+        startActivity(new Intent(LengkapiData.this, TakePicture.class));
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Error", "onFailure: " + t.getMessage());
-                pDialog.dismiss();
-            }
-        });
     }
 }
