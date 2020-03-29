@@ -4,4 +4,15 @@
     <dimen name="font_medium">15sp</dimen>
     <dimen name="font_large">20sp</dimen>
     <dimen name="font_big">30sp</dimen>
+    <dimen name="marginTop10dp">10dp</dimen>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="icon_top_margin">24dp</dimen>
+    <dimen name="icon_bottom_margin">24dp</dimen>
+    <dimen name="title_bottom_margin">16dp</dimen>
+    <dimen name="field_width_standard">160dp</dimen>
+
+    <dimen name="button_horizontal_margin">8dp</dimen>
 </resources>

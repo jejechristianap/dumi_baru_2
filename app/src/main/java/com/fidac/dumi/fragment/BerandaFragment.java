@@ -38,11 +38,7 @@ public class BerandaFragment extends Fragment {
         TextView userEmailTv = view.findViewById(R.id.user_email);
         TextView userNama = view.findViewById(R.id.user_nama);
 
-        User user = SharedPrefManager.getInstance(getActivity()).getUser();
-        userIdTv.setText(user.getId());
-        userNipTv.setText(user.getNip());
-        userEmailTv.setText(user.getEmail());
-        userNama.setText(user.getNama());
+
 
 
         lihatSemuaTV.setOnClickListener(new View.OnClickListener() {

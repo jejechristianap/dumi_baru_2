@@ -2,20 +2,35 @@ package com.fidac.dumi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fidac.dumi.api.BaseApiService;
+import com.fidac.dumi.api.CekNipBknInterface;
+import com.fidac.dumi.api.LoginInterface;
 import com.fidac.dumi.model.PreferenceHelper;
+import com.fidac.dumi.model.RetrofitClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MasukActivity extends AppCompatActivity {
@@ -24,6 +39,7 @@ public class MasukActivity extends AppCompatActivity {
     private EditText nipEt;
     private EditText passEt;
     private PreferenceHelper preferenceHelper;
+    private TextView daftarDisiniTv;
 
     Context mContext;
     BaseApiService mApiService;
@@ -35,34 +51,88 @@ public class MasukActivity extends AppCompatActivity {
 
         nipEt = findViewById(R.id.masuk_nip_et);
         passEt = findViewById(R.id.masuk_password_et);
+        daftarDisiniTv = findViewById(R.id.daftar_disini_tv);
 
         masukButton = findViewById(R.id.masuk_user_button);
-        masukButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*userLogin();*/
-            }
+        masukButton.setOnClickListener(v -> {
+            loginUser();
+        });
+        daftarDisiniTv.setOnClickListener(v ->{
+            startActivity(new Intent(MasukActivity.this, DaftarActivity.class));
         });
     }
     @Override
     public void onBackPressed() {
+        finish();
         startActivity(new Intent(MasukActivity.this, HalamanDepanActivity.class));
     }
 
     private void loginUser() {
+        String nip = nipEt.getText().toString();
+        String password = passEt.getText().toString();
 
-        final String username = nipEt.getText().toString().trim();
-        final String password = passEt.getText().toString().trim();
+        if (TextUtils.isEmpty(nip)){
+            nipEt.setError("Mohon masukkan NIP anda");
+            nipEt.requestFocus();
+            return;
+        } else if(nip.length() < 12){
+            nipEt.setError("NIP SALAH");
+            nipEt.requestFocus();
+            return;
+        }
 
-        /*Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(LoginInterface.LOGINURL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
+        if(TextUtils.isEmpty(password)){
+            passEt.setError("Mohon masukkan password anda");
+            passEt.requestFocus();
+            return;
+        } else {
+            passEt.setError(null);
+        }
+        final ProgressDialog pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Mohon Menunggu...");
+        pDialog.show();
 
-        LoginInterface api = retrofit.create(LoginInterface.class);
+        LoginInterface cek = RetrofitClient.getClient().create(LoginInterface.class);
+        Call<ResponseBody> call = cek.getUserLogin(nip, password);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-        Call<String> call = api.getUserLogin(username,password);
-*/
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+                    boolean status = obj.getBoolean("status");
+                    if (status) {
+                        pDialog.dismiss();
+                        String dat = obj.getString("data");
+                        JSONArray dataArray = new JSONArray(dat);
+                        startActivity(new Intent(MasukActivity.this, MainActivity.class));
+//                        for (int i = 0; i < dataArray.length(); i++){
+//                            JSONObject userObj = dataArray.getJSONObject(i);
+//
+//                        }
+
+//                        startActivity(new Intent(MasukActivity.this, MainActivity.class));
+                    } else {
+                        Toast.makeText(MasukActivity.this, "NIP/Password Salah!", Toast.LENGTH_SHORT).show();
+                        nipEt.requestFocus();
+                        passEt.requestFocus();
+                    }
+                } catch (JSONException | IOException e) {
+                    e.printStackTrace();
+                }
+
+//                    JSONObject jsonRESULTS = new JSONObject(response.body().string());
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+
+
 
     }
 

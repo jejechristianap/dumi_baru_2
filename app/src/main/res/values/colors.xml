@@ -6,6 +6,10 @@
     <color name="colorWhite">#FFF</color>
     <color name="colorBlue">#1560DB</color>
 
+    <color name="grey_100">#F5F5F5</color>
+    <color name="grey_300">#E0E0E0</color>
+    <color name="grey_500">#9E9E9E</color>
+
     <!--Switch Color-->
     <color name="disable_forground_grey">#42221f1f</color>
     <color name="disable_thumb_grey">#1c000000</color>

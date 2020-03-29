@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:baselineAligned="false"
         android:orientation="vertical"
-        android:background="#1560DB"
+        android:background="@drawable/bg_beranda"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -34,93 +34,47 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="8dp"
+                android:weightSum="2"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_1jt"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_weight="1.4"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
-                    android:text="@string/rp_1000000"
+                    android:text="@string/rp_0"
                     android:textColor="@android:color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView9"
-                    android:textSize="30sp" />
+                    app:autoSizeMinTextSize="20sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="35sp"
+                    tools:autoSizeStepGranularity="2sp"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:background="@drawable/layout_rounded"
+                    android:layout_gravity="center"
+                    android:layout_height="30dp">
+                    <TextView
+                        android:text="@string/riwayat"
+                        android:textColor="@color/colorBlue"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        app:autoSizeMinTextSize="20sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="25sp"
+                        tools:autoSizeStepGranularity="2sp"/>
+                </LinearLayout>
+
 
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/user_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="start|center"
-                    android:text="@string/riwayat"
-                    android:textColor="@android:color/white"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_1jt"
-                    tools:autoSizeMaxTextSize="12sp"
-                    tools:autoSizeStepGranularity="1sp" />
-
-                <TextView
-                    android:id="@+id/user_nip"
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:layout_marginEnd="3dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/transfer"
-                    android:textColor="@android:color/white"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView"
-                    tools:autoSizeMaxTextSize="12sp"
-                    tools:autoSizeStepGranularity="1sp" />
-                <TextView
-                    android:id="@+id/user_nama"
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:layout_marginEnd="3dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/transfer"
-                    android:textColor="@android:color/white"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView"
-                    tools:autoSizeMaxTextSize="12sp"
-                    tools:autoSizeStepGranularity="1sp" />
-                <TextView
-                    android:id="@+id/user_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:layout_marginEnd="3dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/transfer"
-                    android:textColor="@android:color/white"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView"
-                    tools:autoSizeMaxTextSize="12sp"
-                    tools:autoSizeStepGranularity="1sp" />
-        </LinearLayout>
     </LinearLayout>
 
 

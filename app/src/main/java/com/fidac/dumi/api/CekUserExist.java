@@ -6,12 +6,11 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
-public interface LoginInterface {
+public interface CekUserExist {
 
     @FormUrlEncoded
-    @POST("user/get")
-    Call<ResponseBody> getUserLogin(
-            @Field("nipBaru") String nip,
-            @Field("sandi") String password
+    @POST("user/cek")
+    Call<ResponseBody> cekUser(
+            @Field("nip") String nip
     );
 }
