@@ -18,9 +18,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="2">
-
+            android:orientation="vertical">
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
@@ -31,13 +29,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/iv_ktp"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1.6"
-                    app:srcCompat="@drawable/ktp" />
+                    android:gravity="center"
+                    android:layout_weight="1.5">
+                    <ImageView
+                        android:id="@+id/iv_ktp"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        app:srcCompat="@drawable/ktp" />
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/ktp_button"
@@ -46,10 +48,10 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="32dp"
-                    android:layout_weight="0.4"
+                    android:layout_weight="0.5"
                     android:background="@drawable/button_design_login_register"
                     android:fontFamily="sans-serif-medium"
-                    android:text="@string/foto_selfi"
+                    android:text="@string/foto_ktp"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="20sp"
@@ -67,13 +69,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-                <ImageView
-                    android:id="@+id/imv_selfi"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1.6"
-                    app:srcCompat="@drawable/selfie_ktp" />
+                    android:gravity="center"
+                    android:layout_weight="1.5">
+                    <ImageView
+                        android:id="@+id/iv_selfi"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        app:srcCompat="@drawable/selfie_ktp" />
+
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/selfi_button"
@@ -82,18 +89,33 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="32dp"
-                    android:layout_weight="0.4"
+                    android:layout_weight="0.5"
                     android:background="@drawable/button_design_login_register"
                     android:fontFamily="sans-serif-medium"
-                    android:text="@string/foto_ktp"
+                    android:text="@string/foto_selfi"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="20sp" />
-
-
             </LinearLayout>
+            <Button
+                android:visibility="gone"
+                android:id="@+id/konfirmasi_nomor_telp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/button_design_login_register"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/konfirmasi_nomor_telp"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
         </LinearLayout>
     </ScrollView>
+
+
 
 
 

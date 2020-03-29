@@ -20,7 +20,7 @@ public class HalamanDepanActivity extends AppCompatActivity {
         daftarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class));
+                startActivity(new Intent(HalamanDepanActivity.this, TakePicture.class));
             }
         });
 

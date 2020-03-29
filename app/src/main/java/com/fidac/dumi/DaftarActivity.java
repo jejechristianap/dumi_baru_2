@@ -3,6 +3,7 @@ package com.fidac.dumi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.se.omapi.Session;
 import android.text.InputType;
@@ -44,7 +45,9 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;*/
 import com.fidac.dumi.api.CekNipBknInterface;
+import com.fidac.dumi.api.CekUserExist;
 import com.fidac.dumi.model.RetrofitClient;
+import com.fidac.dumi.retrofit.NipResources;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -75,6 +78,12 @@ public class DaftarActivity extends AppCompatActivity {
     private String[] agama = {"Islam", "Kristen", "Khatolik", "Budha", "Hindu", "Konghucu"};
     private String[] instansi = {"Pilih Mitra", "PNS", "Non-PNS"};
 
+    private SharedPreferences.Editor editor;
+    private SharedPreferences pref;
+
+    ProgressDialog pDialog;
+
+
     public static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
                     "\\@" +
@@ -90,13 +99,17 @@ public class DaftarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar);
 
+        pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
+        editor = pref.edit();
+
+        pDialog = new ProgressDialog(DaftarActivity.this);
+
         /*Linear Layout*/
         cekNipLl = findViewById(R.id.cek_nip_layout);
         emailPassLl = findViewById(R.id.email_password);
 
-
+        /*Hide Soft Keyboard*/
         imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-
 
         masukanNipEt = findViewById(R.id.daftar_nip_et);
         nipCheckBox = findViewById(R.id.cek_nip);
@@ -111,7 +124,9 @@ public class DaftarActivity extends AppCompatActivity {
             if (isChecked) {
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 masukanNipEt.setCursorVisible(false);
-                cekNip();
+                cekUser();
+//                cekNip();
+//                startActivity(new Intent(DaftarActivity.this, TakePicture.class));
             }
         });
 
@@ -128,6 +143,7 @@ public class DaftarActivity extends AppCompatActivity {
         lanjutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String nip = masukanNipEt.getText().toString();
                 String email = emailEt.getText().toString();
                 String pass = passEt.getText().toString();
                 String ulangiPass = ulangiPassEt.getText().toString();
@@ -165,12 +181,59 @@ public class DaftarActivity extends AppCompatActivity {
                     ulangiPassEt.setError(null);
                 }
 
-                startActivity(new Intent(DaftarActivity.this, LengkapiData.class));
+                editor.putString("nip", nip);
+                editor.putString("email", email);
+                editor.putString("pass", pass);
+                editor.commit();
+
+                startActivity(new Intent(DaftarActivity.this, OtpVerify.class));
 
             }
         });
 
 
+    }
+
+    public void cekUser(){
+        String nip = masukanNipEt.getText().toString();
+        if(TextUtils.isEmpty(nip)){
+            masukanNipEt.setError("Kolom tidak boleh kosong...");
+            masukanNipEt.requestFocus();
+            nipCheckBox.setChecked(false);
+            return;
+        }
+
+        pDialog.setMessage("Mohon Menunggu...");
+        pDialog.show();
+        CekUserExist cekUser = RetrofitClient.getClient().create(CekUserExist.class);
+        Call<ResponseBody> call = cekUser.cekUser(nip);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+//                    JSONObject jsonRESULTS = new JSONObject(response.body().string());
+                    boolean status = obj.getBoolean("status");
+                    if (!status) {
+                        pDialog.dismiss();
+                        Toast.makeText(DaftarActivity.this, "NIP anda sudah terdaftar", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(DaftarActivity.this, MasukActivity.class));
+                    } else {
+                        cekNip();
+                    }
+                }catch (Exception e) {
+//                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    nipCheckBox.setChecked(false);
+                    emailPassLl.setVisibility(View.GONE);
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     public void cekNip() {
@@ -181,10 +244,6 @@ public class DaftarActivity extends AppCompatActivity {
             nipCheckBox.setChecked(false);
             return;
         }
-
-        final ProgressDialog pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Mohon Menunggu...");
-        pDialog.show();
 
         CekNipBknInterface cek = RetrofitClient.getClient().create(CekNipBknInterface.class);
         /*196404181984032001*/
@@ -202,6 +261,7 @@ public class DaftarActivity extends AppCompatActivity {
                     if(status){
                         pDialog.dismiss();
                         emailPassLl.setVisibility(View.VISIBLE);
+                        emailEt.requestFocus();
                         Toast.makeText(DaftarActivity.this, "NIP anda ditemukan..", Toast.LENGTH_SHORT).show();
                         Log.d("OBJECTRESPONSE", "onResponse124: " + obj);
                         /*196404181984032001*/
@@ -228,13 +288,14 @@ public class DaftarActivity extends AppCompatActivity {
 //                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         Log.e("errorMessage", "onResponse: " + obj);
                         nipCheckBox.setChecked(false);
+                        masukanNipEt.setCursorVisible(true);
                         pDialog.dismiss();
                         Toast.makeText(DaftarActivity.this, "Mohon maaf Instansi anda belum bekerja sama", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
 //                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                     nipCheckBox.setChecked(false);
-                    dataNipLl.setVisibility(View.GONE);
+                    emailPassLl.setVisibility(View.GONE);
                     pDialog.dismiss();
                     e.printStackTrace();
                 }

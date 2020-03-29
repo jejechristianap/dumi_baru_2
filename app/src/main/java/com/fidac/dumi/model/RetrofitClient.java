@@ -1,7 +1,9 @@
 package com.fidac.dumi.model;
 
 import com.fidac.dumi.api.CekNipBknInterface;
+import com.fidac.dumi.api.CekUserExist;
 import com.fidac.dumi.api.RegisterInterface;
+import com.fidac.dumi.api.UploadImageInterface;
 
 import java.util.concurrent.TimeUnit;
 
@@ -41,6 +43,9 @@ public class RetrofitClient {
         public CekNipBknInterface getNip(){
             return retrofit.create(CekNipBknInterface.class);
         }
+        public RegisterInterface regis(){ return retrofit.create(RegisterInterface.class); }
+        public UploadImageInterface uploadImage(){ return retrofit.create(UploadImageInterface.class); }
+        public CekUserExist cekUser(){ return retrofit.create(CekUserExist.class); }
     }
 
 

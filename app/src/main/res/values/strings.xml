@@ -146,5 +146,7 @@
     <string name="email">Email</string>
     <string name="foto_ktp">Foto KTP</string>
     <string name="foto_selfi">Foto Selfi</string>
+    <string name="konfirmasi_nomor_telp">Konfirmasi Nomor Telepon</string>
+    <string name="kirim_ulang_kode">Kirim Ulang Kode</string>
 
 </resources>
