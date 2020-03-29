@@ -1,7 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:weightSum="2"
     android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/layout_image"
+        android:orientation="vertical"
+        android:layout_weight="0.7"
+        android:gravity="center"
+        android:background="@drawable/bg_beranda"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_profil"
+            android:background="@drawable/layout_rounded"
+            android:layout_width="120dp"
+            android:layout_height="120dp"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_weight="1.3"
+        android:layout_marginBottom="50dp"
+        android:layout_height="0dp">
+        <!--<LinearLayout
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/nama"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    android:textColor="@android:color/black"
+                    tools:autoSizeMaxTextSize="20sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:id="@+id/nama"
+                    android:gravity="end"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="15sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="#D2CECE"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/rekening"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    android:textColor="@android:color/black"
+                    tools:autoSizeMaxTextSize="20sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"/>
+                <TextView
+                    android:layout_gravity="center"
+                    android:id="@+id/nomor_rek"
+                    android:layout_weight="2"
+                    android:gravity="end"
+                    android:layout_width="0dp"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="15sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="#D2CECE"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/nomor_pensiun"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    android:textColor="@android:color/black"
+                    tools:autoSizeMaxTextSize="20sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"/>
+                <TextView
+                    android:layout_gravity="center"
+                    android:id="@+id/nomor_pensiun"
+                    android:layout_weight="2"
+                    android:gravity="end"
+                    android:layout_width="0dp"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="15sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="#D2CECE"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/maksimal_tenor"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    android:textColor="@android:color/black"
+                    tools:autoSizeMaxTextSize="20sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:id="@+id/maksimal_tenor"
+                    android:layout_weight="2"
+                    android:gravity="end"
+                    android:layout_width="0dp"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="15sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="#D2CECE"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="@string/maksimal_limit"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    android:textColor="@android:color/black"
+                    tools:autoSizeMaxTextSize="20sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:id="@+id/maksimal_limit"
+                    android:gravity="end"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="15sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
+
+
+
+        </LinearLayout>-->
+    </ScrollView>
+
+
+
+</LinearLayout>
