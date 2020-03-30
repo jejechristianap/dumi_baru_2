@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".jenispinjaman.PinjamanPensiunActivity"></activity>
+        <activity android:name=".akun.RincianAkunActivity"></activity>
+        <activity android:name=".jenispinjaman.PinjamanPensiunActivity" />
         <activity android:name=".IsiPulsaActivity" />
         <activity android:name=".TakePicture" />
         <activity android:name=".LengkapiData" />

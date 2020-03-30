@@ -38,38 +38,42 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/rincian_akun_ll"
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:weightSum="3"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="30dp">
+
+                <ImageView
+                    android:src="@drawable/ic_profil_user"
+                    android:layout_width="0dp"
+                    android:layout_gravity="center"
+                    android:layout_height="25dp"
+                    android:layout_weight="0.4"/>
 
                 <TextView
-                    android:layout_weight="1"
+                    android:layout_weight="2.2"
                     android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
                     android:text="@string/rincian_akun"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     android:textColor="@android:color/black"
-                    tools:autoSizeMaxTextSize="20sp"
+                    tools:autoSizeMaxTextSize="23sp"
                     tools:autoSizeStepGranularity="1sp"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"/>
+                    android:layout_height="25sp"/>
 
-                <TextView
-                    android:layout_gravity="center"
-                    android:id="@+id/nama"
-                    android:gravity="end"
-                    android:layout_weight="2"
+                <ImageView
+                    android:src="@drawable/ic_keyboard_arrow_right_"
                     android:layout_width="0dp"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_height="30dp"/>
+                    android:layout_gravity="center"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.4"/>
+
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -81,35 +85,40 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:weightSum="3"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
-                <TextView
-                    android:layout_weight="1"
+                android:layout_height="30dp">
+
+                <ImageView
+                    android:src="@drawable/ic_profil_reset_pass"
+                    android:layout_width="0dp"
                     android:layout_gravity="center"
+                    android:layout_height="25dp"
+                    android:layout_weight="0.4"/>
+
+                <TextView
+                    android:layout_weight="2.2"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
                     android:text="@string/ubah_sandi"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     android:textColor="@android:color/black"
-                    tools:autoSizeMaxTextSize="20sp"
+                    tools:autoSizeMaxTextSize="23sp"
                     tools:autoSizeStepGranularity="1sp"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"/>
-                <TextView
+                    android:layout_height="25sp"/>
+
+                <ImageView
+                    android:src="@drawable/ic_keyboard_arrow_right_"
+                    android:layout_width="0dp"
                     android:layout_gravity="center"
-                    android:id="@+id/nomor_rek"
-                    android:layout_weight="2"
-                    android:gravity="end"
-                    android:layout_width="0dp"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_height="30dp"/>
+                    android:layout_height="30dp"
+                    android:layout_weight="0.4"/>
+
             </LinearLayout>
 
             <View
@@ -122,35 +131,40 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:weightSum="3"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
-                <TextView
-                    android:layout_weight="1"
+                android:layout_height="30dp">
+
+                <ImageView
+                    android:src="@drawable/ic_profil_privacy_policy"
+                    android:layout_width="0dp"
                     android:layout_gravity="center"
+                    android:layout_height="25dp"
+                    android:layout_weight="0.4"/>
+
+                <TextView
+                    android:layout_weight="2.2"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
                     android:text="@string/kebijakan_privasi"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     android:textColor="@android:color/black"
-                    tools:autoSizeMaxTextSize="20sp"
+                    tools:autoSizeMaxTextSize="23sp"
                     tools:autoSizeStepGranularity="1sp"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"/>
-                <TextView
+                    android:layout_height="25sp"/>
+
+                <ImageView
+                    android:src="@drawable/ic_keyboard_arrow_right_"
+                    android:layout_width="0dp"
                     android:layout_gravity="center"
-                    android:id="@+id/nomor_pensiun"
-                    android:layout_weight="2"
-                    android:gravity="end"
-                    android:layout_width="0dp"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_height="30dp"/>
+                    android:layout_height="30dp"
+                    android:layout_weight="0.4"/>
+
             </LinearLayout>
 
             <View
@@ -163,36 +177,40 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:weightSum="3"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
-                <TextView
-                    android:layout_weight="1"
+                android:layout_height="30dp">
+
+                <ImageView
+                    android:src="@drawable/ic_profil_help"
+                    android:layout_width="0dp"
                     android:layout_gravity="center"
+                    android:layout_height="25dp"
+                    android:layout_weight="0.4"/>
+
+                <TextView
+                    android:layout_weight="2.2"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
                     android:text="@string/pusat_bantuan"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     android:textColor="@android:color/black"
-                    tools:autoSizeMaxTextSize="20sp"
+                    tools:autoSizeMaxTextSize="23sp"
                     tools:autoSizeStepGranularity="1sp"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"/>
+                    android:layout_height="25sp"/>
 
-                <TextView
-                    android:layout_gravity="center"
-                    android:id="@+id/maksimal_tenor"
-                    android:layout_weight="2"
-                    android:gravity="end"
+                <ImageView
+                    android:src="@drawable/ic_keyboard_arrow_right_"
                     android:layout_width="0dp"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_height="30dp"/>
+                    android:layout_gravity="center"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.4"/>
+
             </LinearLayout>
 
             <View
@@ -205,39 +223,56 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:weightSum="3"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
-                <TextView
-                    android:layout_weight="1"
+                android:layout_height="30dp">
+
+                <ImageView
+                    android:src="@drawable/ic_profil_disclaimer"
+                    android:layout_width="0dp"
                     android:layout_gravity="center"
+                    android:layout_height="25dp"
+                    android:layout_weight="0.4"/>
+
+                <TextView
+                    android:layout_weight="2.2"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
                     android:text="@string/disclaimer"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     android:textColor="@android:color/black"
-                    tools:autoSizeMaxTextSize="20sp"
+                    tools:autoSizeMaxTextSize="23sp"
                     tools:autoSizeStepGranularity="1sp"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"/>
+                    android:layout_height="25sp"/>
 
-                <TextView
-                    android:layout_gravity="center"
-                    android:id="@+id/maksimal_limit"
-                    android:gravity="end"
-                    android:layout_weight="2"
+                <ImageView
+                    android:src="@drawable/ic_keyboard_arrow_right_"
                     android:layout_width="0dp"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_height="30dp"/>
+                    android:layout_gravity="center"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.4"/>
+
             </LinearLayout>
 
-
+            <Button
+                android:id="@+id/keluar_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="100dp"
+                android:background="@drawable/button_design_keluar"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/keluar"
+                android:textAllCaps="false"
+                android:textColor="#F44336"
+                android:textSize="22sp" />
 
         </LinearLayout>
     </ScrollView>

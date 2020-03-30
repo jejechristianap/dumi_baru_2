@@ -4,6 +4,357 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     tools:context=".jenispinjaman.PinjamanPensiunActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/todo"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/pinjaman_regular"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_rounded"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/tentukan_pinjaman"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                app:autoSizeMinTextSize="6sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"/>
+
+
+            <TextView
+                android:id="@+id/rp_16jt_regular"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="@string/rp_16jt"
+                android:textColor="#000000"
+                android:textSize="@dimen/font_big"
+                app:autoSizeMinTextSize="6sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="30sp"
+                tools:autoSizeStepGranularity="1sp" />
+
+            <SeekBar
+                android:id="@+id/seekbar_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="17"
+                android:padding="10dp"
+                android:progress="0"
+                android:progressTint="@color/colorPrimary"
+                android:thumbTint="@color/colorPrimary" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/lama_pembayaran"
+                android:textColor="@android:color/black"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="6sp"
+                tools:autoSizeMaxTextSize="30sp"
+                tools:autoSizeStepGranularity="1sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <Button
+                    android:id="@+id/bulan_12_regular"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/flat_selector"
+                    android:text="@string/bulan_12"
+                    android:textColor="#2196F3"
+                    android:textSize="@dimen/font_small" />
+
+                <Button
+                    android:id="@+id/bulan_18_regular"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/flat_selector"
+                    android:text="@string/bulan_18"
+                    android:textColor="#2196F3"
+                    android:textSize="@dimen/font_small" />
+
+                <Button
+                    android:id="@+id/bulan_24_regular"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/flat_selector"
+                    android:text="@string/bulan_24"
+                    android:textColor="#2196F3"
+                    android:textSize="@dimen/font_small" />
+
+                <Button
+                    android:id="@+id/bulan_30_regular"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/flat_selector"
+                    android:text="@string/bulan_30"
+                    android:textColor="#2196F3"
+                    android:textSize="@dimen/font_small" />
+
+                <Button
+                    android:id="@+id/bulan_36_regular"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/flat_selector"
+                    android:text="@string/bulan_36"
+                    android:textColor="#2196F3"
+                    android:textSize="@dimen/font_small" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1.2"
+                    android:text="@string/angsuran_perbulan"
+                    android:textColor="@android:color/black"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    tools:autoSizeMaxTextSize="30sp"
+                    tools:autoSizeStepGranularity="1sp"/>
+
+                <TextView
+                    android:id="@+id/angsuran_perbulan_regular"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="0.8"
+                    android:gravity="end"
+                    android:textColor="@android:color/black"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    tools:autoSizeMaxTextSize="30sp"
+                    tools:autoSizeStepGranularity="1sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1.2"
+                    android:text="@string/biaya_administrasi"
+                    android:textColor="@android:color/black"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    tools:autoSizeMaxTextSize="30sp"
+                    tools:autoSizeStepGranularity="1sp"/>
+
+                <TextView
+                    android:id="@+id/biaya_administrasi_regular"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="0.8"
+                    android:gravity="end"
+                    android:textColor="@android:color/black"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    tools:autoSizeMaxTextSize="30sp"
+                    tools:autoSizeStepGranularity="1sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/asuransi_12_36_bulan"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1.2"
+                    android:text="@string/biaya_asuransi_regular"
+                    android:textColor="@android:color/black"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    tools:autoSizeMaxTextSize="30sp"
+                    tools:autoSizeStepGranularity="1sp"/>
+
+                <TextView
+                    android:id="@+id/biaya_asuransi_regular"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="0.8"
+                    android:gravity="end"
+                    android:textColor="@android:color/black"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    tools:autoSizeMaxTextSize="30sp"
+                    tools:autoSizeStepGranularity="1sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1.2"
+                    android:text="@string/transfer_antar_bank"
+                    android:textColor="@android:color/black"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    tools:autoSizeMaxTextSize="30sp"
+                    tools:autoSizeStepGranularity="1sp"/>
+
+                <TextView
+                    android:id="@+id/biaya_transfer_antar_bank_regular"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="0.8"
+                    android:gravity="end"
+                    android:textColor="@android:color/black"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    tools:autoSizeMaxTextSize="30sp"
+                    tools:autoSizeStepGranularity="1sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="2"
+                    android:text="@string/jumlah_yang_diterima"
+                    android:textColor="@android:color/black"
+                    android:gravity="center"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="6sp"
+                    tools:autoSizeMaxTextSize="30sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/jumlah_yang_diterima_regular"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:paddingTop="15dp"
+                android:paddingBottom="5dp"
+                android:textColor="@android:color/black"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="6sp"
+                tools:autoSizeMaxTextSize="35sp"
+                tools:autoSizeStepGranularity="1sp" />
+
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_rounded_custom"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/ajukan_sekarang"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
