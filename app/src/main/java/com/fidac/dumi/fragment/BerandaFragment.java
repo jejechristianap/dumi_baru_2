@@ -41,28 +41,15 @@ public class BerandaFragment extends Fragment {
 
 
 
-        lihatSemuaTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LihatSemuaActivity.class);
-                startActivity(intent);
-            }
+        lihatSemuaTV.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), LihatSemuaActivity.class);
+            startActivity(intent);
         });
 
 
-        dumiKilatButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), PinjamanKilatActivity.class));
-            }
-        });
+        dumiKilatButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanKilatActivity.class)));
 
-        dumiRegularButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), PinjamanRegularActivity.class));
-            }
-        });
+        dumiRegularButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanRegularActivity.class)));
 
         return view;
     }

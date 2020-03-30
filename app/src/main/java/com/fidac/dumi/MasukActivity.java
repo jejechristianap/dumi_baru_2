@@ -20,6 +20,8 @@ import com.fidac.dumi.api.CekNipBknInterface;
 import com.fidac.dumi.api.LoginInterface;
 import com.fidac.dumi.model.PreferenceHelper;
 import com.fidac.dumi.model.RetrofitClient;
+import com.fidac.dumi.model.SharedPrefManager;
+import com.fidac.dumi.model.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -105,13 +107,36 @@ public class MasukActivity extends AppCompatActivity {
                         pDialog.dismiss();
                         String dat = obj.getString("data");
                         JSONArray dataArray = new JSONArray(dat);
-                        startActivity(new Intent(MasukActivity.this, MainActivity.class));
-//                        for (int i = 0; i < dataArray.length(); i++){
-//                            JSONObject userObj = dataArray.getJSONObject(i);
-//
-//                        }
-
 //                        startActivity(new Intent(MasukActivity.this, MainActivity.class));
+                        for (int i = 0; i < dataArray.length(); i++){
+                            JSONObject userObj = dataArray.getJSONObject(i);
+                            int id = userObj.getInt("id");
+                            String nip = userObj.getString("nipBaru");
+                            String nama = userObj.getString("namaPns");
+                            String agama = userObj.getString("agama");
+                            String noKtp = userObj.getString("noktp");
+                            String email = userObj.getString("email");
+                            String noHp = userObj.getString("no_hp");
+                            String pendidikan = userObj.getString("pendidikan");
+                            String ketTitle = userObj.getString("ket_title");
+                            String rt = userObj.getString("rt");
+                            String rw = userObj.getString("rw");
+                            String kelurahan = userObj.getString("desa");
+                            String kecamatan = userObj.getString("kecamatan");
+                            String kota = userObj.getString("kabkota");
+                            String alamat = userObj.getString("kampung");
+                            String kodePos = userObj.getString("kodepos");
+
+                            User user = new User(id, nip, email, nama, noKtp, agama, pendidikan, ketTitle,
+                                    rt, rw, kelurahan, kecamatan, kota, alamat, kodePos, noHp);
+
+                            SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+
+                            Toast.makeText(MasukActivity.this, "Selamat datang, " + nama, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        startActivity(new Intent(MasukActivity.this, MainActivity.class));
                     } else {
                         Toast.makeText(MasukActivity.this, "NIP/Password Salah!", Toast.LENGTH_SHORT).show();
                         nipEt.requestFocus();

@@ -143,6 +143,7 @@ public class TakePicture extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d("Res", "onResponse: " +response.body());
 //                pDialog.dismiss();
+                finish();
                 startActivity(new Intent(TakePicture.this, MainActivity.class));
             }
             @Override
