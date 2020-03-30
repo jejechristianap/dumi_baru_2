@@ -40,8 +40,7 @@ public class RetrofitClient {
 
             return retrofit;
         }
-
-        public CekNipBknInterface getNip(){
+        /*public CekNipBknInterface getNip(){
             return retrofit.create(CekNipBknInterface.class);
         }
         public LoginInterface userLogin(){
@@ -49,11 +48,8 @@ public class RetrofitClient {
     }
         public RegisterInterface createUser(){ return retrofit.create(RegisterInterface.class); }
         public UploadImageInterface uploadImage(){ return retrofit.create(UploadImageInterface.class); }
-        public CekUserExist cekUser(){ return retrofit.create(CekUserExist.class); }
+        public CekUserExist cekUser(){ return retrofit.create(CekUserExist.class); }*/
     }
-
-
-
     /*public static synchronized RetrofitClient getmInstance(){
         if(mInstance == null){
             mInstance = new RetrofitClient();
@@ -69,6 +65,3 @@ public class RetrofitClient {
     public CekNipBknInterface getNip(){
         return retrofit.create(CekNipBknInterface.class);
     }*/
-
-
-

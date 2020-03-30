@@ -271,11 +271,9 @@ public class TakePicture extends AppCompatActivity {
     }
 
 
-/*
     private void uploadFile(String nip, Uri ktp, Uri selfi) {
         // create upload service client
-        UploadImageInterface service =
-                RetrofitClient.getClient().create(UploadImageInterface.class);
+        UploadImageInterface service = RetrofitClient.getClient().create(UploadImageInterface.class);
 
         // https://github.com/iPaulPro/aFileChooser/blob/master/aFileChooser/src/com/ipaulpro/afilechooser/utils/FileUtils.java
         // use the FileUtils to get the actual file by uri
@@ -306,7 +304,7 @@ public class TakePicture extends AppCompatActivity {
                         okhttp3.MultipartBody.FORM, descriptionString);
 
         // finally, execute the request
-        Call<ResponseBody> call = service.uploadImage(requestFileKtp, bodyKtp, bodySelfi);
+        Call<ResponseBody> call = service.uploadImages(requestFileKtp, bodyKtp, bodySelfi);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call,
@@ -323,7 +321,6 @@ public class TakePicture extends AppCompatActivity {
         });
     }
 
-*/
 
 
 

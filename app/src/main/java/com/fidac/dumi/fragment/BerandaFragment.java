@@ -33,10 +33,10 @@ public class BerandaFragment extends Fragment {
         final Button dumiKilatButton = view.findViewById(R.id.dumi_kilat_button);
         final Button dumiRegularButton = view.findViewById(R.id.dumi_regular_button);
 
-        TextView userIdTv = view.findViewById(R.id.user_id);
+        /*TextView userIdTv = view.findViewById(R.id.user_id);
         TextView userNipTv = view.findViewById(R.id.user_nip);
         TextView userEmailTv = view.findViewById(R.id.user_email);
-        TextView userNama = view.findViewById(R.id.user_nama);
+        TextView userNama = view.findViewById(R.id.user_nama);*/
 
 
 

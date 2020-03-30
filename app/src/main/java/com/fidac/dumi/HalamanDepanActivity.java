@@ -17,20 +17,9 @@ public class HalamanDepanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_halaman_depan);
 
         daftarButton = findViewById(R.id.daftar_button);
-        daftarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class));
-            }
-        });
-
+        daftarButton.setOnClickListener(v -> startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class)));
         masukButton = findViewById(R.id.masuk_button);
-        masukButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HalamanDepanActivity.this, MasukActivity.class));
-            }
-        });
+        masukButton.setOnClickListener(v -> startActivity(new Intent(HalamanDepanActivity.this, MasukActivity.class)));
     }
 
     @Override

@@ -17,7 +17,7 @@ public interface UploadImageInterface {
 
     @Multipart
     @POST("user/update")
-    Call<ResponseBody> uploadImage(@Part("nipBaru") RequestBody requestBody,
+    Call<ResponseBody> uploadImages(@Part("nipBaru") RequestBody requestBody,
                                    @Part MultipartBody.Part image_ktp,
                                    @Part MultipartBody.Part image_selfi);
 
