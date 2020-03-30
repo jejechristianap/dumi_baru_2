@@ -182,6 +182,7 @@ public class TakePicture extends AppCompatActivity {
                 })
                 .show();
     }
+
     private void openCameraKtp() {
         ContentValues values = new ContentValues();
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());

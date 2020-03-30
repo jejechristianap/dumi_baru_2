@@ -269,7 +269,7 @@
                 android:layout_marginBottom="100dp"
                 android:background="@drawable/button_design_keluar"
                 android:fontFamily="sans-serif-medium"
-                android:text="@string/keluar"
+                android:text="@string/logout"
                 android:textAllCaps="false"
                 android:textColor="#F44336"
                 android:textSize="22sp" />

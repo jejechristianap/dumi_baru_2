@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -132,8 +133,10 @@ public class MasukActivity extends AppCompatActivity {
 
                             SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
 
-                            Toast.makeText(MasukActivity.this, "Selamat datang, " + nama, Toast.LENGTH_SHORT).show();
-
+                            Toast toast= Toast.makeText(MasukActivity.this,
+                                    "Selamat datang, " + nama, Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                            toast.show();
                         }
 
                         startActivity(new Intent(MasukActivity.this, MainActivity.class));
