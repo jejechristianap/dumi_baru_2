@@ -71,16 +71,12 @@ public class TakePicture extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_picture);
-
         pref = getApplicationContext().getSharedPreferences("Daftar", 0 );
-
         imgKtpIv = findViewById(R.id.iv_ktp);
         imgSelfiIv = findViewById(R.id.iv_selfi);
-
         ktpButton = findViewById(R.id.ktp_button);
         selfiButton = findViewById(R.id.selfi_button);
         konfirmasiButton = findViewById(R.id.konfirmasi_nomor_telp);
-
         ktpButton.setOnClickListener(v -> {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                 if(checkSelfPermission(Manifest.permission.CAMERA) ==
@@ -96,7 +92,6 @@ public class TakePicture extends AppCompatActivity {
                 openCameraKtp();
             }
         });
-
         selfiButton.setOnClickListener(v ->{
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                 if(checkSelfPermission(Manifest.permission.CAMERA) ==
@@ -112,16 +107,11 @@ public class TakePicture extends AppCompatActivity {
                 openCameraSelfi();
             }
         });
-
         konfirmasiButton.setOnClickListener(v -> {
 //            uploadFile("197301092000032001", imgKtp, imgSelfi);
             regisUser();
-
         });
-
-
     }
-
     public void regisUser(){
         String nip = pref.getString("nip", null);
         String email = pref.getString("email", null);
@@ -140,13 +130,10 @@ public class TakePicture extends AppCompatActivity {
         String jenisKelamin = pref.getString("jenis_kelamin", null);
         String agama = pref.getString("agama", null);
         String noTelp = pref.getString("no_telp", null);
-
-
         /*pDialog.setMessage("Terima kasih, data anda sedang diproses...");
         pDialog.show();*/
         Log.d("USER", nip+"\n"+email+"\n"+pass+"\n"+noKtp+"\n"+namaLengkap+"\n"+title+"\n"+ketTitle+"\n"+
                 rt+"\n"+rw+"\n"+kelurahan+"\n"+kecamatan+"\n"+kota+"\n"+alamat+"\n"+kodePos+"\n"+jenisKelamin);
-
         RegisterInterface regis = RetrofitClient.getClient().create(RegisterInterface.class);
         Call<ResponseBody> call = regis.createUser(nip, email, pass, noKtp,
                 namaLengkap, jenisKelamin, agama, title, ketTitle, rt, rw, kelurahan,
@@ -158,7 +145,6 @@ public class TakePicture extends AppCompatActivity {
 //                pDialog.dismiss();
                 startActivity(new Intent(TakePicture.this, MainActivity.class));
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("Error", "onFailure: " + t.getMessage());
@@ -166,7 +152,6 @@ public class TakePicture extends AppCompatActivity {
             }
         });
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -174,38 +159,28 @@ public class TakePicture extends AppCompatActivity {
             konfirmasiButton.setVisibility(View.VISIBLE);
         }
     }
-
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitByBackKey();
-
             //moveTaskToBack(false);
-
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
-
     protected void exitByBackKey() {
-
         // do something when the button is clicked
         // do something when the button is clicked
         AlertDialog alertbox = new AlertDialog.Builder(this)
                 .setMessage("Apa anda yakin ingin keluar?")
                 .setPositiveButton("Ya", (arg0, arg1) -> {
-
                     finish();
                     startActivity(new Intent());
                     //close();
-
-
                 })
                 .setNegativeButton("Tidak", (arg0, arg1) -> {
                 })
                 .show();
-
     }
-
     private void openCameraKtp() {
         ContentValues values = new ContentValues();
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -217,7 +192,6 @@ public class TakePicture extends AppCompatActivity {
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgKtp);
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE_KTP);
     }
-
     private void openCameraSelfi() {
         ContentValues values = new ContentValues();
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -227,9 +201,9 @@ public class TakePicture extends AppCompatActivity {
 
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgSelfi);
+//        cameraIntent.putExtra()
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE_SELFI);
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -250,11 +224,9 @@ public class TakePicture extends AppCompatActivity {
             }
         }
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if(resultCode == RESULT_OK){
             switch (requestCode){
                 case IMAGE_CAPTURE_CODE_KTP:
@@ -266,10 +238,8 @@ public class TakePicture extends AppCompatActivity {
                     selfi = true;
                     break;
             }
-
         }
     }
-
 
     private void uploadFile(String nip, Uri ktp, Uri selfi) {
         // create upload service client
@@ -320,8 +290,4 @@ public class TakePicture extends AppCompatActivity {
             }
         });
     }
-
-
-
-
 }

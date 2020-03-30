@@ -7,7 +7,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface LoginInterface {
-
     @FormUrlEncoded
     @POST("user/get")
     Call<ResponseBody> getUserLogin(

@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".TakePicture"></activity>
+        <activity android:name=".IsiPulsaActivity"></activity>
+        <activity android:name=".TakePicture" />
         <activity android:name=".LengkapiData" />
         <activity android:name=".OtpVerify" />
         <activity android:name=".HalamanDepanActivity" />

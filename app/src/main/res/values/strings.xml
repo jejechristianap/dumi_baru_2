@@ -159,5 +159,10 @@
     <string name="kebijakan_privasi">Kebijakan Privasi</string>
     <string name="pusat_bantuan">Pusat Bantuan</string>
     <string name="disclaimer">Disclaimer</string>
+    <string name="dumi_pensiun">DUMI Pensiun</string>
+    <string name="dumi_pensiun_des">Pinjaman di hari tu untuk memudahkan hari anda</string>
+    <string name="test">Test</string>
+    <string name="dumi_bumn">DUMI BUMN</string>
+    <string name="dumi_bumn_des">Pinjaman dana sampai Rp50.000.00 untuk pegawai BUMN</string>
 
 </resources>
