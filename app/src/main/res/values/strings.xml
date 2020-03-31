@@ -166,5 +166,6 @@
     <string name="dumi_bumn_des">Pinjaman dana sampai Rp50.000.00 untuk pegawai BUMN</string>
     <string name="kembali">Kembali</string>
     <string name="logout">Logout</string>
+    <string name="cek_daftar_harga">Cek Daftar Harga Pulsa</string>
 
 </resources>

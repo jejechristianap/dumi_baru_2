@@ -1,5 +1,10 @@
 package com.fidac.dumi.api;
 
+import com.fidac.dumi.model.DaftarHargaPulsa;
+import com.fidac.dumi.model.User;
+
+import java.util.List;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -10,7 +15,7 @@ public interface IsiPulsaInterface {
 
     @FormUrlEncoded
     @POST("daftarharga")
-    Call<ResponseBody> cekHargaPulsa(
+    Call<List<DaftarHargaPulsa>> getDaftarHargaPulsa(
             @Field("username") String username,
             @Field("password") String password
     );

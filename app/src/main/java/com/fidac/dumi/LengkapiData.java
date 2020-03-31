@@ -2,26 +2,14 @@ package com.fidac.dumi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import com.fidac.dumi.api.CekNipBknInterface;
-import com.fidac.dumi.api.RegisterInterface;
-import com.fidac.dumi.model.RetrofitClient;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LengkapiData extends AppCompatActivity {
 
