@@ -149,6 +149,7 @@
                 android:layout_height="wrap_content">
                 <!--Isi Pulsa-->
                 <LinearLayout
+                    android:id="@+id/isi_pulsa_ll"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_row="0"

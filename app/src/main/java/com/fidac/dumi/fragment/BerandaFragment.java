@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.fidac.dumi.IsiPulsaActivity;
 import com.fidac.dumi.LihatSemuaActivity;
 import com.fidac.dumi.R;
 import com.fidac.dumi.jenispinjaman.PinjamanKilatActivity;
@@ -39,6 +41,7 @@ public class BerandaFragment extends Fragment {
         Button dumiRegularButton = view.findViewById(R.id.dumi_regular_button);
         Button dumiPensiunButton = view.findViewById(R.id.dumi_pensiun_button);
         Button dumiBumnButton = view.findViewById(R.id.dumi_bumn_button);
+        LinearLayout isiPulsaLl = view.findViewById(R.id.isi_pulsa_ll);
 
         /*TextView userIdTv = view.findViewById(R.id.user_id);
         TextView userNipTv = view.findViewById(R.id.user_nip);
@@ -51,7 +54,7 @@ public class BerandaFragment extends Fragment {
         View toastV = toastPensiun.getView();
         TextView text = toastV.findViewById(android.R.id.message);
         text.setTextColor(Color.WHITE);
-        toastV.getBackground().setColorFilter(Color.CYAN, PorterDuff.Mode.SRC_IN);
+        toastV.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.SRC_IN);
 
         Toast toastBumn= Toast.makeText(getActivity(),
                 "Mohon maaf ini pinjaman ini khusus untuk pengguna BUMN", Toast.LENGTH_SHORT);
@@ -68,18 +71,14 @@ public class BerandaFragment extends Fragment {
             startActivity(intent);
         });
 
+        /*E-Commerce*/
+        isiPulsaLl.setOnClickListener(v -> startActivity(new Intent(getActivity(), IsiPulsaActivity.class)));
+
 
         dumiKilatButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanKilatActivity.class)));
-
         dumiRegularButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanRegularActivity.class)));
-
-        dumiPensiunButton.setOnClickListener(v -> {
-            toastPensiun.show();
-        });
-
-        dumiBumnButton.setOnClickListener(v -> {
-            toastBumn.show();
-        });
+        dumiPensiunButton.setOnClickListener(v -> toastPensiun.show());
+        dumiBumnButton.setOnClickListener(v -> toastBumn.show());
 
         return view;
     }

@@ -4,12 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fidac.dumi.api.IsiPulsaInterface;
@@ -48,6 +53,10 @@ public class IsiPulsaActivity extends AppCompatActivity {
     private void cekDaftarHarga() {
         IsiPulsaInterface cek = RetrofitClient.getPulsa().create(IsiPulsaInterface.class);
 
+        final ProgressDialog pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Loading Data...");
+        pDialog.show();
+
         Call<List<DaftarHargaPulsa>> call = cek.getDaftarHargaPulsa("api_mmbc_fidac18", "Fi918_ahBmpl");
         call.enqueue(new Callback<List<DaftarHargaPulsa>>() {
             @Override
@@ -71,12 +80,14 @@ public class IsiPulsaActivity extends AppCompatActivity {
                 Log.i("autolog", "RecyclerViewAdapter recyclerViewAdapter =new RecyclerViewAdapter(getApplicationContext(), userList);");
                 recyclerView.setAdapter(recyclerViewAdapter);
                 Log.i("autolog", "recyclerView.setAdapter(recyclerViewAdapter);");
+                pDialog.dismiss();
 
             }
 
             @Override
             public void onFailure(Call<List<DaftarHargaPulsa>> call, Throwable t) {
                 Log.d("Fail", "onFailure: " + t.getMessage());
+                pDialog.dismiss();
             }
         });
     }
