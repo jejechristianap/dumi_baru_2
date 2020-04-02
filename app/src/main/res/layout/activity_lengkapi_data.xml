@@ -198,12 +198,7 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-            <DatePicker
-                android:ems="10"
-                android:inputType="date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <!--<EditText
+            <EditText
                 android:id="@+id/tanggal_lahir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -215,7 +210,7 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
-                tools:ignore="LabelFor" />-->
+                tools:ignore="LabelFor" />
 
             <!--Status Kawin-->
             <TextView
@@ -475,15 +470,29 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:id="@+id/propinsi"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:inputType="textCapCharacters"
-                android:textColor="@android:color/black"
-                tools:ignore="LabelFor" />
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/spinner_custom"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/propinsi_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_down24dp" />
+            </RelativeLayout>
 
             <!--kota-->
             <TextView
@@ -496,15 +505,29 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:id="@+id/kota"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:inputType="textCapCharacters"
-                android:textColor="@android:color/black"
-                tools:ignore="LabelFor" />
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/spinner_custom"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/kabupaten_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_down24dp" />
+            </RelativeLayout>
 
             <!--Kecamatan-->
             <TextView
@@ -517,15 +540,29 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:id="@+id/kecamatan"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:inputType="textCapCharacters"
-                android:textColor="@android:color/black"
-                tools:ignore="LabelFor" />
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/spinner_custom"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/kecamatan_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_down24dp" />
+            </RelativeLayout>
 
             <!--Kelurahan-->
             <TextView
@@ -538,15 +575,29 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:id="@+id/kelurahan"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:inputType="textCapCharacters"
-                android:textColor="@android:color/black"
-                tools:ignore="LabelFor" />
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/spinner_custom"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/kelurahan_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_down24dp" />
+            </RelativeLayout>
 
             <!--Kode pos-->
             <TextView
@@ -559,16 +610,38 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:id="@+id/kode_pos"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/spinner_custom"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/kode_pos_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_down24dp" />
+            </RelativeLayout>
+            <!--<EditText
+                android:id="@+id/kode_pos_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:backgroundTint="@color/colorBlue"
                 android:inputType="number"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"
-                tools:ignore="LabelFor" />
+                tools:ignore="LabelFor" />-->
 
             <!--Data Keluarga-->
             <TextView

@@ -31,29 +31,10 @@ public class HalamanDepanActivity extends AppCompatActivity {
         daftarButton.setOnClickListener(v -> startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class)));
         masukButton = findViewById(R.id.masuk_button);
         masukButton.setOnClickListener(v -> startActivity(new Intent(HalamanDepanActivity.this, MasukActivity.class)));
-       /* getPropinsiBt = findViewById(R.id.get_propinsi);
-        getPropinsiBt.setOnClickListener(v -> {
-            cekPropinsi();
-        })*/;
+
 
     }
 
-    public void cekPropinsi() {
-        PropinsiInterface prop = RetrofitClient.getPropinsi().create(PropinsiInterface.class);
-        Call<ResponseBody> call = prop.getPropinsi();
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Toast.makeText(HalamanDepanActivity.this, "Response: " + response.body().toString(), Toast.LENGTH_SHORT).show();
-                Log.d("Prop", "onResponse: " + response.body().toString());
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-    }
 
     @Override
     public void onBackPressed() {

@@ -9,7 +9,7 @@ import retrofit2.http.POST;
 
 public interface PropinsiInterface {
 
-    @GET("provinces/get")
+    @GET("wilayah/get")
     Call<ResponseBody> getPropinsi();
 
 
