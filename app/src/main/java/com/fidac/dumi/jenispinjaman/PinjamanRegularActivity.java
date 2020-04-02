@@ -1,20 +1,30 @@
 package com.fidac.dumi.jenispinjaman;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.fidac.dumi.BankActivity;
 import com.fidac.dumi.MainActivity;
 import com.fidac.dumi.R;
+import com.fidac.dumi.model.SharedPrefManager;
+import com.fidac.dumi.model.User;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class PinjamanRegularActivity extends AppCompatActivity {
@@ -45,21 +55,46 @@ public class PinjamanRegularActivity extends AppCompatActivity {
     private final int PEMBAYARAN_36_BULAN = 36;
     private final int JUMLAH_BULAN_1_TAHUN = 12;
     private final int JUMLAH_PINJAMAN_DEFAULT = 16000000;
-    private final double BIAYA_ADMIN = 0.01;
-    private final double BIAYA_ASURANSI = 0.01;
-    private final double BIAYA_ASURANSI_SD_24 = 0.016;
-    private final double BIAYA_ASURANSI_SD_36 = 0.021;
+    private final float BIAYA_ADMIN = 0.01f;
+    private final float BIAYA_ASURANSI = 0.01f;
+    private final float BIAYA_ASURANSI_SD_24 = 0.016f;
+    private final float BIAYA_ASURANSI_SD_36 = 0.021f;
 
-    private final double BIAYA_TRANSFER = 6500;
-    private final double BUNGA_PERBULAN = 0.099;
+    private final float BIAYA_TRANSFER = 6500;
+    private final float BUNGA_PERBULAN = 0.099f;
 
     private Locale localID;
     private NumberFormat formatRp;
+
+    private Spinner tujuanSpinner;
+    private ArrayAdapter<CharSequence> tujuanAdapter;
+    private String[] tujuanPinjaman = {"Renovasi Rumah", "Biaya Pendidikan", "Biaya Rumah Sakit",
+            "Jalan-jalan", "Biaya Pernikahan", "Modal Usaha", "Lainnya"};
+
+    private Button lanjutButton;
+
+    float bunga, admin, angsuran, asuransi, sisa;
+    int plafond;
+
+    private SharedPreferences.Editor editor;
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pinjmana_reguler);
+
+        /*SharedPref ajukanPinjaman*/
+        pref = getApplicationContext().getSharedPreferences("ajukanPinjaman", 0); // 0 - for private mode
+        editor = pref.edit();
+
+        plafond = 0;
+        bunga = 0;
+        admin = 0;
+        angsuran = 0;
+        asuransi = 0;
+        sisa = 0;
+
         backRegular = findViewById(R.id.back_regular);
         backRegular.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +103,12 @@ public class PinjamanRegularActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        /*Tujuan Pinjaman*/
+        tujuanSpinner = findViewById(R.id.tujuan_pinjaman_reguler_spinner);
+        tujuanAdapter = new ArrayAdapter<>(PinjamanRegularActivity.this, R.layout.spinner_text, tujuanPinjaman);
+        tujuanAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+        tujuanSpinner.setAdapter(tujuanAdapter);
 
         localID = new Locale("in", "ID");
         formatRp = NumberFormat.getCurrencyInstance(localID);
@@ -275,169 +316,218 @@ public class PinjamanRegularActivity extends AppCompatActivity {
         bulan30 = findViewById(R.id.bulan_30_regular);
         bulan36 = findViewById(R.id.bulan_36_regular);
 
-        bulan12.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*Button Text Color Pressed*/
-                bulan12.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorWhite));
-                bulan18.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan24.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan30.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan36.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                /*Button Background Press*/
-                bulan12.setBackgroundResource(R.drawable.rect_pressed);
-                bulan18.setBackgroundResource(R.drawable.rect_normal);
-                bulan24.setBackgroundResource(R.drawable.rect_normal);
-                bulan30.setBackgroundResource(R.drawable.rect_normal);
-                bulan36.setBackgroundResource(R.drawable.rect_normal);
-                /*Loan Calculation*/
-                double pokok = pinjamanUang / PEMBAYARAN_12_BULAN;
-                double bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
-                double angsuran = pokok + bunga;
-                double admin = pinjamanUang * BIAYA_ADMIN;
-                double asuransi = pinjamanUang * BIAYA_ASURANSI;
-                double totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
-                double sisa = pinjamanUang - totalPengurangan;
+        bulan12.setOnClickListener(v -> {
+            /*Button Text Color Pressed*/
+            bulan12.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorWhite));
+            bulan18.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan24.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan30.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan36.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            /*Button Background Press*/
+            bulan12.setBackgroundResource(R.drawable.rect_pressed);
+            bulan18.setBackgroundResource(R.drawable.rect_normal);
+            bulan24.setBackgroundResource(R.drawable.rect_normal);
+            bulan30.setBackgroundResource(R.drawable.rect_normal);
+            bulan36.setBackgroundResource(R.drawable.rect_normal);
 
-                angsuranRegularTv.setText(formatRp.format((double)angsuran));
-                biayaAdminRegularTv.setText(formatRp.format((double)admin));
-                asuransiDiatas12.setText("Biaya Asuransi 1%");
-                biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
-                biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
-                jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
-            }
+            /*Loan Calculation*/
+            plafond = PEMBAYARAN_12_BULAN;
+            float pokok = pinjamanUang / plafond;
+            bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
+            angsuran = pokok + bunga;
+            admin = pinjamanUang * BIAYA_ADMIN;
+            asuransi = pinjamanUang * BIAYA_ASURANSI;
+            float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
+            sisa = pinjamanUang - totalPengurangan;
+
+            angsuranRegularTv.setText(formatRp.format((double)angsuran));
+            biayaAdminRegularTv.setText(formatRp.format((double)admin));
+            asuransiDiatas12.setText("Biaya Asuransi 1%");
+            biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
+            biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
+            jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
         });
 
-        bulan18.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*Button Text Color Pressed*/
-                bulan12.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan18.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorWhite));
-                bulan24.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan30.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan36.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                /*Button Background Press*/
-                bulan12.setBackgroundResource(R.drawable.rect_normal);
-                bulan18.setBackgroundResource(R.drawable.rect_pressed);
-                bulan24.setBackgroundResource(R.drawable.rect_normal);
-                bulan30.setBackgroundResource(R.drawable.rect_normal);
-                bulan36.setBackgroundResource(R.drawable.rect_normal);
-                /*Loan Calculation*/
-                double pokok = pinjamanUang / PEMBAYARAN_18_BULAN;
-                double bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
-                double angsuran = pokok + bunga;
-                double admin = pinjamanUang * BIAYA_ADMIN;
-                double asuransi = pinjamanUang * BIAYA_ASURANSI_SD_24;
-                double totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
-                double sisa = pinjamanUang - totalPengurangan;
+        bulan18.setOnClickListener(v -> {
+            /*Button Text Color Pressed*/
+            bulan12.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan18.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorWhite));
+            bulan24.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan30.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan36.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            /*Button Background Press*/
+            bulan12.setBackgroundResource(R.drawable.rect_normal);
+            bulan18.setBackgroundResource(R.drawable.rect_pressed);
+            bulan24.setBackgroundResource(R.drawable.rect_normal);
+            bulan30.setBackgroundResource(R.drawable.rect_normal);
+            bulan36.setBackgroundResource(R.drawable.rect_normal);
 
-                angsuranRegularTv.setText(formatRp.format((double)angsuran));
-                biayaAdminRegularTv.setText(formatRp.format((double)admin));
-                asuransiDiatas12.setText("Biaya Asuransi 1.6%");
-                biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
-                biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
-                jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
-            }
+            /*Loan Calculation*/
+            plafond = PEMBAYARAN_18_BULAN;
+            float pokok = pinjamanUang / plafond;
+            bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
+            angsuran = pokok + bunga;
+            admin = pinjamanUang * BIAYA_ADMIN;
+            asuransi = pinjamanUang * BIAYA_ASURANSI_SD_24;
+            float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
+            sisa = pinjamanUang - totalPengurangan;
+
+            angsuranRegularTv.setText(formatRp.format((double)angsuran));
+            biayaAdminRegularTv.setText(formatRp.format((double)admin));
+            asuransiDiatas12.setText("Biaya Asuransi 1.6%");
+            biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
+            biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
+            jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
         });
 
-        bulan24.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*Button Text Color Pressed*/
-                bulan12.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan18.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan24.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorWhite));
-                bulan30.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan36.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                /*Button Background Press*/
-                bulan12.setBackgroundResource(R.drawable.rect_normal);
-                bulan18.setBackgroundResource(R.drawable.rect_normal);
-                bulan24.setBackgroundResource(R.drawable.rect_pressed);
-                bulan30.setBackgroundResource(R.drawable.rect_normal);
-                bulan36.setBackgroundResource(R.drawable.rect_normal);
-                /*Loan Calculation*/
-                double pokok = pinjamanUang / PEMBAYARAN_24_BULAN;
-                double bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
-                double angsuran = pokok + bunga;
-                double admin = pinjamanUang * BIAYA_ADMIN;
-                double asuransi = pinjamanUang * BIAYA_ASURANSI_SD_24;
-                double totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
-                double sisa = pinjamanUang - totalPengurangan;
+        bulan24.setOnClickListener(v -> {
+            /*Button Text Color Pressed*/
+            bulan12.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan18.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan24.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorWhite));
+            bulan30.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan36.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            /*Button Background Press*/
+            bulan12.setBackgroundResource(R.drawable.rect_normal);
+            bulan18.setBackgroundResource(R.drawable.rect_normal);
+            bulan24.setBackgroundResource(R.drawable.rect_pressed);
+            bulan30.setBackgroundResource(R.drawable.rect_normal);
+            bulan36.setBackgroundResource(R.drawable.rect_normal);
 
-                angsuranRegularTv.setText(formatRp.format((double)angsuran));
-                biayaAdminRegularTv.setText(formatRp.format((double)admin));
-                asuransiDiatas12.setText("Biaya Asuransi 1.6%");
-                biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
-                biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
-                jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
-            }
+            /*Loan Calculation 24*/
+            plafond = PEMBAYARAN_24_BULAN;
+            float pokok = pinjamanUang / plafond;
+            bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
+            angsuran = pokok + bunga;
+            admin = pinjamanUang * BIAYA_ADMIN;
+            asuransi = pinjamanUang * BIAYA_ASURANSI_SD_24;
+            float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
+            sisa = pinjamanUang - totalPengurangan;
+
+            angsuranRegularTv.setText(formatRp.format((double)angsuran));
+            biayaAdminRegularTv.setText(formatRp.format((double)admin));
+            asuransiDiatas12.setText("Biaya Asuransi 1.6%");
+            biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
+            biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
+            jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
         });
 
-        bulan30.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*Button Text Color Pressed*/
-                bulan12.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan18.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan24.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan30.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorWhite));
-                bulan36.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                /*Button Background Press*/
-                bulan12.setBackgroundResource(R.drawable.rect_normal);
-                bulan18.setBackgroundResource(R.drawable.rect_normal);
-                bulan24.setBackgroundResource(R.drawable.rect_normal);
-                bulan30.setBackgroundResource(R.drawable.rect_pressed);
-                bulan36.setBackgroundResource(R.drawable.rect_normal);
-                /*Loan Calculation*/
-                double pokok = pinjamanUang / PEMBAYARAN_30_BULAN;
-                double bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
-                double angsuran = pokok + bunga;
-                double admin = pinjamanUang * BIAYA_ADMIN;
-                double asuransi = pinjamanUang * BIAYA_ASURANSI_SD_36;
-                double totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
-                double sisa = pinjamanUang - totalPengurangan;
+        bulan30.setOnClickListener(v -> {
+            /*Button Text Color Pressed*/
+            bulan12.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan18.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan24.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan30.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorWhite));
+            bulan36.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            /*Button Background Press*/
+            bulan12.setBackgroundResource(R.drawable.rect_normal);
+            bulan18.setBackgroundResource(R.drawable.rect_normal);
+            bulan24.setBackgroundResource(R.drawable.rect_normal);
+            bulan30.setBackgroundResource(R.drawable.rect_pressed);
+            bulan36.setBackgroundResource(R.drawable.rect_normal);
 
-                angsuranRegularTv.setText(formatRp.format((double)angsuran));
-                biayaAdminRegularTv.setText(formatRp.format((double)admin));
-                asuransiDiatas12.setText("Biaya Asuransi 2.1%");
-                biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
-                biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
-                jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
-            }
+            /*Loan Calculation 30*/
+            plafond = PEMBAYARAN_30_BULAN;
+            float pokok = pinjamanUang / plafond;
+            bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
+            angsuran = pokok + bunga;
+            admin = pinjamanUang * BIAYA_ADMIN;
+            asuransi = pinjamanUang * BIAYA_ASURANSI_SD_36;
+            float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
+            sisa = pinjamanUang - totalPengurangan;
+
+            angsuranRegularTv.setText(formatRp.format((double)angsuran));
+            biayaAdminRegularTv.setText(formatRp.format((double)admin));
+            asuransiDiatas12.setText("Biaya Asuransi 2.1%");
+            biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
+            biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
+            jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
         });
 
-        bulan36.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*Button Text Color Pressed*/
-                bulan12.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan18.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan24.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan30.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
-                bulan36.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorWhite));
-                /*Button Background Press*/
-                bulan12.setBackgroundResource(R.drawable.rect_normal);
-                bulan18.setBackgroundResource(R.drawable.rect_normal);
-                bulan24.setBackgroundResource(R.drawable.rect_normal);
-                bulan30.setBackgroundResource(R.drawable.rect_normal);
-                bulan36.setBackgroundResource(R.drawable.rect_pressed);
-                /*Loan Calculation*/
-                double pokok = pinjamanUang / PEMBAYARAN_36_BULAN;
-                double bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
-                double angsuran = pokok + bunga;
-                double admin = pinjamanUang * BIAYA_ADMIN;
-                double asuransi = pinjamanUang * BIAYA_ASURANSI_SD_36;
-                double totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
-                double sisa = pinjamanUang - totalPengurangan;
+        bulan36.setOnClickListener(v -> {
+            /*Button Text Color Pressed*/
+            bulan12.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan18.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan24.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan30.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorBlue));
+            bulan36.setTextColor(PinjamanRegularActivity.this.getColor(R.color.colorWhite));
+            /*Button Background Press*/
+            bulan12.setBackgroundResource(R.drawable.rect_normal);
+            bulan18.setBackgroundResource(R.drawable.rect_normal);
+            bulan24.setBackgroundResource(R.drawable.rect_normal);
+            bulan30.setBackgroundResource(R.drawable.rect_normal);
+            bulan36.setBackgroundResource(R.drawable.rect_pressed);
 
-                angsuranRegularTv.setText(formatRp.format((double)angsuran));
-                biayaAdminRegularTv.setText(formatRp.format((double)admin));
-                asuransiDiatas12.setText("Biaya Asuransi 2.1%");
-                biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
-                biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
-                jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
-            }
+            /*Loan Calculation 30*/
+            plafond = PEMBAYARAN_36_BULAN;
+            float pokok = pinjamanUang / plafond;
+            bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
+            angsuran = pokok + bunga;
+            admin = pinjamanUang * BIAYA_ADMIN;
+            asuransi = pinjamanUang * BIAYA_ASURANSI_SD_36;
+            float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
+            sisa = pinjamanUang - totalPengurangan;
+
+            angsuranRegularTv.setText(formatRp.format((double)angsuran));
+            biayaAdminRegularTv.setText(formatRp.format((double)admin));
+            asuransiDiatas12.setText("Biaya Asuransi 2.1%");
+            biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
+            biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
+            jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
         });
+
+        lanjutButton = findViewById(R.id.lanjut_button_reguler);
+        lanjutButton.setOnClickListener(v -> {
+            ajukanPinjaman();
+        });
+    }
+
+    private void ajukanPinjaman() {
+        User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+        String nip = user.getNip();
+        String tujuan = tujuanSpinner.getSelectedItem().toString();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        Date today = c.getTime();
+        String tglPinjam = dateFormat.format(today);
+
+        c.add(Calendar.MONTH, plafond);
+        final Date dueDate = c.getTime();
+        String tglAkhirPinjam = dateFormat.format(dueDate);
+
+        Log.d("Pinjaman",
+                "nip: " + nip +
+                        "\nPinjaman: " + pinjamanUang +
+                        "\nPlafond: " + plafond +
+                        "\nbunga: " + BUNGA_PERBULAN +
+                        "\nBunga: " + bunga +
+                        "\nAdmin: " + admin +
+                        "\nAngsuran: " + angsuran +
+                        "\nTrfBank: " + BIAYA_TRANSFER +
+                        "\nTujuan: " + tujuan +
+                        "\nTglPinjam: " + tglPinjam +
+                        "\nAkhirTgl: " + tglAkhirPinjam +
+                        "\nSisa: " + sisa +
+                        "\nasurans: " + asuransi);
+
+        editor.putString("nip", nip);
+        editor.putFloat("pinjaman", pinjamanUang);
+        editor.putInt("lamaPinjaman", plafond);
+        editor.putFloat("bunga", bunga);
+        editor.putFloat("admin", admin);
+        editor.putFloat("angsuran", angsuran);
+        editor.putFloat("diterima", sisa);
+        editor.putString("tujuan", tujuan);
+        editor.putString("tglMulai", tglPinjam);
+        editor.putString("tglAkhir", tglAkhirPinjam);
+        editor.putFloat("asuransi", asuransi);
+        editor.commit();
+
+        startActivity(new Intent(PinjamanRegularActivity.this, BankActivity.class));
+
+        /*PinjamanKilatInterface pinjam = RetrofitClient.getClient().create(PinjamanKilatInterface.class);
+        Call<ResponseBody> call = pinjam.ajukanPinjaman(nip, pinjamanUang, plafond, 0, BUNGA_PERBULAN,
+                bunga, admin, angsuran, BIAYA_TRANSFER, tujuan, tglPinjam, tglAkhirPinjam, "", sisa, asuransi, );*/
     }
 }

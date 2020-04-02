@@ -1,11 +1,19 @@
 package com.fidac.dumi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
@@ -13,6 +21,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.fidac.dumi.api.PinjamanKilatInterface;
+import com.fidac.dumi.jenispinjaman.PinjamanPensiunActivity;
 import com.fidac.dumi.retrofit.RetrofitClient;
 
 import org.json.JSONException;
@@ -116,7 +125,17 @@ public class BankActivity extends AppCompatActivity {
                         boolean status = obj.getBoolean("status");
                         if(status){
                             pDialog.dismiss();
-                            Toast.makeText(BankActivity.this, "Terima kasih, pengajuan anda akan kami proses.", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(BankActivity.this, "Terima kasih, pengajuan anda akan kami proses.", Toast.LENGTH_SHORT).show();
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //Do something after 2s
+                                    pushNotification();
+                                }
+                            }, 3000);
+
+                            finish();
                             startActivity(new Intent(BankActivity.this, MainActivity.class));
                         } else {
                             Toast.makeText(BankActivity.this, "Mohon maaf terjadi kesalahan, silahkan coba beberapa saat lagi.", Toast.LENGTH_SHORT).show();
@@ -135,9 +154,43 @@ public class BankActivity extends AppCompatActivity {
                     pDialog.dismiss();
                 }
             });
-
-
         });
 
+    }
+
+    public void pushNotification(){
+        // Send Notification
+        NotificationManager mNotificationManager;
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(getApplicationContext(), "notify_001");
+        Intent ii = new Intent(getApplicationContext(), MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(BankActivity.this, 0, ii, 0);
+        NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
+        bigText.bigText("Pengajuan anda berhasil kami terima.\nProses dapat berlangsung 1-3 hari kerja, mohon menunggu." );
+        bigText.setSummaryText("Pengajuan");
+
+        mBuilder.setContentIntent(pendingIntent);
+        mBuilder.setSmallIcon(R.drawable.ic_mail);
+        mBuilder.setContentTitle("Terima kasih,");
+        mBuilder.setContentText("Pengajuan anda akan diproses.");
+        mBuilder.setPriority(Notification.PRIORITY_MAX);
+        mBuilder.setStyle(bigText);
+        mBuilder.setAutoCancel(true);
+        mNotificationManager =
+                (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // === Removed some obsoletes
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            String channelId = "Your_channel_id";
+            NotificationChannel channel = new NotificationChannel(
+                    channelId,
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_HIGH);
+            mNotificationManager.createNotificationChannel(channel);
+            mBuilder.setChannelId(channelId);
+        }
+
+        mNotificationManager.notify(0, mBuilder.build());
     }
 }
