@@ -108,7 +108,7 @@
                 android:layout_weight="0.5"
                 android:background="@drawable/button_design_login_register"
                 android:fontFamily="sans-serif-medium"
-                android:text="@string/konfirmasi_nomor_telp"
+                android:text="@string/daftar"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />

@@ -98,49 +98,80 @@ public class TakePicture extends AppCompatActivity {
         });
         konfirmasiButton.setOnClickListener(v -> {
 //            uploadFile("197301092000032001", imgKtp, imgSelfi);
-//            regisUser();
+            regisUser();
         });
     }
     public void regisUser(){
+
+
+        /*Progress Dialog*/
+        final ProgressDialog pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Memuat Data...");
+        pDialog.show();
+
+        /*Value from DaftarActivity */
         String nip = pref.getString("nip", null);
         String email = pref.getString("email", null);
         String pass = pref.getString("pass", null);
+        /*Value from LengkapiData*/
         String noKtp = pref.getString("no_ktp", null);
         String namaLengkap = pref.getString("nama_lengkap", null);
+        String agama = pref.getString("agama", null);
+        String jenisKelamin = pref.getString("jenis_kelamin", null);
+        String tempatLahir = pref.getString("tempat_lahir", null);
+        String tanggalLahir = pref.getString("tanggal_lahir", null);
+        String statusKawin = pref.getString("status_kawin", null);
+        String jumlahTanggungan = pref.getString("jumlah_tanggungan", null);
         String title = pref.getString("title", null);
         String ketTitle = pref.getString("ket_title", null);
+        String inskerKerja = pref.getString("insker", null);
+        String statusRumah = pref.getString("status_rumah", null);
+        String alamat = pref.getString("alamat", null);
         String rt = pref.getString("rt", null);
         String rw = pref.getString("rw", null);
-        String kelurahan = pref.getString("kelurahan", null);
-        String kecamatan = pref.getString("kecamatan", null);
+        String propinsi = pref.getString("propinsi", null);
         String kota = pref.getString("kota", null);
-        String alamat = pref.getString("alamat", null);
+        String kecamatan = pref.getString("kecamatan", null);
+        String kelurahan = pref.getString("kelurahan", null);
         String kodePos = pref.getString("kode_pos", null);
-        String jenisKelamin = pref.getString("jenis_kelamin", null);
-        String agama = pref.getString("agama", null);
+        String statusHubungan = pref.getString("status_hubungan", null);
+        String namaPenanggung = pref.getString("nama_penanggung", null);
+        String noKtpPenanggung = pref.getString("no_ktp_penanggung", null);
+        String namaIbu = pref.getString("nama_ibu", null);
         String noTelp = pref.getString("no_telp", null);
-        /*pDialog.setMessage("Terima kasih, data anda sedang diproses...");
-        pDialog.show();*/
-        Log.d("USER", nip+"\n"+email+"\n"+pass+"\n"+noKtp+"\n"+namaLengkap+"\n"+title+"\n"+ketTitle+"\n"+
-                rt+"\n"+rw+"\n"+kelurahan+"\n"+kecamatan+"\n"+kota+"\n"+alamat+"\n"+kodePos+"\n"+jenisKelamin);
+
+        Log.d("Input", "createUser:" + "\nNIP: " + nip + "\nEmail: " + email + "\nPass: " + pass +
+                "\nTelp: " + noTelp + "\nKTP: " + noKtp + "\nNama: " + namaLengkap +
+                "\nAgama: " + agama + "\nJK: " + jenisKelamin + "\n TempatLahir: " + tempatLahir +
+                "\nTanggalLahir: " + tanggalLahir + "\nStatusKawin: " + statusKawin +
+                "\nTanggungan: " + jumlahTanggungan + "\nGelar: " + title + "\nKetTit: " + ketTitle +
+                "\nInskerKerja: " + inskerKerja + "\nStatusRumah: " + statusRumah + "\nAlamat: " + alamat +
+                "\nRt: " + rt + "\nRw: " + rw + "\nPropinsi: " + propinsi + "\nKota: " + kota +
+                "\nKecamatan: " + kecamatan + "\nKelurahan: " + kelurahan + "\nPos: " + kodePos +
+                "\nStatus Hubungan: " + statusHubungan + "\nNama Penanggung: " + namaPenanggung +
+                "\nKtp Penanggung: " + noKtpPenanggung + "\nNama Ibu: " + namaIbu);
+
+        /*API Call Registrasi*/
         RegisterInterface regis = RetrofitClient.getClient().create(RegisterInterface.class);
-        /*Call<ResponseBody> call = regis.createUser(nip, email, pass, noKtp,
-                namaLengkap, jenisKelamin, agama, title, ketTitle, rt, rw, kelurahan,
-                kecamatan, kota, alamat, kodePos, noTelp);
+        Call<ResponseBody> call = regis.createUser(nip, email, pass, noTelp, noKtp,
+                namaLengkap, agama, jenisKelamin,tempatLahir, tanggalLahir, statusKawin, jumlahTanggungan,
+                title, ketTitle, inskerKerja, statusRumah, alamat, rt, rw, propinsi, kota, kecamatan, kelurahan,
+                kodePos, statusHubungan, namaPenanggung, noKtpPenanggung, namaIbu);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d("Res", "onResponse: " +response.body());
-//                pDialog.dismiss();
+                pDialog.dismiss();
                 finish();
-                startActivity(new Intent(TakePicture.this, MainActivity.class));
+                Toast.makeText(TakePicture.this, "Selamat, Pendaftaran Berhasil", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(TakePicture.this, MasukActivity.class));
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("Error", "onFailure: " + t.getMessage());
-//                pDialog.dismiss();
+                pDialog.dismiss();
             }
-        });*/
+        });
     }
     @Override
     protected void onResume() {
@@ -161,10 +192,10 @@ public class TakePicture extends AppCompatActivity {
         // do something when the button is clicked
         // do something when the button is clicked
         AlertDialog alertbox = new AlertDialog.Builder(this)
-                .setMessage("Apa anda yakin ingin keluar?")
+                .setMessage("Data yang anda masukkan akan hilang, apa anda yakin?")
                 .setPositiveButton("Ya", (arg0, arg1) -> {
                     finish();
-                    startActivity(new Intent());
+                    startActivity(new Intent(TakePicture.this, HalamanDepanActivity.class));
                     //close();
                 })
                 .setNegativeButton("Tidak", (arg0, arg1) -> {
@@ -219,7 +250,7 @@ public class TakePicture extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
-            Toast.makeText(this, "data: " + data.getData(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "data: " + data.getData(), Toast.LENGTH_SHORT).show();
             switch (requestCode){
                 case IMAGE_CAPTURE_CODE_KTP:
                     imgKtpIv.setImageURI(imgKtp);
@@ -233,7 +264,7 @@ public class TakePicture extends AppCompatActivity {
         }
     }
 
-    private void uploadFile(String nip, Uri ktp, Uri selfi) {
+    /*private void uploadFile(String nip, Uri ktp, Uri selfi) {
         // create upload service client
         UploadImageInterface service = RetrofitClient.getClient().create(UploadImageInterface.class);
 
@@ -281,5 +312,5 @@ public class TakePicture extends AppCompatActivity {
                 Toast.makeText(TakePicture.this, "NOPE", Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 }

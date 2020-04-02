@@ -12,5 +12,4 @@ public interface PropinsiInterface {
     @GET("wilayah/get")
     Call<ResponseBody> getPropinsi();
 
-
 }

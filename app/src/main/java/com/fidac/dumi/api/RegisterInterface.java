@@ -30,18 +30,14 @@ public interface RegisterInterface {
             @Field("alamat") String alamat,
             @Field("rt") String rt,
             @Field("rw") String rw,
-            @Field("propinsi") String propinsi,
+            @Field("provinsi") String propinsi,
             @Field("kota") String kota,
             @Field("kecamatan") String kecamatan,
             @Field("kelurahan") String kelurahan,
             @Field("kode_pos") String kodePos,
             @Field("status_hubungan") String statusHubungan,
-            @Field("nama_ortu") String namaOrtu,
-            @Field("nama_kerabat") String namaKerabat,
-            @Field("nama_pasangan") String namaPasangan,
-            @Field("no_ktp_ortu") String noKtpOrtu,
-            @Field("no_ktp_kerabat") String noKtpKerabat,
-            @Field("no_ktp_pasangan") String noKtpPasangan,
+            @Field("nama_penanggung") String namaPenanggung,
+            @Field("no_ktp_penanggung") String noKtpPenanggung,
             @Field("nama_gadis_ibu") String namaGadisIbu
     );
 }

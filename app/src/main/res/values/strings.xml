@@ -181,5 +181,8 @@
     <string name="no_telp_penanggung">No. Telp Penanggung</string>
     <string name="jumlah_tanggungan">Jumlah Tanggungan</string>
     <string name="nama_ibu">Nama Gadis Ibu Kandung</string>
+    <string name="status_hubungan_penjamin">Status Hubungan Penanggung</string>
+    <string name="format_tgl_lahir">(TahunBulanTanggal) contoh: 19990101</string>
+    <string name="tujuan_pinjaman">Tujuan Pinjaman</string>
 
 </resources>

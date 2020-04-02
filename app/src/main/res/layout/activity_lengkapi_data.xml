@@ -41,6 +41,7 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp" />
+
             <!--No Ktp-->
             <TextView
                 android:layout_width="match_parent"
@@ -66,6 +67,7 @@
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
                 tools:ignore="LabelFor" />
+
             <!--Nama (KTP)-->
             <TextView
                 android:layout_width="match_parent"
@@ -90,6 +92,7 @@
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
                 tools:ignore="LabelFor" />
+
             <!--Agama-->
             <TextView
                 android:layout_width="match_parent"
@@ -174,7 +177,7 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
-                android:id="@+id/tempat_lahir"
+                android:id="@+id/tempat_lahir_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
@@ -199,12 +202,13 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
-                android:id="@+id/tanggal_lahir"
+                android:id="@+id/tanggal_lahir_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:backgroundTint="@color/colorBlue"
                 android:inputType="date"
+                android:hint="@string/format_tgl_lahir"
                 android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
@@ -259,7 +263,7 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
-                android:id="@+id/jumlah_tanggungan"
+                android:id="@+id/jumlah_tanggungan_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
@@ -289,7 +293,6 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/spinner_custom"
                 android:orientation="horizontal">
-
                 <Spinner
                     android:id="@+id/title_spinner"
                     android:layout_width="match_parent"
@@ -299,7 +302,6 @@
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:spinnerMode="dropdown" />
-
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -308,6 +310,7 @@
                     android:layout_gravity="center"
                     android:src="@drawable/ic_arrow_down24dp" />
             </RelativeLayout>
+
             <!--Keterangan Title-->
             <TextView
                 android:layout_width="match_parent"
@@ -341,7 +344,7 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
-                android:id="@+id/insker_nama"
+                android:id="@+id/insker_nama_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
@@ -633,15 +636,6 @@
                     android:layout_gravity="center"
                     android:src="@drawable/ic_arrow_down24dp" />
             </RelativeLayout>
-            <!--<EditText
-                android:id="@+id/kode_pos_et"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:inputType="number"
-                android:textColor="@android:color/black"
-                tools:ignore="LabelFor" />-->
 
             <!--Data Keluarga-->
             <TextView
@@ -665,7 +659,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/status_hubungan"
+                android:text="@string/status_hubungan_penjamin"
                 android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
@@ -694,6 +688,7 @@
                     android:layout_gravity="center"
                     android:src="@drawable/ic_arrow_down24dp" />
             </RelativeLayout>
+
             <!--Nama Kerabat-->
             <TextView
                 android:layout_width="match_parent"
@@ -706,7 +701,7 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
-                android:id="@+id/nama_lengkap_penanggung"
+                android:id="@+id/nama_lengkap_penanggung_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
@@ -718,6 +713,7 @@
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
                 tools:ignore="LabelFor" />
+
             <!--No Ktp-->
             <TextView
                 android:layout_width="match_parent"
@@ -730,7 +726,7 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
-                android:id="@+id/no_ktp_penanggung"
+                android:id="@+id/no_ktp_penanggung_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
@@ -756,7 +752,7 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
-                android:id="@+id/nama_gadis_ibu"
+                android:id="@+id/nama_gadis_ibu_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""

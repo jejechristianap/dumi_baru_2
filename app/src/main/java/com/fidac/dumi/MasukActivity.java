@@ -98,7 +98,7 @@ public class MasukActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 try {
-                    JSONObject obj = new JSONObject(response.body().string());
+                   JSONObject obj = new JSONObject(response.body().string());
                     boolean status = obj.getBoolean("status");
                     if (status) {
                         pDialog.dismiss();
@@ -109,32 +109,46 @@ public class MasukActivity extends AppCompatActivity {
                             JSONObject userObj = dataArray.getJSONObject(i);
                             int id = userObj.getInt("id");
                             String nip = userObj.getString("nipBaru");
+                            String email = userObj.getString("email");
+                            String password = userObj.getString("sandi");
+                            String noKtp = userObj.getString("noktp");
                             String nama = userObj.getString("namaPns");
                             String agama = userObj.getString("agama");
-                            String noKtp = userObj.getString("noktp");
-                            String email = userObj.getString("email");
-                            String noHp = userObj.getString("no_hp");
+                            String jenisKelamin = userObj.getString("jenis_kelamin");
+                            String tempatLahir = userObj.getString("tempatLahir");
+                            String tanggalLahir = userObj.getString("tglLhrPns");
+                            String statusKawin = userObj.getString("status_kawin");
+                            String jumlahTanggungan = userObj.getString("tanggungan");
                             String pendidikan = userObj.getString("pendidikan");
                             String ketTitle = userObj.getString("ket_title");
+                            String insker = userObj.getString("inskerNama");
+                            String statusRumah = userObj.getString("status_rumah");
+                            String alamat = userObj.getString("alamat");
                             String rt = userObj.getString("rt");
                             String rw = userObj.getString("rw");
-                            String kelurahan = userObj.getString("desa");
-                            String kecamatan = userObj.getString("kecamatan");
+                            String propinsi = userObj.getString("provinsi");
                             String kota = userObj.getString("kabkota");
-                            String alamat = userObj.getString("kampung");
+                            String kecamatan = userObj.getString("kecamatan");
+                            String kelurahan = userObj.getString("desa");
                             String kodePos = userObj.getString("kodepos");
+                            String statusHubungan = userObj.getString("status_hubungan");
+                            String namaPenanggung = userObj.getString("nama_penanggung");
+                            String noKtpPenanggung = userObj.getString("no_ktp_penanggung");
+                            String namaIbu = userObj.getString("ibuKandung");
+                            String noHp = userObj.getString("no_hp");
 
-                            User user = new User(id, nip, email, nama, noKtp, agama, pendidikan, ketTitle,
-                                    rt, rw, kelurahan, kecamatan, kota, alamat, kodePos, noHp);
+                            User user = new User(id, nip, email, password, noKtp, nama, agama, jenisKelamin,
+                                    tempatLahir, tanggalLahir, statusKawin, jumlahTanggungan, pendidikan, ketTitle,
+                                    insker, statusRumah, alamat, rt, rw, propinsi, kota, kecamatan, kelurahan,
+                                    kodePos, statusHubungan, namaPenanggung, noKtpPenanggung, namaIbu, noHp);
 
                             SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
 
                             Toast toast= Toast.makeText(MasukActivity.this,
                                     "Selamat datang, " + nama, Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                            toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
                             toast.show();
                         }
-
                         startActivity(new Intent(MasukActivity.this, MainActivity.class));
                     } else {
                         Toast.makeText(MasukActivity.this, "NIP/Password Salah!", Toast.LENGTH_SHORT).show();
@@ -144,9 +158,6 @@ public class MasukActivity extends AppCompatActivity {
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
                 }
-
-//                    JSONObject jsonRESULTS = new JSONObject(response.body().string());
-
             }
 
             @Override

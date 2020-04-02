@@ -21,7 +21,6 @@ public class RetrofitClient {
     private static final String BASE_URL = "http://app.ternak-burung.top/api/";
     private static final String BASE_URL_PULSA = "https://klikmbc.co.id/json/pulsa/";
     private static final String BASE_URL_OTP = "http://api.nusasms.com/api/v3/sendsms/";
-    private static final String BASE_URL_PROPINSI = "http://app.ternak-burung.top/api/provinces/get";
     private static RetrofitClient mInstance;
     private static Retrofit retrofit = null;
 
@@ -129,7 +128,12 @@ public class RetrofitClient {
 
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
-            builder.hostnameVerifier((hostname, session) -> true);
+            builder.hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
             return builder;
         } catch (Exception e) {
             throw new RuntimeException(e);

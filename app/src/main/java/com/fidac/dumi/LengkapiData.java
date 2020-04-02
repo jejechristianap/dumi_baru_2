@@ -39,7 +39,9 @@ public class LengkapiData extends AppCompatActivity {
 
     private EditText noKtpEt, namaLengkapEt, ketTitleEt,
             rtEt, rwEt, kelurahanEt, kecamatanEt, kotaEt,
-            alamatEt, kodePosEt;
+            alamatEt, kodePosEt, tempatLahirEt, tanggalLahirEt,
+            jumlahTanggunganEt, inskerKerjaEt, namaPenanggungEt,
+            noKtpPenanggungEt, namaIbuEt;
 
     private Button lanjutButton;
 
@@ -109,18 +111,20 @@ public class LengkapiData extends AppCompatActivity {
         /*EditText Init*/
         noKtpEt = findViewById(R.id.no_ktp);
         namaLengkapEt = findViewById(R.id.nama_lengkap);
+        tempatLahirEt = findViewById(R.id.tempat_lahir_et);
+        tanggalLahirEt = findViewById(R.id.tanggal_lahir_et);
+        jumlahTanggunganEt = findViewById(R.id.jumlah_tanggungan_et);
         ketTitleEt = findViewById(R.id.ket_title);
+        inskerKerjaEt = findViewById(R.id.insker_nama_et);
+        alamatEt = findViewById(R.id.alamat);
         rtEt = findViewById(R.id.rt);
         rwEt = findViewById(R.id.rw);
-//        kelurahanEt = findViewById(R.id.kelurahan);
-//        kecamatanEt = findViewById(R.id.kecamatan);
-//        kotaEt = findViewById(R.id.kota);
-        alamatEt = findViewById(R.id.alamat);
-//        kodePosEt = findViewById(R.id.kode_pos);
+        namaPenanggungEt = findViewById(R.id.nama_lengkap_penanggung_et);
+        noKtpPenanggungEt = findViewById(R.id.no_ktp_penanggung_et);
+        namaIbuEt = findViewById(R.id.nama_gadis_ibu_et);
 
 
         lanjutButton = findViewById(R.id.lanjut_button_lengkapi_data);
-
         lanjutButton.setOnClickListener(v -> {
             createUser();
         });
@@ -145,7 +149,6 @@ public class LengkapiData extends AppCompatActivity {
         kecSpinner = findViewById(R.id.kecamatan_spinner);
         kelSpinner = findViewById(R.id.kelurahan_spinner);
         kodePosSpinner = findViewById(R.id.kode_pos_spinner);
-//        kodePosEt = findViewById(R.id.kode_pos_et);
 
 
         /*Progress Dialog*/
@@ -164,7 +167,6 @@ public class LengkapiData extends AppCompatActivity {
                     JSONObject obj = new JSONObject(response.body().string());
                     boolean status = obj.getBoolean("status");
                     if (status) {
-
                         String data = obj.getString("data");
                         JSONObject prop = new JSONObject(data);
                         /*Wilayah*/
@@ -303,24 +305,37 @@ public class LengkapiData extends AppCompatActivity {
     }
 
     public void createUser(){
-        String noKtp, namaLengkap, ketTitle, rt, rw, kelurahan, kecamatan,
-                kota, alamat, kodePos, nipBaru, email, password, jenisKelamin, agama, title;
+        String noKtp, namaLengkap, tempatLahir, tanggalLahir, statusKawin,
+                jumlahTanggungan, title, ketTitle, inskerKerja,
+                statusRumah, rt, rw, propinsi, kelurahan, kecamatan,
+                kota, alamat, kodePos, jenisKelamin, agama,
+                statusHubungan, namaPenanggung, noKtpPenanggung, namaIbu;
+
+        // User Input
         noKtp = noKtpEt.getText().toString();
         namaLengkap = namaLengkapEt.getText().toString();
+        agama = agamaSpinner.getSelectedItem().toString();
+        jenisKelamin = jenisKelaminSpinner.getSelectedItem().toString();
+        tempatLahir = tempatLahirEt.getText().toString();
+        tanggalLahir = tanggalLahirEt.getText().toString();
+        statusKawin = statusKawinSpinner.getSelectedItem().toString();
+        jumlahTanggungan = jumlahTanggunganEt.getText().toString();
+        title = titleSpinner.getSelectedItem().toString();
         ketTitle = ketTitleEt.getText().toString();
+        inskerKerja = inskerKerjaEt.getText().toString();
+        statusRumah = statusRumahSpinner.getSelectedItem().toString();
+        alamat = alamatEt.getText().toString();
         rt = rtEt.getText().toString();
         rw = rwEt.getText().toString();
-        kelurahan = kelurahanEt.getText().toString();
-        kecamatan = kecamatanEt.getText().toString();
-        kota = kotaEt.getText().toString();
-        alamat = alamatEt.getText().toString();
-        kodePos = kodePosEt.getText().toString();
-        nipBaru = pref.getString("nip", null);
-        email = pref.getString("email", null);
-        password = pref.getString("pass", null);
-        jenisKelamin = jenisKelaminSpinner.getSelectedItem().toString();
-        agama = agamaSpinner.getSelectedItem().toString();
-        title = titleSpinner.getSelectedItem().toString();
+        propinsi = propinsiSpinner.getSelectedItem().toString();
+        kota = kabSpinner.getSelectedItem().toString();
+        kecamatan  = kecSpinner.getSelectedItem().toString();
+        kelurahan = kelSpinner.getSelectedItem().toString();
+        kodePos = kodePosSpinner.getSelectedItem().toString();
+        statusHubungan = statusHubunganSpinner.getSelectedItem().toString();
+        namaPenanggung = namaPenanggungEt.getText().toString();
+        noKtpPenanggung = noKtpPenanggungEt.getText().toString();
+        namaIbu = namaIbuEt.getText().toString();
 
         /*User Handling*/
         // No KTP
@@ -367,30 +382,7 @@ public class LengkapiData extends AppCompatActivity {
         } else {
             rwEt.setError(null);
         }
-        // Kelurahan
-        if(TextUtils.isEmpty(kelurahan)){
-            kelurahanEt.setError(KOLOM);
-            kelurahanEt.requestFocus();
-            return;
-        } else {
-            kelurahanEt.setError(null);
-        }
-        // Kecamatan
-        if(TextUtils.isEmpty(kecamatan)){
-            kecamatanEt.setError(KOLOM);
-            kecamatanEt.requestFocus();
-            return;
-        } else {
-            kecamatanEt.setError(null);
-        }
-        // Kota
-        if(TextUtils.isEmpty(kota)){
-            kotaEt.setError(KOLOM);
-            kotaEt.requestFocus();
-            return;
-        } else {
-            kotaEt.setError(null);
-        }
+
         // Alamat
         if(TextUtils.isEmpty(alamat)){
             alamatEt.setError(KOLOM);
@@ -399,31 +391,43 @@ public class LengkapiData extends AppCompatActivity {
         } else {
             alamatEt.setError(null);
         }
-        // Kode Pos
-        if(TextUtils.isEmpty(kodePos)){
-            kodePosEt.setError(KOLOM);
-            kodePosEt.requestFocus();
-            return;
-        } else {
-            kodePosEt.setError(null);
-        }
+
+        Log.d("Input", "createUser: " + "\nKTP: " + noKtp + "\nNama: " + namaLengkap +
+                "\nAgama: " + agama + "\nJK: " + jenisKelamin + "\n TempatLahir: " + tempatLahir +
+                "\nTanggalLahir: " + tanggalLahir + "\nStatusKawin: " + statusKawin +
+                "\nTanggungan: " + jumlahTanggungan + "\nGelar: " + title + "\nKetTit: " + ketTitle +
+                "\nInskerKerja: " + inskerKerja + "\nStatusRumah: " + statusRumah + "\nAlamat: " + alamat +
+                "\nRt: " + rt + "\nRw: " + rw + "\nPropinsi: " + propinsi + "\nKota: " + kota +
+                "\nKecamatan: " + kecamatan + "\nKelurahan: " + kelurahan + "\nPos: " + kodePos +
+                "\nStatus Hubungan: " + statusHubungan + "\nNama Penanggung: " + namaPenanggung +
+                "\nKtp Penanggung: " + noKtpPenanggung + "\nNama Ibu: " + namaIbu);
 
         editor.putString("no_ktp", noKtp);
         editor.putString("nama_lengkap", namaLengkap);
+        editor.putString("agama", agama);
+        editor.putString("jensi_kelamin", jenisKelamin);
+        editor.putString("tempat_lahir", tempatLahir);
+        editor.putString("tanggal_lahir", tanggalLahir);
+        editor.putString("status_kawin", statusKawin);
+        editor.putString("jumlah_tanggungan", jumlahTanggungan);
         editor.putString("title", title);
         editor.putString("ket_title", ketTitle);
+        editor.putString("insker", inskerKerja);
+        editor.putString("status_rumah", statusRumah);
+        editor.putString("alamat", alamat);
         editor.putString("rt", rt);
         editor.putString("rw", rw);
-        editor.putString("kelurahan", kelurahan);
-        editor.putString("kecamatan", kecamatan);
+        editor.putString("propinsi", propinsi);
         editor.putString("kota", kota);
-        editor.putString("alamat", alamat);
+        editor.putString("kecamatan", kecamatan);
+        editor.putString("kelurahan", kelurahan);
         editor.putString("kode_pos", kodePos);
-        editor.putString("jensi_kelamin", jenisKelamin);
-        editor.putString("agama", agama);
+        editor.putString("status_hubungan", statusHubungan);
+        editor.putString("nama_penanggung", namaPenanggung);
+        editor.putString("no_ktp_penanggung", noKtpPenanggung);
+        editor.putString("nama_ibu", namaIbu);
         editor.commit();
         startActivity(new Intent(LengkapiData.this, TakePicture.class));
-
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -438,10 +442,10 @@ public class LengkapiData extends AppCompatActivity {
         // do something when the button is clicked
         // do something when the button is clicked
         AlertDialog alertbox = new AlertDialog.Builder(this)
-                .setMessage("Apa anda yakin ingin keluar?")
+                .setMessage("Apa anda yakin ingin kembali ke Halaman Depan?")
                 .setPositiveButton("Ya", (arg0, arg1) -> {
                     finish();
-                    startActivity(new Intent());
+                    startActivity(new Intent(LengkapiData.this, HalamanDepanActivity.class));
                     //close();
                 })
                 .setNegativeButton("Tidak", (arg0, arg1) -> {

@@ -102,6 +102,41 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif-medium"
+                android:text="@string/tujuan_pinjaman"
+                android:textColor="@android:color/black"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="6sp"
+                tools:autoSizeMaxTextSize="30sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/spinner_custom"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/tujuan_pinjaman_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_down24dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="sans-serif-medium"
                 android:text="@string/lama_pembayaran"
                 android:textColor="@android:color/black"
                 app:autoSizeTextType="uniform"
@@ -319,6 +354,7 @@
                 tools:autoSizeStepGranularity="1sp" />
 
             <Button
+                android:id="@+id/ajukan_button"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
