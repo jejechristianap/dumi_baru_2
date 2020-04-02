@@ -184,5 +184,11 @@
     <string name="status_hubungan_penjamin">Status Hubungan Penanggung</string>
     <string name="format_tgl_lahir">(TahunBulanTanggal) contoh: 19990101</string>
     <string name="tujuan_pinjaman">Tujuan Pinjaman</string>
+    <string name="data_transfer">Data Transfer</string>
+    <string name="nam_bank">Nama Bank</string>
+    <string name="bank">Contoh : MANDIRI</string>
+    <string name="no_rek">No. Rekening</string>
+    <string name="norekcontoh">Contoh 23412xxxxx</string>
+    <string name="nama_pemilik_rekening">Nama Pemilik Rekening</string>
 
 </resources>

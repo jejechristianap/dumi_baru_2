@@ -1,7 +1,9 @@
 package com.fidac.dumi.jenispinjaman;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.fidac.dumi.BankActivity;
 import com.fidac.dumi.LengkapiData;
 import com.fidac.dumi.MainActivity;
 import com.fidac.dumi.R;
@@ -22,6 +25,9 @@ import com.fidac.dumi.model.User;
 import com.fidac.dumi.retrofit.RetrofitClient;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import okhttp3.ResponseBody;
@@ -55,19 +61,28 @@ public class PinjamanKilatActivity extends AppCompatActivity {
     private final int PEMBAYARAN_12_BULAN = 12;
     private final int JUMLAH_BULAN_1_TAHUN = 12;
     private final int JUMLAH_PINJAMAN_DEFAULT = 1000000;
-    private final double BIAYA_ADMIN = 0.01;
-    private final double BIAYA_ASURANSI = 0.01;
-    private final double BIAYA_TRANSFER = 6500;
-    private final double BUNGA_PERBULAN = 0.099;
-    double plafond, bunga, admin, angsuran, asuransi;
+    private final float BIAYA_ADMIN = (float) 0.01;
+    private final float BIAYA_ASURANSI = (float) 0.01;
+    private final float BIAYA_TRANSFER = 6500;
+    private final float BUNGA_PERBULAN = (float) 0.099;
+    float bunga, admin, angsuran, asuransi, sisa;
+    int plafond;
 
     private Locale localID;
     private NumberFormat formatRp;
+
+    public static final String DATE_FORMAT_2 = "yyyy-MM-dd";
+
+    private SharedPreferences.Editor editor;
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pinjaman_kilat);
+
+        pref = getApplicationContext().getSharedPreferences("ajukanPinjaman", 0); // 0 - for private mode
+        editor = pref.edit();
 
         tujuanSpinner = findViewById(R.id.tujuan_pinjaman_spinner);
         tujuanAdapter = new ArrayAdapter<>(PinjamanKilatActivity.this, R.layout.spinner_text, tujuanPinjaman);
@@ -93,6 +108,7 @@ public class PinjamanKilatActivity extends AppCompatActivity {
         admin = 0;
         angsuran = 0;
         asuransi = 0;
+        sisa = 0;
 
         localID = new Locale("in", "ID");
         formatRp = NumberFormat.getCurrencyInstance(localID);
@@ -381,13 +397,13 @@ public class PinjamanKilatActivity extends AppCompatActivity {
             bulan12.setBackgroundResource(R.drawable.rect_normal);
 
             plafond = PEMBAYARAN_3_BULAN;
-            double pokok = pinjamanUang / plafond;
+            float pokok = pinjamanUang / plafond;
             bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
             angsuran = pokok + bunga;
             admin = pinjamanUang * BIAYA_ADMIN;
             asuransi = pinjamanUang * BIAYA_ASURANSI;
-            double totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
-            double sisa = pinjamanUang - totalPengurangan;
+            float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
+            sisa = pinjamanUang - totalPengurangan;
 
             angsuranTv.setText(formatRp.format(angsuran));
             biayaAdminTv.setText(formatRp.format((double)admin));
@@ -405,13 +421,13 @@ public class PinjamanKilatActivity extends AppCompatActivity {
             bulan12.setBackgroundResource(R.drawable.rect_normal);
 
             plafond = PEMBAYARAN_6_BULAN;
-            double pokok = pinjamanUang / plafond;
+            float pokok = pinjamanUang / plafond;
             bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
             angsuran = pokok + bunga;
             admin = pinjamanUang * BIAYA_ADMIN;
             asuransi = pinjamanUang * BIAYA_ASURANSI;
-            double totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
-            double sisa = pinjamanUang - totalPengurangan;
+            float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
+            sisa = pinjamanUang - totalPengurangan;
 
             angsuranTv.setText(formatRp.format((double)angsuran));
             biayaAdminTv.setText(formatRp.format((double)admin));
@@ -429,13 +445,13 @@ public class PinjamanKilatActivity extends AppCompatActivity {
             bulan6.setBackgroundResource(R.drawable.rect_normal);
 
             plafond = PEMBAYARAN_12_BULAN;
-            double pokok = pinjamanUang / plafond;
+            float pokok = pinjamanUang / plafond;
             bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
             angsuran = pokok + bunga;
             admin = pinjamanUang * BIAYA_ADMIN;
             asuransi = pinjamanUang * BIAYA_ASURANSI;
-            double totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
-            double sisa = pinjamanUang - totalPengurangan;
+            float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
+            sisa = pinjamanUang - totalPengurangan;
 
             angsuranTv.setText(formatRp.format((double)angsuran));
             biayaAdminTv.setText(formatRp.format((double)admin));
@@ -444,7 +460,7 @@ public class PinjamanKilatActivity extends AppCompatActivity {
             jumlahTerimaTv.setText(formatRp.format((double)sisa));
         });
 
-        ajukanButton = findViewById(R.id.ajukan_button);
+        ajukanButton = findViewById(R.id.lanjut_button_kilat);
         ajukanButton.setOnClickListener(v -> {
             ajukanPinjaman();
         });
@@ -456,8 +472,47 @@ public class PinjamanKilatActivity extends AppCompatActivity {
         String nip = user.getNip();
         String tujuan = tujuanSpinner.getSelectedItem().toString();
 
-        PinjamanKilatInterface pinjam = RetrofitClient.getClient().create(PinjamanKilatInterface.class);
-        /*Call<ResponseBody> call = pinjam.ajukanPinjaman(nip, pinjamanUang, plafond, 0, BUNGA_PERBULAN,
-                bunga, admin, angsuran, asuransi, tujuan, );*/
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_2);
+        Calendar c = Calendar.getInstance();
+        Date today = c.getTime();
+        String tglPinjam = dateFormat.format(today);
+
+        c.add(Calendar.MONTH, plafond);
+        final Date dueDate = c.getTime();
+        String tglAkhirPinjam = dateFormat.format(dueDate);
+
+        Log.d("Pinjaman",
+                "nip: " + nip +
+                        "\nPinjaman: " + pinjamanUang +
+                        "\nPlafond: " + plafond +
+                        "\nbunga: " + BUNGA_PERBULAN +
+                        "\nBunga: " + bunga +
+                        "\nAdmin: " + admin +
+                        "\nAngsuran: " + angsuran +
+                        "\nTrfBank: " + BIAYA_TRANSFER +
+                        "\nTujuan: " + tujuan +
+                        "\nTglPinjam: " + tglPinjam +
+                        "\nAkhirTgl: " + tglAkhirPinjam +
+                        "\nSisa: " + sisa +
+                        "\nasurans: " + asuransi);
+
+        editor.putString("nip", nip);
+        editor.putFloat("pinjaman", pinjamanUang);
+        editor.putInt("lamaPinjaman", plafond);
+        editor.putFloat("bunga", bunga);
+        editor.putFloat("admin", admin);
+        editor.putFloat("angsuran", angsuran);
+        editor.putFloat("diterima", sisa);
+        editor.putString("tujuan", tujuan);
+        editor.putString("tglMulai", tglPinjam);
+        editor.putString("tglAkhir", tglAkhirPinjam);
+        editor.putFloat("asuransi", asuransi);
+        editor.commit();
+
+        startActivity(new Intent(PinjamanKilatActivity.this, BankActivity.class));
+
+        /*PinjamanKilatInterface pinjam = RetrofitClient.getClient().create(PinjamanKilatInterface.class);
+        Call<ResponseBody> call = pinjam.ajukanPinjaman(nip, pinjamanUang, plafond, 0, BUNGA_PERBULAN,
+                bunga, admin, angsuran, BIAYA_TRANSFER, tujuan, tglPinjam, tglAkhirPinjam, "", sisa, asuransi, );*/
     }
 }

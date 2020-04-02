@@ -354,14 +354,15 @@
                 tools:autoSizeStepGranularity="1sp" />
 
             <Button
-                android:id="@+id/ajukan_button"
+                android:id="@+id/lanjut_button_kilat"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="100dp"
                 android:background="@drawable/button_rounded_custom"
                 android:fontFamily="sans-serif-medium"
-                android:text="@string/ajukan_sekarang"
+                android:text="@string/lanjut"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
