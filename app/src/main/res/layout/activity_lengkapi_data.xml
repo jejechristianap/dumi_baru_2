@@ -25,7 +25,7 @@
             android:layout_marginEnd="20dp"
             android:orientation="vertical"
             android:visibility="visible">
-
+            <!--Header-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
@@ -33,7 +33,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="5dp"
                 android:gravity="center"
-                android:text="@string/mohon_lengkapi_data"
+                android:text="@string/data_pribadi"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
@@ -52,7 +52,6 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
                 android:id="@+id/no_ktp"
                 android:layout_width="match_parent"
@@ -62,13 +61,11 @@
                 android:inputType="number"
                 android:maxLength="16"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
                 tools:ignore="LabelFor" />
-
             <!--Nama (KTP)-->
             <TextView
                 android:layout_width="match_parent"
@@ -80,22 +77,53 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
                 android:id="@+id/nama_lengkap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                 android:backgroundTint="@color/colorBlue"
-                android:inputType="textCapWords"
+                android:inputType="textCapCharacters"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
                 tools:ignore="LabelFor" />
+            <!--Agama-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/agama"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/spinner_custom"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/agama_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_down24dp" />
+            </RelativeLayout>
 
             <!--Jenis Kelamin-->
             <TextView
@@ -108,7 +136,6 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -135,27 +162,80 @@
                     android:src="@drawable/ic_arrow_down24dp" />
             </RelativeLayout>
 
-            <!--Agama-->
+            <!--tempat lahir-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/agama"
+                android:text="@string/tempat_lahir"
                 android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/tempat_lahir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textCapCharacters"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />
 
+            <!--tanggal lahir-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/tanggal_lahir"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <DatePicker
+                android:ems="10"
+                android:inputType="date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <!--<EditText
+                android:id="@+id/tanggal_lahir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="date"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />-->
+
+            <!--Status Kawin-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/status_kawin"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/spinner_custom"
                 android:orientation="horizontal">
-
                 <Spinner
-                    android:id="@+id/agama_spinner"
+                    android:id="@+id/status_kawin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -163,7 +243,6 @@
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:spinnerMode="dropdown" />
-
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -173,18 +252,42 @@
                     android:src="@drawable/ic_arrow_down24dp" />
             </RelativeLayout>
 
-            <!--Title-->
+            <!--Jumlah Tanggungan-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/title"
+                android:text="@string/jumlah_tanggungan"
                 android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/jumlah_tanggungan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="number"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />
 
+            <!--Title-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/gelar"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -210,29 +313,111 @@
                     android:layout_gravity="center"
                     android:src="@drawable/ic_arrow_down24dp" />
             </RelativeLayout>
-
             <!--Keterangan Title-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/ket_title"
+                android:text="@string/ket_gelar"
                 android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
                 android:id="@+id/ket_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                 android:backgroundTint="@color/colorBlue"
-                android:inputType="textCapWords"
+                android:inputType="textCapCharacters"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"
+                tools:ignore="LabelFor" />
+
+            <!--Nama Intansi kerja-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/instansi_kerja"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/insker_nama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textCapCharacters"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />
+
+            <!--Status Rumah-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/status_rumah"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/spinner_custom"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/status_rumah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_down24dp" />
+            </RelativeLayout>
+
+            <!--Alamat-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/alamat"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:gravity="top|left"
+                android:inputType="textMultiLine|textCapCharacters"
+                android:lines="8"
+                android:maxLines="10"
+                android:minLines="6"
+                android:scrollbars="vertical"
+                android:textColor="@android:color/black"
                 tools:ignore="LabelFor" />
 
             <!--RT-->
@@ -246,7 +431,6 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
                 android:id="@+id/rt"
                 android:layout_width="match_parent"
@@ -256,7 +440,6 @@
                 android:backgroundTint="@color/colorBlue"
                 android:inputType="number"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"
                 tools:ignore="LabelFor" />
 
             <!--RW-->
@@ -270,7 +453,6 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
                 android:id="@+id/rw"
                 android:layout_width="match_parent"
@@ -280,31 +462,48 @@
                 android:backgroundTint="@color/colorBlue"
                 android:inputType="number"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"
                 tools:ignore="LabelFor" />
 
-            <!--Kelurahan-->
+            <!--Propinsi-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/kelurahan"
+                android:text="@string/propinsi"
                 android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
-                android:id="@+id/kelurahan"
+                android:id="@+id/propinsi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                 android:backgroundTint="@color/colorBlue"
-                android:inputType="text"
+                android:inputType="textCapCharacters"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"
+                tools:ignore="LabelFor" />
+
+            <!--kota-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/kota"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/kota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textCapCharacters"
+                android:textColor="@android:color/black"
                 tools:ignore="LabelFor" />
 
             <!--Kecamatan-->
@@ -323,64 +522,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                 android:backgroundTint="@color/colorBlue"
-                android:inputType="text"
+                android:inputType="textCapCharacters"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"
                 tools:ignore="LabelFor" />
 
-            <!--Kecamatan-->
+            <!--Kelurahan-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/kota"
+                android:text="@string/kelurahan"
                 android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
-                android:id="@+id/kota"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                android:backgroundTint="@color/colorBlue"
-                android:inputType="text"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                tools:ignore="LabelFor" />
-
-            <!--Alamat-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/alamat"
-                android:textColor="@android:color/black"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
-
-            <EditText
-                android:id="@+id/alamat"
+                android:id="@+id/kelurahan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:backgroundTint="@color/colorBlue"
-                android:gravity="top|left"
-                android:inputType="textMultiLine"
-                android:lines="8"
-                android:maxLines="10"
-                android:minLines="6"
-                android:scrollbars="vertical"
+                android:inputType="textCapCharacters"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"
                 tools:ignore="LabelFor" />
 
+            <!--Kode pos-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -391,7 +559,6 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
                 android:id="@+id/kode_pos"
                 android:layout_width="match_parent"
@@ -401,6 +568,132 @@
                 android:inputType="number"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
+                tools:ignore="LabelFor" />
+
+            <!--Data Keluarga-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="@string/data_keluarga"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp" />
+
+            <!--Status Hubungan-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/status_hubungan"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/spinner_custom"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/status_hubungan_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_down24dp" />
+            </RelativeLayout>
+            <!--Nama Kerabat-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/nama_penanggung"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/nama_lengkap_penanggung"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textCapCharacters"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />
+            <!--No Ktp-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/no_ktp_penanggung"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/no_ktp_penanggung"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="number"
+                android:maxLength="16"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />
+
+            <!--Nama Gadis Ibu-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/nama_ibu"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/nama_gadis_ibu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textCapCharacters"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
                 tools:ignore="LabelFor" />
 
             <Button

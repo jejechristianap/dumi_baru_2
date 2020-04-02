@@ -20,6 +20,8 @@ public class RetrofitClient {
 
     private static final String BASE_URL = "http://app.ternak-burung.top/api/";
     private static final String BASE_URL_PULSA = "https://klikmbc.co.id/json/pulsa/";
+    private static final String BASE_URL_OTP = "http://api.nusasms.com/api/v3/sendsms/";
+    private static final String BASE_URL_PROPINSI = "http://app.ternak-burung.top/api/provinces/get";
     private static RetrofitClient mInstance;
     private static Retrofit retrofit = null;
 
@@ -43,8 +45,7 @@ public class RetrofitClient {
 
             return retrofit;
         }
-
-    public static Retrofit getPulsa() {
+    public static Retrofit getOtp() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -54,6 +55,39 @@ public class RetrofitClient {
                 .readTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .build();
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL_OTP)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpClient)
+                .build();
+
+        return retrofit;
+    }
+    public static Retrofit getPropinsi() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpClient)
+                .build();
+
+        return retrofit;
+    }
+
+
+    public static Retrofit getPulsa() {
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL_PULSA)

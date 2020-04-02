@@ -167,5 +167,19 @@
     <string name="kembali">Kembali</string>
     <string name="logout">Logout</string>
     <string name="cek_daftar_harga">Cek Daftar Harga Pulsa</string>
+    <string name="instansi_kerja">Instansi Kerja</string>
+    <string name="gelar">Gelar</string>
+    <string name="ket_gelar">Keterangan Gelar</string>
+    <string name="status_rumah">Status Rumah</string>
+    <string name="data_pribadi">Data Pribadi</string>
+    <string name="data_pekerjaan">Data Pekerjaan</string>
+    <string name="data_keluarga">Data Keluarga</string>
+    <string name="status_kawin">Status Kawin</string>
+    <string name="status_hubungan">Status Hubungan</string>
+    <string name="nama_penanggung">Nama Penanggung (Seusai KTP)</string>
+    <string name="no_ktp_penanggung">No. KTP Penanggung</string>
+    <string name="no_telp_penanggung">No. Telp Penanggung</string>
+    <string name="jumlah_tanggungan">Jumlah Tanggungan</string>
+    <string name="nama_ibu">Nama Gadis Ibu Kandung</string>
 
 </resources>

@@ -37,6 +37,7 @@ import java.util.HashMap;
 import java.util.Map;*/
 import com.fidac.dumi.api.CekNipBknInterface;
 import com.fidac.dumi.api.CekUserExist;
+import com.fidac.dumi.api.PropinsiInterface;
 import com.fidac.dumi.retrofit.RetrofitClient;
 
 import org.json.JSONObject;
@@ -60,7 +61,7 @@ public class DaftarActivity extends AppCompatActivity {
     private LinearLayout cekNipLl;
     private LinearLayout emailPassLl;
 
-    private Button lanjutButton;
+    private Button lanjutButton, testButton;
     private EditText emailEt, passEt, ulangiPassEt;
 
     private String[] title = {"Tanpa Gelar","D-1","D-2","D-3", "D-4", "S-1", "S-2", "S-3"};
@@ -108,6 +109,7 @@ public class DaftarActivity extends AppCompatActivity {
         emailEt = findViewById(R.id.email_daftar_et);
         passEt = findViewById(R.id.masuk_password_et);
         ulangiPassEt = findViewById(R.id.ulangi_password_et);
+
 
         nipCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
@@ -182,6 +184,8 @@ public class DaftarActivity extends AppCompatActivity {
 
 
     }
+
+
 
     public void cekUser(){
         String nip = masukanNipEt.getText().toString();

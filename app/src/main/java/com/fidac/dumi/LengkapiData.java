@@ -19,14 +19,19 @@ public class LengkapiData extends AppCompatActivity {
 
     private Button lanjutButton;
 
-    private Spinner jenisKelaminSpinner, agamaSpinner, titleSpinner;
-    private ArrayAdapter<CharSequence> jenisKelaminAdapter, agamaAdapter, titleAdapter;
+    private Spinner jenisKelaminSpinner, agamaSpinner, titleSpinner,
+            statusKawinSpinner, statusRumahSpinner, statusHubunganSpinner;
+    private ArrayAdapter<CharSequence> jenisKelaminAdapter, agamaAdapter, titleAdapter,
+            statusKawinAdapter, statusRumahAdapter, statusHubunganAdapter;
 
     private static final String KOLOM = "Kolom ini tidak boleh kosong";
 
     private String[] title = {"Tanpa Gelar","D-1","D-2","D-3", "D-4", "S-1", "S-2", "S-3"};
     private String[] agama = {"Islam", "Kristen", "Khatolik", "Budha", "Hindu", "Konghucu"};
     private String[] jenisKelamin = {"L", "P"};
+    private String[] statusKawin = {"BELUM MENIKAH","MENIKAH", "CERAI", "DUDA", "JANDA"};
+    private String[] statusHubungan = {"ORANGTUA", "KAKAK/ADE/KERABAT", "SUAMI/ISTRI"};
+    private String[] statusRumah = {"KONTRAK", "RUMAH SENDIRI", "RUMAH ORANGTUA"};
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
 
@@ -42,6 +47,24 @@ public class LengkapiData extends AppCompatActivity {
         jenisKelaminAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, jenisKelamin);
         jenisKelaminAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
         jenisKelaminSpinner.setAdapter(jenisKelaminAdapter);
+
+        /*Status Kawin*/
+        statusKawinSpinner = findViewById(R.id.status_kawin);
+        statusKawinAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, statusKawin);
+        statusKawinAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+        statusKawinSpinner.setAdapter(statusKawinAdapter);
+
+        /*Status Rumah*/
+        statusRumahSpinner = findViewById(R.id.status_rumah);
+        statusRumahAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, statusRumah);
+        statusRumahAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+        statusRumahSpinner.setAdapter(statusRumahAdapter);
+
+        /*Status Hubungan*/
+        statusHubunganSpinner = findViewById(R.id.status_hubungan_spinner);
+        statusHubunganAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, statusHubungan);
+        statusHubunganAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+        statusHubunganSpinner.setAdapter(statusHubunganAdapter);
 
         /*Agama*/
         agamaSpinner = findViewById(R.id.agama_spinner);

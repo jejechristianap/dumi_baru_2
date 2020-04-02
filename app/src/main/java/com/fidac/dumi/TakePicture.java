@@ -98,7 +98,7 @@ public class TakePicture extends AppCompatActivity {
         });
         konfirmasiButton.setOnClickListener(v -> {
 //            uploadFile("197301092000032001", imgKtp, imgSelfi);
-            regisUser();
+//            regisUser();
         });
     }
     public void regisUser(){
@@ -124,7 +124,7 @@ public class TakePicture extends AppCompatActivity {
         Log.d("USER", nip+"\n"+email+"\n"+pass+"\n"+noKtp+"\n"+namaLengkap+"\n"+title+"\n"+ketTitle+"\n"+
                 rt+"\n"+rw+"\n"+kelurahan+"\n"+kecamatan+"\n"+kota+"\n"+alamat+"\n"+kodePos+"\n"+jenisKelamin);
         RegisterInterface regis = RetrofitClient.getClient().create(RegisterInterface.class);
-        Call<ResponseBody> call = regis.createUser(nip, email, pass, noKtp,
+        /*Call<ResponseBody> call = regis.createUser(nip, email, pass, noKtp,
                 namaLengkap, jenisKelamin, agama, title, ketTitle, rt, rw, kelurahan,
                 kecamatan, kota, alamat, kodePos, noTelp);
         call.enqueue(new Callback<ResponseBody>() {
@@ -140,7 +140,7 @@ public class TakePicture extends AppCompatActivity {
                 Log.d("Error", "onFailure: " + t.getMessage());
 //                pDialog.dismiss();
             }
-        });
+        });*/
     }
     @Override
     protected void onResume() {
@@ -219,6 +219,7 @@ public class TakePicture extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
+            Toast.makeText(this, "data: " + data.getData(), Toast.LENGTH_SHORT).show();
             switch (requestCode){
                 case IMAGE_CAPTURE_CODE_KTP:
                     imgKtpIv.setImageURI(imgKtp);
