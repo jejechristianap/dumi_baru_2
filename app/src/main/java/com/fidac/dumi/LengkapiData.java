@@ -28,7 +28,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -180,6 +184,7 @@ public class LengkapiData extends AppCompatActivity {
                         JSONArray objKabArray = new JSONArray(kabupaten);
                         JSONArray objKecArray = new JSONArray(kecamatan);
                         JSONArray ojbDesArray = new JSONArray(desa);
+                        JSONArray objPosArray = new JSONArray(desa);
 
                         /*ArraList*/
                         ArrayList<String> propArray = new ArrayList<>();
@@ -193,6 +198,7 @@ public class LengkapiData extends AppCompatActivity {
                             JSONObject provinsi = objPropArray.getJSONObject(i);
                             propArray.add(provinsi.getString("provinsi"));
                         }
+                        Collections.sort(propArray);
                         propinsiAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, propArray);
                         propinsiAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
                         propinsiSpinner.setAdapter(propinsiAdapter);
@@ -209,6 +215,7 @@ public class LengkapiData extends AppCompatActivity {
                                         String prop = kabu.getString("provinsi");
                                         if (prop.equals(propPilih)) {
                                             kabArray.add(kabu.getString("kabupaten"));
+                                            Collections.sort(kabArray);
                                             kabAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, kabArray);
                                             kabAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
                                             kabSpinner.setAdapter(kabAdapter);
@@ -224,6 +231,7 @@ public class LengkapiData extends AppCompatActivity {
                                                             String kab = kec.getString("kabupaten");
                                                             if(kab.equals(kabuPilih)){
                                                                 kecArray.add(kec.getString("kecamatan"));
+                                                                Collections.sort(kecArray);
                                                                 kecAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, kecArray);
                                                                 kecAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
                                                                 kecSpinner.setAdapter(kecAdapter);
@@ -240,14 +248,29 @@ public class LengkapiData extends AppCompatActivity {
                                                                                 String kec = kel.getString("kecamatan");
                                                                                 if(kec.equals(kecPilih)){
                                                                                     desArray.add(kel.getString("desa"));
+                                                                                    kodePosArray.add(kel.getString("kodepos"));
                                                                                     kelAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, desArray);
                                                                                     kelAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
                                                                                     kelSpinner.setAdapter(kelAdapter);
+                                                                                    kelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                                                                        @Override
+                                                                                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+                                                                                            HashSet<String> set = new HashSet<>(kodePosArray);
+                                                                                            kodePosArray.clear();
+                                                                                            kodePosArray.addAll(set);
+                                                                                            Collections.sort(kodePosArray); // Sorting array list using Collections.sort
 
-                                                                                    kodePosArray.add(kel.getString("kodepos"));
-                                                                                    kodePosAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, kodePosArray);
-                                                                                    kodePosAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
-                                                                                    kodePosSpinner.setAdapter(kodePosAdapter);
+                                                                                            kodePosAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, kodePosArray);
+                                                                                            kodePosAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+                                                                                            kodePosSpinner.setAdapter(kodePosAdapter);
+
+                                                                                        }
+
+                                                                                        @Override
+                                                                                        public void onNothingSelected(AdapterView<?> parent) {
+                                                                                        }
+                                                                                    });
                                                                                 }
 
                                                                             } catch (JSONException e) {
@@ -327,11 +350,7 @@ public class LengkapiData extends AppCompatActivity {
         alamat = alamatEt.getText().toString();
         rt = rtEt.getText().toString();
         rw = rwEt.getText().toString();
-        propinsi = propinsiSpinner.getSelectedItem().toString();
-        kota = kabSpinner.getSelectedItem().toString();
-        kecamatan  = kecSpinner.getSelectedItem().toString();
-        kelurahan = kelSpinner.getSelectedItem().toString();
-        kodePos = kodePosSpinner.getSelectedItem().toString();
+
         statusHubungan = statusHubunganSpinner.getSelectedItem().toString();
         namaPenanggung = namaPenanggungEt.getText().toString();
         noKtpPenanggung = noKtpPenanggungEt.getText().toString();
@@ -391,6 +410,12 @@ public class LengkapiData extends AppCompatActivity {
         } else {
             alamatEt.setError(null);
         }
+
+        propinsi = propinsiSpinner.getSelectedItem().toString();
+        kota = kabSpinner.getSelectedItem().toString();
+        kecamatan  = kecSpinner.getSelectedItem().toString();
+        kelurahan = kelSpinner.getSelectedItem().toString();
+        kodePos = kodePosSpinner.getSelectedItem().toString();
 
         Log.d("Input", "createUser: " + "\nKTP: " + noKtp + "\nNama: " + namaLengkap +
                 "\nAgama: " + agama + "\nJK: " + jenisKelamin + "\n TempatLahir: " + tempatLahir +

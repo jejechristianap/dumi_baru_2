@@ -57,7 +57,7 @@ public class MasukActivity extends AppCompatActivity {
             loginUser();
         });
         daftarDisiniTv.setOnClickListener(v ->{
-            startActivity(new Intent(MasukActivity.this, DaftarActivity.class));
+            startActivity(new Intent(MasukActivity.this, HalamanDepanActivity.class));
         });
     }
     @Override

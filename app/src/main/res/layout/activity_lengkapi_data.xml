@@ -116,6 +116,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="30dp"
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:spinnerMode="dropdown" />
@@ -145,17 +147,17 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/spinner_custom"
                 android:orientation="horizontal">
-
                 <Spinner
                     android:id="@+id/jenis_kelamin_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="30dp"
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:spinnerMode="dropdown" />
-
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -239,6 +241,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="30dp"
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:spinnerMode="dropdown" />
@@ -299,6 +303,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="30dp"
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:spinnerMode="dropdown" />
@@ -378,6 +384,8 @@
                     android:id="@+id/status_rumah"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
@@ -482,6 +490,8 @@
                 <Spinner
                     android:id="@+id/propinsi_spinner"
                     android:layout_width="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
@@ -517,6 +527,8 @@
                 <Spinner
                     android:id="@+id/kabupaten_spinner"
                     android:layout_width="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
@@ -552,6 +564,8 @@
                 <Spinner
                     android:id="@+id/kecamatan_spinner"
                     android:layout_width="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
@@ -587,6 +601,8 @@
                 <Spinner
                     android:id="@+id/kelurahan_spinner"
                     android:layout_width="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
@@ -622,6 +638,8 @@
                 <Spinner
                     android:id="@+id/kode_pos_spinner"
                     android:layout_width="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
@@ -675,6 +693,8 @@
                     android:id="@+id/status_hubungan_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"

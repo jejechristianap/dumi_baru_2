@@ -582,8 +582,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="@dimen/marginTop10dp"
                     android:background="@drawable/button_custom_2"
                     android:backgroundTint="#F1DED8"
                     android:gravity="left"
@@ -619,7 +619,7 @@
                         android:textColor="@android:color/black"
                         android:layout_marginTop="2dp"
                         android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
+                        android:layout_marginEnd="@dimen/marginTop10dp"
                         app:autoSizeMinTextSize="6sp"
                         app:autoSizeTextType="uniform"
                         tools:autoSizeMaxTextSize="12sp"
@@ -658,7 +658,7 @@
                         android:layout_height="50dp"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="15dp"
-                        android:src="@drawable/ic_pelni" />
+                        android:src="@drawable/ic_bumn" />
 
                     <TextView
                         android:layout_width="match_parent"

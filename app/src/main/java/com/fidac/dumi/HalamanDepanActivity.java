@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fidac.dumi.api.PropinsiInterface;
@@ -18,19 +19,35 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HalamanDepanActivity extends AppCompatActivity {
-    private Button daftarButton;
-    private Button masukButton;
-    private Button getPropinsiBt;
+    private Button asnButton;
+    private Button bumnButton;
+    private Button pensiunButton;
+    private TextView masukTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_halaman_depan);
 
-        daftarButton = findViewById(R.id.daftar_button);
-        daftarButton.setOnClickListener(v -> startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class)));
-        masukButton = findViewById(R.id.masuk_button);
-        masukButton.setOnClickListener(v -> startActivity(new Intent(HalamanDepanActivity.this, MasukActivity.class)));
+        asnButton = findViewById(R.id.asn_akftif_button_daftar);
+        asnButton.setOnClickListener(v ->
+                startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class)));
+
+        bumnButton = findViewById(R.id.bumn_button_daftar);
+        bumnButton.setOnClickListener(v ->
+                startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class)));
+
+        pensiunButton = findViewById(R.id.pensiun_button_daftar);
+        pensiunButton.setOnClickListener(v -> {
+            startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class));
+
+        });
+
+        masukTv = findViewById(R.id.masuk_tv);
+        masukTv.setOnClickListener(v -> {
+            startActivity(new Intent(HalamanDepanActivity.this, MasukActivity.class));
+
+        });
 
 
     }

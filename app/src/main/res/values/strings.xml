@@ -190,5 +190,11 @@
     <string name="no_rek">No. Rekening</string>
     <string name="norekcontoh">Contoh 23412xxxxx</string>
     <string name="nama_pemilik_rekening">Nama Pemilik Rekening</string>
+    <string name="daftar_sebagai">Daftar Sebagai</string>
+    <string name="asn_aktif">ASN Aktif</string>
+    <string name="pegawai_bumn">Pegawai BUMN</string>
+    <string name="pensiun_asn">Pensiunan ASN</string>
+    <string name="sudah_punya_akun">Sudah punya akun? Masuk di sini</string>
+    <string name="pinjam_dumi">Pinjam DUMI</string>
 
 </resources>

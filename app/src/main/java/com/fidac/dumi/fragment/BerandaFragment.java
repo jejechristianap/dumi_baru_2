@@ -23,9 +23,6 @@ import com.fidac.dumi.LihatSemuaActivity;
 import com.fidac.dumi.R;
 import com.fidac.dumi.jenispinjaman.PinjamanKilatActivity;
 import com.fidac.dumi.jenispinjaman.PinjamanRegularActivity;
-import com.fidac.dumi.model.SharedPrefManager;
-import com.fidac.dumi.model.User;
-
 
 public class BerandaFragment extends Fragment {
 
@@ -43,12 +40,8 @@ public class BerandaFragment extends Fragment {
         Button dumiBumnButton = view.findViewById(R.id.dumi_bumn_button);
         LinearLayout isiPulsaLl = view.findViewById(R.id.isi_pulsa_ll);
 
-        /*TextView userIdTv = view.findViewById(R.id.user_id);
-        TextView userNipTv = view.findViewById(R.id.user_nip);
-        TextView userEmailTv = view.findViewById(R.id.user_email);
-        TextView userNama = view.findViewById(R.id.user_nama);*/
 
-        Toast toastPensiun= Toast.makeText(getActivity(),
+        Toast toastPensiun  = Toast.makeText(getActivity(),
                 "Mohon maaf ini pinjaman ini khusus untuk pengguna Pensiun", Toast.LENGTH_SHORT);
         toastPensiun.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         View toastV = toastPensiun.getView();
@@ -77,8 +70,8 @@ public class BerandaFragment extends Fragment {
 
         dumiKilatButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanKilatActivity.class)));
         dumiRegularButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanRegularActivity.class)));
-        dumiPensiunButton.setOnClickListener(v -> toastPensiun.show());
-        dumiBumnButton.setOnClickListener(v -> toastBumn.show());
+        dumiPensiunButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanKilatActivity.class)));
+        dumiBumnButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanRegularActivity.class)));
 
         return view;
     }

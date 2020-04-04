@@ -296,9 +296,9 @@ public class DaftarActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                dataNipLl.setVisibility(View.GONE);
+//                dataNipLl.setVisibility(View.GONE);
 //                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-                Toast.makeText(DaftarActivity.this, "Something wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DaftarActivity.this, "Session Timeout", Toast.LENGTH_SHORT).show();
                 Log.d("Error", "onFailure: " + t.getMessage());
                 nipCheckBox.setChecked(false);
                 pDialog.dismiss();
