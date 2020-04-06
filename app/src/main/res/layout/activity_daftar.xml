@@ -37,7 +37,7 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="40sp"
                 tools:autoSizeStepGranularity="1sp" />
-            <!--<RelativeLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="32dp"
@@ -45,7 +45,7 @@
                 android:background="@drawable/spinner_custom"
                 android:orientation="horizontal">
                 <Spinner
-                    android:id="@+id/pns_nonpns_spinner"
+                    android:id="@+id/daftar_sebagai_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -60,7 +60,7 @@
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_arrow_down24dp" />
-            </RelativeLayout>-->
+            </RelativeLayout>
             <LinearLayout
                 android:id="@+id/cek_nip_layout"
                 android:layout_marginTop="24dp"

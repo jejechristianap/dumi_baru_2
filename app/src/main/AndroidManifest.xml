@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".BankActivity"></activity>
         <activity android:name=".akun.RincianAkunActivity" />
         <activity android:name=".jenispinjaman.PinjamanPensiunActivity" />
@@ -40,6 +41,16 @@
         <activity android:name=".DaftarActivity" />
         <activity android:name=".MasukActivity" />
         <activity android:name=".MainActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.fidac.dumi.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
     </application>
 
 </manifest>

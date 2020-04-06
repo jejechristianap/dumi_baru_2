@@ -18,93 +18,67 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
             android:orientation="vertical">
-            <LinearLayout
-                android:id="@+id/linearLayout2"
+
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/iv_ktp"
+                android:layout_marginTop="50dp"
+                android:layout_width="300dp"
+                android:layout_height="220dp"
+                app:srcCompat="@drawable/ktp_frame" />
+
+            <Button
+                android:id="@+id/ktp_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:orientation="vertical"
-                android:weightSum="2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:gravity="center"
-                    android:layout_weight="1.5">
-                    <ImageView
-                        android:id="@+id/iv_ktp"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        app:srcCompat="@drawable/ktp" />
-                </LinearLayout>
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="64dp"
+                android:background="@drawable/button_design_login_register"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/foto_ktp"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="73dp"
+                tools:layout_editor_absoluteY="493dp" />
 
-                <Button
-                    android:id="@+id/ktp_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_weight="0.5"
-                    android:background="@drawable/button_design_login_register"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/foto_ktp"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    tools:layout_editor_absoluteX="73dp"
-                    tools:layout_editor_absoluteY="493dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/iv_selfi"
                 android:layout_marginTop="64dp"
-                android:orientation="vertical"
-                android:weightSum="2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:gravity="center"
-                    android:layout_weight="1.5">
-                    <ImageView
-                        android:id="@+id/iv_selfi"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        app:srcCompat="@drawable/selfie_ktp" />
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                app:srcCompat="@drawable/selfie_ktp" />
 
-                </LinearLayout>
 
-                <Button
-                    android:id="@+id/selfi_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_weight="0.5"
-                    android:background="@drawable/button_design_login_register"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/foto_selfi"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
-            </LinearLayout>
+
+            <Button
+                android:id="@+id/selfi_button"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginEnd="64dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/button_design_login_register"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/foto_selfi"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
             <Button
                 android:visibility="gone"
                 android:id="@+id/konfirmasi_nomor_telp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
+                android:layout_marginBottom="50dp"
                 android:layout_weight="0.5"
                 android:background="@drawable/button_design_login_register"
                 android:fontFamily="sans-serif-medium"
@@ -114,11 +88,4 @@
                 android:textSize="20sp" />
         </LinearLayout>
     </ScrollView>
-
-
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

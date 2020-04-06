@@ -66,7 +66,7 @@ public class DaftarActivity extends AppCompatActivity {
 
     private String[] title = {"Tanpa Gelar","D-1","D-2","D-3", "D-4", "S-1", "S-2", "S-3"};
     private String[] agama = {"Islam", "Kristen", "Khatolik", "Budha", "Hindu", "Konghucu"};
-    private String[] instansi = {"Pilih Mitra", "PNS", "Non-PNS"};
+    private String[] instansi = {"Pilih Mitra", "ASN AKTIF", "BUMN", "ASN PENSIUN"};
 
     private SharedPreferences.Editor editor;
     private SharedPreferences pref;

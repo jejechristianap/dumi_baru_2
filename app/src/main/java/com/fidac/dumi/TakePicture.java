@@ -4,16 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.content.FileProvider;
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -21,16 +22,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.fidac.dumi.api.RegisterInterface;
 import com.fidac.dumi.api.UploadImageInterface;
 import com.fidac.dumi.retrofit.RetrofitClient;
-import com.fidac.dumi.util.FileUtils;
-
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import id.zelory.compressor.Compressor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -41,25 +41,31 @@ import retrofit2.Response;
 
 public class TakePicture extends AppCompatActivity {
 
-    private static final int PERMISSION_CODE_KTP = 1000;
-    private static final int IMAGE_CAPTURE_CODE_KTP = 1001;
-    private static final int PERMISSION_CODE_SELFI = 1002;
-    private static final int IMAGE_CAPTURE_CODE_SELFI = 1003;
     private ImageView imgKtpIv, imgSelfiIv;
     private Button ktpButton, selfiButton, konfirmasiButton;
-
     private SharedPreferences pref;
-    ProgressDialog pDialog;
 
     private Uri imgKtp, imgSelfi;
-    boolean ktp = false;
-    boolean selfi = false;
-    String filePath = "";
+    private boolean ktp = false;
+    private boolean selfi = false;
+    private String currentPhotoPathKtp, currentPhotoPathSelfi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_picture);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if(checkSelfPermission(Manifest.permission.CAMERA) ==
+                    PackageManager.PERMISSION_DENIED ||
+                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                            PackageManager.PERMISSION_DENIED){
+                String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                requestPermissions(permission, 1);
+            }
+        }
+
+
         pref = getApplicationContext().getSharedPreferences("Daftar", 0 );
         imgKtpIv = findViewById(R.id.iv_ktp);
         imgSelfiIv = findViewById(R.id.iv_selfi);
@@ -67,40 +73,191 @@ public class TakePicture extends AppCompatActivity {
         selfiButton = findViewById(R.id.selfi_button);
         konfirmasiButton = findViewById(R.id.konfirmasi_nomor_telp);
         ktpButton.setOnClickListener(v -> {
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                if(checkSelfPermission(Manifest.permission.CAMERA) ==
-                        PackageManager.PERMISSION_DENIED ||
-                        checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                                PackageManager.PERMISSION_DENIED){
-                    String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                    requestPermissions(permission, PERMISSION_CODE_KTP);
-                } else {
-                    openCameraKtp();
-                }
-            } else {
-                openCameraKtp();
-            }
+            takeImgKtp();
         });
         selfiButton.setOnClickListener(v ->{
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                if(checkSelfPermission(Manifest.permission.CAMERA) ==
-                        PackageManager.PERMISSION_DENIED ||
-                        checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                                PackageManager.PERMISSION_DENIED){
-                    String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                    requestPermissions(permission, PERMISSION_CODE_SELFI);
-                } else {
-                    openCameraSelfi();
-                }
-            } else {
-                openCameraSelfi();
-            }
+           takeImgSelfi();
         });
         konfirmasiButton.setOnClickListener(v -> {
-//            uploadFile("197301092000032001", imgKtp, imgSelfi);
-            regisUser();
+            uploadFile();
+//            regisUser();
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(ktp && selfi){
+
+            selfiButton.setBackgroundResource(R.drawable.button_masuk);
+            konfirmasiButton.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /*Take Image ktp*/
+    private void takeImgKtp() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFileKtp();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                ktp = true;
+                imgKtp = FileProvider.getUriForFile(this,
+                        "com.fidac.dumi.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgKtp);
+                startActivityForResult(takePictureIntent, 1);
+            }
+        }
+    }
+    /*Take Image selfi*/
+    private void takeImgSelfi() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFileSelfi();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                selfi = true;
+                imgSelfi = FileProvider.getUriForFile(this,
+                        "com.fidac.dumi.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgSelfi);
+                startActivityForResult(takePictureIntent, 2);
+            }
+        }
+    }
+
+    /* Create File path for image ktp */
+    private File createImageFileKtp() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "KTP_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPathKtp = image.getAbsolutePath();
+        return image;
+    }
+
+    /* Create File path for image selfi */
+    private File createImageFileSelfi() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "SELFI_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPathSelfi = image.getAbsolutePath();
+        return image;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case 1:
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+
+                } else {
+                    Toast.makeText(this, "Permission Denied...", Toast.LENGTH_SHORT).show();
+                }
+            break;
+        }
+    }
+    @SuppressLint("ResourceAsColor")
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+//            Toast.makeText(this, "data: " + data.getData(), Toast.LENGTH_SHORT).show();
+            switch (requestCode){
+                case 1:
+                    imgKtpIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    imgKtpIv.setImageURI(Uri.parse(currentPhotoPathKtp));
+                    ktpButton.setBackgroundResource(R.drawable.button_masuk);
+                    ktpButton.setTextColor(R.color.colorBlue);
+                    Log.d("KTP", "onActivityResult: " + currentPhotoPathKtp);
+//                    ImageCropFunction();
+
+                    break;
+                case 2:
+                    imgSelfiIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    imgSelfiIv.setImageURI(Uri.parse(currentPhotoPathSelfi));
+                    selfiButton.setBackgroundResource(R.drawable.button_masuk);
+                    selfiButton.setTextColor(R.color.colorBlue);
+                    Log.d("SELFI", "onActivityResult: " + currentPhotoPathSelfi);
+                    break;
+
+            }
+        }
+    }
+
+    /* Upload Image to API */
+    private void uploadFile() {
+
+        String nipBaru = pref.getString("nip", null);
+        // create upload service client
+        UploadImageInterface service = RetrofitClient.getClient().create(UploadImageInterface.class);
+
+
+        RequestBody nip = RequestBody.create(MediaType.parse("text/plain"), nipBaru);
+
+        File fileKtp  = new File(currentPhotoPathKtp);
+        File fileSelfi = new File(currentPhotoPathSelfi);
+
+        RequestBody fileReqBodyKtp = RequestBody.create(MediaType.parse("image/*"), fileKtp);
+        RequestBody fileReqBodySelfi = RequestBody.create(MediaType.parse("image/*"), fileSelfi);
+
+
+
+        // MultipartBody.Part is used to send also the actual param name
+        MultipartBody.Part bodyKtp = MultipartBody.Part.createFormData("image_ktp", currentPhotoPathKtp, fileReqBodyKtp);
+        MultipartBody.Part bodySelfi = MultipartBody.Part.createFormData("image_selfi", currentPhotoPathSelfi, fileReqBodySelfi);
+
+        // finally, execute the request
+        Call<ResponseBody> call = service.uploadImages(nip, bodyKtp, bodySelfi);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.v("Upload", "success" + response.body().toString());
+                Toast.makeText(TakePicture.this, "Upload Berhasil", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("Upload error:", t.getMessage());
+                Toast.makeText(TakePicture.this, "Mohon maaf terjadi kesalahan, silahkan coba lagi", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    /* Upload user data to API */
     public void regisUser(){
 
 
@@ -173,13 +330,8 @@ public class TakePicture extends AppCompatActivity {
             }
         });
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(ktp && selfi){
-            konfirmasiButton.setVisibility(View.VISIBLE);
-        }
-    }
+
+    /* Back button dialog */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitByBackKey();
@@ -202,115 +354,4 @@ public class TakePicture extends AppCompatActivity {
                 })
                 .show();
     }
-
-    private void openCameraKtp() {
-        ContentValues values = new ContentValues();
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        values.put(MediaStore.Images.Media.TITLE, "ktp_"+timeStamp);
-        values.put(MediaStore.Images.Media.DESCRIPTION, "From Camera");
-        imgKtp = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgKtp);
-        startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE_KTP);
-    }
-    private void openCameraSelfi() {
-        ContentValues values = new ContentValues();
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        values.put(MediaStore.Images.Media.TITLE, "selfi_"+timeStamp);
-        values.put(MediaStore.Images.Media.DESCRIPTION, "From Camera");
-        imgSelfi = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgSelfi);
-//        cameraIntent.putExtra()
-        startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE_SELFI);
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
-            case PERMISSION_CODE_KTP: {
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    openCameraKtp();
-                } else {
-                    Toast.makeText(this, "Permission Denied...", Toast.LENGTH_SHORT).show();
-                }
-            }
-            case PERMISSION_CODE_SELFI: {
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    openCameraSelfi();
-                } else {
-                    Toast.makeText(this, "Permission Denied...", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK){
-//            Toast.makeText(this, "data: " + data.getData(), Toast.LENGTH_SHORT).show();
-            switch (requestCode){
-                case IMAGE_CAPTURE_CODE_KTP:
-                    imgKtpIv.setImageURI(imgKtp);
-                    ktp = true;
-                    break;
-                case IMAGE_CAPTURE_CODE_SELFI:
-                    imgSelfiIv.setImageURI(imgSelfi);
-                    selfi = true;
-                    break;
-            }
-        }
-    }
-
-    /*private void uploadFile(String nip, Uri ktp, Uri selfi) {
-        // create upload service client
-        UploadImageInterface service = RetrofitClient.getClient().create(UploadImageInterface.class);
-
-        // https://github.com/iPaulPro/aFileChooser/blob/master/aFileChooser/src/com/ipaulpro/afilechooser/utils/FileUtils.java
-        // use the FileUtils to get the actual file by uri
-        File file = FileUtils.getFile(this, ktp);
-
-        // create RequestBody instance from file
-        RequestBody requestFileKtp =
-                RequestBody.create(
-                        MediaType.parse(getContentResolver().getType(ktp)),
-                        file
-                );
-        RequestBody requestFileSelfi =
-                RequestBody.create(
-                        MediaType.parse(getContentResolver().getType(selfi)),
-                        file
-                );
-
-        // MultipartBody.Part is used to send also the actual file name
-        MultipartBody.Part bodyKtp =
-                MultipartBody.Part.createFormData("ktp", file.getName(), requestFileKtp);
-        MultipartBody.Part bodySelfi =
-                MultipartBody.Part.createFormData("selfi", file.getName(), requestFileSelfi);
-
-        // add another part within the multipart request
-        String descriptionString = "foto ktp";
-        RequestBody description =
-                RequestBody.create(
-                        okhttp3.MultipartBody.FORM, descriptionString);
-
-        // finally, execute the request
-        Call<ResponseBody> call = service.uploadImages(requestFileKtp, bodyKtp, bodySelfi);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call,
-                                   Response<ResponseBody> response) {
-                Log.v("Upload", "success");
-                Toast.makeText(TakePicture.this, "Yeah", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("Upload error:", t.getMessage());
-                Toast.makeText(TakePicture.this, "NOPE", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
 }

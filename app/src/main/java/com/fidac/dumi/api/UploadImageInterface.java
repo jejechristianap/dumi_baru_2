@@ -15,10 +15,10 @@ import retrofit2.http.PartMap;
 
 public interface UploadImageInterface {
 
-    @FormUrlEncoded
+
     @Multipart
     @POST("user/update")
-    Call<ResponseBody> uploadImages(@Field("nipBaru") String nip,
+    Call<ResponseBody> uploadImages(@Part("nipBaru") RequestBody nipBaru,
                                    @Part MultipartBody.Part image_ktp,
                                    @Part MultipartBody.Part image_selfi);
 

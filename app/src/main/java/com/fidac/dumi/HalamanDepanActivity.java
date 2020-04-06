@@ -19,9 +19,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HalamanDepanActivity extends AppCompatActivity {
-    private Button asnButton;
-    private Button bumnButton;
-    private Button pensiunButton;
+    private Button daftarButton;
+    private Button masukButton;
     private TextView masukTv;
 
     @Override
@@ -29,27 +28,16 @@ public class HalamanDepanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_halaman_depan);
 
-        asnButton = findViewById(R.id.asn_akftif_button_daftar);
-        asnButton.setOnClickListener(v ->
-                startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class)));
+        daftarButton = findViewById(R.id.asn_akftif_button_daftar);
+        daftarButton.setOnClickListener(v ->
+                startActivity(new Intent(HalamanDepanActivity.this, TakePicture.class)));
 
-        bumnButton = findViewById(R.id.bumn_button_daftar);
-        bumnButton.setOnClickListener(v ->
-                startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class)));
 
-        pensiunButton = findViewById(R.id.pensiun_button_daftar);
-        pensiunButton.setOnClickListener(v -> {
-            startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class));
 
-        });
-
-        masukTv = findViewById(R.id.masuk_tv);
-        masukTv.setOnClickListener(v -> {
+        masukButton = findViewById(R.id.masuk_button);
+        masukButton.setOnClickListener(v -> {
             startActivity(new Intent(HalamanDepanActivity.this, MasukActivity.class));
-
         });
-
-
     }
 
 
