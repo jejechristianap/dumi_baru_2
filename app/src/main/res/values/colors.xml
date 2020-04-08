@@ -5,10 +5,18 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhite">#FFF</color>
     <color name="colorBlue">#1560DB</color>
+    <color name="lightBlue">#D8EAF1</color>
+    <color name="black">#000000</color>
 
-    <color name="grey_100">#F5F5F5</color>
+    <color name="blueTrans">#68D0FA</color>
+
+    <color name="grey">#969897</color>
+
+    <color name="grey_100">#EAEAEA</color>
     <color name="grey_300">#E0E0E0</color>
-    <color name="grey_500">#9E9E9E</color>
+    <color name="grey_500">#BDBDBD</color>
+
+    <color name="grey_700">#747474</color>
 
     <!--Switch Color-->
     <color name="disable_forground_grey">#42221f1f</color>

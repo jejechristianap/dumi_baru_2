@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".akun.PusatBantuanActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/todo"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/bantuan"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.432" />
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--Subtitle-->
+            <LinearLayout
+                android:background="@color/colorBlue"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="@string/bisa_kami_bantu"
+                    android:textColor="@color/colorWhite"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="23sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"/>
+
+            </LinearLayout>
+
+            <!--01-->
+            <LinearLayout
+                android:id="@+id/pilihan_satu_ll"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.3"
+                    android:text="@string/one"
+                    android:textColor="@android:color/black"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="23sp"
+                    tools:autoSizeStepGranularity="1sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="2.4"
+                    android:text="@string/apa_itu_dumi"
+                    android:textColor="@android:color/black"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="18sp"
+                    tools:autoSizeStepGranularity="1sp" />
+
+                <ImageView
+                    android:id="@+id/arrow1"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.3"
+                    android:contentDescription="@string/arrow_down"
+                    android:src="@drawable/ic_arrow_down24dp" />
+
+            </LinearLayout>
+            <!--01 Description-->
+            <LinearLayout
+                android:id="@+id/deskripsi_satu_ll"
+                android:background="@color/lightBlue"
+                android:visibility="gone"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <TextView
+                    android:text="@string/bisa_kami_bantu"
+                    android:textColor="@color/grey_700"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="@dimen/marginTop10dp"
+                    android:layout_marginEnd="20dp"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="23sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="#D2CECE" />
+
+            <!--02-->
+            <LinearLayout
+                android:id="@+id/pilihan_dua_ll"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.3"
+                    android:text="@string/two"
+                    android:textColor="@android:color/black"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="23sp"
+                    tools:autoSizeStepGranularity="1sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="2.4"
+                    android:text="@string/siapa_saja_yang_dapat"
+                    android:textColor="@android:color/black"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="18sp"
+                    tools:autoSizeStepGranularity="1sp" />
+
+                <ImageView
+                    android:id="@+id/arrow2"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.3"
+                    android:contentDescription="@string/arrow_down"
+                    android:src="@drawable/ic_arrow_down24dp" />
+
+            </LinearLayout>
+            <!--02 Description-->
+            <LinearLayout
+                android:id="@+id/deskripsi_dua_ll"
+                android:background="@color/lightBlue"
+                android:visibility="gone"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <TextView
+                    android:text="@string/bisa_kami_bantu"
+                    android:textColor="@color/grey_700"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="@dimen/marginTop10dp"
+                    android:layout_marginEnd="20dp"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="23sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="#D2CECE" />
+
+            <!--03-->
+            <LinearLayout
+                android:id="@+id/pilihan_tiga_ll"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.3"
+                    android:text="@string/three"
+                    android:textColor="@android:color/black"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="23sp"
+                    tools:autoSizeStepGranularity="1sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="2.4"
+                    android:text="@string/bagaimana"
+                    android:textColor="@android:color/black"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="18sp"
+                    tools:autoSizeStepGranularity="1sp" />
+
+                <ImageView
+                    android:id="@+id/arrow3"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.3"
+                    android:contentDescription="@string/arrow_down"
+                    android:src="@drawable/ic_arrow_down24dp" />
+
+            </LinearLayout>
+            <!--03 Description-->
+            <LinearLayout
+                android:id="@+id/deskripsi_tiga_ll"
+                android:background="@color/lightBlue"
+                android:visibility="gone"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <TextView
+                    android:text="@string/bisa_kami_bantu"
+                    android:textColor="@color/grey_700"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="@dimen/marginTop10dp"
+                    android:layout_marginEnd="20dp"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="23sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="#D2CECE" />
+
+            <!--04-->
+            <LinearLayout
+                android:id="@+id/pilihan_empat_ll"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.3"
+                    android:text="@string/four"
+                    android:textColor="@android:color/black"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="23sp"
+                    tools:autoSizeStepGranularity="1sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="2.4"
+                    android:text="@string/cara_jadi_mitra"
+                    android:textColor="@android:color/black"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="18sp"
+                    tools:autoSizeStepGranularity="1sp" />
+
+                <ImageView
+                    android:id="@+id/arrow4"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.3"
+                    android:contentDescription="@string/arrow_down"
+                    android:src="@drawable/ic_arrow_down24dp" />
+            </LinearLayout>
+            <!--04 Description-->
+            <LinearLayout
+                android:id="@+id/deskripsi_empat_ll"
+                android:background="@color/lightBlue"
+                android:visibility="gone"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <TextView
+                    android:text="@string/bisa_kami_bantu"
+                    android:textColor="@color/grey_700"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="@dimen/marginTop10dp"
+                    android:layout_marginEnd="20dp"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="23sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="#D2CECE" />
+
+            <!--05-->
+            <LinearLayout
+                android:id="@+id/pilihan_lima_ll"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.3"
+                    android:text="@string/five"
+                    android:textColor="@android:color/black"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="23sp"
+                    tools:autoSizeStepGranularity="1sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="2.4"
+                    android:text="@string/proses_pinjaman"
+                    android:textColor="@android:color/black"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="18sp"
+                    tools:autoSizeStepGranularity="1sp" />
+
+                <ImageView
+                    android:id="@+id/arrow5"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.3"
+                    android:contentDescription="@string/arrow_down"
+                    android:src="@drawable/ic_arrow_down24dp" />
+            </LinearLayout>
+            <!--05 Description-->
+            <LinearLayout
+                android:id="@+id/deskripsi_lima_ll"
+                android:background="@color/lightBlue"
+                android:visibility="gone"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <TextView
+                    android:text="@string/bisa_kami_bantu"
+                    android:textColor="@color/grey_700"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="@dimen/marginTop10dp"
+                    android:layout_marginEnd="20dp"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="23sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="#D2CECE" />
+
+            <LinearLayout
+                android:layout_margin="20dp"
+                android:padding="5dp"
+                android:background="@color/grey_100"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--Sub Title Hubungi Kami-->
+                <TextView
+                    android:text="@string/hubungi_kami"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="@dimen/marginTop10dp"
+                    android:layout_marginEnd="20dp"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="15sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"/>
+                <!--Email Kantor-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="@dimen/marginTop10dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:src="@drawable/ic_mail"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="0.3"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="23sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="2.4"
+                        android:text="@string/email_kantor"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="18sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+                <!--Telpon Kantor-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:src="@drawable/ic_mail"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="0.3"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="23sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="2.4"
+                        android:text="@string/no_telp_kantor"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="18sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+                <!--WA Kantor-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:src="@drawable/ic_mail"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="0.3"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="23sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="2.4"
+                        android:text="@string/wa_kantor"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="18sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+
+                <!--Sub Title Operasional-->
+                <TextView
+                    android:text="@string/jam_operasional"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="15sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="@dimen/marginTop10dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:src="@drawable/ic_mail"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="0.3"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="23sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="2.4"
+                        android:text="@string/hari_operasional"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="18sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+                <!--Sub Title Alamat-->
+                <TextView
+                    android:text="@string/alamat"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="15sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="@dimen/marginTop10dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:src="@drawable/ic_mail"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="0.3"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="23sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="2.4"
+                        android:text="@string/alamat_kantor"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="18sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_marginBottom="55dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

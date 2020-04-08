@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 .setMessage("Apa anda yakin ingin keluar?")
                 .setPositiveButton("Ya", (arg0, arg1) -> {
                     finish();
-                    startActivity(new Intent());
+                    startActivity(new Intent(MainActivity.this, HalamanDepanActivity.class));
                     //close();
                 })
                 .setNegativeButton("Tidak", (arg0, arg1) -> {

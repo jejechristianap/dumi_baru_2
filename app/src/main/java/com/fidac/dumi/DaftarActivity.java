@@ -11,10 +11,13 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -68,6 +71,9 @@ public class DaftarActivity extends AppCompatActivity {
     private String[] agama = {"Islam", "Kristen", "Khatolik", "Budha", "Hindu", "Konghucu"};
     private String[] instansi = {"Pilih Mitra", "ASN AKTIF", "BUMN", "ASN PENSIUN"};
 
+    private Spinner instansiSpinner;
+    private ArrayAdapter<CharSequence> instansiAdapter;
+
     private SharedPreferences.Editor editor;
     private SharedPreferences pref;
 
@@ -91,6 +97,11 @@ public class DaftarActivity extends AppCompatActivity {
 
         pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
         editor = pref.edit();
+
+        instansiSpinner = findViewById(R.id.daftar_sebagai_spinner);
+        instansiAdapter = new ArrayAdapter<>(DaftarActivity.this, R.layout.spinner_text, instansi);
+        instansiAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+        instansiSpinner.setAdapter(instansiAdapter);
 
         pDialog = new ProgressDialog(DaftarActivity.this);
 

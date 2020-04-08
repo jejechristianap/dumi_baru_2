@@ -176,6 +176,7 @@
                 android:background="#D2CECE"/>
 
             <LinearLayout
+                android:id="@+id/pusat_bantua_ll"
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"

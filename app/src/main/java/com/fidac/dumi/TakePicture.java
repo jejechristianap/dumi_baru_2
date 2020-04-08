@@ -245,8 +245,10 @@ public class TakePicture extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
                 Log.v("Upload", "success" + response.body().toString());
                 Toast.makeText(TakePicture.this, "Upload Berhasil", Toast.LENGTH_SHORT).show();
+                regisUser();
             }
 
             @Override

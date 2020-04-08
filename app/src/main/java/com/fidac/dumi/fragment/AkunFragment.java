@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.fidac.dumi.HalamanDepanActivity;
 import com.fidac.dumi.R;
+import com.fidac.dumi.akun.PusatBantuanActivity;
 import com.fidac.dumi.akun.RincianAkunActivity;
 
 
@@ -24,10 +25,17 @@ public class AkunFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_akun, container, false);
 
         LinearLayout rincianAkunLl = view.findViewById(R.id.rincian_akun_ll);
+        LinearLayout pusatBantuanLl = view.findViewById(R.id.pusat_bantua_ll);
         Button keluarButton = view.findViewById(R.id.keluar_button);
 
+        /*Rincian Akun*/
         rincianAkunLl.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), RincianAkunActivity.class));
+        });
+
+        /*Pusat Bantuan*/
+        pusatBantuanLl.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), PusatBantuanActivity.class));
         });
 
         keluarButton.setOnClickListener(v -> {

@@ -196,5 +196,24 @@
     <string name="pensiun_asn">Pensiunan ASN</string>
     <string name="sudah_punya_akun">Sudah punya akun? Masuk di sini</string>
     <string name="pinjam_dumi">Pinjam DUMI</string>
+    <string name="one">01.</string>
+    <string name="apa_itu_dumi">Apa Itu DUMI?</string>
+    <string name="arrow_down">arrow down</string>
+    <string name="bisa_kami_bantu">Halo, ada yang bisa kami bantu?</string>
+    <string name="two">02.</string>
+    <string name="siapa_saja_yang_dapat">Siapa saja yang dapat menggunakannya?</string>
+    <string name="three">03.</string>
+    <string name="bagaimana">Bagaimana cara kerjanya?</string>
+    <string name="four">04.</string>
+    <string name="cara_jadi_mitra">Bagaimana cara menjadi mitra?</string>
+    <string name="five">05.</string>
+    <string name="proses_pinjaman">Berapa lama proses pencairan pinjaman?</string>
+    <string name="hubungi_kami">Hubungi Kami</string>
+    <string name="email_kantor">cs@minjem.com</string>
+    <string name="no_telp_kantor">(021) 8088281 ext. 4218</string>
+    <string name="wa_kantor">+62 813-1582-3033 (WhatsApp)</string>
+    <string name="jam_operasional">Jam Operasional</string>
+    <string name="hari_operasional">Senin - Jumat (08.00 - 16.00 WIB)</string>
+    <string name="alamat_kantor">Gedung Badan Kepegawaian Negara\nJl. Mayjen Sutoyo no.12, Cililitan, Jakarta\nTimur, DKI Jakarta 13640</string>
 
 </resources>
