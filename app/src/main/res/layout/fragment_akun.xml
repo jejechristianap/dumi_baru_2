@@ -130,6 +130,7 @@
                 android:background="#D2CECE"/>
 
             <LinearLayout
+                android:id="@+id/kebijakan_privasi_ll"
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
@@ -223,6 +224,7 @@
                 android:background="#D2CECE"/>
 
             <LinearLayout
+                android:id="@+id/disclaimer_ll"
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"

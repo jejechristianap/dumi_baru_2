@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -14,10 +15,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +42,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;*/
+import com.fidac.dumi.akun.KebijakanPrivasiActivity;
 import com.fidac.dumi.api.CekNipBknInterface;
 import com.fidac.dumi.api.CekUserExist;
 import com.fidac.dumi.api.PropinsiInterface;
@@ -46,6 +51,7 @@ import com.fidac.dumi.retrofit.RetrofitClient;
 import org.json.JSONObject;
 import java.util.regex.Pattern;
 
+import io.reactivex.internal.operators.single.SingleDelayWithCompletable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,9 +73,10 @@ public class DaftarActivity extends AppCompatActivity {
     private Button lanjutButton, testButton;
     private EditText emailEt, passEt, ulangiPassEt;
 
-    private String[] title = {"Tanpa Gelar","D-1","D-2","D-3", "D-4", "S-1", "S-2", "S-3"};
-    private String[] agama = {"Islam", "Kristen", "Khatolik", "Budha", "Hindu", "Konghucu"};
     private String[] instansi = {"Pilih Mitra", "ASN AKTIF", "BUMN", "ASN PENSIUN"};
+
+    private TextView syaratTv;
+    private Switch setujuSwitch;
 
     private Spinner instansiSpinner;
     private ArrayAdapter<CharSequence> instansiAdapter;
@@ -97,6 +104,20 @@ public class DaftarActivity extends AppCompatActivity {
 
         pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
         editor = pref.edit();
+
+        syaratTv = findViewById(R.id.setuju_tv);
+        syaratTv.setText(Html.fromHtml(getString(R.string.saya_setuju)));
+        syaratTv.setOnClickListener(v -> startActivity(new Intent(this, KebijakanPrivasiActivity.class)));
+        setujuSwitch = findViewById(R.id.setuju_switch);
+        setujuSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked){
+                lanjutButton.setEnabled(true);
+                lanjutButton.setBackgroundResource(R.drawable.button_design_login_register);
+            } else {
+                lanjutButton.setEnabled(false);
+                lanjutButton.setBackgroundResource(R.drawable.button_lanjut_design);
+            }
+        });
 
         instansiSpinner = findViewById(R.id.daftar_sebagai_spinner);
         instansiAdapter = new ArrayAdapter<>(DaftarActivity.this, R.layout.spinner_text, instansi);
@@ -142,55 +163,52 @@ public class DaftarActivity extends AppCompatActivity {
             }
         });
 
-        lanjutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String nip = masukanNipEt.getText().toString();
-                String email = emailEt.getText().toString();
-                String pass = passEt.getText().toString();
-                String ulangiPass = ulangiPassEt.getText().toString();
+        lanjutButton.setOnClickListener(v -> {
+            String nip = masukanNipEt.getText().toString();
+            String email = emailEt.getText().toString();
+            String pass = passEt.getText().toString();
+            String ulangiPass = ulangiPassEt.getText().toString();
 
-                /*Email Handling*/
-                if (TextUtils.isEmpty(email)) {
-                    emailEt.setError("Kolom ini tidak boleh kosong..");
-                    emailEt.requestFocus();
-                    return;
-                } else if (!EMAIL_ADDRESS_PATTERN.matcher(email).matches()) {
-                    emailEt.setError("Email tidak valid");
-                    emailEt.requestFocus();
-                    return;
-                } else {
-                    emailEt.setError(null);
-                }
-                /*Password Handling*/
-                if (TextUtils.isEmpty(pass)){
-                    passEt.setError("Kolom ini tidak boleh kosong..");
-                    passEt.requestFocus();
-                    return;
-                } else if(pass.length() < 6){
-                    passEt.setError("Password minimal 6 karakter");
-                    passEt.requestFocus();
-                    return;
-                } else {
-                    passEt.setError(null);
-                }
-                /*Check is password match*/
-                if (!ulangiPass.equals(pass)){
-                    ulangiPassEt.setError("Password tidak sama..");
-                    ulangiPassEt.requestFocus();
-                    return;
-                } else {
-                    ulangiPassEt.setError(null);
-                }
-
-                editor.putString("nip", nip);
-                editor.putString("email", email);
-                editor.putString("pass", pass);
-                editor.commit();
-
-                startActivity(new Intent(DaftarActivity.this, OtpVerify.class));
-
+            /*Email Handling*/
+            if (TextUtils.isEmpty(email)) {
+                emailEt.setError("Kolom ini tidak boleh kosong..");
+                emailEt.requestFocus();
+                return;
+            } else if (!EMAIL_ADDRESS_PATTERN.matcher(email).matches()) {
+                emailEt.setError("Email tidak valid");
+                emailEt.requestFocus();
+                return;
+            } else {
+                emailEt.setError(null);
             }
+            /*Password Handling*/
+            if (TextUtils.isEmpty(pass)){
+                passEt.setError("Kolom ini tidak boleh kosong..");
+                passEt.requestFocus();
+                return;
+            } else if(pass.length() < 6){
+                passEt.setError("Password minimal 6 karakter");
+                passEt.requestFocus();
+                return;
+            } else {
+                passEt.setError(null);
+            }
+            /*Check is password match*/
+            if (!ulangiPass.equals(pass)){
+                ulangiPassEt.setError("Password tidak sama..");
+                ulangiPassEt.requestFocus();
+                return;
+            } else {
+                ulangiPassEt.setError(null);
+            }
+
+            editor.putString("nip", nip);
+            editor.putString("email", email);
+            editor.putString("pass", pass);
+            editor.commit();
+
+            startActivity(new Intent(DaftarActivity.this, OtpVerify.class));
+
         });
 
 

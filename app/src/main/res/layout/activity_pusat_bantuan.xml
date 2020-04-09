@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/back_regular"
+        android:id="@+id/back_bantuan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/todo"
@@ -129,19 +129,20 @@
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="wrap_content">
                 <TextView
-                    android:text="@string/bisa_kami_bantu"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/marginTop10dp"
                     android:textColor="@color/grey_700"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="@dimen/marginTop10dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_weight="2.4"
+                    android:text="@string/bantuan1"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="23sp"
-                    tools:autoSizeStepGranularity="1sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"/>
+                    tools:autoSizeMaxTextSize="15sp"
+                    tools:autoSizeStepGranularity="1sp" />
+
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -207,19 +208,19 @@
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="wrap_content">
                 <TextView
-                    android:text="@string/bisa_kami_bantu"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/marginTop10dp"
                     android:textColor="@color/grey_700"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="@dimen/marginTop10dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_weight="2.4"
+                    android:text="@string/bantuan2"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="23sp"
-                    tools:autoSizeStepGranularity="1sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"/>
+                    tools:autoSizeMaxTextSize="15sp"
+                    tools:autoSizeStepGranularity="1sp" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -285,19 +286,19 @@
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="wrap_content">
                 <TextView
-                    android:text="@string/bisa_kami_bantu"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/marginTop10dp"
                     android:textColor="@color/grey_700"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="@dimen/marginTop10dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_weight="2.4"
+                    android:text="@string/bantuan3"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="23sp"
-                    tools:autoSizeStepGranularity="1sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"/>
+                    tools:autoSizeMaxTextSize="15sp"
+                    tools:autoSizeStepGranularity="1sp" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -362,19 +363,19 @@
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="wrap_content">
                 <TextView
-                    android:text="@string/bisa_kami_bantu"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/marginTop10dp"
                     android:textColor="@color/grey_700"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="@dimen/marginTop10dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_weight="2.4"
+                    android:text="@string/bantuan4"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="23sp"
-                    tools:autoSizeStepGranularity="1sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"/>
+                    tools:autoSizeMaxTextSize="15sp"
+                    tools:autoSizeStepGranularity="1sp" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -439,19 +440,19 @@
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="wrap_content">
                 <TextView
-                    android:text="@string/bisa_kami_bantu"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/marginTop10dp"
                     android:textColor="@color/grey_700"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="@dimen/marginTop10dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_weight="2.4"
+                    android:text="@string/bantuan5"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="23sp"
-                    tools:autoSizeStepGranularity="1sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"/>
+                    tools:autoSizeMaxTextSize="15sp"
+                    tools:autoSizeStepGranularity="1sp" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -494,7 +495,7 @@
                     android:weightSum="3">
 
                     <ImageView
-                        android:src="@drawable/ic_mail"
+                        android:src="@drawable/ic_email"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
@@ -530,7 +531,7 @@
                     android:weightSum="3">
 
                     <ImageView
-                        android:src="@drawable/ic_mail"
+                        android:src="@drawable/ic_phone"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
@@ -567,7 +568,7 @@
                     android:weightSum="3">
 
                     <ImageView
-                        android:src="@drawable/ic_mail"
+                        android:src="@drawable/ic_wa"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
@@ -618,7 +619,7 @@
                     android:weightSum="3">
 
                     <ImageView
-                        android:src="@drawable/ic_mail"
+                        android:src="@drawable/ic_clock"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
@@ -668,7 +669,7 @@
                     android:weightSum="3">
 
                     <ImageView
-                        android:src="@drawable/ic_mail"
+                        android:src="@drawable/ic_placeholder"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="5dp"

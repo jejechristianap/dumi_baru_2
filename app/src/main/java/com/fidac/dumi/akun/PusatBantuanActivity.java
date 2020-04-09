@@ -2,19 +2,21 @@ package com.fidac.dumi.akun;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.fidac.dumi.R;
+import com.fidac.dumi.fragment.AkunFragment;
 import com.google.android.material.internal.VisibilityAwareImageButton;
 
 public class PusatBantuanActivity extends AppCompatActivity {
 
     private LinearLayout pilihanSatuLl, pilihanDuaLl, pilihanTigaLl, pilihanEmpatLl, pilihanLimaLl;
     private LinearLayout deskripsiSatuLl, deskripsiDuaLl, deskripsiTigaLl, deskripsiEmpatLl, deskripsiLimaLl;
-    private ImageView arrow1, arrow2, arrow3, arrow4, arrow5;
+    private ImageView arrow1, arrow2, arrow3, arrow4, arrow5, backBantuanIv;
 
     private boolean satu, dua, tiga, empat, lima;
 
@@ -22,6 +24,8 @@ public class PusatBantuanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pusat_bantuan);
+
+        backBantuanIv = findViewById(R.id.back_bantuan);
 
         /*Iinit Pilihan*/
         pilihanSatuLl = findViewById(R.id.pilihan_satu_ll);
@@ -110,6 +114,8 @@ public class PusatBantuanActivity extends AppCompatActivity {
                 lima = false;
             }
         });
+
+        backBantuanIv.setOnClickListener(v -> finish());
 
     }
 }
