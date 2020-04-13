@@ -6,8 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -76,7 +74,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     android:autofillHints=""
-                    android:backgroundTint="@color/colorBlue"
+                    android:backgroundTint="@color/darkBlue"
                     android:ems="10"
                     android:hint="@string/nip"
                     android:inputType="number" />
@@ -102,7 +100,7 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="20dp"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:layout_width="match_parent"
@@ -120,7 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
+                android:backgroundTint="@color/darkBlue"
                 android:inputType="textEmailAddress"
                 android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
@@ -144,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
+                android:backgroundTint="@color/darkBlue"
                 android:inputType="textPassword"
                 android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
@@ -168,7 +166,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
+                android:backgroundTint="@color/darkBlue"
                 android:inputType="textPassword"
                 android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
@@ -193,6 +191,7 @@
                     android:layout_marginTop="@dimen/marginTop10dp"
                     android:id="@+id/setuju_switch"
                     android:layout_gravity="top"
+                    android:theme="@style/SCBSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -207,8 +206,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="15dp"/>
             </LinearLayout>
-
-
 
             <Button
                 android:enabled="false"
@@ -230,10 +227,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/daftar_password_et" />
         </LinearLayout>
-
-
-
-
         </LinearLayout>
 
     </ScrollView>

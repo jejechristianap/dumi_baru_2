@@ -115,7 +115,7 @@ public class DaftarActivity extends AppCompatActivity {
                 lanjutButton.setBackgroundResource(R.drawable.button_design_login_register);
             } else {
                 lanjutButton.setEnabled(false);
-                lanjutButton.setBackgroundResource(R.drawable.button_lanjut_design);
+                lanjutButton.setBackgroundResource(R.drawable.button_lanjut_design) ;
             }
         });
 

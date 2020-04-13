@@ -40,9 +40,6 @@ public class MasukActivity extends AppCompatActivity {
     private PreferenceHelper preferenceHelper;
     private TextView daftarDisiniTv;
 
-    Context mContext;
-    BaseApiService mApiService;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +54,8 @@ public class MasukActivity extends AppCompatActivity {
             loginUser();
         });
         daftarDisiniTv.setOnClickListener(v ->{
-            startActivity(new Intent(MasukActivity.this, HalamanDepanActivity.class));
+            finish();
+            startActivity(new Intent(MasukActivity.this, DaftarActivity.class));
         });
     }
     @Override
@@ -171,7 +169,7 @@ public class MasukActivity extends AppCompatActivity {
 
     }
 
-    private void parseLoginData(String response){
+    /*private void parseLoginData(String response){
         try {
             JSONObject jsonObject = new JSONObject(response);
             if (jsonObject.getString("status").equals("true")) {
@@ -207,8 +205,7 @@ public class MasukActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
+    }*/
     /*private void userLogin() {
         //first getting the values
         final String nip = nipEt.getText().toString();

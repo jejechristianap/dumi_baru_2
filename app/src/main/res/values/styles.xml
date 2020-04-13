@@ -35,8 +35,7 @@
     <!--Switch Theme-->
     <style name="SCBSwitch" parent="Theme.AppCompat.Light">
         <!-- active thumb & track color (30% transparency) -->
-        <item name="colorControlActivated">#46bdbf</item>
-
+        <item name="colorControlActivated">@color/darkBlue</item>
         <!-- inactive thumb color -->
         <item name="colorSwitchThumbNormal">#f1f1f1
         </item>
@@ -47,9 +46,9 @@
 
     <!--CheckBox Custom-->
     <style name="MyCheckbox" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
-        <item name="android:colorControlNormal">#46bdbf</item>
-        <item name="android:colorControlActivated">#46bdbf</item>
-        <item name="android:colorControlHighlight">#c51162</item>
+        <item name="android:colorControlNormal">@color/darkBlue</item>
+        <item name="android:colorControlActivated">@color/darkBlue</item>
+        <item name="android:colorControlHighlight">@color/darkBlue</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
     </style>
 
