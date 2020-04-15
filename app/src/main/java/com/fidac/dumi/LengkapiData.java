@@ -3,6 +3,7 @@ package com.fidac.dumi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,7 +15,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,11 +30,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import okhttp3.ResponseBody;
@@ -66,12 +72,25 @@ public class LengkapiData extends AppCompatActivity {
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
 
+    private ImageView pickDate;
+    private Calendar myCalendar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lengkapi_data);
         pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
         editor = pref.edit();
+
+        /*Calendar*/
+        myCalendar = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel();
+        };
 
         /*Jenis Kelamin*/
         jenisKelaminSpinner = findViewById(R.id.jenis_kelamin_spinner);
@@ -116,7 +135,9 @@ public class LengkapiData extends AppCompatActivity {
         noKtpEt = findViewById(R.id.no_ktp);
         namaLengkapEt = findViewById(R.id.nama_lengkap);
         tempatLahirEt = findViewById(R.id.tempat_lahir_et);
+        pickDate = findViewById(R.id.pick_date);
         tanggalLahirEt = findViewById(R.id.tanggal_lahir_et);
+        tanggalLahirEt.setEnabled(false);
         jumlahTanggunganEt = findViewById(R.id.jumlah_tanggungan_et);
         ketTitleEt = findViewById(R.id.ket_title);
         inskerKerjaEt = findViewById(R.id.insker_nama_et);
@@ -126,6 +147,15 @@ public class LengkapiData extends AppCompatActivity {
         namaPenanggungEt = findViewById(R.id.nama_lengkap_penanggung_et);
         noKtpPenanggungEt = findViewById(R.id.no_ktp_penanggung_et);
         namaIbuEt = findViewById(R.id.nama_gadis_ibu_et);
+
+
+
+        pickDate.setOnClickListener(v -> {
+            // TODO Auto-generated method stub
+            new DatePickerDialog(LengkapiData.this, date, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+        });
 
 
         lanjutButton = findViewById(R.id.lanjut_button_lengkapi_data);
@@ -146,6 +176,13 @@ public class LengkapiData extends AppCompatActivity {
         cekPropinsi();
     }
 
+    private void updateLabel() {
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        tanggalLahirEt.setText(sdf.format(myCalendar.getTime()));
+    }
+
     public void cekPropinsi() {
         /*Spinner init*/
         propinsiSpinner = findViewById(R.id.propinsi_spinner);
@@ -153,7 +190,6 @@ public class LengkapiData extends AppCompatActivity {
         kecSpinner = findViewById(R.id.kecamatan_spinner);
         kelSpinner = findViewById(R.id.kelurahan_spinner);
         kodePosSpinner = findViewById(R.id.kode_pos_spinner);
-
 
         /*Progress Dialog*/
         final ProgressDialog pDialog = new ProgressDialog(this);

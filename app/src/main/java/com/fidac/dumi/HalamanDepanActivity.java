@@ -30,7 +30,7 @@ public class HalamanDepanActivity extends AppCompatActivity {
 
         daftarButton = findViewById(R.id.asn_akftif_button_daftar);
         daftarButton.setOnClickListener(v ->
-                startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class)));
+                startActivity(new Intent(HalamanDepanActivity.this, LengkapiData.class)));
 
 
 

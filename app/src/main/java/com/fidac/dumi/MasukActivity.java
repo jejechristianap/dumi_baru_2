@@ -147,8 +147,10 @@ public class MasukActivity extends AppCompatActivity {
                             toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
                             toast.show();
                         }
+                        finish();
                         startActivity(new Intent(MasukActivity.this, MainActivity.class));
                     } else {
+                        pDialog.dismiss();
                         Toast.makeText(MasukActivity.this, "NIP/Password Salah!", Toast.LENGTH_SHORT).show();
                         nipEt.requestFocus();
                         passEt.requestFocus();

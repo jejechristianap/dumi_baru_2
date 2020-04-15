@@ -48,6 +48,7 @@ import com.fidac.dumi.api.CekUserExist;
 import com.fidac.dumi.api.PropinsiInterface;
 import com.fidac.dumi.retrofit.RetrofitClient;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.regex.Pattern;
 
@@ -102,6 +103,9 @@ public class DaftarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar);
 
+        LinearLayout ll = findViewById(R.id.email_password);
+        ll.setVisibility(View.GONE);
+
         pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
         editor = pref.edit();
 
@@ -148,8 +152,6 @@ public class DaftarActivity extends AppCompatActivity {
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 masukanNipEt.setCursorVisible(false);
                 cekUser();
-//                cekNip();
-//                startActivity(new Intent(DaftarActivity.this, TakePicture.class));
             }
         });
 
@@ -210,10 +212,7 @@ public class DaftarActivity extends AppCompatActivity {
             startActivity(new Intent(DaftarActivity.this, OtpVerify.class));
 
         });
-
-
     }
-
 
 
     public void cekUser(){
@@ -282,37 +281,29 @@ public class DaftarActivity extends AppCompatActivity {
                     boolean status = obj.getBoolean("status");
                     if(status){
                         pDialog.dismiss();
-                        emailPassLl.setVisibility(View.VISIBLE);
-                        emailEt.requestFocus();
-                        Toast.makeText(DaftarActivity.this, "NIP anda ditemukan..", Toast.LENGTH_SHORT).show();
                         Log.d("OBJECTRESPONSE", "onResponse124: " + obj);
                         /*196404181984032001*/
-                        /*String dat = obj.getString("data");
+                        String dat = obj.getString("data");
                         JSONArray dataArray = new JSONArray(dat);
+                        String inskerNama = "";
                         for (int i = 0; i < dataArray.length(); i++){
                             JSONObject dataObj = dataArray.getJSONObject(i);
-                            String nipBaru = dataObj.getString("nipBaru");
-                            String namaPns = dataObj.getString("namaPns");
-                            String golongan = dataObj.getString("golongan");
-                            String namaJabatan = dataObj.getString("namaJabatan");
-                            String tmtCpns = dataObj.getString("tmtCpns");
-                            String mkBulan = dataObj.getString("mkBulan");
-                            String mkTahun = dataObj.getString("mkTahun");
-                            String inskerNama = dataObj.getString("inskerNama");
-                            String tempatLahir = dataObj.getString("tempatLahir");
-                            String tglLhrPns = dataObj.getString("tglLhrPns");
-                            String npwpNomor = dataObj.getString("npwpNomor");
-                            String noKtp = dataObj.getString("noktp");
-                            String tmtPensiun = dataObj.getString("tmtPensiun");
-                            String gajiPokok = dataObj.getString("gajiPokok");
-                        }*/
+                            inskerNama = dataObj.getString("inskerNama");
+                        }
+                        if(inskerNama.equals("Badan Kepegawaian Negara")){
+                            Toast.makeText(DaftarActivity.this, "NIP anda ditemukan..", Toast.LENGTH_SHORT).show();
+                            emailPassLl.setVisibility(View.VISIBLE);
+                            emailEt.requestFocus();
+                        } else {
+                            Toast.makeText(DaftarActivity.this, "Mohon maaf Instansi anda belum bekerja sama", Toast.LENGTH_SHORT).show();
+
+                        }
                     }else{
 //                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         Log.e("errorMessage", "onResponse: " + obj);
                         nipCheckBox.setChecked(false);
                         masukanNipEt.setCursorVisible(true);
                         pDialog.dismiss();
-                        Toast.makeText(DaftarActivity.this, "Mohon maaf Instansi anda belum bekerja sama", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
 //                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);

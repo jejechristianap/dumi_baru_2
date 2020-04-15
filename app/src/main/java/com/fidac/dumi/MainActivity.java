@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
         loadFragment(new BerandaFragment());
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
         // beri listener pada saat item/menu bottomnavigation terpilih
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
@@ -86,12 +87,4 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 })
                 .show();
     }
-
-
-    /*@Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        moveTaskToBack(true);
-    }*/
 }

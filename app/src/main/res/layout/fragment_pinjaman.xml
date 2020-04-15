@@ -37,8 +37,7 @@
             tools:autoSizeStepGranularity="1sp"
             android:layout_width="match_parent"
             android:layout_height="50dp"/>
-
-        <ProgressBar
+        <!--<ProgressBar
             android:id="@+id/simpleProgressBar"
             android:layout_marginTop="20dp"
             android:layout_marginStart="30dp"
@@ -46,8 +45,18 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:progressBackgroundTint="#FF9800"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>-->
+        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            app:rcProgress="0"
+            app:rcSecondaryProgress="1"
+            app:rcMax="9"
+            app:rcRadius="1sp"
+            app:rcReverse="true"
+            app:rcProgressColor="@color/blueTrans"
+            app:rcSecondaryProgressColor="@color/colorBlue"
+            app:rcBackgroundColor="@color/lightBlue" />
 
     </LinearLayout>
 

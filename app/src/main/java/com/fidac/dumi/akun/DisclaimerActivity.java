@@ -17,9 +17,6 @@ public class DisclaimerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disclaimer);
 
-        disclaimerTv = findViewById(R.id.disclaimer_tv);
-        disclaimerTv.setMovementMethod(new ScrollingMovementMethod());
-
         backIv = findViewById(R.id.back_disclaimer);
         backIv.setOnClickListener(v -> finish());
 

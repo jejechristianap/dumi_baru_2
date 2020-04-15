@@ -203,20 +203,46 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:id="@+id/tanggal_lahir_et"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:inputType="date"
-                android:hint="@string/format_tgl_lahir"
-                android:textColor="@android:color/black"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="20sp"
-                tools:autoSizeStepGranularity="1sp"
-                tools:ignore="LabelFor" />
+                android:layout_height="wrap_content">
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/tanggal_lahir_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:backgroundTint="@color/colorBlue"
+                    android:inputType="date"
+                    android:textColor="@android:color/black"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/pick_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:autoSizeMaxTextSize="20sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    tools:ignore="LabelFor" />
+
+                <ImageView
+                    android:id="@+id/pick_date"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/ic_date_blue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <!--Status Kawin-->
             <TextView

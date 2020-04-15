@@ -8,13 +8,40 @@
     tools:context=".akun.RincianAkunActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBlue"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back_rincian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/todo"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/rincian_akun"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.432" />
 
 
     <ScrollView
@@ -25,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
         <!--Data Pribadi-->
         <LinearLayout
             android:id="@+id/data_nip"
@@ -37,33 +64,110 @@
             android:orientation="vertical"
             android:visibility="visible">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="5dp"
-                android:gravity="center"
-                android:text="@string/rincian_akun"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="20sp"
-                tools:autoSizeStepGranularity="1sp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.34" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="1" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.3" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="1" />
+
+                <ImageView
+                    android:id="@+id/img_dp_iv"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="@dimen/marginTop10dp"
+                    android:background="@drawable/layout_rounded"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/layout_rounded_home"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                    app:layout_constraintEnd_toEndOf="@+id/guideline" />
+
+                <ImageView
+                    android:id="@+id/takeImg"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_photograph"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:text="@string/nama_lengkap"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintEnd_toEndOf="@id/guideline4"
+                    tools:autoSizeMaxTextSize="15sp"
+                    tools:autoSizeStepGranularity="1sp" />
+
+                <EditText
+                    android:id="@+id/nama_lengkap_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:backgroundTint="@color/colorBlue"
+                    android:inputType="number"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="@+id/guideline3"
+                    app:layout_constraintEnd_toEndOf="@id/guideline4"
+                    tools:autoSizeMaxTextSize="20sp"
+                    tools:autoSizeStepGranularity="1sp"
+                    tools:ignore="LabelFor" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
             <!--No Ktp-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/no_ktp"
-                android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
                 android:id="@+id/no_ktp_rincian"
                 android:layout_width="match_parent"
@@ -78,39 +182,13 @@
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
                 tools:ignore="LabelFor" />
-            <!--Nama (KTP)-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/nama"
-                android:textColor="@android:color/black"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
 
-            <EditText
-                android:id="@+id/nama_lengkap_rincian"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:inputType="text"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="20sp"
-                tools:autoSizeStepGranularity="1sp"
-                tools:ignore="LabelFor" />
             <!--Agama-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/agama"
-                android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
@@ -136,7 +214,6 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/title"
-                android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
@@ -162,7 +239,6 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/rt"
-                android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
@@ -184,7 +260,6 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/rw"
-                android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
@@ -207,7 +282,6 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/kelurahan"
-                android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
@@ -230,7 +304,6 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/kecamatan"
-                android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
@@ -253,7 +326,6 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/kota"
-                android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
@@ -276,7 +348,6 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/alamat"
-                android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
@@ -303,7 +374,6 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/kode_pos"
-                android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
@@ -325,7 +395,6 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/no_telp"
-                android:textColor="@android:color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"

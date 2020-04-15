@@ -52,6 +52,7 @@ public class AkunFragment extends Fragment {
 
         /*Logout Button*/
         keluarButton.setOnClickListener(v -> {
+            getActivity().finish();
             startActivity(new Intent(getActivity(), HalamanDepanActivity.class));
         });
 
