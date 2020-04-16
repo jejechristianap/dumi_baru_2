@@ -8,12 +8,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fidac.dumi.api.BaseApiService;
+import com.fidac.dumi.api.CekUserExist;
 import com.fidac.dumi.api.LoginInterface;
 import com.fidac.dumi.model.PreferenceHelper;
 import com.fidac.dumi.retrofit.RetrofitClient;
@@ -39,11 +41,14 @@ public class MasukActivity extends AppCompatActivity {
     private EditText passEt;
     private PreferenceHelper preferenceHelper;
     private TextView daftarDisiniTv;
+    ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_masuk);
+
+        pDialog = new ProgressDialog(MasukActivity.this);
 
         nipEt = findViewById(R.id.masuk_nip_et);
         passEt = findViewById(R.id.masuk_password_et);
@@ -51,7 +56,8 @@ public class MasukActivity extends AppCompatActivity {
 
         masukButton = findViewById(R.id.masuk_user_button);
         masukButton.setOnClickListener(v -> {
-            loginUser();
+            cekUser();
+//            loginUser();
         });
         daftarDisiniTv.setOnClickListener(v ->{
             finish();
@@ -62,6 +68,55 @@ public class MasukActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
         startActivity(new Intent(MasukActivity.this, HalamanDepanActivity.class));
+    }
+
+    public void cekUser(){
+        String nip = nipEt.getText().toString();
+        String pass = passEt.getText().toString();
+
+        if(TextUtils.isEmpty(nip)){
+            nipEt.setError("Kolom tidak boleh kosong...");
+            nipEt.requestFocus();
+            return;
+        }
+
+        if(TextUtils.isEmpty(pass)){
+            passEt.setError("Kolom tidak boleh kosong...");
+            passEt.requestFocus();
+            return;
+        }
+
+        pDialog.setMessage("Mohon Menunggu...");
+        pDialog.show();
+        CekUserExist cekUser = RetrofitClient.getClient().create(CekUserExist.class);
+        Call<ResponseBody> call = cekUser.cekUser(nip);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+//                    JSONObject jsonRESULTS = new JSONObject(response.body().string());
+                    boolean status = obj.getBoolean("status");
+                    if (!status) {
+                        pDialog.dismiss();
+                        loginUser();
+                    } else {
+                        pDialog.dismiss();
+                        Toast.makeText(MasukActivity.this, "NIP anda belum terdaftar, silahkan mendaftarkan NIP anda", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(MasukActivity.this, DaftarActivity.class));
+                    }
+                }catch (Exception e) {
+//                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     private void loginUser() {
@@ -85,9 +140,7 @@ public class MasukActivity extends AppCompatActivity {
         } else {
             passEt.setError(null);
         }
-        final ProgressDialog pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Mohon Menunggu...");
-        pDialog.show();
+
 
         LoginInterface cek = RetrofitClient.getClient().create(LoginInterface.class);
         Call<ResponseBody> call = cek.getUserLogin(nip, password);

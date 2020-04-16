@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.fidac.dumi.api.PropinsiInterface;
 import com.fidac.dumi.retrofit.RetrofitClient;
+import com.google.firebase.auth.FirebaseAuth;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -30,8 +31,7 @@ public class HalamanDepanActivity extends AppCompatActivity {
 
         daftarButton = findViewById(R.id.asn_akftif_button_daftar);
         daftarButton.setOnClickListener(v ->
-                startActivity(new Intent(HalamanDepanActivity.this, LengkapiData.class)));
-
+                startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class)));
 
 
         masukButton = findViewById(R.id.masuk_button);
@@ -40,6 +40,11 @@ public class HalamanDepanActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseAuth.getInstance().signOut();
+    }
 
     @Override
     public void onBackPressed() {

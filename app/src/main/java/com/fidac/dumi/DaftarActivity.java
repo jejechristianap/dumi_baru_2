@@ -24,6 +24,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 /*import com.android.volley.AuthFailureError;
@@ -47,9 +48,16 @@ import com.fidac.dumi.api.CekNipBknInterface;
 import com.fidac.dumi.api.CekUserExist;
 import com.fidac.dumi.api.PropinsiInterface;
 import com.fidac.dumi.retrofit.RetrofitClient;
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.Collections;
 import java.util.regex.Pattern;
 
 import io.reactivex.internal.operators.single.SingleDelayWithCompletable;
@@ -59,6 +67,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DaftarActivity extends AppCompatActivity {
+
+    private static final int RC_SIGN_IN = 101;
 
     private EditText masukanNipEt;
     private CheckBox nipCheckBox;
@@ -209,12 +219,54 @@ public class DaftarActivity extends AppCompatActivity {
             editor.putString("pass", pass);
             editor.commit();
 
-            startActivity(new Intent(DaftarActivity.this, OtpVerify.class));
+//            startActivity(new Intent(DaftarActivity.this, OtpVerify.class));
+            doPhoneLogin();
 
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseApp.initializeApp(this);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            startActivity(new Intent(getApplicationContext(), LengkapiData.class));
+        }
+    }
 
+    /*FireBase OTP UI*/
+    private void doPhoneLogin() {
+        Intent intent = AuthUI.getInstance().createSignInIntentBuilder()
+                .setIsSmartLockEnabled(!BuildConfig.DEBUG)
+                .setAvailableProviders(Collections.singletonList(new AuthUI.IdpConfig.PhoneBuilder().build()))
+                .setTheme(R.style.OtpTheme)
+                .setLogo(R.mipmap.ic_launcher_dumi)
+                .build();
+        startActivityForResult(intent, RC_SIGN_IN);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            IdpResponse idpResponse = IdpResponse.fromResultIntent(data);
+            if (resultCode == RESULT_OK) {
+                // Successfully signed in
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+            } else {
+                /**
+                 *   Sign in failed. If response is null the user canceled the
+                 *   sign-in flow using the back button. Otherwise check
+                 *   response.getError().getErrorCode() and handle the error.
+                 */
+                Toast.makeText(getBaseContext(), "OTP Gagal", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    /*Cek nip sudah pernah mendaftar atau belum*/
     public void cekUser(){
         String nip = masukanNipEt.getText().toString();
         if(TextUtils.isEmpty(nip)){
@@ -256,7 +308,7 @@ public class DaftarActivity extends AppCompatActivity {
             }
         });
     }
-
+    /*Cek keterangan Nip*/
     public void cekNip() {
         String nip = masukanNipEt.getText().toString();
         if(TextUtils.isEmpty(nip)){

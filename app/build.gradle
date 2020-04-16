@@ -12,6 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
 
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -49,9 +50,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0-alpha05'
     /*Material Design*/
     implementation 'com.google.android.material:material:1.2.0-alpha05'
-
-
-
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
 
     /*Okhttp3*/
@@ -71,6 +69,9 @@ dependencies {
     implementation 'id.zelory:compressor:2.1.0'
 
     implementation 'com.akexorcist:RoundCornerProgressBar:2.0.3'
+
+    /*Firebase Auth UI*/
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
 
 
 }

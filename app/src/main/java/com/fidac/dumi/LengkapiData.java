@@ -75,10 +75,20 @@ public class LengkapiData extends AppCompatActivity {
     private ImageView pickDate;
     private Calendar myCalendar;
 
+    private ProgressDialog pDialog;
+    private PropinsiInterface prop;
+
+    /*Wilayah*/
+    private String propPilih;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lengkapi_data);
+
+        pDialog = new ProgressDialog(LengkapiData.this);
+        pDialog.setMessage("Memuat data...");
+
         pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
         editor = pref.edit();
 
@@ -128,8 +138,54 @@ public class LengkapiData extends AppCompatActivity {
         titleAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
         titleSpinner.setAdapter(titleAdapter);
 
-//        propinsiSpinner = findViewById(R.id.propinsi_spinner);
-//        propinsiAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, );
+        /*Wilayah*/
+        propinsiSpinner = findViewById(R.id.propinsi_spinner);
+        kabSpinner = findViewById(R.id.kabupaten_spinner);
+        kecSpinner = findViewById(R.id.kecamatan_spinner);
+        kelSpinner = findViewById(R.id.kelurahan_spinner);
+        kodePosSpinner = findViewById(R.id.kode_pos_spinner);
+
+
+        propinsiSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                /*Kabupaten*/
+                propPilih = propinsiSpinner.getSelectedItem().toString();
+                getKabupaten(propPilih);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        kabSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                /*Kecamatan*/
+                String kabuPilih = kabSpinner.getSelectedItem().toString();
+                getKecamatan(kabuPilih);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        kecSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                /*Kelurahan*/
+                String kecPilih = kecSpinner.getSelectedItem().toString();
+                getKelurahanPos(kecPilih);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         /*EditText Init*/
         noKtpEt = findViewById(R.id.no_ktp);
@@ -184,20 +240,12 @@ public class LengkapiData extends AppCompatActivity {
     }
 
     public void cekPropinsi() {
-        /*Spinner init*/
-        propinsiSpinner = findViewById(R.id.propinsi_spinner);
-        kabSpinner = findViewById(R.id.kabupaten_spinner);
-        kecSpinner = findViewById(R.id.kecamatan_spinner);
-        kelSpinner = findViewById(R.id.kelurahan_spinner);
-        kodePosSpinner = findViewById(R.id.kode_pos_spinner);
 
         /*Progress Dialog*/
-        final ProgressDialog pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Memuat Data...");
         pDialog.show();
 
         /*API CALL*/
-        PropinsiInterface prop = RetrofitClient.getPropinsi().create(PropinsiInterface.class);
+        prop = RetrofitClient.getPropinsi().create(PropinsiInterface.class);
         Call<ResponseBody> call = prop.getPropinsi();
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -208,147 +256,113 @@ public class LengkapiData extends AppCompatActivity {
                     boolean status = obj.getBoolean("status");
                     if (status) {
                         String data = obj.getString("data");
-                        JSONObject prop = new JSONObject(data);
-                        /*Wilayah*/
-                        String propinsi = prop.getString("provinsi");
-                        String kabupaten = prop.getString("kabupaten");
-                        String kecamatan = prop.getString("kecamatan");
-                        String desa = prop.getString("desa");
-
-                        /*JSONArray*/
-                        JSONArray objPropArray = new JSONArray(propinsi);
-                        JSONArray objKabArray = new JSONArray(kabupaten);
-                        JSONArray objKecArray = new JSONArray(kecamatan);
-                        JSONArray ojbDesArray = new JSONArray(desa);
-                        JSONArray objPosArray = new JSONArray(desa);
-
-                        /*ArraList*/
+                        JSONArray objPropArray = new JSONArray(data);
                         ArrayList<String> propArray = new ArrayList<>();
-                        ArrayList<String> kabArray = new ArrayList<>();
-                        ArrayList<String> kecArray = new ArrayList<>();
-                        ArrayList<String> desArray = new ArrayList<>();
-                        ArrayList<String> kodePosArray = new ArrayList<>();
-
-                        /*Propinsi*/
                         for (int i = 0; i < objPropArray.length(); i++) {
                             JSONObject provinsi = objPropArray.getJSONObject(i);
                             propArray.add(provinsi.getString("provinsi"));
                         }
+                        pDialog.dismiss();
                         Collections.sort(propArray);
                         propinsiAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, propArray);
                         propinsiAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
                         propinsiSpinner.setAdapter(propinsiAdapter);
-                        propinsiSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                /*Kabupaten*/
-                                String propPilih = propinsiSpinner.getSelectedItem().toString();
-                                kabArray.clear();
-                                for(int i = 0; i<objKabArray.length(); i++){
-                                    JSONObject kabu = null;
-                                    try {
-                                        kabu = objKabArray.getJSONObject(i);
-                                        String prop = kabu.getString("provinsi");
-                                        if (prop.equals(propPilih)) {
-                                            kabArray.add(kabu.getString("kabupaten"));
-                                            Collections.sort(kabArray);
-                                            kabAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, kabArray);
-                                            kabAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
-                                            kabSpinner.setAdapter(kabAdapter);
-                                            kabSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                                @Override
-                                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                    /*Kecamatan*/
-                                                    kecArray.clear();
-                                                    String kabuPilih = kabSpinner.getSelectedItem().toString();
-                                                    for(int i = 0; i < objKecArray.length(); i++){
-                                                        try {
-                                                            JSONObject kec = objKecArray.getJSONObject(i);
-                                                            String kab = kec.getString("kabupaten");
-                                                            if(kab.equals(kabuPilih)){
-                                                                kecArray.add(kec.getString("kecamatan"));
-                                                                Collections.sort(kecArray);
-                                                                kecAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, kecArray);
-                                                                kecAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
-                                                                kecSpinner.setAdapter(kecAdapter);
-                                                                kecSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                                                    @Override
-                                                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                                        /*Kelurahan*/
-                                                                        desArray.clear();
-                                                                        kodePosArray.clear();
-                                                                        String kecPilih = kecSpinner.getSelectedItem().toString();
-                                                                        for(int i=0; i<ojbDesArray.length(); i++){
-                                                                            try {
-                                                                                JSONObject kel = ojbDesArray.getJSONObject(i);
-                                                                                String kec = kel.getString("kecamatan");
-                                                                                if(kec.equals(kecPilih)){
-                                                                                    desArray.add(kel.getString("desa"));
-                                                                                    kodePosArray.add(kel.getString("kodepos"));
-                                                                                    kelAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, desArray);
-                                                                                    kelAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
-                                                                                    kelSpinner.setAdapter(kelAdapter);
-                                                                                    kelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                                                                        @Override
-                                                                                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//
-                                                                                            HashSet<String> set = new HashSet<>(kodePosArray);
-                                                                                            kodePosArray.clear();
-                                                                                            kodePosArray.addAll(set);
-                                                                                            Collections.sort(kodePosArray); // Sorting array list using Collections.sort
-
-                                                                                            kodePosAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, kodePosArray);
-                                                                                            kodePosAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
-                                                                                            kodePosSpinner.setAdapter(kodePosAdapter);
-
-                                                                                        }
-
-                                                                                        @Override
-                                                                                        public void onNothingSelected(AdapterView<?> parent) {
-                                                                                        }
-                                                                                    });
-                                                                                }
-
-                                                                            } catch (JSONException e) {
-                                                                                e.printStackTrace();
-                                                                            }
-                                                                        }
-                                                                    }
-
-                                                                    @Override
-                                                                    public void onNothingSelected(AdapterView<?> parent) {
-
-                                                                    }
-                                                                });
-                                                            }
-                                                        } catch (JSONException e) {
-                                                            e.printStackTrace();
-                                                        }
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onNothingSelected(AdapterView<?> parent) {
-
-                                                }
-                                            });
-                                        }
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-
-                            }
-                        });
                         pDialog.dismiss();
                     }
                 }catch (JSONException e) {
+                    pDialog.dismiss();
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    pDialog.dismiss();
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                pDialog.dismiss();
+            }
+        });
+    }
+
+    /*Get Kabupaten from Propinsi*/
+    private void getKabupaten(String propPilih){
+        pDialog.setMessage("Memuat Kabupaten...");
+        pDialog.show();
+        Call<ResponseBody> call = prop.getKabupaten(propPilih);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                ArrayList<String> kabArray = new ArrayList<>();
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+                    String data = obj.getString("data");
+                    JSONArray objKabArray = new JSONArray(data);
+                    kabArray.clear();
+                    pDialog.dismiss();
+                    for(int i = 0; i<objKabArray.length(); i++){
+                        JSONObject kabu = objKabArray.getJSONObject(i);
+                        try {
+                            String propinsi = kabu.getString("provinsi");
+                            if (propinsi.equals(propPilih)) {
+                                kabArray.add(kabu.getString("kabupaten"));
+                                Collections.sort(kabArray);
+                                kabAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, kabArray);
+                                kabAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+                                kabSpinner.setAdapter(kabAdapter);
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } catch (JSONException | IOException e) {
+                    pDialog.dismiss();
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                pDialog.dismiss();
+            }
+        });
+
+    }
+
+    private void getKecamatan(String kabuPilih){
+        pDialog.setMessage("Memuat Kecamatan...");
+        pDialog.show();
+        Call<ResponseBody> call = prop.getKecamatan(kabuPilih);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                ArrayList<String> kecArray= new ArrayList<>();
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+                    String data = obj.getString("data");
+                    JSONArray objKecArray = new JSONArray(data);
+                    kecArray.clear();
+                    pDialog.dismiss();
+                    for(int i = 0; i < objKecArray.length(); i++){
+                        try {
+                            JSONObject kec = objKecArray.getJSONObject(i);
+                            String kab = kec.getString("kabupaten");
+                            if(kab.equals(kabuPilih)){
+                                kecArray.add(kec.getString("kecamatan"));
+                                Collections.sort(kecArray);
+                                kecAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, kecArray);
+                                kecAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+                                kecSpinner.setAdapter(kecAdapter);
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            pDialog.dismiss();
+                        }
+                    }
+                } catch (JSONException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -358,10 +372,129 @@ public class LengkapiData extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                pDialog.dismiss();
             }
         });
     }
+
+    private void getKelurahanPos(String kecPilih){
+        pDialog.setMessage("Memuat Kelurahan...");
+        pDialog.show();
+        Call<ResponseBody> call = prop.getDesa(kecPilih);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                ArrayList<String> desArray = new ArrayList<>();
+                ArrayList<String> kodePosArray = new ArrayList<>();
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+                    String data = obj.getString("data");
+                    JSONArray ojbDesArray = new JSONArray(data);
+                    pDialog.dismiss();
+                    desArray.clear();
+                    kodePosArray.clear();
+                    for(int i=0; i<ojbDesArray.length(); i++){
+                        try {
+                            JSONObject kel = ojbDesArray.getJSONObject(i);
+                            String kec = kel.getString("kecamatan");
+                            if(kec.equals(kecPilih)){
+                                desArray.add(kel.getString("desa"));
+                                kodePosArray.add(kel.getString("kodepos"));
+                                /*
+                                kelAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, desArray);
+                                kelAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+                                kelSpinner.setAdapter(kelAdapter);
+                                kelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                                        HashSet<String> set = new HashSet<>(kodePosArray);
+                                        kodePosArray.clear();
+                                        kodePosArray.addAll(set);
+                                        Collections.sort(kodePosArray); // Sorting array list using Collections.sort
+
+                                        kodePosAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, kodePosArray);
+                                        kodePosAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+                                        kodePosSpinner.setAdapter(kodePosAdapter);
+
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+                                }
+                            });*/
+                        }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+                    kelAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, desArray);
+                    kelAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+                    kelSpinner.setAdapter(kelAdapter);
+                    kelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            String kelPilih = kelSpinner.getSelectedItem().toString();
+                            /*for(int i=0; i<ojbDesArray.length(); i++){
+                                try {
+                                    JSONObject kel = ojbDesArray.getJSONObject(i);
+                                    int idPos = kel.getInt("id");
+                                    String kec = kel.getString("kecamatan");
+                                    if(kec.equals(kecPilih)){
+                                        desArray.add(kel.getString("desa"));
+                                        kodePosArray.add(kel.getString("kodepos"));
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }*/
+
+                            HashSet<String> set = new HashSet<>(kodePosArray);
+                            kodePosArray.clear();
+                            kodePosArray.addAll(set);
+                            Collections.sort(kodePosArray); // Sorting array list using Collections.sort
+
+                            kodePosAdapter = new ArrayAdapter<>(LengkapiData.this, R.layout.spinner_text, kodePosArray);
+                            kodePosAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+                            kodePosSpinner.setAdapter(kodePosAdapter);
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                        }
+                    });
+                } catch (JSONException | IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                pDialog.dismiss();
+            }
+        });
+    }
+
+   /* private void getPos(String desaPilih){
+        Call<ResponseBody> call = prop.getPos(desaPilih);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }*/
 
     public void createUser(){
         String noKtp, namaLengkap, tempatLahir, tanggalLahir, statusKawin,
@@ -370,7 +503,7 @@ public class LengkapiData extends AppCompatActivity {
                 kota, alamat, kodePos, jenisKelamin, agama,
                 statusHubungan, namaPenanggung, noKtpPenanggung, namaIbu;
 
-        // User Input
+        // Data Pribadi
         noKtp = noKtpEt.getText().toString();
         namaLengkap = namaLengkapEt.getText().toString();
         agama = agamaSpinner.getSelectedItem().toString();
@@ -386,7 +519,7 @@ public class LengkapiData extends AppCompatActivity {
         alamat = alamatEt.getText().toString();
         rt = rtEt.getText().toString();
         rw = rwEt.getText().toString();
-
+        /*Data Keluarga*/
         statusHubungan = statusHubunganSpinner.getSelectedItem().toString();
         namaPenanggung = namaPenanggungEt.getText().toString();
         noKtpPenanggung = noKtpPenanggungEt.getText().toString();
@@ -447,6 +580,19 @@ public class LengkapiData extends AppCompatActivity {
             alamatEt.setError(null);
         }
 
+        if (TextUtils.isEmpty(noKtpPenanggung)){
+            noKtpPenanggungEt.setError(KOLOM);
+            noKtpPenanggungEt.requestFocus();
+            return;
+        } else if (noKtpPenanggung.length() != 16){
+            noKtpPenanggungEt.setError("No KTP salah");
+            noKtpPenanggungEt.requestFocus();
+            return;
+        } else {
+            noKtpPenanggungEt.setError(null);
+        }
+
+        /*Wilayah*/
         propinsi = propinsiSpinner.getSelectedItem().toString();
         kota = kabSpinner.getSelectedItem().toString();
         kecamatan  = kecSpinner.getSelectedItem().toString();

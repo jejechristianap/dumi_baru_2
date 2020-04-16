@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private static final String BASE_URL = "http://app.ternak-burung.top/api/";
+    private static final String BASE_URL = "http://api.minjem.biz.id/api/";
     private static final String BASE_URL_PULSA = "https://klikmbc.co.id/json/pulsa/";
     private static final String BASE_URL_OTP = "http://api.nusasms.com/api/v3/sendsms/";
     private static RetrofitClient mInstance;
