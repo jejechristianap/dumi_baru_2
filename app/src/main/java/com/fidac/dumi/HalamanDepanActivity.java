@@ -3,6 +3,7 @@ package com.fidac.dumi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,10 +25,17 @@ public class HalamanDepanActivity extends AppCompatActivity {
     private Button masukButton;
     private TextView masukTv;
 
+    private SharedPreferences.Editor editor;
+    private SharedPreferences pref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_halaman_depan);
+
+        pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
+        editor = pref.edit();
+        editor.clear();
 
         daftarButton = findViewById(R.id.asn_akftif_button_daftar);
         daftarButton.setOnClickListener(v ->

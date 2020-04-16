@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -25,6 +26,10 @@ import android.widget.Toast;
 import com.fidac.dumi.api.RegisterInterface;
 import com.fidac.dumi.api.UploadImageInterface;
 import com.fidac.dumi.retrofit.RetrofitClient;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -50,6 +55,8 @@ public class TakePicture extends AppCompatActivity {
     private boolean selfi = false;
     private String currentPhotoPathKtp, currentPhotoPathSelfi;
 
+    private ProgressDialog pDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +72,7 @@ public class TakePicture extends AppCompatActivity {
             }
         }
 
-
+        pDialog = new ProgressDialog(TakePicture.this);
         pref = getApplicationContext().getSharedPreferences("Daftar", 0 );
         imgKtpIv = findViewById(R.id.iv_ktp);
         imgSelfiIv = findViewById(R.id.iv_selfi);
@@ -78,6 +85,9 @@ public class TakePicture extends AppCompatActivity {
         selfiButton.setOnClickListener(v ->{
            takeImgSelfi();
         });
+
+
+
         konfirmasiButton.setOnClickListener(v -> {
             uploadFile();
 //            regisUser();
@@ -89,7 +99,13 @@ public class TakePicture extends AppCompatActivity {
         super.onResume();
         if(ktp && selfi){
 
-            selfiButton.setBackgroundResource(R.drawable.button_masuk);
+//            selfiButton.setBackgroundResource(R.drawable.button_masuk);
+
+        }
+
+        if (TextUtils.isEmpty(currentPhotoPathKtp) || TextUtils.isEmpty(currentPhotoPathSelfi)){
+
+        } else {
             konfirmasiButton.setVisibility(View.VISIBLE);
         }
     }
@@ -234,26 +250,41 @@ public class TakePicture extends AppCompatActivity {
         RequestBody fileReqBodyKtp = RequestBody.create(MediaType.parse("image/*"), fileKtp);
         RequestBody fileReqBodySelfi = RequestBody.create(MediaType.parse("image/*"), fileSelfi);
 
-
-
         // MultipartBody.Part is used to send also the actual param name
         MultipartBody.Part bodyKtp = MultipartBody.Part.createFormData("image_ktp", currentPhotoPathKtp, fileReqBodyKtp);
         MultipartBody.Part bodySelfi = MultipartBody.Part.createFormData("image_selfi", currentPhotoPathSelfi, fileReqBodySelfi);
 
+        pDialog.setMessage("Sedang mengupload foto...");
+        pDialog.show();
         // finally, execute the request
         Call<ResponseBody> call = service.uploadImages(nip, bodyKtp, bodySelfi);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                Log.v("Upload", "success" + response.body().toString());
-                Toast.makeText(TakePicture.this, "Upload Berhasil", Toast.LENGTH_SHORT).show();
-                regisUser();
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+                    boolean status = obj.getBoolean("status");
+                    if (status){
+                        pDialog.dismiss();
+                        Log.v("Upload", "success" + response.body().toString());
+                        Toast.makeText(TakePicture.this, "Upload Berhasil", Toast.LENGTH_SHORT).show();
+                        regisUser();
+                    } else{
+                        pDialog.dismiss();
+                        Toast.makeText(TakePicture.this, "Mohon maaf upload gagal, silahkan mencoba lagi..", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("Upload error:", t.getMessage());
+                pDialog.dismiss();
                 Toast.makeText(TakePicture.this, "Mohon maaf terjadi kesalahan, silahkan coba lagi", Toast.LENGTH_SHORT).show();
             }
         });
@@ -265,7 +296,7 @@ public class TakePicture extends AppCompatActivity {
 
         /*Progress Dialog*/
         final ProgressDialog pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Memuat Data...");
+        pDialog.setMessage("Mengirim data...");
         pDialog.show();
 
         /*Value from DaftarActivity */
