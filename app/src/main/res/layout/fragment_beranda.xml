@@ -86,6 +86,297 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <!--Pinjaman Multiguna-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
+                android:gravity="start|center"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:text="@string/pinjaman_multiguna"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <LinearLayout
+                android:id="@+id/dumi_kilat"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/button_custom_2"
+                    android:backgroundTint="#fff2d3"
+                    android:gravity="left"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/kilat" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/dumi_kilat"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="15sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:text="@string/dumi_kilat_deskripsi"
+                        android:fontFamily="sans-serif"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp"
+                        />
+
+                    <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:id="@+id/dumi_kilat_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/button_rounded_custom"
+                        android:textAllCaps="false"
+                        android:text="@string/ajukan"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/button_custom_2"
+                    android:backgroundTint="#d8f1d8"
+                    android:gravity="left"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/regular" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/dumi_regular"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+
+                        app:autoSizeMinTextSize="15sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:text="@string/dumi_regular_deskripsi"
+                        android:fontFamily="sans-serif"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp"
+                        />
+
+                    <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:id="@+id/dumi_regular_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/button_rounded_custom"
+                        android:textAllCaps="false"
+                        android:text="@string/ajukan"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/dumi_pensiun_bumn"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <!--Dumi Pensiun-->
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="@dimen/marginTop10dp"
+                    android:background="@drawable/button_custom_2"
+                    android:backgroundTint="#F1DED8"
+                    android:gravity="left"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_pensiun" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/dumi_pensiun"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+
+                        app:autoSizeMinTextSize="15sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:text="@string/dumi_pensiun_des"
+                        android:fontFamily="sans-serif"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="@dimen/marginTop10dp"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp"
+                        />
+
+                    <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:id="@+id/dumi_pensiun_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/button_rounded_custom"
+                        android:textAllCaps="false"
+                        android:text="@string/ajukan"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+                <!--Dumi BUMN-->
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/button_custom_2"
+                    android:backgroundTint="#D8E5F1"
+                    android:gravity="left"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_bumn" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/dumi_bumn"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="15sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:text="@string/dumi_bumn_des"
+                        android:fontFamily="sans-serif"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp"
+                        />
+
+                    <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:id="@+id/dumi_bumn_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/button_rounded_custom"
+                        android:textAllCaps="false"
+                        android:text="@string/ajukan"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+            </LinearLayout>
+
             <!--Pembelian & Top Up-->
             <LinearLayout
                 android:layout_marginTop="10dp"
@@ -415,300 +706,6 @@
 
                 </LinearLayout>
             </GridLayout>
-            <!--Pinjaman Multiguna-->
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="22dp"
-                android:gravity="start|center"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:text="@string/pinjaman_multiguna"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@android:color/black"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
-            <LinearLayout
-                android:id="@+id/dumi_kilat"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/button_custom_2"
-                    android:backgroundTint="#fff2d3"
-                    android:gravity="left"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/kilat" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="sans-serif"
-                        android:text="@string/dumi_kilat"
-                        android:textColor="@android:color/black"
-                        android:textStyle="bold"
-                        app:autoSizeMinTextSize="15sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="20sp"
-                        tools:autoSizeStepGranularity="1sp" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:text="@string/dumi_kilat_deskripsi"
-                        android:fontFamily="sans-serif"
-                        android:textColor="@android:color/black"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        app:autoSizeMinTextSize="6sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="12sp"
-                        tools:autoSizeStepGranularity="1sp"
-                        />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:id="@+id/dumi_kilat_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@drawable/button_rounded_custom"
-                        android:textAllCaps="false"
-                        android:text="@string/ajukan"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@drawable/button_custom_2"
-                    android:backgroundTint="#d8f1d8"
-                    android:gravity="left"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/regular" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="sans-serif"
-                        android:text="@string/dumi_regular"
-                        android:textColor="@android:color/black"
-                        android:textStyle="bold"
-
-                        app:autoSizeMinTextSize="15sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="20sp"
-                        tools:autoSizeStepGranularity="1sp" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:text="@string/dumi_regular_deskripsi"
-                        android:fontFamily="sans-serif"
-                        android:textColor="@android:color/black"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        app:autoSizeMinTextSize="6sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="12sp"
-                        tools:autoSizeStepGranularity="1sp"
-                        />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:id="@+id/dumi_regular_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@drawable/button_rounded_custom"
-                        android:textAllCaps="false"
-                        android:text="@string/ajukan"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/dumi_pensiun_bumn"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                android:weightSum="2">
-                <!--Dumi Pensiun-->
-                <LinearLayout
-                    android:visibility="gone"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="@dimen/marginTop10dp"
-                    android:background="@drawable/button_custom_2"
-                    android:backgroundTint="#F1DED8"
-                    android:gravity="left"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/ic_pensiun" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="sans-serif"
-                        android:text="@string/dumi_pensiun"
-                        android:textColor="@android:color/black"
-                        android:textStyle="bold"
-
-                        app:autoSizeMinTextSize="15sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="20sp"
-                        tools:autoSizeStepGranularity="1sp" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:text="@string/dumi_pensiun_des"
-                        android:fontFamily="sans-serif"
-                        android:textColor="@android:color/black"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="@dimen/marginTop10dp"
-                        app:autoSizeMinTextSize="6sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="12sp"
-                        tools:autoSizeStepGranularity="1sp"
-                        />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:id="@+id/dumi_pensiun_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@drawable/button_rounded_custom"
-                        android:textAllCaps="false"
-                        android:text="@string/ajukan"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
-                <!--Dumi BUMN-->
-                <LinearLayout
-                    android:visibility="gone"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@drawable/button_custom_2"
-                    android:backgroundTint="#D8E5F1"
-                    android:gravity="left"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/ic_bumn" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="sans-serif"
-                        android:text="@string/dumi_bumn"
-                        android:textColor="@android:color/black"
-                        android:textStyle="bold"
-                        app:autoSizeMinTextSize="15sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="20sp"
-                        tools:autoSizeStepGranularity="1sp" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:text="@string/dumi_bumn_des"
-                        android:fontFamily="sans-serif"
-                        android:textColor="@android:color/black"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        app:autoSizeMinTextSize="6sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="12sp"
-                        tools:autoSizeStepGranularity="1sp"
-                        />
-
-                    <Button
-                        style="?android:attr/buttonBarButtonStyle"
-                        android:id="@+id/dumi_bumn_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@drawable/button_rounded_custom"
-                        android:textAllCaps="false"
-                        android:text="@string/ajukan"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
-            </LinearLayout>
-
-
 
         </LinearLayout>
     </ScrollView>

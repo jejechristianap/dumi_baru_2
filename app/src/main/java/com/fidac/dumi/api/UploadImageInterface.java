@@ -22,4 +22,9 @@ public interface UploadImageInterface {
                                    @Part MultipartBody.Part image_ktp,
                                    @Part MultipartBody.Part image_selfi);
 
+    @Multipart
+    @POST("user/profile")
+    Call<ResponseBody> uploadProfile(@Part("nipBaru") RequestBody nipBaru,
+                                    @Part MultipartBody.Part image_ktp);
+
 }

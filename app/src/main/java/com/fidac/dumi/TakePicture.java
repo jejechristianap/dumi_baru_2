@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.fidac.dumi.api.RegisterInterface;
 import com.fidac.dumi.api.UploadImageInterface;
 import com.fidac.dumi.retrofit.RetrofitClient;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,8 +90,8 @@ public class TakePicture extends AppCompatActivity {
 
 
         konfirmasiButton.setOnClickListener(v -> {
-            uploadFile();
-//            regisUser();
+//            uploadFile();
+            regisUser();
         });
     }
 
@@ -261,7 +262,6 @@ public class TakePicture extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
                 try {
                     JSONObject obj = new JSONObject(response.body().string());
                     boolean status = obj.getBoolean("status");
@@ -269,7 +269,10 @@ public class TakePicture extends AppCompatActivity {
                         pDialog.dismiss();
                         Log.v("Upload", "success" + response.body().toString());
                         Toast.makeText(TakePicture.this, "Upload Berhasil", Toast.LENGTH_SHORT).show();
-                        regisUser();
+//                        regisUser();
+                        finish();
+                        Toast.makeText(TakePicture.this, "Selamat, Pendaftaran Berhasil", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(TakePicture.this, MasukActivity.class));
                     } else{
                         pDialog.dismiss();
                         Toast.makeText(TakePicture.this, "Mohon maaf upload gagal, silahkan mencoba lagi..", Toast.LENGTH_SHORT).show();
@@ -328,7 +331,7 @@ public class TakePicture extends AppCompatActivity {
         String namaPenanggung = pref.getString("nama_penanggung", null);
         String noKtpPenanggung = pref.getString("no_ktp_penanggung", null);
         String namaIbu = pref.getString("nama_ibu", null);
-        String noTelp = pref.getString("no_telp", null);
+        String noTelp = pref.getString("no_telpon", null);
 
         Log.d("Input", "createUser:" + "\nNIP: " + nip + "\nEmail: " + email + "\nPass: " + pass +
                 "\nTelp: " + noTelp + "\nKTP: " + noKtp + "\nNama: " + namaLengkap +
@@ -351,10 +354,21 @@ public class TakePicture extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d("Res", "onResponse: " +response.body());
-                pDialog.dismiss();
-                finish();
-                Toast.makeText(TakePicture.this, "Selamat, Pendaftaran Berhasil", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(TakePicture.this, MasukActivity.class));
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+                    boolean status = obj.getBoolean("status");
+                    if (status){
+                        pDialog.dismiss();
+                        uploadFile();
+
+                    } else {
+                        pDialog.dismiss();
+                        Toast.makeText(TakePicture.this, "Mohon maaf, pendaftar tidak berhasil", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -379,6 +393,7 @@ public class TakePicture extends AppCompatActivity {
         AlertDialog alertbox = new AlertDialog.Builder(this)
                 .setMessage("Data yang anda masukkan akan hilang, apa anda yakin?")
                 .setPositiveButton("Ya", (arg0, arg1) -> {
+
                     finish();
                     startActivity(new Intent(TakePicture.this, HalamanDepanActivity.class));
                     //close();

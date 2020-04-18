@@ -96,12 +96,9 @@ public class PinjamanRegularActivity extends AppCompatActivity {
         sisa = 0;
 
         backRegular = findViewById(R.id.back_regular);
-        backRegular.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PinjamanRegularActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
+        backRegular.setOnClickListener(v -> {
+            Intent intent = new Intent(PinjamanRegularActivity.this, MainActivity.class);
+            startActivity(intent);
         });
 
         /*Tujuan Pinjaman*/

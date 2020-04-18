@@ -237,13 +237,13 @@ public class DaftarActivity extends AppCompatActivity {
 
     /*FireBase OTP UI*/
     private void doPhoneLogin() {
-        Intent intent = AuthUI.getInstance().createSignInIntentBuilder()
-                .setIsSmartLockEnabled(!BuildConfig.DEBUG)
-                .setAvailableProviders(Collections.singletonList(new AuthUI.IdpConfig.PhoneBuilder().build()))
-                .setTheme(R.style.OtpTheme)
-                .setLogo(R.mipmap.ic_launcher_dumi)
-                .build();
-        startActivityForResult(intent, RC_SIGN_IN);
+            Intent intent = AuthUI.getInstance().createSignInIntentBuilder()
+                    .setIsSmartLockEnabled(!BuildConfig.DEBUG)
+                    .setAvailableProviders(Collections.singletonList(new AuthUI.IdpConfig.PhoneBuilder().build()))
+                    .setTheme(R.style.OtpTheme)
+                    .setLogo(R.mipmap.ic_launcher_dumi)
+                    .build();
+            startActivityForResult(intent, RC_SIGN_IN);
     }
 
     @Override

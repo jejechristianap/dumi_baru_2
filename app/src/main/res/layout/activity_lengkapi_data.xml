@@ -198,7 +198,7 @@
                 tools:autoSizeStepGranularity="1sp" />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="40dp">
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline"
                     android:orientation="vertical"
@@ -206,14 +206,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/tanggal_lahir_et"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:autofillHints=""
                     android:backgroundTint="@color/colorBlue"
                     android:textColor="@android:color/black"
                     android:inputType="date"
+                    android:hint=""
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -223,6 +224,14 @@
                     tools:autoSizeMaxTextSize="20sp"
                     tools:autoSizeStepGranularity="1sp"
                     tools:ignore="LabelFor" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/colorBlue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageView
                     android:id="@+id/pick_date"

@@ -514,9 +514,9 @@ public class PinjamanKilatActivity extends AppCompatActivity {
                         for (int i = 0; i<bungaObj.length(); i++){
                             JSONObject bung = bungaObj.getJSONObject(i);
                             int id = bung.getInt("id_bunga");
-                            Toast.makeText(PinjamanKilatActivity.this, "instansi: " + id, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(PinjamanKilatActivity.this, "instansi: " + id, Toast.LENGTH_SHORT).show();
                             if(id == 1){
-                                Toast.makeText(PinjamanKilatActivity.this, "Get bunga", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(PinjamanKilatActivity.this, "Get bunga", Toast.LENGTH_SHORT).show();
                                 double bunga = bung.getDouble("bunga");
                                 double biayaAdmin = bung.getDouble("biaya_admin");
                                 double biayaAsuransi12 = bung.getDouble("biaya_asuransi_12");
@@ -531,7 +531,6 @@ public class PinjamanKilatActivity extends AppCompatActivity {
                                         "\nAsur24: " + getAsur24 + "\nAsur36: " + getAsur36);
                             }
                         }
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

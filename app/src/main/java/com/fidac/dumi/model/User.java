@@ -30,19 +30,12 @@ public class User {
             namaPenanggung,
             noKtpPenanggung,
             namaIbu,
-            noTelp;
+            noTelp,
+            imageKtp,
+            imageSelfi,
+            imageProfile;
 
-    public User(){
-
-    }
-
-    public User(int id, String nip, String email, String password, String noKtp,
-                String namaLengkap, String agama, String jenisKelamin, String tempatLahir,
-                String tanggalLahir, String statusKawin, String jumlahTanggungan, String title,
-                String ketTitle, String inskerKerja, String statusRumah, String alamat,
-                String rt, String rw, String propinsi, String kota, String kecamatan, String kelurahan,
-                String kodePos, String statusHubungan, String namaPenanggung, String noKtpPenanggung,
-                String namaIbu, String noTelp) {
+    public User(int id, String nip, String email, String password, String noKtp, String namaLengkap, String agama, String jenisKelamin, String tempatLahir, String tanggalLahir, String statusKawin, String jumlahTanggungan, String title, String ketTitle, String inskerKerja, String statusRumah, String alamat, String rt, String rw, String propinsi, String kota, String kecamatan, String kelurahan, String kodePos, String statusHubungan, String namaPenanggung, String noKtpPenanggung, String namaIbu, String noTelp, String imageKtp, String imageSelfi, String imageProfile) {
         this.id = id;
         this.nip = nip;
         this.email = email;
@@ -72,6 +65,9 @@ public class User {
         this.noKtpPenanggung = noKtpPenanggung;
         this.namaIbu = namaIbu;
         this.noTelp = noTelp;
+        this.imageKtp = imageKtp;
+        this.imageSelfi = imageSelfi;
+        this.imageProfile = imageProfile;
     }
 
     public int getId() {
@@ -189,4 +185,17 @@ public class User {
     public String getNoTelp() {
         return noTelp;
     }
+
+    public String getImageKtp() {
+        return imageKtp;
+    }
+
+    public String getImageSelfi() {
+        return imageSelfi;
+    }
+
+    public String getImageProfile() {
+        return imageProfile;
+    }
 }
+

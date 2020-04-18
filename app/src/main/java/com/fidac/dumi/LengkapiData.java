@@ -19,10 +19,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fidac.dumi.api.PropinsiInterface;
+import com.fidac.dumi.model.SharedPrefManager;
 import com.fidac.dumi.retrofit.RetrofitClient;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -53,6 +56,8 @@ public class LengkapiData extends AppCompatActivity {
             jumlahTanggunganEt, inskerKerjaEt, namaPenanggungEt,
             noKtpPenanggungEt, namaIbuEt;
 
+    private TextView tanggalLahirTv;
+
     private Button lanjutButton;
 
     private Spinner jenisKelaminSpinner, agamaSpinner, titleSpinner,
@@ -80,6 +85,7 @@ public class LengkapiData extends AppCompatActivity {
 
     /*Wilayah*/
     private String propPilih;
+    String currentPhoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +98,9 @@ public class LengkapiData extends AppCompatActivity {
         pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
         editor = pref.edit();
 
+        currentPhoneNumber = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
+//        Toast.makeText(this, "Phone: " + currentuser, Toast.LENGTH_SHORT).show();
+        Log.d("Nomor", "onCreate: " + currentPhoneNumber);
         /*Calendar*/
         myCalendar = Calendar.getInstance();
         final DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
@@ -192,8 +201,8 @@ public class LengkapiData extends AppCompatActivity {
         namaLengkapEt = findViewById(R.id.nama_lengkap);
         tempatLahirEt = findViewById(R.id.tempat_lahir_et);
         pickDate = findViewById(R.id.pick_date);
-        tanggalLahirEt = findViewById(R.id.tanggal_lahir_et);
-        tanggalLahirEt.setEnabled(false);
+        tanggalLahirTv = findViewById(R.id.tanggal_lahir_et);
+
         jumlahTanggunganEt = findViewById(R.id.jumlah_tanggungan_et);
         ketTitleEt = findViewById(R.id.ket_title);
         inskerKerjaEt = findViewById(R.id.insker_nama_et);
@@ -204,7 +213,12 @@ public class LengkapiData extends AppCompatActivity {
         noKtpPenanggungEt = findViewById(R.id.no_ktp_penanggung_et);
         namaIbuEt = findViewById(R.id.nama_gadis_ibu_et);
 
-
+        tanggalLahirTv.setOnClickListener(v -> {
+            // TODO Auto-generated method stub
+            new DatePickerDialog(LengkapiData.this, date, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+        });
 
         pickDate.setOnClickListener(v -> {
             // TODO Auto-generated method stub
@@ -236,7 +250,7 @@ public class LengkapiData extends AppCompatActivity {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        tanggalLahirEt.setText(sdf.format(myCalendar.getTime()));
+        tanggalLahirTv.setText(sdf.format(myCalendar.getTime()));
     }
 
     public void cekPropinsi() {
@@ -250,8 +264,8 @@ public class LengkapiData extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d("Prop", "onResponse: " + response.body().toString());
                 try {
+                    Log.d("Prop", "onResponse: " + response.body().toString());
                     JSONObject obj = new JSONObject(response.body().string());
                     boolean status = obj.getBoolean("status");
                     if (status) {
@@ -509,7 +523,7 @@ public class LengkapiData extends AppCompatActivity {
         agama = agamaSpinner.getSelectedItem().toString();
         jenisKelamin = jenisKelaminSpinner.getSelectedItem().toString();
         tempatLahir = tempatLahirEt.getText().toString();
-        tanggalLahir = tanggalLahirEt.getText().toString();
+        tanggalLahir = tanggalLahirTv.getText().toString();
         statusKawin = statusKawinSpinner.getSelectedItem().toString();
         jumlahTanggungan = jumlahTanggunganEt.getText().toString();
         title = titleSpinner.getSelectedItem().toString();
@@ -609,10 +623,11 @@ public class LengkapiData extends AppCompatActivity {
                 "\nStatus Hubungan: " + statusHubungan + "\nNama Penanggung: " + namaPenanggung +
                 "\nKtp Penanggung: " + noKtpPenanggung + "\nNama Ibu: " + namaIbu);
 
+        editor.putString("no_telpon", currentPhoneNumber);
         editor.putString("no_ktp", noKtp);
         editor.putString("nama_lengkap", namaLengkap);
         editor.putString("agama", agama);
-        editor.putString("jensi_kelamin", jenisKelamin);
+        editor.putString("jenis_kelamin", jenisKelamin);
         editor.putString("tempat_lahir", tempatLahir);
         editor.putString("tanggal_lahir", tanggalLahir);
         editor.putString("status_kawin", statusKawin);
@@ -634,6 +649,7 @@ public class LengkapiData extends AppCompatActivity {
         editor.putString("no_ktp_penanggung", noKtpPenanggung);
         editor.putString("nama_ibu", namaIbu);
         editor.commit();
+        finish();
         startActivity(new Intent(LengkapiData.this, TakePicture.class));
     }
 
@@ -651,6 +667,7 @@ public class LengkapiData extends AppCompatActivity {
         AlertDialog alertbox = new AlertDialog.Builder(this)
                 .setMessage("Apa anda yakin ingin kembali ke Halaman Depan?")
                 .setPositiveButton("Ya", (arg0, arg1) -> {
+                    SharedPrefManager.getInstance(getApplicationContext()).logout();
                     finish();
                     startActivity(new Intent(LengkapiData.this, HalamanDepanActivity.class));
                     //close();

@@ -13,7 +13,6 @@ public class SharedPrefManager {
     private static final String KEY_NIP = "key_nip";
     private static final String KEY_EMAIL = "key_email";
     private static final String KEY_PASSWORD =  "key_pass";
-
     private static final String KEY_NO_KTP = "key_no_ktp";
     private static final String KEY_NAMA = "key_nama";
     private static final String KEY_AGAMA = "key_agama";
@@ -39,11 +38,9 @@ public class SharedPrefManager {
     private static final String NO_KTP_PENANGGUNG = "no_ktp_penanggung";
     private static final String NAMA_IBU = "nama_ibu";
     private static final String KEY_NO_TELP = "key_no_telp";
-
-
-
-
-
+    private static final String PHOTO_KTP = "photo_ktp";
+    private static final String PHOTO_SELFI = "photo_selfi";
+    private static final String PHOTO_PROFILE = "photo_profile";
     private static SharedPrefManager mInstance;
     private static Context mCtx;
 
@@ -92,6 +89,9 @@ public class SharedPrefManager {
         editor.putString(NO_KTP_PENANGGUNG, user.getNoKtpPenanggung());
         editor.putString(NAMA_IBU, user.getNamaIbu());
         editor.putString(KEY_NO_TELP, user.getNoTelp());
+        editor.putString(PHOTO_KTP, user.getImageKtp());
+        editor.putString(PHOTO_SELFI, user.getImageSelfi());
+        editor.putString(PHOTO_PROFILE, user.getImageProfile());
         editor.apply();
     }
 
@@ -134,7 +134,10 @@ public class SharedPrefManager {
                 sharedPreferences.getString(NAMA_PENANGGUNG, null),
                 sharedPreferences.getString(NO_KTP_PENANGGUNG, null),
                 sharedPreferences.getString(NAMA_IBU, null),
-                sharedPreferences.getString(KEY_NO_TELP, null)
+                sharedPreferences.getString(KEY_NO_TELP, null),
+                sharedPreferences.getString(PHOTO_KTP, null),
+                sharedPreferences.getString(PHOTO_SELFI, null),
+                sharedPreferences.getString(PHOTO_PROFILE, null)
         );
     }
 
@@ -144,7 +147,7 @@ public class SharedPrefManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        mCtx.startActivity(new Intent(mCtx, HalamanDepanActivity.class));
+//        mCtx.startActivity(new Intent(mCtx, HalamanDepanActivity.class));
     }
 
 

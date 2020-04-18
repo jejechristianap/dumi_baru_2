@@ -49,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,8 +67,9 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline"
                     android:layout_width="wrap_content"
@@ -88,6 +90,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     app:layout_constraintGuide_percent="0.3" />
+
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline4"
                     android:layout_width="wrap_content"
@@ -128,26 +131,26 @@
                     android:text="@string/nama_lengkap"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
+                    android:textColor="@color/black"
                     app:layout_constraintBottom_toTopOf="@+id/guideline3"
-                    app:layout_constraintStart_toStartOf="@+id/guideline"
                     app:layout_constraintEnd_toEndOf="@id/guideline4"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
                     tools:autoSizeMaxTextSize="15sp"
                     tools:autoSizeStepGranularity="1sp" />
 
                 <EditText
-                    android:id="@+id/nama_lengkap_et"
+                    android:id="@+id/nama_lengkap_rincian"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:autofillHints=""
                     android:backgroundTint="@color/colorBlue"
                     android:inputType="number"
-                    android:textColor="@android:color/black"
                     android:textStyle="bold"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="@id/guideline4"
                     app:layout_constraintStart_toStartOf="@+id/guideline"
                     app:layout_constraintTop_toTopOf="@+id/guideline3"
-                    app:layout_constraintEnd_toEndOf="@id/guideline4"
                     tools:autoSizeMaxTextSize="20sp"
                     tools:autoSizeStepGranularity="1sp"
                     tools:ignore="LabelFor" />
@@ -156,18 +159,18 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
             <!--No Ktp-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/no_ktp"
+                android:textColor="@color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
+
             <EditText
                 android:id="@+id/no_ktp_rincian"
                 android:layout_width="match_parent"
@@ -175,7 +178,6 @@
                 android:autofillHints=""
                 android:backgroundTint="@color/colorBlue"
                 android:inputType="number"
-                android:textColor="@android:color/black"
                 android:textStyle="bold"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
@@ -189,6 +191,7 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/agama"
+                android:textColor="@color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
@@ -201,13 +204,110 @@
                 android:autofillHints=""
                 android:backgroundTint="@color/colorBlue"
                 android:inputType="text"
-                android:textColor="@android:color/black"
                 android:textStyle="bold"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
                 tools:ignore="LabelFor" />
+            <!--Jenis Kelamin-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/jenis_kelamin"
+                app:autoSizeMinTextSize="8sp"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/jenis_kelamin_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="text"
+                android:textStyle="bold"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />
+
+            <!--tempat lahir-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/tempat_lahir"
+                app:autoSizeMinTextSize="8sp"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/tempat_lahir_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textCapCharacters"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />
+
+            <!--Status Kawin-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/status_kawin"
+                app:autoSizeMinTextSize="8sp"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+
+            <EditText
+                android:id="@+id/status_kawin_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textCapCharacters"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />
+
+            <!--Jumlah Tanggungan-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/jumlah_tanggungan"
+                android:textColor="@color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/jumlah_tanggungan_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="number"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />
+
             <!--Title-->
             <TextView
                 android:layout_width="match_parent"
@@ -215,10 +315,10 @@
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/title"
                 app:autoSizeMinTextSize="8sp"
+                android:textColor="@color/black"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
                 android:id="@+id/title_rincian"
                 android:layout_width="match_parent"
@@ -226,13 +326,87 @@
                 android:autofillHints=""
                 android:backgroundTint="@color/colorBlue"
                 android:inputType="text"
-                android:textColor="@android:color/black"
                 android:textStyle="bold"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
                 tools:ignore="LabelFor" />
+
+            <!--Nama Intansi kerja-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/instansi_kerja"
+                app:autoSizeMinTextSize="8sp"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/insker_nama_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textCapCharacters"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />
+
+            <!--Status Rumah-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/status_rumah"
+                app:autoSizeMinTextSize="8sp"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/status_rumah_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textCapCharacters"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />
+
+            <!--Alamat-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/alamat"
+                android:textColor="@color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/alamat_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:lines="8"
+                android:maxLines="10"
+                android:minLines="6"
+                android:scrollbars="vertical"
+                android:textStyle="bold"
+                tools:ignore="LabelFor" />
+
             <!--RT-->
             <TextView
                 android:layout_width="match_parent"
@@ -241,9 +415,9 @@
                 android:text="@string/rt"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
+                android:textColor="@color/black"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
                 android:id="@+id/rt_rincian"
                 android:layout_width="match_parent"
@@ -251,9 +425,9 @@
                 android:autofillHints=""
                 android:backgroundTint="@color/colorBlue"
                 android:inputType="number"
-                android:textColor="@android:color/black"
                 android:textStyle="bold"
                 tools:ignore="LabelFor" />
+
             <!--RW-->
             <TextView
                 android:layout_width="match_parent"
@@ -261,10 +435,10 @@
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/rw"
                 app:autoSizeMinTextSize="8sp"
+                android:textColor="@color/black"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
                 android:id="@+id/rw_rincian"
                 android:layout_width="match_parent"
@@ -272,60 +446,39 @@
                 android:autofillHints=""
                 android:backgroundTint="@color/colorBlue"
                 android:inputType="number"
-                android:textColor="@android:color/black"
                 android:textStyle="bold"
                 tools:ignore="LabelFor" />
 
-            <!--Kelurahan-->
+            <!--Propinsi-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/kelurahan"
+                android:text="@string/propinsi"
                 app:autoSizeMinTextSize="8sp"
+                android:textColor="@color/black"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
 
             <EditText
-                android:id="@+id/kelurahan_rincian"
+                android:id="@+id/provinsi_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:backgroundTint="@color/colorBlue"
                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                 android:inputType="text"
-                android:textColor="@android:color/black"
                 android:textStyle="bold"
                 tools:ignore="LabelFor" />
-            <!--Kecamatan-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/kecamatan"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
 
-            <EditText
-                android:id="@+id/kecamatan_rincian"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                android:inputType="text"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                tools:ignore="LabelFor" />
-            <!--Kecamatan-->
+            <!--Kota-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/kota"
+                android:textColor="@color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
@@ -339,41 +492,62 @@
                 android:backgroundTint="@color/colorBlue"
                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                 android:inputType="text"
-                android:textColor="@android:color/black"
                 android:textStyle="bold"
                 tools:ignore="LabelFor" />
-            <!--Alamat-->
+
+            <!--Kecamatan-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/alamat"
+                android:text="@string/kecamatan"
+                android:textColor="@color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
 
             <EditText
-                android:id="@+id/alamat_rincian"
+                android:id="@+id/kecamatan_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:backgroundTint="@color/colorBlue"
-                android:gravity="top|left"
-                android:inputType="textMultiLine"
-                android:lines="8"
-                android:maxLines="10"
-                android:minLines="6"
-                android:scrollbars="vertical"
-                android:textColor="@android:color/black"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                android:inputType="text"
                 android:textStyle="bold"
                 tools:ignore="LabelFor" />
 
+            <!--Kelurahan-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/kelurahan"
+                android:textColor="@color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+
+            <EditText
+                android:id="@+id/kelurahan_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                android:inputType="text"
+                android:textStyle="bold"
+                tools:ignore="LabelFor" />
+
+            <!--Kode Pos-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/kode_pos"
+                android:textColor="@color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
@@ -386,31 +560,142 @@
                 android:autofillHints=""
                 android:backgroundTint="@color/colorBlue"
                 android:inputType="number"
-                android:textColor="@android:color/black"
                 android:textStyle="bold"
                 tools:ignore="LabelFor" />
 
+            <!--Nomor Telepon-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
                 android:text="@string/no_telp"
+                android:textColor="@color/black"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
                 android:id="@+id/no_telp_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
                 android:autofillHints=""
                 android:backgroundTint="@color/colorBlue"
                 android:inputType="number"
-                android:textColor="@android:color/black"
                 android:textStyle="bold"
                 tools:ignore="LabelFor" />
+
+            <!--Data Keluarga-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="@string/data_keluarga"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp" />
+
+            <!--Status Hubungan-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:textColor="@color/black"
+                android:text="@string/status_hubungan_penjamin"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/status_hubungan_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="number"
+                android:textStyle="bold"
+                tools:ignore="LabelFor" />
+
+            <!--Nama Kerabat-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/nama_penanggung"
+                app:autoSizeMinTextSize="8sp"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/nama_kerabat_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textCapCharacters"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />
+
+            <!--No Ktp-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/no_ktp_penanggung"
+                android:textColor="@color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/no_ktp_kerabat_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="number"
+                android:maxLength="16"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />
+
+            <!--Nama Gadis Ibu-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/nama_ibu"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                android:textColor="@color/black"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:id="@+id/nama_ibu_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:layout_marginBottom="50dp"
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textCapCharacters"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />
+
         </LinearLayout>
 
     </ScrollView>

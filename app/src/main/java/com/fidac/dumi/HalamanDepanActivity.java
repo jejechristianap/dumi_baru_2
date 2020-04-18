@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fidac.dumi.api.PropinsiInterface;
+import com.fidac.dumi.model.SharedPrefManager;
 import com.fidac.dumi.retrofit.RetrofitClient;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -33,6 +34,7 @@ public class HalamanDepanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_halaman_depan);
 
+        SharedPrefManager.getInstance(getApplicationContext()).logout();
         pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
         editor = pref.edit();
         editor.clear();

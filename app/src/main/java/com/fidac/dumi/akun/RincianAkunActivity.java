@@ -7,7 +7,9 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,61 +22,109 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.fidac.dumi.R;
+import com.fidac.dumi.TakePicture;
+import com.fidac.dumi.api.UploadImageInterface;
 import com.fidac.dumi.fragment.AkunFragment;
 import com.fidac.dumi.model.SharedPrefManager;
 import com.fidac.dumi.model.User;
+import com.fidac.dumi.retrofit.RetrofitClient;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class RincianAkunActivity extends AppCompatActivity {
     private Uri imgDp;
     private String currentPhotoPath;
     private ImageView imgDpIv, takeImg, back;
+    private UploadImageInterface prop;
+    private User prefManager;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+
+    private EditText noKtpEt, namaEt, agamaEt, jenisKEt, tempatTglEt, statusKawinEt,
+            jmlTangEt, titleEt, inskerEt, statusRumahEt, rtEt, rwEt, kelurahanEt, kecamatanEt,
+            kotaEt, alamatEt, kodePosEt, noTelpEt, provinsiEt, statusHubEt, namaKerabatEt,
+            noKtpKerEt, namaIbuEt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rincian_akun);
 
+        pref = getApplicationContext().getSharedPreferences("Profile", 0); // 0 - for private mode
+        editor = pref.edit();
+        prop = RetrofitClient.getClient().create(UploadImageInterface.class);
+
         imgDpIv = findViewById(R.id.img_dp_iv);
         takeImg = findViewById(R.id.takeImg);
         back = findViewById(R.id.back_rincian);
 
-        EditText noKtpEt, namaEt, agamaEt, titleEt, rtEt, rwEt, kelurahanEt, kecamatanEt,
-                kotaEt, alamatEt, kodePosEt, noTelpEt;
+
 
 //        Button kembaliButton = findViewById(R.id.kembali_button);
 
 
-        User prefManager = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+        prefManager = SharedPrefManager.getInstance(getApplicationContext()).getUser();
         String noKtp = prefManager.getNoKtp();
         String nama = prefManager.getNamaLengkap();
         String agama = prefManager.getAgama();
+        String jenisKl = prefManager.getJenisKelamin();
+        String tempatTglLhr = prefManager.getTempatLahir() + ", " + prefManager.getTanggalLahir();
+        String statusKawin = prefManager.getStatusKawin();
+        String jmlTang = prefManager.getJumlahTanggungan();
         String title = prefManager.getTitle() + " (" + prefManager.getKetTitle() + ")";
+        String insker = prefManager.getInskerKerja();
+        String statusRumah = prefManager.getStatusRumah();
         String rt = prefManager.getRt();
         String rw = prefManager.getRw();
+        String provinsi = prefManager.getPropinsi();
         String kelurahan = prefManager.getKelurahan();
         String kecamatan = prefManager.getKecamatan();
         String kota = prefManager.getKota();
         String alamat = prefManager.getAlamat();
         String kodePos = prefManager.getKodePos();
         String noTelp = prefManager.getNoTelp();
+        String statushubungan = prefManager.getStatusHubungan();
+        String namaKerabat = prefManager.getNamaPenanggung();
+        String noKtpKerabat = prefManager.getNoKtpPenanggung();
+        String namaIbu = prefManager.getNamaIbu();
 
         noKtpEt = findViewById(R.id.no_ktp_rincian);
-        namaEt = findViewById(R.id.nama_lengkap_et);
+        namaEt = findViewById(R.id.nama_lengkap_rincian);
         agamaEt = findViewById(R.id.agama_rincian);
+        jenisKEt = findViewById(R.id.jenis_kelamin_rincian);
+        tempatTglEt = findViewById(R.id.tempat_lahir_rincian);
+        statusKawinEt = findViewById(R.id.status_kawin_rincian);
+        jmlTangEt = findViewById(R.id.jumlah_tanggungan_rincian);
         titleEt = findViewById(R.id.title_rincian);
+        inskerEt = findViewById(R.id.insker_nama_rincian);
+        statusRumahEt = findViewById(R.id.status_rumah_rincian);
         rtEt = findViewById(R.id.rt_rincian);
         rwEt = findViewById(R.id.rw_rincian);
+        provinsiEt = findViewById(R.id.provinsi_rincian);
         kelurahanEt = findViewById(R.id.kelurahan_rincian);
         kecamatanEt = findViewById(R.id.kecamatan_rincian);
         kotaEt = findViewById(R.id.kota_rincian);
         alamatEt = findViewById(R.id.alamat_rincian);
         kodePosEt = findViewById(R.id.kode_pos_rincian);
         noTelpEt = findViewById(R.id.no_telp_rincian);
+        statusHubEt = findViewById(R.id.status_hubungan_rincian);
+        namaKerabatEt = findViewById(R.id.nama_kerabat_rincian);
+        noKtpKerEt = findViewById(R.id.no_ktp_kerabat_rincian);
+        namaIbuEt = findViewById(R.id.nama_ibu_rincian);
 
         noKtpEt.setEnabled(false);
         namaEt.setEnabled(false);
@@ -88,22 +138,87 @@ public class RincianAkunActivity extends AppCompatActivity {
         alamatEt.setEnabled(false);
         kodePosEt.setEnabled(false);
         noTelpEt.setEnabled(false);
+        jenisKEt.setEnabled(false);
+        tempatTglEt.setEnabled(false);
+        statusKawinEt.setEnabled(false);
+        jmlTangEt.setEnabled(false);
+        inskerEt.setEnabled(false);
+        statusRumahEt.setEnabled(false);
+        provinsiEt.setEnabled(false);
+        statusHubEt.setEnabled(false);
+        namaKerabatEt.setEnabled(false);
+        noKtpKerEt.setEnabled(false);
+        namaIbuEt.setEnabled(false);
 
         noKtpEt.setText(noKtp);
         namaEt.setText(nama);
         agamaEt.setText(agama);
+        jenisKEt.setText(jenisKl);
+        tempatTglEt.setText(tempatTglLhr);
+        statusKawinEt.setText(statusKawin);
+        jmlTangEt.setText(jmlTang);
+        inskerEt.setText(insker);
+        statusRumahEt.setText(statusRumah);
         titleEt.setText(title);
         rtEt.setText(rt);
         rwEt.setText(rw);
+        provinsiEt.setText(provinsi);
         kelurahanEt.setText(kelurahan);
         kecamatanEt.setText(kecamatan);
         kotaEt.setText(kota);
         alamatEt.setText(alamat);
         kodePosEt.setText(kodePos);
         noTelpEt.setText(noTelp);
+        statusHubEt.setText(statushubungan);
+        namaKerabatEt.setText(namaKerabat);
+        noKtpKerEt.setText(noKtpKerabat);
+        namaIbuEt.setText(namaIbu);
 
         takeImg.setOnClickListener(v -> takeImg());
         back.setOnClickListener(v -> finish());
+    }
+
+    private void uploadProfile(){
+        String nipBaru = prefManager.getNip();
+
+        RequestBody nip = RequestBody.create(MediaType.parse("text/plain"), nipBaru);
+        File fileProfile = new File(currentPhotoPath);
+        RequestBody fileReqBodyProfile = RequestBody.create(MediaType.parse("image/*"), fileProfile);
+        MultipartBody.Part bodyProfile = MultipartBody.Part.createFormData("image_profile", currentPhotoPath, fileReqBodyProfile);
+        ProgressDialog pDialog;
+        pDialog = new ProgressDialog(RincianAkunActivity.this);
+        pDialog.setMessage("Sedang mengupload foto...");
+        pDialog.show();
+        Call<ResponseBody> call = prop.uploadProfile(nip, bodyProfile);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+                    boolean status = obj.getBoolean("status");
+                    if (status){
+                        pDialog.dismiss();
+                        Log.v("Upload", "success" + response.body().toString());
+                        Toast.makeText(RincianAkunActivity.this, "Upload Berhasil", Toast.LENGTH_SHORT).show();
+                        editor.putString("image_profile", currentPhotoPath);
+                        editor.commit();
+                    } else{
+                        pDialog.dismiss();
+                        Toast.makeText(RincianAkunActivity.this, "Mohon maaf upload gagal, silahkan mencoba lagi..", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
     }
 
     private void takeImg() {
@@ -168,7 +283,8 @@ public class RincianAkunActivity extends AppCompatActivity {
                 case 1:
                     imgDpIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
                     imgDpIv.setImageURI(Uri.parse(currentPhotoPath));
-                    Log.d("KTP", "onActivityResult: " + currentPhotoPath);
+                    Log.d("Profile", "onActivityResult: " + currentPhotoPath);
+                    uploadProfile();
 //                    ImageCropFunction();
 
                     break;

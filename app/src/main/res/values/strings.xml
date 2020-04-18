@@ -116,7 +116,7 @@
     <string name="mk_bulan">Masa Kerja (Bulan):</string>
     <string name="mk_tahun">Masa Kerja (Tahun):</string>
     <string name="inskerNama">inskerNama:</string>
-    <string name="tempat_lahir">Tempat Lahir:</string>
+    <string name="tempat_lahir">Tempat dan tanggal lahir:</string>
     <string name="tglLahirPns">Tanggal Lahir:</string>
     <string name="npwp">NPWP:</string>
     <string name="no_ktp">No. KTP:</string>
@@ -310,12 +310,12 @@
 
         Kami juga dapat mengumpulkan Informasi Pribadi anda dari akun-akun anda yang lain  atau akun-akun
         yang ada di perangkat mobile dengan tunduk kepada Peraturan dan Hukum yang berlaku, seperti:\n\n
-        &#8226;<br/>
+        &#8226;<br />
         Kami dapat melihat lokasi anda secara langsung melalui jaringan dan Global Positioning System (GPS)
         dari perangkat mobile anda.\n\n
-        &#8226;<br/>
+        &#8226;<br />
         Kami dapatmengakses mikrofon di perangkat mobile anda;\n\n
-        &#8226;<br/>
+        &#8226;<br />
         Kami dapat mengakses kamera di perangkat mobile anda , dan/atau mengambil foto atau video dari
         perangkat mobile anda.\n\n
 
@@ -459,6 +459,13 @@
     <string name="kebijakanprivasi">Kebijakan dan Privasi</string>
     <string name="saya_setuju"><![CDATA[Saya setuju dengan<font color=\'#1560db\'> Syarat dan Ketentuan</font> yang berlaku]]></string>
     <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="notifikasi">Notifikasi</string>
+    <string name="pesan">Pesan</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="status_pinjaman">Status Pinjaman:</string>
+    <string name="tanggal_pengajuan">Tanggal Pengajuan</string>
 
 
 </resources>

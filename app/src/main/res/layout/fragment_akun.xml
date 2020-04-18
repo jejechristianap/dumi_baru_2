@@ -17,7 +17,7 @@
         android:layout_height="0dp">
 
         <ImageView
-            android:id="@+id/photo"
+            android:id="@+id/photo_profile"
             android:layout_gravity="center"
             android:src="@drawable/ic_profil"
             android:background="@drawable/layout_rounded"
@@ -83,6 +83,7 @@
                 android:background="#D2CECE"/>
 
             <LinearLayout
+                android:id="@+id/ubah_sandi_ll"
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"

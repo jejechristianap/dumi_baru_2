@@ -187,18 +187,21 @@ public class MasukActivity extends AppCompatActivity {
                             String noKtpPenanggung = userObj.getString("no_ktp_penanggung");
                             String namaIbu = userObj.getString("ibuKandung");
                             String noHp = userObj.getString("no_hp");
+                            String imageKtp = userObj.getString("photo_ktp");
+                            String imageSelfi = userObj.getString("photo_selfi");
+                            String imageProfile = userObj.getString("photo_profile");
 
                             User user = new User(id, nip, email, password, noKtp, nama, agama, jenisKelamin,
                                     tempatLahir, tanggalLahir, statusKawin, jumlahTanggungan, pendidikan, ketTitle,
                                     insker, statusRumah, alamat, rt, rw, propinsi, kota, kecamatan, kelurahan,
-                                    kodePos, statusHubungan, namaPenanggung, noKtpPenanggung, namaIbu, noHp);
+                                    kodePos, statusHubungan, namaPenanggung, noKtpPenanggung, namaIbu, noHp, imageKtp, imageSelfi, imageProfile);
 
                             SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
 
-                            Toast toast= Toast.makeText(MasukActivity.this,
+                            /*Toast toast= Toast.makeText(MasukActivity.this,
                                     "Selamat datang, " + nama, Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
-                            toast.show();
+                            toast.show();*/
                         }
                         finish();
                         startActivity(new Intent(MasukActivity.this, MainActivity.class));
