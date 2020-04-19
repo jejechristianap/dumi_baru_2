@@ -168,7 +168,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/tempat_lahir"
+                android:text="@string/tempat_lhr"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
@@ -210,6 +210,8 @@
                     android:id="@+id/tanggal_lahir_et"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="5dp"
                     android:autofillHints=""
                     android:backgroundTint="@color/colorBlue"
                     android:textColor="@android:color/black"
@@ -221,7 +223,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/pick_date"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:autoSizeMaxTextSize="20sp"
+                    tools:autoSizeMaxTextSize="12sp"
                     tools:autoSizeStepGranularity="1sp"
                     tools:ignore="LabelFor" />
 

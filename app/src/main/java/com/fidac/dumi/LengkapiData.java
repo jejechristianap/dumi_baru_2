@@ -213,6 +213,10 @@ public class LengkapiData extends AppCompatActivity {
         noKtpPenanggungEt = findViewById(R.id.no_ktp_penanggung_et);
         namaIbuEt = findViewById(R.id.nama_gadis_ibu_et);
 
+        String insker = pref.getString("inskerNama", null);
+        inskerKerjaEt.setEnabled(false);
+        inskerKerjaEt.setText(insker);
+
         tanggalLahirTv.setOnClickListener(v -> {
             // TODO Auto-generated method stub
             new DatePickerDialog(LengkapiData.this, date, myCalendar

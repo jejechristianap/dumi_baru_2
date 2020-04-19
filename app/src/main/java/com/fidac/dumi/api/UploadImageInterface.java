@@ -27,4 +27,11 @@ public interface UploadImageInterface {
     Call<ResponseBody> uploadProfile(@Part("nipBaru") RequestBody nipBaru,
                                     @Part MultipartBody.Part image_ktp);
 
+    @Multipart
+    @POST("surat/update")
+    Call<ResponseBody> uploadSurat(@Part("nipBaru") RequestBody nipBaru,
+                                   @Part MultipartBody.Part imgSk,
+                                   @Part MultipartBody.Part imgPa,
+                                   @Part MultipartBody.Part imgSkCpns);
+
 }

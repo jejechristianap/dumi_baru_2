@@ -113,6 +113,9 @@ public class DaftarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar);
 
+        pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
+        editor = pref.edit();
+
         LinearLayout ll = findViewById(R.id.email_password);
         ll.setVisibility(View.GONE);
 
@@ -162,6 +165,9 @@ public class DaftarActivity extends AppCompatActivity {
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 masukanNipEt.setCursorVisible(false);
                 cekUser();
+            } else {
+                masukanNipEt.setCursorVisible(true);
+                emailPassLl.setVisibility(View.GONE);
             }
         });
 
@@ -341,15 +347,19 @@ public class DaftarActivity extends AppCompatActivity {
                         for (int i = 0; i < dataArray.length(); i++){
                             JSONObject dataObj = dataArray.getJSONObject(i);
                             inskerNama = dataObj.getString("inskerNama");
+                            editor.putString("inskerNama", inskerNama);
                         }
-                        if(inskerNama.equals("Badan Kepegawaian Negara")){
+                        Toast.makeText(DaftarActivity.this, "NIP anda ditemukan..", Toast.LENGTH_SHORT).show();
+                        emailPassLl.setVisibility(View.VISIBLE);
+                        emailEt.requestFocus();
+                        /*if(inskerNama.equals("Badan Kepegawaian Negara")){
                             Toast.makeText(DaftarActivity.this, "NIP anda ditemukan..", Toast.LENGTH_SHORT).show();
                             emailPassLl.setVisibility(View.VISIBLE);
                             emailEt.requestFocus();
                         } else {
                             Toast.makeText(DaftarActivity.this, "Mohon maaf Instansi anda belum bekerja sama", Toast.LENGTH_SHORT).show();
 
-                        }
+                        }*/
                     }else{
 //                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         Log.e("errorMessage", "onResponse: " + obj);

@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".akun.UbahSandiActivity"></activity>
+        <activity android:name=".PelengkapanRegularActivity"></activity>
+        <activity android:name=".akun.UbahSandiActivity" />
         <activity android:name=".akun.KebijakanPrivasiActivity" />
         <activity android:name=".akun.DisclaimerActivity" />
         <activity android:name=".akun.PusatBantuanActivity" />

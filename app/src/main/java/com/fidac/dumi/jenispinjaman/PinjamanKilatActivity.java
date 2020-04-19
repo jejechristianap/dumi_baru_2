@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -23,6 +24,7 @@ import com.fidac.dumi.MainActivity;
 import com.fidac.dumi.R;
 import com.fidac.dumi.api.GetBungaInterface;
 import com.fidac.dumi.api.PinjamanKilatInterface;
+import com.fidac.dumi.api.StatusPinjamanInterface;
 import com.fidac.dumi.model.SharedPrefManager;
 import com.fidac.dumi.model.User;
 import com.fidac.dumi.retrofit.RetrofitClient;
@@ -38,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -88,12 +91,16 @@ public class PinjamanKilatActivity extends AppCompatActivity {
 
     private SharedPreferences.Editor editor;
     private SharedPreferences pref;
+    private User prefManager;
+
+    private TextView adminTv, asuransiTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pinjaman_kilat);
 
+        prefManager = SharedPrefManager.getInstance(getApplicationContext()).getUser();
         pref = getApplicationContext().getSharedPreferences("ajukanPinjaman", 0); // 0 - for private mode
         editor = pref.edit();
 
@@ -108,6 +115,9 @@ public class PinjamanKilatActivity extends AppCompatActivity {
         biayaTransferTv = findViewById(R.id.biaya_transfer_antar_bank_kilat);
         jumlahTerimaTv = findViewById(R.id.jumlah_yang_diterima_kilat);
         jumlah = findViewById(R.id.rp_1jt_kilat);
+
+        adminTv = findViewById(R.id.admin_asn);
+        asuransiTv = findViewById(R.id.asuransi_asn);
 
         back = findViewById(R.id.back_kilat);
         back.setOnClickListener(v -> {
@@ -475,8 +485,17 @@ public class PinjamanKilatActivity extends AppCompatActivity {
 
         ajukanButton = findViewById(R.id.lanjut_button_kilat);
         ajukanButton.setOnClickListener(v -> {
-            ajukanPinjaman();
+//            ajukanPinjaman();
+            String angs = angsuranTv.getText().toString();
+            if(TextUtils.isEmpty(angs)){
+                Toast.makeText(this, "Tentukan Lama Pembayaran", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Toast.makeText(this, "Touch", Toast.LENGTH_SHORT).show();
+            getPinjaman();
+//            ajukanPinjaman();
         });
+
 
     }
 
@@ -492,10 +511,67 @@ public class PinjamanKilatActivity extends AppCompatActivity {
 
     }
 
+    private void getPinjaman(){
+
+        String nip = prefManager.getNip();
+        Toast.makeText(this, "NIp: " + nip, Toast.LENGTH_SHORT).show();
+        StatusPinjamanInterface status = RetrofitClient.getClient().create(StatusPinjamanInterface.class);
+        Call<ResponseBody> call = status.getPinjaman(nip);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+                    boolean cek = obj.getBoolean("status");
+                    if (cek){
+                        String data = obj.getString("data");
+                        JSONArray jsonArray = new JSONArray(data);
+                        if (!jsonArray.isNull(0)){
+                            for (int i = 0; i<jsonArray.length(); i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                int statusId = jsonObject.getInt("status");
+                                Toast.makeText(PinjamanKilatActivity.this, "id " + statusId, Toast.LENGTH_SHORT).show();
+
+                                if(statusId == 1){
+                                    Toast.makeText(PinjamanKilatActivity.this, "Anda sudah mengajukan pinjaman, mohon menunggu", Toast.LENGTH_SHORT).show();
+                                } else if (statusId == 2){
+                                    Toast.makeText(PinjamanKilatActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                } else if (statusId == 3){
+                                    ajukanPinjaman();
+                                } else if (statusId == 4){
+                                    Toast.makeText(PinjamanKilatActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                } else if (statusId == 5){
+                                    Toast.makeText(PinjamanKilatActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                } else if(statusId == 6){
+                                    ajukanPinjaman();
+                                }
+//
+                            }
+                        }else {
+                            ajukanPinjaman();
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+    }
+
     private void getBunga() {
         final ProgressDialog pDialog = new ProgressDialog(this);
         pDialog.setMessage("Memuat Data...");
         pDialog.show();
+        User pref = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+        String insker = pref.getInskerKerja();
 
         GetBungaInterface bunga = RetrofitClient.getClient().create(GetBungaInterface.class);
         Call<ResponseBody> call = bunga.getBunga();
@@ -506,17 +582,17 @@ public class PinjamanKilatActivity extends AppCompatActivity {
                 try {
                     JSONObject obj = new JSONObject(response.body().string());
                     boolean status = obj.getBoolean("status");
-                    Toast.makeText(PinjamanKilatActivity.this, "status: " + status, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(PinjamanKilatActivity.this, "status: " + status, Toast.LENGTH_SHORT).show();
                     if (status){
                         String data = obj.getString("data");
                         JSONArray bungaObj = new JSONArray(data);
-
                         for (int i = 0; i<bungaObj.length(); i++){
                             JSONObject bung = bungaObj.getJSONObject(i);
                             int id = bung.getInt("id_bunga");
 //                            Toast.makeText(PinjamanKilatActivity.this, "instansi: " + id, Toast.LENGTH_SHORT).show();
-                            if(id == 1){
-//                                Toast.makeText(PinjamanKilatActivity.this, "Get bunga", Toast.LENGTH_SHORT).show();
+                            if(id == 1 && insker.contains("Badan Kepegawaian Negara")){
+                                adminTv.setText("Biaya Administrasi 1%");
+                                asuransiTv.setText("Biaya Asuransi 1%");
                                 double bunga = bung.getDouble("bunga");
                                 double biayaAdmin = bung.getDouble("biaya_admin");
                                 double biayaAsuransi12 = bung.getDouble("biaya_asuransi_12");
@@ -529,6 +605,19 @@ public class PinjamanKilatActivity extends AppCompatActivity {
                                 getAsur36 = (float) biayaAsuransi36;
                                 Log.d("Biaya", "onResponse: " + "\nBunga: " + getBunga + "\nAdmin: " + getAdmin + "\nAsur12: " + getAsur12 +
                                         "\nAsur24: " + getAsur24 + "\nAsur36: " + getAsur36);
+                            } else if (id == 2 && !insker.contains("Badan Kepegawaian Negara")){
+                                adminTv.setText("Biaya Administrasi 2%");
+                                asuransiTv.setText("Biaya Asuransi 2%");
+                                double bunga = bung.getDouble("bunga");
+                                double biayaAdmin = bung.getDouble("biaya_admin");
+                                double biayaAsuransi12 = bung.getDouble("biaya_asuransi_12");
+                                double biayaAsuransi24 = bung.getDouble("biaya_asuransi_24");
+                                double biayaAsuransi36 = bung.getDouble("biaya_asuransi_36");
+                                getBunga = (float) bunga;
+                                getAdmin = (float) biayaAdmin;
+                                getAsur12 = (float) biayaAsuransi12;
+                                getAsur24 = (float) biayaAsuransi24;
+                                getAsur36 = (float) biayaAsuransi36;
                             }
                         }
                     }
@@ -537,7 +626,6 @@ public class PinjamanKilatActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override
@@ -561,20 +649,6 @@ public class PinjamanKilatActivity extends AppCompatActivity {
         final Date dueDate = c.getTime();
         String tglAkhirPinjam = dateFormat.format(dueDate);
 
-        /*Log.d("Pinjaman",
-                "nip: " + nip +
-                        "\nPinjaman: " + pinjamanUang +
-                        "\nPlafond: " + plafond +
-                        "\nbunga: " + BUNGA_PERBULAN +
-                        "\nBunga: " + bunga +
-                        "\nAdmin: " + admin +
-                        "\nAngsuran: " + angsuran +
-                        "\nTrfBank: " + BIAYA_TRANSFER +
-                        "\nTujuan: " + tujuan +
-                        "\nTglPinjam: " + tglPinjam +
-                        "\nAkhirTgl: " + tglAkhirPinjam +
-                        "\nSisa: " + sisa +
-                        "\nasurans: " + asuransi);*/
 
         editor.putString("nip", nip);
         editor.putFloat("pinjaman", pinjamanUang);
@@ -590,8 +664,5 @@ public class PinjamanKilatActivity extends AppCompatActivity {
         editor.commit();
 
         startActivity(new Intent(PinjamanKilatActivity.this, BankActivity.class));
-        /*PinjamanKilatInterface pinjam = RetrofitClient.getClient().create(PinjamanKilatInterface.class);
-        Call<ResponseBody> call = pinjam.ajukanPinjaman(nip, pinjamanUang, plafond, 0, BUNGA_PERBULAN,
-                bunga, admin, angsuran, BIAYA_TRANSFER, tujuan, tglPinjam, tglAkhirPinjam, "", sisa, asuransi, );*/
     }
 }

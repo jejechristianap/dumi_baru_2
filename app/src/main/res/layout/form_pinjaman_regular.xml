@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glStartVerti"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glEndVerti"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTopHori"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glBottomHori"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTopIv"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glBottomIv"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.86"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glStartIv"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glEndIv"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.86"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTvTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="138dp" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTvTop2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTvTop3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.29" />
+
+    <ImageView
+        app:layout_constraintStart_toEndOf="@id/glStartVerti"
+        app:layout_constraintEnd_toStartOf="@id/glEndVerti"
+        app:layout_constraintTop_toBottomOf="@id/glTopHori"
+        app:layout_constraintBottom_toTopOf="@id/glBottomHori"
+        android:background="@drawable/layout_rounded"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+    <TextView
+        android:id="@+id/tv_top"
+        app:layout_constraintStart_toEndOf="@id/glStartIv"
+        app:layout_constraintEnd_toStartOf="@id/glEndIv"
+        app:layout_constraintTop_toBottomOf="@id/glTopIv"
+        app:layout_constraintBottom_toTopOf="@id/glTvTop"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        app:autoSizeMinTextSize="12sp"
+        tools:autoSizeMaxTextSize="30sp"
+        tools:autoSizeStepGranularity="2sp"
+        android:text="@string/pelengkap_regular"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/zero"/>
+
+    <TextView
+        app:layout_constraintStart_toEndOf="@id/glStartIv"
+        app:layout_constraintEnd_toStartOf="@id/glEndIv"
+        app:layout_constraintTop_toBottomOf="@id/glTvTop2"
+        app:layout_constraintBottom_toTopOf="@id/glTvTop3"
+        android:text="@string/foto_sk"
+        android:textColor="@color/black"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/zero"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

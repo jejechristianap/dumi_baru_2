@@ -64,6 +64,12 @@ public class MitraFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getPinjaman();
+    }
+
     private void getPinjaman(){
         String nip = prefManager.getNip();
         StatusPinjamanInterface status = RetrofitClient.getClient().create(StatusPinjamanInterface.class);
@@ -93,12 +99,15 @@ public class MitraFragment extends Fragment {
                             } else if (statusId == 2){
                                 statusPinjamanTv.setText("Disetujui");
                             } else if (statusId == 3){
-                                statusPinjamanTv.setText("Telah ditransfer");
+                                statusPinjamanTv.setText("Pengajuan ditolak");
                             } else if (statusId == 4){
-                                statusPinjamanTv.setText("Kredit berjalan");
+                                statusPinjamanTv.setText("Telah ditransfer");
                             } else if (statusId == 5){
-                                statusPinjamanTv.setText("Kredit lunas");
+                                statusPinjamanTv.setText("Kredit berjalan");
+                            } else if(statusId == 6){
+                                statusPinjamanTv.setText("Kredit Lunas");
                             }
+                            lamaPinjaman += " Bulan";
                             pinjamanTv.setText(formatRp.format(pinjaman));
                             tenorPinjamanTv.setText(lamaPinjaman);
                             bungaTv.setText(formatRp.format(bungaRupiah));

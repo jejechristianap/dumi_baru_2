@@ -253,6 +253,7 @@
                 android:weightSum="2">
 
                 <TextView
+                    android:id="@+id/tvAdminReg"
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:layout_weight="1.2"
@@ -285,7 +286,7 @@
                 android:weightSum="2">
 
                 <TextView
-                    android:id="@+id/asuransi_12_36_bulan"
+                    android:id="@+id/tvAsurReg"
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:layout_weight="1.2"

@@ -65,7 +65,10 @@ public class BerandaFragment extends Fragment {
         });
 
         /*E-Commerce*/
-        isiPulsaLl.setOnClickListener(v -> startActivity(new Intent(getActivity(), IsiPulsaActivity.class)));
+        isiPulsaLl.setOnClickListener(v -> {
+//            startActivity(new Intent(getActivity(), IsiPulsaActivity.class));
+            Toast.makeText(getActivity(), "Tunggu update kami selanjutnya", Toast.LENGTH_SHORT).show();
+        });
 
 
         dumiKilatButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanKilatActivity.class)));

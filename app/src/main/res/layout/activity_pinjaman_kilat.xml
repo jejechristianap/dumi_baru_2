@@ -229,6 +229,7 @@
                 android:weightSum="2">
 
                 <TextView
+                    android:id="@+id/admin_asn"
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:layout_weight="1.2"
@@ -261,6 +262,7 @@
                 android:weightSum="2">
 
                 <TextView
+                    android:id="@+id/asuransi_asn"
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:layout_weight="1.2"

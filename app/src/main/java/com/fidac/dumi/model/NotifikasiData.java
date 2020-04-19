@@ -1,126 +1,102 @@
 package com.fidac.dumi.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class NotifikasiData {
-    int id, status, lamaPinjaman;
-    String nipBaru, tglPengajuan, tujuanPinjaman, tglMulaiPinjaman, tglAkhirPinjaman,
-            imgSuratKuasa, imgSuratBendahara, imgPersetujuan, imgSkCpns, noPk;
-    double pinjaman, bungaPertahun, bungaPersen, bungaRp, adminRp, angsuranPerbulan,
-            asuransiRp, transferRp, diterimaRp;
+    int id, status;
+    String judul, isi, waktu, idNasabah, token;
+    boolean bool;
+    @SerializedName("data")
+    @Expose
+    List<NotifikasiData> notif;
+
+    public List<NotifikasiData> getNotif(){
+        return notif;
+    }
 
     public NotifikasiData(){
 
     }
 
-    public NotifikasiData(int id, int status, int lamaPinjaman, String nipBaru, String tglPengajuan, String tujuanPinjaman, String tglMulaiPinjaman, String tglAkhirPinjaman, String imgSuratKuasa, String imgSuratBendahara, String imgPersetujuan, String imgSkCpns, String noPk, double pinjaman, double bungaPertahun, double bungaPersen, double bungaRp, double adminRp, double angsuranPerbulan, double asuransiRp, double transferRp, double diterimaRp) {
+    public NotifikasiData(boolean bool, int id, String token, String judul, String isi, int status, String waktu, String idNasabah) {
+        this.bool = bool;
         this.id = id;
+        this.token = token;
+        this.judul = judul;
+        this.isi = isi;
         this.status = status;
-        this.lamaPinjaman = lamaPinjaman;
-        this.nipBaru = nipBaru;
-        this.tglPengajuan = tglPengajuan;
-        this.tujuanPinjaman = tujuanPinjaman;
-        this.tglMulaiPinjaman = tglMulaiPinjaman;
-        this.tglAkhirPinjaman = tglAkhirPinjaman;
-        this.imgSuratKuasa = imgSuratKuasa;
-        this.imgSuratBendahara = imgSuratBendahara;
-        this.imgPersetujuan = imgPersetujuan;
-        this.imgSkCpns = imgSkCpns;
-        this.noPk = noPk;
-        this.pinjaman = pinjaman;
-        this.bungaPertahun = bungaPertahun;
-        this.bungaPersen = bungaPersen;
-        this.bungaRp = bungaRp;
-        this.adminRp = adminRp;
-        this.angsuranPerbulan = angsuranPerbulan;
-        this.asuransiRp = asuransiRp;
-        this.transferRp = transferRp;
-        this.diterimaRp = diterimaRp;
+        this.waktu = waktu;
+        this.idNasabah = idNasabah;
     }
 
-    public int getId() {
-        return id;
+    public boolean isBool() {
+        return bool;
+    }
+
+    public void setBool(boolean bool) {
+        this.bool = bool;
+    }
+
+    public void setNotif(List<NotifikasiData> notif) {
+        this.notif = notif;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public int getStatus() {
         return status;
     }
 
-    public int getLamaPinjaman() {
-        return lamaPinjaman;
+    public String getToken() {
+        return token;
     }
 
-    public String getNipBaru() {
-        return nipBaru;
+    public int getId() {
+        return id;
     }
 
-    public String getTglPengajuan() {
-        return tglPengajuan;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getTujuanPinjaman() {
-        return tujuanPinjaman;
+    public String getJudul() {
+        return judul;
     }
 
-    public String getTglMulaiPinjaman() {
-        return tglMulaiPinjaman;
+    public void setJudul(String judul) {
+        this.judul = judul;
     }
 
-    public String getTglAkhirPinjaman() {
-        return tglAkhirPinjaman;
+    public String getIsi() {
+        return isi;
     }
 
-    public String getImgSuratKuasa() {
-        return imgSuratKuasa;
+    public void setIsi(String isi) {
+        this.isi = isi;
     }
 
-    public String getImgSuratBendahara() {
-        return imgSuratBendahara;
+    public String getWaktu() {
+        return waktu;
     }
 
-    public String getImgPersetujuan() {
-        return imgPersetujuan;
+    public void setWaktu(String waktu) {
+        this.waktu = waktu;
     }
 
-    public String getImgSkCpns() {
-        return imgSkCpns;
+    public String getIdNasabah() {
+        return idNasabah;
     }
 
-    public String getNoPk() {
-        return noPk;
-    }
-
-    public double getPinjaman() {
-        return pinjaman;
-    }
-
-    public double getBungaPertahun() {
-        return bungaPertahun;
-    }
-
-    public double getBungaPersen() {
-        return bungaPersen;
-    }
-
-    public double getBungaRp() {
-        return bungaRp;
-    }
-
-    public double getAdminRp() {
-        return adminRp;
-    }
-
-    public double getAngsuranPerbulan() {
-        return angsuranPerbulan;
-    }
-
-    public double getAsuransiRp() {
-        return asuransiRp;
-    }
-
-    public double getTransferRp() {
-        return transferRp;
-    }
-
-    public double getDiterimaRp() {
-        return diterimaRp;
+    public void setIdNasabah(String idNasabah) {
+        this.idNasabah = idNasabah;
     }
 }

@@ -66,20 +66,11 @@ public class IsiPulsaActivity extends AppCompatActivity {
                 Log.i("autolog", "onResponse");
 
                 daftarHargaPulsaList = response.body();
-                Log.i("autolog", "List<User> userList = response.body();");
-
                 RecyclerView recyclerView = findViewById(R.id.daftar_harga);
-                Log.i("autolog", "RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler);");
-
                 layoutManager = new LinearLayoutManager(IsiPulsaActivity.this);
-                Log.i("autolog", "layoutManager = new LinearLayoutManager(MainActivity.this);");
                 recyclerView.setLayoutManager(layoutManager);
-                Log.i("autolog", "recyclerView.setLayoutManager(layoutManager);");
-
                 RecyclerViewAdapter recyclerViewAdapter =new RecyclerViewAdapter(getApplicationContext(), daftarHargaPulsaList);
-                Log.i("autolog", "RecyclerViewAdapter recyclerViewAdapter =new RecyclerViewAdapter(getApplicationContext(), userList);");
                 recyclerView.setAdapter(recyclerViewAdapter);
-                Log.i("autolog", "recyclerView.setAdapter(recyclerViewAdapter);");
                 pDialog.dismiss();
 
             }

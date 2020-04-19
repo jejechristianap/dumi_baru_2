@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -28,6 +30,8 @@ import com.fidac.dumi.fragment.AkunFragment;
 import com.fidac.dumi.model.SharedPrefManager;
 import com.fidac.dumi.model.User;
 import com.fidac.dumi.retrofit.RetrofitClient;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +40,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -63,6 +68,16 @@ public class RincianAkunActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rincian_akun);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if(checkSelfPermission(Manifest.permission.CAMERA) ==
+                    PackageManager.PERMISSION_DENIED ||
+                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                            PackageManager.PERMISSION_DENIED){
+                String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                requestPermissions(permission, 1);
+            }
+        }
 
         pref = getApplicationContext().getSharedPreferences("Profile", 0); // 0 - for private mode
         editor = pref.edit();
@@ -176,6 +191,23 @@ public class RincianAkunActivity extends AppCompatActivity {
 
         takeImg.setOnClickListener(v -> takeImg());
         back.setOnClickListener(v -> finish());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        prefManager = SharedPrefManager.getInstance(Objects.requireNonNull(getApplicationContext())).getUser();
+        String apiPhotoPath = prefManager.getImageProfile();
+        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
+        ImageLoader imageLoader = ImageLoader.getInstance();
+
+        if(apiPhotoPath != null){
+            imgDpIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//            photoIv.setImageURI(Uri.parse(apiPhotoPath));
+            imageLoader.displayImage(apiPhotoPath, imgDpIv);
+        }
+        ImageLoader.getInstance().destroy();
     }
 
     private void uploadProfile(){

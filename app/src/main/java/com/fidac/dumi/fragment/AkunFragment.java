@@ -21,6 +21,7 @@ import com.fidac.dumi.akun.DisclaimerActivity;
 import com.fidac.dumi.akun.KebijakanPrivasiActivity;
 import com.fidac.dumi.akun.PusatBantuanActivity;
 import com.fidac.dumi.akun.RincianAkunActivity;
+import com.fidac.dumi.akun.UbahSandiActivity;
 import com.fidac.dumi.model.SharedPrefManager;
 import com.fidac.dumi.model.User;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -41,16 +42,22 @@ public class AkunFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_akun, container, false);
 
-
         LinearLayout rincianAkunLl = view.findViewById(R.id.rincian_akun_ll);
+        LinearLayout ubahSandiLl = view.findViewById(R.id.ubah_sandi_ll);
         LinearLayout pusatBantuanLl = view.findViewById(R.id.pusat_bantua_ll);
         LinearLayout disclaimerLl = view.findViewById(R.id.disclaimer_ll);
         LinearLayout kebijakanPrivasiLl = view.findViewById(R.id.kebijakan_privasi_ll);
         Button keluarButton = view.findViewById(R.id.keluar_button);
 
+
+
         /*Rincian Akun*/
         rincianAkunLl.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), RincianAkunActivity.class));
+        });
+
+        ubahSandiLl.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), UbahSandiActivity.class));
         });
 
         /*Kebijakan privasi*/
@@ -82,6 +89,7 @@ public class AkunFragment extends Fragment {
         pref = Objects.requireNonNull(getActivity()).getApplicationContext().getSharedPreferences("Profile", 0); // 0 - for private mode
         photoPath = pref.getString("image_profile", null);
         apiPhotoPath = prefManager.getImageProfile();
+
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(getActivity()));
         ImageLoader imageLoader = ImageLoader.getInstance();
         photoIv = view.findViewById(R.id.photo_profile);
@@ -93,5 +101,6 @@ public class AkunFragment extends Fragment {
 //            photoIv.setImageURI(Uri.parse(apiPhotoPath));
             imageLoader.displayImage(apiPhotoPath, photoIv);
         }
+        ImageLoader.getInstance().destroy();
     }
 }

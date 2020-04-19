@@ -466,6 +466,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="status_pinjaman">Status Pinjaman:</string>
     <string name="tanggal_pengajuan">Tanggal Pengajuan</string>
+    <string name="masukkan_password_baru">Masukkan password baru</string>
+    <string name="tempat_lhr">Tempat Lahir</string>
+    <string name="pelengkap_regular">Pengguna wajib melengkapi dokumen sebagai berikut:</string>
+    <string name="foto_sk">&#8226;<br /> Foto Dokumen SK Pengankatan/CPNS</string>
+    <string name="foto_surat_kuasa">&#8226;<br /> Foto Dokumen Surat kuasa</string>
+    <string name="foto_pa">&#8226;<br /> Foto Dokumen Persetujuan Atasan</string>
 
 
 </resources>

@@ -1,8 +1,10 @@
 package com.fidac.dumi.jenispinjaman;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -11,21 +13,37 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.fidac.dumi.BankActivity;
 import com.fidac.dumi.MainActivity;
+import com.fidac.dumi.PelengkapanRegularActivity;
 import com.fidac.dumi.R;
+import com.fidac.dumi.api.GetBungaInterface;
+import com.fidac.dumi.api.StatusPinjamanInterface;
 import com.fidac.dumi.model.SharedPrefManager;
 import com.fidac.dumi.model.User;
+import com.fidac.dumi.retrofit.RetrofitClient;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PinjamanRegularActivity extends AppCompatActivity {
 
@@ -63,6 +81,8 @@ public class PinjamanRegularActivity extends AppCompatActivity {
     private final float BIAYA_TRANSFER = 6500;
     private final float BUNGA_PERBULAN = 0.099f;
 
+    private float getBunga, getAdmin, getAsur12, getAsur24, getAsur36;
+
     private Locale localID;
     private NumberFormat formatRp;
 
@@ -78,6 +98,10 @@ public class PinjamanRegularActivity extends AppCompatActivity {
 
     private SharedPreferences.Editor editor;
     private SharedPreferences pref;
+    private TextView adminTv, asurTv;
+    private String getAsuransi = "";
+    private String getAdministrasi = "";
+    private boolean bkn = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +141,9 @@ public class PinjamanRegularActivity extends AppCompatActivity {
         biayaTransferRegularTv = findViewById(R.id.biaya_transfer_antar_bank_regular);
         jumlahTerimaRegularTv = findViewById(R.id.jumlah_yang_diterima_regular);
 
+        adminTv = findViewById(R.id.tvAdminReg);
+        asurTv = findViewById(R.id.tvAsurReg);
+
         /*Jumlah yang akan dipinjam*/
         pinjamanUang = JUMLAH_PINJAMAN_DEFAULT;
         jumlahRegular = findViewById(R.id.rp_16jt_regular);
@@ -139,7 +166,7 @@ public class PinjamanRegularActivity extends AppCompatActivity {
 
                 angsuranRegularTv.setText("");
                 biayaAdminRegularTv.setText("");
-                asuransiDiatas12.setText("Biaya Asuransi");
+//                asuransiDiatas12.setText("Biaya Asuransi");
                 biayaAsuransiRegularTv.setText("");
                 biayaTransferRegularTv.setText("");
 
@@ -327,19 +354,28 @@ public class PinjamanRegularActivity extends AppCompatActivity {
             bulan30.setBackgroundResource(R.drawable.rect_normal);
             bulan36.setBackgroundResource(R.drawable.rect_normal);
 
+            if(bkn){
+                getAsuransi = "Biaya Asuransi 1%";
+                getAdministrasi = "Biaya Administrasi 1%";
+            } else {
+                getAsuransi = "Biaya Asuransi 2%";
+                getAdministrasi = "Biaya Administrasi 2%";
+            }
+            adminTv.setText(getAdministrasi);
+            asurTv.setText(getAsuransi);
             /*Loan Calculation*/
             plafond = PEMBAYARAN_12_BULAN;
             float pokok = pinjamanUang / plafond;
-            bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
+            bunga = (pinjamanUang * getBunga) / JUMLAH_BULAN_1_TAHUN;
             angsuran = pokok + bunga;
-            admin = pinjamanUang * BIAYA_ADMIN;
-            asuransi = pinjamanUang * BIAYA_ASURANSI;
+            admin = pinjamanUang * getAdmin;
+            asuransi = pinjamanUang * getAsur12;
             float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
             sisa = pinjamanUang - totalPengurangan;
 
+
             angsuranRegularTv.setText(formatRp.format((double)angsuran));
             biayaAdminRegularTv.setText(formatRp.format((double)admin));
-            asuransiDiatas12.setText("Biaya Asuransi 1%");
             biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
             biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
             jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
@@ -359,19 +395,28 @@ public class PinjamanRegularActivity extends AppCompatActivity {
             bulan30.setBackgroundResource(R.drawable.rect_normal);
             bulan36.setBackgroundResource(R.drawable.rect_normal);
 
+            if(bkn){
+                getAsuransi = "Biaya Asuransi 1.6%";
+                getAdministrasi = "Biaya Administrasi 1%";
+            } else {
+                getAsuransi = "Biaya Asuransi 2%";
+                getAdministrasi = "Biaya Administrasi 2%";
+            }
+            adminTv.setText(getAdministrasi);
+            asurTv.setText(getAsuransi);
+
             /*Loan Calculation*/
             plafond = PEMBAYARAN_18_BULAN;
             float pokok = pinjamanUang / plafond;
-            bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
+            bunga = (pinjamanUang * getBunga) / JUMLAH_BULAN_1_TAHUN;
             angsuran = pokok + bunga;
-            admin = pinjamanUang * BIAYA_ADMIN;
-            asuransi = pinjamanUang * BIAYA_ASURANSI_SD_24;
+            admin = pinjamanUang * getAdmin;
+            asuransi = pinjamanUang * getAsur24;
             float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
             sisa = pinjamanUang - totalPengurangan;
 
             angsuranRegularTv.setText(formatRp.format((double)angsuran));
             biayaAdminRegularTv.setText(formatRp.format((double)admin));
-            asuransiDiatas12.setText("Biaya Asuransi 1.6%");
             biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
             biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
             jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
@@ -391,19 +436,28 @@ public class PinjamanRegularActivity extends AppCompatActivity {
             bulan30.setBackgroundResource(R.drawable.rect_normal);
             bulan36.setBackgroundResource(R.drawable.rect_normal);
 
+            if(bkn){
+                getAsuransi = "Biaya Asuransi 1.6%";
+                getAdministrasi = "Biaya Administrasi 1%";
+            } else {
+                getAsuransi = "Biaya Asuransi 2%";
+                getAdministrasi = "Biaya Administrasi 2%";
+            }
+            adminTv.setText(getAdministrasi);
+            asurTv.setText(getAsuransi);
+
             /*Loan Calculation 24*/
             plafond = PEMBAYARAN_24_BULAN;
             float pokok = pinjamanUang / plafond;
-            bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
+            bunga = (pinjamanUang * getBunga) / JUMLAH_BULAN_1_TAHUN;
             angsuran = pokok + bunga;
-            admin = pinjamanUang * BIAYA_ADMIN;
-            asuransi = pinjamanUang * BIAYA_ASURANSI_SD_24;
+            admin = pinjamanUang * getAdmin;
+            asuransi = pinjamanUang * getAsur24;
             float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
             sisa = pinjamanUang - totalPengurangan;
 
             angsuranRegularTv.setText(formatRp.format((double)angsuran));
             biayaAdminRegularTv.setText(formatRp.format((double)admin));
-            asuransiDiatas12.setText("Biaya Asuransi 1.6%");
             biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
             biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
             jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
@@ -423,22 +477,31 @@ public class PinjamanRegularActivity extends AppCompatActivity {
             bulan30.setBackgroundResource(R.drawable.rect_pressed);
             bulan36.setBackgroundResource(R.drawable.rect_normal);
 
+            if(bkn){
+                getAsuransi = "Biaya Asuransi 2.1%";
+                getAdministrasi = "Biaya Administrasi 1%";
+            } else {
+                getAsuransi = "Biaya Asuransi 2%";
+                getAdministrasi = "Biaya Administrasi 2%";
+            }
+            adminTv.setText(getAdministrasi);
+            asurTv.setText(getAsuransi);
+
             /*Loan Calculation 30*/
             plafond = PEMBAYARAN_30_BULAN;
             float pokok = pinjamanUang / plafond;
-            bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
+            bunga = (pinjamanUang * getBunga) / JUMLAH_BULAN_1_TAHUN;
             angsuran = pokok + bunga;
-            admin = pinjamanUang * BIAYA_ADMIN;
-            asuransi = pinjamanUang * BIAYA_ASURANSI_SD_36;
+            admin = pinjamanUang * getAdmin;
+            asuransi = pinjamanUang * getAsur36;
             float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
             sisa = pinjamanUang - totalPengurangan;
 
-            angsuranRegularTv.setText(formatRp.format((double)angsuran));
-            biayaAdminRegularTv.setText(formatRp.format((double)admin));
-            asuransiDiatas12.setText("Biaya Asuransi 2.1%");
-            biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
-            biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
-            jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
+            angsuranRegularTv.setText(formatRp.format(angsuran));
+            biayaAdminRegularTv.setText(formatRp.format(admin));
+            biayaAsuransiRegularTv.setText(formatRp.format(asuransi));
+            biayaTransferRegularTv.setText(formatRp.format(BIAYA_TRANSFER));
+            jumlahTerimaRegularTv.setText(formatRp.format(sisa));
         });
 
         bulan36.setOnClickListener(v -> {
@@ -454,29 +517,180 @@ public class PinjamanRegularActivity extends AppCompatActivity {
             bulan24.setBackgroundResource(R.drawable.rect_normal);
             bulan30.setBackgroundResource(R.drawable.rect_normal);
             bulan36.setBackgroundResource(R.drawable.rect_pressed);
+            if(bkn){
+                getAsuransi = "Biaya Asuransi 2.1%";
+                getAdministrasi = "Biaya Administrasi 1%";
+            } else {
+                getAsuransi = "Biaya Asuransi 2%";
+                getAdministrasi = "Biaya Administrasi 2%";
+            }
+            adminTv.setText(getAdministrasi);
+            asurTv.setText(getAsuransi);
 
-            /*Loan Calculation 30*/
+            /*Loan Calculation 36*/
             plafond = PEMBAYARAN_36_BULAN;
             float pokok = pinjamanUang / plafond;
-            bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
+            bunga = (pinjamanUang * getBunga) / JUMLAH_BULAN_1_TAHUN;
             angsuran = pokok + bunga;
-            admin = pinjamanUang * BIAYA_ADMIN;
-            asuransi = pinjamanUang * BIAYA_ASURANSI_SD_36;
+            admin = pinjamanUang * getAdmin;
+            asuransi = pinjamanUang * getAsur36;
             float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
             sisa = pinjamanUang - totalPengurangan;
 
-            angsuranRegularTv.setText(formatRp.format((double)angsuran));
-            biayaAdminRegularTv.setText(formatRp.format((double)admin));
-            asuransiDiatas12.setText("Biaya Asuransi 2.1%");
-            biayaAsuransiRegularTv.setText(formatRp.format((double)asuransi));
-            biayaTransferRegularTv.setText(formatRp.format((double)BIAYA_TRANSFER));
-            jumlahTerimaRegularTv.setText(formatRp.format((double)sisa));
+            angsuranRegularTv.setText(formatRp.format(angsuran));
+            biayaAdminRegularTv.setText(formatRp.format(admin));
+            biayaAsuransiRegularTv.setText(formatRp.format(asuransi));
+            biayaTransferRegularTv.setText(formatRp.format(BIAYA_TRANSFER));
+            jumlahTerimaRegularTv.setText(formatRp.format(sisa));
         });
 
         lanjutButton = findViewById(R.id.lanjut_button_reguler);
         lanjutButton.setOnClickListener(v -> {
-            ajukanPinjaman();
+            String angs = angsuranRegularTv.getText().toString();
+            if (TextUtils.isEmpty(angs)){
+                Toast.makeText(this, "Tentukan Lama Pembayaran", Toast.LENGTH_SHORT).show();
+            }
+//            ajukanPinjaman();
+            getPinjaman();
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getBunga = 0f;
+        getAdmin = 0f;
+        getAsur12 = 0f;
+        getAsur24 = 0f;
+        getAsur36 = 0f;
+        getBunga();
+//        bkn = false;
+
+    }
+
+    private void getBunga() {
+        final ProgressDialog pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Memuat Data...");
+        pDialog.show();
+        User pref = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+        String insker = pref.getInskerKerja();
+
+        GetBungaInterface bunga = RetrofitClient.getClient().create(GetBungaInterface.class);
+        Call<ResponseBody> call = bunga.getBunga();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                pDialog.dismiss();
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+                    boolean status = obj.getBoolean("status");
+//                    Toast.makeText(PinjamanKilatActivity.this, "status: " + status, Toast.LENGTH_SHORT).show();
+                    if (status){
+                        String data = obj.getString("data");
+                        JSONArray bungaObj = new JSONArray(data);
+                        for (int i = 0; i<bungaObj.length(); i++){
+                            JSONObject bung = bungaObj.getJSONObject(i);
+                            int id = bung.getInt("id_bunga");
+                            if(id == 1 && insker.contains("Badan Kepegawaian Negara")){
+                                bkn = true;
+                                adminTv.setText("Biaya Administrasi 1%");
+                                asurTv.setText("Biaya Asuransi 1%");
+                                double bunga = bung.getDouble("bunga");
+                                double biayaAdmin = bung.getDouble("biaya_admin");
+                                double biayaAsuransi12 = bung.getDouble("biaya_asuransi_12");
+                                double biayaAsuransi24 = bung.getDouble("biaya_asuransi_24");
+                                double biayaAsuransi36 = bung.getDouble("biaya_asuransi_36");
+                                getBunga = (float) bunga;
+                                getAdmin = (float) biayaAdmin;
+                                getAsur12 = (float) biayaAsuransi12;
+                                getAsur24 = (float) biayaAsuransi24;
+                                getAsur36 = (float) biayaAsuransi36;
+                                Log.d("Biaya", "onResponse: " + "\nBunga: " + getBunga + "\nAdmin: " + getAdmin + "\nAsur12: " + getAsur12 +
+                                        "\nAsur24: " + getAsur24 + "\nAsur36: " + getAsur36);
+                            } else if (id == 2 && !insker.contains("Badan Kepegawaian Negara")){
+//                                Toast.makeText(PinjamanKilatActivity.this, "Non BKN", Toast.LENGTH_SHORT).show();
+                                bkn = false;
+                                adminTv.setText("Biaya Administrasi 2%");
+                                asurTv.setText("Biaya Asuransi 2%");
+                                double bunga = bung.getDouble("bunga");
+                                double biayaAdmin = bung.getDouble("biaya_admin");
+                                double biayaAsuransi12 = bung.getDouble("biaya_asuransi_12");
+                                double biayaAsuransi24 = bung.getDouble("biaya_asuransi_24");
+                                double biayaAsuransi36 = bung.getDouble("biaya_asuransi_36");
+                                getBunga = (float) bunga;
+                                getAdmin = (float) biayaAdmin;
+                                getAsur12 = (float) biayaAsuransi12;
+                                getAsur24 = (float) biayaAsuransi24;
+                                getAsur36 = (float) biayaAsuransi36;
+                            }
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                pDialog.dismiss();
+            }
+        });
+    }
+
+    private void getPinjaman(){
+        User pref = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+        String nip = pref.getNip();
+        StatusPinjamanInterface status = RetrofitClient.getClient().create(StatusPinjamanInterface.class);
+        Call<ResponseBody> call = status.getPinjaman(nip);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+                    boolean cek = obj.getBoolean("status");
+                    if (cek){
+                        String data = obj.getString("data");
+                        JSONArray jsonArray = new JSONArray(data);
+                        if (!jsonArray.isNull(0)){
+                            for (int i = 0; i<jsonArray.length(); i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                int statusId = jsonObject.getInt("status");
+
+                                if(statusId == 1){
+                                    Toast.makeText(PinjamanRegularActivity.this, "Anda sudah mengajukan pinjaman, mohon menunggu", Toast.LENGTH_SHORT).show();
+                                } else if (statusId == 2){
+                                    Toast.makeText(PinjamanRegularActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                } else if (statusId == 3){
+                                    ajukanPinjaman();
+                                } else if (statusId == 4){
+                                    Toast.makeText(PinjamanRegularActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                } else if (statusId == 5){
+                                    Toast.makeText(PinjamanRegularActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                } else if(statusId == 6){
+                                    ajukanPinjaman();
+                                }
+                            }
+                        } else {
+                            ajukanPinjaman();
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
     }
 
     private void ajukanPinjaman() {
@@ -521,7 +735,7 @@ public class PinjamanRegularActivity extends AppCompatActivity {
         editor.putFloat("asuransi", asuransi);
         editor.commit();
 
-        startActivity(new Intent(PinjamanRegularActivity.this, BankActivity.class));
+        startActivity(new Intent(PinjamanRegularActivity.this, PelengkapanRegularActivity.class));
 
         /*PinjamanKilatInterface pinjam = RetrofitClient.getClient().create(PinjamanKilatInterface.class);
         Call<ResponseBody> call = pinjam.ajukanPinjaman(nip, pinjamanUang, plafond, 0, BUNGA_PERBULAN,
