@@ -7,19 +7,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fidac.dumi.api.BaseApiService;
-import com.fidac.dumi.api.CekNipBknInterface;
+import com.fidac.dumi.api.CekUserExist;
 import com.fidac.dumi.api.LoginInterface;
 import com.fidac.dumi.model.PreferenceHelper;
-import com.fidac.dumi.model.RetrofitClient;
+import com.fidac.dumi.retrofit.RetrofitClient;
+import com.fidac.dumi.model.SharedPrefManager;
+import com.fidac.dumi.model.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,14 +41,14 @@ public class MasukActivity extends AppCompatActivity {
     private EditText passEt;
     private PreferenceHelper preferenceHelper;
     private TextView daftarDisiniTv;
-
-    Context mContext;
-    BaseApiService mApiService;
+    ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_masuk);
+
+        pDialog = new ProgressDialog(MasukActivity.this);
 
         nipEt = findViewById(R.id.masuk_nip_et);
         passEt = findViewById(R.id.masuk_password_et);
@@ -55,9 +56,11 @@ public class MasukActivity extends AppCompatActivity {
 
         masukButton = findViewById(R.id.masuk_user_button);
         masukButton.setOnClickListener(v -> {
-            loginUser();
+            cekUser();
+//            loginUser();
         });
         daftarDisiniTv.setOnClickListener(v ->{
+            finish();
             startActivity(new Intent(MasukActivity.this, DaftarActivity.class));
         });
     }
@@ -65,6 +68,55 @@ public class MasukActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
         startActivity(new Intent(MasukActivity.this, HalamanDepanActivity.class));
+    }
+
+    public void cekUser(){
+        String nip = nipEt.getText().toString();
+        String pass = passEt.getText().toString();
+
+        if(TextUtils.isEmpty(nip)){
+            nipEt.setError("Kolom tidak boleh kosong...");
+            nipEt.requestFocus();
+            return;
+        }
+
+        if(TextUtils.isEmpty(pass)){
+            passEt.setError("Kolom tidak boleh kosong...");
+            passEt.requestFocus();
+            return;
+        }
+
+        pDialog.setMessage("Mohon Menunggu...");
+        pDialog.show();
+        CekUserExist cekUser = RetrofitClient.getClient().create(CekUserExist.class);
+        Call<ResponseBody> call = cekUser.cekUser(nip);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+//                    JSONObject jsonRESULTS = new JSONObject(response.body().string());
+                    boolean status = obj.getBoolean("status");
+                    if (!status) {
+                        pDialog.dismiss();
+                        loginUser();
+                    } else {
+                        pDialog.dismiss();
+                        Toast.makeText(MasukActivity.this, "NIP anda belum terdaftar, silahkan mendaftarkan NIP anda", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(MasukActivity.this, DaftarActivity.class));
+                    }
+                }catch (Exception e) {
+//                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     private void loginUser() {
@@ -88,9 +140,7 @@ public class MasukActivity extends AppCompatActivity {
         } else {
             passEt.setError(null);
         }
-        final ProgressDialog pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Mohon Menunggu...");
-        pDialog.show();
+
 
         LoginInterface cek = RetrofitClient.getClient().create(LoginInterface.class);
         Call<ResponseBody> call = cek.getUserLogin(nip, password);
@@ -99,20 +149,64 @@ public class MasukActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 try {
-                    JSONObject obj = new JSONObject(response.body().string());
+                   JSONObject obj = new JSONObject(response.body().string());
                     boolean status = obj.getBoolean("status");
                     if (status) {
                         pDialog.dismiss();
                         String dat = obj.getString("data");
                         JSONArray dataArray = new JSONArray(dat);
-                        startActivity(new Intent(MasukActivity.this, MainActivity.class));
-//                        for (int i = 0; i < dataArray.length(); i++){
-//                            JSONObject userObj = dataArray.getJSONObject(i);
-//
-//                        }
-
 //                        startActivity(new Intent(MasukActivity.this, MainActivity.class));
+                        for (int i = 0; i < dataArray.length(); i++){
+                            JSONObject userObj = dataArray.getJSONObject(i);
+                            int id = userObj.getInt("id");
+                            String nip = userObj.getString("nipBaru");
+                            String email = userObj.getString("email");
+                            String password = userObj.getString("sandi");
+                            String noKtp = userObj.getString("noktp");
+                            String nama = userObj.getString("namaPns");
+                            String agama = userObj.getString("agama");
+                            String jenisKelamin = userObj.getString("jenis_kelamin");
+                            String tempatLahir = userObj.getString("tempatLahir");
+                            String tanggalLahir = userObj.getString("tglLhrPns");
+                            String statusKawin = userObj.getString("status_kawin");
+                            String jumlahTanggungan = userObj.getString("tanggungan");
+                            String pendidikan = userObj.getString("pendidikan");
+                            String ketTitle = userObj.getString("ket_title");
+                            String insker = userObj.getString("inskerNama");
+                            String statusRumah = userObj.getString("status_rumah");
+                            String alamat = userObj.getString("alamat");
+                            String rt = userObj.getString("rt");
+                            String rw = userObj.getString("rw");
+                            String propinsi = userObj.getString("provinsi");
+                            String kota = userObj.getString("kabkota");
+                            String kecamatan = userObj.getString("kecamatan");
+                            String kelurahan = userObj.getString("desa");
+                            String kodePos = userObj.getString("kodepos");
+                            String statusHubungan = userObj.getString("status_hubungan");
+                            String namaPenanggung = userObj.getString("nama_penanggung");
+                            String noKtpPenanggung = userObj.getString("no_ktp_penanggung");
+                            String namaIbu = userObj.getString("ibuKandung");
+                            String noHp = userObj.getString("no_hp");
+                            String imageKtp = userObj.getString("photo_ktp");
+                            String imageSelfi = userObj.getString("photo_selfi");
+                            String imageProfile = userObj.getString("photo_profile");
+
+                            User user = new User(id, nip, email, password, noKtp, nama, agama, jenisKelamin,
+                                    tempatLahir, tanggalLahir, statusKawin, jumlahTanggungan, pendidikan, ketTitle,
+                                    insker, statusRumah, alamat, rt, rw, propinsi, kota, kecamatan, kelurahan,
+                                    kodePos, statusHubungan, namaPenanggung, noKtpPenanggung, namaIbu, noHp, imageKtp, imageSelfi, imageProfile);
+
+                            SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+
+                            /*Toast toast= Toast.makeText(MasukActivity.this,
+                                    "Selamat datang, " + nama, Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+                            toast.show();*/
+                        }
+                        finish();
+                        startActivity(new Intent(MasukActivity.this, MainActivity.class));
                     } else {
+                        pDialog.dismiss();
                         Toast.makeText(MasukActivity.this, "NIP/Password Salah!", Toast.LENGTH_SHORT).show();
                         nipEt.requestFocus();
                         passEt.requestFocus();
@@ -120,9 +214,6 @@ public class MasukActivity extends AppCompatActivity {
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
                 }
-
-//                    JSONObject jsonRESULTS = new JSONObject(response.body().string());
-
             }
 
             @Override
@@ -136,7 +227,7 @@ public class MasukActivity extends AppCompatActivity {
 
     }
 
-    private void parseLoginData(String response){
+    /*private void parseLoginData(String response){
         try {
             JSONObject jsonObject = new JSONObject(response);
             if (jsonObject.getString("status").equals("true")) {
@@ -172,8 +263,7 @@ public class MasukActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
+    }*/
     /*private void userLogin() {
         //first getting the values
         final String nip = nipEt.getText().toString();

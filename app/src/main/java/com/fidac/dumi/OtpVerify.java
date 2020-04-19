@@ -3,7 +3,6 @@ package com.fidac.dumi;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,9 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthResult;
@@ -27,8 +28,10 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.firebase.ui.auth.AuthUI;
 
 
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 public class OtpVerify extends AppCompatActivity {
@@ -63,9 +66,10 @@ public class OtpVerify extends AppCompatActivity {
         pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
         editor = pref.edit();
 
-        mAuth = FirebaseAuth.getInstance();
+//        mAuth = FirebaseAuth.getInstance();
+        doPhoneLogin();
 
-        kodeEt = findViewById(R.id.kodeOtp);
+        /*kodeEt = findViewById(R.id.kodeOtp);
         nomorTelpEt = findViewById(R.id.daftar_no_telp_et);
         noTelpLl = findViewById(R.id.nomor_telp);
         verifikasiKodeLl = findViewById(R.id.verifikasi_kode);
@@ -106,21 +110,54 @@ public class OtpVerify extends AppCompatActivity {
         });
 
         kirimUlangOtpButton = findViewById(R.id.kirim_ulang_button);
-        kirimUlangOtpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resendVerificationCode(nomorTelp, mResendToken);
-            }
-        });
+        kirimUlangOtpButton.setOnClickListener(v -> resendVerificationCode(nomorTelp, mResendToken));
+*/
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseAuth.getInstance().signOut();
+        FirebaseApp.initializeApp(this);
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            startActivity(new Intent(getApplicationContext(), LengkapiData.class));
+        }
     }
 
-    private void sendVerificationCode(String no) {
+    /*FireBase UI*/
+    private void doPhoneLogin() {
+        Intent intent = AuthUI.getInstance().createSignInIntentBuilder()
+                .setIsSmartLockEnabled(!BuildConfig.DEBUG)
+                .setAvailableProviders(Collections.singletonList(new AuthUI.IdpConfig.PhoneBuilder().build()))
+                .setTheme(R.style.OtpTheme)
+                .setLogo(R.mipmap.ic_launcher_dumi)
+                .build();
+        startActivityForResult(intent, RC_SIGN_IN);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            IdpResponse idpResponse = IdpResponse.fromResultIntent(data);
+            if (resultCode == RESULT_OK) {
+                // Successfully signed in
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+            } else {
+                /**
+                 *   Sign in failed. If response is null the user canceled the
+                 *   sign-in flow using the back button. Otherwise check
+                 *   response.getError().getErrorCode() and handle the error.
+                 */
+                Toast.makeText(getBaseContext(), "OTP Gagal", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
+    /*Firebase OTP custom*/
+   /* private void sendVerificationCode(String no) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+62" + no,
                 60,
@@ -140,8 +177,6 @@ public class OtpVerify extends AppCompatActivity {
                 mCallbacks,         // OnVerificationStateChangedCallbacks
                 token);             // ForceResendingToken from callbacks
     }
-
-
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
@@ -183,7 +218,6 @@ public class OtpVerify extends AppCompatActivity {
 
         }
     };
-
     private void verifyVerificationCode(String code) {
         //creating the credential
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerifikasiId, code);
@@ -191,34 +225,30 @@ public class OtpVerify extends AppCompatActivity {
         //signing the user
         signInWithPhoneAuthCredential(credential);
     }
-
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(OtpVerify.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            //verification successful we will start the profile activity
+                .addOnCompleteListener(OtpVerify.this, task -> {
+                    if (task.isSuccessful()) {
+                        //verification successful we will start the profile activity
 
-                            progressBar.setVisibility(View.GONE);
-                            Intent intent = new Intent(OtpVerify.this, LengkapiData.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
+                        progressBar.setVisibility(View.GONE);
+                        Intent intent = new Intent(OtpVerify.this, LengkapiData.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
 
-                        } else {
+                    } else {
 
-                            //verification unsuccessful.. display an error message
-                            progressBar.setVisibility(View.GONE);
-                            String message = "Terjadi kesalahan mohon mencoba lagi";
+                        //verification unsuccessful.. display an error message
+                        progressBar.setVisibility(View.GONE);
+                        String message = "Terjadi kesalahan mohon mencoba lagi";
+                        Toast.makeText(OtpVerify.this, message, Toast.LENGTH_SHORT).show();
+                        if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                            message = "Kode tidak valid";
                             Toast.makeText(OtpVerify.this, message, Toast.LENGTH_SHORT).show();
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                message = "Kode tidak valid";
-                                Toast.makeText(OtpVerify.this, message, Toast.LENGTH_SHORT).show();
-                            }
-
-
                         }
+
+
                     }
                 });
-    }
+    }*/
 }

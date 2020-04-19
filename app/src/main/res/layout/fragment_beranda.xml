@@ -68,7 +68,7 @@
                         android:layout_height="25dp"
                         app:autoSizeMinTextSize="20sp"
                         app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="25sp"
+                        tools:autoSizeMaxTextSize="20sp"
                         tools:autoSizeStepGranularity="2sp"/>
                 </LinearLayout>
 
@@ -80,342 +80,14 @@
 
     <ScrollView
         android:scrollbars="none"
-        android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <!--Pembelian & Top Up-->
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:gravity="start|center"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginBottom="5dp"
-                        android:text="@string/pembelian_topup"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@android:color/black"
-                        app:autoSizeMinTextSize="8sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="15sp"
-                        tools:autoSizeStepGranularity="1sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="end"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/lihat_semua"
-                        android:gravity="end|center"
-                        android:layout_width="match_parent"
-                        android:layout_height="16dp"
-                        android:text="@string/lihat_semua"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="#1560DB"
-                        app:autoSizeMinTextSize="8sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="15sp"
-                        tools:autoSizeStepGranularity="1sp" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <GridLayout
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <!--Isi Pulsa-->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_row="0"
-                    android:layout_rowWeight="1"
-                    android:layout_column="0"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/layout_rounded_home"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_pulsa" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="15dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
-                        android:text="@string/isi_pulsa"
-                        app:autoSizeMinTextSize="6sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="12sp"
-                        tools:autoSizeStepGranularity="1sp" />
-                </LinearLayout>
-                <!--Token PLN-->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_row="0"
-                    android:layout_rowWeight="1"
-                    android:layout_column="1"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/layout_rounded_home"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_token_pln" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="15dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
-                        android:text="@string/token_pln"
-                        app:autoSizeMinTextSize="6sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="12sp"
-                        tools:autoSizeStepGranularity="1sp" />
-
-                </LinearLayout>
-                <!--Gopay-->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_row="0"
-                    android:layout_rowWeight="1"
-                    android:layout_column="2"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/layout_rounded_home"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_gopay" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="15dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
-                        android:text="@string/gopay"
-                        app:autoSizeMinTextSize="6sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="12sp"
-                        tools:autoSizeStepGranularity="1sp" />
-
-                </LinearLayout>
-                <!--Ovo-->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_row="0"
-                    android:layout_rowWeight="1"
-                    android:layout_column="3"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/layout_rounded_home"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_ovo" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="15dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
-                        android:text="@string/ovo"
-                        app:autoSizeMinTextSize="6sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="12sp"
-                        tools:autoSizeStepGranularity="1sp" />
-
-                </LinearLayout>
-                <!--Pesan Hotel-->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_row="1"
-                    android:layout_rowWeight="1"
-                    android:layout_column="0"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/layout_rounded_home"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_hotel" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="15dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
-                        android:text="@string/hotel"
-                        android:textSize="@dimen/font_small"
-                        app:autoSizeMinTextSize="6sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="12sp"
-                        tools:autoSizeStepGranularity="1sp" />
-                </LinearLayout>
-                <!--Pesawat-->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_row="1"
-                    android:layout_rowWeight="1"
-                    android:layout_column="1"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/layout_rounded_home"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_pesawat" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="15dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
-                        android:text="@string/pesawat"
-                        android:textSize="@dimen/font_small"
-                        app:autoSizeMinTextSize="6sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="12sp"
-                        tools:autoSizeStepGranularity="1sp" />
-
-                </LinearLayout>
-                <!--Kereta Api-->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_row="1"
-                    android:layout_rowWeight="1"
-                    android:layout_column="2"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/layout_rounded_home"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_kereta" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="15dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
-                        android:text="@string/kereta"
-                        android:textSize="@dimen/font_small"
-                        app:autoSizeMinTextSize="6sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="12sp"
-                        tools:autoSizeStepGranularity="1sp" />
-
-                </LinearLayout>
-                <!--Bus Travel-->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_row="1"
-                    android:layout_rowWeight="1"
-                    android:layout_column="3"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/layout_rounded_home"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_bus_travel" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="15dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
-                        android:text="@string/bus_travel"
-                        android:textSize="@dimen/font_small"
-                        app:autoSizeMinTextSize="6sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="12sp"
-                        tools:autoSizeStepGranularity="1sp" />
-
-                </LinearLayout>
-            </GridLayout>
             <!--Pinjaman Multiguna-->
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="22dp"
@@ -430,8 +102,6 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
-
             <LinearLayout
                 android:id="@+id/dumi_kilat"
                 android:layout_marginTop="5dp"
@@ -568,6 +238,481 @@
                         android:textColor="@android:color/white" />
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/dumi_pensiun_bumn"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <!--Dumi Pensiun-->
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="@dimen/marginTop10dp"
+                    android:background="@drawable/button_custom_2"
+                    android:backgroundTint="#F1DED8"
+                    android:gravity="left"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_pensiun" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/dumi_pensiun"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+
+                        app:autoSizeMinTextSize="15sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:text="@string/dumi_pensiun_des"
+                        android:fontFamily="sans-serif"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="@dimen/marginTop10dp"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp"
+                        />
+
+                    <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:id="@+id/dumi_pensiun_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/button_rounded_custom"
+                        android:textAllCaps="false"
+                        android:text="@string/ajukan"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+                <!--Dumi BUMN-->
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/button_custom_2"
+                    android:backgroundTint="#D8E5F1"
+                    android:gravity="left"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_bumn" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/dumi_bumn"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="15sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:text="@string/dumi_bumn_des"
+                        android:fontFamily="sans-serif"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp"
+                        />
+
+                    <Button
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:id="@+id/dumi_bumn_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/button_rounded_custom"
+                        android:textAllCaps="false"
+                        android:text="@string/ajukan"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--Pembelian & Top Up-->
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:gravity="start|center"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/pembelian_topup"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="15sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="end"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/lihat_semua"
+                        android:gravity="end|center"
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"
+                        android:text="@string/lihat_semua"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="#1560DB"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="15sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <GridLayout
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--Isi Pulsa-->
+                <LinearLayout
+                    android:id="@+id/isi_pulsa_ll"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/layout_rounded_home"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_pulsa" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:text="@string/isi_pulsa"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+                <!--Token PLN-->
+                <LinearLayout
+                    android:id="@+id/token_ll"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/layout_rounded_home"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_token_pln" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:text="@string/token_pln"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+                <!--Gopay-->
+                <LinearLayout
+                    android:id="@+id/gopay_ll"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/layout_rounded_home"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_gopay" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:text="@string/gopay"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+                <!--Ovo-->
+                <LinearLayout
+                    android:id="@+id/ovo_ll"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_row="0"
+                    android:layout_rowWeight="1"
+                    android:layout_column="3"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/layout_rounded_home"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_ovo" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:text="@string/ovo"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+                <!--Pesan Hotel-->
+                <LinearLayout
+                    android:id="@+id/hotel_ll"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/layout_rounded_home"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_hotel" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:text="@string/hotel"
+                        android:textSize="@dimen/font_small"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+                <!--Pesawat-->
+                <LinearLayout
+                    android:id="@+id/pesawat_ll"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/layout_rounded_home"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_pesawat" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:text="@string/pesawat"
+                        android:textSize="@dimen/font_small"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+                <!--Kereta Api-->
+                <LinearLayout
+                    android:id="@+id/kereta_ll"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/layout_rounded_home"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_kereta" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:text="@string/kereta"
+                        android:textSize="@dimen/font_small"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+                <!--Bus Travel-->
+                <LinearLayout
+                    android:id="@+id/bus_ll"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:layout_column="3"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/layout_rounded_home"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_bus_travel" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:text="@string/bus_travel"
+                        android:textSize="@dimen/font_small"
+                        app:autoSizeMinTextSize="6sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="12sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                </LinearLayout>
+            </GridLayout>
+
         </LinearLayout>
     </ScrollView>
 

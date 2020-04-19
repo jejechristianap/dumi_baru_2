@@ -116,7 +116,7 @@
     <string name="mk_bulan">Masa Kerja (Bulan):</string>
     <string name="mk_tahun">Masa Kerja (Tahun):</string>
     <string name="inskerNama">inskerNama:</string>
-    <string name="tempat_lahir">Tempat Lahir:</string>
+    <string name="tempat_lahir">Tempat dan tanggal lahir:</string>
     <string name="tglLahirPns">Tanggal Lahir:</string>
     <string name="npwp">NPWP:</string>
     <string name="no_ktp">No. KTP:</string>
@@ -159,5 +159,319 @@
     <string name="kebijakan_privasi">Kebijakan Privasi</string>
     <string name="pusat_bantuan">Pusat Bantuan</string>
     <string name="disclaimer">Disclaimer</string>
+    <string name="dumi_pensiun">DUMI Pensiun</string>
+    <string name="dumi_pensiun_des">Pinjaman di hari tu untuk memudahkan hari anda</string>
+    <string name="test">Test</string>
+    <string name="dumi_bumn">DUMI BUMN</string>
+    <string name="dumi_bumn_des">Pinjaman dana sampai Rp50.000.00 untuk pegawai BUMN</string>
+    <string name="kembali">Kembali</string>
+    <string name="logout">Logout</string>
+    <string name="cek_daftar_harga">Cek Daftar Harga Pulsa</string>
+    <string name="instansi_kerja">Instansi Kerja</string>
+    <string name="gelar">Gelar</string>
+    <string name="ket_gelar">Keterangan Gelar</string>
+    <string name="status_rumah">Status Rumah</string>
+    <string name="data_pribadi">Data Pribadi</string>
+    <string name="data_pekerjaan">Data Pekerjaan</string>
+    <string name="data_keluarga">Data Keluarga</string>
+    <string name="status_kawin">Status Kawin</string>
+    <string name="status_hubungan">Status Hubungan</string>
+    <string name="nama_penanggung">Nama Penanggung (Seusai KTP)</string>
+    <string name="no_ktp_penanggung">No. KTP Penanggung</string>
+    <string name="no_telp_penanggung">No. Telp Penanggung</string>
+    <string name="jumlah_tanggungan">Jumlah Tanggungan</string>
+    <string name="nama_ibu">Nama Gadis Ibu Kandung</string>
+    <string name="status_hubungan_penjamin">Status Hubungan Penanggung</string>
+    <string name="format_tgl_lahir">(TahunBulanTanggal) contoh: 19990101</string>
+    <string name="tujuan_pinjaman">Tujuan Pinjaman</string>
+    <string name="data_transfer">Data Transfer</string>
+    <string name="nam_bank">Nama Bank</string>
+    <string name="bank">Contoh : MANDIRI</string>
+    <string name="no_rek">No. Rekening</string>
+    <string name="norekcontoh">Contoh 23412xxxxx</string>
+    <string name="nama_pemilik_rekening">Nama Pemilik Rekening</string>
+    <string name="daftar_sebagai">Daftar Sebagai</string>
+    <string name="asn_aktif">ASN Aktif</string>
+    <string name="pegawai_bumn">Pegawai BUMN</string>
+    <string name="pensiun_asn">Pensiunan ASN</string>
+    <string name="sudah_punya_akun">Sudah punya akun? Masuk di sini</string>
+    <string name="pinjam_dumi">Pinjam DUMI</string>
+    <string name="one">01.</string>
+    <string name="apa_itu_dumi">Apa Itu DUMI?</string>
+    <string name="arrow_down">arrow down</string>
+    <string name="bisa_kami_bantu">Halo, ada yang bisa kami bantu?</string>
+    <string name="two">02.</string>
+    <string name="siapa_saja_yang_dapat">Siapa saja yang dapat menggunakannya?</string>
+    <string name="three">03.</string>
+    <string name="bagaimana">Bagaimana cara kerjanya?</string>
+    <string name="four">04.</string>
+    <string name="cara_jadi_mitra">Bagaimana cara menjadi mitra?</string>
+    <string name="five">05.</string>
+    <string name="proses_pinjaman">Berapa lama proses pencairan pinjaman?</string>
+    <string name="hubungi_kami">Hubungi Kami</string>
+    <string name="email_kantor">cs@minjem.com</string>
+    <string name="no_telp_kantor">(021) 8088281 ext. 4218</string>
+    <string name="wa_kantor">+62 813-1582-3033 (WhatsApp)</string>
+    <string name="jam_operasional">Jam Operasional</string>
+    <string name="hari_operasional">Senin - Jumat (08.00 - 16.00 WIB)</string>
+    <string name="alamat_kantor">Gedung Badan Kepegawaian Negara\nJl. Mayjen Sutoyo no.12, Cililitan, Jakarta\nTimur, DKI Jakarta 13640</string>
+    <string name="disclaimer_deskripsi">
+        <b>PERHATIAN:</b>\n\n\n
+        1. Layanan Pinjam Meminjam Berbasis Teknologi Informasi merupakan kesepakatan perdata antara
+        Pemberi Pinjaman dengan Penerima Pinjaman, sehingga segala risiko yang timbul dari kesepakatan
+        tersebut ditanggung sepenuhnya oleh masing-masing pihak.\n\n
+        2. Risiko kredit atau gagal bayar ditanggung sepenuhnya oleh Pemberi Pinjaman. Tidak ada lembaga
+        atau otoritas negara yang bertanggung jawab atas risiko gagal bayar ini.\n\n
+        3. Penyelenggara dengan persetujuan dari masing-masing Pengguna (Pemberi Pinjaman dan/atau Penerima Pinjaman)
+        mengakses, memperoleh, menyimpan, mengelola, dan/atau menggunakan data pribadi Pengguna ("Pemanfaatan Data")
+        pada atau di dalam benda, perangkat elektronik (termasuk smartphone atau telepon seluler), perangkat keras (hardware)
+        maupun lunak (software), dokumen elektronik, aplikasi atau sistem elektronik milik Pengguna atau yang dikuasai
+        Pengguna, dengan memberitahukan tujuan, batasan, dan mekanisme Pemanfaatan Data tersebut kepada Pengguna yang
+        bersangkutan sebelum memperoleh persetujuan yang dimaksud.\n\n
+        4. Pemberi Pinjaman yang belum memiliki pengetahuan dan pengalaman pinjam meminjam, disarankan untuk
+        tidak menggunakan layanan ini.\n\n
+        5. Penerima Pinjaman harus mempertimbangkan tingkat bunga pinjaman dan biaya lainnya sesuai
+        dengan kemampuan dalam melunasi pinjaman.\n\n
+        6. Setiap kecurangan tercatat secara digital di dunia maya dan dapat diketahui masyarakat luas di media sosial.\n\n
+        7. Pengguna harus membaca dan memahami informasi ini sebelum membuat keputusan menjadi Pemberi Pinjaman atau Penerima Pinjaman.\n\n
+        8. Pemerintah yaitu dalam hal ini Otoritas Jasa Keuangan, tidak bertanggung jawab atas setiap pelanggaran
+        atau ketidakpatuhan oleh Pengguna, baik Pemberi Pinjaman maupun Penerima Pinjaman (baik karena kesengajaan atau
+        kelalaian Pengguna) terhadap ketentuan peraturan perundang-undangan maupun kesepakatan atau perikatan antara
+        Penyelenggara dengan Pemberi Pinjaman dan/atau Penerima Pinjaman.\n\n
+        9. Setiap transaksi dan kegiatan pinjam meminjam atau pelaksanaan kesepakatan mengenai pinjam meminjam antara
+        atau yang melibatkan Penyelenggara, Pemberi Pinjaman, dan/atau Penerima Pinjaman wajib dilakukan melalui escrow
+        account dan virtual account sebagaimana yang diwajibkan berdasarkan Peraturan Otoritas Jasa Keuangan Nomor
+        77/POJK.01/2016 tentang Layanan Pinjam Meminjam Uang Berbasis Teknologi Informasi dan pelanggaran atau
+        ketidakpatuhan terhadap ketentuan tersebut merupakan bukti telah terjadinya pelanggaran hukum oleh Penyelenggara
+        sehingga Penyelenggara wajib menanggung ganti rugi yang diderita oleh masing-masing Pengguna sebagai akibat
+        langsung dari pelanggaran hukum tersebut di atas tanpa mengurangi hak Pengguna yang menderita kerugian menurut
+        Kitab Undang-Undang Hukum Perdata.
+    </string>
+    <string name="bantuan1">
+        Aplikasi untuk menunjang berbagai keperluan ASN dan mitra lainnya mulai dari pembelian pulsa, token listrik, pemesanan tiket akomodasi hingga pinjaman dana tanpa agunan dengan bunga rendah.
+    </string>
+    <string name="bantuan2">
+        DUMI diperuntukan untuk ASN, Pegawai BUMN serta Pensiunan kedua profesi tersebut.
+    </string>
+    <string name="bantuan3">
+        Setiap pengguna dari instansi yang telah bekerjasama mendapat saldo Pay Later senilai 1 juta rupiah yang dapat
+        digunakan untuk melakukan segala transaksi yang tersedia pada aplikasi DUMI. Pada saat gajian bendahara
+        masing-masing instansi akan memotong gaji setiap pengguna sesuai dengan nilai yang mereka pakai dari saldo Pay Later.
+    </string>
+    <string name="bantuan4">
+        Bagi instansi yang tertarik untuk menjadi mitra DUMI dapat menghubungi kami di info@dumi.co.id atau (021) 80882815 ext. 4218
+    </string>
+    <string name="bantuan5">
+        3 sampai 5 hari kerja setelah pengajuan berhasil.
+    </string>
+    <string name="syarat_ketentuan">
+        <b>KEBIJAKAN PRIVASI APLIKASI MOBILE DUMI</b>\n\n
+        Kebijakan Privasi\n\n
+        Pembaharuan terakhir: 2 Desember 2019\n\n
+        Persetujuan Pengguna\n\n
+        Anda menyetujui kebijakan privasi ini, termasuk menyetujui sepenuhnya terhadap kemungkinan atau memang
+        betul akan adanya pengumpulan, pemrosesan, transfer antar perbatasan negara dan penyimpanan dari informasi
+        pribadi sebagaimana didefinisikan di dalam kebijakan privasi ini, ketika anda mendaftar, mengakses atau
+        menggunakan “Dumi pinjaman tunai online”(“Aplikasi”), segala macam fitur, pemrosesan, fungsi dan pelayanan
+        terkait lainnya (secara kolektif disebut dengan “Pelayanan”). Kecuali dinyatakan lain didalam kebijakan
+        Privasi ini, syarat-syarat yang digunakan di ddalam kebijakan Privasi ini mempunyai arti yang sama dengan
+        Syarat-syarat dan ketentuan-ketentuan yang dapat di akses di https://minjem.com/syarat-ketentuan\n\n
+        Cakupan Penggunaan\n\n
+        Kebijakan Privasi ini menginformasikan anda mengenai kebijakan kami atas hak privasi anda terkait dengan
+        pengumpulan, penggunaan, penyimpanan, pemrosesan, pengungkapan dan kemanan dari informasi anda ketika anda
+        menggunakan aplikasi ini di perangkat apapun (termasuk perangkat mobile). Kebijakan Privasi ini berlaku untuk
+        seluruh informasi yang kami proses terkait dengan hubungan kami dengan anda sebagai pelanggan atau calon pelanggan.\n\n
+        Pengumpulan Informasi Pribadi\n\n
+        Mohon diperhatikan apabila anda menggunakan aplikasi atau pelayanan di tempat orang lain seperti keluarga,
+        teman atau karyawan-karyawan anda, anda harus memastikan bahwa anda adalah orang yang berwenang untuk memberikan
+        kami informasi pribadi. Penggunaan aplikasi dengan cara ini secara otomatis akan dianggap bahwa anda telah
+        mendapatkan ijin yang bersangkutan dengan pemilik informasi pribadi dan telah diinformasikan kepada pemilik
+        informasi tersebut akan kebijakan privasi ini. Anda dengan ini menyatakan dan menjamin bahwa seluruh keluarga,
+        teman dan karyawan-karyawan yang informasi pribadinya anda berikan kepada kami bahwa mereka telah menyetujui
+        untuk digunakan, diproses, disimpan dan atau diungkap informasi pribadinya sehubungan dengan kebijakan privasi
+        ini dan semua aturan hukum dan perundang-undangan yang berlaku.\n\n
+        Kami dapat menanyakan kepada anda untuk menyediakan informasi tertentu yang dapat mengidentifikasi informasi yang
+        berhubungan dengan anda atau dapat digunakan untuk melakukan kontak atau mengidentifikasikan anda.\n\n
+        Informasi identifikasi pribadi dapat termasuk namun tidak terbatas dengan: a) Informasi kontak seperti
+        Nama Lengkap anda, nomor yang dapat dihubungi, alamat email, alamat, alamat kantor, dan informasi lain
+        yang serupa; b) Informasi keuangan seperti Rekening Bank secara lengkap dan/atau Kartu Kredit; dan c)
+        Informasi pribadi yang sensitive seperti tanggal lahir, jenis kelamin, kewarganegaraan, status pernikahan,
+        dan/atau data lengkap di Kartu Identitas resmi anda (secara kolektif disebut dengan “Informasi Pribadi”).
+        Informasi Identifikasi Pribadi tidak termasuk anonim atau informasi yang dikumpulkan dengan maksud bukan
+        untuk mengidentifikasi orang secara spesifik. Kami juga dapat memerlukan foto-foto dari Informasi Pribadi,
+        yang mungkin berlaku selama proses permohonan atau selama pinjaman aktif secara layak untuk memverifikasi
+        seluruh informasi yang telah anda berikan kepada Perusahaan.\n\n
+        Kami memiliki hak tanpa pemberitahuan sebelumnya kepada anda untuk memperbaharui jenis Informasi Pribadi
+        yang mungkin dibutuhkan untuk disediakan dengan menambahkan komponen atau menghapus komponen yang ada dari
+        permintaan prosedur identifikasi kami dari waktu ke waktu.\n\n
+        Kami juga dapat mengumpulkan Informasi pribadi anda dari sumber-sumber lainnya, seperti informasi yang anda
+        berikan secara langsung atau tidak langsung, termasuk pengumpulan informasi yang anda berikan melalui pelayanan
+        terkait lainnya, termasuk kepada Tim Pelayanan Pelanggan kami.\n\n
+
+        Kami juga dapat mengumpulkan Informasi Pribadi anda dari akun-akun anda yang lain  atau akun-akun
+        yang ada di perangkat mobile dengan tunduk kepada Peraturan dan Hukum yang berlaku, seperti:\n\n
+        &#8226;<br />
+        Kami dapat melihat lokasi anda secara langsung melalui jaringan dan Global Positioning System (GPS)
+        dari perangkat mobile anda.\n\n
+        &#8226;<br />
+        Kami dapatmengakses mikrofon di perangkat mobile anda;\n\n
+        &#8226;<br />
+        Kami dapat mengakses kamera di perangkat mobile anda , dan/atau mengambil foto atau video dari
+        perangkat mobile anda.\n\n
+
+        Apabila anda memilih untuk tidak memberikan kepada kami Informasi Pribadi anda sebagaimana yang
+        dibutuhkan dari anda, atau anda menarik persetujuan anda, kapan saja selama penggunaan layanan
+        kami terhadap pengumpulan, pemrosesan, dan/atau penyimpanan Informasi Pribadi sebagaimana didefinisikan
+        di dalam Kebijakan Privasi ini, kami memiliki hak untuk menolak permintaan anda atau menolak untuk
+        melanjutkan layanan kami.\n\n
+
+        <b>Penggunaan Informasi Pribadi</b>\n\n
+        Informasi Pribadi yang kami kumpulkan dari anda akan digunakan untuk dapat melaksanakan permintaan
+        layanan dari kami. Kami dapat menggunakan Informasi Pribadi untuk:\n\n
+        Memfasilitasi penggunaan dari layanan aplikasi dan/atau akses untuk pendaftaran aplikasi akun anda
+        (apabila ada);\n\n
+        •	Memverifikasi identitas anda dan  kontak yang anda berikan;\n
+        •	Menyediakan layanan kami;\n
+        •	Memproses transaksi dan mengirimkan pemberitahuan mengenai transaksi anda;\n
+        •	Menghubungi anda dan memperbaharui pelaksanaan layanan kami;\n
+        •	Berkomunikasi dengan anda dan memproses permintaan anda;\n
+        •	Menawarkan survei, promosi, dan komunikasi pemasaran;\n
+        •	Memperbaiki konten aplikasi dan susunannya;\n
+        •	Meningkatkan layanan kami;\n
+        •	Menyediakan layanan transfer dana elektronik, dan layanan terkait lainnya;\n
+        •	Mengontak referensi pribadi yang diberikan untuk memverifikasi keakuratan informasi dan memastikan
+        identitas dan kondisi dari pengguna;\n
+        •	Menanggapi pertanyaan-pertanyaan apapun, komentar-komentar, atau perhatian terhadap layanan kami;\n
+        •	Memberikan layanan pelanggan;\n
+        •	Mengumpulkan akun yang gagal/lalai membayar;\n
+        •	Menggunakan hak hukum perusahaan untuk melindungi kepentingannya;\n\n
+        Hal lain yang telah ditentukan dan disahkan untuk tujuan tertentu dan telah diumumkan sebelumnya,
+        atau dalam praktek yang wajar adalah setelah pengumpulan Informasi Pribadi.\n\n
+        Kami tidak akan membagi Informasi pribadi anda dengan pihak ketiga lainnya untuk
+        kepentingan bisnis mereka termasuk namun tidak terbatas kepada pemasaran, iklan tanpa persetujuan
+        dan kuasa dari anda.\n\n
+        <b>Penyedia Layanan</b>\n\n
+        Kami dapat mempekerjakan pihak ketiga baik itu perusahaan maupun individu untuk memfasilitasi
+        layanan atas nama kami, untuk melaksanakan pengerjaan layanan terkait, untuk membantu kami dalam
+        menganalisa bagaimana layanan kami digunakan atau untuk membantu kami mengumpulkan akun-akun yang
+        gagal/lalai bayar.\n\n
+        Pihak ketiga ini akan memiliki akses ke Informasi Pribadi anda tetapi hanya untuk menjalankan pekerjaan
+        yang kami minta dan memiliki kewajiban untuk tidak mengungkapkan, menggunakan atau menyimpan Informasi pribadi
+        anda untuk tujuan apapun.\n\n
+        <b>Membagikan Informasi Pribadi</b>\n\n
+        Kami dapat membagikan Informasi anda kepada pihak ketiga, termasuk namun tidak terbatas kepada:\n\n
+        Afiliasi dan/atau perusahaan-perusahaan anggota dari PT. Fidac Inovasi Teknologi,
+        termasuk anak-anak perusahaannya baik secara langsung maupun tidak langsung untuk membantu daftar
+        layanan pada aplikasi, membantu mendeteksi dan mencegah potensi perbuatan melawan hukum dan
+        pelanggaran terhadap kebijakan kami, dan untuk memberikan data yang layak untuk dianalisa dalam
+        penggunaan aplikasi termasuk komunikasi pemasaran.\n\n
+        Pengadilan, Pejabat Pemerintahan, penegak Hukum, dan pembuatan kebijakan lainnya sehubungan
+        dengan panggilan dari Pengadilan dan atau proses hukum lainnya atau persyaratan yang berlaku
+        sesuai dengan peraturan dan perundang-undangan yang berlaku, atau ketika kami meyakini atas dasar
+        kebijaksanaan kami sendiri bahwa pengungkapan Informasi Pribadi tersebut diperlukan untuk mencegah
+        kerusakan atau kerugian, atau laporan adanya kecurigaan terhadap adanya aktivitas melawan hukum atau
+        menginvestigasi pelanggaran dari syarat-syarat dan ketentuan yang telah kami tentukan;\n\n
+        Biro kredit, Asosiasi Fintech Pendanaan Bersama Indonesia (AFPI) dan Agen Jasa Penagihan untuk
+        laporan informasi akun sebagaimana diperbolehkan oleh Undang-undang.\n\n
+        Tim pelayanan pelanggan untuk tujuan pelayanan pelanggan.\n\n
+        Bank atau mitra-mitra keuangan sebagaimana diperbolehkan oleh undang-undang melalui kontrak bisnis;\n\n
+        Departemen Legal, untuk memastikan kepatuhan dengan aturan-aturan pemerintah dan pembuat kebijakan
+        serta untuk melindungi dari hal yang dapat merugikan baik benda maupun keselamatan pengguna aplikasi
+        lainnya atau public sebagaimana dipersyaratkan dan diperbolehkan oleh undang-undang yang berlaku.\n\n
+        Penyedia Layanan, mengizinkan penyedia layanan di dalam kontrak dengan kami untuk mendukung operasional
+        bisnis kami seperti pencegahan terhadap penipuan, pengumpulan tagihan, pemasaran, pelayanan pelanggan
+        dan layanan teknologi.\n\n
+        Mohon dicatat bahwa bebrapa pihak ketiga dapat dimungkinkan berada di negara lain dengan peraturan
+        dan regulasi yanag berbeda dalam pemrosesan Informasi pribadi. Dengan menyetujui Kebijakan privasi
+        ini anda telah mengetahui bahwa Informasi Pribadi dapat dikirim antar batas negara ke negara lain
+        dengan tunduk kepada undang-undang dan peraturan yang berlaku, dan anda memberikan persetujuan
+        untuk hal tersebut.\n\n
+        <b>Pemberitahuan Khusus – Anak di bawah umur</b>\n\n
+        Penggunaan aplikasi ini bukan untuk orang-orang di bawah 18 tahun dan kami tidak akan
+        mengumpulkan, mempergunakan, memberikan atau memproses dalam bentuk apapun Informasi
+        Pribadi apapun dari orang yang berumur di bawah 18 tahun.\n\n
+        Kami akan menanyakan juga kepada anda, apabila anda berumur di bawah 18 tahun, mohon untuk tidak
+        mengirimkan kepada kami (sebagai contoh, nama, alamat dan alamat email). Apabila berumur di bawah 18
+        tahun dan namun tetap mempertanyakan untuk mempergunakan layanan aplikasi ini yang mana membutuhkan
+        Informasi Pribadi anda untuk dimasukkan, mohon mintakan kepada orang tua atau wali untuk bertiundak untuk anda.\n\n
+        <b>Keakuratan dari Informasi Pribadi</b>\n\n
+        Apabila anda hendak memeriksa, mengubah atau menghapus Informasi Pribadi mengenai apapun
+        yang telah anda berikan kepada kami, mohon segera menghubungi kami pada nomor kontak tertulis dibawah.\n\n
+        <b>Penyimpanan Informasi Pribadi</b>\n\n
+        Kami tetap menyimpan Informasi Pribadi anda selama anda menggunkan layanan kami, dan setelah itu,
+        kami tetap akan menyimpan Informasi Pribadi tersebut dalam waktu 1 sampai dengan 5 tahun kalender
+        dengan merujuk kepada hukum yang berlaku. Kami juga akan menyimpan Informasi Pribadi untuk kepatuhan
+        kepada persyaratan dari hukum dan peraturan yang berlaku, untuk mencegah penipuan, menyelesaikan
+        perselisihan dan berbagai macam permasalahan yang timbul, dan untuk melaksanakan hal-hal lain
+        yang diperbolehkan atau dipersyaratkan oleh undang-undang dan peraturan yang berlaku. Dibawah
+        kebijakan perlindungan data kami, kami akan menghapus Informasi Pribadi dengan suatu cara yang
+        aman dan sesuai dengan undang-undang dan peraturan yang berlaku, setelah Informasi Pribadi tersebut
+        sudah tidak lagi diperlukan dan relevan dengan layanan kami, kecuali undang-undang dan peraturan yang
+        berlaku mempersyaratkan demikian, kecuali dimintakan oleh Pengguna secara tertulis.\n\n
+        <b>Keamanan</b>\n\n
+        Keamanan dari Informasi Pribadi anda adalah prioritas kami. Kecuali diindikasikan di dalam
+        kebijakan privasi, kami tidak akan mengungkapkan Informasi Pribadi anda kepada pihak ketiga
+        tanpa persetujuan anda. Untuk itu kami akan melakukan seluruh prosedur yang diperlukan dana
+        melakukan langkah-langkah terbaik kami untuk memastikan seluruh Informasi Pribadi yang telah diterima
+        akan tetap menjadi rahasia dan aman, baik itu online maupun offline. Kami melindungi Informasi Pribadi
+        anda dengan menggunakan variasi teknikal dan pengukuran keamanan administratif untuk mengurangi resiko
+        dan kerugian, penyalahgunaan, akses yang tidak diperkenankan, pengungkapan dan perubahan. Kami juga
+        menggunakan perubahan dari waktu ke waktu pengukuran keamanan secara variatif, ketika teknologi baru
+        tersedia dan cocok seperti firewalls dan enkripsi data , serta control akses ke pusat data.\n\n
+        <b>Kerahasiaan Pengguna</b>\n\n
+        Untuk kelanjutan kerahasiaan dari Informasi Pribadi anda, kami menyarankan untuk menyimpan kerhasiaan
+        akun detil anda setiap waktu.\n\n
+        <b>Tautan Eksternal</b>
+        Aplikasi ini mungkin berisi tautan ke situs lainnya yang tidak dioperasikan oelh kami. Apabila anda meng-klik
+        tautan pihak ketiga tersebt, anda kan diarahkan kepada situs pihak ketiga. Kami sangat menyarankan anda
+        untuk meninjau Kebijakan privasi dari setiap situs yang anda kunjungi. Kami tidak memiliki kendali dan
+        tidak akan bertangung-jawab untuk isi, kebijakan privasi ataupun praktek yang dilakukan oleh situs atau
+        layanan pihak ketiga tersebut.\n\n
+        <b>Pembaharuan kebijakan Privasi</b>\n\n
+        Kami dapat merubah Kebijakan Privasi ini setiap saat dengan melakukan posting versi revisi di
+        dalam aplikasi. Anda disarankan untuk meninjau Kebijakan Privasi ini secara berkala untuk informasi
+        terkini. Perubahan dari Kebijakan Privasi ini efektif sejak tanggal di posting. Apabila kami melakukan
+        perubahan yang sunstansial terhadap Kebijakan Privasi ini dan dalam hal kami menggunakan Informasi
+        Pribadi anda, kami akan memasang perubahan tersebut di dalam aplikasi dan akan melakukan langkah
+        terbaik untuk memberitahukan anda atas perubahan signifikan tersebut. Dengan terus melanjutkan
+        menggunakan layanan kami, anda menerima dan menyetujui pembaharuan syarat-sayarat pada Kebijakan privasi.\n\n
+        <b>Pertanyaan dan Keluhan</b>\n\n
+        Apabila anda meyakini bahwa Informasi Pribadi anda disalahgunakan atau dimanfaatkan,
+        atau anda meyakini bahwa keamanan dan perlindungan dari tiap-tiap Informasi Data sebagai mana telah
+        membahayakan anda, anda dapat meminta keterangan dan mengajukan keluhan kepada Informasi Kontak dibawah
+        ini dan dapat mendiskusikan secara singkat mengenai hal tersebut bersamaan dengan detil kontak untuk
+        referensi anda.\n\n
+        Apabila anda tidak puas terhadap pelayanan pengaduan anda, atau anda meyakini masih adanya ancaman
+        pelanggaran terhadap Informasi Pribadi anda, anda dapat langsung melaporkan keluhan anda terhadap otoritas
+        pengawas sesuai dengan undang-undang dan peraturan yang berlaku.\n\n
+        <b>Informasi Kontak</b>\n\n
+        Demikianlah, apabila anda mempunyai pertanyaan ataupun keluhan sehubungan dengan kebijakan Privasi,
+        atau anda mempunyai permohonan informasi sehubungan dengan hal apapun juga mengnai proses dari
+        masing-masing Informasi Pribadi, anda dapat menghubungi kami melalui informasi sebagai berikut:\n\n
+        Email:  <u>cs@minjem.com</u>\n\n
+        Nomor Telepon:  021 80882815 – ext 4218\n\n
+        Alamat: PT. Fidac Inovasi Teknologi.\n
+        Gedung BKN II Lantai 12\n
+        Jalan Mayjen Sutoyo No 12\n
+        Jakarta Timur, DKI Jakarta\n
+        Indonesia
+    </string>
+    <string name="kebijakanprivasi">Kebijakan dan Privasi</string>
+    <string name="saya_setuju"><![CDATA[Saya setuju dengan<font color=\'#1560db\'> Syarat dan Ketentuan</font> yang berlaku]]></string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="notifikasi">Notifikasi</string>
+    <string name="pesan">Pesan</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="status_pinjaman">Status Pinjaman:</string>
+    <string name="tanggal_pengajuan">Tanggal Pengajuan</string>
+    <string name="masukkan_password_baru">Masukkan password baru</string>
+    <string name="tempat_lhr">Tempat Lahir</string>
+    <string name="pelengkap_regular">Pengguna wajib melengkapi dokumen sebagai berikut:</string>
+    <string name="foto_sk">&#8226;<br /> Foto Dokumen SK Pengankatan/CPNS</string>
+    <string name="foto_surat_kuasa">&#8226;<br /> Foto Dokumen Surat kuasa</string>
+    <string name="foto_pa">&#8226;<br /> Foto Dokumen Persetujuan Atasan</string>
+
 
 </resources>

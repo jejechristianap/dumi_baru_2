@@ -1,21 +1,51 @@
 package com.fidac.dumi.jenispinjaman;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.fidac.dumi.BankActivity;
+import com.fidac.dumi.LengkapiData;
 import com.fidac.dumi.MainActivity;
 import com.fidac.dumi.R;
+import com.fidac.dumi.api.GetBungaInterface;
+import com.fidac.dumi.api.PinjamanKilatInterface;
+import com.fidac.dumi.api.StatusPinjamanInterface;
+import com.fidac.dumi.model.SharedPrefManager;
+import com.fidac.dumi.model.User;
+import com.fidac.dumi.retrofit.RetrofitClient;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PinjamanKilatActivity extends AppCompatActivity {
 
@@ -33,24 +63,51 @@ public class PinjamanKilatActivity extends AppCompatActivity {
     private Button bulan3;
     private Button bulan6;
     private Button bulan12;
+    private Button ajukanButton;
+
+    private Spinner tujuanSpinner;
+    private ArrayAdapter<CharSequence> tujuanAdapter;
+    private String[] tujuanPinjaman = {"Renovasi Rumah", "Biaya Pendidikan", "Biaya Rumah Sakit",
+            "Jalan-jalan", "Biaya Pernikahan", "Modal Usaha", "Lainnya"};
 
     private final int PEMBAYARAN_3_BULAN = 3;
     private final int PEMBAYARAN_6_BULAN = 6;
     private final int PEMBAYARAN_12_BULAN = 12;
     private final int JUMLAH_BULAN_1_TAHUN = 12;
     private final int JUMLAH_PINJAMAN_DEFAULT = 1000000;
-    private final double BIAYA_ADMIN = 0.01;
-    private final double BIAYA_ASURANSI = 0.01;
-    private final double BIAYA_TRANSFER = 6500;
-    private final double BUNGA_PERBULAN = 0.099;
+    private final float BIAYA_ADMIN = (float) 0.01;
+    private final float BIAYA_ASURANSI = (float) 0.01;
+    private final float BIAYA_TRANSFER = 6500;
+    private final float BUNGA_PERBULAN = (float) 0.099;
+    private float bunga, admin, angsuran, asuransi, sisa;
+    private int plafond;
+
+    private float getBunga, getAdmin, getAsur12, getAsur24, getAsur36;
 
     private Locale localID;
     private NumberFormat formatRp;
+
+    public static final String DATE_FORMAT_2 = "yyyy-MM-dd";
+
+    private SharedPreferences.Editor editor;
+    private SharedPreferences pref;
+    private User prefManager;
+
+    private TextView adminTv, asuransiTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pinjaman_kilat);
+
+        prefManager = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+        pref = getApplicationContext().getSharedPreferences("ajukanPinjaman", 0); // 0 - for private mode
+        editor = pref.edit();
+
+        tujuanSpinner = findViewById(R.id.tujuan_pinjaman_spinner);
+        tujuanAdapter = new ArrayAdapter<>(PinjamanKilatActivity.this, R.layout.spinner_text, tujuanPinjaman);
+        tujuanAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+        tujuanSpinner.setAdapter(tujuanAdapter);
 
         angsuranTv = findViewById(R.id.angsuran_perbulan_kilat);
         biayaAdminTv = findViewById(R.id.biaya_administrasi_kilat);
@@ -59,16 +116,22 @@ public class PinjamanKilatActivity extends AppCompatActivity {
         jumlahTerimaTv = findViewById(R.id.jumlah_yang_diterima_kilat);
         jumlah = findViewById(R.id.rp_1jt_kilat);
 
+        adminTv = findViewById(R.id.admin_asn);
+        asuransiTv = findViewById(R.id.asuransi_asn);
+
         back = findViewById(R.id.back_kilat);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PinjamanKilatActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
+        back.setOnClickListener(v -> {
+            Intent intent = new Intent(PinjamanKilatActivity.this, MainActivity.class);
+            startActivity(intent);
         });
 
         pinjamanUang = JUMLAH_PINJAMAN_DEFAULT;
+        plafond = 0;
+        bunga = 0;
+        admin = 0;
+        angsuran = 0;
+        asuransi = 0;
+        sisa = 0;
 
         localID = new Locale("in", "ID");
         formatRp = NumberFormat.getCurrencyInstance(localID);
@@ -348,81 +411,258 @@ public class PinjamanKilatActivity extends AppCompatActivity {
         bulan6 = findViewById(R.id.bulan_6_kilat);
         bulan12 = findViewById(R.id.bulan_12_kilat);
 
-        bulan3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bulan3.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorWhite));
-                bulan6.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorBlue));
-                bulan12.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorBlue));
-                bulan3.setBackgroundResource(R.drawable.rect_pressed);
-                bulan6.setBackgroundResource(R.drawable.rect_normal);
-                bulan12.setBackgroundResource(R.drawable.rect_normal);
-                double pokok = pinjamanUang / PEMBAYARAN_3_BULAN;
-                double bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
-                double angsuran = pokok + bunga;
-                double admin = pinjamanUang * BIAYA_ADMIN;
-                double asuransi = pinjamanUang * BIAYA_ASURANSI;
-                double totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
-                double sisa = pinjamanUang - totalPengurangan;
+        bulan3.setOnClickListener(v -> {
+            bulan3.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorWhite));
+            bulan6.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorBlue));
+            bulan12.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorBlue));
+            bulan3.setBackgroundResource(R.drawable.rect_pressed);
+            bulan6.setBackgroundResource(R.drawable.rect_normal);
+            bulan12.setBackgroundResource(R.drawable.rect_normal);
 
-                angsuranTv.setText(formatRp.format((double)angsuran));
-                biayaAdminTv.setText(formatRp.format((double)admin));
-                biayaAsuransiTv.setText(formatRp.format((double)asuransi));
-                biayaTransferTv.setText(formatRp.format((double)BIAYA_TRANSFER));
-                jumlahTerimaTv.setText(formatRp.format((double)sisa));
+            plafond = PEMBAYARAN_3_BULAN;
+            float pokok = pinjamanUang / plafond;
+            bunga = (pinjamanUang * getBunga) / JUMLAH_BULAN_1_TAHUN;
+            angsuran = pokok + bunga;
+            admin = pinjamanUang * getAdmin;
+            asuransi = pinjamanUang * getAsur12;
+            float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
+            sisa = pinjamanUang - totalPengurangan;
+
+            angsuranTv.setText(formatRp.format(angsuran));
+            biayaAdminTv.setText(formatRp.format(admin));
+            biayaAsuransiTv.setText(formatRp.format(asuransi));
+            biayaTransferTv.setText(formatRp.format(BIAYA_TRANSFER));
+            jumlahTerimaTv.setText(formatRp.format(sisa));
+        });
+
+        bulan6.setOnClickListener(v -> {
+            bulan3.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorBlue));
+            bulan6.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorWhite));
+            bulan12.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorBlue));
+            bulan6.setBackgroundResource(R.drawable.rect_pressed);
+            bulan3.setBackgroundResource(R.drawable.rect_normal);
+            bulan12.setBackgroundResource(R.drawable.rect_normal);
+
+            plafond = PEMBAYARAN_6_BULAN;
+            float pokok = pinjamanUang / plafond;
+            bunga = (pinjamanUang * getBunga) / JUMLAH_BULAN_1_TAHUN;
+            angsuran = pokok + bunga;
+            admin = pinjamanUang * getAdmin;
+            asuransi = pinjamanUang * getAsur12;
+            float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
+            sisa = pinjamanUang - totalPengurangan;
+
+            angsuranTv.setText(formatRp.format(angsuran));
+            biayaAdminTv.setText(formatRp.format(admin));
+            biayaAsuransiTv.setText(formatRp.format(asuransi));
+            biayaTransferTv.setText(formatRp.format(BIAYA_TRANSFER));
+            jumlahTerimaTv.setText(formatRp.format(sisa));
+        });
+
+        bulan12.setOnClickListener(v -> {
+            bulan3.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorBlue));
+            bulan6.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorBlue));
+            bulan12.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorWhite));
+            bulan12.setBackgroundResource(R.drawable.rect_pressed);
+            bulan3.setBackgroundResource(R.drawable.rect_normal);
+            bulan6.setBackgroundResource(R.drawable.rect_normal);
+
+            plafond = PEMBAYARAN_12_BULAN;
+            float pokok = pinjamanUang / plafond;
+            bunga = (pinjamanUang * getBunga) / JUMLAH_BULAN_1_TAHUN;
+            angsuran = pokok + bunga;
+            admin = pinjamanUang * getAdmin;
+            asuransi = pinjamanUang * getAsur12;
+            float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
+            sisa = pinjamanUang - totalPengurangan;
+
+            angsuranTv.setText(formatRp.format(angsuran));
+            biayaAdminTv.setText(formatRp.format(admin));
+            biayaAsuransiTv.setText(formatRp.format(asuransi));
+            biayaTransferTv.setText(formatRp.format(BIAYA_TRANSFER));
+            jumlahTerimaTv.setText(formatRp.format(sisa));
+        });
+
+        ajukanButton = findViewById(R.id.lanjut_button_kilat);
+        ajukanButton.setOnClickListener(v -> {
+//            ajukanPinjaman();
+            String angs = angsuranTv.getText().toString();
+            if(TextUtils.isEmpty(angs)){
+                Toast.makeText(this, "Tentukan Lama Pembayaran", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Toast.makeText(this, "Touch", Toast.LENGTH_SHORT).show();
+            getPinjaman();
+//            ajukanPinjaman();
+        });
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getBunga = 0f;
+        getAdmin = 0f;
+        getAsur12 = 0f;
+        getAsur24 = 0f;
+        getAsur36 = 0f;
+        getBunga();
+
+    }
+
+    private void getPinjaman(){
+
+        String nip = prefManager.getNip();
+        Toast.makeText(this, "NIp: " + nip, Toast.LENGTH_SHORT).show();
+        StatusPinjamanInterface status = RetrofitClient.getClient().create(StatusPinjamanInterface.class);
+        Call<ResponseBody> call = status.getPinjaman(nip);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+                    boolean cek = obj.getBoolean("status");
+                    if (cek){
+                        String data = obj.getString("data");
+                        JSONArray jsonArray = new JSONArray(data);
+                        if (!jsonArray.isNull(0)){
+                            for (int i = 0; i<jsonArray.length(); i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                int statusId = jsonObject.getInt("status");
+                                Toast.makeText(PinjamanKilatActivity.this, "id " + statusId, Toast.LENGTH_SHORT).show();
+
+                                if(statusId == 1){
+                                    Toast.makeText(PinjamanKilatActivity.this, "Anda sudah mengajukan pinjaman, mohon menunggu", Toast.LENGTH_SHORT).show();
+                                } else if (statusId == 2){
+                                    Toast.makeText(PinjamanKilatActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                } else if (statusId == 3){
+                                    ajukanPinjaman();
+                                } else if (statusId == 4){
+                                    Toast.makeText(PinjamanKilatActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                } else if (statusId == 5){
+                                    Toast.makeText(PinjamanKilatActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                } else if(statusId == 6){
+                                    ajukanPinjaman();
+                                }
+//
+                            }
+                        }else {
+                            ajukanPinjaman();
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
             }
         });
 
-        bulan6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bulan3.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorBlue));
-                bulan6.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorWhite));
-                bulan12.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorBlue));
-                bulan6.setBackgroundResource(R.drawable.rect_pressed);
-                bulan3.setBackgroundResource(R.drawable.rect_normal);
-                bulan12.setBackgroundResource(R.drawable.rect_normal);
-                double pokok = pinjamanUang / PEMBAYARAN_6_BULAN;
-                double bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
-                double angsuran = pokok + bunga;
-                double admin = pinjamanUang * BIAYA_ADMIN;
-                double asuransi = pinjamanUang * BIAYA_ASURANSI;
-                double totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
-                double sisa = pinjamanUang - totalPengurangan;
+    }
 
-                angsuranTv.setText(formatRp.format((double)angsuran));
-                biayaAdminTv.setText(formatRp.format((double)admin));
-                biayaAsuransiTv.setText(formatRp.format((double)asuransi));
-                biayaTransferTv.setText(formatRp.format((double)BIAYA_TRANSFER));
-                jumlahTerimaTv.setText(formatRp.format((double)sisa));
+    private void getBunga() {
+        final ProgressDialog pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Memuat Data...");
+        pDialog.show();
+        User pref = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+        String insker = pref.getInskerKerja();
+
+        GetBungaInterface bunga = RetrofitClient.getClient().create(GetBungaInterface.class);
+        Call<ResponseBody> call = bunga.getBunga();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                pDialog.dismiss();
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+                    boolean status = obj.getBoolean("status");
+//                    Toast.makeText(PinjamanKilatActivity.this, "status: " + status, Toast.LENGTH_SHORT).show();
+                    if (status){
+                        String data = obj.getString("data");
+                        JSONArray bungaObj = new JSONArray(data);
+                        for (int i = 0; i<bungaObj.length(); i++){
+                            JSONObject bung = bungaObj.getJSONObject(i);
+                            int id = bung.getInt("id_bunga");
+//                            Toast.makeText(PinjamanKilatActivity.this, "instansi: " + id, Toast.LENGTH_SHORT).show();
+                            if(id == 1 && insker.contains("Badan Kepegawaian Negara")){
+                                adminTv.setText("Biaya Administrasi 1%");
+                                asuransiTv.setText("Biaya Asuransi 1%");
+                                double bunga = bung.getDouble("bunga");
+                                double biayaAdmin = bung.getDouble("biaya_admin");
+                                double biayaAsuransi12 = bung.getDouble("biaya_asuransi_12");
+                                double biayaAsuransi24 = bung.getDouble("biaya_asuransi_24");
+                                double biayaAsuransi36 = bung.getDouble("biaya_asuransi_36");
+                                getBunga = (float) bunga;
+                                getAdmin = (float) biayaAdmin;
+                                getAsur12 = (float) biayaAsuransi12;
+                                getAsur24 = (float) biayaAsuransi24;
+                                getAsur36 = (float) biayaAsuransi36;
+                                Log.d("Biaya", "onResponse: " + "\nBunga: " + getBunga + "\nAdmin: " + getAdmin + "\nAsur12: " + getAsur12 +
+                                        "\nAsur24: " + getAsur24 + "\nAsur36: " + getAsur36);
+                            } else if (id == 2 && !insker.contains("Badan Kepegawaian Negara")){
+                                adminTv.setText("Biaya Administrasi 2%");
+                                asuransiTv.setText("Biaya Asuransi 2%");
+                                double bunga = bung.getDouble("bunga");
+                                double biayaAdmin = bung.getDouble("biaya_admin");
+                                double biayaAsuransi12 = bung.getDouble("biaya_asuransi_12");
+                                double biayaAsuransi24 = bung.getDouble("biaya_asuransi_24");
+                                double biayaAsuransi36 = bung.getDouble("biaya_asuransi_36");
+                                getBunga = (float) bunga;
+                                getAdmin = (float) biayaAdmin;
+                                getAsur12 = (float) biayaAsuransi12;
+                                getAsur24 = (float) biayaAsuransi24;
+                                getAsur36 = (float) biayaAsuransi36;
+                            }
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                pDialog.dismiss();
             }
         });
+    }
 
-        bulan12.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bulan3.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorBlue));
-                bulan6.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorBlue));
-                bulan12.setTextColor(PinjamanKilatActivity.this.getColor(R.color.colorWhite));
-                bulan12.setBackgroundResource(R.drawable.rect_pressed);
-                bulan3.setBackgroundResource(R.drawable.rect_normal);
-                bulan6.setBackgroundResource(R.drawable.rect_normal);
-                double pokok = pinjamanUang / PEMBAYARAN_12_BULAN;
-                double bunga = (pinjamanUang * BUNGA_PERBULAN) / JUMLAH_BULAN_1_TAHUN;
-                double angsuran = pokok + bunga;
-                double admin = pinjamanUang * BIAYA_ADMIN;
-                double asuransi = pinjamanUang * BIAYA_ASURANSI;
-                double totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
-                double sisa = pinjamanUang - totalPengurangan;
+    private void ajukanPinjaman() {
+        User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+        String nip = user.getNip();
+        String tujuan = tujuanSpinner.getSelectedItem().toString();
 
-                angsuranTv.setText(formatRp.format((double)angsuran));
-                biayaAdminTv.setText(formatRp.format((double)admin));
-                biayaAsuransiTv.setText(formatRp.format((double)asuransi));
-                biayaTransferTv.setText(formatRp.format((double)BIAYA_TRANSFER));
-                jumlahTerimaTv.setText(formatRp.format((double)sisa));
-            }
-        });
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_2);
+        Calendar c = Calendar.getInstance();
+        Date today = c.getTime();
+        String tglPinjam = dateFormat.format(today);
+
+        c.add(Calendar.MONTH, plafond);
+        final Date dueDate = c.getTime();
+        String tglAkhirPinjam = dateFormat.format(dueDate);
 
 
+        editor.putString("nip", nip);
+        editor.putFloat("pinjaman", pinjamanUang);
+        editor.putInt("lamaPinjaman", plafond);
+        editor.putFloat("bunga", bunga);
+        editor.putFloat("admin", admin);
+        editor.putFloat("angsuran", angsuran);
+        editor.putFloat("diterima", sisa);
+        editor.putString("tujuan", tujuan);
+        editor.putString("tglMulai", tglPinjam);
+        editor.putString("tglAkhir", tglAkhirPinjam);
+        editor.putFloat("asuransi", asuransi);
+        editor.commit();
+
+        startActivity(new Intent(PinjamanKilatActivity.this, BankActivity.class));
     }
 }

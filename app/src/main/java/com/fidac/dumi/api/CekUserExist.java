@@ -11,6 +11,6 @@ public interface CekUserExist {
     @FormUrlEncoded
     @POST("user/cek")
     Call<ResponseBody> cekUser(
-            @Field("nip") String nip
+            @Field("nipBaru") String nip
     );
 }

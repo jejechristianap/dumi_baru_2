@@ -1,3 +1,4 @@
+/*
 package com.fidac.dumi.model;
 
 import android.content.Context;
@@ -36,3 +37,4 @@ public class VolleySingleton {
         getRequestQueue().add(req);
     }
 }
+*/
