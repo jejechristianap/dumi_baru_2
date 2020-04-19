@@ -491,7 +491,6 @@ public class PinjamanKilatActivity extends AppCompatActivity {
                 Toast.makeText(this, "Tentukan Lama Pembayaran", Toast.LENGTH_SHORT).show();
                 return;
             }
-            Toast.makeText(this, "Touch", Toast.LENGTH_SHORT).show();
             getPinjaman();
 //            ajukanPinjaman();
         });
@@ -514,7 +513,6 @@ public class PinjamanKilatActivity extends AppCompatActivity {
     private void getPinjaman(){
 
         String nip = prefManager.getNip();
-        Toast.makeText(this, "NIp: " + nip, Toast.LENGTH_SHORT).show();
         StatusPinjamanInterface status = RetrofitClient.getClient().create(StatusPinjamanInterface.class);
         Call<ResponseBody> call = status.getPinjaman(nip);
         call.enqueue(new Callback<ResponseBody>() {
@@ -530,7 +528,6 @@ public class PinjamanKilatActivity extends AppCompatActivity {
                             for (int i = 0; i<jsonArray.length(); i++){
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 int statusId = jsonObject.getInt("status");
-                                Toast.makeText(PinjamanKilatActivity.this, "id " + statusId, Toast.LENGTH_SHORT).show();
 
                                 if(statusId == 1){
                                     Toast.makeText(PinjamanKilatActivity.this, "Anda sudah mengajukan pinjaman, mohon menunggu", Toast.LENGTH_SHORT).show();
@@ -582,14 +579,12 @@ public class PinjamanKilatActivity extends AppCompatActivity {
                 try {
                     JSONObject obj = new JSONObject(response.body().string());
                     boolean status = obj.getBoolean("status");
-//                    Toast.makeText(PinjamanKilatActivity.this, "status: " + status, Toast.LENGTH_SHORT).show();
                     if (status){
                         String data = obj.getString("data");
                         JSONArray bungaObj = new JSONArray(data);
                         for (int i = 0; i<bungaObj.length(); i++){
                             JSONObject bung = bungaObj.getJSONObject(i);
                             int id = bung.getInt("id_bunga");
-//                            Toast.makeText(PinjamanKilatActivity.this, "instansi: " + id, Toast.LENGTH_SHORT).show();
                             if(id == 1 && insker.contains("Badan Kepegawaian Negara")){
                                 adminTv.setText("Biaya Administrasi 1%");
                                 asuransiTv.setText("Biaya Asuransi 1%");

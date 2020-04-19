@@ -46,8 +46,8 @@ import java.util.HashMap;
 import java.util.Map;*/
 import com.fidac.dumi.api.CekNipBknInterface;
 import com.fidac.dumi.api.CekUserExist;
-import com.fidac.dumi.model.RetrofitClient;
 import com.fidac.dumi.retrofit.NipResources;
+import com.fidac.dumi.retrofit.RetrofitClient;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
