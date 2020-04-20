@@ -1,3 +1,4 @@
+/*
 package com.fidac.dumi.model;
 
 import android.content.Context;
@@ -6,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,15 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fidac.dumi.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class NotifikasiAdapter extends RecyclerView.Adapter<NotifikasiAdapter.NotifHolder>{
-    private List<NotifikasiData> notifList = null;
+public class NotifikasiAdapterOld extends RecyclerView.Adapter<NotifikasiAdapterOld.NotifHolder>{
+    private List<NotifikasiDataOld> notifList = null;
 //    private Context context;
     private LayoutInflater inflater;
 
-    public NotifikasiAdapter(Context context, List<NotifikasiData> notifList){
+    public NotifikasiAdapterOld(Context context, List<NotifikasiDataOld> notifList){
         inflater = LayoutInflater.from(context);
         this.notifList = notifList;
 //        this.context = context;
@@ -76,3 +75,4 @@ public class NotifikasiAdapter extends RecyclerView.Adapter<NotifikasiAdapter.No
     }
 
 }
+*/

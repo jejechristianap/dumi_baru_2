@@ -122,6 +122,7 @@ public class MasukActivity extends AppCompatActivity {
     private void loginUser() {
         String nip = nipEt.getText().toString();
         String password = passEt.getText().toString();
+        pDialog.show();
 
         if (TextUtils.isEmpty(nip)){
             nipEt.setError("Mohon masukkan NIP anda");
@@ -203,9 +204,10 @@ public class MasukActivity extends AppCompatActivity {
                             toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
                             toast.show();*/
                         }
-                        pDialog.dismiss();
+
                         finish();
                         startActivity(new Intent(MasukActivity.this, MainActivity.class));
+                        pDialog.dismiss();
                     } else {
                         pDialog.dismiss();
                         Toast.makeText(MasukActivity.this, "NIP/Password Salah!", Toast.LENGTH_SHORT).show();

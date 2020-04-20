@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 
 import com.fidac.dumi.R;
 import com.fidac.dumi.api.StatusPinjamanInterface;
-import com.fidac.dumi.model.NotifikasiData;
 import com.fidac.dumi.model.SharedPrefManager;
 import com.fidac.dumi.model.User;
 import com.fidac.dumi.retrofit.RetrofitClient;
@@ -23,7 +22,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 

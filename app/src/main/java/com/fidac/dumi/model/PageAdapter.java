@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.fidac.dumi.fragment.NotifikasiFragment;
+import com.fidac.dumi.fragment.NotifikasiFragmentOld;
 import com.fidac.dumi.fragment.PesanFragment;
 
 public class PageAdapter extends FragmentPagerAdapter {

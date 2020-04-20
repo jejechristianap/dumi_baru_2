@@ -485,15 +485,14 @@ public class PinjamanKilatActivity extends AppCompatActivity {
 
         ajukanButton = findViewById(R.id.lanjut_button_kilat);
         ajukanButton.setOnClickListener(v -> {
-//            ajukanPinjaman();
             String angs = angsuranTv.getText().toString();
             if(TextUtils.isEmpty(angs)){
                 Toast.makeText(this, "Tentukan Lama Pembayaran", Toast.LENGTH_SHORT).show();
                 return;
             }
-            Toast.makeText(this, "Touch", Toast.LENGTH_SHORT).show();
+
             getPinjaman();
-//            ajukanPinjaman();
+
         });
 
 
@@ -514,7 +513,7 @@ public class PinjamanKilatActivity extends AppCompatActivity {
     private void getPinjaman(){
 
         String nip = prefManager.getNip();
-        Toast.makeText(this, "NIp: " + nip, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "NIp: " + nip, Toast.LENGTH_SHORT).show();
         StatusPinjamanInterface status = RetrofitClient.getClient().create(StatusPinjamanInterface.class);
         Call<ResponseBody> call = status.getPinjaman(nip);
         call.enqueue(new Callback<ResponseBody>() {
@@ -526,26 +525,43 @@ public class PinjamanKilatActivity extends AppCompatActivity {
                     if (cek){
                         String data = obj.getString("data");
                         JSONArray jsonArray = new JSONArray(data);
+                        ArrayList<Integer> statusPinjaman = new ArrayList<>();
                         if (!jsonArray.isNull(0)){
                             for (int i = 0; i<jsonArray.length(); i++){
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                int statusId = jsonObject.getInt("status");
-                                Toast.makeText(PinjamanKilatActivity.this, "id " + statusId, Toast.LENGTH_SHORT).show();
-
-                                if(statusId == 1){
-                                    Toast.makeText(PinjamanKilatActivity.this, "Anda sudah mengajukan pinjaman, mohon menunggu", Toast.LENGTH_SHORT).show();
+                                statusPinjaman.add(jsonObject.getInt("status"));
+                            }
+                            if(statusPinjaman.contains(1)){
+                                Toast.makeText(PinjamanKilatActivity.this, "Anda sudah mengajukan pinjaman. Mohon menunggu info dari kami.", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (statusPinjaman.contains(2)){
+                                Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (statusPinjaman.contains(4)){
+                                Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (statusPinjaman.contains(5)){
+                                Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." , Toast.LENGTH_SHORT).show();
+                                return;
+                            } else {
+                                /*if(statusId == 1){
+                                    Toast.makeText(PinjamanKilatActivity.this, "Anda sudah mengajukan pinjaman. Mohon menunggu info dari kami.", Toast.LENGTH_SHORT).show();
+                                    return;
                                 } else if (statusId == 2){
-                                    Toast.makeText(PinjamanKilatActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." + statusId, Toast.LENGTH_SHORT).show();
+                                    return;
                                 } else if (statusId == 3){
                                     ajukanPinjaman();
                                 } else if (statusId == 4){
-                                    Toast.makeText(PinjamanKilatActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." + statusId, Toast.LENGTH_SHORT).show();
+                                    return;
                                 } else if (statusId == 5){
-                                    Toast.makeText(PinjamanKilatActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." + statusId, Toast.LENGTH_SHORT).show();
+                                    return;
                                 } else if(statusId == 6){
-                                    ajukanPinjaman();
-                                }
-//
+
+                                }*/
+                                ajukanPinjaman();
                             }
                         }else {
                             ajukanPinjaman();

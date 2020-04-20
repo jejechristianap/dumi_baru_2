@@ -108,9 +108,11 @@ public class PelengkapanRegularActivity extends AppCompatActivity {
         RequestBody fileReqBodySkCpns = RequestBody.create(MediaType.parse("image/*"), fileSkCpns);
         RequestBody fileReqBodyPa = RequestBody.create(MediaType.parse("image/*"), filePa);
         RequestBody fileReqBodySk = RequestBody.create(MediaType.parse("image/*"), fileSk);
+
         MultipartBody.Part bodySk = MultipartBody.Part.createFormData("img_surat_kuasa", fotoSkPath, fileReqBodySk);
         MultipartBody.Part bodyPa = MultipartBody.Part.createFormData("img_persetujuan_atasan", fotoPaPath, fileReqBodyPa);
         MultipartBody.Part bodySkCpns = MultipartBody.Part.createFormData("img_sk_cpns", fotoSkCpnsPath, fileReqBodySkCpns);
+
         ProgressDialog pDialog = new ProgressDialog(PelengkapanRegularActivity.this);
         pDialog.setMessage("Sedang mengupload foto...");
         pDialog.show();

@@ -1,3 +1,4 @@
+/*
 package com.fidac.dumi.model;
 
 import com.google.gson.annotations.Expose;
@@ -5,23 +6,23 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class NotifikasiData {
+public class NotifikasiDataOld {
     int id, status;
     String judul, isi, waktu, idNasabah, token;
     boolean bool;
     @SerializedName("data")
     @Expose
-    List<NotifikasiData> notif;
+    List<NotifikasiDataOld> notif;
 
-    public List<NotifikasiData> getNotif(){
+    public List<NotifikasiDataOld> getNotif(){
         return notif;
     }
 
-    public NotifikasiData(){
+    public NotifikasiDataOld(){
 
     }
 
-    public NotifikasiData(boolean bool, int id, String token, String judul, String isi, int status, String waktu, String idNasabah) {
+    public NotifikasiDataOld(boolean bool, int id, String token, String judul, String isi, int status, String waktu, String idNasabah) {
         this.bool = bool;
         this.id = id;
         this.token = token;
@@ -40,7 +41,7 @@ public class NotifikasiData {
         this.bool = bool;
     }
 
-    public void setNotif(List<NotifikasiData> notif) {
+    public void setNotif(List<NotifikasiDataOld> notif) {
         this.notif = notif;
     }
 
@@ -100,3 +101,4 @@ public class NotifikasiData {
         this.idNasabah = idNasabah;
     }
 }
+*/

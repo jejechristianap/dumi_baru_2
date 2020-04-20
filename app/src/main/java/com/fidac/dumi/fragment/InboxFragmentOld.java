@@ -1,57 +1,36 @@
+/*
 package com.fidac.dumi.fragment;
 
-import android.app.ProgressDialog;
-import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
-import com.fidac.dumi.IsiPulsaActivity;
 import com.fidac.dumi.R;
-import com.fidac.dumi.api.IsiPulsaInterface;
-import com.fidac.dumi.api.StatusPinjamanInterface;
-import com.fidac.dumi.model.DaftarHargaPulsa;
-import com.fidac.dumi.model.NotifikasiAdapter;
-import com.fidac.dumi.model.NotifikasiData;
-import com.fidac.dumi.model.PageAdapter;
-import com.fidac.dumi.model.RecyclerViewAdapter;
-import com.fidac.dumi.model.SharedPrefManager;
-import com.fidac.dumi.model.User;
-import com.fidac.dumi.retrofit.RetrofitClient;
-import com.google.android.gms.tasks.Tasks;
-import com.google.android.material.tabs.TabLayout;
+import com.fidac.dumi.model.NotifikasiAdapterOld;
+import com.fidac.dumi.model.NotifikasiDataOld;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
-public class InboxFragment extends Fragment {
+public class InboxFragmentOld extends Fragment {
     private LinearLayoutManager layoutManager;
-    private List<NotifikasiData> notifikasiData = null;
-    private List<NotifikasiData> data;
+    private List<NotifikasiDataOld> notifikasiData = null;
+    private List<NotifikasiDataOld> data;
 
-    NotifikasiAdapter notifikasiAdapter;
+    NotifikasiAdapterOld notifikasiAdapter;
     RecyclerView recyclerView;
 
     @Nullable
@@ -60,10 +39,12 @@ public class InboxFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_inbox, container, false);
         recyclerView = view.findViewById(R.id.notifikasi_rv);
-        /*layoutManager = new LinearLayoutManager(getActivity());
+        */
+/*layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         notifikasiAdapter = new NotifikasiAdapter(getActivity(), data);
-        recyclerView.setAdapter(notifikasiAdapter);*/
+        recyclerView.setAdapter(notifikasiAdapter);*//*
+
 
 //        getNotif();
         return view;
@@ -73,10 +54,11 @@ public class InboxFragment extends Fragment {
     public void onStart() {
         super.onStart();
         data = new ArrayList<>();
-        getNotif();
+//        getNotif();
     }
 
-    private void getNotif(){
+    */
+/*private void getNotif(){
         StatusPinjamanInterface cek = RetrofitClient.getClient().create(StatusPinjamanInterface.class);
 
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
@@ -97,15 +79,25 @@ public class InboxFragment extends Fragment {
                     recyclerView.setLayoutManager(layoutManager);
                     notifikasiAdapter = new NotifikasiAdapter(getActivity(), notifikasiData);
                     recyclerView.setAdapter(notifikasiAdapter);
-                    /*Toast.makeText(getContext(), dataS, Toast.LENGTH_SHORT).show();
+                    *//*
+*/
+/*Toast.makeText(getContext(), dataS, Toast.LENGTH_SHORT).show();
                     JSONObject obj = new JSONObject(response.body().string());
-                    boolean status = obj.getBoolean("status");*/
-                    /*if (status){
+                    boolean status = obj.getBoolean("status");*//*
+*/
+/*
+                    *//*
+*/
+/*if (status){
                         String dataS = obj.getString("data");
                         JSONArray jsonArray = new JSONArray(dataS);
                         int len = jsonArray.length();
 
-                        *//*for (int i = 0; i<len; i++){
+                        *//*
+*/
+/**//*
+*/
+/*for (int i = 0; i<len; i++){
                             JSONObject json = jsonArray.getJSONObject(i);
 //                            data.add(jsonArray.get(i).toString());
                             int id = json.getInt("id");
@@ -119,26 +111,52 @@ public class InboxFragment extends Fragment {
                             notifikasiData
 //                            data.add(i);
 
-                            *//**//*data.add(new NotifikasiData(json.getInt("id"),
+                            *//*
+*/
+/**//*
+*/
+/**//*
+*/
+/**//*
+*/
+/*data.add(new NotifikasiData(json.getInt("id"),
                                     json.getString("token"),
                                     json.getString("judul"),
                                     json.getString("isi"),
                                     json.getInt("status"),
                                     json.getString("waktu"),
                                     json.getString("id_nasabah")
-                                    ));*//**//*
+                                    ));*//*
+*/
+/**//*
+*/
+/**//*
+*/
+/**//*
+*/
+/*
                         }*//*
+*/
+/**//*
+*/
+/*
 
 
 //                        data =  dataS;
 
 
-                    }*/
+                    }*//*
+*/
+/*
                     pDialog.dismiss();
-                }/* catch (JSONException | IOException e) {
+                }*//*
+*/
+/* catch (JSONException | IOException e) {
                     e.printStackTrace();
                     pDialog.dismiss();
-                }*/
+                }*//*
+*/
+/*
 
             @Override
             public void onFailure(Call<NotifikasiData> call, Throwable t) {
@@ -146,16 +164,17 @@ public class InboxFragment extends Fragment {
                 pDialog.dismiss();
             }
         });
-    }
+    }*//*
+
 
     private void writeRecycler(String response){
         try {
             JSONObject obj = new JSONObject(response);
             if(obj.optString("status").equals(true)){
-                ArrayList<NotifikasiData> notifikasiDataList = new ArrayList<>();
+                ArrayList<NotifikasiDataOld> notifikasiDataList = new ArrayList<>();
                 JSONArray jsonArray = obj.getJSONArray("data");
                 for (int i = 0; i<jsonArray.length(); i++){
-                    NotifikasiData notif = new NotifikasiData();
+                    NotifikasiDataOld notif = new NotifikasiDataOld();
                     JSONObject notifObj = jsonArray.getJSONObject(i);
                     notif.setId(notifObj.getInt("id"));
                     notif.setToken(notifObj.getString("token"));
@@ -168,7 +187,7 @@ public class InboxFragment extends Fragment {
                     Log.d("RecyclerView", "writeRecycler: "+notif);
                 }
 //                Toast.makeText(getActivity(), "Get data", Toast.LENGTH_SHORT).show();
-                notifikasiAdapter = new NotifikasiAdapter(getActivity(), notifikasiDataList);
+                notifikasiAdapter = new NotifikasiAdapterOld(getActivity(), notifikasiDataList);
                 recyclerView.setAdapter(notifikasiAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
             }
@@ -177,3 +196,4 @@ public class InboxFragment extends Fragment {
         }
     }
 }
+*/

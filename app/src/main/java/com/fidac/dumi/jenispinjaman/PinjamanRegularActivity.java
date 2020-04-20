@@ -36,6 +36,7 @@ import org.w3c.dom.Text;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -549,6 +550,7 @@ public class PinjamanRegularActivity extends AppCompatActivity {
             String angs = angsuranRegularTv.getText().toString();
             if (TextUtils.isEmpty(angs)){
                 Toast.makeText(this, "Tentukan Lama Pembayaran", Toast.LENGTH_SHORT).show();
+                return;
             }
 //            ajukanPinjaman();
             getPinjaman();
@@ -654,29 +656,47 @@ public class PinjamanRegularActivity extends AppCompatActivity {
                     if (cek){
                         String data = obj.getString("data");
                         JSONArray jsonArray = new JSONArray(data);
+                        ArrayList<Integer> statusPinjaman = new ArrayList<>();
                         if (!jsonArray.isNull(0)){
                             for (int i = 0; i<jsonArray.length(); i++){
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                int statusId = jsonObject.getInt("status");
-
-                                if(statusId == 1){
-                                    Toast.makeText(PinjamanRegularActivity.this, "Anda sudah mengajukan pinjaman, mohon menunggu", Toast.LENGTH_SHORT).show();
+                                statusPinjaman.add(jsonObject.getInt("status"));
+                            }
+                            if(statusPinjaman.contains(1)){
+                                Toast.makeText(PinjamanRegularActivity.this, "Anda sudah mengajukan pinjaman. Mohon menunggu info dari kami.", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (statusPinjaman.contains(2)){
+                                Toast.makeText(PinjamanRegularActivity.this, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (statusPinjaman.contains(4)){
+                                Toast.makeText(PinjamanRegularActivity.this, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (statusPinjaman.contains(5)){
+                                Toast.makeText(PinjamanRegularActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." , Toast.LENGTH_SHORT).show();
+                                return;
+                            } else {
+                                /*if(statusId == 1){
+                                    Toast.makeText(PinjamanKilatActivity.this, "Anda sudah mengajukan pinjaman. Mohon menunggu info dari kami.", Toast.LENGTH_SHORT).show();
+                                    return;
                                 } else if (statusId == 2){
-                                    Toast.makeText(PinjamanRegularActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." + statusId, Toast.LENGTH_SHORT).show();
+                                    return;
                                 } else if (statusId == 3){
                                     ajukanPinjaman();
                                 } else if (statusId == 4){
-                                    Toast.makeText(PinjamanRegularActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." + statusId, Toast.LENGTH_SHORT).show();
+                                    return;
                                 } else if (statusId == 5){
-                                    Toast.makeText(PinjamanRegularActivity.this, "Mohon maaf tagihan anda belum lunas, terima kasih", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." + statusId, Toast.LENGTH_SHORT).show();
+                                    return;
                                 } else if(statusId == 6){
-                                    ajukanPinjaman();
-                                }
+
+                                }*/
+                                ajukanPinjaman();
                             }
-                        } else {
+                        }else {
                             ajukanPinjaman();
                         }
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

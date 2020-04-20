@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.fidac.dumi.R;
 
 
-public class NotifikasiFragment extends Fragment {
+public class NotifikasiFragmentOld extends Fragment {
 
     @Nullable
     @Override
