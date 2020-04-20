@@ -152,7 +152,7 @@ public class MasukActivity extends AppCompatActivity {
                    JSONObject obj = new JSONObject(response.body().string());
                     boolean status = obj.getBoolean("status");
                     if (status) {
-                        pDialog.dismiss();
+
                         String dat = obj.getString("data");
                         JSONArray dataArray = new JSONArray(dat);
 //                        startActivity(new Intent(MasukActivity.this, MainActivity.class));
@@ -203,6 +203,7 @@ public class MasukActivity extends AppCompatActivity {
                             toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
                             toast.show();*/
                         }
+                        pDialog.dismiss();
                         finish();
                         startActivity(new Intent(MasukActivity.this, MainActivity.class));
                     } else {
