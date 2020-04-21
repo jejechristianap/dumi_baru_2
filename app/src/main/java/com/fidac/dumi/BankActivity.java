@@ -16,19 +16,29 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.fidac.dumi.api.PinjamanKilatInterface;
+import com.fidac.dumi.api.UploadImageInterface;
 import com.fidac.dumi.jenispinjaman.PinjamanPensiunActivity;
+import com.fidac.dumi.model.SharedPrefManager;
+import com.fidac.dumi.model.User;
 import com.fidac.dumi.retrofit.RetrofitClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,7 +48,9 @@ public class BankActivity extends AppCompatActivity {
 
     private EditText namaBankEt, noRekEt, pemilikEt;
     private Button ajukanButton;
+    private CheckBox checkBox;
     private SharedPreferences pref;
+    String fotoSkPath, fotoSkCpnsPath, fotoPaPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +59,32 @@ public class BankActivity extends AppCompatActivity {
 
         pref = getApplicationContext().getSharedPreferences("ajukanPinjaman", 0);
 
-        namaBankEt = findViewById(R.id.nama_bank_et);
+        fotoSkCpnsPath = getIntent().getStringExtra("fotoSkCpns");
+        fotoPaPath = getIntent().getStringExtra("fotoPa");
+        fotoSkPath = getIntent().getStringExtra("fotoSk");
+
+        /*namaBankEt = findViewById(R.id.nama_bank_et);
         noRekEt = findViewById(R.id.no_rek_et);
-        pemilikEt = findViewById(R.id.nama_pemilik_rek_et);
-        ajukanButton = findViewById(R.id.ajukan_button_bank);
+        pemilikEt = findViewById(R.id.nama_pemilik_rek_et);*/
+        checkBox = findViewById(R.id.cek_setuju);
+        ajukanButton = findViewById(R.id.ajukan_pinjaman_button);
+
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                ajukanButton.setVisibility(View.VISIBLE);
+//                cekUser();
+            } else {
+                ajukanButton.setVisibility(View.GONE);
+            }
+        });
+
 
         ajukanButton.setOnClickListener(v -> {
-            String namaBank = namaBankEt.getText().toString();
-            String noRek = noRekEt.getText().toString();
-            String pemilik = pemilikEt.getText().toString();
+            String namaBank = "";
+            String noRek = "";
+            String pemilik = "";
 
-            if (TextUtils.isEmpty(namaBank)){
+            /*if (TextUtils.isEmpty(namaBank)){
                 namaBankEt.setError("Kolom ini tidak boleh kosong..");
                 namaBankEt.requestFocus();
                 return;
@@ -79,7 +106,7 @@ public class BankActivity extends AppCompatActivity {
                 return;
             } else {
                 pemilikEt.setError(null);
-            }
+            }*/
 
             String nip = pref.getString("nip", null);
             float pinjaman = pref.getFloat("pinjaman", 0.f);
@@ -125,18 +152,22 @@ public class BankActivity extends AppCompatActivity {
                         boolean status = obj.getBoolean("status");
                         if(status){
                             pDialog.dismiss();
-//                            Toast.makeText(BankActivity.this, "Terima kasih, pengajuan anda akan kami proses.", Toast.LENGTH_SHORT).show();
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
+                            if (fotoPaPath == null && fotoSkCpnsPath == null && fotoSkPath == null){
+//                                Toast.makeText(BankActivity.this, "Null", Toast.LENGTH_SHORT).show();
+                                Handler handler = new Handler();
+                                handler.postDelayed(() -> {
                                     //Do something after 2s
                                     pushNotification();
-                                }
-                            }, 3000);
+                                }, 3000);
+                                finish();
+                                startActivity(new Intent(BankActivity.this, MainActivity.class));
+                            }else {
+//                                Toast.makeText(BankActivity.this, "Not Null", Toast.LENGTH_SHORT).show();
+                                uploadSurat();
+                            }
+//                            uploadSurat();
+//                            Toast.makeText(BankActivity.this, "Terima kasih, pengajuan anda akan kami proses.", Toast.LENGTH_SHORT).show();
 
-                            finish();
-                            startActivity(new Intent(BankActivity.this, MainActivity.class));
                         } else {
                             Toast.makeText(BankActivity.this, "Mohon maaf terjadi kesalahan, silahkan coba beberapa saat lagi.", Toast.LENGTH_SHORT).show();
                         }
@@ -158,6 +189,68 @@ public class BankActivity extends AppCompatActivity {
 
     }
 
+    private void uploadSurat(){
+        User pref = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+        String nip = pref.getNip();
+
+
+        UploadImageInterface service = RetrofitClient.getClient().create(UploadImageInterface.class);
+        File fileSkCpns  = new File(fotoSkCpnsPath);
+        File filePa = new File(fotoPaPath);
+        File fileSk = new File(fotoSkPath);
+
+        RequestBody nipBaru = RequestBody.create(MediaType.parse("text/plain"), nip);
+        RequestBody fileReqBodySkCpns = RequestBody.create(MediaType.parse("image/*"), fileSkCpns);
+        RequestBody fileReqBodyPa = RequestBody.create(MediaType.parse("image/*"), filePa);
+        RequestBody fileReqBodySk = RequestBody.create(MediaType.parse("image/*"), fileSk);
+
+        MultipartBody.Part bodySk = MultipartBody.Part.createFormData("img_surat_kuasa", fotoSkPath, fileReqBodySk);
+        MultipartBody.Part bodyPa = MultipartBody.Part.createFormData("img_persetujuan_atasan", fotoPaPath, fileReqBodyPa);
+        MultipartBody.Part bodySkCpns = MultipartBody.Part.createFormData("img_sk_cpns", fotoSkCpnsPath, fileReqBodySkCpns);
+
+        ProgressDialog pDialog = new ProgressDialog(BankActivity.this);
+        pDialog.setMessage("Sedang mengupload foto...");
+        pDialog.show();
+//        Call call = (Call) service.uploadSurat(nipBaru, bodySk, bodyPa, bodySkCpns);
+        retrofit2.Call<ResponseBody> call = service.uploadSurat(nipBaru, bodySk, bodyPa,bodySkCpns);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    JSONObject obj = new JSONObject(response.body().string());
+                    boolean status = obj.getBoolean("status");
+                    if (status){
+                        pDialog.dismiss();
+                        Log.v("Upload", "success" + response.body().toString());
+                        Toast.makeText(BankActivity.this, "Upload Berhasil", Toast.LENGTH_SHORT).show();
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(() -> {
+                            //Do something after 2s
+                            pushNotification();
+                        }, 3000);
+
+                        finish();
+                        startActivity(new Intent(BankActivity.this, MainActivity.class));
+                    } else{
+                        pDialog.dismiss();
+                        Toast.makeText(BankActivity.this, "Mohon maaf upload gagal, silahkan mencoba lagi..", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+    }
+
     public void pushNotification(){
         // Send Notification
         NotificationManager mNotificationManager;
@@ -166,7 +259,8 @@ public class BankActivity extends AppCompatActivity {
         Intent ii = new Intent(getApplicationContext(), MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(BankActivity.this, 0, ii, 0);
         NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
-        bigText.bigText("Pengajuan anda berhasil kami terima.\nProses dapat berlangsung 1-3 hari kerja, mohon menunggu." );
+        bigText.bigText("Pengajuan anda berhasil kami terima." +
+                "\nProses dapat berlangsung 1-3 hari kerja setelah data anda terverifikasi, mohon menunggu." );
         bigText.setSummaryText("Pengajuan");
 
         mBuilder.setContentIntent(pendingIntent);

@@ -5,27 +5,90 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BankActivity">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glCenterHori"
+        app:layout_constraintGuide_percent="0.6"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <TextView
+        android:id="@+id/kebijakan_privasi_tv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/white"
+        android:padding="20dp"
+        android:scrollbars="vertical"
+        android:text="@string/apabila_pengajuan"
+        android:textColor="@color/black"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        app:autoSizeMinTextSize="8sp"
+        app:autoSizeTextType="uniform"
+        tools:autoSizeMaxTextSize="50sp"
+        tools:autoSizeStepGranularity="2sp"
+        app:layout_constraintBottom_toTopOf="@+id/glCenterHori"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+    <CheckBox
+        android:id="@+id/cek_setuju"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/cek_setuju"
+        android:theme="@style/MyCheckbox"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/glCenterHori" />
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/ajukan_pinjaman_button"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/button_rounded_custom"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/ajukan_sekarang"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cek_setuju" />
+
+    <!--<ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
-        <!--Data Bank-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:orientation="vertical"
-            android:visibility="visible">
+        &lt;!&ndash;Data Bank&ndash;&gt;
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/apabila_pengajuan"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="50sp"
+                tools:autoSizeStepGranularity="2sp" />
+
+            &lt;!&ndash;<TextView
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginTop="5dp"
@@ -39,9 +102,9 @@
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="20sp"
-                tools:autoSizeStepGranularity="1sp" />
-            <!--Nama Bank-->
-            <TextView
+                tools:autoSizeStepGranularity="1sp" />&ndash;&gt;
+            &lt;!&ndash;Nama Bank&ndash;&gt;
+           &lt;!&ndash; <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -64,10 +127,9 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
-                tools:ignore="LabelFor" />
-
-            <!--No Rek-->
-            <TextView
+                tools:ignore="LabelFor" />&ndash;&gt;
+            &lt;!&ndash;No Rek&ndash;&gt;
+           &lt;!&ndash; <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -90,11 +152,9 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
-                tools:ignore="LabelFor" />
-
-
-            <!--Nama Pemilik-->
-            <TextView
+                tools:ignore="LabelFor" />&ndash;&gt;
+            &lt;!&ndash;Nama Pemilik&ndash;&gt;
+            &lt;!&ndash;<TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -117,7 +177,6 @@
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
                 tools:ignore="LabelFor" />
-
             <Button
                 android:id="@+id/ajukan_button_bank"
                 style="?android:attr/buttonBarButtonStyle"
@@ -129,10 +188,8 @@
                 android:text="@string/ajukan_sekarang"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                android:textSize="20sp" />&ndash;&gt;
 
-        </LinearLayout>
-
-    </ScrollView>
+    </ScrollView>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

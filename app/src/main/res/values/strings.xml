@@ -176,7 +176,7 @@
     <string name="data_keluarga">Data Keluarga</string>
     <string name="status_kawin">Status Kawin</string>
     <string name="status_hubungan">Status Hubungan</string>
-    <string name="nama_penanggung">Nama Penanggung (Seusai KTP)</string>
+    <string name="nama_penanggung">Nama Penanggung (Sesuai KTP)</string>
     <string name="no_ktp_penanggung">No. KTP Penanggung</string>
     <string name="no_telp_penanggung">No. Telp Penanggung</string>
     <string name="jumlah_tanggungan">Jumlah Tanggungan</string>
@@ -472,6 +472,18 @@
     <string name="foto_sk">&#8226;<br /> Foto Dokumen SK Pengankatan/CPNS</string>
     <string name="foto_surat_kuasa">&#8226;<br /> Foto Dokumen Surat kuasa</string>
     <string name="foto_pa">&#8226;<br /> Foto Dokumen Persetujuan Atasan</string>
+    <string name="kirim_format">Kirim Contoh File</string>
+    <string name="pastikan_email">Pastikan email anda sudah benar</string>
+    <string name="kirim">Kirim</string>
+    <string name="contoh_format">Contoh Format Dokumen</string>
+    <string name="tutup">Tutup</string>
+    <string name="sk">Surat Kuasa</string>
+    <string name="persetujuan_atasan">Persetujuan Atasan</string>
+    <string name="tagihan">Tagihan</string>
+    <string name="apabila_pengajuan">Apabila pengajuan pinjaman anda telah disetujui\nAnda akan
+        dibuatkan Rekening Bank Mandiri Taspen di kantor cabang yang ditentukan,\ndan proses pencairan akan di transfer ke
+        rekening tersebut.</string>
+    <string name="cek_setuju">Saya setuju</string>
 
 
 </resources>

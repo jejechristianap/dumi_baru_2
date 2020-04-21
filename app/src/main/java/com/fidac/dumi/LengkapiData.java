@@ -72,7 +72,7 @@ public class LengkapiData extends AppCompatActivity {
     private String[] agama = {"Islam", "Kristen", "Khatolik", "Budha", "Hindu", "Konghucu"};
     private String[] jenisKelamin = {"L", "P"};
     private String[] statusKawin = {"BELUM MENIKAH","MENIKAH", "CERAI", "DUDA", "JANDA"};
-    private String[] statusHubungan = {"ORANGTUA", "KAKAK/ADE/KERABAT", "SUAMI/ISTRI"};
+    private String[] statusHubungan = {"ORANGTUA", "KAKAK/ADIK/KERABAT", "SUAMI/ISTRI"};
     private String[] statusRumah = {"KONTRAK", "RUMAH SENDIRI", "RUMAH ORANGTUA"};
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;

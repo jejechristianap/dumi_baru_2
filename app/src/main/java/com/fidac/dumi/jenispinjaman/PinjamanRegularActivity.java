@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -103,6 +105,7 @@ public class PinjamanRegularActivity extends AppCompatActivity {
     private String getAsuransi = "";
     private String getAdministrasi = "";
     private boolean bkn = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -545,6 +548,8 @@ public class PinjamanRegularActivity extends AppCompatActivity {
             jumlahTerimaRegularTv.setText(formatRp.format(sisa));
         });
 
+
+
         lanjutButton = findViewById(R.id.lanjut_button_reguler);
         lanjutButton.setOnClickListener(v -> {
             String angs = angsuranRegularTv.getText().toString();
@@ -761,4 +766,6 @@ public class PinjamanRegularActivity extends AppCompatActivity {
         Call<ResponseBody> call = pinjam.ajukanPinjaman(nip, pinjamanUang, plafond, 0, BUNGA_PERBULAN,
                 bunga, admin, angsuran, BIAYA_TRANSFER, tujuan, tglPinjam, tglAkhirPinjam, "", sisa, asuransi, );*/
     }
+
+
 }

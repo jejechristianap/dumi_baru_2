@@ -151,9 +151,7 @@ public class TakePicture extends AppCompatActivity {
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 selfi = true;
-                imgSelfi = FileProvider.getUriForFile(this,
-                        "com.fidac.dumi.fileprovider",
-                        photoFile);
+                imgSelfi = FileProvider.getUriForFile(this, "com.fidac.dumi.fileprovider", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgSelfi);
                 startActivityForResult(takePictureIntent, 2);
             }

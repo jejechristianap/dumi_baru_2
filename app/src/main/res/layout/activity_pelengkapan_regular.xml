@@ -133,7 +133,7 @@
         app:layout_constraintTop_toBottomOf="@id/glTvH2"
         app:layout_constraintBottom_toTopOf="@id/glTvH3"
         android:background="@drawable/button_design_login_register"
-        android:text="Foto SK"
+        android:text="Foto SK/CPNS"
         android:layout_margin="5dp"
         android:textColor="@color/colorWhite"
         android:textAllCaps="false"
@@ -217,7 +217,7 @@
         app:layout_constraintTop_toBottomOf="@id/glTvH6"
         app:layout_constraintBottom_toTopOf="@id/glTvH7"
         android:background="@drawable/button_design_login_register"
-        android:text="Foto Surat Kuasa"
+        android:text="Foto PA"
         android:layout_margin="5dp"
         android:textColor="@color/colorWhite"
         android:textAllCaps="false"
@@ -235,12 +235,29 @@
         android:layout_height="@dimen/zero"/>
 
     <Button
+        android:id="@+id/kirim_format_pdf_button"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_rounded_custom"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/contoh_format"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/glEndVerti"
+        app:layout_constraintStart_toStartOf="@+id/glcenter"
+        app:layout_constraintTop_toBottomOf="@id/glTvH7" />
+
+    <Button
         android:id="@+id/lanjut_button_foto"
         style="?android:attr/buttonBarButtonStyle"
         android:layout_width="@dimen/zero"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="72dp"
         android:layout_marginEnd="64dp"
         android:background="@drawable/button_rounded_custom"
         android:fontFamily="sans-serif-medium"
@@ -249,8 +266,9 @@
         android:textColor="@android:color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@id/glEndVerti"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/glStartVerti"
-        app:layout_constraintTop_toBottomOf="@id/glTvH7" />
+        app:layout_constraintTop_toBottomOf="@+id/kirim_format_pdf_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

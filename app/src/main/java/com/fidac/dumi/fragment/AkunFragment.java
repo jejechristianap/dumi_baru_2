@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,8 +50,12 @@ public class AkunFragment extends Fragment {
         LinearLayout disclaimerLl = view.findViewById(R.id.disclaimer_ll);
         LinearLayout kebijakanPrivasiLl = view.findViewById(R.id.kebijakan_privasi_ll);
         Button keluarButton = view.findViewById(R.id.keluar_button);
+        photoIv = view.findViewById(R.id.photo_profile);
 
+        photoIv.setOnClickListener(v -> {
+//            photoIv.setScaleType(ImageView.ScaleType.FIT_XY);
 
+        });
 
         /*Rincian Akun*/
         rincianAkunLl.setOnClickListener(v -> {
@@ -92,13 +98,12 @@ public class AkunFragment extends Fragment {
 
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(getActivity()));
         ImageLoader imageLoader = ImageLoader.getInstance();
-        photoIv = view.findViewById(R.id.photo_profile);
+
         if (photoPath != null){
             photoIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             photoIv.setImageURI(Uri.parse(photoPath));
         } else if(apiPhotoPath != null){
             photoIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//            photoIv.setImageURI(Uri.parse(apiPhotoPath));
             imageLoader.displayImage(apiPhotoPath, photoIv);
         }
         ImageLoader.getInstance().destroy();
