@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.fidac.dumi">
+    package="com.minjem.dumi">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -20,22 +20,22 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="q">
-        <activity android:name=".PdfViewerActivity"></activity>
-        <activity android:name=".PelengkapanRegularActivity" />
-        <activity android:name=".akun.UbahSandiActivity" />
-        <activity android:name=".akun.KebijakanPrivasiActivity" />
-        <activity android:name=".akun.DisclaimerActivity" />
-        <activity android:name=".akun.PusatBantuanActivity" />
-        <activity android:name=".BankActivity" />
-        <activity android:name=".akun.RincianAkunActivity" />
-        <activity android:name=".jenispinjaman.PinjamanPensiunActivity" />
-        <activity android:name=".IsiPulsaActivity" />
-        <activity android:name=".TakePicture" />
-        <activity android:name=".LengkapiData" />
-        <activity android:name=".OtpVerify" />
-        <activity android:name=".HalamanDepanActivity" />
+        <activity android:name="com.minjem.dumi.PdfViewerActivity"></activity>
+        <activity android:name="com.minjem.dumi.PelengkapanRegularActivity" />
+        <activity android:name="com.minjem.dumi.akun.UbahSandiActivity" />
+        <activity android:name="com.minjem.dumi.akun.KebijakanPrivasiActivity" />
+        <activity android:name="com.minjem.dumi.akun.DisclaimerActivity" />
+        <activity android:name="com.minjem.dumi.akun.PusatBantuanActivity" />
+        <activity android:name="com.minjem.dumi.BankActivity" />
+        <activity android:name="com.minjem.dumi.akun.RincianAkunActivity" />
+        <activity android:name="com.minjem.dumi.jenispinjaman.PinjamanPensiunActivity" />
+        <activity android:name="com.minjem.dumi.IsiPulsaActivity" />
+        <activity android:name="com.minjem.dumi.TakePicture" />
+        <activity android:name="com.minjem.dumi.LengkapiData" />
+        <activity android:name="com.minjem.dumi.OtpVerify" />
+        <activity android:name="com.minjem.dumi.HalamanDepanActivity" />
         <activity
-            android:name=".Splash"
+            android:name="com.minjem.dumi.Splash"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,16 +43,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".jenispinjaman.PinjamanRegularActivity" />
-        <activity android:name=".jenispinjaman.PinjamanKilatActivity" />
-        <activity android:name=".LihatSemuaActivity" />
-        <activity android:name=".DaftarActivity" />
-        <activity android:name=".MasukActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name="com.minjem.dumi.jenispinjaman.PinjamanRegularActivity" />
+        <activity android:name="com.minjem.dumi.jenispinjaman.PinjamanKilatActivity" />
+        <activity android:name="com.minjem.dumi.LihatSemuaActivity" />
+        <activity android:name="com.minjem.dumi.DaftarActivity" />
+        <activity android:name="com.minjem.dumi.MasukActivity" />
+        <activity android:name="com.minjem.dumi.MainActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.fidac.dumi.fileprovider"
+            android:authorities="com.minjem.dumi.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

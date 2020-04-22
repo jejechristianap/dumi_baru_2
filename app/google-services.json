@@ -15,6 +15,67 @@
       },
       "oauth_client": [
         {
+          "client_id": "142533851234-bl984aj2ld8sl9i6nu3k3nqpsuks4sip.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fidac.dumi",
+            "certificate_hash": "4b01c395023a87a9ff69356597f83e40f4d851d0"
+          }
+        },
+        {
+          "client_id": "142533851234-4mvkvvro3np90060a9rm1g48shm736vq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fidac.dumi",
+            "certificate_hash": "a410d5f38d262958e430a8301e20f275238edd2a"
+          }
+        },
+        {
+          "client_id": "142533851234-a8jujhl84g3dm2g530houbb2hlfnc7s5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fidac.dumi",
+            "certificate_hash": "a023b5e5976e3f6f753cc9f10eb043a371570d54"
+          }
+        },
+        {
+          "client_id": "142533851234-dptfrjf7cf1ms09ve0alc8neino1eaga.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fidac.dumi",
+            "certificate_hash": "b9a148af5dfd8688e3f42848b7aa7aa9aef19c87"
+          }
+        },
+        {
+          "client_id": "142533851234-o8bmbrg15i4hhmutlbqirduqktkgso34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIBJbSnL3YGGxuQ1tQVrYGZmAZgqbY61g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142533851234-o8bmbrg15i4hhmutlbqirduqktkgso34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142533851234:android:cdf59739ab71c04bbc793b",
+        "android_client_info": {
+          "package_name": "com.minjem.dumi"
+        }
+      },
+      "oauth_client": [
+        {
           "client_id": "142533851234-o8bmbrg15i4hhmutlbqirduqktkgso34.apps.googleusercontent.com",
           "client_type": 3
         }
