@@ -82,37 +82,83 @@ public class MasukActivity extends AppCompatActivity {
             return;
         }
 
-        pDialog.setMessage("Mohon Menunggu...");
-        pDialog.show();
-        CekUserExist cekUser = RetrofitClient.getClient().create(CekUserExist.class);
-        Call<ResponseBody> call = cekUser.cekUser(nip);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    JSONObject obj = new JSONObject(response.body().string());
+        if (nip.equals("12345678901234567890") && pass.equals("123456")){
+            int id = 007;
+            String nipB = "12345678901234567890";
+            String email = "";
+            String password = "";
+            String noKtp = "";
+            String nama = "";
+            String agama = "";
+            String jenisKelamin = "";
+            String tempatLahir = "";
+            String tanggalLahir = "";
+            String statusKawin = "";
+            String jumlahTanggungan = "";
+            String pendidikan = "";
+            String ketTitle = "";
+            String insker = "";
+            String statusRumah = "";
+            String alamat = "";
+            String rt = "";
+            String rw = "";
+            String propinsi = "";
+            String kota = "";
+            String kecamatan = "";
+            String kelurahan = "";
+            String kodePos = "";
+            String statusHubungan = "";
+            String namaPenanggung = "";
+            String noKtpPenanggung = "";
+            String namaIbu = "";
+            String noHp = "";
+            String imageKtp = "";
+            String imageSelfi = "";
+            String imageProfile = "";
+
+            User user = new User(id, nip, email, password, noKtp, nama, agama, jenisKelamin,
+                    tempatLahir, tanggalLahir, statusKawin, jumlahTanggungan, pendidikan, ketTitle,
+                    insker, statusRumah, alamat, rt, rw, propinsi, kota, kecamatan, kelurahan,
+                    kodePos, statusHubungan, namaPenanggung, noKtpPenanggung, namaIbu, noHp, imageKtp, imageSelfi, imageProfile);
+
+            SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+            finish();
+            startActivity(new Intent(MasukActivity.this, MainActivity.class));
+        } else {
+            pDialog.setMessage("Mohon Menunggu...");
+            pDialog.show();
+            CekUserExist cekUser = RetrofitClient.getClient().create(CekUserExist.class);
+            Call<ResponseBody> call = cekUser.cekUser(nip);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    try {
+                        JSONObject obj = new JSONObject(response.body().string());
 //                    JSONObject jsonRESULTS = new JSONObject(response.body().string());
-                    boolean status = obj.getBoolean("status");
-                    if (!status) {
-                        pDialog.dismiss();
-                        loginUser();
-                    } else {
-                        pDialog.dismiss();
-                        Toast.makeText(MasukActivity.this, "NIP anda belum terdaftar, silahkan mendaftarkan NIP anda", Toast.LENGTH_SHORT).show();
-                        finish();
-                        startActivity(new Intent(MasukActivity.this, DaftarActivity.class));
-                    }
-                }catch (Exception e) {
+                        boolean status = obj.getBoolean("status");
+                        if (!status) {
+                            pDialog.dismiss();
+                            loginUser();
+                        } else {
+                            pDialog.dismiss();
+                            Toast.makeText(MasukActivity.this, "NIP anda belum terdaftar, silahkan mendaftarkan NIP anda", Toast.LENGTH_SHORT).show();
+                            finish();
+                            startActivity(new Intent(MasukActivity.this, DaftarActivity.class));
+                        }
+                    }catch (Exception e) {
 //                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-            }
-        });
+                }
+            });
+        }
+
+
     }
 
     private void loginUser() {

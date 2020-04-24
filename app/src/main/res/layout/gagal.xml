@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/id_back_gagal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/white_corner"
+        app:layout_constraintBottom_toBottomOf="@id/id_view3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline13"
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
+        app:layout_constraintTop_toTopOf="@id/guideline15" />
+
+    <ImageView
+        android:id="@+id/id_icon_gagal"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="@dimen/kotak_150"
+        android:layout_height="@dimen/kotak_150"
+        android:layout_marginTop="@dimen/layout_large"
+        android:background="@drawable/icon_gagal"
+        app:layout_constraintBottom_toTopOf="@+id/id_text_progress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/id_back_gagal" />
+
+    <TextView
+        android:id="@+id/id_text_gagal"
+        style="@style/textview"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:autoSizeMaxTextSize="@dimen/font_xlarge"
+        android:autoSizeMinTextSize="@dimen/font_small"
+        android:gravity="center"
+        android:text="Transaksi Gagal !"
+        android:textColor="@color/merah"
+        android:textSize="@dimen/font_xlarge"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/id_back_gagal"
+        app:layout_constraintStart_toStartOf="@id/id_back_gagal"
+        app:layout_constraintTop_toBottomOf="@id/id_icon_gagal" />
+
+    <Button
+        android:id="@+id/id_btn_gagal"
+        style="@style/button"
+        android:layout_margin="@dimen/layout_small"
+        android:background="@drawable/birutelorasin_corner"
+        android:text="Kembali"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/id_back_gagal"
+        app:layout_constraintStart_toStartOf="@id/id_back_gagal"
+        app:layout_constraintTop_toBottomOf="@id/id_text_gagal" />
+
+    <View
+        android:id="@+id/id_view3"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/layout_normal"
+        android:layout_marginTop="@dimen/margin_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_btn_gagal" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="41dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.23" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

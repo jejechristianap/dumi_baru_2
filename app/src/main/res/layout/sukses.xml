@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/id_back_sukses"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/white_corner"
+        app:layout_constraintBottom_toBottomOf="@id/id_view3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline13"
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
+        app:layout_constraintTop_toTopOf="@id/guideline15" />
+
+
+    <ImageView
+        android:id="@+id/id_icon_sukses"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="@dimen/kotak_150"
+        android:layout_height="@dimen/kotak_150"
+        android:layout_marginTop="@dimen/layout_large"
+        android:background="@drawable/icon_berhasil"
+        app:layout_constraintBottom_toTopOf="@+id/id_text_progress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/id_back_sukses" />
+
+    <TextView
+        android:id="@+id/id_text_sukses"
+        style="@style/textview"
+        android:layout_marginTop="@dimen/margin_small"
+        android:autoSizeMaxTextSize="@dimen/font_xlarge"
+        android:autoSizeMinTextSize="@dimen/font_small"
+        android:gravity="center"
+        android:text="Transaksi Berhasil"
+        android:textColor="@color/hijau_tosca"
+        android:textSize="@dimen/font_xlarge"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/id_back_sukses"
+        app:layout_constraintStart_toStartOf="@id/id_back_sukses"
+        app:layout_constraintTop_toBottomOf="@id/id_icon_sukses" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/id_noref_sukses"
+        style="@style/textview"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:gravity="center"
+        android:textColor="@color/abu_sedang"
+        android:text="No Referensi : 1213224354"
+        app:layout_constraintEnd_toEndOf="@id/id_back_sukses"
+        app:layout_constraintStart_toStartOf="@id/id_back_sukses"
+        app:layout_constraintTop_toBottomOf="@id/id_text_sukses" />
+
+    <Button
+        android:id="@+id/id_btn_sukses"
+        style="@style/button"
+        android:layout_margin="@dimen/layout_small"
+        android:background="@drawable/birutelorasin_corner"
+        android:text="Kembali ke Beranda"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/id_back_sukses"
+        app:layout_constraintStart_toStartOf="@id/id_back_sukses"
+        app:layout_constraintTop_toBottomOf="@id/id_noref_sukses" />
+
+    <View
+        android:id="@+id/id_view3"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/layout_normal"
+        android:layout_marginTop="@dimen/margin_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_btn_sukses" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

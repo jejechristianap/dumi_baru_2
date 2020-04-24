@@ -101,11 +101,17 @@
                             android:src="@drawable/ic_pulsa" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
                             android:text="@string/isi_pulsa"
-                            android:textSize="10sp" />
+                            android:layout_height="15dp"
+                            app:autoSizeMinTextSize="6sp"
+                            app:autoSizeTextType="uniform"
+                            tools:autoSizeMaxTextSize="12sp"
+                            tools:autoSizeStepGranularity="1sp" />
 
                     </LinearLayout>
                     <!--Token PLN-->
@@ -127,11 +133,17 @@
                             android:src="@drawable/ic_token_pln" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
                             android:text="@string/token_pln"
-                            android:textSize="10sp" />
+                            android:layout_height="15dp"
+                            app:autoSizeMinTextSize="6sp"
+                            app:autoSizeTextType="uniform"
+                            tools:autoSizeMaxTextSize="12sp"
+                            tools:autoSizeStepGranularity="1sp" />
 
                     </LinearLayout>
                     <!--Gopay-->
@@ -153,11 +165,17 @@
                             android:src="@drawable/ic_internet" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
                             android:text="@string/internet"
-                            android:textSize="10sp" />
+                            android:layout_height="15dp"
+                            app:autoSizeMinTextSize="6sp"
+                            app:autoSizeTextType="uniform"
+                            tools:autoSizeMaxTextSize="12sp"
+                            tools:autoSizeStepGranularity="1sp"/>
 
                     </LinearLayout>
                     <!--Ovo-->
@@ -180,11 +198,17 @@
                             android:src="@drawable/ic_ovo" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
                             android:text="@string/ovo"
-                            android:textSize="10sp" />
+                            android:layout_height="15dp"
+                            app:autoSizeMinTextSize="6sp"
+                            app:autoSizeTextType="uniform"
+                            tools:autoSizeMaxTextSize="12sp"
+                            tools:autoSizeStepGranularity="1sp" />
 
                     </LinearLayout>
 
@@ -206,13 +230,19 @@
                             android:src="@drawable/ic_gopay" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
                             android:text="@string/gopay"
-                            android:textSize="10sp" />
+                            android:layout_height="15dp"
+                            app:autoSizeMinTextSize="6sp"
+                            app:autoSizeTextType="uniform"
+                            tools:autoSizeMaxTextSize="12sp"
+                            tools:autoSizeStepGranularity="1sp" />
                     </LinearLayout>
-                    <!--Pesawat-->
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="70dp"
@@ -231,11 +261,18 @@
                             android:src="@drawable/ic_emoney" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:layout_height="15dp"
+                            app:autoSizeMinTextSize="6sp"
+                            app:autoSizeTextType="uniform"
+                            tools:autoSizeMaxTextSize="12sp"
+                            tools:autoSizeStepGranularity="1sp"
                             android:text="@string/emoney"
-                            android:textSize="10sp" />
+                            />
 
                     </LinearLayout>
                     <!--Kereta Api-->
@@ -257,11 +294,17 @@
                             android:src="@drawable/ic_bri" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="@string/bri"
-                            android:textSize="10sp" />
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:layout_height="15dp"
+                            app:autoSizeMinTextSize="6sp"
+                            app:autoSizeTextType="uniform"
+                            tools:autoSizeMaxTextSize="12sp"
+                            tools:autoSizeStepGranularity="1sp"
+                            android:text="@string/bri" />
 
                     </LinearLayout>
                     <!--Bus Travel-->
@@ -283,11 +326,18 @@
                             android:src="@drawable/ic_bni" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:layout_height="15dp"
+                            app:autoSizeMinTextSize="6sp"
+                            app:autoSizeTextType="uniform"
+                            tools:autoSizeMaxTextSize="12sp"
+                            tools:autoSizeStepGranularity="1sp"
                             android:text="@string/tap_cash"
-                            android:textSize="10sp" />
+                            />
 
                     </LinearLayout>
 
@@ -309,11 +359,18 @@
                             android:src="@drawable/ic_linkaja" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:layout_height="15dp"
+                            app:autoSizeMinTextSize="6sp"
+                            app:autoSizeTextType="uniform"
+                            tools:autoSizeMaxTextSize="12sp"
+                            tools:autoSizeStepGranularity="1sp"
                             android:text="@string/link_aja"
-                            android:textSize="10sp" />
+                            />
 
                     </LinearLayout>
 
@@ -335,11 +392,17 @@
                             android:src="@drawable/ic_dana" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="@string/dana"
-                            android:textSize="10sp" />
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:layout_height="15dp"
+                            app:autoSizeMinTextSize="6sp"
+                            app:autoSizeTextType="uniform"
+                            tools:autoSizeMaxTextSize="12sp"
+                            tools:autoSizeStepGranularity="1sp"
+                            android:text="@string/dana" />
 
                     </LinearLayout>
 
@@ -361,10 +424,18 @@
                             android:src="@drawable/ic_grab" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:layout_height="15dp"
+                            app:autoSizeMinTextSize="6sp"
+                            app:autoSizeTextType="uniform"
+                            tools:autoSizeMaxTextSize="12sp"
+                            tools:autoSizeStepGranularity="1sp"
                             android:text="@string/grab_pay"
-                            android:textSize="10sp" />
+                            />
 
                     </LinearLayout>
 
@@ -386,11 +457,17 @@
                             android:src="@drawable/ic_voucher_game" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="@string/voucher_game"
-                            android:textSize="10sp" />
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:layout_height="15dp"
+                            app:autoSizeMinTextSize="6sp"
+                            app:autoSizeTextType="uniform"
+                            tools:autoSizeMaxTextSize="12sp"
+                            tools:autoSizeStepGranularity="1sp"
+                            android:text="@string/voucher_game" />
 
                     </LinearLayout>
                 </GridLayout>
@@ -572,8 +649,8 @@
                             android:textSize="10sp" />
 
                     </LinearLayout>
-                    <!--Kereta Api-->
-                    <LinearLayout
+
+                    <!--<LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="1"
@@ -598,7 +675,7 @@
                             android:textSize="10sp" />
 
                     </LinearLayout>
-                    <!--Bus Travel-->
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="70dp"
@@ -649,14 +726,14 @@
                             android:text="@string/tagihan_cc"
                             android:textSize="10sp" />
 
-                    </LinearLayout>
+                    </LinearLayout>-->
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="70dp"
-                        android:layout_row="2"
+                        android:layout_row="1"
                         android:layout_rowWeight="1"
-                        android:layout_column="1"
+                        android:layout_column="2"
                         android:layout_columnWeight="1"
                         android:layout_margin="10dp"
                         android:background="@drawable/layout_rounded_home"

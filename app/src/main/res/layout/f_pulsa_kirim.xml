@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/id_back_pulsa"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/margin_xxlarge"
+        android:background="@drawable/white_corner"
+        app:layout_constraintBottom_toBottomOf="@id/id_view2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/konfirmasi"
+        style="@style/textview.title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:gravity="center"
+        android:text="Konfirmasi Pembayaran"
+        app:layout_constraintEnd_toEndOf="@id/guideline12"
+        app:layout_constraintStart_toStartOf="@id/guideline10"
+        app:layout_constraintTop_toTopOf="@id/id_back_pulsa" />
+
+
+    <ImageView
+        android:id="@+id/id_logo_pulsa"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="@dimen/margin_xxlarge"
+        android:background="@drawable/telkomsel"
+        app:layout_constraintEnd_toEndOf="@id/id_back_pulsa"
+        app:layout_constraintStart_toStartOf="@id/id_back_pulsa"
+        app:layout_constraintTop_toBottomOf="@id/konfirmasi"/>
+
+    <TextView
+        android:id="@+id/id_provider_pulsa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:text="Telkomsel"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_xlarge"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_logo_pulsa" />
+
+    <TextView
+        android:id="@+id/id_nomor_pulsa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="0812435335"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_provider_pulsa" />
+
+    <TextView
+        android:id="@+id/vocher"
+        style="@style/textview"
+        android:layout_width="0dp"
+        android:layout_marginTop="@dimen/layout_small"
+        android:gravity="left|center_vertical"
+        android:text="Vocher Pulsa"
+        android:textSize="@dimen/font_normal"
+        app:layout_constraintEnd_toEndOf="@id/guideline11"
+        app:layout_constraintStart_toStartOf="@id/guideline10"
+        app:layout_constraintTop_toBottomOf="@id/id_nomor_pulsa" />
+
+    <TextView
+        android:id="@+id/id_nominal_pulsa"
+        style="@style/textview"
+        android:layout_marginTop="@dimen/margin_small"
+        android:gravity="left"
+        android:text="Rp. 100.000"
+        android:textSize="@dimen/font_large"
+        app:layout_constraintEnd_toEndOf="@id/guideline11"
+        app:layout_constraintStart_toStartOf="@id/guideline10"
+        app:layout_constraintTop_toBottomOf="@id/vocher" />
+
+    <TextView
+        android:id="@+id/metode"
+        style="@style/textview"
+        android:layout_marginTop="@dimen/layout_small"
+        android:gravity="center_vertical"
+        android:text="Metode Pembayaran"
+        android:textSize="@dimen/font_normal"
+        app:layout_constraintEnd_toEndOf="@id/guideline12"
+        app:layout_constraintStart_toStartOf="@id/guideline11"
+        app:layout_constraintTop_toBottomOf="@id/id_nomor_pulsa" />
+
+    <TextView
+        android:id="@+id/id_metode_pulsa"
+        style="@style/textview"
+        android:layout_width="0dp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:gravity="left"
+        android:text="Saldo Pay Later"
+        android:textSize="@dimen/font_medium"
+        app:layout_constraintBaseline_toBaselineOf="@id/id_nominal_pulsa"
+        app:layout_constraintEnd_toEndOf="@id/guideline12"
+        app:layout_constraintStart_toStartOf="@id/guideline11"
+        app:layout_constraintTop_toBottomOf="@id/metode" />
+
+    <TextView
+        android:id="@+id/biaya"
+        style="@style/textview"
+        android:layout_marginTop="@dimen/margin_xlarge"
+        android:text="Biaya Trasaksi"
+        app:layout_constraintStart_toStartOf="@id/guideline10"
+        app:layout_constraintTop_toBottomOf="@id/id_nominal_pulsa" />
+
+    <TextView
+        android:id="@+id/id_biaya_transaksi_pulsa"
+        style="@style/textview"
+        android:layout_marginTop="@dimen/margin_small"
+        android:text="Rp. 500"
+        android:textSize="@dimen/font_large"
+        app:layout_constraintEnd_toEndOf="@id/guideline11"
+        app:layout_constraintStart_toStartOf="@id/guideline10"
+        app:layout_constraintTop_toBottomOf="@id/biaya" />
+
+    <TextView
+        android:id="@+id/total_pembayaran"
+        style="@style/textview"
+        android:layout_marginTop="@dimen/margin_xlarge"
+        android:gravity="left"
+        android:text="Total"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/guideline12"
+        app:layout_constraintStart_toStartOf="@id/guideline11"
+        app:layout_constraintTop_toBottomOf="@id/id_nominal_pulsa" />
+
+    <TextView
+        android:id="@+id/id_total_pembayaran"
+        style="@style/textview"
+        android:layout_marginTop="@dimen/margin_small"
+        android:gravity="left"
+        android:text="Rp. 98.000"
+        android:textSize="@dimen/font_large"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline11"
+        app:layout_constraintTop_toBottomOf="@id/total_pembayaran" />
+
+
+    <Button
+        android:id="@+id/id_btn_kirim_pulsa"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/layout_xlarge"
+        android:layout_marginStart="@dimen/layout_large"
+        android:layout_marginTop="@dimen/layout_xxlarge"
+        android:layout_marginEnd="@dimen/layout_large"
+        android:background="@drawable/birutelorasin_corner"
+        android:text="Bayar"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_total_pembayaran" />
+
+    <TextView
+        android:id="@+id/id_btn_batalkan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_normal"
+        android:gravity="center"
+        android:text="Batalkan"
+        android:textColor="@color/biru_asin"
+        android:textSize="@dimen/font_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_btn_kirim_pulsa" />
+
+    <View
+        android:id="@+id/id_view"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/layout_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_btn_batalkan" />
+
+    <View
+        android:id="@+id/id_view2"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/layout_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/id_view" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.58" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="40dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

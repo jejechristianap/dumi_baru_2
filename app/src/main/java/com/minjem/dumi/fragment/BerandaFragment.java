@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.minjem.dumi.LihatSemuaActivity;
 import com.minjem.dumi.R;
+import com.minjem.dumi.ecommerce.ECommerceActivity;
 import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity;
 import com.minjem.dumi.jenispinjaman.PinjamanRegularActivity;
 
@@ -66,7 +67,10 @@ public class BerandaFragment extends Fragment {
         /*E-Commerce*/
         isiPulsaLl.setOnClickListener(v -> {
 //            startActivity(new Intent(getActivity(), IsiPulsaActivity.class));
-            Toast.makeText(getActivity(), "Tunggu update kami selanjutnya", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "Tunggu update kami selanjutnya", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), ECommerceActivity.class);
+            intent.putExtra("pulsa", "pulsa");
+            startActivity(intent);
         });
 
 

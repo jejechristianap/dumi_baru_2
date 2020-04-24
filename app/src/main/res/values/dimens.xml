@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="font_small">12sp</dimen>
+    <!--<dimen name="font_small">12sp</dimen>
     <dimen name="font_medium">15sp</dimen>
-    <dimen name="font_large">20sp</dimen>
+    <dimen name="font_large">20sp</dimen>-->
     <dimen name="font_big">30sp</dimen>
     <dimen name="marginTop10dp">10dp</dimen>
     <dimen name="zero">0dp</dimen>
@@ -15,4 +15,29 @@
     <dimen name="field_width_standard">160dp</dimen>
 
     <dimen name="button_horizontal_margin">8dp</dimen>
+
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_medium">8dp</dimen>
+    <dimen name="margin_large">12dp</dimen>
+    <dimen name="margin_xlarge">16dp</dimen>
+    <dimen name="margin_xxlarge">20dp</dimen>
+
+    <dimen name="font_small">11sp</dimen>
+    <dimen name="font_normal">13sp</dimen>
+    <dimen name="font_medium">15sp</dimen>
+    <dimen name="font_large">17sp</dimen>
+    <dimen name="font_xlarge">20sp</dimen>
+    <dimen name="font_xxlarge">25sp</dimen>
+
+    <dimen name="layout_small">25dp</dimen>
+    <dimen name="layout_normal">30dp</dimen>
+    <dimen name="layout_medium">35dp</dimen>
+    <dimen name="layout_large">40dp</dimen>
+    <dimen name="layout_xlarge">45dp</dimen>
+    <dimen name="layout_xxlarge">50dp</dimen>
+
+
+    <dimen name="kotak_100">100dp</dimen>
+    <dimen name="kotak_150">150dp</dimen>
+    <dimen name="kotak_200">200dp</dimen>
 </resources>

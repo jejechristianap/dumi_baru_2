@@ -484,6 +484,9 @@
         dibuatkan Rekening Bank Mandiri Taspen di kantor cabang yang ditentukan,\ndan proses pencairan akan di transfer ke
         rekening tersebut.</string>
     <string name="cek_setuju">Saya setuju</string>
+    <string name="no_meter">Nomor Meter</string>
+    <string name="ex_token">011xxxxx</string>
+    <string name="pln">PLN</string>
 
 
 </resources>

@@ -320,10 +320,8 @@ public class DaftarActivity extends AppCompatActivity {
             return;
         }
 
+
         CekNipBknInterface cek = RetrofitClient.getClient().create(CekNipBknInterface.class);
-        /*196404181984032001*/
-        /*197301092000032001*/
-        // Call with ResponseBody
         Call<ResponseBody> call = cek.cekBkn(nip);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -348,23 +346,13 @@ public class DaftarActivity extends AppCompatActivity {
                         Toast.makeText(DaftarActivity.this, "NIP anda ditemukan..", Toast.LENGTH_SHORT).show();
                         emailPassLl.setVisibility(View.VISIBLE);
                         emailEt.requestFocus();
-                        /*if(inskerNama.equals("Badan Kepegawaian Negara")){
-                            Toast.makeText(DaftarActivity.this, "NIP anda ditemukan..", Toast.LENGTH_SHORT).show();
-                            emailPassLl.setVisibility(View.VISIBLE);
-                            emailEt.requestFocus();
-                        } else {
-                            Toast.makeText(DaftarActivity.this, "Mohon maaf Instansi anda belum bekerja sama", Toast.LENGTH_SHORT).show();
-
-                        }*/
                     }else{
-//                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         Log.e("errorMessage", "onResponse: " + obj);
                         nipCheckBox.setChecked(false);
                         masukanNipEt.setCursorVisible(true);
                         pDialog.dismiss();
                     }
                 } catch (Exception e) {
-//                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                     nipCheckBox.setChecked(false);
                     emailPassLl.setVisibility(View.GONE);
                     pDialog.dismiss();
@@ -374,8 +362,6 @@ public class DaftarActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                dataNipLl.setVisibility(View.GONE);
-//                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 Toast.makeText(DaftarActivity.this, "Session Timeout", Toast.LENGTH_SHORT).show();
                 Log.d("Error", "onFailure: " + t.getMessage());
                 nipCheckBox.setChecked(false);
@@ -383,7 +369,6 @@ public class DaftarActivity extends AppCompatActivity {
                 call.cancel();
             }
         });
-
     }
 }
 
