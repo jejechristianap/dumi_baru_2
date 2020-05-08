@@ -72,55 +72,13 @@ class InboxFragment : Fragment() {
         call.enqueue(object : Callback<NotifikasiResponse> {
             override fun onResponse(call: Call<NotifikasiResponse>, response: Response<NotifikasiResponse>) {
                 pDialog.dismiss()
-
-
                 notifikasiData = response.body()!!.data as MutableList<NotifikasiData>
                 layoutManager = LinearLayoutManager(activity)
                 recyclerView.layoutManager = layoutManager
                 notifikasiAdapter = NotifikasiAdapter(mCOntext, notifikasiData!!)
                 recyclerView.adapter = notifikasiAdapter
                 notifikasiAdapter.notifyDataSetChanged()
-                /*Toast.makeText(getContext(), dataS, Toast.LENGTH_SHORT).show();
-                    JSONObject obj = new JSONObject(response.body().string());
-                    boolean status = obj.getBoolean("status");*/
-                /*if (status){
-                        String dataS = obj.getString("data");
-                        JSONArray jsonArray = new JSONArray(dataS);
-                        int len = jsonArray.length();
-
-                        *//*for (int i = 0; i<len; i++){
-                            JSONObject json = jsonArray.getJSONObject(i);
-//                            data.add(jsonArray.get(i).toString());
-                            int id = json.getInt("id");
-                            String token = json.getString("token");
-                            String judul = json.getString("judul");
-                            String isi = json.getString("isi");
-                            int statusI = json.getInt("status");
-                            String waktu = json.getString("waktu");
-                            String idNasabah = json.getString("id_nasabah");
-
-                            notifikasiData
-//                            data.add(i);
-
-                            *//**//*data.add(new NotifikasiData(json.getInt("id"),
-                                    json.getString("token"),
-                                    json.getString("judul"),
-                                    json.getString("isi"),
-                                    json.getInt("status"),
-                                    json.getString("waktu"),
-                                    json.getString("id_nasabah")
-                                    ));*//**//*
-                        }*//*
-
-
-//                        data =  dataS;
-
-
-                    }*/
-            }/* catch (JSONException | IOException e) {
-                    e.printStackTrace();
-                    pDialog.dismiss();
-                }*/
+            }
 
             override fun onFailure(call: Call<NotifikasiResponse>, t: Throwable) {
                 Log.d("Fail", "onFailure: " + t.message)

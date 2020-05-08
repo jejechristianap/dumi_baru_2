@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.minjem.dumi.R
 import kotlinx.android.synthetic.main.recycler_view_notifikasi.view.*
 
-class NotifikasiAdapter (internal var mContext : Context,
-                         internal var list : MutableList<NotifikasiData>) :
+class NotifikasiAdapter (internal var mContext : Context, internal var list : MutableList<NotifikasiData>) :
         RecyclerView.Adapter<NotifikasiAdapter.HolderList>(){
     inner class HolderList (view : View) : RecyclerView.ViewHolder(view) {
         fun Data(item: NotifikasiData, position: Int) {

@@ -1,5 +1,6 @@
 package com.minjem.dumi;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -104,6 +105,7 @@ public class DaftarActivity extends AppCompatActivity {
                     ")+"
     );
 
+    @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -219,7 +221,7 @@ public class DaftarActivity extends AppCompatActivity {
             editor.putString("nip", nip);
             editor.putString("email", email);
             editor.putString("pass", pass);
-            editor.commit();
+            editor.apply();
 
 //            startActivity(new Intent(DaftarActivity.this, OtpVerify.class));
             doPhoneLogin();
@@ -291,6 +293,12 @@ public class DaftarActivity extends AppCompatActivity {
                     boolean status = obj.getBoolean("status");
                     if (!status) {
                         pDialog.dismiss();
+                        JSONArray jsonArray = new JSONArray(obj.getString("data"));
+                        if (jsonArray.length() == 0){
+                            Toast.makeText(DaftarActivity.this, "Mohon maaf kami belum bekerja sama dengan Instansi anda.", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                        }
                         Toast.makeText(DaftarActivity.this, "NIP anda sudah terdaftar", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(DaftarActivity.this, MasukActivity.class));
                     } else {

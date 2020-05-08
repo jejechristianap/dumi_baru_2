@@ -27,7 +27,7 @@
         <activity android:name=".akun.KebijakanPrivasiActivity" />
         <activity android:name=".akun.DisclaimerActivity" />
         <activity android:name=".akun.PusatBantuanActivity" />
-        <activity android:name=".BankActivity" />
+        <activity android:name=".PersetujuanActivity" />
         <activity android:name=".akun.RincianAkunActivity" />
         <activity android:name=".jenispinjaman.PinjamanPensiunActivity" />
         <activity android:name=".IsiPulsaActivity" />

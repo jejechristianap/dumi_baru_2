@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BankActivity">
+    tools:context=".PersetujuanActivity">
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glCenterHori"
         app:layout_constraintGuide_percent="0.6"
@@ -26,7 +26,7 @@
         android:layout_marginTop="20dp"
         app:autoSizeMinTextSize="8sp"
         app:autoSizeTextType="uniform"
-        tools:autoSizeMaxTextSize="50sp"
+        tools:autoSizeMaxTextSize="25sp"
         tools:autoSizeStepGranularity="2sp"
         app:layout_constraintBottom_toTopOf="@+id/glCenterHori"
         app:layout_constraintEnd_toEndOf="parent"

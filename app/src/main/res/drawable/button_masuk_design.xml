@@ -11,10 +11,7 @@
             <corners android:radius="30dp" />
         </shape>
     </item>
-    <!--    <item>
-            <corners android:radius="30dp" />
-        </item>-->
-    <!-- create the stroke for top, left, bottom and right with the dp you want -->
+
     <item
         android:bottom="2dp"
         android:left="2dp"

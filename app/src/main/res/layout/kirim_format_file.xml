@@ -64,7 +64,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:autoSizeMaxTextSize="20sp"
-        tools:autoSizeStepGranularity="1sp" />
+        tools:autoSizeStepGranularity="1sp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:visibility="gone"

@@ -12,13 +12,10 @@ public class Splash extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_dumi);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent mainIntent = new Intent(Splash.this, HalamanDepanActivity.class);
-                Splash.this.startActivity(mainIntent);
-                Splash.this.finish();
-            }
+        new Handler().postDelayed(() -> {
+            Intent mainIntent = new Intent(Splash.this, HalamanDepanActivity.class);
+            Splash.this.startActivity(mainIntent);
+            Splash.this.finish();
         }, SPLASH_DISPLAY_LENGTH);
     }
 }

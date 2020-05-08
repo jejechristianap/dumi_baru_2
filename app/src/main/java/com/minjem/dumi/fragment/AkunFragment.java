@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.minjem.dumi.HalamanDepanActivity;
 import com.minjem.dumi.R;
 import com.minjem.dumi.akun.DisclaimerActivity;
@@ -28,6 +29,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.Objects;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 
 public class AkunFragment extends Fragment {
@@ -97,13 +100,19 @@ public class AkunFragment extends Fragment {
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(getActivity()));
         ImageLoader imageLoader = ImageLoader.getInstance();
 
-        if (photoPath != null){
+        Glide.with(this)
+                .load(apiPhotoPath)
+                .error(R.drawable.ic_profil)
+                .transform(new RoundedCornersTransformation(30, 10))
+                .into(photoIv);
+
+        /*if (photoPath != null){
             photoIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             photoIv.setImageURI(Uri.parse(photoPath));
         } else if(apiPhotoPath != null){
             photoIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageLoader.displayImage(apiPhotoPath, photoIv);
         }
-        ImageLoader.getInstance().destroy();
+        ImageLoader.getInstance().destroy();*/
     }
 }

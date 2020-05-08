@@ -106,9 +106,9 @@ public class PelengkapanRegularActivity extends AppCompatActivity {
                 return;
             }
 
-//            startActivity(new Intent(this, BankActivity.class));
+//            startActivity(new Intent(this, PersetujuanActivity.class));
 //            uploadSurat();
-            Intent i = new Intent(getBaseContext(), BankActivity.class);
+            Intent i = new Intent(getBaseContext(), PersetujuanActivity.class);
             i.putExtra("fotoSkCpns", fotoSkCpnsPath);
             i.putExtra("fotoSk", fotoSkPath);
             i.putExtra("fotoPa", fotoPaPath);
@@ -126,7 +126,7 @@ public class PelengkapanRegularActivity extends AppCompatActivity {
 
         myDialog.setTitle("Contoh Format Dokumen");
         myDialog.setNegativeButton("Tutup", (dialog, which) -> {
-//                finish();
+
         });
         dialog = myDialog.create();
         dialog.show();
@@ -371,7 +371,7 @@ public class PelengkapanRegularActivity extends AppCompatActivity {
                         Toast.makeText(PelengkapanRegularActivity.this, "Upload Berhasil", Toast.LENGTH_SHORT).show();
 //                        regisUser();
                         finish();
-                        startActivity(new Intent(PelengkapanRegularActivity.this, BankActivity.class));
+                        startActivity(new Intent(PelengkapanRegularActivity.this, PersetujuanActivity.class));
                     } else{
                         pDialog.dismiss();
                         Toast.makeText(PelengkapanRegularActivity.this, "Mohon maaf upload gagal, silahkan mencoba lagi..", Toast.LENGTH_SHORT).show();

@@ -469,7 +469,7 @@
     <string name="masukkan_password_baru">Masukkan password baru</string>
     <string name="tempat_lhr">Tempat Lahir</string>
     <string name="pelengkap_regular">Pengguna wajib melengkapi dokumen sebagai berikut:</string>
-    <string name="foto_sk">&#8226;<br /> Foto Dokumen SK Pengankatan/CPNS</string>
+    <string name="foto_sk">&#8226;<br /> Foto Dokumen SK Pengangkatan/CPNS</string>
     <string name="foto_surat_kuasa">&#8226;<br /> Foto Dokumen Surat kuasa</string>
     <string name="foto_pa">&#8226;<br /> Foto Dokumen Persetujuan Atasan</string>
     <string name="kirim_format">Kirim Contoh File</string>
@@ -480,7 +480,9 @@
     <string name="sk">Surat Kuasa</string>
     <string name="persetujuan_atasan">Persetujuan Atasan</string>
     <string name="tagihan">Tagihan</string>
-    <string name="apabila_pengajuan">Apabila pengajuan pinjaman anda telah disetujui\nAnda akan
+    <string name="apabila_pengajuan">Info!\nPengajuan pinjaman di atas tanggal 25,
+        akan kami proses pada awal bulan berikutnya.\n\nApabila pengajuan pinjaman
+        anda telah disetujui\nAnda akan
         dibuatkan Rekening Bank Mandiri Taspen di kantor cabang yang ditentukan,\ndan proses pencairan akan di transfer ke
         rekening tersebut.</string>
     <string name="cek_setuju">Saya setuju</string>

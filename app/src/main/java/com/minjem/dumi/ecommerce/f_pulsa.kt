@@ -1,5 +1,6 @@
 package com.minjem.dumi.ecommerce
 
+import android.annotation.SuppressLint
 import android.app.ActionBar
 import android.app.Dialog
 import android.content.Context
@@ -84,6 +85,7 @@ class f_pulsa : Fragment(){
         }))
     }
 
+    @SuppressLint("SetTextI18n")
     private fun popUp(position: Int) {
         popup.setContentView(R.layout.f_pulsa_kirim)
         popup.window!!.setLayout(ActionBar.LayoutParams.MATCH_PARENT,ActionBar.LayoutParams.WRAP_CONTENT)

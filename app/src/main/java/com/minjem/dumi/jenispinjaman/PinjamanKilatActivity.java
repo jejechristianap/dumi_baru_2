@@ -17,7 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.minjem.dumi.BankActivity;
+import com.minjem.dumi.PersetujuanActivity;
 import com.minjem.dumi.MainActivity;
 import com.minjem.dumi.R;
 import com.minjem.dumi.api.GetBungaInterface;
@@ -675,6 +675,6 @@ public class PinjamanKilatActivity extends AppCompatActivity {
         editor.putFloat("asuransi", asuransi);
         editor.commit();
 
-        startActivity(new Intent(PinjamanKilatActivity.this, BankActivity.class));
+        startActivity(new Intent(PinjamanKilatActivity.this, PersetujuanActivity.class));
     }
 }
