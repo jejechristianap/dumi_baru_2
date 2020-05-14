@@ -52,12 +52,7 @@ public class UnsafeOkHttpClient {
             builder.readTimeout(60,TimeUnit.SECONDS);
             builder.retryOnConnectionFailure(true);
             builder.sslSocketFactory(sslSocketFactory, (X509TrustManager)trustAllCerts[0]);
-            builder.hostnameVerifier(new HostnameVerifier() {
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    return true;
-                }
-            });
+            builder.hostnameVerifier((hostname, session) -> true);
 
             OkHttpClient okHttpClient = builder.build();
             return okHttpClient;

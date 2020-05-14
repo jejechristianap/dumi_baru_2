@@ -10,13 +10,13 @@ class ECommerceActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ecommerce)
 
         if(savedInstanceState == null){
-            val pulsa:String = intent.getStringExtra("pulsa")
-            val token:String = intent.getStringExtra("token")
+            val mFragment = intent.getStringExtra("fragment")
+//            val token = intent.getStringExtra("token")
 
-            if (pulsa == "pulsa"){
-                supportFragmentManager.beginTransaction().replace(R.id.fl_content,f_pulsa()).commit()
-            } else {
-
+            if (mFragment == "pulsa"){
+                supportFragmentManager.beginTransaction().replace(R.id.fl_content,PulsaFragment()).commit()
+            } else if (mFragment == "pln"){
+                supportFragmentManager.beginTransaction().replace(R.id.fl_content, PlnFragment()).commit()
             }
 
         }

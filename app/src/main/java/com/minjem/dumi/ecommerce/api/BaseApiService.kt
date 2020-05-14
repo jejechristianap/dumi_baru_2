@@ -23,4 +23,9 @@ interface BaseApiService {
                  @Field("itrx") itrx : String,
                  @Field("kodeoperator") kodeoperator : String,
                  @Field("nomortujuan") nomortujuan : String) : Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("json/ppob/daftarharga")
+    fun getPln(@Field("username") username : String,
+                 @Field("password") password : String) : Call<ResponseBody>
 }

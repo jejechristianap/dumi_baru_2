@@ -1,5 +1,6 @@
 package com.minjem.dumi.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -40,10 +41,13 @@ public class AkunFragment extends Fragment {
     private ImageView photoIv;
     private User prefManager;
     private View view;
+    private Context mContext;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_akun, container, false);
+
+        mContext = getActivity();
 
         LinearLayout rincianAkunLl = view.findViewById(R.id.rincian_akun_ll);
         LinearLayout ubahSandiLl = view.findViewById(R.id.ubah_sandi_ll);
@@ -51,6 +55,7 @@ public class AkunFragment extends Fragment {
         LinearLayout disclaimerLl = view.findViewById(R.id.disclaimer_ll);
         LinearLayout kebijakanPrivasiLl = view.findViewById(R.id.kebijakan_privasi_ll);
         Button keluarButton = view.findViewById(R.id.keluar_button);
+
         photoIv = view.findViewById(R.id.photo_profile);
 
         photoIv.setOnClickListener(v -> {
@@ -97,22 +102,12 @@ public class AkunFragment extends Fragment {
         photoPath = pref.getString("image_profile", null);
         apiPhotoPath = prefManager.getImageProfile();
 
-        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(getActivity()));
-        ImageLoader imageLoader = ImageLoader.getInstance();
 
-        Glide.with(this)
+        Glide.with(mContext)
                 .load(apiPhotoPath)
                 .error(R.drawable.ic_profil)
                 .transform(new RoundedCornersTransformation(30, 10))
                 .into(photoIv);
 
-        /*if (photoPath != null){
-            photoIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            photoIv.setImageURI(Uri.parse(photoPath));
-        } else if(apiPhotoPath != null){
-            photoIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageLoader.displayImage(apiPhotoPath, photoIv);
-        }
-        ImageLoader.getInstance().destroy();*/
     }
 }

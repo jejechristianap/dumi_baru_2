@@ -20,7 +20,7 @@ class RecyclerItemClickListener (mContext :Context, private val mListener : OnIt
     override fun onTouchEvent(p0: androidx.recyclerview.widget.RecyclerView, p1: MotionEvent) {
     }
     override fun onInterceptTouchEvent(p0: androidx.recyclerview.widget.RecyclerView, p1: MotionEvent): Boolean {
-        val childView = p0!!.findChildViewUnder(p1!!.x,p1.y)
+        val childView = p0.findChildViewUnder(p1.x,p1.y)
         if (childView != null && mListener != null && mGestureDetector.onTouchEvent(p1)){
             mListener.onItemClick(childView,p0.getChildAdapterPosition(childView))
         }

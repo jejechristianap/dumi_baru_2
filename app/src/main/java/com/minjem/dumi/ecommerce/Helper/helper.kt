@@ -1,4 +1,4 @@
-package com.hendi.pulsa.Helper
+package com.minjem.dumi.ecommerce.Helper
 
 import android.app.ActionBar
 import android.app.Dialog
@@ -8,6 +8,9 @@ import android.graphics.drawable.ColorDrawable
 import android.widget.Toast
 import com.minjem.dumi.R
 import java.text.DecimalFormat
+
+const val USERNAME = "api_mmbc_fidac18"
+const val PASSWORD = "Fi918_ahBmpl"
 
 fun mDF(text : String) : String {
 

@@ -69,7 +69,7 @@ public class BerandaFragment extends Fragment {
 //            startActivity(new Intent(getActivity(), IsiPulsaActivity.class));
 //            Toast.makeText(getActivity(), "Tunggu update kami selanjutnya", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(), ECommerceActivity.class);
-            intent.putExtra("pulsa", "pulsa");
+            intent.putExtra("fragment", "pulsa");
             startActivity(intent);
         });
 

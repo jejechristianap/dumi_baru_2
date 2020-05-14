@@ -19,12 +19,14 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hendi.pulsa.Adapter.A_pulsa
-import com.hendi.pulsa.Helper.mDF
-import com.hendi.pulsa.Helper.mProgress
+import com.minjem.dumi.ecommerce.Helper.mDF
+import com.minjem.dumi.ecommerce.Helper.mProgress
 import com.hendi.pulsa.response.G_Pulsa
 import com.mdi.stockin.ApiHelper.HttpRetrofitClient
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.R
+import com.minjem.dumi.ecommerce.Helper.PASSWORD
+import com.minjem.dumi.ecommerce.Helper.USERNAME
 import kotlinx.android.synthetic.main.f_pulsa.view.*
 import kotlinx.android.synthetic.main.f_pulsa_kirim.*
 import kotlinx.android.synthetic.main.gagal.*
@@ -37,9 +39,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
-import java.text.DecimalFormat
 
-class f_pulsa : Fragment(){
+class PulsaFragment : Fragment(){
     lateinit var v : View
     lateinit var mContext: Context
     lateinit var api : HttpRetrofitClient
@@ -167,7 +168,7 @@ class f_pulsa : Fragment(){
         mProgress(progress)
         v.id_no_operator.setText("")
         v.id_btn_reload.visibility = View.GONE
-        api.retrofit.getPulsa("api_mmbc_fidac18","Fi918_ahBmpl").enqueue(object : Callback<ResponseBody> {
+        api.retrofit.getPulsa( USERNAME, PASSWORD).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("Error",t.message!!)
                 progress.dismiss()
@@ -186,7 +187,7 @@ class f_pulsa : Fragment(){
 
                         Log.d("Json => ", json.length().toString())
 
-                        for (i in 0..json.length() -1){
+                        for (i in 0 until json.length()){
                             val tipe = json.getJSONObject(i).getString("tipe").toString()
                             val operator = json.getJSONObject(i).getString("operator").toString()
                             val kodeoperator = json.getJSONObject(i).getString("kodeoperator").toString()
@@ -215,7 +216,7 @@ class f_pulsa : Fragment(){
                                                 pulsa.nominal = nominal
                                                 pulsa.harga = harga
                                                 pulsa.status = status
-                                                list.set(index,pulsa)
+                                                list[index] = pulsa
                                             }
                                         }
                                     }
@@ -233,8 +234,6 @@ class f_pulsa : Fragment(){
                                     list.add(pulsa)
                                 }
                             }
-
-
                         }
 
                         Log.d("Jumlah Pulsa",list.size.toString())
@@ -357,7 +356,7 @@ class f_pulsa : Fragment(){
                     }
                 }else {
                     if (s.toString().length > 3){
-                        result = ArrayList<G_Pulsa>()
+                        result = ArrayList()
                         for (i in list){
                             if (i.operator!!.contains("kuya")){
                                 result.add(i)

@@ -41,7 +41,6 @@ class A_pulsa(internal var mContext : Context, internal var list : List<G_Pulsa>
 
     fun filter (new : MutableList<G_Pulsa>){
 
-
         list = new.sortedBy { it.nominal!!.toInt() }
         notifyDataSetChanged()
     }
