@@ -52,7 +52,6 @@ object HttpRetrofitClient {
             .build()
     }
 
-    val retrofit : BaseApiService
-        get() = instanse.create(BaseApiService::class.java)
+    val retrofit : BaseApiService get() = instanse.create(BaseApiService::class.java)
 
 }

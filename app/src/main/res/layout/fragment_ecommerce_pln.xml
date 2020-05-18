@@ -73,7 +73,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:gravity="center"
-                android:text="Prabayar"
+                android:text="@string/prbayar"
                 android:textColor="@color/white"
                 android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/id_prabayar_bc"
@@ -85,7 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:gravity="center"
-                android:text="Pascabayar"
+                android:text="@string/bulanan"
                 android:textColor="@color/abu_muda"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/id_pascabayar_bc"
@@ -127,13 +127,13 @@
                 android:text="@string/no_meter"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/id_no_operator"
+                app:layout_constraintBottom_toTopOf="@id/noMeter"
                 app:layout_constraintEnd_toEndOf="@id/guideline6"
                 app:layout_constraintStart_toStartOf="@id/guideline5"
                 app:layout_constraintTop_toTopOf="@id/id_pulsa_bc" />
 
             <EditText
-                android:id="@+id/id_no_operator"
+                android:id="@+id/noMeter"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/ex_token"
@@ -180,7 +180,7 @@
                 app:layout_constraintGuide_percent="0.75" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/id_rv"
+                android:id="@+id/rvPln"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:paddingTop="10dp"

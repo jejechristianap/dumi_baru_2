@@ -19,6 +19,8 @@
     <color name="grey_700">#747474</color>
     <color name="black">#000000</color>
 
+    <color name="dialogBackground">#60000000</color>
+
     <!--Switch Color-->
     <color name="disable_forground_grey">#42221f1f</color>
     <color name="disable_thumb_grey">#1c000000</color>

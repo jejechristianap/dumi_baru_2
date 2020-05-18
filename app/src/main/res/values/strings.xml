@@ -489,6 +489,8 @@
     <string name="no_meter">Nomor Meter</string>
     <string name="ex_token">011xxxxx</string>
     <string name="pln">PLN</string>
+    <string name="prbayar">Prabayar</string>
+    <string name="bulanan">Bulanan</string>
 
 
 </resources>

@@ -18,7 +18,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.hendi.pulsa.Adapter.A_pulsa
+import com.minjem.dumi.ecommerce.Adapter.A_pulsa
 import com.minjem.dumi.ecommerce.Helper.mDF
 import com.minjem.dumi.ecommerce.Helper.mProgress
 import com.hendi.pulsa.response.G_Pulsa
@@ -27,7 +27,7 @@ import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.R
 import com.minjem.dumi.ecommerce.Helper.PASSWORD
 import com.minjem.dumi.ecommerce.Helper.USERNAME
-import kotlinx.android.synthetic.main.f_pulsa.view.*
+import kotlinx.android.synthetic.main.fragment_ecommerce_pulsa.view.*
 import kotlinx.android.synthetic.main.f_pulsa_kirim.*
 import kotlinx.android.synthetic.main.gagal.*
 import kotlinx.android.synthetic.main.sukses.*
@@ -51,7 +51,7 @@ class PulsaFragment : Fragment(){
     lateinit var dialogSukses : Dialog
     lateinit var dialogGagal : Dialog
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        v = layoutInflater.inflate(R.layout.f_pulsa,container,false)
+        v = layoutInflater.inflate(R.layout.fragment_ecommerce_pulsa,container,false)
         mContext = this.context!!
         api = HttpRetrofitClient
         v.id_rv.layoutManager = GridLayoutManager(mContext,3)
@@ -197,7 +197,7 @@ class PulsaFragment : Fragment(){
                             val status = json.getJSONObject(i).getString("status").toString()
 
 
-                            Log.d("Log Operator dan Tipe ${i}",operator + " - " + tipe )
+                            Log.d("Log Operator dan Tipe $i", "$operator - $tipe")
 
                             if (tipe == "PULSA" && status == "Ready"){
                                 val find = list.find { it.operator == operator && it.nominal == nominal }
