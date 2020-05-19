@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     private static final String BASE_URL = "https://api.minjem.biz.id/api/";
-    private static final String BASE_URL_PULSA = "https://klikmbc.co.id/json/pulsa/";
+    private static final String BASE_URL_PULSA = "http://klikmbc.co.id/";
     private static final String BASE_URL_OTP = "http://api.nusasms.com/api/v3/sendsms/";
     private static RetrofitClient mInstance;
     private static Retrofit retrofit = null;
@@ -43,6 +43,7 @@ public class RetrofitClient {
 
             return retrofit;
         }
+
     public static Retrofit getOtp() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

@@ -5,6 +5,7 @@ package com.mdi.stockin.ApiHelper
 
 import com.minjem.dumi.ecommerce.api.BaseApiService
 import com.minjem.dumi.ecommerce.api.UnsafeOkHttpClient
+import com.minjem.dumi.retrofit.RetrofitClient
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -36,6 +37,7 @@ object HttpRetrofitClient {
 //        client.setSslSocketFactory(sslContext.socketFactory)
 
         val ok = UnsafeOkHttpClient.getUnsafeOkHttpClient()
+        val unsafe = RetrofitClient.getUnsafeOkHttpClient()
 
         val okHttp = OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
@@ -45,11 +47,12 @@ object HttpRetrofitClient {
             .retryOnConnectionFailure(true)
             .build()
 
-        Retrofit.Builder().baseUrl("http://klikmbc.co.id/")
-            .client(okHttp)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
+        Retrofit.Builder()
+                .baseUrl("https://klikmbc.co.id/")
+                .client(unsafe.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
     }
 
     val retrofit : BaseApiService get() = instanse.create(BaseApiService::class.java)

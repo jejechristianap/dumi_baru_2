@@ -27,8 +27,8 @@ import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.R
 import com.minjem.dumi.ecommerce.Helper.PASSWORD
 import com.minjem.dumi.ecommerce.Helper.USERNAME
-import kotlinx.android.synthetic.main.fragment_ecommerce_pulsa.view.*
-import kotlinx.android.synthetic.main.f_pulsa_kirim.*
+import kotlinx.android.synthetic.main.ecommerce_pulsa.view.*
+import kotlinx.android.synthetic.main.ecommerce_konfirmasi_pembayaran.*
 import kotlinx.android.synthetic.main.gagal.*
 import kotlinx.android.synthetic.main.sukses.*
 import okhttp3.ResponseBody
@@ -51,7 +51,7 @@ class PulsaFragment : Fragment(){
     lateinit var dialogSukses : Dialog
     lateinit var dialogGagal : Dialog
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        v = layoutInflater.inflate(R.layout.fragment_ecommerce_pulsa,container,false)
+        v = layoutInflater.inflate(R.layout.ecommerce_pulsa,container,false)
         mContext = this.context!!
         api = HttpRetrofitClient
         v.id_rv.layoutManager = GridLayoutManager(mContext,3)
@@ -88,7 +88,7 @@ class PulsaFragment : Fragment(){
 
     @SuppressLint("SetTextI18n")
     private fun popUp(position: Int) {
-        popup.setContentView(R.layout.f_pulsa_kirim)
+        popup.setContentView(R.layout.ecommerce_konfirmasi_pembayaran)
         popup.window!!.setLayout(ActionBar.LayoutParams.MATCH_PARENT,ActionBar.LayoutParams.WRAP_CONTENT)
         popup.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         popup.setCancelable(false)

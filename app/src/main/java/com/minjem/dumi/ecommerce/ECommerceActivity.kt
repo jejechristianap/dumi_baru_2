@@ -17,6 +17,8 @@ class ECommerceActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction().replace(R.id.fl_content,PulsaFragment()).commit()
             } else if (mFragment == "pln"){
                 supportFragmentManager.beginTransaction().replace(R.id.fl_content, PlnFragment()).commit()
+            }else if (mFragment == "flight"){
+                supportFragmentManager.beginTransaction().replace(R.id.fl_content, FlightFragment()).commit()
             }
 
         }

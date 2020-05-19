@@ -27,8 +27,8 @@
 
     <ImageView
         android:id="@+id/id_back_cp"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_80sdp"
         android:layout_margin="8dp"
         android:background="@drawable/abu_corner"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,22 +41,24 @@
         android:layout_width="0dp"
         android:textStyle="bold"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_5sdp"
         android:text="5000"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="@dimen/_15ssp"
         app:layout_constraintEnd_toEndOf="@id/id_back_cp"
         app:layout_constraintStart_toStartOf="@id/id_back_cp"
         app:layout_constraintTop_toTopOf="@id/id_back_cp" />
 
     <TextView
-        android:layout_marginTop="4dp"
         android:id="@+id/id_judul_harga_cp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textSize="13dp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="4dp"
         android:text="Harga"
+        android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="@id/id_back_cp"
         app:layout_constraintTop_toBottomOf="@id/id_jumlah_pulsa_cp" />
 
@@ -64,9 +66,9 @@
         android:id="@+id/id_harga_pulsa_cp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/_16sdp"
         android:text="Rp 5.800"
-        android:textSize="15dp"
+        android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/id_back_cp"
         app:layout_constraintTop_toBottomOf="@id/id_judul_harga_cp" />

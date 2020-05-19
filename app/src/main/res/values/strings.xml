@@ -491,6 +491,22 @@
     <string name="pln">PLN</string>
     <string name="prbayar">Prabayar</string>
     <string name="bulanan">Bulanan</string>
+    <string name="total">Rp5,500</string>
+    <string name="harga">Harga</string>
+    <string name="oneWay">One Way</string>
+    <string name="roundTrip">Round Trip</string>
+    <string name="multiCity">Multi City</string>
+    <string name="dari">Dari</string>
+    <string name="jakarta">Jakarta (JKTA)</string>
+    <string name="tujuan">Tujuan</string>
+    <string name="flight">Flight</string>
+    <string name="tgl">Selasa, 05 Mei 2020</string>
+    <string name="keberangkatan">Keberangkatan</string>
+    <string name="kedatangan">Kedatangan</string>
+    <string name="penumpang">Penumpang</string>
+    <string name="orang">1 Orang</string>
+    <string name="kelas">Kelas</string>
+    <string name="ekonomi">Ekonomi</string>
 
 
 </resources>

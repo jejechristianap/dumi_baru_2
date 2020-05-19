@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.minjem.dumi.ecommerce.ECommerceActivity;
 import com.minjem.dumi.model.SharedPrefManager;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -30,14 +31,21 @@ public class HalamanDepanActivity extends AppCompatActivity {
         editor.clear();
 
         daftarButton = findViewById(R.id.asn_akftif_button_daftar);
-        daftarButton.setOnClickListener(v ->
-                startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class)));
+        daftarButton.setOnClickListener(v ->{
+//                    startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class));
+                    Intent i = new Intent(this, ECommerceActivity.class);
+                    i.putExtra("fragment", "pulsa");
+                    startActivity(i);
+                });
 
 
         masukButton = findViewById(R.id.masuk_button);
         masukButton.setOnClickListener(v -> {
-            startActivity(new Intent(HalamanDepanActivity.this, MasukActivity.class));
-        });
+//                startActivity(new Intent(HalamanDepanActivity.this, MasukActivity.class));
+                    Intent i = new Intent(this, ECommerceActivity.class);
+                    i.putExtra("fragment", "pln");
+                    startActivity(i);
+                });
     }
 
     @Override

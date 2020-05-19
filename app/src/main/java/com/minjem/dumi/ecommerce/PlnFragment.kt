@@ -16,7 +16,7 @@ import com.minjem.dumi.ecommerce.Adapter.PlnAdapter
 import com.minjem.dumi.ecommerce.Helper.PASSWORD
 import com.minjem.dumi.ecommerce.Helper.USERNAME
 import com.minjem.dumi.ecommerce.response.PlnData
-import kotlinx.android.synthetic.main.fragment_ecommerce_pln.view.*
+import kotlinx.android.synthetic.main.ecommerce_pln.view.*
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import retrofit2.Call
@@ -34,7 +34,7 @@ class PlnFragment: Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView = layoutInflater.inflate(R.layout.fragment_ecommerce_pln,container,false)
+        mView = layoutInflater.inflate(R.layout.ecommerce_pln,container,false)
         mContext = this.context!!
 
         /*Recycler View PLN*/
@@ -42,6 +42,7 @@ class PlnFragment: Fragment() {
         plnAdapter = PlnAdapter(mContext, list)
         mView.rvPln.adapter = plnAdapter
         plnAdapter.notifyDataSetChanged()
+        api = HttpRetrofitClient
 
         /*Dialog*/
         mDialog = Dialog(mContext)
@@ -69,10 +70,11 @@ class PlnFragment: Fragment() {
                         val ppob_grup = jsonArray.getJSONObject(i).getString("ppob_grup").toString()
                         val ppob_produk = jsonArray.getJSONObject(i).getString("ppob_produk").toString()
                         val ppob_kodeproduk = jsonArray.getJSONObject(i).getString("ppob_kodeproduk").toString()
-                        val ppob_nominal = jsonArray.getJSONObject(i).getString("ppob_nominal").toString()
+                        var ppob_nominal = jsonArray.getJSONObject(i).getString("ppob_nominal").toString()
                         val ppob_admin = jsonArray.getJSONObject(i).getString("ppob_admin").toString()
                         val ppob_debet = jsonArray.getJSONObject(i).getString("ppob_debet").toString()
                         val ppob_status = jsonArray.getJSONObject(i).getString("ppob_status").toString()
+                        ppob_nominal = ppob_nominal.replace(".","")
 
                         if (ppob_grup == "PLN Group" && ppob_produk == "PLN Pra Bayar" && ppob_status == "Ready"){
                             val find = list.find{ it.ppob_kodeproduk == ppob_kodeproduk && it.ppob_nominal == ppob_nominal}
@@ -100,6 +102,7 @@ class PlnFragment: Fragment() {
                                 pln.ppob_admin = ppob_admin
                                 pln.ppob_debet = ppob_debet
                                 pln.ppob_status = ppob_status
+//                                pln.ppob_nominal = pln.ppob_nominal?.replace(".","")
                                 list.add(pln)
                             }
 
@@ -107,12 +110,14 @@ class PlnFragment: Fragment() {
                         plnAdapter.filter(list)
                         mView.rvPln.adapter = plnAdapter
                         plnAdapter.notifyDataSetChanged()
+                        progressDialog.dialog.dismiss()
                         Log.d("Jumlah Filter", list.size.toString())
                     }
                     Log.d("Jumlah PLN", list.size.toString())
-
+                    progressDialog.dialog.dismiss()
 
                 } else {
+                    progressDialog.dialog.dismiss()
                     Log.e("Erorr", "Response gagal")
                 }
             }
