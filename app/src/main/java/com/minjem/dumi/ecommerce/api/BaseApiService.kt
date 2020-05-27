@@ -7,6 +7,7 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface BaseApiService {
@@ -28,4 +29,15 @@ interface BaseApiService {
     @POST("json/ppob/daftarharga")
     fun getPln(@Field("username") username : String,
                  @Field("password") password : String) : Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("json/ppob/cektagihan")
+    fun cekTagihanPln(@Field("username") username : String,
+                      @Field("password") password : String,
+                      @Field("ppob_kodeproduk") kodeproduk : String,
+                      @Field("ppob_nomorpelanggan") nomorpelanggan : String) : Call<ResponseBody>
+
+    @FormUrlEncoded
+    @GET("json/getcodearea-json")
+    fun getBandara():Call<ResponseBody>
 }

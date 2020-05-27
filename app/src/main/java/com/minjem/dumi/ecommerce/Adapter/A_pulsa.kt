@@ -11,7 +11,8 @@ import com.minjem.dumi.R
 import kotlinx.android.synthetic.main.customlist_pulsa.view.*
 import java.text.DecimalFormat
 
-class A_pulsa(internal var mContext : Context, internal var list : List<G_Pulsa>) : RecyclerView.Adapter<A_pulsa.pulsa_holder>() {
+class A_pulsa(internal var mContext : Context, internal var list : List<G_Pulsa>) :
+        RecyclerView.Adapter<A_pulsa.pulsa_holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): pulsa_holder {
         val a = LayoutInflater.from(mContext).inflate(R.layout.customlist_pulsa,parent,false)
 
