@@ -1,83 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/custom_ripple"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.02" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.98" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.66" />
-
-    <ImageView
+    <LinearLayout
         android:id="@+id/id_back_cp"
-        android:layout_width="@dimen/_100sdp"
+        android:orientation="vertical"
+        android:padding="@dimen/_12sdp"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/_80sdp"
         android:layout_margin="8dp"
-        android:background="@drawable/abu_corner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@drawable/abu_corner">
+        <TextView
+            android:id="@+id/id_jumlah_pulsa_cp"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:text="@string/rp_1jt"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp" />
 
-    <TextView
-        android:id="@+id/id_jumlah_pulsa_cp"
-        android:layout_width="0dp"
-        android:textStyle="bold"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:text="5000"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_15ssp"
-        app:layout_constraintEnd_toEndOf="@id/id_back_cp"
-        app:layout_constraintStart_toStartOf="@id/id_back_cp"
-        app:layout_constraintTop_toTopOf="@id/id_back_cp" />
+        <TextView
+            android:id="@+id/id_judul_harga_cp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/harga"
+            android:textSize="@dimen/_10ssp"/>
 
-    <TextView
-        android:id="@+id/id_judul_harga_cp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="4dp"
-        android:text="Harga"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintStart_toStartOf="@id/id_back_cp"
-        app:layout_constraintTop_toBottomOf="@id/id_jumlah_pulsa_cp" />
+        <TextView
+            android:id="@+id/id_harga_pulsa_cp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rp_1jt"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/id_harga_pulsa_cp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:text="Rp 5.800"
-        android:textSize="@dimen/_12ssp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/id_back_cp"
-        app:layout_constraintTop_toBottomOf="@id/id_judul_harga_cp" />
-
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_harga_pulsa_cp" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -132,5 +132,12 @@
         <item name="android:textSize">@dimen/font_normal</item>
     </style>
 
+    <!--FullScreen Dialog-->
+    <style name="DialogTheme" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
 
 </resources>

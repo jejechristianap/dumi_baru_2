@@ -507,6 +507,8 @@
     <string name="orang">1 Orang</string>
     <string name="kelas">Kelas</string>
     <string name="ekonomi">Ekonomi</string>
+    <string name="reload">Reload</string>
+    <string name="surabaya">Surabaya (SBY)</string>
 
 
 </resources>

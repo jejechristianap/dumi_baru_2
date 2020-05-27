@@ -192,12 +192,12 @@
             </androidx.recyclerview.widget.RecyclerView>
 
             <Button
-                android:id="@+id/id_btn_reload"
+                android:id="@+id/pln_reload"
                 style="@style/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/biru_corner"
-                android:text="Reload"
+                android:text="@string/reload"
                 android:textColor="@color/white"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"

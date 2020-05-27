@@ -34,7 +34,7 @@ public class HalamanDepanActivity extends AppCompatActivity {
         daftarButton.setOnClickListener(v ->{
 //                    startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class));
                     Intent i = new Intent(this, ECommerceActivity.class);
-                    i.putExtra("fragment", "pulsa");
+                    i.putExtra("fragment", "pln");
                     startActivity(i);
                 });
 
@@ -43,7 +43,7 @@ public class HalamanDepanActivity extends AppCompatActivity {
         masukButton.setOnClickListener(v -> {
 //                startActivity(new Intent(HalamanDepanActivity.this, MasukActivity.class));
                     Intent i = new Intent(this, ECommerceActivity.class);
-                    i.putExtra("fragment", "pln");
+                    i.putExtra("fragment", "flight");
                     startActivity(i);
                 });
     }

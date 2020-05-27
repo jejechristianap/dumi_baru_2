@@ -49,48 +49,53 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            
             <RadioGroup
-                android:id="@+id/flight_one_round_multi"
+                android:id="@+id/radio_group_flight"
                 android:orientation="horizontal"
                 android:background="@color/colorBlue"
                 android:layout_width="match_parent"
                 android:gravity="center_horizontal"
+                android:checkedButton="@id/oneWayRb"
                 android:layout_height="wrap_content">
                 <RadioButton
+                    android:id="@+id/oneWayRb"
                     android:background="@drawable/radio_flat_selector"
                     android:button="@android:color/transparent"
                     android:text="@string/oneWay"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:checked="true"
                     android:gravity="center"
                     android:textColor="@drawable/radio_flat_text_selector"
                     android:layout_width="@dimen/_90sdp"
                     android:layout_height="@dimen/_25sdp"/>
                 <RadioButton
+                    android:id="@+id/roundTripRb"
                     android:background="@drawable/radio_flat_selector"
                     android:button="@android:color/transparent"
                     android:text="@string/roundTrip"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     android:gravity="center"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:textColor="@drawable/radio_flat_text_selector"
                     android:layout_width="@dimen/_90sdp"
                     android:layout_height="@dimen/_25sdp"/>
-                <RadioButton
+                <!--<RadioButton
+                    android:id="@+id/multiCityRb"
                     android:background="@drawable/radio_flat_selector"
                     android:button="@android:color/transparent"
                     android:text="@string/multiCity"
                     android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:gravity="center"
                     android:textColor="@drawable/radio_flat_text_selector"
                     android:layout_width="@dimen/_90sdp"
-                    android:layout_height="@dimen/_25sdp"/>
+                    android:layout_height="@dimen/_25sdp"/>-->
             </RadioGroup>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -122,7 +127,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/dari"
+                    android:id="@+id/dariTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
@@ -143,12 +148,15 @@
                     android:background="@color/colorWhite"
                     app:layout_constraintEnd_toStartOf="@id/switchIv"
                     app:layout_constraintStart_toEndOf="@id/landingTakeOff"
-                    app:layout_constraintTop_toBottomOf="@id/dari" />
+                    app:layout_constraintTop_toBottomOf="@id/dariTv" />
+
 
                 <ImageView
                     android:id="@+id/switchIv"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:padding="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
                     android:src="@drawable/ic_switch"
                     app:layout_constraintBottom_toBottomOf="@+id/view3"
@@ -168,11 +176,11 @@
                     app:layout_constraintTop_toBottomOf="@+id/view3" />
 
                 <TextView
-                    android:id="@+id/tujuan"
+                    android:id="@+id/tujuanTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:text="@string/jakarta"
+                    android:text="@string/surabaya"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/_18ssp"
                     app:layout_constraintStart_toEndOf="@+id/landingTakeOff"
@@ -227,51 +235,62 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tglBerangkat" />
 
-                <ImageView
-                    android:layout_marginTop="@dimen/_20sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view4"
-                    android:id="@+id/tglKedatanganIv"
-                    android:src="@drawable/ic_pulang"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:contentDescription="@string/todo" />
-
-                <TextView
-                    android:id="@+id/kedatangan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:text="@string/kedatangan"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/tglKedatanganIv"
-                    app:layout_constraintTop_toTopOf="@id/tglKedatanganIv" />
-
-                <TextView
-                    android:id="@+id/tglKedatanganTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:text="@string/tgl"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
-                    app:layout_constraintStart_toEndOf="@id/tglKedatanganIv"
-                    app:layout_constraintTop_toBottomOf="@id/kedatangan" />
-                <View
-                    android:id="@+id/view5"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@color/black"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/roundTripCl"
+                    android:visibility="gone"
+                    android:paddingTop="@dimen/_20sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tglKedatanganTv" />
+                    app:layout_constraintTop_toBottomOf="@id/view4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/tglKedatanganIv"
+                        android:src="@drawable/ic_pulang"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:contentDescription="@string/todo" />
+
+                    <TextView
+                        android:id="@+id/kedatangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="@string/kedatangan"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/tglKedatanganIv"
+                        app:layout_constraintTop_toTopOf="@id/tglKedatanganIv" />
+
+                    <TextView
+                        android:id="@+id/tglKedatanganTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="@string/tgl"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15ssp"
+                        app:layout_constraintStart_toEndOf="@id/tglKedatanganIv"
+                        app:layout_constraintTop_toBottomOf="@id/kedatangan" />
+                    <View
+                        android:id="@+id/view5"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tglKedatanganTv" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
                 <ImageView
                     android:layout_marginTop="@dimen/_20sdp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view5"
+                    app:layout_constraintTop_toBottomOf="@id/roundTripCl"
                     android:id="@+id/penumpangIv"
                     android:src="@drawable/ic_penumpang"
                     android:layout_width="@dimen/_30sdp"
@@ -317,7 +336,7 @@
                     android:contentDescription="@string/todo"
                     android:src="@drawable/ic_class"
                     app:layout_constraintStart_toEndOf="@+id/view6"
-                    app:layout_constraintTop_toBottomOf="@id/view5" />
+                    app:layout_constraintTop_toBottomOf="@id/roundTripCl" />
                 <TextView
                     android:id="@+id/kelas"
                     android:layout_width="wrap_content"
