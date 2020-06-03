@@ -1,4 +1,5 @@
 package com.hendi.pulsa.api
+/*
 
 import org.apache.http.conn.ssl.SSLSocketFactory
 import java.io.IOException
@@ -59,3 +60,4 @@ constructor(truststore: KeyStore) : SSLSocketFactory(truststore) {
         return sslContext.getSocketFactory().createSocket()
     }
 }
+*/

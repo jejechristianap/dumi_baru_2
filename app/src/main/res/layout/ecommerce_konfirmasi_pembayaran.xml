@@ -93,7 +93,7 @@
         style="@style/textview"
         android:layout_marginTop="@dimen/layout_small"
         android:gravity="center_vertical"
-        android:text="Metode Pembayaran"
+        android:text="@string/saldo_pay_later"
         android:textSize="@dimen/font_normal"
         app:layout_constraintEnd_toEndOf="@id/guideline12"
         app:layout_constraintStart_toStartOf="@id/guideline11"

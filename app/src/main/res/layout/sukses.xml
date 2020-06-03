@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -23,10 +24,10 @@
         android:layout_height="@dimen/kotak_150"
         android:layout_marginTop="@dimen/layout_large"
         android:background="@drawable/icon_berhasil"
-        app:layout_constraintBottom_toTopOf="@+id/id_text_progress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/id_back_sukses" />
+        app:layout_constraintTop_toTopOf="@id/id_back_sukses"
+        tools:ignore="UnknownIdInLayout" />
 
     <TextView
         android:id="@+id/id_text_sukses"

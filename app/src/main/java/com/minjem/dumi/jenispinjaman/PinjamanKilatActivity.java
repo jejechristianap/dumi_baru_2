@@ -472,6 +472,8 @@ public class PinjamanKilatActivity extends AppCompatActivity {
             float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
             sisa = pinjamanUang - totalPengurangan;
 
+//            Toast.makeText(this, "Bunga: " + bunga, Toast.LENGTH_SHORT).show();
+
             angsuranTv.setText(formatRp.format(angsuran));
             biayaAdminTv.setText(formatRp.format(admin));
             biayaAsuransiTv.setText(formatRp.format(asuransi));
@@ -529,16 +531,12 @@ public class PinjamanKilatActivity extends AppCompatActivity {
                             }
                             if(statusPinjaman.contains(1)){
                                 Toast.makeText(PinjamanKilatActivity.this, "Anda sudah mengajukan pinjaman. Mohon menunggu info dari kami.", Toast.LENGTH_SHORT).show();
-                                return;
                             } else if (statusPinjaman.contains(2)){
                                 Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show();
-                                return;
                             } else if (statusPinjaman.contains(4)){
                                 Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show();
-                                return;
                             } else if (statusPinjaman.contains(5)){
                                 Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." , Toast.LENGTH_SHORT).show();
-                                return;
                             } else {
                                 /*if(statusId == 1){
                                     Toast.makeText(PinjamanKilatActivity.this, "Anda sudah mengajukan pinjaman. Mohon menunggu info dari kami.", Toast.LENGTH_SHORT).show();

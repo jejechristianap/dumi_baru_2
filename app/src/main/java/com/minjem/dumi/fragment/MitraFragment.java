@@ -104,6 +104,8 @@ public class MitraFragment extends Fragment {
                                 statusPinjamanTv.setText("Kredit berjalan");
                             } else if(statusId == 6){
                                 statusPinjamanTv.setText("Kredit Lunas");
+                            } else {
+                                statusPinjamanTv.setText("!!Dalam Proses Pengembangan!!");
                             }
                             lamaPinjaman += " Bulan";
                             pinjamanTv.setText(formatRp.format(pinjaman));

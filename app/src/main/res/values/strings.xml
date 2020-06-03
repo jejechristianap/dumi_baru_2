@@ -106,7 +106,7 @@
     <string name="mohon_menunggu">Mohon Menunggu</string>
     <string name="keluar">Keluar</string>
     <string name="masukan_nama">Masukkan Nama</string>
-    <string name="cek_nip">Cek Nip Anda</string>
+    <string name="cek_nip">Cek Data Anda</string>
     <string name="nip_baru">NIP:</string>
     <string name="mohon_cek_data">Mohon Cek Data Anda</string>
     <string name="nama">Nama:</string>
@@ -140,7 +140,7 @@
     <string name="dati">Dati (Seperti nama Kota/Desa) OPTIONAL</string>
     <string name="propinsi">Propinsi</string>
     <string name="bidang_usaha">Bidang Usaha</string>
-    <string name="tanggal_lahir">Tanggal Lahir</string>
+    <string name="tanggal_lahir">Tanggal Lahir, contoh (10-03-1996)</string>
     <string name="agama">Agama</string>
     <string name="mohon_lengkapi_data">Mohon Lengkapi Data Anda</string>
     <string name="email">Email</string>
@@ -509,6 +509,10 @@
     <string name="ekonomi">Ekonomi</string>
     <string name="reload">Reload</string>
     <string name="surabaya">Surabaya (SBY)</string>
+    <string name="jkt">Jakarta</string>
+    <string name="bandara">Soekarno</string>
+    <string name="getToken">Get Token</string>
+    <string name="nama_pns">Nama PNS</string>
 
 
 </resources>

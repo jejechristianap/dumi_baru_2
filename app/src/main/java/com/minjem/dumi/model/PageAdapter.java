@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.minjem.dumi.fragment.NotifikasiFragment;
 import com.minjem.dumi.fragment.PesanFragment;
 
+import org.jetbrains.annotations.NotNull;
+
 public class PageAdapter extends FragmentPagerAdapter {
     private int numOfTabs;
 
@@ -15,6 +17,7 @@ public class PageAdapter extends FragmentPagerAdapter {
         this.numOfTabs = numOfTabs;
     }
 
+    @NotNull
     @Override
     public Fragment getItem(int position) {
         switch (position){

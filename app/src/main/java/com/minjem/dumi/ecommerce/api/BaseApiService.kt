@@ -12,32 +12,47 @@ import retrofit2.http.POST
 
 interface BaseApiService {
 
+
+
     @FormUrlEncoded
-    @POST("json/pulsa/daftarharga")
+    @POST("mmbc/saldo/get")
+    fun getSaldo(@Field("id") id : Int,
+                 @Field("nipBaru") nipBaru : String,
+                 @Field("username") username : String,
+                 @Field("password") password : String) : Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("mmbc/pulsa/get")
     fun getPulsa(@Field("username") username : String,
                  @Field("password") password : String) : Call<ResponseBody>
 
     @FormUrlEncoded
-    @POST("json/pulsa/isipulsa")
-    fun isiPulsa(@Field("username") username: String,
-                 @Field("password") password: String,
-                 @Field("itrx") itrx : String,
+    @POST("mmbc/pulsa/isi")
+    fun isiPulsa(@Field("id_nasabah") id_nasabah : Int,
+                 @Field("saldo") saldo : Int,
+                 @Field("itrx") itrx : Int,
                  @Field("kodeoperator") kodeoperator : String,
-                 @Field("nomortujuan") nomortujuan : String) : Call<ResponseBody>
+                 @Field("nomortujuan") nomortujuan : String,
+                 @Field("harga") harga : Int,
+                 @Field("nominal") nominal : Int,
+                 @Field("tipe") tipe : String,
+                 @Field("username") username: String,
+                 @Field("password") password: String
+    ) : Call<ResponseBody>
 
     @FormUrlEncoded
-    @POST("json/ppob/daftarharga")
+    @POST("mmbc/ppob/daftarharga")
     fun getPln(@Field("username") username : String,
                  @Field("password") password : String) : Call<ResponseBody>
 
     @FormUrlEncoded
-    @POST("json/ppob/cektagihan")
+    @POST("mmbc/ppob/cektagihan")
     fun cekTagihanPln(@Field("username") username : String,
                       @Field("password") password : String,
                       @Field("ppob_kodeproduk") kodeproduk : String,
                       @Field("ppob_nomorpelanggan") nomorpelanggan : String) : Call<ResponseBody>
 
-    @FormUrlEncoded
+
     @GET("json/getcodearea-json")
     fun getBandara():Call<ResponseBody>
 }

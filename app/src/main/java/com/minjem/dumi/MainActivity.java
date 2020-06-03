@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.minjem.dumi.fragment.BerandaFragment;
 import com.minjem.dumi.fragment.InboxFragment;
 import com.minjem.dumi.fragment.MitraFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.minjem.dumi.model.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -26,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         loadFragment(new BerandaFragment());
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        // beri listener pada saat item/menu bottomnavigation terpilih
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
 
@@ -72,11 +73,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return super.onKeyDown(keyCode, event);
     }
     protected void exitByBackKey() {
-        // do something when the button is clicked
-        // do something when the button is clicked
-        AlertDialog alertbox = new AlertDialog.Builder(this)
+       new AlertDialog.Builder(this)
                 .setMessage("Apa anda yakin ingin keluar?")
                 .setPositiveButton("Ya", (arg0, arg1) -> {
+                    SharedPrefManager.getInstance(getApplicationContext()).logout();
                     finish();
                     startActivity(new Intent(MainActivity.this, HalamanDepanActivity.class));
                     //close();

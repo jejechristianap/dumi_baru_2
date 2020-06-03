@@ -32,19 +32,19 @@ public class HalamanDepanActivity extends AppCompatActivity {
 
         daftarButton = findViewById(R.id.asn_akftif_button_daftar);
         daftarButton.setOnClickListener(v ->{
-//                    startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class));
-                    Intent i = new Intent(this, ECommerceActivity.class);
+                    startActivity(new Intent(HalamanDepanActivity.this, DaftarActivity.class));
+                    /*Intent i = new Intent(this, DaftarActivity.class);
                     i.putExtra("fragment", "pln");
-                    startActivity(i);
+                    startActivity(i);*/
                 });
 
 
         masukButton = findViewById(R.id.masuk_button);
         masukButton.setOnClickListener(v -> {
-//                startActivity(new Intent(HalamanDepanActivity.this, MasukActivity.class));
-                    Intent i = new Intent(this, ECommerceActivity.class);
+                startActivity(new Intent(HalamanDepanActivity.this, MasukActivity.class));
+                    /*Intent i = new Intent(this, ECommerceActivity.class);
                     i.putExtra("fragment", "flight");
-                    startActivity(i);
+                    startActivity(i);*/
                 });
     }
 

@@ -43,6 +43,8 @@ class InboxFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_inbox, container, false)
         mCOntext = this.context!!
         recyclerView = view.findViewById(R.id.notifikasi_rv)
+        layoutManager = LinearLayoutManager(activity)
+        recyclerView.layoutManager = layoutManager
         /*layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         notifikasiAdapter = new NotifikasiAdapter(getActivity(), data);
@@ -73,8 +75,7 @@ class InboxFragment : Fragment() {
             override fun onResponse(call: Call<NotifikasiResponse>, response: Response<NotifikasiResponse>) {
                 pDialog.dismiss()
                 notifikasiData = response.body()!!.data as MutableList<NotifikasiData>
-                layoutManager = LinearLayoutManager(activity)
-                recyclerView.layoutManager = layoutManager
+
                 notifikasiAdapter = NotifikasiAdapter(mCOntext, notifikasiData!!)
                 recyclerView.adapter = notifikasiAdapter
                 notifikasiAdapter.notifyDataSetChanged()

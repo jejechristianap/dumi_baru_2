@@ -76,6 +76,38 @@
       },
       "oauth_client": [
         {
+          "client_id": "142533851234-h4gqmfjvs838kujs3irdiuu3gberml7k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.minjem.dumi",
+            "certificate_hash": "4b01c395023a87a9ff69356597f83e40f4d851d0"
+          }
+        },
+        {
+          "client_id": "142533851234-u0vib87n6ccd56jvnpgo59qtffko99as.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.minjem.dumi",
+            "certificate_hash": "a410d5f38d262958e430a8301e20f275238edd2a"
+          }
+        },
+        {
+          "client_id": "142533851234-jfp9ufcnmai2nd5bl2tabqqabnr37asr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.minjem.dumi",
+            "certificate_hash": "a023b5e5976e3f6f753cc9f10eb043a371570d54"
+          }
+        },
+        {
+          "client_id": "142533851234-p0n1hsmamb1b0u0qo218ade0sv5bt1ua.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.minjem.dumi",
+            "certificate_hash": "b9a148af5dfd8688e3f42848b7aa7aa9aef19c87"
+          }
+        },
+        {
           "client_id": "142533851234-o8bmbrg15i4hhmutlbqirduqktkgso34.apps.googleusercontent.com",
           "client_type": 3
         }

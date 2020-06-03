@@ -109,21 +109,14 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
 
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/layout_rounded_home"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline2"
-                    app:layout_constraintEnd_toEndOf="@+id/guideline" />
-
                 <ImageView
                     android:id="@+id/takeImg"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_photograph"
+                    android:src="@drawable/ic_camera_2"
                     app:layout_constraintBottom_toTopOf="@+id/guideline2"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline" />
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    android:contentDescription="@string/todo" />
 
                 <TextView
                     android:layout_width="0dp"

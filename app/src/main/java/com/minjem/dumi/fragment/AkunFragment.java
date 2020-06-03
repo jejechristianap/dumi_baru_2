@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.signature.ObjectKey;
 import com.minjem.dumi.HalamanDepanActivity;
 import com.minjem.dumi.R;
 import com.minjem.dumi.akun.DisclaimerActivity;
@@ -42,11 +47,11 @@ public class AkunFragment extends Fragment {
     private User prefManager;
     private View view;
     private Context mContext;
+    private SharedPrefManager SPM;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_akun, container, false);
-
         mContext = getActivity();
 
         LinearLayout rincianAkunLl = view.findViewById(R.id.rincian_akun_ll);
@@ -56,6 +61,7 @@ public class AkunFragment extends Fragment {
         LinearLayout kebijakanPrivasiLl = view.findViewById(R.id.kebijakan_privasi_ll);
         Button keluarButton = view.findViewById(R.id.keluar_button);
 
+        SPM = new SharedPrefManager(Objects.requireNonNull(getActivity()).getApplicationContext());
         photoIv = view.findViewById(R.id.photo_profile);
 
         photoIv.setOnClickListener(v -> {
@@ -65,7 +71,9 @@ public class AkunFragment extends Fragment {
 
         /*Rincian Akun*/
         rincianAkunLl.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), RincianAkunActivity.class));
+            Intent i = new Intent(getActivity(), RincianAkunActivity.class);
+            i.putExtra("photo_profile", apiPhotoPath);
+            startActivity(i);
         });
 
         ubahSandiLl.setOnClickListener(v -> {
@@ -87,7 +95,8 @@ public class AkunFragment extends Fragment {
 
         /*Logout Button*/
         keluarButton.setOnClickListener(v -> {
-            getActivity().finish();
+            Objects.requireNonNull(getActivity()).finish();
+            SPM.logout();
             startActivity(new Intent(getActivity(), HalamanDepanActivity.class));
         });
 
@@ -98,16 +107,22 @@ public class AkunFragment extends Fragment {
     public void onStart() {
         super.onStart();
         prefManager = SharedPrefManager.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext()).getUser();
-        pref = Objects.requireNonNull(getActivity()).getApplicationContext().getSharedPreferences("Profile", 0); // 0 - for private mode
-        photoPath = pref.getString("image_profile", null);
         apiPhotoPath = prefManager.getImageProfile();
+        Log.d("Photo_PP", apiPhotoPath);
+
 
 
         Glide.with(mContext)
                 .load(apiPhotoPath)
                 .error(R.drawable.ic_profil)
-                .transform(new RoundedCornersTransformation(30, 10))
+                .thumbnail(0.25f)
+                .signature(new ObjectKey(System.currentTimeMillis()+""))
+                .transform(new CircleCrop(), new RoundedCorners(16))
                 .into(photoIv);
+
+       /* pref = Objects.requireNonNull(getActivity()).getApplicationContext().getSharedPreferences("Profile", 0);
+        photoPath = pref.getString("image_profile", null);*/
+
 
     }
 }

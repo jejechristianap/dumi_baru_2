@@ -2,11 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
+        android:textCursorDrawable="@null"
+        android:background="@color/white"
+        app:iconifiedByDefault="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,6 +21,7 @@
         android:id="@+id/rvCityAirport"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        tools:listitem="@layout/recycler_view_bandara"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

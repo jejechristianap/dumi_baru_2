@@ -14,7 +14,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.mdi.stockin.ApiHelper.HttpRetrofitClient
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
+import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.CustomProgressDialog
 import com.minjem.dumi.R
@@ -61,6 +64,8 @@ class PlnFragment: Fragment() {
         /*Dialog*/
         mDialog = Dialog(mContext)
 
+
+
         getPln()
         rvClick()
         return mView
@@ -78,59 +83,63 @@ class PlnFragment: Fragment() {
                 if (response.isSuccessful){
                     try {
                         Log.d("Response", response.body().toString())
-                        val jsonArray = JSONArray(response.body()!!.string())
-                        Log.d("JsonArray", jsonArray.length().toString())
+                        val jsonObject = JSONObject(response.body()!!.string())
+                        if (jsonObject.getBoolean("status")){
+                            val jsonArray = JSONArray(jsonObject.getString("data"))
+                            Log.d("JsonArray", jsonArray.length().toString())
 
-                        for (i in 0 until jsonArray.length()) {
-                            val ppob_grup = jsonArray.getJSONObject(i).getString("ppob_grup").toString()
-                            val ppob_produk = jsonArray.getJSONObject(i).getString("ppob_produk").toString()
-                            val ppob_kodeproduk = jsonArray.getJSONObject(i).getString("ppob_kodeproduk").toString()
-                            var ppob_nominal = jsonArray.getJSONObject(i).getString("ppob_nominal").toString()
-                            val ppob_admin = jsonArray.getJSONObject(i).getString("ppob_admin").toString()
-                            val ppob_debet = jsonArray.getJSONObject(i).getString("ppob_debet").toString()
-                            val ppob_status = jsonArray.getJSONObject(i).getString("ppob_status").toString()
-                            ppob_nominal = ppob_nominal.replace(".", "")
+                            for (i in 0 until jsonArray.length()) {
+                                val ppob_grup = jsonArray.getJSONObject(i).getString("ppob_grup").toString()
+                                val ppob_produk = jsonArray.getJSONObject(i).getString("ppob_produk").toString()
+                                val ppob_kodeproduk = jsonArray.getJSONObject(i).getString("ppob_kodeproduk").toString()
+                                var ppob_nominal = jsonArray.getJSONObject(i).getString("ppob_nominal").toString()
+                                val ppob_admin = jsonArray.getJSONObject(i).getString("ppob_admin").toString()
+                                val ppob_debet = jsonArray.getJSONObject(i).getString("ppob_debet").toString()
+                                val ppob_status = jsonArray.getJSONObject(i).getString("ppob_status").toString()
+                                ppob_nominal = ppob_nominal.replace(".", "")
 
-                            if (ppob_grup == "PLN Group" && ppob_produk == "PLN Pra Bayar" && ppob_status == "Ready") {
-                                val find = list.find { it.ppob_kodeproduk == ppob_kodeproduk && it.ppob_nominal == ppob_nominal }
-                                if (find != null) {
-                                    if (find.ppob_nominal!!.toInt() < ppob_nominal.toInt()) {
+                                if (ppob_grup == "PLN Group" && ppob_produk == "PLN Pra Bayar" && ppob_status == "Ready") {
+                                    val find = list.find { it.ppob_kodeproduk == ppob_kodeproduk && it.ppob_nominal == ppob_nominal }
+                                    if (find != null) {
+                                        if (find.ppob_nominal!!.toInt() < ppob_nominal.toInt()) {
 //                                    Log.d("Harga PLN Prabayar", "")
-                                        list.forEachIndexed { index, plnData ->
-                                            if (plnData.ppob_produk == ppob_produk && plnData.ppob_nominal == ppob_nominal) {
-                                                val pln = PlnData()
-                                                pln.ppob_grup = ppob_grup
-                                                pln.ppob_produk = ppob_produk
-                                                pln.ppob_kodeproduk = ppob_kodeproduk
-                                                pln.ppob_nominal = ppob_nominal
-                                                pln.ppob_admin = ppob_admin
-                                                pln.ppob_debet = ppob_debet
-                                                pln.ppob_status = ppob_status
-                                                list[index] = pln
+                                            list.forEachIndexed { index, plnData ->
+                                                if (plnData.ppob_produk == ppob_produk && plnData.ppob_nominal == ppob_nominal) {
+                                                    val pln = PlnData()
+                                                    pln.ppob_grup = ppob_grup
+                                                    pln.ppob_produk = ppob_produk
+                                                    pln.ppob_kodeproduk = ppob_kodeproduk
+                                                    pln.ppob_nominal = ppob_nominal
+                                                    pln.ppob_admin = ppob_admin
+                                                    pln.ppob_debet = ppob_debet
+                                                    pln.ppob_status = ppob_status
+                                                    list[index] = pln
+                                                }
                                             }
                                         }
+                                    } else {
+                                        val pln = PlnData()
+                                        pln.ppob_grup = ppob_grup
+                                        pln.ppob_produk = ppob_produk
+                                        pln.ppob_kodeproduk = ppob_kodeproduk
+                                        pln.ppob_nominal = ppob_nominal
+                                        pln.ppob_admin = ppob_admin
+                                        pln.ppob_debet = ppob_debet
+                                        pln.ppob_status = ppob_status
+                                        list.add(pln)
                                     }
-                                } else {
-                                    val pln = PlnData()
-                                    pln.ppob_grup = ppob_grup
-                                    pln.ppob_produk = ppob_produk
-                                    pln.ppob_kodeproduk = ppob_kodeproduk
-                                    pln.ppob_nominal = ppob_nominal
-                                    pln.ppob_admin = ppob_admin
-                                    pln.ppob_debet = ppob_debet
-                                    pln.ppob_status = ppob_status
-//                                pln.ppob_nominal = pln.ppob_nominal?.replace(".","")
-                                    list.add(pln)
                                 }
+                                plnAdapter.filter(list)
+                                mView.rvPln.adapter = plnAdapter
+                                plnAdapter.notifyDataSetChanged()
+                                progressDialog.dialog.dismiss()
+
                             }
-                            plnAdapter.filter(list)
-                            mView.rvPln.adapter = plnAdapter
-                            plnAdapter.notifyDataSetChanged()
-                            progressDialog.dialog.dismiss()
                             Log.d("Jumlah Filter", list.size.toString())
+                            Log.d("Jumlah PLN", list.size.toString())
+                            progressDialog.dialog.dismiss()
                         }
-                        Log.d("Jumlah PLN", list.size.toString())
-                        progressDialog.dialog.dismiss()
+
                     } catch (e: IOException){
                         e.printStackTrace()
                     } catch (e: JSONException){
@@ -182,10 +191,11 @@ class PlnFragment: Fragment() {
 //                            rincianTransaksi()
                             Log.d("Response", response.body().toString())
                             val json = JSONObject(response.body()!!.string())
-                            namaPelanggan = json.getString("ppob_namapelanggan").toString()
-                            nomorPelanggan = "${json.getString("ppob_nomorpelanggan")} | ${json.getString("ppob_tarifdaya")}"
-                            voucher = json.getString("ppob_totaltagihan").toString()
-                            total = json.getString("ppob_totalbayar").toString()
+                            val request = JSONObject(json.getString("data"));
+                            namaPelanggan = request.getString("ppob_namapelanggan").toString()
+                            nomorPelanggan = "${request.getString("ppob_nomorpelanggan")} | ${request.getString("ppob_tarifdaya")}"
+                            voucher = request.getString("ppob_totaltagihan").toString()
+                            total = request.getString("ppob_totalbayar").toString()
                             posItem?.let { rincianTransaksi(it) }
                         }catch (e: IOException){
                             e.printStackTrace()

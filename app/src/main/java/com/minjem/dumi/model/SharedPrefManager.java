@@ -37,10 +37,14 @@ public class SharedPrefManager {
     private static final String PHOTO_KTP = "photo_ktp";
     private static final String PHOTO_SELFI = "photo_selfi";
     private static final String PHOTO_PROFILE = "photo_profile";
+    private static final String STATUS_TOPUP = "status_topup";
+    private static final String SALDO = "saldo";
+    private static final String SALDO_MAX = "saldo_max";
+
     private static SharedPrefManager mInstance;
     private static Context mCtx;
 
-    private SharedPrefManager(Context context) {
+    public SharedPrefManager(Context context) {
         mCtx = context;
     }
 
@@ -88,6 +92,9 @@ public class SharedPrefManager {
         editor.putString(PHOTO_KTP, user.getImageKtp());
         editor.putString(PHOTO_SELFI, user.getImageSelfi());
         editor.putString(PHOTO_PROFILE, user.getImageProfile());
+        editor.putInt(STATUS_TOPUP, user.getStatus_topup());
+        editor.putInt(SALDO, user.getSaldo());
+        editor.putInt(SALDO_MAX, user.getSaldo_max());
         editor.apply();
     }
 
@@ -133,7 +140,10 @@ public class SharedPrefManager {
                 sharedPreferences.getString(KEY_NO_TELP, null),
                 sharedPreferences.getString(PHOTO_KTP, null),
                 sharedPreferences.getString(PHOTO_SELFI, null),
-                sharedPreferences.getString(PHOTO_PROFILE, null)
+                sharedPreferences.getString(PHOTO_PROFILE, null),
+                sharedPreferences.getInt(STATUS_TOPUP, 0),
+                sharedPreferences.getInt(SALDO, 0),
+                sharedPreferences.getInt(SALDO_MAX, 0)
         );
     }
 

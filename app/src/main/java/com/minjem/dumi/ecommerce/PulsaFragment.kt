@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.ActionBar
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -18,17 +19,18 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.minjem.dumi.ecommerce.Adapter.A_pulsa
-import com.minjem.dumi.ecommerce.Helper.mDF
-import com.minjem.dumi.ecommerce.Helper.mProgress
 import com.hendi.pulsa.response.G_Pulsa
-import com.mdi.stockin.ApiHelper.HttpRetrofitClient
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.R
+import com.minjem.dumi.ecommerce.Adapter.A_pulsa
 import com.minjem.dumi.ecommerce.Helper.PASSWORD
 import com.minjem.dumi.ecommerce.Helper.USERNAME
-import kotlinx.android.synthetic.main.ecommerce_pulsa.view.*
+import com.minjem.dumi.ecommerce.Helper.mDF
+import com.minjem.dumi.ecommerce.Helper.mProgress
+import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
+import com.minjem.dumi.model.SharedPrefManager
 import kotlinx.android.synthetic.main.ecommerce_konfirmasi_pembayaran.*
+import kotlinx.android.synthetic.main.ecommerce_pulsa.view.*
 import kotlinx.android.synthetic.main.gagal.*
 import kotlinx.android.synthetic.main.sukses.*
 import okhttp3.ResponseBody
@@ -39,6 +41,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PulsaFragment : Fragment(){
     lateinit var v : View
@@ -50,6 +54,11 @@ class PulsaFragment : Fragment(){
     lateinit var progress : Dialog
     lateinit var dialogSukses : Dialog
     lateinit var dialogGagal : Dialog
+    private var idUser : Int = 0
+    private var nipBaru : String? = null
+    private var saldoUser : Int = 0
+    private var itrx : Int = 0
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = layoutInflater.inflate(R.layout.ecommerce_pulsa,container,false)
         mContext = this.context!!
@@ -63,6 +72,7 @@ class PulsaFragment : Fragment(){
         dialogSukses = Dialog(mContext)
         popup = Dialog(mContext)
 
+        getSaldo()
         getPulsa()
         rvClick()
 
@@ -98,10 +108,15 @@ class PulsaFragment : Fragment(){
             popup.dismiss()
         }
 
+
+
+
+
         popup.id_nomor_pulsa.text = v.id_no_operator.text.toString()
         popup.id_provider_pulsa.text = v.id_nama_operator.text.toString()
         popup.id_nominal_pulsa.text = "Rp. " + adapter.list[position].nominal?.let { mDF(it) }
         popup.id_total_pembayaran.text = "Rp. " + adapter.list[position].harga?.let { mDF(it) }
+        popup.id_metode_pulsa.text = "Rp. " + mDF(saldoUser.toString())
 
         when(popup.id_provider_pulsa.text.toString()){
             "INDOSAT" ->{
@@ -127,7 +142,10 @@ class PulsaFragment : Fragment(){
 
         popup.id_btn_kirim_pulsa.setOnClickListener {
             mProgress(progress)
-            api.retrofit.isiPulsa("api_mmbc_fidac18","Fi918_ahBmpl","1",adapter.list[position].kodeoperator!!,popup.id_nomor_pulsa.text.toString()).enqueue(object : Callback<ResponseBody>{
+            api.retrofit.isiPulsa(idUser, saldoUser, itrx+1,
+                    adapter.list[position].kodeoperator!!, popup.id_nomor_pulsa.text.toString(),
+                    adapter.list[position].harga!!.toInt(), adapter.list[position].nominal!!.toInt(), adapter.list[position].tipe.toString(), USERNAME, PASSWORD)
+                    .enqueue(object : Callback<ResponseBody>{
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     Log.e("error isipulsa",t.message!!)
                     progress.dismiss()
@@ -140,7 +158,8 @@ class PulsaFragment : Fragment(){
                         Log.d("Isi Pulsa",response.body().toString())
                         try {
                             val json = JSONObject(response.body()!!.string())
-                            if (json.getString("result") != "no"){
+                            if (json.getBoolean("status")){
+                                Log.d("Status isi pulsa", json.getString("message"))
                                 mDialogSukses()
                             } else {
                                 mDialogGagal()
@@ -160,8 +179,35 @@ class PulsaFragment : Fragment(){
             })
         }
 
+    }
 
+    private fun getSaldo(){
+        val id = SharedPrefManager.getInstance(mContext).user.id
+        val nipBaru = SharedPrefManager.getInstance(mContext).user.nip
+        api.retrofit.getSaldo(id, nipBaru, USERNAME, PASSWORD).enqueue(object : Callback<ResponseBody>{
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e("Error",t.message!!)
+            }
 
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful){
+                    val jsonObject = JSONObject(response.body()!!.string())
+                    if (jsonObject.getBoolean("status")){
+                        Log.d("Saldo", jsonObject.getString("message"))
+                        val jsonArray = JSONArray(jsonObject.getString("data"))
+                        for (i in 0 until jsonArray.length()){
+                            idUser = jsonArray.getJSONObject(i).getInt("id")
+                            saldoUser = jsonArray.getJSONObject(i).getInt("saldo")
+                            itrx = jsonArray.getJSONObject(i).getInt("itrx")
+
+                        }
+                        Log.d("getSaldo", "ID: $idUser\nSaldo: $saldoUser\nITRX: $itrx")
+                    }
+
+                }
+            }
+
+        })
     }
 
     private fun getPulsa() {
@@ -183,75 +229,76 @@ class PulsaFragment : Fragment(){
                     Log.d("Response",response.body().toString())
                     try {
 
-                        val json = JSONArray(response.body()!!.string())
+                        val jsonObject = JSONObject(response.body()!!.string())
+                        if (jsonObject.getBoolean("status")){
+                            val json = JSONArray(jsonObject.getString("data"))
+                            Log.d("Json => ", json.length().toString())
 
-                        Log.d("Json => ", json.length().toString())
-
-                        for (i in 0 until json.length()){
-                            val tipe = json.getJSONObject(i).getString("tipe").toString()
-                            val operator = json.getJSONObject(i).getString("operator").toString()
-                            val kodeoperator = json.getJSONObject(i).getString("kodeoperator").toString()
-                            val keterangan = json.getJSONObject(i).getString("keterangan").toString()
-                            val nominal = json.getJSONObject(i).getString("nominal").toString()
-                            val harga = json.getJSONObject(i).getString("harga").toString()
-                            val status = json.getJSONObject(i).getString("status").toString()
+                            for (i in 0 until json.length()){
+                                val tipe = json.getJSONObject(i).getString("tipe").toString()
+                                val operator = json.getJSONObject(i).getString("operator").toString()
+                                val kodeoperator = json.getJSONObject(i).getString("kodeoperator").toString()
+                                val keterangan = json.getJSONObject(i).getString("keterangan").toString()
+                                val nominal = json.getJSONObject(i).getString("nominal").toString()
+                                val harga = json.getJSONObject(i).getString("harga").toString()
+                                val status = json.getJSONObject(i).getString("status").toString()
 
 
-                            Log.d("Log Operator dan Tipe $i", "$operator - $tipe")
+                                Log.d("Log Operator dan Tipe $i", "$operator - $tipe")
 
-                            if (tipe == "PULSA" && status == "Ready"){
-                                val find = list.find { it.operator == operator && it.nominal == nominal }
+                                if (tipe == "PULSA" && status == "Ready"){
+                                    val find = list.find { it.operator == operator && it.nominal == nominal }
 
-                                if (find != null){
+                                    if (find != null){
 
-                                    if (find.harga!!.toInt() < harga.toInt()){
-                                        list.forEachIndexed { index, it ->
-                                            if (it.operator == operator && it.nominal == nominal){
-                                                Log.d("Harga lebih besar", "Harga Sekarang " + it.harga + " < " + harga)
-                                                val pulsa = G_Pulsa()
-                                                pulsa.tipe = tipe
-                                                pulsa.operator = operator
-                                                pulsa.kodeoperator = kodeoperator
-                                                pulsa.keterangan = keterangan
-                                                pulsa.nominal = nominal
-                                                pulsa.harga = harga
-                                                pulsa.status = status
-                                                list[index] = pulsa
+                                        if (find.harga!!.toInt() < harga.toInt()){
+                                            list.forEachIndexed { index, it ->
+                                                if (it.operator == operator && it.nominal == nominal){
+                                                    Log.d("Harga lebih besar", "Harga Sekarang " + it.harga + " < " + harga)
+                                                    val pulsa = G_Pulsa()
+                                                    pulsa.tipe = tipe
+                                                    pulsa.operator = operator
+                                                    pulsa.kodeoperator = kodeoperator
+                                                    pulsa.keterangan = keterangan
+                                                    pulsa.nominal = nominal
+                                                    pulsa.harga = harga
+                                                    pulsa.status = status
+                                                    list[index] = pulsa
+                                                }
                                             }
                                         }
+
+
+                                    } else {
+                                        val pulsa = G_Pulsa()
+                                        pulsa.tipe = tipe
+                                        pulsa.operator = operator
+                                        pulsa.kodeoperator = kodeoperator
+                                        pulsa.keterangan = keterangan
+                                        pulsa.nominal = nominal
+                                        pulsa.harga = harga
+                                        pulsa.status = status
+                                        list.add(pulsa)
                                     }
-
-
-                                } else {
-                                    val pulsa = G_Pulsa()
-                                    pulsa.tipe = tipe
-                                    pulsa.operator = operator
-                                    pulsa.kodeoperator = kodeoperator
-                                    pulsa.keterangan = keterangan
-                                    pulsa.nominal = nominal
-                                    pulsa.harga = harga
-                                    pulsa.status = status
-                                    list.add(pulsa)
                                 }
                             }
-                        }
 
-                        Log.d("Jumlah Pulsa",list.size.toString())
+                            Log.d("Jumlah Pulsa",list.size.toString())
 
-                        val awal = ArrayList<G_Pulsa>()
-                        for (i in list){
-                            if (i.operator!!.equals("TELKOMSEL") && i.status!!.contains("Ready")){
-                                Log.d("Filter Tel",i.operator + " - " + i.status + " - " + i.tipe)
-                                awal.add(i)
-                                v.id_nama_operator.text = i.operator
-                                v.id_image_operator.setBackgroundResource(R.drawable.telkomsel)
+                            val awal = ArrayList<G_Pulsa>()
+                            for (i in list){
+                                if (i.operator!!.equals("TELKOMSEL") && i.status!!.contains("Ready")){
+                                    Log.d("Filter Tel",i.operator + " - " + i.status + " - " + i.tipe)
+                                    awal.add(i)
+                                    v.id_nama_operator.text = i.operator
+                                    v.id_image_operator.setBackgroundResource(R.drawable.telkomsel)
+                                }
+                                adapter.filter(awal)
+                                v.id_rv.adapter = adapter
+                                adapter.notifyDataSetChanged()
+                                Log.d("Jumlah Filter",awal.size.toString())
                             }
-                            adapter.filter(awal)
-                            v.id_rv.adapter = adapter
-                            adapter.notifyDataSetChanged()
-                            Log.d("Jumlah Filter",awal.size.toString())
                         }
-
 
 
 
@@ -282,7 +329,9 @@ class PulsaFragment : Fragment(){
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 Log.d("Operator",s.toString())
                 var result = ArrayList<G_Pulsa>()
-                if (s.toString().contains("0814") || s.toString().contains("0815") || s.toString().contains("0816") || s.toString().contains("0855") || s.toString().contains("0856") || s.toString().contains("0857") || s.toString().contains("0858") ){
+                if (s.toString().contains("0814") || s.toString().contains("0815") || s.toString().contains("0816")
+                        || s.toString().contains("0855") || s.toString().contains("0856") || s.toString().contains("0857")
+                        || s.toString().contains("0858") ){
                     for (i in list){
                         if (i.operator!!.contains("INDOSAT")){
                             result.add(i)
@@ -393,6 +442,7 @@ class PulsaFragment : Fragment(){
         dialogSukses.show()
 
         dialogSukses.id_btn_sukses.setOnClickListener {
+            val i = Intent()
             dialogSukses.dismiss()
             popup.dismiss()
         }

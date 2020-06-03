@@ -208,8 +208,12 @@ public class LengkapiData extends AppCompatActivity {
         namaIbuEt = findViewById(R.id.nama_gadis_ibu_et);
 
         String insker = pref.getString("inskerNama", null);
-        inskerKerjaEt.setEnabled(false);
+        String nama = pref.getString("namaPns", null);
+        String tglLahir = pref.getString("tglLahir", null);
+        inskerKerjaEt.setEnabled(true);
         inskerKerjaEt.setText(insker);
+        namaLengkapEt.setText(nama);
+        tanggalLahirTv.setText(tglLahir);
 
         tanggalLahirTv.setOnClickListener(v -> {
             // TODO Auto-generated method stub
@@ -246,7 +250,8 @@ public class LengkapiData extends AppCompatActivity {
 
     private void updateLabel() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        Locale localID = new Locale("in", "ID");
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, localID);
 
         tanggalLahirTv.setText(sdf.format(myCalendar.getTime()));
     }

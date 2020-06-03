@@ -15,10 +15,10 @@ import kotlinx.android.synthetic.main.rv_listharga.view.*
 import java.text.DecimalFormat
 import java.util.*
 
-class PlnAdapter(internal var mContext : Context, internal var list : List<PlnData>) : RecyclerView.Adapter<PlnAdapter.pln_holder>() {
+class PlnAdapter(private var mContext : Context, internal var list : List<PlnData>)
+    : RecyclerView.Adapter<PlnAdapter.pln_holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): pln_holder {
         val a = LayoutInflater.from(mContext).inflate(R.layout.rv_listharga,parent,false)
-
         return pln_holder(a)
     }
 
@@ -33,21 +33,17 @@ class PlnAdapter(internal var mContext : Context, internal var list : List<PlnDa
     inner class pln_holder (view : View) : RecyclerView.ViewHolder(view) {
         @SuppressLint("SetTextI18n")
         fun data(item: PlnData) {
-
-
             item.ppob_nominal = item.ppob_nominal?.replace(".", "")
             item.ppob_admin = item.ppob_admin?.replace(".", "")
             val df = DecimalFormat("#,###")
             val local = Locale("in", "ID")
-            val formatUang = NumberFormat.getCurrencyInstance(local)
+//            val formatUang = NumberFormat.getCurrencyInstance(local)
             val fo = df.format(item.ppob_nominal!!.toInt())
-
             val total = item.ppob_nominal!!.toInt() + item.ppob_admin!!.toInt()
             val no = df.format(total)
 //            fo += no
             itemView.harga.text = fo
             itemView.totalHarga.text = "Rp$no"
-
         }
     }
 

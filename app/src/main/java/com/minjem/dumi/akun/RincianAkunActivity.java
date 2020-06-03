@@ -21,6 +21,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.minjem.dumi.R;
 import com.minjem.dumi.api.UploadImageInterface;
 import com.minjem.dumi.model.SharedPrefManager;
@@ -38,6 +42,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -55,6 +60,7 @@ public class RincianAkunActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
 
+
     private EditText noKtpEt, namaEt, agamaEt, jenisKEt, tempatTglEt, statusKawinEt,
             jmlTangEt, titleEt, inskerEt, statusRumahEt, rtEt, rwEt, kelurahanEt, kecamatanEt,
             kotaEt, alamatEt, kodePosEt, noTelpEt, provinsiEt, statusHubEt, namaKerabatEt,
@@ -65,14 +71,12 @@ public class RincianAkunActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rincian_akun);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if(checkSelfPermission(Manifest.permission.CAMERA) ==
-                    PackageManager.PERMISSION_DENIED ||
-                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                            PackageManager.PERMISSION_DENIED){
-                String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                requestPermissions(permission, 1);
-            }
+        if(checkSelfPermission(Manifest.permission.CAMERA) ==
+                PackageManager.PERMISSION_DENIED ||
+                checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                        PackageManager.PERMISSION_DENIED){
+            String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            requestPermissions(permission, 1);
         }
 
         pref = getApplicationContext().getSharedPreferences("Profile", 0); // 0 - for private mode
@@ -194,16 +198,24 @@ public class RincianAkunActivity extends AppCompatActivity {
         super.onStart();
 
         prefManager = SharedPrefManager.getInstance(Objects.requireNonNull(getApplicationContext())).getUser();
-        String apiPhotoPath = prefManager.getImageProfile();
-        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
-        ImageLoader imageLoader = ImageLoader.getInstance();
+        String apiPhotoPath = Objects.requireNonNull(getIntent().getExtras()).getString("photo_profile", null);
+        /*ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
+        ImageLoader imageLoader = ImageLoader.getInstance();*/
 
-        if(apiPhotoPath != null){
+        Glide.with(this)
+                .load(apiPhotoPath)
+                .error(R.drawable.ic_profil)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .transform(new CircleCrop(), new RoundedCorners(16))
+                .into(imgDpIv);
+
+        /*if(apiPhotoPath != null){
             imgDpIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
 //            photoIv.setImageURI(Uri.parse(apiPhotoPath));
             imageLoader.displayImage(apiPhotoPath, imgDpIv);
         }
-        ImageLoader.getInstance().destroy();
+        ImageLoader.getInstance().destroy();*/
     }
 
     private void uploadProfile(){

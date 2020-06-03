@@ -22,7 +22,6 @@
         android:layout_height="@dimen/kotak_150"
         android:layout_marginTop="@dimen/layout_large"
         android:background="@drawable/icon_gagal"
-        app:layout_constraintBottom_toTopOf="@+id/id_text_progress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/id_back_gagal" />

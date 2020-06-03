@@ -13,14 +13,14 @@ import com.minjem.dumi.R
 import java.text.DecimalFormat
 import java.util.*
 
-const val USERNAME = "api_mmbc_fidac18"
-const val PASSWORD = "Fi918_ahBmpl"
+const val USERNAME = "f!dac"
+const val PASSWORD = "f!dac2020"
 
 @RequiresApi(Build.VERSION_CODES.N)
 fun mDF(text : String) : String {
 
     val local = Locale("in", "ID")
-    val formatUang = NumberFormat.getCurrencyInstance(local)
+//    val formatUang = NumberFormat.getCurrencyInstance(local)
 
     val df = DecimalFormat("#,###")
     return df.format(text.toInt()).toString()

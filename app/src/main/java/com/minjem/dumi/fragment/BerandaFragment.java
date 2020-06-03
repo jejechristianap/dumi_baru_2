@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +21,39 @@ import androidx.fragment.app.Fragment;
 
 import com.minjem.dumi.LihatSemuaActivity;
 import com.minjem.dumi.R;
+import com.minjem.dumi.ecommerce.CallbackListener;
 import com.minjem.dumi.ecommerce.ECommerceActivity;
+import com.minjem.dumi.ecommerce.api.BaseApiService;
+import com.minjem.dumi.ecommerce.api.HttpRetrofitClient;
 import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity;
 import com.minjem.dumi.jenispinjaman.PinjamanRegularActivity;
+import com.minjem.dumi.model.SharedPrefManager;
+import com.minjem.dumi.retrofit.RetrofitClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Objects;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.minjem.dumi.ecommerce.Helper.HelperKt.PASSWORD;
+import static com.minjem.dumi.ecommerce.Helper.HelperKt.USERNAME;
 
 public class BerandaFragment extends Fragment {
+    private int saldoUser = 0;
+    private TextView saldoTv;
+    Locale localID;
+    NumberFormat formatRp;
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint({"ResourceAsColor", "SetTextI18n"})
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,11 +61,14 @@ public class BerandaFragment extends Fragment {
 
 //        final LinearLayout topLayout = view.findViewById(R.id.top_background);
         TextView lihatSemuaTV = view.findViewById(R.id.lihat_semua);
+        saldoTv = view.findViewById(R.id.saldoPayLater);
         Button dumiKilatButton = view.findViewById(R.id.dumi_kilat_button);
         Button dumiRegularButton = view.findViewById(R.id.dumi_regular_button);
         Button dumiPensiunButton = view.findViewById(R.id.dumi_pensiun_button);
         Button dumiBumnButton = view.findViewById(R.id.dumi_bumn_button);
         LinearLayout isiPulsaLl = view.findViewById(R.id.isi_pulsa_ll);
+        LinearLayout plnTokenLl = view.findViewById(R.id.token_ll);
+
 
 
         Toast toastPensiun  = Toast.makeText(getActivity(),
@@ -58,7 +88,6 @@ public class BerandaFragment extends Fragment {
         vB.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.SRC_IN);
 
 
-
         lihatSemuaTV.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), LihatSemuaActivity.class);
             startActivity(intent);
@@ -73,7 +102,11 @@ public class BerandaFragment extends Fragment {
             startActivity(intent);
         });
 
-
+        plnTokenLl.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ECommerceActivity.class);
+            intent.putExtra("fragment", "pln");
+            startActivity(intent);
+        });
         dumiKilatButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanKilatActivity.class)));
         dumiRegularButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanRegularActivity.class)));
         dumiPensiunButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanKilatActivity.class)));
@@ -82,4 +115,52 @@ public class BerandaFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        getSaldo();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getSaldo();
+    }
+
+    private void getSaldo(){
+        int idUser = SharedPrefManager.getInstance(getActivity()).getUser().getId();
+        String nipBaru = SharedPrefManager.getInstance(getActivity()).getUser().getNip();
+        BaseApiService api = RetrofitClient.getClient().create(BaseApiService.class);
+        Call<ResponseBody> call = api.getSaldo(idUser, nipBaru, USERNAME, PASSWORD);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()){
+                    try {
+                        assert response.body() != null;
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        if (jsonObject.getBoolean("status")){
+                            JSONArray jsonArray = new JSONArray(jsonObject.getString("data"));
+                            for (int i = 0; i<jsonArray.length(); i++){
+                                saldoUser = jsonArray.getJSONObject(i).getInt("saldo");
+                            }
+                            Log.d("SaldoUser", "Saldo: " + saldoUser);
+                            localID = new Locale("in", "ID");
+                            formatRp = NumberFormat.getCurrencyInstance(localID);
+                            saldoTv.setText(formatRp.format(saldoUser));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
 }
