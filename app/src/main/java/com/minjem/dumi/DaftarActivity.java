@@ -2,15 +2,19 @@ package com.minjem.dumi;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -18,6 +22,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -42,9 +47,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;*/
+import com.google.gson.JsonObject;
 import com.minjem.dumi.akun.KebijakanPrivasiActivity;
 import com.minjem.dumi.api.CekNipBknInterface;
 import com.minjem.dumi.api.CekUserExist;
+import com.minjem.dumi.api.LoginInterface;
 import com.minjem.dumi.retrofit.RetrofitClient;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -52,10 +59,16 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import okhttp3.ResponseBody;
@@ -68,7 +81,7 @@ public class DaftarActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 101;
 
     private EditText masukanNipEt;
-    private CheckBox nipCheckBox;
+    private Button nipCheckBox;
     private CheckBox showPassCheckBox;
 
     /*Hide Soft Keyboard*/
@@ -91,6 +104,14 @@ public class DaftarActivity extends AppCompatActivity {
 
     private SharedPreferences.Editor editor;
     private SharedPreferences pref;
+    private ProgressBar progressBar;
+    private Button getTokenButton;
+    private TextView tokenTv;
+    private String accessToken = "";
+    private TextView tanggalLahir;
+    private EditText namaPnsEt;
+    private int countDown = 0;
+    private Calendar myCalendar;
 
     ProgressDialog pDialog;
 
@@ -144,6 +165,8 @@ public class DaftarActivity extends AppCompatActivity {
         /*Linear Layout*/
         cekNipLl = findViewById(R.id.cek_nip_layout);
         emailPassLl = findViewById(R.id.email_password);
+        tanggalLahir = findViewById(R.id.daftar_tgl_lahir);
+        namaPnsEt = findViewById(R.id.daftar_nama_pns);
 
         /*Hide Soft Keyboard*/
         imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -158,16 +181,46 @@ public class DaftarActivity extends AppCompatActivity {
         ulangiPassEt = findViewById(R.id.ulangi_password_et);
 
 
-        nipCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
+        nipCheckBox.setOnClickListener(v -> {
+            getToken();
+        });
+
+        myCalendar = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel();
+        };
+
+        tanggalLahir.setOnClickListener(v -> {
+            // TODO Auto-generated method stub
+            new DatePickerDialog(DaftarActivity.this, date, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+        });
+
+        /*nipCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 masukanNipEt.setCursorVisible(false);
-                cekUser();
+                String token = tokenTv.getText().toString();
+                if (TextUtils.isEmpty(token)){
+                    Toast toast = Toast.makeText(this, "Token Kosong!", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP|Gravity.END,200,300);
+                    toast.show();
+                    masukanNipEt.setCursorVisible(true);
+                    nipCheckBox.setChecked(false);
+                    return;
+                }
+
             } else {
                 masukanNipEt.setCursorVisible(true);
                 emailPassLl.setVisibility(View.GONE);
             }
-        });
+        });*/
 
         showPassCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(isChecked){
@@ -229,6 +282,13 @@ public class DaftarActivity extends AppCompatActivity {
         });
     }
 
+    private void updateLabel() {
+        String myFormat = "dd-MM-yyyy"; //In which you need put here
+        Locale localID = new Locale("in", "ID");
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, localID);
+        tanggalLahir.setText(sdf.format(myCalendar.getTime()));
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -237,6 +297,46 @@ public class DaftarActivity extends AppCompatActivity {
         if(mAuth.getCurrentUser() != null){
             startActivity(new Intent(getApplicationContext(), LengkapiData.class));
         }
+    }
+
+    private void getToken(){
+        CekNipBknInterface token = RetrofitClient.getClient().create(CekNipBknInterface.class);
+        Call<ResponseBody> call = token.getToken();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                if (response.isSuccessful()){
+                    try {
+                        assert response.body() != null;
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        String data = jsonObject.getString("data");
+                        JSONObject request = new JSONObject(data);
+                        Log.d("Data", "onResponse: " + data);
+                        if (jsonObject.getBoolean("status")){
+//                            Toast.makeText(DaftarActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+//                            JSONObject data = jsonObject.getJSONObject("data");
+                            accessToken = request.getString("access_token");
+                            countDown = request.getInt("expires_in");
+
+                            Log.d("Token", "onResponse: " + accessToken);
+
+                            cekUser();
+                        } else {
+                            Toast.makeText(DaftarActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                        }
+
+                    } catch (JSONException | IOException e) {
+                        progressBar.setVisibility(View.GONE);
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     /*FireBase OTP UI*/
@@ -276,7 +376,6 @@ public class DaftarActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(nip)){
             masukanNipEt.setError("Kolom tidak boleh kosong...");
             masukanNipEt.requestFocus();
-            nipCheckBox.setChecked(false);
             return;
         }
 
@@ -296,8 +395,6 @@ public class DaftarActivity extends AppCompatActivity {
                         JSONArray jsonArray = new JSONArray(obj.getString("data"));
                         if (jsonArray.length() == 0){
                             Toast.makeText(DaftarActivity.this, "Mohon maaf kami belum bekerja sama dengan Instansi anda.", Toast.LENGTH_SHORT).show();
-                        } else {
-
                         }
                         Toast.makeText(DaftarActivity.this, "NIP anda sudah terdaftar", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(DaftarActivity.this, MasukActivity.class));
@@ -306,7 +403,6 @@ public class DaftarActivity extends AppCompatActivity {
                     }
                 }catch (Exception e) {
 //                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-                    nipCheckBox.setChecked(false);
                     emailPassLl.setVisibility(View.GONE);
                     e.printStackTrace();
                 }
@@ -321,47 +417,52 @@ public class DaftarActivity extends AppCompatActivity {
     /*Cek keterangan Nip*/
     public void cekNip() {
         String nip = masukanNipEt.getText().toString();
+        String tglLahir = tanggalLahir.getText().toString();
+        String namaPns = namaPnsEt.getText().toString();
         if(TextUtils.isEmpty(nip)){
             masukanNipEt.setError("Kolom tidak boleh kosong...");
             masukanNipEt.requestFocus();
-            nipCheckBox.setChecked(false);
             return;
+        }
+        if (TextUtils.isEmpty(tglLahir)){
+            tanggalLahir.setError("Kolom tidak boleh kosong...");
+            tanggalLahir.requestFocus();
+        }
+        if (TextUtils.isEmpty(namaPns)){
+            namaPnsEt.setError("Kolom tidak boleh kosong...");
+            namaPnsEt.requestFocus();
         }
 
 
         CekNipBknInterface cek = RetrofitClient.getClient().create(CekNipBknInterface.class);
-        Call<ResponseBody> call = cek.cekBkn(nip);
+        Call<ResponseBody> call = cek.getBkn(nip, tglLahir, namaPns, accessToken);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d("Res", "onResponse: " +response.body());
                 try {
-                    JSONObject obj = new JSONObject(response.body().string());
-//                    JSONObject jsonRESULTS = new JSONObject(response.body().string());
-                    boolean status = obj.getBoolean("status");
-                    if(status){
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+                    JSONObject request = new JSONObject(jsonObject.getString("data"));
+                    if(request.getInt("code") == 1){
                         pDialog.dismiss();
-                        Log.d("OBJECTRESPONSE", "onResponse124: " + obj);
-                        /*196404181984032001*/
-                        String dat = obj.getString("data");
-                        JSONArray dataArray = new JSONArray(dat);
-                        String inskerNama = "";
-                        for (int i = 0; i < dataArray.length(); i++){
-                            JSONObject dataObj = dataArray.getJSONObject(i);
-                            inskerNama = dataObj.getString("inskerNama");
-                            editor.putString("inskerNama", inskerNama);
-                        }
+                        JSONObject jsonData = new JSONObject(request.getString("data"));
+                        String inskerNama = jsonData.getString("unorNama");
+                        String namaPns = jsonData.getString("nama");
+                        String tglLahir = jsonData.getString("tglLahir");
+                        editor.putString("inskerNama", inskerNama);
+                        editor.putString("namaPns", namaPns);
+                        editor.putString("tglLahir", tglLahir);
+                        Log.d("Data", "unorNama: " + inskerNama  + "\nNama : " + namaPns + "\ntglLahir: " + tglLahir );
+
                         Toast.makeText(DaftarActivity.this, "NIP anda ditemukan..", Toast.LENGTH_SHORT).show();
                         emailPassLl.setVisibility(View.VISIBLE);
                         emailEt.requestFocus();
                     }else{
-                        Log.e("errorMessage", "onResponse: " + obj);
-                        nipCheckBox.setChecked(false);
+                        Toast.makeText(DaftarActivity.this, request.getString("data"), Toast.LENGTH_SHORT).show();
                         masukanNipEt.setCursorVisible(true);
                         pDialog.dismiss();
                     }
                 } catch (Exception e) {
-                    nipCheckBox.setChecked(false);
                     emailPassLl.setVisibility(View.GONE);
                     pDialog.dismiss();
                     e.printStackTrace();
@@ -372,200 +473,10 @@ public class DaftarActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(DaftarActivity.this, "Session Timeout", Toast.LENGTH_SHORT).show();
                 Log.d("Error", "onFailure: " + t.getMessage());
-                nipCheckBox.setChecked(false);
                 pDialog.dismiss();
                 call.cancel();
             }
         });
     }
 }
-
-
-
-
-
-
-
-/*  Volley Library
-    private void cekNipUser() {
-
-        final String cekNip = masukanNipEt.getText().toString();
-        if(TextUtils.isEmpty(cekNip)){
-            masukanNipEt.setError("Silahkan masukan nip anda");
-            masukanNipEt.requestFocus();
-            return;
-        }
-        final ProgressDialog pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Loading...");
-        pDialog.show();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Url.URL_CEK_NIP,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-//                        progressBar.setVisibility(View.GONE);
-                        Log.d("Response", response);
-
-                        try {
-                            //converting response to json object
-
-                            //if no error in response
-                            JSONObject obj = new JSONObject(response);
-                            JSONArray jsonArray = obj.getJSONArray("data");
-
-                            if (obj.getBoolean("status")) {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-
-
-
-
-                                */
-/*User 1
-                                nip: 123456789123456789;
-                                pass: dumi123;
-
-                                user 2
-                                nip: 147258369147258369;
-                                pass: dumi123;
-
-                                user 3
-                                nip: 369258147369258147
-                                pass: dumi123;
-
-                                user 4
-                                nip: 321654987321654987
-                                *//*
-
-
-                                //storing the user in shared preferences
-                                //starting the profile activity
-                                Toast.makeText(DaftarActivity.this, "NIP Anda terdaftar", Toast.LENGTH_SHORT).show();
-                                pDialog.dismiss();
-                                finish();
-//                                Toast.makeText(DaftarActivity.this, "Registrasi berhasil!123", Toast.LENGTH_SHORT).show();
-//                                startActivity(new Intent(DaftarActivity.this, MasukActivity.class));
-                            } else {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                                Toast.makeText(DaftarActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-
-                                pDialog.dismiss();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(DaftarActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                            pDialog.dismiss();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(DaftarActivity.this, "Something wrong", Toast.LENGTH_SHORT).show();
-                        pDialog.dismiss();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("nip", cekNip);
-                return params;
-            }
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                String httpPostBody="grant_type=password&username=Alice&password=password123";
-                // usually you'd have a field with some values you'd want to escape, you need to do it yourself if overriding getBody. here's how you do it
-                try {
-                    httpPostBody=httpPostBody+"&randomFieldFilledWithAwkwardCharacters="+ URLEncoder.encode("{{%stuffToBe Escaped/","UTF-8");
-                } catch (UnsupportedEncodingException exception) {
-                    Log.e("ERROR", "exception", exception);
-                    // return null and don't pass any POST string if you encounter encoding error
-                    return null;
-                }
-                return httpPostBody.getBytes();
-            }
-        };
-
-        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
-    }
-    private void registerUser() {
-        final String nip = masukanNipEt.getText().toString();
-        final String email = masukanEmailEt.getText().toString();
-        final String password = masukanPasswordEt.getText().toString();
-        final String nama = masukkanNamaEt.getText().toString();
-
-        final ProgressDialog pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Loading...");
-        pDialog.show();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Url.URL_REGISTER,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-//                        progressBar.setVisibility(View.GONE);
-                        Log.d("Response", response);
-
-                        try {
-                            //converting response to json object
-
-                            //if no error in response
-                            JSONObject obj = new JSONObject(response);
-                            JSONArray jsonArray = obj.getJSONArray("data");
-                            //if no error in response 12345678901234567890 123123123
-                            if (obj.getBoolean("status")) {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-
-                                *//*User 1
-                                nip: 123456789123456789;
-                                pass: dumi123;
-
-                                user 2
-                                nip: 147258369147258369;
-                                pass: dumi123;
-
-                                user 3
-                                nip: 369258147369258147
-                                pass: dumi123;
-
-                                user 4
-                                nip: 321654987321654987
-                                *//*
-
-
-
-                            //storing the user in shared preferences
-                                //starting the profile activity
-                                pDialog.dismiss();
-                                finish();
-//                                Toast.makeText(DaftarActivity.this, "Registrasi berhasil!123", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(DaftarActivity.this, MasukActivity.class));
-                            } else {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            pDialog.dismiss();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("nip", nip);
-                params.put("email", email);
-                params.put("nama", nama);
-                params.put("password", password);
-                return params;
-            }
-        };
-
-        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
-    }*/
-
 
