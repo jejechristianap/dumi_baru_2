@@ -513,6 +513,19 @@
     <string name="bandara">Soekarno</string>
     <string name="getToken">Get Token</string>
     <string name="nama_pns">Nama PNS</string>
+    <string name="transaksi">Transaksi</string>
+    <string name="transaksiDetail">Transaksi Detail</string>
+    <string name="invoice">Nomor Invoice</string>
+    <string name="namaPelanggan">Nama</string>
+    <string name="tarifDaya">Tarif/Daya</string>
+    <string name="bayar">Bayar</string>
+    <string name="materai">Materai</string>
+    <string name="ppn">PPN</string>
+    <string name="ppj">PPJ</string>
+    <string name="angsuran">Angsuran</string>
+    <string name="noToken">Nomor Token</string>
+    <string name="noTokenListrik">1234 5678 9101 5544 3354</string>
+    <string name="informasiListrik">Informasi listrik</string>
 
 
 </resources>

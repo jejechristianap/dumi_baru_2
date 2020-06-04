@@ -20,7 +20,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="q">
-<!--        <activity android:name=".ecommerce.PlnFragment"></activity>-->
+        <activity android:name=".ecommerce.transaction.RiwayatView"></activity>
+        <!-- <activity android:name=".ecommerce.PlnFragment"></activity> -->
         <activity android:name=".PdfViewerActivity" />
         <activity android:name=".PelengkapanRegularActivity" />
         <activity android:name=".akun.UbahSandiActivity" />

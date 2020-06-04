@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ecommerce.transaction.RiwayatView">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@color/colorBlue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/backTransaksiIv"
+        android:layout_width="@dimen/_50sdp"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:padding="@dimen/_12sdp"
+        android:layout_height="0dp"
+        android:foreground="?selectableItemBackgroundBorderless"
+        android:background="@drawable/circle_shape"
+        android:clickable="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:focusable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/riwayat"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/riwayatRv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/recycler_view_riwayat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+    <ScrollView
+        android:visibility="gone"
+        android:id="@+id/scrollView5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingTop="@dimen/_15sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:background="@drawable/layout_rounded_home"
+            android:layout_width="match_parent"
+            android:padding="@dimen/_12sdp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/transaksiDetail"
+                    android:text="@string/transaksiDetail"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_15ssp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/invoiceNumber"
+                    android:text="@string/invoice"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/transaksiDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/noInvoiceTv"
+                    android:text="@string/invoice"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/colorBlue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/invoiceNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/noMeter"
+                    android:text="@string/no_meter"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintTop_toBottomOf="@id/noInvoiceTv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/noMeterTv"
+                    android:text="@string/no_meter"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="@id/noMeter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/nama"
+                    android:text="@string/namaPelanggan"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintTop_toBottomOf="@id/noMeter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/namaTv"
+                    android:text="@string/namaPelanggan"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="@id/nama"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tarifDaya"
+                    android:text="@string/tarifDaya"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintTop_toBottomOf="@id/nama"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tarifDayaTv"
+                    android:text="@string/tarifDaya"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="@id/tarifDaya"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/bayar"
+                    android:text="@string/bayar"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintTop_toBottomOf="@id/tarifDaya"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/bayarTv"
+                    android:text="@string/bayar"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="@id/bayar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/materai"
+                    android:text="@string/materai"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintTop_toBottomOf="@id/bayar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/materaiTv"
+                    android:text="@string/materai"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="@id/materai"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/ppn"
+                    android:text="@string/ppn"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintTop_toBottomOf="@id/materai"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/ppnTv"
+                    android:text="@string/ppn"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="@id/ppn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/ppj"
+                    android:text="@string/ppj"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintTop_toBottomOf="@id/ppn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/ppjTv"
+                    android:text="@string/ppj"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="@id/ppj"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/angsuran"
+                    android:text="@string/angsuran"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintTop_toBottomOf="@id/ppj"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/angsuranTv"
+                    android:text="@string/angsuran"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="@id/angsuran"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/noToken"
+                    android:text="@string/noToken"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintTop_toBottomOf="@id/angsuran"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/noTokenTv"
+                    android:text="@string/noTokenListrik"
+                    android:textSize="@dimen/_20ssp"
+                    android:textColor="@color/colorBlue"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/noToken"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/informasiTv"
+                    android:text="@string/informasiListrik"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_15ssp"
+                    app:layout_constraintTop_toBottomOf="@id/noTokenTv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
