@@ -49,8 +49,8 @@ interface BaseApiService {
     @POST("mmbc/ppob/cektagihan")
     fun cekTagihanPln(@Field("username") username : String,
                       @Field("password") password : String,
-                      @Field("ppob_kodeproduk") kodeproduk : String,
-                      @Field("ppob_nomorpelanggan") nomorpelanggan : String) : Call<ResponseBody>
+                      @Field("kode_produk") kodeproduk : String,
+                      @Field("nomor_pelanggan") nomorpelanggan : String) : Call<ResponseBody>
 
 
     @GET("json/getcodearea-json")

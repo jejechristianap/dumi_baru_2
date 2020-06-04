@@ -10,9 +10,9 @@
         android:id="@+id/id_back_cp"
         android:orientation="vertical"
         android:padding="@dimen/_12sdp"
+        android:layout_margin="@dimen/_8sdp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_80sdp"
-        android:layout_margin="8dp"
         android:background="@drawable/abu_corner">
         <TextView
             android:id="@+id/id_jumlah_pulsa_cp"

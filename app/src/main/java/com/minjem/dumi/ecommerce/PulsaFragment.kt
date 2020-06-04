@@ -29,6 +29,7 @@ import com.minjem.dumi.ecommerce.Helper.mDF
 import com.minjem.dumi.ecommerce.Helper.mProgress
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.minjem.dumi.model.SharedPrefManager
+import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.ecommerce_konfirmasi_pembayaran.*
 import kotlinx.android.synthetic.main.ecommerce_pulsa.view.*
 import kotlinx.android.synthetic.main.gagal.*
@@ -75,6 +76,8 @@ class PulsaFragment : Fragment(){
         getSaldo()
         getPulsa()
         rvClick()
+        val current = "sdfasdkfjh"
+
 
         v.id_btn_reload.setOnClickListener {
             getPulsa()

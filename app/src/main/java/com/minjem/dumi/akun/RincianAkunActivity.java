@@ -11,8 +11,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -30,19 +31,20 @@ import com.minjem.dumi.api.UploadImageInterface;
 import com.minjem.dumi.model.SharedPrefManager;
 import com.minjem.dumi.model.User;
 import com.minjem.dumi.retrofit.RetrofitClient;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -58,6 +60,7 @@ public class RincianAkunActivity extends AppCompatActivity {
     private UploadImageInterface prop;
     private User prefManager;
     private SharedPreferences pref;
+    private File filePicture;
     private SharedPreferences.Editor editor;
 
 
@@ -202,6 +205,8 @@ public class RincianAkunActivity extends AppCompatActivity {
         /*ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
         ImageLoader imageLoader = ImageLoader.getInstance();*/
 
+
+
         Glide.with(this)
                 .load(apiPhotoPath)
                 .error(R.drawable.ic_profil)
@@ -209,7 +214,7 @@ public class RincianAkunActivity extends AppCompatActivity {
                 .skipMemoryCache(true)
                 .transform(new CircleCrop(), new RoundedCorners(16))
                 .into(imgDpIv);
-
+        imgDpIv.setRotation(90);
         /*if(apiPhotoPath != null){
             imgDpIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
 //            photoIv.setImageURI(Uri.parse(apiPhotoPath));
@@ -221,9 +226,18 @@ public class RincianAkunActivity extends AppCompatActivity {
     private void uploadProfile(){
         String nipBaru = prefManager.getNip();
 
+//        Compressor compressor = new Compressor().compress(this, currentPhotoPath);
+
         RequestBody nip = RequestBody.create(MediaType.parse("text/plain"), nipBaru);
         File fileProfile = new File(currentPhotoPath);
-        RequestBody fileReqBodyProfile = RequestBody.create(MediaType.parse("image/*"), fileProfile);
+
+/*        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeFile(fileProfile.getAbsolutePath(), bmOptions);
+        compressImage(bitmap);*/
+//        saveBitmapToFile(fileProfile);
+//        File pp = new File(String.valueOf(bitmap));
+
+        RequestBody fileReqBodyProfile = RequestBody.create(MediaType.parse("image/*"), filePicture);
         MultipartBody.Part bodyProfile = MultipartBody.Part.createFormData("image_profile", currentPhotoPath, fileReqBodyProfile);
         ProgressDialog pDialog;
         pDialog = new ProgressDialog(RincianAkunActivity.this);
@@ -321,8 +335,19 @@ public class RincianAkunActivity extends AppCompatActivity {
 //            Toast.makeText(this, "data: " + data.getData(), Toast.LENGTH_SHORT).show();
             switch (requestCode){
                 case 1:
-                    imgDpIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    imgDpIv.setImageURI(Uri.parse(currentPhotoPath));
+                    filePicture = new File(currentPhotoPath);
+                    saveBitmapToFile(filePicture);
+
+                    Glide.with(this)
+                            .load(filePicture)
+                            .error(R.drawable.ic_profil)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .transform(new CircleCrop(), new RoundedCorners(16))
+                            .into(imgDpIv);
+                    imgDpIv.setRotation(90);
+                    /*imgDpIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    imgDpIv.setImageURI(Uri.parse(currentPhotoPath));*/
                     Log.d("Profile", "onActivityResult: " + currentPhotoPath);
                     uploadProfile();
 //                    ImageCropFunction();
@@ -330,6 +355,47 @@ public class RincianAkunActivity extends AppCompatActivity {
                     break;
 
             }
+        }
+    }
+
+    public void saveBitmapToFile(File file){
+        try {
+
+            // BitmapFactory options to downsize the image
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            o.inSampleSize = 6;
+            // factor of downsizing the image
+
+            FileInputStream inputStream = new FileInputStream(file);
+            //Bitmap selectedBitmap = null;
+            BitmapFactory.decodeStream(inputStream, null, o);
+            inputStream.close();
+
+            // The new size we want to scale to
+            final int REQUIRED_SIZE=75;
+
+            // Find the correct scale value. It should be the power of 2.
+            int scale = 1;
+            while(o.outWidth / scale / 2 >= REQUIRED_SIZE &&
+                    o.outHeight / scale / 2 >= REQUIRED_SIZE) {
+                scale *= 2;
+            }
+
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize = scale;
+            inputStream = new FileInputStream(file);
+
+            Bitmap selectedBitmap = BitmapFactory.decodeStream(inputStream, null, o2);
+            inputStream.close();
+
+            // here i override the original image file
+            file.createNewFile();
+            FileOutputStream outputStream = new FileOutputStream(file);
+
+            selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 100 , outputStream);
+
+        } catch (Exception e) {
         }
     }
 }

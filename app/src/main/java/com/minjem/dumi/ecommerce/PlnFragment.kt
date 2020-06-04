@@ -187,16 +187,26 @@ class PlnFragment: Fragment() {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     if (response.isSuccessful){
                         try {
-                            progressDialog.dialog.dismiss()
 //                            rincianTransaksi()
                             Log.d("Response", response.body().toString())
                             val json = JSONObject(response.body()!!.string())
-                            val request = JSONObject(json.getString("data"));
-                            namaPelanggan = request.getString("ppob_namapelanggan").toString()
-                            nomorPelanggan = "${request.getString("ppob_nomorpelanggan")} | ${request.getString("ppob_tarifdaya")}"
-                            voucher = request.getString("ppob_totaltagihan").toString()
-                            total = request.getString("ppob_totalbayar").toString()
-                            posItem?.let { rincianTransaksi(it) }
+                            val data = json.getString("data")
+                            if (json.getBoolean("status")){
+                                val request = JSONObject(data);
+                                if (request.getString("result") == "ok"){
+                                    namaPelanggan = request.getString("ppob_namapelanggan").toString()
+                                    nomorPelanggan = "${request.getString("ppob_nomorpelanggan")} | ${request.getString("ppob_tarifdaya")}"
+                                    voucher = request.getString("ppob_totaltagihan").toString()
+                                    total = request.getString("ppob_totalbayar").toString()
+                                    posItem?.let { rincianTransaksi(it) }
+                                    progressDialog.dialog.dismiss()
+                                } else {
+                                    Toast.makeText(mContext, request.getString("reason"), Toast.LENGTH_LONG).show()
+                                    progressDialog.dialog.dismiss()
+                                }
+
+                            }
+
                         }catch (e: IOException){
                             e.printStackTrace()
                         } catch (e: JSONException){

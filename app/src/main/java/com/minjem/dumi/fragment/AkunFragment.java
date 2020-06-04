@@ -115,13 +115,11 @@ public class AkunFragment extends Fragment {
         Glide.with(mContext)
                 .load(apiPhotoPath)
                 .error(R.drawable.ic_profil)
-                .thumbnail(0.25f)
-                .signature(new ObjectKey(System.currentTimeMillis()+""))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .transform(new CircleCrop(), new RoundedCorners(16))
                 .into(photoIv);
-
-       /* pref = Objects.requireNonNull(getActivity()).getApplicationContext().getSharedPreferences("Profile", 0);
-        photoPath = pref.getString("image_profile", null);*/
+        photoIv.setRotation(90);
 
 
     }
