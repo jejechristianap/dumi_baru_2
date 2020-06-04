@@ -25,6 +25,7 @@ import com.minjem.dumi.ecommerce.CallbackListener;
 import com.minjem.dumi.ecommerce.ECommerceActivity;
 import com.minjem.dumi.ecommerce.api.BaseApiService;
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient;
+import com.minjem.dumi.ecommerce.transaction.RiwayatView;
 import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity;
 import com.minjem.dumi.jenispinjaman.PinjamanRegularActivity;
 import com.minjem.dumi.model.SharedPrefManager;
@@ -68,6 +69,12 @@ public class BerandaFragment extends Fragment {
         Button dumiBumnButton = view.findViewById(R.id.dumi_bumn_button);
         LinearLayout isiPulsaLl = view.findViewById(R.id.isi_pulsa_ll);
         LinearLayout plnTokenLl = view.findViewById(R.id.token_ll);
+        LinearLayout riwayatLl = view.findViewById(R.id.riwayatLl);
+
+        riwayatLl.setOnClickListener(v -> {
+            startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext(), RiwayatView.class));
+        });
+
 
 
 

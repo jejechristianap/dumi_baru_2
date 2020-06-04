@@ -7,20 +7,11 @@
     android:background="@color/white"
     tools:context=".ecommerce.ECommerceActivity">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
-
-
     <View
         android:id="@+id/view"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/_155sdp"
         android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,21 +19,22 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <View
-    android:id="@+id/id_pascabayar_bc"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:layout_marginTop="60dp"
-    android:background="@drawable/biru_gelap"
-    app:layout_constraintEnd_toEndOf="@id/guideline4"
-    app:layout_constraintHeight_percent=".05"
-    app:layout_constraintStart_toStartOf="@id/guideline2"
-    app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/id_pascabayar_bc"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_26sdp"
+        android:layout_marginTop="@dimen/_45sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="@drawable/biru_gelap"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/id_prabayar_bc"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="60dp"
+        android:layout_height="@dimen/_26sdp"
+        android:layout_marginTop="@dimen/_45sdp"
         android:background="@drawable/biru_corner"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintHeight_percent=".05"
@@ -52,24 +44,26 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:text="Pulsa"
         android:textColor="@color/white"
-        android:textSize="23dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="@id/guideline2"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/prabayar"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
         android:text="Prabayar"
         android:textColor="@color/white"
-        android:textSize="16dp"
+        android:textSize="@dimen/_13ssp"
+        android:layout_marginStart="@dimen/_20sdp"
         app:layout_constraintBottom_toBottomOf="@+id/id_prabayar_bc"
         app:layout_constraintEnd_toEndOf="@+id/id_prabayar_bc"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/id_prabayar_bc" />
 
     <TextView
@@ -78,61 +72,60 @@
         android:gravity="center"
         android:text="Pascabayar"
         android:textColor="@color/abu_muda"
-        android:textSize="16sp"
+        android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="@+id/id_pascabayar_bc"
         app:layout_constraintEnd_toEndOf="@+id/id_pascabayar_bc"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toEndOf="@id/prabayar"
         app:layout_constraintTop_toTopOf="@+id/id_prabayar_bc" />
 
     <View
         android:id="@+id/id_pulsa_bc"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:background="@drawable/white_corner"
-        app:layout_constraintBottom_toTopOf="@id/guideline"
-        app:layout_constraintEnd_toEndOf="@id/guideline4"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintTop_toBottomOf="@+id/id_prabayar_bc"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/id_image_operator"
-        android:layout_width="@dimen/layout_xxlarge"
-        android:layout_height="@dimen/layout_xxlarge"
-        android:layout_margin="@dimen/margin_xlarge"
-        android:background="@drawable/telkomsel"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:padding="@dimen/_2sdp"
+        android:src="@drawable/telkomsel"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:background="@drawable/layout_rounded_home"
         app:layout_constraintBottom_toBottomOf="@id/id_pulsa_bc"
-        app:layout_constraintEnd_toEndOf="@id/guideline5"
         app:layout_constraintStart_toStartOf="@id/id_pulsa_bc"
         app:layout_constraintTop_toTopOf="@id/id_pulsa_bc" />
 
     <Button
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/contactButton"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
         android:background="@drawable/ic_contacts"
+        android:layout_marginEnd="@dimen/_15sdp"
         app:layout_constraintBottom_toBottomOf="@id/id_pulsa_bc"
         app:layout_constraintEnd_toEndOf="@id/id_pulsa_bc"
-        app:layout_constraintHeight_percent=".058"
-        app:layout_constraintStart_toStartOf="@id/guideline6"
         app:layout_constraintTop_toTopOf="@id/id_pulsa_bc"
         app:layout_constraintWidth_percent=".1" />
     <!--android:background="@drawable/ic_contact"-->
 
     <TextView
         android:id="@+id/id_nama_operator"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:text="@string/no_telp"
-        android:textSize="18sp"
+        android:textSize="@dimen/_13ssp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/id_no_operator"
-        app:layout_constraintEnd_toEndOf="@id/guideline6"
-        app:layout_constraintStart_toStartOf="@id/guideline5"
-        app:layout_constraintTop_toTopOf="@id/id_pulsa_bc" />
+        android:layout_marginStart="@dimen/_15sdp"
+        app:layout_constraintStart_toEndOf="@id/id_image_operator"
+        app:layout_constraintTop_toTopOf="@id/id_image_operator" />
 
     <EditText
         android:id="@+id/id_no_operator"
@@ -140,9 +133,11 @@
         android:layout_height="wrap_content"
         android:hint="@string/ex_token"
         android:inputType="number"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
         app:layout_constraintBottom_toBottomOf="@id/id_pulsa_bc"
-        app:layout_constraintEnd_toEndOf="@id/guideline6"
-        app:layout_constraintStart_toStartOf="@id/guideline5"
+        app:layout_constraintEnd_toStartOf="@id/contactButton"
+        app:layout_constraintStart_toEndOf="@id/id_image_operator"
         app:layout_constraintTop_toBottomOf="@id/id_nama_operator" />
 
 
@@ -167,28 +162,16 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.96" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.28" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/id_rv"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guideline4"
-        app:layout_constraintStart_toEndOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/view"
         tools:listitem="@layout/customlist_pulsa">
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -203,7 +186,8 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

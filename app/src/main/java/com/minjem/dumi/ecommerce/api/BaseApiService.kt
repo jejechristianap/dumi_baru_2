@@ -52,6 +52,26 @@ interface BaseApiService {
                       @Field("kode_produk") kodeproduk : String,
                       @Field("nomor_pelanggan") nomorpelanggan : String) : Call<ResponseBody>
 
+    @FormUrlEncoded
+    @POST("mmbc/ppob/isilistrik")
+    fun isiTokenListrik(@Field("username") username : String,
+                        @Field("password") password : String,
+                        @Field("kode_produk") kodeproduk : String,
+                        @Field("nomor_pelanggan") nomorpelanggan : String,
+                        @Field("id_nasabah") idNasabah : Int,
+                        @Field("nipBaru") nipBaru : String,
+                        @Field("ppob_voucher") ppobVoucher : String
+
+
+    ) : Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("mmbc/ppob/ppobriwayat")
+    fun getRiwayat(@Field("username") username : String,
+                   @Field("password") password : String,
+                   @Field("id_nasabah") idNasabah: Int
+    ) : Call<ResponseBody>
+
 
     @GET("json/getcodearea-json")
     fun getBandara():Call<ResponseBody>

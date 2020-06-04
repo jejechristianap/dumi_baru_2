@@ -54,10 +54,12 @@
                     tools:autoSizeStepGranularity="2sp"/>
 
                 <LinearLayout
+                    android:id="@+id/riwayatLl"
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_weight="0.6"
                     android:background="@drawable/layout_rounded"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:layout_gravity="center"
                     android:layout_height="@dimen/_30sdp">
                     <TextView

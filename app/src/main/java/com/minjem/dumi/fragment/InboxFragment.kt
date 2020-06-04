@@ -43,7 +43,7 @@ class InboxFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_inbox, container, false)
         mCOntext = this.context!!
         recyclerView = view.findViewById(R.id.notifikasi_rv)
-        layoutManager = LinearLayoutManager(activity)
+        layoutManager = LinearLayoutManager(mCOntext)
         recyclerView.layoutManager = layoutManager
         /*layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
