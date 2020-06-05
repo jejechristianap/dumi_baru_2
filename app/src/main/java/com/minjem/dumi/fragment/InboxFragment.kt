@@ -1,7 +1,6 @@
 package com.minjem.dumi.fragment
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.minjem.dumi.CustomProgressDialog
 
 import com.minjem.dumi.R
 import com.minjem.dumi.api.StatusPinjamanInterface
@@ -34,6 +34,7 @@ class InboxFragment : Fragment() {
     private var layoutManager: LinearLayoutManager? = null
     var notifikasiData: MutableList<NotifikasiData>? = null
     private var data: MutableList<NotifikasiData>? = null
+    private var progressDialog = CustomProgressDialog()
 
     internal lateinit var notifikasiAdapter: NotifikasiAdapter
     internal lateinit var recyclerView: RecyclerView
@@ -63,9 +64,7 @@ class InboxFragment : Fragment() {
     private fun getNotif() {
         val cek = RetrofitClient.getClient().create(StatusPinjamanInterface::class.java)
 
-        val pDialog = ProgressDialog(activity)
-        pDialog.setMessage("Loading Data...")
-        pDialog.show()
+        progressDialog.show(mCOntext, "Memuat data...")
         val prefManager = SharedPrefManager.getInstance(activity!!.applicationContext).user
         val nip = prefManager.nip
         //        Toast.makeText(getActivity(), nip, Toast.LENGTH_SHORT).show();
@@ -73,7 +72,7 @@ class InboxFragment : Fragment() {
         val call = cek.getNotif(nip)
         call.enqueue(object : Callback<NotifikasiResponse> {
             override fun onResponse(call: Call<NotifikasiResponse>, response: Response<NotifikasiResponse>) {
-                pDialog.dismiss()
+                progressDialog.dialog.dismiss()
                 notifikasiData = response.body()!!.data as MutableList<NotifikasiData>
 
                 notifikasiAdapter = NotifikasiAdapter(mCOntext, notifikasiData!!)
@@ -83,7 +82,7 @@ class InboxFragment : Fragment() {
 
             override fun onFailure(call: Call<NotifikasiResponse>, t: Throwable) {
                 Log.d("Fail", "onFailure: " + t.message)
-                pDialog.dismiss()
+                progressDialog.dialog.dismiss()
             }
         })
     }
@@ -92,7 +91,7 @@ class InboxFragment : Fragment() {
     private fun writeRecycler(response: String) {
         try {
             val obj = JSONObject(response)
-            if (obj.getBoolean("status") == true) {
+            if (obj.getBoolean("status")) {
                 val notifikasiDataList = ArrayList<NotifikasiData>()
                 val jsonArray = obj.getJSONArray("data")
                 for (i in 0 until jsonArray.length()) {

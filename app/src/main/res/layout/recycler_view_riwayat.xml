@@ -22,7 +22,7 @@
         android:text="@string/token_pln"
         android:textSize="@dimen/_13ssp"
         android:textColor="@color/black"
-        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_12sdp"
         android:layout_alignTop="@id/iconRiwayatIv"
         android:layout_toEndOf="@id/iconRiwayatIv"
         android:layout_width="wrap_content"
@@ -30,21 +30,30 @@
 
     <TextView
         android:id="@+id/hargaTv"
-        android:text="@string/rp_1jt"
-        android:textSize="@dimen/_13ssp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginTop="@dimen/_1sdp"
-        android:layout_marginStart="@dimen/_15sdp"
-        android:layout_toEndOf="@id/iconRiwayatIv"
-        android:layout_below="@id/tipeTv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="@string/rp_1jt"
+        android:textColor="@color/black"
+        android:layout_below="@id/waktuTv"
+        android:layout_alignParentEnd="true"
+        android:textSize="@dimen/_11ssp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/noTokenTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rp_1jt"
+        android:textColor="@color/darkBlue"
+        android:layout_below="@id/tipeTv"
+        android:layout_alignStart="@id/tipeTv"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/waktuTv"
         android:text="@string/tgl"
-        android:textSize="@dimen/_11ssp"
+        android:textSize="@dimen/_10ssp"
         android:textColor="@color/black"
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_alignTop="@id/iconRiwayatIv"

@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+
+
     <!--Blue Background-->
     <View
         android:id="@+id/view"
@@ -13,34 +15,48 @@
         android:layout_height="@dimen/_155sdp"
         android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <ImageView
+        android:id="@+id/backPlnIv"
+        android:layout_width="@dimen/_50sdp"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:padding="@dimen/_12sdp"
+        android:layout_height="0dp"
+        android:foreground="?selectableItemBackgroundBorderless"
+        android:background="@drawable/circle_shape"
+        android:clickable="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:focusable="true" />
+
     <!--Prabayar & Bulanan background-->
     <View
         android:id="@+id/id_pascabayar_bc"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/_26sdp"
         android:layout_marginTop="@dimen/_45sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:background="@drawable/biru_gelap"
-        app:layout_constraintEnd_toEndOf="@id/guideline4"
-        app:layout_constraintHeight_percent=".05"
-        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <View
         android:id="@+id/id_prabayar_bc"
         android:layout_width="0dp"
         android:layout_height="@dimen/_26sdp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="@dimen/_45sdp"
         android:background="@drawable/biru_corner"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintHeight_percent=".05"
         app:layout_constraintStart_toStartOf="@id/guideline2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
+        android:visibility="gone"
         android:id="@+id/historyIv"
         android:src="@drawable/ic_note"
         android:padding="@dimen/_5sdp"
@@ -69,7 +85,7 @@
         android:gravity="center"
         android:text="@string/prbayar"
         android:textColor="@color/white"
-        android:textSize="16dp"
+        android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="@+id/id_prabayar_bc"
         app:layout_constraintEnd_toEndOf="@+id/id_prabayar_bc"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -200,6 +216,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

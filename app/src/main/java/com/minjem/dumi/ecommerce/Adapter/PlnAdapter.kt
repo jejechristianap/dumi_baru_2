@@ -36,7 +36,7 @@ class PlnAdapter(private var mContext : Context, internal var list : List<PlnDat
             item.ppob_nominal = item.ppob_nominal?.replace(".", "")
             item.ppob_admin = item.ppob_admin?.replace(".", "")
             val df = DecimalFormat("#,###")
-            val local = Locale("in", "ID")
+//            val local = Locale("in", "ID")
 //            val formatUang = NumberFormat.getCurrencyInstance(local)
             val fo = df.format(item.ppob_nominal!!.toInt())
             val total = item.ppob_nominal!!.toInt() + item.ppob_admin!!.toInt()

@@ -19,7 +19,7 @@ const val PASSWORD = "f!dac2020"
 @RequiresApi(Build.VERSION_CODES.N)
 fun mDF(text : String) : String {
 
-    val local = Locale("in", "ID")
+//    val local = Locale("in", "ID")
 //    val formatUang = NumberFormat.getCurrencyInstance(local)
 
     val df = DecimalFormat("#,###")

@@ -102,6 +102,10 @@ class PlnFragment: Fragment() {
 
     private fun initImage(){
 
+        mView.backPlnIv.setOnClickListener {
+            activity!!.finish()
+        }
+
         mView.historyIv.setOnClickListener {
             /*if (TextUtils.isEmpty(noInvoice)){
                 Toast.makeText(mContext, "Mohon maaf belum ada transaksi", Toast.LENGTH_LONG).show()
@@ -395,7 +399,7 @@ class PlnFragment: Fragment() {
         dialogSukses.show()
 
         dialogSukses.id_btn_sukses.setOnClickListener {
-            val i = Intent(mContext, MainActivity::class.java)
+//            val i = Intent(mContext, MainActivity::class.java)
 //            startActivity(i)
             dialogSukses.dismiss()
             mDialog.dismiss()

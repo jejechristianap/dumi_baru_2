@@ -28,7 +28,7 @@ object HttpRetrofitClient {
 //        client.setSslSocketFactory(sslContext.socketFactory)
 
 //        val ok = UnsafeOkHttpClient.getUnsafeOkHttpClient()
-        val unsafe = RetrofitClient.getUnsafeOkHttpClient()
+//        val unsafe = RetrofitClient.getUnsafeOkHttpClient()
 
         val okHttp = OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)

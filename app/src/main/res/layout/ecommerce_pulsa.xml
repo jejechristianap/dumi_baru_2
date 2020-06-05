@@ -30,6 +30,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/backPulsaIv"
+        android:layout_width="@dimen/_50sdp"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:padding="@dimen/_12sdp"
+        android:layout_height="0dp"
+        android:foreground="?selectableItemBackgroundBorderless"
+        android:background="@drawable/circle_shape"
+        android:clickable="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:focusable="true" />
+
     <View
         android:id="@+id/id_prabayar_bc"
         android:layout_width="0dp"
@@ -57,7 +70,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:text="Prabayar"
+        android:text="@string/prbayar"
         android:textColor="@color/white"
         android:textSize="@dimen/_13ssp"
         android:layout_marginStart="@dimen/_20sdp"
@@ -70,7 +83,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:text="Pascabayar"
+        android:text="@string/pascabayar"
         android:textColor="@color/abu_muda"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="@+id/id_pascabayar_bc"

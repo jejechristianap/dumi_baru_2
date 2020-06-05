@@ -76,9 +76,10 @@ class PulsaFragment : Fragment(){
         getSaldo()
         getPulsa()
         rvClick()
-        val current = "sdfasdkfjh"
 
-
+        v.backPulsaIv.setOnClickListener {
+            activity!!.finish()
+        }
         v.id_btn_reload.setOnClickListener {
             getPulsa()
         }
@@ -110,10 +111,6 @@ class PulsaFragment : Fragment(){
         popup.id_btn_batalkan.setOnClickListener {
             popup.dismiss()
         }
-
-
-
-
 
         popup.id_nomor_pulsa.text = v.id_no_operator.text.toString()
         popup.id_provider_pulsa.text = v.id_nama_operator.text.toString()
@@ -445,7 +442,7 @@ class PulsaFragment : Fragment(){
         dialogSukses.show()
 
         dialogSukses.id_btn_sukses.setOnClickListener {
-            val i = Intent()
+//            val i = Intent()
             dialogSukses.dismiss()
             popup.dismiss()
         }

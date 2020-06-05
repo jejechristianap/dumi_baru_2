@@ -22,14 +22,16 @@ class RiwayatECommAdapter(private var mContext: Context, internal var list: List
             val tipe = item.tipe
             if (tipe == "PLN"){
                 itemView.iconRiwayatIv.setImageResource(R.drawable.pln_logo)
-                itemView.tipeTv.text = item.tipe
+                itemView.tipeTv.text = "Token"
                 itemView.hargaTv.text = "Rp${rpFromat.format(item.ppob_totalbayar!!.toInt())}"
                 itemView.waktuTv.text = item.created_at
+                itemView.noTokenTv.text = item.ppob_stroomtoken
             } else{
                 itemView.iconRiwayatIv.setImageResource(R.drawable.ic_pulsa)
                 itemView.tipeTv.text = item.tipe
                 itemView.hargaTv.text = "Rp${rpFromat.format(item.harga!!.toInt())}"
                 itemView.waktuTv.text = item.created_at
+                itemView.noTokenTv.text = item.no_tujuan
             }
 
         }
