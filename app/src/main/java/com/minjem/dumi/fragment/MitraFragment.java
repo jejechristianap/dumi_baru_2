@@ -1,15 +1,18 @@
 package com.minjem.dumi.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.minjem.dumi.PerjanjianKreditView;
 import com.minjem.dumi.R;
 import com.minjem.dumi.api.StatusPinjamanInterface;
 import com.minjem.dumi.model.SharedPrefManager;
@@ -37,6 +40,11 @@ public class MitraFragment extends Fragment {
     private User prefManager;
     private Locale localID;
     private NumberFormat formatRp;
+    private Button pkButton;
+    private String tglPengajuan = "";
+    private String tujuan = "";
+    private double bungaRupiah = 0.0;
+    private double angsuran = 0.0;
 
     @Nullable
     @Override
@@ -57,6 +65,18 @@ public class MitraFragment extends Fragment {
         transferBankTv = view.findViewById(R.id.transfer_bank_pinjaman);
         jumlahTerimaTv = view.findViewById(R.id.jumlah_terima_pinjaman);
         tglPengajuanTv = view.findViewById(R.id.tanggal_pengajuan_pinjaman);
+
+        pkButton = view.findViewById(R.id.pkButton);
+        pkButton.setOnClickListener(v -> {
+            Intent i = new Intent(getActivity(), PerjanjianKreditView.class);
+            i.putExtra("tanggal", tglPengajuan);
+            i.putExtra("pinjaman", pinjamanTv.getText().toString());
+            i.putExtra("bunga", bungaRupiah);
+            i.putExtra("angsuran", angsuran);
+            i.putExtra("tujuan", tujuan);
+            i.putExtra("tenor", tenorPinjamanTv.getText().toString());
+            startActivity(i);
+        });
 
         getPinjaman();
         return view;
@@ -86,26 +106,34 @@ public class MitraFragment extends Fragment {
                             int statusId = jsonObject.getInt("status");
                             double pinjaman = jsonObject.getDouble("pinjaman");
                             String lamaPinjaman = jsonObject.getString("lamaPinjaman");
-                            double bungaRupiah = jsonObject.getDouble("bungaRupiah");
-                            double angsuran = jsonObject.getDouble("angsuranPerbulan");
+                            bungaRupiah = jsonObject.getDouble("bungaRupiah");
+                            angsuran = jsonObject.getDouble("angsuranPerbulan");
                             double asuransi = jsonObject.getDouble("asuransiRupiah");
                             double adminRupiah = jsonObject.getDouble("administrasiRupiah");
                             double diterima = jsonObject.getDouble("diterimaRupiah");
-                            String tglPengajuan = jsonObject.getString("tglPengajuan");
+                            tglPengajuan = jsonObject.getString("tglPengajuan");
+                            tujuan = jsonObject.getString("tujuanPinjaman");
                             if(statusId == 1){
                                 statusPinjamanTv.setText("Pengajuan");
+                                pkButton.setVisibility(View.GONE);
                             } else if (statusId == 2){
                                 statusPinjamanTv.setText("Disetujui");
+                                pkButton.setVisibility(View.VISIBLE);
                             } else if (statusId == 3){
                                 statusPinjamanTv.setText("Pengajuan ditolak");
+                                pkButton.setVisibility(View.GONE);
                             } else if (statusId == 4){
                                 statusPinjamanTv.setText("Telah ditransfer");
+                                pkButton.setVisibility(View.GONE);
                             } else if (statusId == 5){
                                 statusPinjamanTv.setText("Kredit berjalan");
+                                pkButton.setVisibility(View.GONE);
                             } else if(statusId == 6){
                                 statusPinjamanTv.setText("Kredit Lunas");
+                                pkButton.setVisibility(View.GONE);
                             } else {
                                 statusPinjamanTv.setText("!!Dalam Proses Pengembangan!!");
+                                pkButton.setVisibility(View.GONE);
                             }
                             lamaPinjaman += " Bulan";
                             pinjamanTv.setText(formatRp.format(pinjaman));

@@ -41,17 +41,15 @@
                     android:id="@+id/saldoPayLater"
                     android:layout_width="0dp"
                     android:layout_weight="1.4"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_gravity="center"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/rp_0"
+                    android:textSize="@dimen/_20ssp"
                     android:textColor="@android:color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView9"
-                    app:autoSizeMinTextSize="20sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="35sp"
-                    tools:autoSizeStepGranularity="2sp"/>
+                    />
 
                 <LinearLayout
                     android:id="@+id/riwayatLl"
@@ -61,14 +59,14 @@
                     android:background="@drawable/layout_rounded"
                     android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:layout_gravity="center"
-                    android:layout_height="@dimen/_30sdp">
+                    android:layout_height="@dimen/_28sdp">
                     <TextView
                         android:text="@string/riwayat"
                         android:textColor="@color/colorBlue"
-                        android:textSize="@dimen/_15ssp"
+                        android:textSize="@dimen/_12ssp"
                         android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_30sdp" />
+                        android:layout_height="@dimen/_28sdp" />
                 </LinearLayout>
 
 
@@ -101,7 +99,26 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
+
+            <com.synnapps.carouselview.CarouselView
+                android:visibility="gone"
+                android:id="@+id/caraouselViewPinjaman"
+                app:fillColor="@color/white"
+                app:pageColor="#00000000"
+                android:paddingStart="@dimen/_30sdp"
+                android:paddingEnd="@dimen/_30sdp"
+                android:paddingTop="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_15sdp"
+                app:radius="@dimen/_5sdp"
+                app:slideInterval="3000"
+                app:strokeColor="#FF777777"
+                app:strokeWidth="@dimen/_1sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"/>
+
+
             <LinearLayout
+                android:visibility="visible"
                 android:id="@+id/dumi_kilat"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="20dp"

@@ -526,6 +526,132 @@
     <string name="noToken">Nomor Token</string>
     <string name="noTokenListrik">1234 5678 9101 5544 3354</string>
     <string name="informasiListrik">Informasi listrik</string>
-
-
+    <string name="pk">Perjanjian Kredit</string>
+    <string name="perjanjianPinjamanDumi">PERJANJIAN PINJAMAN DUMI PNS MULTIGUNA\nNomor: BMTP.FTC/00XXX-FDC/2020</string>
+    <string name="text1">Perjanjian Pinjaman Dumi PNS Sejahtera ("<b>Perjanjian</b>") ini dibuat dan ditandatangani pada hari Kamis tanggal 12/03/2020, yang dilaksanakan oleh dan antara: </string>
+    <string name="text2">1.	<b>PT FIDAC INOVASI TEKNOLOGI</b>, suatu Perseroan Terbatas yang didirikan berdasarkan Hukum Negara
+        Republik Indonesia yang menyediakan, mengelola, dan mengoperasikan layanan pinjaman berbasis teknologi informasi,
+        dalam hal ini bertindak  sebagai Penerima Kuasa dari Pemberi Pinjaman yang tersebut pada Lampiran 1 Perjanjian ini
+        dan oleh karenanya bertindak untuk dan atas nama Pemberi Pinjaman tersebut, untuk menyediakan fasilitas pinjaman
+        konvensional kepada Penerima Pinjaman (untuk selanjutnya disebut sebagai “Penyelenggara”)</string>
+    <string name="text3">2.	DANI KURNIA, Warga Negara Indonesia, beralamat di  Jl. Anggrek IV No. 158,
+        pemegang Kartu Tanda Penduduk Nomor 3276012909660001 sebagai penerima fasilitas pinjaman konvensional
+        yang diberikan oleh Pemberi Pinjaman yang diwakili oleh Penyelenggara (untuk selanjutnya disebut sebagai “Penerima Pinjaman”)</string>
+    <string name="text4">\nPenyelenggara dan Penerima Pinjaman untuk selanjutnya masing-masing disebut sebagai
+        ”<b>Pihak</b>” atau bersama-sama sebagai ”<b>Para Pihak</b>”, Para Pihak terlebih dahulu menerangkan hal-hal sebagai berikut:</string>
+    <string name="text5">1.	Bahwa Penyelenggara adalah suatu Perseroan Terbatas yang bergerak di lembaga jasa
+        keuangan <i>non</i>-bank, khususnya menyediakan, mengelola dan mengoperasikan layanan pinjaman berbasis teknologi
+        informasi berdasarkan prinsip konvensional yang terdaftar dan diawasi oleh Otoritas Jasa Keuangan (OJK) Republik Indonesia.\n\n2. Bahwa
+        Penyelenggara dalam menyelenggarakan layanan sebagaimana dimaksud dalam poin <i>1</i> di atas, memiliki dan
+        mengoperasikan suatu aplikasi <i>mobile</i> yang menghubungkan pihak yang memberikan pinjaman dengan pihak yang membutuhkan pinjaman,
+        yang dikenal dengan merk ”<b>Dumi</b>” dengan alamat  web <u>www.minjem.com</u> (untuk selanjutnya disebut ”<b>Sistem Penyelenggara</b>”).\n\n3.
+        Bahwa Penyelenggara telah memperoleh kuasa dari Pemberi Pinjaman untuk melakukan perjanjian pinjaman dengan Penerima Pinjaman.
+        4.	Bahwa Penerima Pinjaman telah mendaftarkan diri dan mengajukan permohonan kepada Penyelenggara melalui Sistem
+        Penyelenggara untuk mendapatkan Fasilitas Pinjaman Dumi PNS Sejahtera (untuk selanjutnya disebut “<b>Fasilitas Pinjaman</b>”)
+        yang digunakan untuk pinjaman multiguna, dan lain-lain sebagaimana telah disetujui oleh Penyelenggara dan diatur dalam Perjanjian ini.
+        \n\n5.	Bahwa sehubungan dengan pernyataan di atas, Penyelenggara sebagai kuasa dari Pemberi Pinjaman bersedia memberikan
+        Fasilitas Pinjaman kepada Penerima Pinjaman. Penyelenggara dan Penerima Pinjaman telah saling setuju dan sepakat, dengan
+        ini para pihak membuat dan menetapkan Perjanjian Pinjaman untuk dipatuhi dan dilaksanakan oleh Para Pihak tersebut,
+        dengan syarat-syarat dan ketentuan-ketentuan yang diatur sebagai berikut :
+    </string>
+    <string name="text6">Pasal 1\nDEFINISI</string>
+    <string name="text7">Dalam Perjanjian ini, yang dimaksud dengan:\n1. <b>Surat Kuasa Khusus</b> adalah kuasa
+        yang diberikan oleh Pemberi Pinjaman kepada <b>Penyelenggara</b> untuk meneruskan kembali dana yang dititipkan
+        oleh <b>Pemberi Pinjaman</b> di <b>Rekening Penampungan</b> kepada <b>Peminjam</b>, pihak mana telah dipilih/ditentukan oleh
+        <b>Pemberi Pinjaman</b> melalui <b>Sistem Penyelenggara</b>.\n\n2. <b>Pinjaman Dumi PNS Multiguna</b> adalah pinjaman
+        yang dilakukan oleh Penyelenggara selaku wakil Pemberi Pinjaman kepada Penerima Pinjaman dengan
+        jangka waktu dan suku bunga yang telah ditentukan dan disepakati, dan pengembalian secara angsuran
+        berdasarkan kesepakatan antara penyelenggara dengan Penerima Pinjaman.\n\n3. <b>Angsuran</b> adalah sejumlah uang
+        yang dibayarkan secara berkala oleh Penerima Pinjaman kepada Penyelenggara pada setiap bulan dalam jumlah dan
+        tanggal sebagaimana tersebut dalam Perjanjian ini.\n\n4. <b>Jangka Waktu Pinjaman</b> adalah jangka waktu dimulainya
+        Fasilitas Pinjaman sebagaimana diatur dalam Perjanjian ini sampai dengan Perjanjian ini berakhir.\n\n5.	<b>Perjanjian Pinjaman</b>
+        adalah Perjanjian pemberian kuasa dari Pemberi Kuasa kepada Penerima Kuasa untuk melakukan perbuatan hukum tertentu.\n\n6. <b>Biaya-Biaya</b>
+        adalah sejumlah uang yang dibayarkan untuk biaya-biaya, termasuk administrasi dan asuransi dalam
+        pelaksanaan proses pinjaman ini.\n\n7. <b>Denda</b> adalah sejumlah uang yang harus dibayarkan Penerima
+        Pinjaman kepada Penyelenggara, sebagai sanksi keuangan atas kelalaian Penerima Pinjaman dalam melaksanakan
+        kewajibannya sebagaimana disepakati dalam Perjanjian ini.\n\n8.	<b>Hari Kerja</b> adalah hari Senin
+        sampai dengan Jumat di luar hari libur Nasional.\n\n9. <b>Jangka Waktu Perjanjian</b> adalah
+        masa berlakunya Perjanjian ini sesuai dengan yang ditentukan pasal  2.
+    </string>
+    <string name="text8">Pasal 2\nJUMLAH, BUNGA, ANGSURAN, TUJUAN, DAN\nJANGKA WAKTU PINJAMAN</string>
+    <string name="text9">Atas permintaan Penerima Pinjaman, Penyelenggara setuju untuk memberikan fasilitas pinjaman kepada Penerima Pinjaman dengan ketentuan :</string>
+    <string name="text10">1. Jumlah Pinjaman</string>
+    <string name="text11">2. Bunga: 9,9% per tahun, flat dengan ketentuan bagi hasil   kepada Pemberi Pinjaman sebesar 8,4% dan biaya jasa kepada Penyelenggara sebesar 1,5%.</string>
+    <string name="text12">Angsuran</string>
+    <string name="text13">Pasal 3\nSYARAT REALISASI\n</string>
+    <string name="text14">Pencairan Pinjaman dilakukan secara langsung kepada Penerima Pinjaman setelah Perjanjian Pinjaman ditanda tangani oleh para pihak.</string>
+    <string name="text15">Pasal 4\nJAMINAN PEMBAYARAN\n</string>
+    <string name="text16">Untuk menjamin bahwa Penerima Pinjaman akan melakukan pelunasan pinjaman tepat waktu yang telah disepakati
+        Para Pihak berdasarkan Perjanjian ini, maka Penerima Pinjaman berjanji dan dengan ini mengikatkan diri untuk membuat surat
+        kuasa pemotongan gaji/pendapatan kepada bendahara gaji/juru bayar pendapatan di tempat Penerima Pinjaman bekerja/berusaha.</string>
+    <string name="text17">Pasal 5\PERNYATAAN DAN JAMINAN\n</string>
+    <string name="text18">Penerima Pinjaman dengan ini menyatakan pengakuan dengan sebenar–benarnya serta menjamin kepada
+        Penyelenggara, sebagaimana Penyelenggara menerima pernyataan dan pengakuan
+        Penerima Pinjaman, bahwa:\n\n1.	Penerima Pinjaman berhak dan berwenang sepenuhnya untuk menandatangani
+        Perjanjian ini, tidak dalam tekanan atau paksaan dari pihak manapun.\n\n2.	Penerima Pinjaman menjamin
+        bahwa segala surat dan dokumen serta akta yang Penerima Pinjaman tandatangani dan/atau gunakan
+        berkaitan dengan Perjanjian ini adalah benar, keberadaannya sah, dan tindakan Penerima Pinjaman
+        tidak melanggar atau bertentangan dengan ketentuan dan/atau hukum yang berlaku, serta hal-hal
+        lain yang dapat menghalangi pelaksanaan Perjanjian ini.\n\n3.	Penerima Pinjaman adalah
+        Perseorangan yang tunduk pada hukum Negara Republik Indonesia.\n\n4.	Diadakannya Perjanjian ini dan/atau
+        Addendum Perjanjian ini tidak akan bertentangan dengan suatu Perjanjian yang telah ada atau yang akan
+        diadakan oleh Penerima Pinjaman dengan pihak ketiga lainnya.\n\n5.	Sepanjang tidak bertentangan
+        dengan peraturan perundang-undangan yang berlaku, Penerima Pinjaman berjanji dan dengan ini
+        mengikatkan diri mendahulukan untuk membayar dan melunasi kewajiban Penerima Pinjaman kepada
+        Penyelenggara dari kewajiban lainnya.\n\n6.	Dalam hal-hal yang berkaitan dengan
+        ayat 1, 2, 3, 4 dan 5. Pasal ini, Penerima Pinjaman berjanji dan dengan ini
+        mengikatkan diri untuk membebaskan Penyelenggara dari segala tuntutan atau gugatan yang
+        datang dari pihak mana pun dan/atau atas alasan apapun.
+    </string>
+    <string name="text19">Pasal 6\HUKUM YANG BERLAKU\n</string>
+    <string name="text20">Pelaksanaan Perjanjian ini tunduk kepada ketentuan perundang-undangan yang berlaku di Indonesia.</string>
+    <string name="text21">Pasal 7\PENYELESAIAN PERSELISIHAN\n</string>
+    <string name="text22">1. Apabila di kemudian hari terjadi perbedaan pendapat atau penafsiran atas
+        hal-hal yang tercantum di dalam Perjanjian ini atau terjadi perselisihan atau sengketa dalam
+        pelaksanaan Perjanjian ini, Para Pihak sepakat untuk menyelesaikannya secara
+        musyawarah untuk mufakat.\n\n2.	Dalam hal, penyelesaian sengketa sebagaimana dimaksud
+        pada ayat 1 Pasal ini tidak mencapai kesepakatan, maka Para Pihak bersepakat,
+        dan dengan ini berjanji serta mengikatkan diri satu terhadap yang lain,
+        untuk menyelesaikannya melalui Badan Arbitrase Nasional Indonesia (”<b>BANI</b>”) menurut
+        Peraturan dan Prosedur Arbitrase yang berlaku di dalam Badan Arbitrase tersebut.\n\n3.	Para Pihak sepakat,
+        dan dengan ini mengikatkan diri satu terhadap yang lain, bahwa putusan yang ditetapkan oleh
+        BANI tersebut sebagai keputusan tingkat pertama dan terakhir.\n\n4.	Tanpa mengurangi tempat pokok
+        BANI di Jakarta yang ditentukan di dalam Peraturan dan Prosedur Arbitrase BANI, Para Pihak bersepakat
+        memilih tempat pelaksanaan arbitrase di kota tempat cabang Penyelenggara berada. Namun penunjukan
+        dan pembentukan Arbiter atau Majelis Arbitrase dilakukan oleh Ketua BANI.\n\n5.	Mengenai pelaksanaan (eksekusi)
+        putusan BANI, sesuai dengan ketentuan Surat Edaran Mahkamah Agung No. 8 tahun 2008, Para Pihak
+        sepakat bahwa Para Pihak dapat meminta pelaksanaan (eksekusi) putusan BANI tersebut pada setiap
+        Pengadilan di wilayah hukum Republik Indonesia.
+    </string>
+    <string name="text23">Pasal 8\KETENTUAN PENUTUP\n</string>
+    <string name="text24">1. Penyelenggara dan Penerima Pinjaman dengan ini,
+        sepakat dan setuju untuk memberlakukan seluruh ketentuan-ketentuan
+        yang diatur di dalam Perjanjian ini.\n\n2.	Sebelum Perjanjian ini
+        ditandatangani oleh Penerima Pinjaman, Penerima Pinjaman mengakui dengan sebenarnya,
+        dan tidak lain dari yang sebenarnya, bahwa Penerima Pinjaman telah membaca dengan cermat
+        atau dibacakan kepadanya seluruh isi Perjanjian ini, sehingga oleh karena itu Penerima
+        Pinjaman memahami sepenuhnya segala yang akan menjadi akibat hukum setelah Penerima Pinjaman
+        menandatangani Perjanjian ini.\n\n3.	Perjanjian ini mengikat Para Pihak
+        yang sah, para pengganti atau pihak-pihak yang menerima hak dari masing-masing Para Pihak.\n\n4. Perjanjian ini memuat,
+        dan karenanya menggantikan semua pengertian dan kesepakatan yang telah dicapai oleh Para
+        Pihak sebelum ditandatanganinya Perjanjian ini, baik tertulis, lisan maupun elektronik,
+        mengenai hal yang sama.\n\n5.	Jika salah satu atau sebagian ketentuan-ketentuan dalam
+        Perjanjian ini menjadi batal atau tidak berlaku, maka tidak mengakibatkan seluruh
+        Perjanjian ini menjadi batal atau tidak berlaku seluruhnya.\n\n6.	Kelalaian atau keterlambatan
+        Penyelenggara dalam melaksanakan haknya berdasarkan Perjanjian ini atau dokumen-dokumen lain yang
+        dibuat berdasarkan Perjanjian ini tidak boleh ditafsirkan bahwa Penyelenggara telah melepaskan
+        hak-hak tersebut.\n\n7.	Para Pihak mengakui bahwa judul pada setiap pasal
+        dalam Perjanjian ini dipakai hanya untuk memudahkan pembaca Perjanjian ini,
+        karenanya judul tersebut tidak memberikan penafsiran apapun atas isi Perjanjian ini.\n\n8.	Apabila ada hal-hal
+        yang belum diatur atau belum cukup diatur dalam Perjanjian ini, maka Penyelenggara dan
+        Penerima Pinjaman akan mengaturnya bersama secara musyawarah untuk mufakat dalam
+        suatu Perjanjian Tambahan (Addendum) yang ditandatangani oleh Para Pihak.\n\n9.	Tiap Perjanjian Tambahan (Addendum) dari
+        Perjanjian ini merupakan satu kesatuan yang tidak terpisahkan dari Perjanjian ini\n\nDemikian Perjanjian ini
+        dibuat dan ditandatangani di Jakarta oleh Penyelenggara dan Penerima Pinjaman, yang masing-masing disimpan
+        oleh Penyelenggara dan Penerima Pinjaman, dan masing-masing berlaku sebagai aslinya.
+    </string>
+    <string name="penyelenggara">PENYELENGGARA PINJAMAN</string>
+    <string name="penerima">PENERIMA</string>
+    <string name="ptfidac">PT FIDACINOVASITEKNOLOGI</string>
+    <string name="penerimaPinjaman">"<b>Penerima Pinjaman</b>"</string>
 </resources>

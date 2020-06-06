@@ -354,12 +354,14 @@ class PlnFragment: Fragment() {
 
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                         if (response.isSuccessful){
+                            progressDialog.dialog.dismiss()
                             Log.d("Isi Token Listrik", response.body().toString())
                             val jsonObject = JSONObject(response.body()!!.string())
                             if (jsonObject.getBoolean("status")){
                                 Log.d("Status token listrik", jsonObject.getString("message"))
-                                val jsonArray = JSONArray(jsonObject.getString("data"))
-                                for (i in 0 until jsonArray.length()){
+
+                                mDialogSukses()
+                                /*for (i in 0 until jsonArray.length()){
                                     noInvoice = jsonArray.getJSONObject(i).getString("ppob_invoice")
                                     noMeter = jsonArray.getJSONObject(i).getString("ppob_nomorpelanggan")
                                     nama = jsonArray.getJSONObject(i).getString("ppob_namapelanggan")
@@ -371,13 +373,9 @@ class PlnFragment: Fragment() {
                                     angsuran = jsonArray.getJSONObject(i).getString("ppob_angsuran")
                                     noToken = jsonArray.getJSONObject(i).getString("ppob_stroomtoken")
                                     informasiListrik = jsonArray.getJSONObject(i).getString("ppob_footer")
-                                }
+                                }*/
 
-                                Log.d("Keterangan Token", "\nInvoice: $noInvoice \nMeter: $noMeter \nNama: $nama \nTarifDaya: $tarifdaya \nBayar: $bayar \nMaterai: $materai" +
-                                        "\nPPN: $ppn \nPPJ: $ppj \nAngsuran: $angsuran \nNoToken: $noToken \nInformasi: $informasiListrik")
 
-                                progressDialog.dialog.dismiss()
-                                mDialogSukses()
                             } else {
                                 progressDialog.dialog.dismiss()
                                 mDialogGagal()

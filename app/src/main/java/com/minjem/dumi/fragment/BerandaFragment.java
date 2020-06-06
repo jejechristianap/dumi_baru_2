@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,8 @@ import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity;
 import com.minjem.dumi.jenispinjaman.PinjamanRegularActivity;
 import com.minjem.dumi.model.SharedPrefManager;
 import com.minjem.dumi.retrofit.RetrofitClient;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,8 +54,10 @@ import static com.minjem.dumi.ecommerce.Helper.HelperKt.USERNAME;
 public class BerandaFragment extends Fragment {
     private int saldoUser = 0;
     private TextView saldoTv;
-    Locale localID;
-    NumberFormat formatRp;
+    private Locale localID;
+    private NumberFormat formatRp;
+    private CarouselView carouselView;
+    private int[] sampleImages = {R.drawable.pln_logo, R.drawable.telkomsel};
 
     @SuppressLint({"ResourceAsColor", "SetTextI18n"})
     @Nullable
@@ -74,6 +79,10 @@ public class BerandaFragment extends Fragment {
         riwayatLl.setOnClickListener(v -> {
             startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext(), RiwayatView.class));
         });
+
+        carouselView = view.findViewById(R.id.caraouselViewPinjaman);
+        carouselView.setPageCount(sampleImages.length);
+        carouselView.setImageListener(imageListener);
 
 
 
@@ -121,6 +130,10 @@ public class BerandaFragment extends Fragment {
 
         return view;
     }
+
+    ImageListener imageListener = (position, imageView) -> {
+        imageView.setImageResource(sampleImages[position]);
+    };
 
     @Override
     public void onStart() {

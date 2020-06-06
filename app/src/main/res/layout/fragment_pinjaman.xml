@@ -504,6 +504,18 @@
                     tools:autoSizeStepGranularity="1sp" />
             </LinearLayout>
 
+            <Button
+                android:visibility="gone"
+                android:id="@+id/pkButton"
+                android:background="@drawable/button_custom_design_darkblue"
+                android:text="@string/pk"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_17sdp"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_30sdp"/>
+
         </LinearLayout>
     </ScrollView>
 

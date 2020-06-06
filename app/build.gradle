@@ -94,7 +94,10 @@ dependencies {
     /*LoaderView*/
     implementation 'com.elyeproj.libraries:loaderviewlibrary:2.0.0'
 
+    implementation 'com.synnapps:carouselview:0.1.4'
+
 }
 repositories {
     mavenCentral()
+    jcenter()
 }
