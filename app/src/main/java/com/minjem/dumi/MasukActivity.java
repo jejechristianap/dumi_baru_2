@@ -199,7 +199,7 @@ public class MasukActivity extends AppCompatActivity {
 //                        startActivity(new Intent(MasukActivity.this, MainActivity.class));
                         for (int i = 0; i < dataArray.length(); i++) {
                             JSONObject userObj = dataArray.getJSONObject(i);
-                            int id = userObj.getInt("id");
+                            int id = userObj.optInt("id");
                             String nip = userObj.getString("nipBaru");
                             String email = userObj.getString("email");
                             String password = userObj.getString("sandi");
@@ -231,9 +231,9 @@ public class MasukActivity extends AppCompatActivity {
                             String imageKtp = userObj.getString("photo_ktp");
                             String imageSelfi = userObj.getString("photo_selfi");
                             String imageProfile = userObj.getString("photo_profile");
-                            int statusTopup = userObj.getInt("status_topup");
-                            int saldo = userObj.getInt("saldo");
-                            int saldo_max = userObj.getInt("saldo_max");
+                            int statusTopup = userObj.optInt("status_topup",0);
+                            int saldo = userObj.optInt("saldo",0);
+                            int saldo_max = userObj.optInt("saldo_max", 0);
 
                             User user = new User(id, nip, email, password, noKtp, nama, agama, jenisKelamin,
                                     tempatLahir, tanggalLahir, statusKawin, jumlahTanggungan, pendidikan, ketTitle,

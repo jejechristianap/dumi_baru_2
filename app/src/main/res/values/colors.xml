@@ -6,8 +6,11 @@
     <color name="colorWhite">#FFF</color>
     <color name="colorBlue">#1560DB</color>
     <color name="lightBlue">#00d9f5</color>
-
+    <color name="blueKilat">#0697D8</color>
     <color name="darkBlue">#017be7</color>
+    <color name="bluetkb">#BF0B237A</color>
+
+    <color name="purple">#673AB7</color>
 
     <color name="blueTrans">#68D0FA</color>
     <color name="grey">#969897</color>

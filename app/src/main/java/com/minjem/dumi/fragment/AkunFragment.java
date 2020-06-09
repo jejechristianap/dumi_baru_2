@@ -113,7 +113,7 @@ public class AkunFragment extends Fragment {
 
         Glide.with(mContext)
                 .load(apiPhotoPath)
-                .error(R.drawable.ic_profil)
+                .error(R.drawable.layout_round_corner_beranda)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .transform(new CircleCrop(), new RoundedCorners(16))

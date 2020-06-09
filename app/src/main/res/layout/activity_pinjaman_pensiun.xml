@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/todo"
         android:padding="15dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

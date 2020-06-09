@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.minjem.dumi.LihatSemuaActivity;
 import com.minjem.dumi.R;
@@ -53,87 +55,129 @@ import static com.minjem.dumi.ecommerce.Helper.HelperKt.USERNAME;
 
 public class BerandaFragment extends Fragment {
     private int saldoUser = 0;
-    private TextView saldoTv;
+    private TextView saldoTv, pulsaTv, plnTv, gopayTv, ovoTv, hotelTv, pesawatTv, keretaTv, semuaTv;
     private Locale localID;
     private NumberFormat formatRp;
-    private CarouselView carouselView;
-    private int[] sampleImages = {R.drawable.pln_logo, R.drawable.telkomsel};
+    private ImageView kilatIv, regularIv, pulsaIv, plnIv, gopayIv, ovoIv, hotelIv, pesawatIv, keretaIv, semuaIv;
+    private Button kilatB, regularB, tkb, tkbt,riwayatButton;
+    private boolean touch = false;
+    private View view;
+    private String go;
+
 
     @SuppressLint({"ResourceAsColor", "SetTextI18n"})
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_beranda, container, false);
+        view = inflater.inflate(R.layout.fragment_beranda, container, false);
 
-//        final LinearLayout topLayout = view.findViewById(R.id.top_background);
-        TextView lihatSemuaTV = view.findViewById(R.id.lihat_semua);
-        saldoTv = view.findViewById(R.id.saldoPayLater);
-        Button dumiKilatButton = view.findViewById(R.id.dumi_kilat_button);
-        Button dumiRegularButton = view.findViewById(R.id.dumi_regular_button);
-        Button dumiPensiunButton = view.findViewById(R.id.dumi_pensiun_button);
-        Button dumiBumnButton = view.findViewById(R.id.dumi_bumn_button);
-        LinearLayout isiPulsaLl = view.findViewById(R.id.isi_pulsa_ll);
-        LinearLayout plnTokenLl = view.findViewById(R.id.token_ll);
-        LinearLayout riwayatLl = view.findViewById(R.id.riwayatLl);
-
-        riwayatLl.setOnClickListener(v -> {
-            startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext(), RiwayatView.class));
-        });
-
-        carouselView = view.findViewById(R.id.caraouselViewPinjaman);
-        carouselView.setPageCount(sampleImages.length);
-        carouselView.setImageListener(imageListener);
-
-
-
-
-        Toast toastPensiun  = Toast.makeText(getActivity(),
-                "Mohon maaf ini pinjaman ini khusus untuk pengguna Pensiun", Toast.LENGTH_SHORT);
-        toastPensiun.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        View toastV = toastPensiun.getView();
-        TextView text = toastV.findViewById(android.R.id.message);
-        text.setTextColor(Color.WHITE);
-        toastV.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.SRC_IN);
-
-        Toast toastBumn= Toast.makeText(getActivity(),
-                "Mohon maaf ini pinjaman ini khusus untuk pengguna BUMN", Toast.LENGTH_SHORT);
-        toastBumn.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        View vB = toastBumn.getView();
-        TextView text2 = vB.findViewById(android.R.id.message);
-        text2.setTextColor(Color.WHITE);
-        vB.getBackground().setColorFilter(Color.DKGRAY, PorterDuff.Mode.SRC_IN);
-
-
-        lihatSemuaTV.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), LihatSemuaActivity.class);
-            startActivity(intent);
-        });
-
-        /*E-Commerce*/
-        isiPulsaLl.setOnClickListener(v -> {
-//            startActivity(new Intent(getActivity(), IsiPulsaActivity.class));
-//            Toast.makeText(getActivity(), "Tunggu update kami selanjutnya", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getActivity(), ECommerceActivity.class);
-            intent.putExtra("fragment", "pulsa");
-            startActivity(intent);
-        });
-
-        plnTokenLl.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), ECommerceActivity.class);
-            intent.putExtra("fragment", "pln");
-            startActivity(intent);
-        });
-        dumiKilatButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanKilatActivity.class)));
-        dumiRegularButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanRegularActivity.class)));
-        dumiPensiunButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanKilatActivity.class)));
-        dumiBumnButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), PinjamanRegularActivity.class)));
+        initView();
+        initOnTouch();
 
         return view;
     }
 
+
+    private void initView(){
+        kilatIv = view.findViewById(R.id.cardKilat);
+        regularIv = view.findViewById(R.id.cardRegular);
+        kilatB = view.findViewById(R.id.kilatButton);
+        regularB = view.findViewById(R.id.regularButton);
+        tkb = view.findViewById(R.id.tkb);
+        tkbt = view.findViewById(R.id.tkbText);
+        saldoTv = view.findViewById(R.id.saldoPayLater);
+        riwayatButton = view.findViewById(R.id.riwayatButton);
+        pulsaIv = view.findViewById(R.id.icPulsa);
+        pulsaTv = view.findViewById(R.id.textPulsa);
+        plnIv = view.findViewById(R.id.icPln);
+        plnTv = view.findViewById(R.id.textPln);
+        gopayIv = view.findViewById(R.id.icGopay);
+        gopayTv = view.findViewById(R.id.textGopay);
+        ovoIv = view.findViewById(R.id.icOvo);
+        ovoTv = view.findViewById(R.id.textOvo);
+        hotelIv = view.findViewById(R.id.icHotel);
+        hotelTv = view.findViewById(R.id.textHotel);
+        pesawatIv = view.findViewById(R.id.icPesawat);
+        pesawatTv = view.findViewById(R.id.textPesawat);
+        keretaIv = view.findViewById(R.id.icKereta);
+        keretaTv = view.findViewById(R.id.textKereta);
+        semuaIv = view.findViewById(R.id.icSemua);
+        semuaTv = view.findViewById(R.id.textSemua);
+
+    }
+
+    private void initOnTouch(){
+        kilatIv.setOnClickListener(v -> goTo("kilat"));
+        kilatB.setOnClickListener(v -> goTo("kilat"));
+        regularIv.setOnClickListener(v -> goTo("regular"));
+        regularB.setOnClickListener(v -> goTo("regular"));
+        riwayatButton.setOnClickListener(v -> goTo("riwayat"));
+        pulsaIv.setOnClickListener(v -> goTo("pulsa"));
+        pulsaTv.setOnClickListener(v -> goTo("pulsa"));
+        plnIv.setOnClickListener(v -> goTo("pln"));
+        plnTv.setOnClickListener(v -> goTo("pln"));
+        gopayIv.setOnClickListener(v -> goTo("na"));
+        gopayTv.setOnClickListener(v -> goTo("na"));
+        ovoIv.setOnClickListener(v -> goTo("na"));
+        ovoTv.setOnClickListener(v -> goTo("na"));
+        hotelIv.setOnClickListener(v -> goTo("na"));
+        hotelTv.setOnClickListener(v -> goTo("na"));
+        pesawatIv.setOnClickListener(v -> goTo("na"));
+        pesawatTv.setOnClickListener(v -> goTo("na"));
+        keretaIv.setOnClickListener(v -> goTo("na"));
+        keretaTv.setOnClickListener(v -> goTo("na"));
+        semuaIv.setOnClickListener(v -> goTo("semua"));
+        semuaTv.setOnClickListener(v -> goTo("semua"));
+
+        tkb.setOnClickListener(v -> {
+            if (touch){
+                tkbt.setVisibility(View.GONE);
+                touch = false;
+            } else {
+                tkbt.setVisibility(View.VISIBLE);
+                touch = true;
+            }
+        });
+    }
+
+    private void goTo(String item){
+        Intent intent;
+        switch (item){
+            case "kilat":
+                startActivity(new Intent(getActivity(), PinjamanKilatActivity.class));
+                break;
+            case "regular":
+                startActivity(new Intent(getActivity(), PinjamanRegularActivity.class));
+                break;
+            case "riwayat":
+                startActivity(new Intent(getActivity(), RiwayatView.class));
+                break;
+            case "pulsa":
+                intent = new Intent(getActivity(), ECommerceActivity.class);
+                intent.putExtra("fragment", "pulsa");
+                startActivity(intent);
+                break;
+            case "pln":
+                intent = new Intent(getActivity(), ECommerceActivity.class);
+                intent.putExtra("fragment", "pln");
+                startActivity(intent);
+                break;
+            case "semua":
+                startActivity(new Intent(getActivity(), LihatSemuaActivity.class));
+                break;
+            default:
+                Toast.makeText(getActivity(), "Tunggu update kami selanjutanya...", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+    }
+/*
     ImageListener imageListener = (position, imageView) -> {
         imageView.setImageResource(sampleImages[position]);
-    };
+        imageView.setOnClickListener(v -> {
+            Log.d("Position", "Pos: " + position);
+        });
+    };*/
 
     @Override
     public void onStart() {
@@ -162,7 +206,7 @@ public class BerandaFragment extends Fragment {
                         if (jsonObject.getBoolean("status")){
                             JSONArray jsonArray = new JSONArray(jsonObject.getString("data"));
                             for (int i = 0; i<jsonArray.length(); i++){
-                                saldoUser = jsonArray.getJSONObject(i).getInt("saldo");
+                                saldoUser = jsonArray.getJSONObject(i).optInt("saldo", 0);
                             }
                             Log.d("SaldoUser", "Saldo: " + saldoUser);
                             localID = new Locale("in", "ID");

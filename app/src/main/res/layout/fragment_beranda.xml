@@ -1,82 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/top_background"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@color/grey_100">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:orientation="vertical"
-        android:background="@drawable/bg_beranda"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="@dimen/_120sdp"
+        android:padding="@dimen/_15sdp"
+        android:background="@drawable/bg_beranda">
         <ImageView
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"
-            android:layout_width="80dp"
-            android:layout_height="50dp"
+            android:id="@+id/icDumi"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_30sdp"
             android:src="@drawable/dumi_logo_white" />
 
+        <Button
+            android:id="@+id/tkb"
+            android:text="@string/qm"
+            android:textColor="@color/white"
+            android:background="@drawable/button_outerline_white"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"/>
 
-            <LinearLayout
+        <Button
+            android:visibility="gone"
+            android:id="@+id/tkbText"
+            android:text="@string/tkb90"
+            android:textAllCaps="false"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:textColor="@color/bluetkb"
+            android:textSize="@dimen/_8ssp"
+            android:layout_toStartOf="@id/tkb"
+            android:layout_alignTop="@id/tkb"
+            android:layout_alignBottom="@id/tkb"
+            android:background="@drawable/button_rounded_tkb"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="0dp"/>
+
+        <TextView
+            android:id="@+id/saldoTv"
+            android:text="@string/saldo_pay_later"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_below="@id/icDumi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/saldoPayLater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/saldoTv"
+            android:layout_alignStart="@id/saldoTv"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/rp_0"
+            android:textSize="@dimen/_20ssp"
+            android:textColor="@android:color/white"
+            />
+
+        <Button
+            android:id="@+id/riwayatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_alignTop="@id/saldoPayLater"
+            android:layout_alignBottom="@id/saldoPayLater"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/button_lanjut_design"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="@string/riwayat"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary" />
+
+
+
+
+
+
+        <!--<LinearLayout
+            android:id="@+id/riwayatLl"
+            android:orientation="vertical"
+            android:layout_width="@dimen/_70sdp"
+            android:background="@drawable/layout_rounded"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:layout_gravity="center"
+            android:layout_height="@dimen/_28sdp">
+            <TextView
+                android:text="@string/riwayat"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/_12ssp"
+                android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="8dp"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:layout_height="@dimen/_28sdp" />
+        </LinearLayout>-->
 
-                <TextView
-                    android:id="@+id/saldoPayLater"
-                    android:layout_width="0dp"
-                    android:layout_weight="1.4"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_gravity="center"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/rp_0"
-                    android:textSize="@dimen/_20ssp"
-                    android:textColor="@android:color/white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView9"
-                    />
-
-                <LinearLayout
-                    android:id="@+id/riwayatLl"
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.6"
-                    android:background="@drawable/layout_rounded"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:layout_gravity="center"
-                    android:layout_height="@dimen/_28sdp">
-                    <TextView
-                        android:text="@string/riwayat"
-                        android:textColor="@color/colorBlue"
-                        android:textSize="@dimen/_12ssp"
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_28sdp" />
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <ScrollView
         android:scrollbars="none"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingEnd="@dimen/_15sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -87,38 +123,156 @@
             <!--Pinjaman Multiguna-->
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="22dp"
+                android:layout_height="wrap_content"
                 android:gravity="start|center"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:textSize="@dimen/_12ssp"
                 android:text="@string/pinjaman_multiguna"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/black"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
+                />
 
-            <com.synnapps.carouselview.CarouselView
-                android:visibility="gone"
+            <HorizontalScrollView
+                android:visibility="visible"
+                android:scrollbars="none"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_120sdp">
+
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/cardKilat"
+                        android:src="@drawable/card"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:layout_width="@dimen/_240sdp"
+                        android:layout_height="@dimen/_120sdp"/>
+                    <ImageView
+                        android:id="@+id/icKilat"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_alignStart="@id/cardKilat"
+                        android:layout_alignTop="@id/cardKilat"
+                        android:src="@drawable/ic_kilat"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"/>
+                    <TextView
+                        android:text="@string/dumi_kilat"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_alignTop="@id/icKilat"
+                        android:layout_alignBottom="@id/icKilat"
+                        android:layout_toEndOf="@id/icKilat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/kilatDesk"
+                        android:text="@string/dumi_kilat_deskripsi"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/white"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_alignEnd="@id/cardKilat"
+                        android:layout_alignStart="@id/icKilat"
+                        android:layout_below="@id/icKilat"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+                    <Button
+                        android:id="@+id/kilatButton"
+                        android:text="@string/ajukan"
+                        android:textAllCaps="false"
+                        android:textColor="@color/blueKilat"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:layout_below="@id/kilatDesk"
+                        android:background="@drawable/button_lanjut_design"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        android:layout_alignStart="@id/icKilat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_20sdp"/>
+
+                    <ImageView
+                        android:id="@+id/cardRegular"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="@dimen/_240sdp"
+                        android:layout_height="@dimen/_120sdp"
+                        android:layout_marginStart="-1dp"
+                        android:layout_toEndOf="@id/cardKilat"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/card2" />
+
+                    <ImageView
+                        android:id="@+id/icRegular"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_alignStart="@id/cardRegular"
+                        android:layout_alignTop="@id/cardRegular"
+                        android:src="@drawable/ic_regular"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"/>
+
+                    <TextView
+                        android:text="@string/dumi_regular"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_alignTop="@id/icRegular"
+                        android:layout_alignBottom="@id/icRegular"
+                        android:layout_toEndOf="@id/icRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/regularDesk"
+                        android:text="@string/dumi_kilat_deskripsi"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/white"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_alignEnd="@id/cardRegular"
+                        android:layout_alignStart="@id/icRegular"
+                        android:layout_below="@id/icRegular"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+                    <Button
+                        android:id="@+id/regularButton"
+                        android:text="@string/ajukan"
+                        android:textAllCaps="false"
+                        android:textColor="@color/purple"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:layout_below="@id/regularDesk"
+                        android:background="@drawable/button_lanjut_design"
+                        android:layout_alignStart="@id/icRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_20sdp"/>
+                </RelativeLayout>
+
+            </HorizontalScrollView>
+
+
+            <!--Carousel  FF777777-->
+           <!-- <com.synnapps.carouselview.CarouselView
+                android:visibility="visible"
                 android:id="@+id/caraouselViewPinjaman"
                 app:fillColor="@color/white"
+                android:layout_marginTop="@dimen/_15sdp"
                 app:pageColor="#00000000"
-                android:paddingStart="@dimen/_30sdp"
-                android:paddingEnd="@dimen/_30sdp"
-                android:paddingTop="@dimen/_15sdp"
-                android:paddingBottom="@dimen/_15sdp"
                 app:radius="@dimen/_5sdp"
-                app:slideInterval="3000"
-                app:strokeColor="#FF777777"
+                app:slideInterval="0"
+                app:strokeColor="#3C0606"
                 app:strokeWidth="@dimen/_1sdp"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_150sdp"/>
+                android:layout_height="@dimen/_150sdp"/>-->
 
-
-            <LinearLayout
-                android:visibility="visible"
+            <!--Pinjaman-->
+            <!--<LinearLayout
+                android:visibility="gone"
                 android:id="@+id/dumi_kilat"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="20dp"
@@ -253,8 +407,10 @@
                         android:text="@string/ajukan"
                         android:textColor="@android:color/white" />
                 </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
+            </LinearLayout>-->
+
+            <!--Pinjaman pensiun-->
+           <!-- <LinearLayout
                 android:id="@+id/dumi_pensiun_bumn"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
@@ -262,7 +418,7 @@
                 android:baselineAligned="false"
                 android:orientation="horizontal"
                 android:weightSum="2">
-                <!--Dumi Pensiun-->
+                &lt;!&ndash;Dumi Pensiun&ndash;&gt;
                 <LinearLayout
                     android:visibility="gone"
                     android:layout_width="0dp"
@@ -327,7 +483,7 @@
                         android:text="@string/ajukan"
                         android:textColor="@android:color/white" />
                 </LinearLayout>
-                <!--Dumi BUMN-->
+                &lt;!&ndash;Dumi BUMN&ndash;&gt;
                 <LinearLayout
                     android:visibility="gone"
                     android:layout_width="0dp"
@@ -391,70 +547,247 @@
                         android:text="@string/ajukan"
                         android:textColor="@android:color/white" />
                 </LinearLayout>
-            </LinearLayout>
+            </LinearLayout>-->
 
-            <!--Pembelian & Top Up-->
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:orientation="horizontal"
+            <TextView
+                android:gravity="start|center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:baselineAligned="false">
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:text="@string/pembelian_topup"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:gravity="start|center"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginBottom="5dp"
-                        android:text="@string/pembelian_topup"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@android:color/black"
-                        app:autoSizeMinTextSize="8sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="15sp"
-                        tools:autoSizeStepGranularity="1sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="end"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/lihat_semua"
-                        android:gravity="end|center"
-                        android:layout_width="match_parent"
-                        android:layout_height="16dp"
-                        android:text="@string/lihat_semua"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="#1560DB"
-                        app:autoSizeMinTextSize="8sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="15sp"
-                        tools:autoSizeStepGranularity="1sp" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <GridLayout
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+            <RelativeLayout
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <!--Isi Pulsa-->
-                <LinearLayout
+
+                <ImageView
+                    android:id="@+id/icPulsa"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/layout_rounded_home"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@drawable/ic_pulsa" />
+
+                <TextView
+                    android:id="@+id/textPulsa"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/icPulsa"
+                    android:layout_alignStart="@id/icPulsa"
+                    android:layout_alignEnd="@id/icPulsa"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:gravity="center"
+                    android:text="@string/pulsa"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8ssp" />
+
+                <ImageView
+                    android:id="@+id/icPln"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_toEndOf="@id/icPulsa"
+                    android:background="@drawable/layout_rounded_home"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@drawable/ic_token_pln" />
+                <TextView
+                    android:id="@+id/textPln"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/icPln"
+                    android:layout_alignStart="@id/icPln"
+                    android:layout_alignEnd="@id/icPln"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:gravity="center"
+                    android:text="@string/token_pln"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8ssp" />
+
+                <ImageView
+                    android:id="@+id/icGopay"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_toEndOf="@id/icPln"
+                    android:background="@drawable/layout_rounded_home"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@drawable/ic_gopay" />
+
+                <TextView
+                    android:id="@+id/textGopay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/icGopay"
+                    android:layout_alignStart="@id/icGopay"
+                    android:layout_alignEnd="@id/icGopay"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:gravity="center"
+                    android:text="@string/gopay"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8ssp" />
+
+                <ImageView
+                    android:id="@+id/icOvo"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_toEndOf="@id/icGopay"
+                    android:background="@drawable/layout_rounded_home"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@drawable/ic_ovo" />
+
+                <TextView
+                    android:id="@+id/textOvo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/icOvo"
+                    android:layout_alignStart="@id/icOvo"
+                    android:layout_alignEnd="@id/icOvo"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:gravity="center"
+                    android:text="@string/ovo"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8ssp" />
+
+                <ImageView
+                    android:id="@+id/icHotel"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_below="@id/textPulsa"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/layout_rounded_home"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@drawable/ic_hotel" />
+                <TextView
+                    android:id="@+id/textHotel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/icHotel"
+                    android:layout_alignStart="@id/icHotel"
+                    android:layout_alignEnd="@id/icHotel"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:gravity="center"
+                    android:text="@string/hotel"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8ssp" />
+
+                <ImageView
+                    android:id="@+id/icPesawat"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_alignTop="@id/icHotel"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_toEndOf="@id/icHotel"
+                    android:background="@drawable/layout_rounded_home"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@drawable/ic_pesawat" />
+                <TextView
+                    android:id="@+id/textPesawat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/icPesawat"
+                    android:layout_alignStart="@id/icPesawat"
+                    android:layout_alignEnd="@id/icPesawat"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:gravity="center"
+                    android:text="@string/pesawat"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8ssp" />
+
+                <ImageView
+                    android:id="@+id/icKereta"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_alignTop="@id/icHotel"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_toEndOf="@id/icPesawat"
+                    android:background="@drawable/layout_rounded_home"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@drawable/ic_kereta" />
+                <TextView
+                    android:id="@+id/textKereta"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/icPesawat"
+                    android:layout_alignStart="@id/icKereta"
+                    android:layout_alignEnd="@id/icKereta"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:gravity="center"
+                    android:text="@string/kereta"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8ssp" />
+
+                <ImageView
+                    android:id="@+id/icSemua"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_alignTop="@id/icHotel"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_toEndOf="@id/icKereta"
+                    android:background="@drawable/layout_rounded_home"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@drawable/ic_all" />
+                <TextView
+                    android:id="@+id/textSemua"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/icPesawat"
+                    android:layout_alignStart="@id/icSemua"
+                    android:layout_alignEnd="@id/icSemua"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:gravity="center"
+                    android:text="@string/semua"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8ssp" />
+            </RelativeLayout>
+           <!-- <GridLayout
+                android:columnCount="4"
+                android:rowCount="2"
+                android:alignmentMode="alignBounds"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_120sdp">
+
+                <RelativeLayout
+                    android:layout_columnWeight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_50sdp">
+                    <ImageView
+                        android:id="@+id/pulsa"
+                        android:src="@drawable/ic_pulsa"
+                        android:background="@drawable/layout_rounded_home"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"/>
+                    <TextView
+                        android:layout_below="@id/pulsa"
+                        android:text="@string/isi_pulsa"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:textSize="@dimen/_8ssp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+
+
+
+
+
+                &lt;!&ndash;<LinearLayout
                     android:id="@+id/isi_pulsa_ll"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -486,7 +819,7 @@
                         tools:autoSizeMaxTextSize="12sp"
                         tools:autoSizeStepGranularity="1sp" />
                 </LinearLayout>
-                <!--Token PLN-->
+
                 <LinearLayout
                     android:id="@+id/token_ll"
                     android:layout_width="0dp"
@@ -520,41 +853,41 @@
                         tools:autoSizeStepGranularity="1sp" />
 
                 </LinearLayout>
-                <!--Gopay-->
+
                 <LinearLayout
-                    android:id="@+id/gopay_ll"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_row="0"
-                    android:layout_rowWeight="1"
-                    android:layout_column="2"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/layout_rounded_home"
+                android:id="@+id/gopay_ll"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                android:layout_column="2"
+                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                android:background="@drawable/layout_rounded_home"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_gopay" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:text="@string/gopay"
+                    app:autoSizeMinTextSize="6sp"
+                    app:autoSizeTextType="uniform"
+                    tools:autoSizeMaxTextSize="12sp"
+                    tools:autoSizeStepGranularity="1sp" />
 
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_gopay" />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="15dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
-                        android:text="@string/gopay"
-                        app:autoSizeMinTextSize="6sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="12sp"
-                        tools:autoSizeStepGranularity="1sp" />
-
-                </LinearLayout>
-                <!--Ovo-->
                 <LinearLayout
                     android:id="@+id/ovo_ll"
                     android:layout_width="0dp"
@@ -588,7 +921,7 @@
                         tools:autoSizeStepGranularity="1sp" />
 
                 </LinearLayout>
-                <!--Pesan Hotel-->
+
                 <LinearLayout
                     android:id="@+id/hotel_ll"
                     android:layout_width="0dp"
@@ -622,7 +955,7 @@
                         tools:autoSizeMaxTextSize="12sp"
                         tools:autoSizeStepGranularity="1sp" />
                 </LinearLayout>
-                <!--Pesawat-->
+
                 <LinearLayout
                     android:id="@+id/pesawat_ll"
                     android:layout_width="0dp"
@@ -657,7 +990,7 @@
                         tools:autoSizeStepGranularity="1sp" />
 
                 </LinearLayout>
-                <!--Kereta Api-->
+
                 <LinearLayout
                     android:id="@+id/kereta_ll"
                     android:layout_width="0dp"
@@ -692,7 +1025,7 @@
                         tools:autoSizeStepGranularity="1sp" />
 
                 </LinearLayout>
-                <!--Bus Travel-->
+
                 <LinearLayout
                     android:id="@+id/bus_ll"
                     android:layout_width="0dp"
@@ -710,7 +1043,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_bus_travel" />
+                        android:src="@drawable/ic_all" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -719,15 +1052,15 @@
                         android:layout_marginBottom="10dp"
                         android:fontFamily="sans-serif-medium"
                         android:gravity="center"
-                        android:text="@string/bus_travel"
+                        android:text="@string/semua"
                         android:textSize="@dimen/font_small"
                         app:autoSizeMinTextSize="6sp"
                         app:autoSizeTextType="uniform"
                         tools:autoSizeMaxTextSize="12sp"
                         tools:autoSizeStepGranularity="1sp" />
 
-                </LinearLayout>
-            </GridLayout>
+                </LinearLayout>&ndash;&gt;
+            </GridLayout>-->
 
         </LinearLayout>
     </ScrollView>

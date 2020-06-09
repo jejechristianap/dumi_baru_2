@@ -286,7 +286,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <RelativeLayout
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -305,7 +305,7 @@
                     tools:ignore="RelativeOverlap" />
             </RelativeLayout>
             <RelativeLayout
-                android:layout_marginTop="@dimen/_70sdp"
+                android:layout_marginTop="@dimen/_80sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView

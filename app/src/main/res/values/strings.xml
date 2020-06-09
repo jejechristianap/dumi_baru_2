@@ -533,7 +533,7 @@
         Republik Indonesia yang menyediakan, mengelola, dan mengoperasikan layanan pinjaman berbasis teknologi informasi,
         dalam hal ini bertindak  sebagai Penerima Kuasa dari Pemberi Pinjaman yang tersebut pada Lampiran 1 Perjanjian ini
         dan oleh karenanya bertindak untuk dan atas nama Pemberi Pinjaman tersebut, untuk menyediakan fasilitas pinjaman
-        konvensional kepada Penerima Pinjaman (untuk selanjutnya disebut sebagai “Penyelenggara”)</string>
+        konvensional kepada Penerima Pinjaman (untuk selanjutnya disebut sebagai “<b>Penyelenggara</b>”)</string>
     <string name="text3">2.	DANI KURNIA, Warga Negara Indonesia, beralamat di  Jl. Anggrek IV No. 158,
         pemegang Kartu Tanda Penduduk Nomor 3276012909660001 sebagai penerima fasilitas pinjaman konvensional
         yang diberikan oleh Pemberi Pinjaman yang diwakili oleh Penyelenggara (untuk selanjutnya disebut sebagai “Penerima Pinjaman”)</string>
@@ -654,4 +654,8 @@
     <string name="penerima">PENERIMA</string>
     <string name="ptfidac">PT FIDACINOVASITEKNOLOGI</string>
     <string name="penerimaPinjaman">"<b>Penerima Pinjaman</b>"</string>
+    <string name="qm">\?</string>
+    <string name="tkb90">TKB90 | 100%</string>
+    <string name="semua">Semua</string>
+    <string name="pulsa">Pulsa</string>
 </resources>

@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/photo_profile"
             android:layout_gravity="center"
-            android:src="@drawable/ic_profil"
+            android:src="@drawable/layout_round_corner_beranda"
             android:layout_width="120dp"
             android:layout_height="120dp"/>
 

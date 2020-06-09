@@ -209,18 +209,13 @@ public class RincianAkunActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(apiPhotoPath)
-                .error(R.drawable.ic_profil)
+                .error(R.drawable.layout_round_corner_beranda)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .transform(new CircleCrop(), new RoundedCorners(16))
                 .into(imgDpIv);
         imgDpIv.setRotation(90);
-        /*if(apiPhotoPath != null){
-            imgDpIv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//            photoIv.setImageURI(Uri.parse(apiPhotoPath));
-            imageLoader.displayImage(apiPhotoPath, imgDpIv);
-        }
-        ImageLoader.getInstance().destroy();*/
+
     }
 
     private void uploadProfile(){

@@ -1,5 +1,6 @@
 package com.minjem.dumi.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,13 +47,15 @@ public class MitraFragment extends Fragment {
     private String tujuan = "";
     private double bungaRupiah = 0.0;
     private double angsuran = 0.0;
+    private Context mContext;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pinjaman, container, false);
+        mContext = Objects.requireNonNull(getActivity()).getApplicationContext();
 
-        prefManager = SharedPrefManager.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext()).getUser();
+        prefManager = SharedPrefManager.getInstance(mContext).getUser();
         localID = new Locale("in", "ID");
         formatRp = NumberFormat.getCurrencyInstance(localID);
 
@@ -95,68 +99,73 @@ public class MitraFragment extends Fragment {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    JSONObject obj = new JSONObject(response.body().string());
-                    boolean cek = obj.getBoolean("status");
-                    if (cek){
-                        String data = obj.getString("data");
-                        JSONArray jsonArray = new JSONArray(data);
-                        for (int i = 0; i<jsonArray.length(); i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            int statusId = jsonObject.getInt("status");
-                            double pinjaman = jsonObject.getDouble("pinjaman");
-                            String lamaPinjaman = jsonObject.getString("lamaPinjaman");
-                            bungaRupiah = jsonObject.getDouble("bungaRupiah");
-                            angsuran = jsonObject.getDouble("angsuranPerbulan");
-                            double asuransi = jsonObject.getDouble("asuransiRupiah");
-                            double adminRupiah = jsonObject.getDouble("administrasiRupiah");
-                            double diterima = jsonObject.getDouble("diterimaRupiah");
-                            tglPengajuan = jsonObject.getString("tglPengajuan");
-                            tujuan = jsonObject.getString("tujuanPinjaman");
-                            if(statusId == 1){
-                                statusPinjamanTv.setText("Pengajuan");
-                                pkButton.setVisibility(View.GONE);
-                            } else if (statusId == 2){
-                                statusPinjamanTv.setText("Disetujui");
-                                pkButton.setVisibility(View.VISIBLE);
-                            } else if (statusId == 3){
-                                statusPinjamanTv.setText("Pengajuan ditolak");
-                                pkButton.setVisibility(View.GONE);
-                            } else if (statusId == 4){
-                                statusPinjamanTv.setText("Telah ditransfer");
-                                pkButton.setVisibility(View.GONE);
-                            } else if (statusId == 5){
-                                statusPinjamanTv.setText("Kredit berjalan");
-                                pkButton.setVisibility(View.GONE);
-                            } else if(statusId == 6){
-                                statusPinjamanTv.setText("Kredit Lunas");
-                                pkButton.setVisibility(View.GONE);
-                            } else {
-                                statusPinjamanTv.setText("!!Dalam Proses Pengembangan!!");
-                                pkButton.setVisibility(View.GONE);
+                if (response.isSuccessful()){
+                    try {
+                        JSONObject obj = new JSONObject(response.body().string());
+                        boolean cek = obj.getBoolean("status");
+                        if (cek){
+                            String data = obj.getString("data");
+                            JSONArray jsonArray = new JSONArray(data);
+                            for (int i = 0; i<jsonArray.length(); i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                int statusId = jsonObject.getInt("status");
+//                            int statusId = 1;
+                                double pinjaman = jsonObject.getDouble("pinjaman");
+                                String lamaPinjaman = jsonObject.getString("lamaPinjaman");
+                                bungaRupiah = jsonObject.getDouble("bungaRupiah");
+                                angsuran = jsonObject.getDouble("angsuranPerbulan");
+                                double asuransi = jsonObject.getDouble("asuransiRupiah");
+                                double adminRupiah = jsonObject.getDouble("administrasiRupiah");
+                                double diterima = jsonObject.getDouble("diterimaRupiah");
+                                tglPengajuan = jsonObject.getString("tglPengajuan");
+                                tujuan = jsonObject.getString("tujuanPinjaman");
+                                if(statusId == 1){
+                                    statusPinjamanTv.setText("Pengajuan");
+                                    pkButton.setVisibility(View.GONE);
+                                } else if (statusId == 2){
+                                    statusPinjamanTv.setText("Disetujui");
+                                    pkButton.setVisibility(View.VISIBLE);
+                                } else if (statusId == 3){
+                                    statusPinjamanTv.setText("Pengajuan ditolak");
+                                    pkButton.setVisibility(View.GONE);
+                                } else if (statusId == 4){
+                                    statusPinjamanTv.setText("Telah ditransfer");
+                                    pkButton.setVisibility(View.GONE);
+                                } else if (statusId == 5){
+                                    statusPinjamanTv.setText("Kredit berjalan");
+                                    pkButton.setVisibility(View.GONE);
+                                } else if(statusId == 6){
+                                    statusPinjamanTv.setText("Kredit Lunas");
+                                    pkButton.setVisibility(View.GONE);
+                                } else {
+                                    statusPinjamanTv.setText("!!Dalam Proses Pengembangan!!");
+                                    pkButton.setVisibility(View.GONE);
+                                }
+                                lamaPinjaman += " Bulan";
+                                pinjamanTv.setText(formatRp.format(pinjaman));
+                                tenorPinjamanTv.setText(lamaPinjaman);
+                                bungaTv.setText(formatRp.format(bungaRupiah));
+                                angsuranPerbulanTv.setText(formatRp.format(angsuran));
+                                asuransiTv.setText(formatRp.format(asuransi));
+                                adminTv.setText(formatRp.format(adminRupiah));
+                                jumlahTerimaTv.setText(formatRp.format(diterima));
+                                transferBankTv.setText(formatRp.format(6500));
+                                tglPengajuanTv.setText(tglPengajuan);
                             }
-                            lamaPinjaman += " Bulan";
-                            pinjamanTv.setText(formatRp.format(pinjaman));
-                            tenorPinjamanTv.setText(lamaPinjaman);
-                            bungaTv.setText(formatRp.format(bungaRupiah));
-                            angsuranPerbulanTv.setText(formatRp.format(angsuran));
-                            asuransiTv.setText(formatRp.format(asuransi));
-                            adminTv.setText(formatRp.format(adminRupiah));
-                            jumlahTerimaTv.setText(formatRp.format(diterima));
-                            transferBankTv.setText(formatRp.format(6500));
-                            tglPengajuanTv.setText(tglPengajuan);
                         }
+                    } catch (JSONException | IOException e) {
+                        Toast.makeText(mContext, "Mohon maaf server tidak terjangkau", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } else {
+                    Toast.makeText(mContext, "Mohon maaf server tidak terjangkau", Toast.LENGTH_SHORT).show();
                 }
+
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Toast.makeText(mContext, "Mohon maaf server tidak terjangkau", Toast.LENGTH_SHORT).show();
             }
         });
 
