@@ -61,14 +61,12 @@ public class TakePicture extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_picture);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if(checkSelfPermission(Manifest.permission.CAMERA) ==
-                    PackageManager.PERMISSION_DENIED ||
-                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                            PackageManager.PERMISSION_DENIED){
-                String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                requestPermissions(permission, 1);
-            }
+        if(checkSelfPermission(Manifest.permission.CAMERA) ==
+                PackageManager.PERMISSION_DENIED ||
+                checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                        PackageManager.PERMISSION_DENIED){
+            String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            requestPermissions(permission, 1);
         }
 
         pDialog = new ProgressDialog(TakePicture.this);
@@ -302,7 +300,7 @@ public class TakePicture extends AppCompatActivity {
         String nip = pref.getString("nip", null);
         String email = pref.getString("email", null);
         String pass = pref.getString("pass", null);
-        /*Value from LengkapiData*/
+        /*Value from DataPribadiActivity*/
         String noKtp = pref.getString("no_ktp", null);
         String namaLengkap = pref.getString("nama_lengkap", null);
         String agama = pref.getString("agama", null);
@@ -342,7 +340,7 @@ public class TakePicture extends AppCompatActivity {
 
         /*API Call Registrasi*/
         RegisterInterface regis = RetrofitClient.getClient().create(RegisterInterface.class);
-        Call<ResponseBody> call = regis.createUser(nip, email, pass, noTelp, noKtp,
+        /*Call<ResponseBody> call = regis.createUser(nip, email, pass, noTelp, noKtp,
                 namaLengkap, agama, jenisKelamin,tempatLahir, tanggalLahir, statusKawin, jumlahTanggungan,
                 title, ketTitle, inskerKerja, statusRumah, alamat, rt, rw, propinsi, kota, kecamatan, kelurahan,
                 kodePos, statusHubungan, namaPenanggung, noKtpPenanggung, namaIbu);
@@ -371,7 +369,7 @@ public class TakePicture extends AppCompatActivity {
                 Log.d("Error", "onFailure: " + t.getMessage());
                 pDialog.dismiss();
             }
-        });
+        });*/
     }
 
     /* Back button dialog */

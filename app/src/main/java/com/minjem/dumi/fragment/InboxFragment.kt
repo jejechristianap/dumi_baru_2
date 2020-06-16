@@ -14,10 +14,16 @@ import com.minjem.dumi.CustomProgressDialog
 
 import com.minjem.dumi.R
 import com.minjem.dumi.api.StatusPinjamanInterface
+import com.minjem.dumi.ecommerce.Helper.mToast
+import com.minjem.dumi.ecommerce.response.BandaraData
 import com.minjem.dumi.model.NotifikasiAdapter
 import com.minjem.dumi.model.NotifikasiData
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.retrofit.RetrofitClient
+import kotlinx.android.synthetic.main.fragment_inbox.*
+import kotlinx.android.synthetic.main.fragment_inbox.view.*
+import okhttp3.ResponseBody
+import org.json.JSONArray
 
 import org.json.JSONException
 import org.json.JSONObject
@@ -32,34 +38,39 @@ import retrofit2.Response
 class InboxFragment : Fragment() {
     lateinit var mCOntext : Context
     private var layoutManager: LinearLayoutManager? = null
-    var notifikasiData: MutableList<NotifikasiData>? = null
-    private var data: MutableList<NotifikasiData>? = null
+    val list : MutableList<NotifikasiData> = ArrayList()
     private var progressDialog = CustomProgressDialog()
-
     internal lateinit var notifikasiAdapter: NotifikasiAdapter
-    internal lateinit var recyclerView: RecyclerView
+    lateinit var mView: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        val view = inflater.inflate(R.layout.fragment_inbox, container, false)
+        mView = inflater.inflate(R.layout.fragment_inbox, container, false)
         mCOntext = this.context!!
-        recyclerView = view.findViewById(R.id.notifikasi_rv)
+
+        list.clear()
         layoutManager = LinearLayoutManager(mCOntext)
-        recyclerView.layoutManager = layoutManager
-        /*layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        notifikasiAdapter = new NotifikasiAdapter(getActivity(), data);
-        recyclerView.setAdapter(notifikasiAdapter);*/
+        mView.notifikasi_rv.layoutManager = layoutManager
+        notifikasiAdapter = NotifikasiAdapter(mCOntext, list)
+        mView.notifikasi_rv.adapter = notifikasiAdapter
 
-        //        getNotif();
-        return view
-    }
-
-    override fun onStart() {
-        super.onStart()
-        data = ArrayList()
         getNotif()
+
+        /*mView.srl.setOnRefreshListener {
+            mView.srl.isRefreshing = true
+            refreshList()
+        }*/
+        return mView
     }
+
+/*    private fun refreshList(){
+        //do processing to get new data and set your listview's adapter, maybe  reinitialise the loaders you may be using or so
+        //when your data has finished loading, cset the refresh state of the view to false
+        mView.srl.isRefreshing = false
+        progressDialog.show(mCOntext, "Memuat Data..")
+        list.clear()
+        getNotif()
+    }*/
+
 
     private fun getNotif() {
         val cek = RetrofitClient.getClient().create(StatusPinjamanInterface::class.java)
@@ -70,51 +81,49 @@ class InboxFragment : Fragment() {
         //        Toast.makeText(getActivity(), nip, Toast.LENGTH_SHORT).show();
 
         val call = cek.getNotif(nip)
-        call.enqueue(object : Callback<NotifikasiResponse> {
-            override fun onResponse(call: Call<NotifikasiResponse>, response: Response<NotifikasiResponse>) {
-                progressDialog.dialog.dismiss()
-                notifikasiData = response.body()!!.data as MutableList<NotifikasiData>
+        call.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful){
+                    val jsonObject = JSONObject(response.body()!!.string())
+                    if (jsonObject.getBoolean("status")){
+                        val jsonArray = JSONArray(jsonObject.getString("data"))
+                        for (i in 0 until jsonArray.length()){
+                            val id = jsonArray.getJSONObject(i).optInt("id")
+                            val status = jsonArray.getJSONObject(i).optInt("id")
+                            val judul = jsonArray.getJSONObject(i).getString("judul")
+                            val isi = jsonArray.getJSONObject(i).getString("isi")
+                            val waktu = jsonArray.getJSONObject(i).getString("waktu")
 
-                notifikasiAdapter = NotifikasiAdapter(mCOntext, notifikasiData!!)
-                recyclerView.adapter = notifikasiAdapter
-                notifikasiAdapter.notifyDataSetChanged()
+                            val data = NotifikasiData()
+                            data.id = id
+                            data.status = status
+                            data.judul = judul
+                            data.isi = isi
+                            data.waktu = waktu
+                            list.add(data)
+                        }
+                        notifikasiAdapter.filter(list)
+                        mView.notifikasi_rv.adapter = notifikasiAdapter
+                        notifikasiAdapter.notifyDataSetChanged()
+                        progressDialog.dialog.dismiss()
+//                        mToast(mCOntext,"Notif..")
+                    } else {
+                        progressDialog.dialog.dismiss()
+//                        mToast(mCOntext,"Koneksi server gagal..")
+                    }
+
+                } else {
+                    progressDialog.dialog.dismiss()
+//                    mToast(mCOntext,"Koneksi server gagal..")
+                }
+
             }
 
-            override fun onFailure(call: Call<NotifikasiResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.d("Fail", "onFailure: " + t.message)
                 progressDialog.dialog.dismiss()
             }
         })
     }
 
-    @SuppressLint("WrongConstant")
-    private fun writeRecycler(response: String) {
-        try {
-            val obj = JSONObject(response)
-            if (obj.getBoolean("status")) {
-                val notifikasiDataList = ArrayList<NotifikasiData>()
-                val jsonArray = obj.getJSONArray("data")
-                for (i in 0 until jsonArray.length()) {
-                    val notif = NotifikasiData()
-                    val notifObj = jsonArray.getJSONObject(i)
-                    notif.id = notifObj.getInt("id")
-                    notif.token = notifObj.getString("token")
-                    notif.judul = notifObj.getString("judul")
-                    notif.isi = notifObj.getString("isi")
-                    notif.status = notifObj.getInt("status")
-                    notif.waktu = notifObj.getString("waktu")
-                    notif.idNasabah = notifObj.getString("id_nasabah")
-                    notifikasiDataList.add(notif)
-                    Log.d("RecyclerView", "writeRecycler: $notif")
-                }
-                //                Toast.makeText(getActivity(), "Get data", Toast.LENGTH_SHORT).show();
-                notifikasiAdapter = NotifikasiAdapter(mCOntext, notifikasiDataList)
-                recyclerView.adapter = notifikasiAdapter
-                recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-            }
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-
-    }
 }

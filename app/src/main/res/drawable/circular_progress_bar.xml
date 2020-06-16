@@ -1,0 +1,16 @@
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="180"
+    android:toDegrees="180">
+    <shape
+        android:innerRadiusRatio="2.5"
+        android:shape="ring"
+        android:thickness="10dp"
+        android:useLevel="true" > <!-- this line fixes the issue for lollipop api 21 -->
+        <gradient
+            android:angle="0"
+            android:endColor="#00add5"
+            android:startColor="#00add5"
+            android:type="sweep"
+            android:useLevel="false" />
+    </shape>
+</rotate>

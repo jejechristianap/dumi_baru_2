@@ -19,7 +19,7 @@ public interface StatusPinjamanInterface {
 
     @FormUrlEncoded
     @POST("notification/get")
-    Call<NotifikasiResponse> getNotif(@Field("nipBaru") String nip);
+    Call<ResponseBody> getNotif(@Field("nipBaru") String nip);
 
 
 

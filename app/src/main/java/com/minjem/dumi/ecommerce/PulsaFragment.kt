@@ -214,7 +214,7 @@ class PulsaFragment : Fragment(){
         mProgress(progress)
         v.id_no_operator.setText("")
         v.id_btn_reload.visibility = View.GONE
-        api.retrofit.getPulsa( USERNAME, PASSWORD).enqueue(object : Callback<ResponseBody> {
+        api.retrofit.getPulsa( USERNAME, PASSWORD).enqueue(object : Callback<ResponseBody>  {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("Error",t.message!!)
                 progress.dismiss()

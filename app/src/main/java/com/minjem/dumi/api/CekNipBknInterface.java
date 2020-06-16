@@ -14,8 +14,7 @@ public interface CekNipBknInterface {
     Call<ResponseBody> getBkn(
             @Field("nip") String nip,
             @Field("tgl_lahir") String tgl,
-            @Field("namaPns") String namaPns,
-            @Field("token") String token
+            @Field("namaPns") String namaPns
     );
 
     @GET("bkn/token")

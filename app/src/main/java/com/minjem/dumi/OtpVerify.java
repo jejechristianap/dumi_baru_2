@@ -106,7 +106,7 @@ public class OtpVerify extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), LengkapiData.class));
+            startActivity(new Intent(getApplicationContext(), DataPribadiActivity.class));
         }
     }
 
@@ -218,7 +218,7 @@ public class OtpVerify extends AppCompatActivity {
                         //verification successful we will start the profile activity
 
                         progressBar.setVisibility(View.GONE);
-                        Intent intent = new Intent(OtpVerify.this, LengkapiData.class);
+                        Intent intent = new Intent(OtpVerify.this, DataPribadiActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
 

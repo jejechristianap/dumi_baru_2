@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
-        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:src="@drawable/ic_back_white"
         android:background="?selectableItemBackgroundBorderless"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="0dp"

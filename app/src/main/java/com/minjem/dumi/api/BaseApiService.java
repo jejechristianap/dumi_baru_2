@@ -20,5 +20,10 @@ public interface BaseApiService {
                                        @Field("email") String email,
                                        @Field("password") String password);
 
+    @FormUrlEncoded
+    @POST("izi_data/creadit_feature")
+    Call<ResponseBody> creditFeature(@Field("id") String id,
+                                     @Field("name") String name,
+                                     @Field("phone") String phone);
 
 }

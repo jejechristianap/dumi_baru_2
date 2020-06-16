@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".KontakDaruratActivity">
+
+    <ImageView
+        android:id="@+id/backKontakDarurat"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:src="@drawable/ic_back_black"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"/>
+
+    <ScrollView
+        android:layout_below="@id/backKontakDarurat"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/_15sdp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/dataPribadi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="@string/kontakDarurat"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/hubungan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/dataPribadi"
+                android:textSize="@dimen/_12ssp"
+                android:text="@string/hubungan"/>
+            <RelativeLayout
+                android:id="@+id/rlPendidikanTerakhir"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_below="@id/hubungan"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/spinner_custom"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/sHubungan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_down24dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/nama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/rlPendidikanTerakhir"
+                android:textSize="@dimen/_12ssp"
+                android:text="@string/nama"/>
+            <EditText
+                android:id="@+id/etNamaKontakDarurat"
+                android:layout_below="@id/nama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/black"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/nomor_telp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/etNamaKontakDarurat"
+                android:textSize="@dimen/_12ssp"
+                android:text="@string/no_telp"/>
+
+            <EditText
+                android:id="@+id/etNoTelpDarurat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/nomor_telp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="phone"
+                android:textColor="@android:color/black"
+                tools:ignore="LabelFor" />
+
+            <Button
+                android:id="@+id/bLanjutKontakDarurat"
+                android:layout_below="@id/etNoTelpDarurat"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/button_custom_design_darkblue"
+                android:text="@string/lanjut"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_18ssp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

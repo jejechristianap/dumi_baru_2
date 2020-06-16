@@ -15,6 +15,7 @@ import java.util.*
 
 const val USERNAME = "f!dac"
 const val PASSWORD = "f!dac2020"
+const val KOLOM = "Kolom ini tidak boleh kosong!"
 
 @RequiresApi(Build.VERSION_CODES.N)
 fun mDF(text : String) : String {

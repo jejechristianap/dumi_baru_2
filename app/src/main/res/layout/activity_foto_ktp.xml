@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FotoKtpActivity">
+    <ImageView
+        android:id="@+id/backFotoKtp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:src="@drawable/ic_back_black"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"/>
+
+    <ScrollView
+        android:layout_below="@id/backFotoKtp"
+        android:layout_alignParentBottom="true"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/fotoKtp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="@string/foto_ktp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ivFotoKtp"
+                android:src="@drawable/ktp_frame"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_below="@id/fotoKtp"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/text"
+                android:layout_below="@id/ivFotoKtp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/pastikanSemua"
+                android:paddingStart="@dimen/_25sdp"
+                android:paddingEnd="@dimen/_25sdp"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/takeImgKtp"
+                android:layout_centerInParent="true"
+                android:layout_below="@id/text"
+                android:background="@drawable/circle_bg"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:padding="@dimen/_17sdp"
+                android:src="@drawable/ic_ar_camera"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"/>
+
+            <TextView
+                android:id="@+id/tvUlangiFotoKtp"
+                android:layout_below="@id/ivFotoKtp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:gravity="center"
+                android:text="@string/ulangi"
+                android:textColor="#03A9F4"
+                android:textStyle="bold"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:textSize="@dimen/_18ssp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"/>
+
+            <Button
+                android:visibility="visible"
+                android:id="@+id/bLanjutKtp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_below="@id/tvUlangiFotoKtp"
+                android:background="@drawable/button_custom_design_darkblue"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:text="@string/lanjut"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_18ssp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

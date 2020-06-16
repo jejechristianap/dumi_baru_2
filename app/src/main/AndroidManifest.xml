@@ -20,7 +20,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="q">
-        <activity android:name=".PerjanjianKreditView"></activity>
+        <activity android:name=".FotoSelfiActivity"></activity>
+        <activity android:name=".FotoKtpActivity" />
+        <activity android:name=".RekeningBankActivity" />
+        <activity android:name=".KontakDaruratActivity" />
+        <activity android:name=".DataKeluargaActivity" />
+        <activity android:name=".PerjanjianKreditView" />
         <activity android:name=".ecommerce.transaction.RiwayatView" />
         <activity android:name=".ecommerce.PlnFragment" />
         <activity android:name=".PdfViewerActivity" />
@@ -34,7 +39,7 @@
         <activity android:name=".jenispinjaman.PinjamanPensiunActivity" />
         <activity android:name=".IsiPulsaActivity" />
         <activity android:name=".TakePicture" />
-        <activity android:name=".LengkapiData" />
+        <activity android:name=".DataPribadiActivity" />
         <activity android:name=".OtpVerify" />
         <activity android:name=".HalamanDepanActivity" />
         <activity

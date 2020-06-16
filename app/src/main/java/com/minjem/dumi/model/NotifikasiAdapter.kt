@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.minjem.dumi.R
 import kotlinx.android.synthetic.main.recycler_view_notifikasi.view.*
 
-class NotifikasiAdapter (internal var mContext : Context, internal var list : MutableList<NotifikasiData>) :
+class NotifikasiAdapter (internal var mContext : Context, internal var list : List<NotifikasiData>) :
         RecyclerView.Adapter<NotifikasiAdapter.HolderList>(){
     inner class HolderList (view : View) : RecyclerView.ViewHolder(view) {
         fun Data(item: NotifikasiData, position: Int) {
@@ -33,6 +33,11 @@ class NotifikasiAdapter (internal var mContext : Context, internal var list : Mu
 
     override fun onBindViewHolder(holder: NotifikasiAdapter.HolderList, position: Int) {
         holder.Data(list[position],position)
+    }
+
+    fun filter(new : MutableList<NotifikasiData>){
+        list = new.sortedByDescending { it.waktu.toString() }
+        notifyDataSetChanged()
     }
 
 }

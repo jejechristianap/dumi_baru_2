@@ -80,8 +80,8 @@
     <string name="bulan_36">36</string>
     <string name="saldo_pay_later">Saldo Pay Later</string>
     <string name="riwayat">Riwayat</string>
-    <string name="dumi_kilat_deskripsi">Pinjaman maksimal 15 juta rupiah dengan tenor maksimal 12 bulan. Bunga flat 9.9% per tahun.</string>
-    <string name="dumi_regular_deskripsi">Pinjaman maksimal 50 juta rupiah dengan tenor maksimal 36 bulan. Bunga flat 9.9% per tahun.</string>
+    <string name="dumi_kilat_deskripsi">Maksimal 15 juta rupiah dengan tenor maksimal 12 bulan. Bunga flat 9.9% per tahun.</string>
+    <string name="dumi_regular_deskripsi">Maksimal 50 juta rupiah dengan tenor maksimal 36 bulan. Bunga flat 9.9% per tahun.</string>
     <string name="rp_1jt">Rp1.000.000</string>
     <string name="biaya_asuransi_regular">Biaya Asuransi</string>
     <string name="pinjaman">Pinjaman</string>
@@ -118,13 +118,12 @@
     <string name="inskerNama">inskerNama:</string>
     <string name="tempat_lahir">Tempat dan tanggal lahir:</string>
     <string name="tglLahirPns">Tanggal Lahir:</string>
-    <string name="npwp">NPWP:</string>
-    <string name="no_ktp">No. KTP:</string>
+    <string name="no_ktp">Nomor KTP</string>
     <string name="tmt_pensiun">tmtPensiun:</string>
     <string name="gaji_pokok">Gaji Pokok:</string>
     <string name="jenis_kelamin">Jenis Kelamin:</string>
     <string name="nama_singkat">Nama Singkat:</string>
-    <string name="nama_ktp">Nama (Sesuai KTP):</string>
+    <string name="nama_ktp">Nama (Sesuai KTP)</string>
     <string name="title">Title</string>
     <string name="ket_title">Keterangan Title</string>
     <string name="no_telp">Nomor Telepon</string>
@@ -187,7 +186,7 @@
     <string name="data_transfer">Data Transfer</string>
     <string name="nam_bank">Nama Bank</string>
     <string name="bank">Contoh : MANDIRI</string>
-    <string name="no_rek">No. Rekening</string>
+    <string name="no_rek">Nomor Rekening</string>
     <string name="norekcontoh">Contoh 23412xxxxx</string>
     <string name="nama_pemilik_rekening">Nama Pemilik Rekening</string>
     <string name="daftar_sebagai">Daftar Sebagai</string>
@@ -584,7 +583,7 @@
     <string name="text16">Untuk menjamin bahwa Penerima Pinjaman akan melakukan pelunasan pinjaman tepat waktu yang telah disepakati
         Para Pihak berdasarkan Perjanjian ini, maka Penerima Pinjaman berjanji dan dengan ini mengikatkan diri untuk membuat surat
         kuasa pemotongan gaji/pendapatan kepada bendahara gaji/juru bayar pendapatan di tempat Penerima Pinjaman bekerja/berusaha.</string>
-    <string name="text17">Pasal 5\PERNYATAAN DAN JAMINAN\n</string>
+    <string name="text17">Pasal 5\nPERNYATAAN DAN JAMINAN\n</string>
     <string name="text18">Penerima Pinjaman dengan ini menyatakan pengakuan dengan sebenar–benarnya serta menjamin kepada
         Penyelenggara, sebagaimana Penyelenggara menerima pernyataan dan pengakuan
         Penerima Pinjaman, bahwa:\n\n1.	Penerima Pinjaman berhak dan berwenang sepenuhnya untuk menandatangani
@@ -603,9 +602,9 @@
         mengikatkan diri untuk membebaskan Penyelenggara dari segala tuntutan atau gugatan yang
         datang dari pihak mana pun dan/atau atas alasan apapun.
     </string>
-    <string name="text19">Pasal 6\HUKUM YANG BERLAKU\n</string>
+    <string name="text19">Pasal 6\nHUKUM YANG BERLAKU\n</string>
     <string name="text20">Pelaksanaan Perjanjian ini tunduk kepada ketentuan perundang-undangan yang berlaku di Indonesia.</string>
-    <string name="text21">Pasal 7\PENYELESAIAN PERSELISIHAN\n</string>
+    <string name="text21">Pasal 7\nPENYELESAIAN PERSELISIHAN\n</string>
     <string name="text22">1. Apabila di kemudian hari terjadi perbedaan pendapat atau penafsiran atas
         hal-hal yang tercantum di dalam Perjanjian ini atau terjadi perselisihan atau sengketa dalam
         pelaksanaan Perjanjian ini, Para Pihak sepakat untuk menyelesaikannya secara
@@ -623,7 +622,7 @@
         sepakat bahwa Para Pihak dapat meminta pelaksanaan (eksekusi) putusan BANI tersebut pada setiap
         Pengadilan di wilayah hukum Republik Indonesia.
     </string>
-    <string name="text23">Pasal 8\KETENTUAN PENUTUP\n</string>
+    <string name="text23">Pasal 8\nKETENTUAN PENUTUP\n</string>
     <string name="text24">1. Penyelenggara dan Penerima Pinjaman dengan ini,
         sepakat dan setuju untuk memberlakukan seluruh ketentuan-ketentuan
         yang diatur di dalam Perjanjian ini.\n\n2.	Sebelum Perjanjian ini
@@ -658,4 +657,16 @@
     <string name="tkb90">TKB90 | 100%</string>
     <string name="semua">Semua</string>
     <string name="pulsa">Pulsa</string>
+    <string name="pendidikan">Pendidikan Terakhir</string>
+    <string name="noNpwp">Nomor NPWP</string>
+    <string name="namaPasangan">Nama Pasangan</string>
+    <string name="tglLahirPasangan">Tanggal Lahir Pasangan</string>
+    <string name="kontakDarurat">Kontak Darurat</string>
+    <string name="hubungan">Hubungan</string>
+    <string name="rekeningBank">Rekening Bank</string>
+    <string name="namaBank">Nama Bank</string>
+    <string name="pastikanSemua">Pastikan semua informasi yang tertera pada KTP terlihat dengan jelas!</string>
+    <string name="denganIniSaya">Dengan ini saya menyatakan bahwa informasi nama dan nomor rekening yang saya berikan telah lengkap dan benar. segala resiko serta penanggungjawaban yang timbul atas dana yang ditransfer ke rekening tersebut adalah tanggung jawab saya</string>
+    <string name="ulangi">Ulangi</string>
+    <string name="selfiKtp">Selfie dengan KTP</string>
 </resources>

@@ -34,10 +34,41 @@ public interface RegisterInterface {
             @Field("kota") String kota,
             @Field("kecamatan") String kecamatan,
             @Field("kelurahan") String kelurahan,
+            /*Fieldnya di app baru g ada, di api juga g ada*/
             @Field("kode_pos") String kodePos,
-            @Field("status_hubungan") String statusHubungan,
-            @Field("nama_penanggung") String namaPenanggung,
-            @Field("no_ktp_penanggung") String noKtpPenanggung,
-            @Field("nama_gadis_ibu") String namaGadisIbu
+            /*Perubahan param*/
+            @Field("status_hubungan_kontak_darurat") String statusHubungan,
+            @Field("nama_kontak_darurat") String namaPenanggung,
+            @Field("no_telp_kontak_darurat") String noKtpPenanggung,
+            @Field("nama_gadis_ibu") String namaGadisIbu,
+
+            /*data baru*/
+            @Field("dataBkn") String dataBkn,
+            @Field("featurelist") String featurelist,
+            @Field("creditscore") String creditscore,
+            @Field("identity_address") String identity_address,
+            @Field("identity_match") String identity_match,
+            @Field("identity_nationnality") String identity_nationnality,
+            @Field("identity_status") String identity_status,
+            @Field("identity_work") String identity_work,
+            @Field("isfacebook") String isfacebook,
+            @Field("iswhatsapp") String iswhatsapp,
+            @Field("multiphone_idinfo") String multiphone_idinfo,
+            @Field("multiphone_phoneinfo_id") String multiphone_phoneinfo_id,
+            @Field("multiphone_phoneinfo_id_phone") String multiphone_phoneinfo_id_phone,
+            @Field("multiphone_status") String multiphone_status,
+            @Field("phoneage") String phoneage,
+            @Field("phoneage_status") String phoneage_status,
+            @Field("phonealive_id_num") String phonealive_id_num,
+            @Field("phonealive_phone_num") String phonealive_phone_num,
+            @Field("phonealive_status") String phonealive_status,
+            @Field("phonescore_status") String phonescore_status,
+            @Field("npwp") String npwp,
+            @Field("namaPasangan") String namaPasangan,
+            @Field("noKtpPasangan") String noKtpPasangan,
+            @Field("tglLahirPasangan") String tglLahirPasangan,
+            @Field("namaBank") String namaBank,
+            @Field("namaRekening") String namaRekening,
+            @Field("noRekening") String noRekening
     );
 }

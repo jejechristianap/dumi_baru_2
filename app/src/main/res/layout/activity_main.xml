@@ -22,8 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:itemBackground="@android:color/white"
-        app:itemTextColor="@color/colorBlue"
-        app:itemRippleColor="@color/bluetkb"
         app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

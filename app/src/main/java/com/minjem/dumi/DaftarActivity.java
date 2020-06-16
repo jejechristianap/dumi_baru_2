@@ -6,15 +6,12 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -47,11 +44,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;*/
-import com.google.gson.JsonObject;
 import com.minjem.dumi.akun.KebijakanPrivasiActivity;
 import com.minjem.dumi.api.CekNipBknInterface;
 import com.minjem.dumi.api.CekUserExist;
-import com.minjem.dumi.api.LoginInterface;
 import com.minjem.dumi.retrofit.RetrofitClient;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -132,14 +127,12 @@ public class DaftarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar);
 
-        pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
+        pref = getApplicationContext().getSharedPreferences("DATA", 0); // 0 - for private mode
         editor = pref.edit();
 
         LinearLayout ll = findViewById(R.id.email_password);
         ll.setVisibility(View.GONE);
 
-        pref = getApplicationContext().getSharedPreferences("Daftar", 0); // 0 - for private mode
-        editor = pref.edit();
 
         syaratTv = findViewById(R.id.setuju_tv);
         syaratTv.setText(Html.fromHtml(getString(R.string.saya_setuju)));
@@ -183,7 +176,7 @@ public class DaftarActivity extends AppCompatActivity {
 
 
         nipCheckBox.setOnClickListener(v -> {
-            getToken();
+            cekUser();
         });
 
         myCalendar = Calendar.getInstance();
@@ -201,26 +194,6 @@ public class DaftarActivity extends AppCompatActivity {
                     .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                     myCalendar.get(Calendar.DAY_OF_MONTH)).show();
         });
-
-        /*nipCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-                masukanNipEt.setCursorVisible(false);
-                String token = tokenTv.getText().toString();
-                if (TextUtils.isEmpty(token)){
-                    Toast toast = Toast.makeText(this, "Token Kosong!", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.TOP|Gravity.END,200,300);
-                    toast.show();
-                    masukanNipEt.setCursorVisible(true);
-                    nipCheckBox.setChecked(false);
-                    return;
-                }
-
-            } else {
-                masukanNipEt.setCursorVisible(true);
-                emailPassLl.setVisibility(View.GONE);
-            }
-        });*/
 
         showPassCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(isChecked){
@@ -295,7 +268,9 @@ public class DaftarActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), LengkapiData.class));
+            Intent i = new Intent(getApplicationContext(), DataPribadiActivity.class);
+            i.putExtra("namaKtp", namaPnsEt.getText().toString());
+            startActivity(i);
         }
     }
 
@@ -395,9 +370,11 @@ public class DaftarActivity extends AppCompatActivity {
                         JSONArray jsonArray = new JSONArray(obj.getString("data"));
                         if (jsonArray.length() == 0){
                             Toast.makeText(DaftarActivity.this, "Mohon maaf kami belum bekerja sama dengan Instansi anda.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(DaftarActivity.this, "NIP anda sudah terdaftar", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(DaftarActivity.this, MasukActivity.class));
                         }
-                        Toast.makeText(DaftarActivity.this, "NIP anda sudah terdaftar", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(DaftarActivity.this, MasukActivity.class));
+
                     } else {
                         cekNip();
                     }
@@ -435,23 +412,29 @@ public class DaftarActivity extends AppCompatActivity {
 
 
         CekNipBknInterface cek = RetrofitClient.getClient().create(CekNipBknInterface.class);
-        Call<ResponseBody> call = cek.getBkn(nip, tglLahir, namaPns, accessToken);
+        Call<ResponseBody> call = cek.getBkn(nip, tglLahir, namaPns);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d("Res", "onResponse: " +response.body());
                 try {
                     JSONObject jsonObject = new JSONObject(response.body().string());
+                    String data = jsonObject.getString("data");
                     JSONObject request = new JSONObject(jsonObject.getString("data"));
                     if(request.getInt("code") == 1){
                         pDialog.dismiss();
                         JSONObject jsonData = new JSONObject(request.getString("data"));
-                        String inskerNama = jsonData.getString("unorNama");
+                        String inskerNama = jsonData.getString("instansiKerjaNama");
                         String namaPns = jsonData.getString("nama");
                         String tglLahir = jsonData.getString("tglLahir");
-                        editor.putString("inskerNama", inskerNama);
+                        String tempatLahir = jsonData.getString("tempatLahir");
+                        String jenisKelamin = jsonData.getString("jenisKelamin");
+                        editor.putString("instansiKerjaNama", inskerNama);
                         editor.putString("namaPns", namaPns);
                         editor.putString("tglLahir", tglLahir);
+                        editor.putString("tempatLahir", tempatLahir);
+                        editor.putString("jenisKelamin", jenisKelamin);
+                        editor.putString("dataBkn", data);
                         Log.d("Data", "unorNama: " + inskerNama  + "\nNama : " + namaPns + "\ntglLahir: " + tglLahir );
 
                         Toast.makeText(DaftarActivity.this, "NIP anda ditemukan..", Toast.LENGTH_SHORT).show();
@@ -459,6 +442,7 @@ public class DaftarActivity extends AppCompatActivity {
                         emailEt.requestFocus();
                     }else{
                         Toast.makeText(DaftarActivity.this, request.getString("data"), Toast.LENGTH_SHORT).show();
+                        emailPassLl.setVisibility(View.GONE);
                         masukanNipEt.setCursorVisible(true);
                         pDialog.dismiss();
                     }

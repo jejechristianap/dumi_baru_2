@@ -7,7 +7,6 @@ class NotifikasiData {
     var isi: String? = null
     var waktu: String? = null
     var idNasabah: String? = null
-    var token: String? = null
 
 
 }

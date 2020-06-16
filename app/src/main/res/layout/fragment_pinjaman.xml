@@ -7,88 +7,42 @@
     android:weightSum="2"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"
-        android:background="@drawable/bg_beranda"
         android:gravity="center"
-        android:weightSum="1"
-        android:orientation="vertical"
+        android:layout_height="@dimen/_200sdp"
+        android:background="@drawable/bg_beranda"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ProgressBar
+            android:id="@+id/progressTagihan"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:background="@drawable/circle_shape"
+            android:progressDrawable="@drawable/circular_progress_bar"
+            android:max="100"
+            android:progress="40"
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="@dimen/_180sdp"/>
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:id="@+id/tagihan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/progressTagihan"
+            android:layout_alignEnd="@+id/progressTagihan"
+            android:layout_alignBottom="@id/progressTagihan"
+            android:layout_alignTop="@id/progressTagihan"
+            android:padding="@dimen/_20sdp"
             android:gravity="center"
             android:text="@string/tagihan"
             android:textColor="@android:color/white"
-            app:autoSizeMinTextSize="8sp"
-            app:autoSizeTextType="uniform"
-            tools:autoSizeMaxTextSize="30sp"
-            tools:autoSizeStepGranularity="2sp" />
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold" />
 
-    </LinearLayout>
-
-    <!-- Doughnut chart starts here -->
-    <!--<androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
-
-        &lt;!&ndash; ProgressBar that represents a total of 100% &ndash;&gt;
-        <ProgressBar
-            android:id="@+id/background_progressbar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="100"
-            android:progressDrawable="@drawable/stat_full"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        &lt;!&ndash; ProgressBar that represents a chart slice, where "android:progress" is the % value of the slice &ndash;&gt;
-        <ProgressBar
-            android:id="@+id/stats_progressbar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="70"
-            android:progressDrawable="@drawable/stat_progress"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        &lt;!&ndash; The text that goes in a center of the chart &ndash;&gt;
-        <TextView
-            android:id="@+id/number_of_calories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1500/2000"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>-->
-    <!-- Doughnut chart ends here -->
+    </RelativeLayout>
 
     <ScrollView
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_weight="1.7"
         android:layout_height="0dp">

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DataKeluargaActivity">
+
+    <ImageView
+        android:id="@+id/backDataKeluarga"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:src="@drawable/ic_back_black"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"/>
+
+    <ScrollView
+        android:layout_below="@id/backDataKeluarga"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/_15sdp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/dataKeluarga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="@string/data_keluarga"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/namaIbu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/dataKeluarga"
+                android:textSize="@dimen/_12ssp"
+                android:text="@string/nama_ibu"/>
+            <EditText
+                android:id="@+id/etNamaIbu"
+                android:layout_below="@id/namaIbu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/black"
+                tools:ignore="LabelFor" />
+
+
+
+            <TextView
+                android:id="@+id/noNpwp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/etNamaIbu"
+                android:textSize="@dimen/_12ssp"
+                android:text="@string/namaPasangan"/>
+
+            <EditText
+                android:id="@+id/etNamaPasangan"
+                android:layout_below="@id/noNpwp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/black"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/noKtp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/etNamaPasangan"
+                android:textSize="@dimen/_12ssp"
+                android:text="@string/no_ktp"/>
+            <EditText
+                android:id="@+id/etNoKtpPasangan"
+                android:layout_below="@id/noKtp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="number"
+                android:maxLength="16"
+                android:textColor="@android:color/black"
+                tools:ignore="LabelFor" />
+            <TextView
+                android:id="@+id/tglLahirPasangan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/etNoKtpPasangan"
+                android:textSize="@dimen/_12ssp"
+                android:text="@string/tglLahirPasangan"/>
+
+            <TextView
+                android:id="@+id/tglLahirPasanganTv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:autofillHints=""
+                android:layout_below="@id/tglLahirPasangan"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:gravity="bottom"
+                />
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/tglLahirPasanganTv"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/colorBlue" />
+
+            <Button
+                android:id="@+id/bLanjutDataKeluarga"
+                android:layout_below="@id/line1"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@drawable/button_custom_design_darkblue"
+                android:text="@string/lanjut"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_18ssp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

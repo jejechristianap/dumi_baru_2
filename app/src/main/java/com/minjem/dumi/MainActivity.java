@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +14,7 @@ import com.minjem.dumi.fragment.AkunFragment;
 import com.minjem.dumi.fragment.BantuanFragment;
 import com.minjem.dumi.fragment.BerandaFragment;
 import com.minjem.dumi.fragment.InboxFragment;
-import com.minjem.dumi.fragment.MitraFragment;
+import com.minjem.dumi.fragment.PinjamanFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.minjem.dumi.model.SharedPrefManager;
 
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 fragment = new InboxFragment();
                 break;
             case R.id.bottom_navigation_mitra:
-                fragment = new MitraFragment();
+                fragment = new PinjamanFragment();
                 break;
             case R.id.bottom_navigation_bantuan:
                 fragment = new BantuanFragment();

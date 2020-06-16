@@ -11,8 +11,6 @@ import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.core.text.bold
-import androidx.core.text.buildSpannedString
 import com.minjem.dumi.model.SharedPrefManager
 import kotlinx.android.synthetic.main.activity_perjanjian_kredit_view.*
 import java.text.NumberFormat

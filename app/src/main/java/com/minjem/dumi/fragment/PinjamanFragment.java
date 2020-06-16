@@ -36,7 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MitraFragment extends Fragment {
+public class PinjamanFragment extends Fragment {
     private TextView statusPinjamanTv, pinjamanTv, tenorPinjamanTv, bungaTv, angsuranPerbulanTv, asuransiTv,
                         adminTv, transferBankTv, jumlahTerimaTv, tglPengajuanTv;
     private User prefManager;
@@ -109,7 +109,6 @@ public class MitraFragment extends Fragment {
                             for (int i = 0; i<jsonArray.length(); i++){
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 int statusId = jsonObject.getInt("status");
-//                            int statusId = 1;
                                 double pinjaman = jsonObject.getDouble("pinjaman");
                                 String lamaPinjaman = jsonObject.getString("lamaPinjaman");
                                 bungaRupiah = jsonObject.getDouble("bungaRupiah");
