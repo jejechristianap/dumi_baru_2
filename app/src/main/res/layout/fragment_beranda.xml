@@ -110,6 +110,9 @@
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
+
+
+
                     <ImageView
                         android:id="@+id/cardKilat"
                         android:src="@drawable/card"
@@ -160,6 +163,7 @@
                         android:text="@string/ajukan"
                         android:textAllCaps="false"
                         android:textColor="@color/blueKilat" />
+
                     <ImageView
                         android:id="@+id/cardRegular"
                         android:layout_width="@dimen/_250sdp"
@@ -189,7 +193,7 @@
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:id="@+id/regularDesk"
-                        android:text="@string/dumi_kilat_deskripsi"
+                        android:text="@string/dumi_regular_deskripsi"
                         android:textSize="@dimen/_10ssp"
                         android:textColor="@color/white"
                         android:layout_marginEnd="@dimen/_20sdp"

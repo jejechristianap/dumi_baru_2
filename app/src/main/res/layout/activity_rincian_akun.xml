@@ -18,7 +18,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/back_rincian"
         android:layout_width="wrap_content"
@@ -29,7 +28,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back_white" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -42,8 +40,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.432" />
-
-
     <ScrollView
         android:id="@+id/scrollView4"
         android:layout_width="match_parent"
@@ -180,6 +176,7 @@
 
             <!--Agama-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -189,8 +186,8 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
+                android:visibility="gone"
                 android:id="@+id/agama_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -205,6 +202,7 @@
                 tools:ignore="LabelFor" />
             <!--Jenis Kelamin-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -215,6 +213,7 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
+                android:visibility="gone"
                 android:id="@+id/jenis_kelamin_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -230,6 +229,7 @@
 
             <!--tempat lahir-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -240,6 +240,7 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
+                android:visibility="gone"
                 android:id="@+id/tempat_lahir_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -254,6 +255,7 @@
 
             <!--Status Kawin-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -263,8 +265,8 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
+                android:visibility="gone"
                 android:id="@+id/status_kawin_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -306,7 +308,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/title"
+                android:text="@string/pendidikan"
                 app:autoSizeMinTextSize="8sp"
                 android:textColor="@color/black"
                 app:autoSizeTextType="uniform"
@@ -402,6 +404,7 @@
 
             <!--RT-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -412,6 +415,7 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
+                android:visibility="gone"
                 android:id="@+id/rt_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -423,6 +427,7 @@
 
             <!--RW-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -433,6 +438,7 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
+                android:visibility="gone"
                 android:id="@+id/rw_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -444,6 +450,7 @@
 
             <!--Propinsi-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -453,8 +460,8 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
+                android:visibility="gone"
                 android:id="@+id/provinsi_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -467,6 +474,7 @@
 
             <!--Kota-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -476,8 +484,8 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
+                android:visibility="gone"
                 android:id="@+id/kota_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -490,6 +498,7 @@
 
             <!--Kecamatan-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -499,8 +508,8 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
+                android:visibility="gone"
                 android:id="@+id/kecamatan_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -513,6 +522,7 @@
 
             <!--Kelurahan-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -522,8 +532,8 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
+                android:visibility="gone"
                 android:id="@+id/kelurahan_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -545,7 +555,6 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
                 android:id="@+id/kode_pos_rincian"
                 android:layout_width="match_parent"
@@ -579,6 +588,7 @@
 
             <!--Data Keluarga-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginTop="20dp"
@@ -596,6 +606,7 @@
 
             <!--Status Hubungan-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -606,6 +617,7 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
+                android:visibility="gone"
                 android:id="@+id/status_hubungan_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -617,6 +629,7 @@
 
             <!--Nama Kerabat-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -627,6 +640,7 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
+                android:visibility="gone"
                 android:id="@+id/nama_kerabat_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -641,6 +655,7 @@
 
             <!--No Ktp-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -651,6 +666,7 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
+                android:visibility="gone"
                 android:id="@+id/no_ktp_kerabat_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -666,6 +682,7 @@
 
             <!--Nama Gadis Ibu-->
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="@dimen/marginTop10dp"
@@ -676,6 +693,7 @@
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
             <EditText
+                android:visibility="gone"
                 android:id="@+id/nama_ibu_rincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -692,5 +710,4 @@
         </LinearLayout>
 
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

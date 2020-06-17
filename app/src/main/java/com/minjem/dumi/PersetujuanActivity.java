@@ -81,30 +81,6 @@ public class PersetujuanActivity extends AppCompatActivity {
             String noRek = "";
             String pemilik = "";
 
-            /*if (TextUtils.isEmpty(namaBank)){
-                namaBankEt.setError("Kolom ini tidak boleh kosong..");
-                namaBankEt.requestFocus();
-                return;
-            } else {
-                namaBankEt.setError(null);
-            }
-
-            if (TextUtils.isEmpty(noRek)){
-                noRekEt.setError("Kolom ini tidak boleh kosong..");
-                noRekEt.requestFocus();
-                return;
-            } else {
-                noRekEt.setError(null);
-            }
-
-            if (TextUtils.isEmpty(pemilik)){
-                pemilikEt.setError("Kolom ini tidak boleh kosong..");
-                pemilikEt.requestFocus();
-                return;
-            } else {
-                pemilikEt.setError(null);
-            }*/
-
             String nip = pref.getString("nip", null);
             float pinjaman = pref.getFloat("pinjaman", 0.f);
             int plafond = pref.getInt("lamaPinjaman", 0);
@@ -168,10 +144,7 @@ public class PersetujuanActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(PersetujuanActivity.this, "Mohon maaf terjadi kesalahan, silahkan coba beberapa saat lagi.", Toast.LENGTH_SHORT).show();
                         }
-                    } catch (JSONException e) {
-                        pDialog.dismiss();
-                        e.printStackTrace();
-                    } catch (IOException e) {
+                    } catch (JSONException | IOException e) {
                         pDialog.dismiss();
                         e.printStackTrace();
                     }

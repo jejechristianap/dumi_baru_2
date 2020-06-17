@@ -10,11 +10,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:gravity="center"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_height="@dimen/_100sdp"
         android:background="@drawable/bg_beranda"
         app:layout_constraintTop_toTopOf="parent">
 
         <ProgressBar
+            android:visibility="gone"
             android:id="@+id/progressTagihan"
             style="?android:attr/progressBarStyleHorizontal"
             android:background="@drawable/circle_shape"
@@ -42,14 +43,14 @@
     </RelativeLayout>
 
     <ScrollView
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_weight="1.7"
         android:layout_height="0dp">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:orientation="horizontal"

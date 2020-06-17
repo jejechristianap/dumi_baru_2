@@ -134,8 +134,7 @@ interface BaseApiService {
                     @Field("tglLahirPasangan") tglLahirPasangan: String,
                     @Field("namaBank") namaBank: String,
                     @Field("namaRekening") namaRekening: String,
-                    @Field("noRekening") noRekening: String,
-                    toString: String
+                    @Field("noRekening") noRekening: String
     ): Call<ResponseBody>
 
     @Multipart

@@ -191,7 +191,7 @@ class BerandaFragment : Fragment() {
                                 }
                                 Log.d("SaldoUser", "Saldo: $saldoUser")
                                 localID = Locale("in", "ID")
-                                formatRp = NumberFormat.getCurrencyInstance(localID)
+                                formatRp = NumberFormat.getCurrencyInstance(localID!!)
                                 saldoTv!!.text = formatRp.format(saldoUser)
                             }
                         } catch (e: JSONException) {

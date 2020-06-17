@@ -20,14 +20,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="q">
-        <activity android:name=".FotoSelfiActivity"></activity>
+        <activity android:name=".FotoSelfiActivity"/>
         <activity android:name=".FotoKtpActivity" />
         <activity android:name=".RekeningBankActivity" />
         <activity android:name=".KontakDaruratActivity" />
         <activity android:name=".DataKeluargaActivity" />
         <activity android:name=".PerjanjianKreditView" />
         <activity android:name=".ecommerce.transaction.RiwayatView" />
-        <activity android:name=".ecommerce.PlnFragment" />
         <activity android:name=".PdfViewerActivity" />
         <activity android:name=".PelengkapanRegularActivity" />
         <activity android:name=".akun.UbahSandiActivity" />

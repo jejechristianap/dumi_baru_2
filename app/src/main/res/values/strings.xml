@@ -480,10 +480,7 @@
     <string name="persetujuan_atasan">Persetujuan Atasan</string>
     <string name="tagihan">Tagihan</string>
     <string name="apabila_pengajuan">Info!\nPengajuan pinjaman di atas tanggal 25,
-        akan kami proses pada awal bulan berikutnya.\n\nApabila pengajuan pinjaman
-        anda telah disetujui\nAnda akan
-        dibuatkan Rekening Bank Mandiri Taspen di kantor cabang yang ditentukan,\ndan proses pencairan akan di transfer ke
-        rekening tersebut.</string>
+        akan kami proses pada awal bulan berikutnya.</string>
     <string name="cek_setuju">Saya setuju</string>
     <string name="no_meter">Nomor Meter</string>
     <string name="ex_token">011xxxxx</string>

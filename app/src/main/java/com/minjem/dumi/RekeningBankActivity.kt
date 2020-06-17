@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.JsonWriter
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -65,9 +64,9 @@ class RekeningBankActivity : AppCompatActivity() {
         }
 
 
-        val JSONfile = File(getExternalFilesDir(null)!!.path, "nama_bank.json")
+//        val JSONfile = File(getExternalFilesDir(null)!!.path, "nama_bank.json")
 
-        var out: OutputStream? = null
+        /*val out: OutputStream? = null
         try {
             out = FileOutputStream(JSONfile)
         } catch (e: FileNotFoundException) {
@@ -77,7 +76,7 @@ class RekeningBankActivity : AppCompatActivity() {
             val writer = JsonWriter(OutputStreamWriter(out, "UTF-8"))
         } catch (e: UnsupportedEncodingException) {
             e.printStackTrace()
-        }
+        }*/
     }
 
     private fun moveTo(){
@@ -91,8 +90,7 @@ class RekeningBankActivity : AppCompatActivity() {
     }
 
     private fun getJsonDataFromLocalFile(): String? {
-        var jsonString = ""
-        jsonString = try {
+        return try {
             val inputStream: InputStream = assets.open("nama_bank.json")
             val fileSize: Int = inputStream.available()
             val buffer = ByteArray(fileSize)
@@ -103,7 +101,6 @@ class RekeningBankActivity : AppCompatActivity() {
             ex.printStackTrace()
             return null
         }
-        return jsonString
     }
 
     private fun getCityFromJsonData() {
@@ -126,7 +123,7 @@ class RekeningBankActivity : AppCompatActivity() {
         hideKeyBoard()
     }
     private fun hideKeyBoard() {
-        actvNamaBank.setOnItemClickListener { _, _, _, l ->
+        actvNamaBank.setOnItemClickListener { _, _, _, _ ->
             val imm: InputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             Objects.requireNonNull(imm).toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
         }

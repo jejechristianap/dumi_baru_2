@@ -34,15 +34,11 @@ public interface RegisterInterface {
             @Field("kota") String kota,
             @Field("kecamatan") String kecamatan,
             @Field("kelurahan") String kelurahan,
-            /*Fieldnya di app baru g ada, di api juga g ada*/
             @Field("kode_pos") String kodePos,
-            /*Perubahan param*/
             @Field("status_hubungan_kontak_darurat") String statusHubungan,
             @Field("nama_kontak_darurat") String namaPenanggung,
             @Field("no_telp_kontak_darurat") String noKtpPenanggung,
             @Field("nama_gadis_ibu") String namaGadisIbu,
-
-            /*data baru*/
             @Field("dataBkn") String dataBkn,
             @Field("featurelist") String featurelist,
             @Field("creditscore") String creditscore,
@@ -70,5 +66,5 @@ public interface RegisterInterface {
             @Field("namaBank") String namaBank,
             @Field("namaRekening") String namaRekening,
             @Field("noRekening") String noRekening
-    );
+       );
 }
