@@ -45,13 +45,14 @@
                 android:id="@+id/ivFotoKtp"
                 android:src="@drawable/ktp_frame"
                 android:layout_marginTop="@dimen/_30sdp"
+                android:scaleType="centerCrop"
                 android:layout_below="@id/fotoKtp"
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_200sdp"/>
 
             <TextView
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/text"
                 android:layout_below="@id/ivFotoKtp"
                 android:layout_marginTop="@dimen/_20sdp"
@@ -65,7 +66,7 @@
                 android:layout_height="wrap_content"/>
 
             <ImageView
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/takeImgKtp"
                 android:layout_centerInParent="true"
                 android:layout_below="@id/text"
@@ -77,6 +78,7 @@
                 android:layout_height="@dimen/_70sdp"/>
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tvUlangiFotoKtp"
                 android:layout_below="@id/ivFotoKtp"
                 android:layout_marginTop="@dimen/_20sdp"
@@ -92,7 +94,7 @@
                 android:layout_height="@dimen/_36sdp"/>
 
             <Button
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/bLanjutKtp"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_20sdp"

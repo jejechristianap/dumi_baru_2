@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +17,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
+import id.zelory.compressor.Compressor
+import id.zelory.compressor.Compressor.compress
+import androidx.lifecycle.lifecycleScope
+import com.minjem.dumi.util.FileUtils.getReadableFileSize
 import kotlinx.android.synthetic.main.activity_foto_ktp.*
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -26,6 +32,7 @@ class FotoKtpActivity : AppCompatActivity() {
     private val REQUEST_IMAGE_CAPTURE = 1
     val REQUEST_TAKE_PHOTO = 1
     lateinit var currentPhotoPath: String
+    private var compressedImage: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -140,45 +147,43 @@ class FotoKtpActivity : AppCompatActivity() {
         }
     }
 
-    private fun setPic() {
-        // Get the dimensions of the View
-        val targetW = ivFotoKtp.width
-        val targetH = ivFotoKtp.height
-        Log.d("TAG", "setPic: ${ivFotoKtp.width}, ${ivFotoKtp.height}")
-
-        val bmOptions = BitmapFactory.Options().apply {
-            // Get the dimensions of the bitmap
-            inJustDecodeBounds = true
-
-            val photoW: Int = outWidth
-            val photoH: Int = outHeight
-
-            // Determine how much to scale down the image
-            val scaleFactor: Int = Math.min(photoW/targetW, photoH/targetH);
-
-            // Decode the image file into a Bitmap sized to fill the View
-            inJustDecodeBounds = false
-            inSampleSize = scaleFactor
-            inPurgeable = true
-        }
-        BitmapFactory.decodeFile(currentPhotoPath, bmOptions)?.also { bitmap ->
-            ivFotoKtp.setImageBitmap(bitmap)
-        }
-    }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 //            ivFotoKtp.setImageURI(Uri.parse(currentPhotoPath))
-            Glide.with(this)
-                    .load(currentPhotoPath)
-                    .centerCrop()
-                    .into(ivFotoKtp)
-//            setPic()
+
+            val ktp = File(currentPhotoPath)
+
+            ktp.let { imageFile ->
+                lifecycleScope.launch {
+                    // Default compression
+                    compressedImage = compress(this@FotoKtpActivity, imageFile)
+                    setCompressedImage()
+                }
+            } ?: showError("Please choose an image!")
+
+
+
         }
     }
 
 
 
+    private fun setCompressedImage() {
+        compressedImage?.let {
+            ivFotoKtp.setImageBitmap(BitmapFactory.decodeFile(it.absolutePath))
+//            compressedSizeTextView.text = String.format("Size : %s", getReadableFileSize(it.length()))
+//            Toast.makeText(this, "Compressed image save in " + it.path, Toast.LENGTH_LONG).show()
+            Log.d("Size", "setCompressedImage: ${String.format("Size : %s", getReadableFileSize(it.length().toInt()))}")
+            Log.d("Compressor", "Compressed image save in " + it.path)
+        }
+    }
+
+    private fun showError(errorMessage: String) {
+        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+    }
+
+
 }
+

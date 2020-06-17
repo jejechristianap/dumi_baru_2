@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -15,18 +16,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.minjem.dumi.api.RegisterInterface
 import com.minjem.dumi.ecommerce.Helper.mToast
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
+import com.minjem.dumi.retrofit.RetrofitClient
+import com.minjem.dumi.util.FileUtils
+import id.zelory.compressor.Compressor.compress
+import kotlinx.android.synthetic.main.activity_foto_ktp.*
 import kotlinx.android.synthetic.main.activity_foto_selfi.*
-import retrofit2.Callback
-import retrofit2.Call
-import retrofit2.Response
+import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
-
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -37,6 +45,8 @@ class FotoSelfiActivity : AppCompatActivity() {
     lateinit var currentPhotoPath: String
     lateinit var api : HttpRetrofitClient
     private val progressDialog = CustomProgressDialog()
+    private var compressedImageKtp: File? = null
+    private var compressedImageSelfi: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +71,7 @@ class FotoSelfiActivity : AppCompatActivity() {
 
         bLanjutSelfi.setOnClickListener {
             daftar()
-            uploadImg()
+//            uploadImg()
         }
     }
 
@@ -149,24 +159,67 @@ class FotoSelfiActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
 //            ivFotoKtp.setImageURI(Uri.parse(currentPhotoPath))
-            Glide.with(this)
-                    .load(currentPhotoPath)
-                    .centerCrop()
-                    .into(ivFotoSelfi)
-//            setPic()
+
+            val selfi = File(currentPhotoPath)
+            val ktp = File(intent.getStringExtra("ktp")!!.toString())
+
+            selfi.let { imageFile ->
+                lifecycleScope.launch {
+                    compressedImageSelfi = compress(this@FotoSelfiActivity, imageFile)
+                    setCompressedImageSelfi()
+                }
+            }
+
+            ktp.let {  imageFile ->
+                lifecycleScope.launch {
+                    compressedImageKtp = compress(this@FotoSelfiActivity, imageFile)
+                    setCompressedImage()
+                } }
+
+
+
         }
     }
 
+    private fun setCompressedImageSelfi() {
+        compressedImageSelfi?.let {
+            ivFotoSelfi.setImageBitmap(BitmapFactory.decodeFile(it.absolutePath))
+//            compressedSizeTextView.text = String.format("Size : %s", getReadableFileSize(it.length()))
+//            Toast.makeText(this, "Compressed image save in " + it.path, Toast.LENGTH_LONG).show()
+            Log.d(" Selfi Size", "setCompressedImage: ${String.format("Selfi Size : %s", FileUtils.getReadableFileSize(it.length().toInt()))}")
+            Log.d("Compressor", "Compressed image save in " + it.path)
+        }
+    }
+
+    private fun setCompressedImage() {
+        compressedImageKtp?.let {
+//            ivFotoKtp.setImageBitmap(BitmapFactory.decodeFile(it.absolutePath))
+//            compressedSizeTextView.text = String.format("Size : %s", getReadableFileSize(it.length()))
+//            Toast.makeText(this, "Compressed image save in " + it.path, Toast.LENGTH_LONG).show()
+            Log.d("Size KTP", "setCompressedImage: ${String.format("KTP Size : %s", FileUtils.getReadableFileSize(it.length().toInt()))}")
+            Log.d("Compressor", "Compressed image save in " + it.path)
+        }
+    }
+
+
     private fun daftar(){
         val sp = getSharedPreferences("DATA", Context.MODE_PRIVATE)
-        progressDialog.show(this,"Sedang membuat akun..")
+        progressDialog.show(this,"Membuat akun..")
         Log.d("Test", "daftar: ${sp.getString("nip", "")}" +
                 "\nVillage: ${sp.getString("identity_village", "")}")
-        api.retrofit.createUser(sp.getString("nip", "")!!.toString(),
-                sp.getString("email", "")!!.toString(),
-                sp.getString("nip", "")!!.toString(),
-                sp.getString("pass", "")!!.toString(),
-                sp.getString("noTelp", "")!!.toString(),
+
+        /*val nip = sp.getString("nip", null)
+        val email = sp.getString("email", "")!!.toString()
+        val pass = sp.getString("pass", "")!!.toString()
+        val noTelp = sp.getString("noTelp", "")!!.toString()*/
+
+
+
+//        val regis = RetrofitClient.getClient().create(RegisterInterface::class.java)
+        api.retrofit.createUser(sp.getString("nip", "")!!.toString()
+                , sp.getString("email", "")!!.toString()
+                , sp.getString("pass", "")!!.toString()
+                ,sp.getString("noTelp", "")!!.toString(),
                 sp.getString("noKtp", "")!!.toString(),
                 sp.getString("namaPns", "")!!.toString(),
                 sp.getString("identity_religion", "")!!.toString(),
@@ -227,8 +280,20 @@ class FotoSelfiActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful){
-                    mToast(this@FotoSelfiActivity, "Berhasil")
-                    progressDialog.dialog.dismiss()
+
+                    val jsonObject = JSONObject(response.body()!!.string())
+                    if (jsonObject.getBoolean("status")){
+//                        mToast(this@FotoSelfiActivity, "Berhasil")
+
+                        Log.d("Response", "onResponse: ${jsonObject.getString("message")}")
+                        uploadImg()
+
+                    } else {
+                        progressDialog.dialog.dismiss()
+                        mToast(this@FotoSelfiActivity, "Registrasi gagal, silahkan coba lagi.")
+                        Log.d("Response", "onResponse: ${jsonObject.getString("message")}")
+                    }
+
                 } else{
                     mToast(this@FotoSelfiActivity, "Gagal")
                     progressDialog.dialog.dismiss()
@@ -251,19 +316,39 @@ class FotoSelfiActivity : AppCompatActivity() {
 
         val bodyKtp = MultipartBody.Part.createFormData("image_ktp",
                 intent.getStringExtra("ktp")!!.toString(),
-                RequestBody.create(MediaType.parse("image/*"), fileKtp))
+                RequestBody.create(MediaType.parse("image/*"), compressedImageKtp!!))
+
         val bodySelfi = MultipartBody.Part.createFormData("image_selfi",
                 currentPhotoPath,
-                RequestBody.create(MediaType.parse("image/*"), fileSelfi))
+                RequestBody.create(MediaType.parse("image/*"), compressedImageSelfi!!))
 
         api.retrofit.uploadImages(bodyNip, bodyKtp, bodySelfi)
                 .enqueue(object: Callback<ResponseBody>{
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                        TODO("Not yet implemented")
+                        Log.e("Error", t.message!!)
+                        progressDialog.dialog.dismiss()
+                        mToast(this@FotoSelfiActivity, "Server tidak merespon, silahkan coba beberapa saat lagi.")
                     }
 
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                        TODO("Not yet implemented")
+                        if (response.isSuccessful){
+
+                            val jsonObject = JSONObject(response.body()!!.string())
+                            if (jsonObject.getBoolean("status")){
+                                progressDialog.dialog.dismiss()
+//                                Log.d("Response", "onResponse: ${jsonObject.getString("message")}")
+                                finish()
+                                startActivity(Intent(this@FotoSelfiActivity, MasukActivity::class.java))
+                            } else {
+                                progressDialog.dialog.dismiss()
+                                mToast(this@FotoSelfiActivity, "Registrasi gagal, silahkan coba lagi.")
+                                Log.d("Response", "onResponse: ${jsonObject.getString("message")}")
+                            }
+
+                        } else{
+                            mToast(this@FotoSelfiActivity, "Gagal")
+                            progressDialog.dialog.dismiss()
+                        }
                     }
 
                 })
