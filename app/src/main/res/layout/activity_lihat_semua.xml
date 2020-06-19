@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF"
-    tools:context=".LihatSemuaActivity">
+    tools:context=".SemuaEcommerceActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -85,6 +85,7 @@
                     android:layout_height="wrap_content">
                     <!--Top Up Isi Ulang-->
                     <LinearLayout
+                        android:id="@+id/llIsiPulsa"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="0"
@@ -117,6 +118,7 @@
                     </LinearLayout>
                     <!--Token PLN-->
                     <LinearLayout
+                        android:id="@+id/llToken"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="0"
@@ -147,8 +149,9 @@
                             tools:autoSizeStepGranularity="1sp" />
 
                     </LinearLayout>
-                    <!--Gopay-->
+                    <!--Internet-->
                     <LinearLayout
+                        android:id="@+id/llInternet"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="0"
@@ -180,8 +183,8 @@
 
                     </LinearLayout>
                     <!--Ovo-->
-                    <!--Pesan Hotel-->
                     <LinearLayout
+                        android:id="@+id/llOvo"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="0"
@@ -212,8 +215,9 @@
                             tools:autoSizeStepGranularity="1sp" />
 
                     </LinearLayout>
-
+                    <!--Gopay-->
                     <LinearLayout
+                        android:id="@+id/llGopay"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="1"
@@ -243,8 +247,9 @@
                             tools:autoSizeMaxTextSize="12sp"
                             tools:autoSizeStepGranularity="1sp" />
                     </LinearLayout>
-
+                    <!--Emoney-->
                     <LinearLayout
+                        android:id="@+id/llEmoney"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="1"
@@ -276,8 +281,9 @@
                             />
 
                     </LinearLayout>
-                    <!--Kereta Api-->
+                    <!--Brizi-->
                     <LinearLayout
+                        android:id="@+id/llBrizi"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="1"
@@ -308,8 +314,9 @@
                             android:text="@string/bri" />
 
                     </LinearLayout>
-                    <!--Bus Travel-->
+                    <!--TapCash-->
                     <LinearLayout
+                        android:id="@+id/llTapcash"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="1"
@@ -341,8 +348,9 @@
                             />
 
                     </LinearLayout>
-
+                    <!--LinkAja-->
                     <LinearLayout
+                        android:id="@+id/llLinkaja"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="2"
@@ -376,6 +384,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/llDana"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="2"
@@ -408,6 +417,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/llGrabPay"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="2"
@@ -441,6 +451,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/llVouchergame"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="2"
@@ -479,7 +490,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -495,8 +505,8 @@
                 <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
                     <LinearLayout
+                        android:id="@+id/llPdam"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="0"
@@ -523,6 +533,7 @@
                     </LinearLayout>
                     <!--Token PLN-->
                     <LinearLayout
+                        android:id="@+id/llListrik"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="0"
@@ -549,6 +560,7 @@
                     </LinearLayout>
                     <!--Gopay-->
                     <LinearLayout
+                        android:id="@+id/llBpjs"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="0"
@@ -575,6 +587,7 @@
                     </LinearLayout>
                     <!--Ovo-->
                     <LinearLayout
+                        android:id="@+id/llTelkom"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="0"
@@ -601,6 +614,7 @@
                     </LinearLayout>
                     <!--Pesan Hotel-->
                     <LinearLayout
+                        android:id="@+id/llGas"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="1"
@@ -626,6 +640,7 @@
                     </LinearLayout>
                     <!--Pesawat-->
                     <LinearLayout
+                        android:id="@+id/llPascabayar"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="1"
@@ -650,86 +665,8 @@
                             android:textSize="10sp" />
 
                     </LinearLayout>
-
-                    <!--<LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="70dp"
-                        android:layout_row="1"
-                        android:layout_rowWeight="1"
-                        android:layout_column="2"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/layout_rounded_home"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_kredivo" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="@string/kredivo"
-                            android:textSize="10sp" />
-
-                    </LinearLayout>
-
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="70dp"
-                        android:layout_row="1"
-                        android:layout_rowWeight="1"
-                        android:layout_column="3"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/layout_rounded_home"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_home_credit" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="@string/home_credit"
-                            android:textSize="10sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="70dp"
-                        android:layout_row="2"
-                        android:layout_rowWeight="1"
-                        android:layout_column="0"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/layout_rounded_home"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_kredit" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="@string/tagihan_cc"
-                            android:textSize="10sp" />
-
-                    </LinearLayout>-->
-
-                    <LinearLayout
+                        android:id="@+id/llTvkabel"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="1"
@@ -762,7 +699,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -781,6 +717,7 @@
                     android:layout_marginBottom="20dp">
                     <!--Top Up Isi Ulang-->
                     <LinearLayout
+                        android:id="@+id/llPesawat"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="0"
@@ -807,6 +744,7 @@
                     </LinearLayout>
                     <!--Token PLN-->
                     <LinearLayout
+                        android:id="@+id/llKereta"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="0"
@@ -833,6 +771,7 @@
                     </LinearLayout>
                     <!--Gopay-->
                     <LinearLayout
+                        android:id="@+id/llHotel"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="0"
@@ -859,6 +798,7 @@
                     </LinearLayout>
                     <!--Ovo-->
                     <LinearLayout
+                        android:id="@+id/llPelni"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="0"
@@ -885,6 +825,7 @@
                     </LinearLayout>
                     <!--Pesan Hotel-->
                     <LinearLayout
+                        android:id="@+id/llFerry"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="1"
@@ -910,6 +851,7 @@
                     </LinearLayout>
                     <!--Pesawat-->
                     <LinearLayout
+                        android:id="@+id/llBus"
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_row="1"
