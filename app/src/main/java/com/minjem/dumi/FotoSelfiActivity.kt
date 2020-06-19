@@ -19,6 +19,7 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.minjem.dumi.api.RegisterInterface
+import com.minjem.dumi.api.UploadImageInterface
 import com.minjem.dumi.ecommerce.Helper.mToast
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.minjem.dumi.retrofit.RetrofitClient
@@ -164,7 +165,9 @@ class FotoSelfiActivity : AppCompatActivity() {
             val ktp = File(intent.getStringExtra("ktp")!!.toString())
 
             selfi.let { imageFile ->
+
                 lifecycleScope.launch {
+                    Log.d("KTP Before Compress", "onActivityResult: ${String.format("Selfi Size : %s", FileUtils.getReadableFileSize(imageFile.length().toInt()))}")
                     compressedImageSelfi = compress(this@FotoSelfiActivity, imageFile)
                     setCompressedImageSelfi()
                 }
@@ -172,6 +175,7 @@ class FotoSelfiActivity : AppCompatActivity() {
 
             ktp.let {  imageFile ->
                 lifecycleScope.launch {
+                    Log.d("Selfi Before Compress", "onActivityResult: ${String.format("Selfi Size : %s", FileUtils.getReadableFileSize(imageFile.length().toInt()))}")
                     compressedImageKtp = compress(this@FotoSelfiActivity, imageFile)
                     setCompressedImage()
                 } }
@@ -215,8 +219,8 @@ class FotoSelfiActivity : AppCompatActivity() {
 
 
 
-//        val regis = RetrofitClient.getClient().create(RegisterInterface::class.java)
-        api.retrofit.createUser(sp.getString("nip", "")!!.toString()
+        val regis = RetrofitClient.getClient().create(RegisterInterface::class.java)
+        val call = regis.createUser(sp.getString("nip", "")!!.toString()
                 , sp.getString("email", "")!!.toString()
                 , sp.getString("pass", "")!!.toString()
                 ,sp.getString("noTelp", "")!!.toString(),
@@ -271,20 +275,25 @@ class FotoSelfiActivity : AppCompatActivity() {
                 sp.getString("namaBank", "")!!.toString(),
                 sp.getString("namaRekening", "")!!.toString(),
                 sp.getString("noRekening", "")!!.toString()
-        ).enqueue(object : Callback<ResponseBody>{
+        )
+
+        call.enqueue(object : Callback<ResponseBody>{
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("Error", t.message!!)
                 progressDialog.dialog.dismiss()
                 mToast(this@FotoSelfiActivity, "Server tidak merespon, silahkan coba beberapa saat lagi.")
             }
 
+            @SuppressLint("CommitPrefEdits")
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful){
 
                     val jsonObject = JSONObject(response.body()!!.string())
                     if (jsonObject.getBoolean("status")){
 //                        mToast(this@FotoSelfiActivity, "Berhasil")
-
+                        val sharedPreference =  getSharedPreferences("DATA",Context.MODE_PRIVATE)
+                        val editor = sharedPreference.edit()
+                        editor.clear()
                         Log.d("Response", "onResponse: ${jsonObject.getString("message")}")
                         uploadImg()
 
@@ -295,7 +304,7 @@ class FotoSelfiActivity : AppCompatActivity() {
                     }
 
                 } else{
-                    mToast(this@FotoSelfiActivity, "Gagal")
+                    mToast(this@FotoSelfiActivity, response.message().toString())
                     progressDialog.dialog.dismiss()
                 }
 
@@ -322,35 +331,37 @@ class FotoSelfiActivity : AppCompatActivity() {
                 currentPhotoPath,
                 RequestBody.create(MediaType.parse("image/*"), compressedImageSelfi!!))
 
-        api.retrofit.uploadImages(bodyNip, bodyKtp, bodySelfi)
-                .enqueue(object: Callback<ResponseBody>{
-                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                        Log.e("Error", t.message!!)
+        val upload = RetrofitClient.getClient().create(UploadImageInterface::class.java)
+        val call = upload.uploadImages(bodyNip, bodyKtp, bodySelfi)
+        call.enqueue(object: Callback<ResponseBody>{
+             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e("Error", t.message!!)
+                progressDialog.dialog.dismiss()
+                mToast(this@FotoSelfiActivity, "Server tidak merespon, silahkan coba beberapa saat lagi.")
+            }
+
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful){
+                    Log.d("Response", "onResponse: ${response.message().toString()}")
+                    val jsonObject = JSONObject(response.body()!!.string())
+                    if (jsonObject.getBoolean("status")){
                         progressDialog.dialog.dismiss()
-                        mToast(this@FotoSelfiActivity, "Server tidak merespon, silahkan coba beberapa saat lagi.")
-                    }
-
-                    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                        if (response.isSuccessful){
-
-                            val jsonObject = JSONObject(response.body()!!.string())
-                            if (jsonObject.getBoolean("status")){
-                                progressDialog.dialog.dismiss()
 //                                Log.d("Response", "onResponse: ${jsonObject.getString("message")}")
-                                finish()
-                                startActivity(Intent(this@FotoSelfiActivity, MasukActivity::class.java))
-                            } else {
-                                progressDialog.dialog.dismiss()
-                                mToast(this@FotoSelfiActivity, "Registrasi gagal, silahkan coba lagi.")
-                                Log.d("Response", "onResponse: ${jsonObject.getString("message")}")
-                            }
 
-                        } else{
-                            mToast(this@FotoSelfiActivity, "Gagal")
-                            progressDialog.dialog.dismiss()
-                        }
+                        finish()
+                        startActivity(Intent(this@FotoSelfiActivity, MasukActivity::class.java))
+                    } else {
+                        progressDialog.dialog.dismiss()
+                        mToast(this@FotoSelfiActivity, "Registrasi gagal, silahkan coba lagi.")
+                        Log.d("Response", "onResponse: ${jsonObject.getString("message")}")
                     }
 
-                })
+                } else{
+                    mToast(this@FotoSelfiActivity, response.message().toString())
+                    progressDialog.dialog.dismiss()
+                }
+            }
+
+        })
     }
 }

@@ -666,4 +666,6 @@
     <string name="denganIniSaya">Dengan ini saya menyatakan bahwa informasi nama dan nomor rekening yang saya berikan telah lengkap dan benar. segala resiko serta penanggungjawaban yang timbul atas dana yang ditransfer ke rekening tersebut adalah tanggung jawab saya</string>
     <string name="ulangi">Ulangi</string>
     <string name="selfiKtp">Selfie dengan KTP</string>
+    <string name="info">Info!</string>
+    <string name="pengajuan">Pengajuan pinjaman diatas tanggal 25, akan kami proses pada awal bulan berikutnya.</string>
 </resources>

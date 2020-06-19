@@ -179,7 +179,7 @@ open class DataPribadiActivity : AppCompatActivity() {
                                         startActivity(Intent(this@DataPribadiActivity, DataKeluargaActivity::class.java))
                                         progressDialog.dialog.dismiss()
                                     } else {
-                                        mToast(this@DataPribadiActivity, "Invalid ID number, please check the NIK format")
+                                        mToast(this@DataPribadiActivity, "Data tidak valid, mohon periksa kembali data anda.")
                                         progressDialog.dialog.dismiss()
                                     }
 

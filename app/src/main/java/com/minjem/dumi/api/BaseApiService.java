@@ -26,4 +26,7 @@ public interface BaseApiService {
                                      @Field("name") String name,
                                      @Field("phone") String phone);
 
+    @GET("info/regular")
+    Call<ResponseBody> getInfo();
+
 }

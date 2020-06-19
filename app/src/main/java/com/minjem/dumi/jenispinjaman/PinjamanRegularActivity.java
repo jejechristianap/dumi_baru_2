@@ -536,8 +536,6 @@ public class PinjamanRegularActivity extends AppCompatActivity {
             float totalPengurangan = admin + asuransi + BIAYA_TRANSFER;
             sisa = pinjamanUang - totalPengurangan;
 
-            Toast.makeText(this, "Angsuran " + angsuran, Toast.LENGTH_SHORT).show();
-
             angsuranRegularTv.setText(formatRp.format(angsuran));
             biayaAdminRegularTv.setText(formatRp.format(admin));
             biayaAsuransiRegularTv.setText(formatRp.format(asuransi));
@@ -700,9 +698,7 @@ public class PinjamanRegularActivity extends AppCompatActivity {
                             ajukanPinjaman();
                         }
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
+                } catch (JSONException | IOException e) {
                     e.printStackTrace();
                 }
             }

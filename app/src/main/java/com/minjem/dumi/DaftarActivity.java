@@ -129,7 +129,7 @@ public class DaftarActivity extends AppCompatActivity {
 
         pref = getApplicationContext().getSharedPreferences("DATA", 0); // 0 - for private mode
         editor = pref.edit();
-
+        editor.clear();
         LinearLayout ll = findViewById(R.id.email_password);
         ll.setVisibility(View.GONE);
 
@@ -367,13 +367,8 @@ public class DaftarActivity extends AppCompatActivity {
                     boolean status = obj.getBoolean("status");
                     if (!status) {
                         pDialog.dismiss();
-                        JSONArray jsonArray = new JSONArray(obj.getString("data"));
-                        if (jsonArray.length() == 0){
-                            Toast.makeText(DaftarActivity.this, "Mohon maaf kami belum bekerja sama dengan Instansi anda.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(DaftarActivity.this, "NIP anda sudah terdaftar", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(DaftarActivity.this, MasukActivity.class));
-                        }
+                        Toast.makeText(DaftarActivity.this, obj.getString("message"), Toast.LENGTH_SHORT).show();
+
 
                     } else {
                         cekNip();

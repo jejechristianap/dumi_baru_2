@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import id.zelory.compressor.Compressor;
 //import org.apache.commons.io.IOUtils;
 
 public class PelengkapanRegularActivity extends AppCompatActivity {

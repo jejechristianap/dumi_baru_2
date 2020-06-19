@@ -13,19 +13,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.minjem.dumi.LihatSemuaActivity
+import com.minjem.dumi.SemuaEcommerceActivity
 import com.minjem.dumi.R
 import com.minjem.dumi.ecommerce.ECommerceActivity
 import com.minjem.dumi.ecommerce.Helper.PASSWORD
 import com.minjem.dumi.ecommerce.Helper.USERNAME
-import com.minjem.dumi.ecommerce.Helper.mDF
 import com.minjem.dumi.ecommerce.api.BaseApiService
 import com.minjem.dumi.ecommerce.transaction.RiwayatView
 import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity
 import com.minjem.dumi.jenispinjaman.PinjamanRegularActivity
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.retrofit.RetrofitClient
-import kotlinx.android.synthetic.main.fragment_beranda.*
 import kotlinx.android.synthetic.main.fragment_beranda.view.*
 import okhttp3.ResponseBody
 import org.json.JSONArray
@@ -156,7 +154,7 @@ class BerandaFragment : Fragment() {
                 intent.putExtra("fragment", "pln")
                 startActivity(intent)
             }
-            "semua" -> startActivity(Intent(activity, LihatSemuaActivity::class.java))
+            "semua" -> startActivity(Intent(activity, SemuaEcommerceActivity::class.java))
             else -> Toast.makeText(activity, "Tunggu update kami selanjutanya...", Toast.LENGTH_SHORT).show()
         }
     }
