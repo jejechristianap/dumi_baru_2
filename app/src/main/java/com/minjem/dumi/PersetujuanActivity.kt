@@ -42,6 +42,7 @@ class PersetujuanActivity : AppCompatActivity() {
     private var compressImgSkCpns: File? = null
     private var compressImgPa: File? = null
     private var compressImgSk: File? = null
+    lateinit var message: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,9 +120,11 @@ class PersetujuanActivity : AppCompatActivity() {
                                 val handler = Handler()
                                 handler.postDelayed({
                                     //Do something after 2s
-                                    pushNotification()
+                                    pushNotificationKilat()
                                 }, 3000)
                                 finish()
+                                message = obj.getString("message")
+                                Log.d("Pinjaman Kilat", "onResponse: $message")
                                 startActivity(Intent(this@PersetujuanActivity, MainActivity::class.java))
 
                             }
@@ -241,7 +244,7 @@ class PersetujuanActivity : AppCompatActivity() {
                         val handler = Handler()
                         handler.postDelayed({
                             //Do something after 2s
-                            pushNotification()
+                            pushNotificationRegular()
                         }, 3000)
                         finish()
                         startActivity(Intent(this@PersetujuanActivity, MainActivity::class.java))
@@ -260,21 +263,47 @@ class PersetujuanActivity : AppCompatActivity() {
         })
     }
 
-    fun pushNotification() {
+    private fun pushNotificationKilat() {
         // Send Notification
         val mBuilder = NotificationCompat.Builder(applicationContext, "notify_001")
         val ii = Intent(applicationContext, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this@PersetujuanActivity, 0, ii, 0)
         val bigText = NotificationCompat.BigTextStyle()
-        bigText.bigText("""
-                    Pengajuan anda berhasil kami terima.
-                    Proses dapat berlangsung 1-3 hari kerja setelah data anda terverifikasi, mohon menunggu.
-                    """.trimIndent())
-        bigText.setSummaryText("Pengajuan")
+        bigText.bigText(message)
+        bigText.setSummaryText("Pengajuan Pinjaman Kilat")
         mBuilder.setContentIntent(pendingIntent)
-        mBuilder.setSmallIcon(R.drawable.ic_mail)
-        mBuilder.setContentTitle("Terima kasih,")
-        mBuilder.setContentText("Pengajuan anda akan diproses.")
+        mBuilder.setSmallIcon(R.drawable.dumi_logo_real)
+        mBuilder.setContentTitle("Pinjaman Kilat")
+        mBuilder.priority = Notification.PRIORITY_MAX
+        mBuilder.setStyle(bigText)
+        mBuilder.setAutoCancel(true)
+        val mNotificationManager: NotificationManager = applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        // === Removed some obsoletes
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channelId = "Your_channel_id"
+            val channel = NotificationChannel(
+                    channelId,
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_HIGH)
+            mNotificationManager.createNotificationChannel(channel)
+            mBuilder.setChannelId(channelId)
+        }
+        mNotificationManager.notify(0, mBuilder.build())
+    }
+
+    private fun pushNotificationRegular() {
+        // Send Notification
+        val mBuilder = NotificationCompat.Builder(applicationContext, "notify_001")
+        val ii = Intent(applicationContext, MainActivity::class.java)
+        val pendingIntent = PendingIntent.getActivity(this@PersetujuanActivity, 0, ii, 0)
+        val bigText = NotificationCompat.BigTextStyle()
+        /*bigText.bigText("""Pengajuan anda berhasil kami terima. Proses dapat berlangsung 1-3 hari kerja setelah data anda terverifikasi, mohon menunggu.
+                    """.trimIndent())*/
+        bigText.setSummaryText("Pengajuan Pinjaman Regular")
+        mBuilder.setContentIntent(pendingIntent)
+        mBuilder.setSmallIcon(R.drawable.dumi_logo_real)
+        mBuilder.setContentTitle("Pinjaman Regular")
         mBuilder.priority = Notification.PRIORITY_MAX
         mBuilder.setStyle(bigText)
         mBuilder.setAutoCancel(true)

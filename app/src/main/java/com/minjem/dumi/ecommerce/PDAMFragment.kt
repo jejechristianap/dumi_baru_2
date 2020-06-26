@@ -89,6 +89,7 @@ class PDAMFragment : Fragment() {
 
         mView.ivBackPdam.setOnClickListener {
             if (isClick){
+                mView.etPdamIdPel.text.clear()
                 mView.rlListKota.visibility = View.VISIBLE
                 mView.rlTagihanPdam.visibility = View.GONE
                 isClick = false
@@ -139,19 +140,27 @@ class PDAMFragment : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s.isNullOrEmpty()){
                     mView.ivDeleteText.visibility = View.GONE
+
                 } else {
                     mView.ivDeleteText.visibility = View.VISIBLE
                 }
             }
 
         })
+
+        mView.bGanti.setOnClickListener {
+            mView.etPdamIdPel.text.clear()
+            mView.rlListKota.visibility = View.VISIBLE
+            mView.rlTagihanPdam.visibility = View.GONE
+        }
+
         mView.bLanjutPdam.setOnClickListener {
             if (TextUtils.isEmpty(mView.etPdamIdPel.text.toString())){
                 mView.etPdamIdPel.error = KOLOM
+                mView.etPdamIdPel.requestFocus()
                 return@setOnClickListener
             }
             getTagihan(position)
-
         }
 
     }
@@ -167,7 +176,6 @@ class PDAMFragment : Fragment() {
                         dView.rlBerhasil.visibility = View.GONE
                         progressDialog.dialog.dismiss()
                     }
-
 
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                         if (response.isSuccessful){
@@ -213,18 +221,16 @@ class PDAMFragment : Fragment() {
                             showBottomSheet(false)
                         }
                     }
-
                 })
     }
 
     private fun showBottomSheet(berhasil: Boolean){
         dView = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
-        val dialog = BottomSheetDialog(mContext)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val dialog = BottomSheetDialog(mContext, R.style.AppBottomSheetDialogTheme)
+        dialog.setCancelable(false)
         dialog.setContentView(dView)
 
         if (berhasil){
-
             if (tunggakan == ""){
                 dView.tvTunggakan.text= "Rp0"
             } else {
@@ -233,11 +239,7 @@ class PDAMFragment : Fragment() {
 
             val sdf = SimpleDateFormat("yyyyMM")
             val d = sdf.parse(blnTagihan)
-            /*try {
-                val d = sdf.parse(blnTagihan)
-            }catch (e: IOException){
-                Log.d(TAG, "showBottomSheet: $e")
-            }*/
+
             sdf.applyPattern("MMM yyyy")
 
             dView.rlGagal.visibility = View.GONE

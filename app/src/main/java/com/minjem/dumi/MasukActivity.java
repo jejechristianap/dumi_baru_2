@@ -2,10 +2,18 @@ package com.minjem.dumi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,6 +40,7 @@ import retrofit2.Response;
 
 public class MasukActivity extends AppCompatActivity {
 
+    private static String message;
     private Button masukButton;
     private EditText nipEt;
     private EditText passEt;
@@ -43,6 +52,25 @@ public class MasukActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_masuk);
+        /*AsyncTask.execute(() -> {
+            if (isOnline(this)){
+
+            } else {
+                try {
+                    ContextThemeWrapper ctw = new ContextThemeWrapper( this, R.style.Theme_AppCompat_Dialog_Alert);
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(ctw);
+                    alertDialog.setTitle("Info");
+                    alertDialog.setMessage("Internet tidak tersedia, mohon cek koneksi internet anda.");
+                    alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+                    alertDialog.setCancelable(false);
+                    alertDialog.setPositiveButton("OK", (dialog, which) -> finish());
+
+                    alertDialog.show();
+                } catch (Exception e) {
+                    Log.d("Dialog", "Show Dialog: " + e.getMessage());
+                }
+            }
+        });*/
 
         pDialog = new ProgressDialog(MasukActivity.this);
 
@@ -59,6 +87,33 @@ public class MasukActivity extends AppCompatActivity {
             finish();
             startActivity(new Intent(MasukActivity.this, DaftarActivity.class));
         });
+    }
+
+
+
+
+    public static boolean isOnline(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager != null) {
+            NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
+            if (capabilities != null) {
+                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    Log.d("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR");
+                    message = "NetworkCapabilities.TRANSPORT_CELLULAR";
+                    return true;
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    Log.d("Internet", "NetworkCapabilities.TRANSPORT_WIFI");
+                    message = "NetworkCapabilities.TRANSPORT_WIFI";
+                    return true;
+                }  else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)){
+                    Log.d("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET");
+                    message = "NetworkCapabilities.TRANSPORT_ETHERNET";
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -134,27 +189,32 @@ public class MasukActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     try {
-                        JSONObject obj = new JSONObject(response.body().string());
+                        JSONObject obj = null;
+                        if (response.body() != null) {
+                            obj = new JSONObject(response.body().string());
+                        }
 //                    JSONObject jsonRESULTS = new JSONObject(response.body().string());
                         boolean status = obj.getBoolean("status");
+                        pDialog.dismiss();
                         if (!status) {
-                            pDialog.dismiss();
                             loginUser();
                         } else {
-                            pDialog.dismiss();
                             Toast.makeText(MasukActivity.this, "NIP anda belum terdaftar, silahkan mendaftarkan NIP anda", Toast.LENGTH_SHORT).show();
                             finish();
                             startActivity(new Intent(MasukActivity.this, DaftarActivity.class));
                         }
                     } catch (Exception e) {
 //                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                        pDialog.dismiss();
+                        Toast.makeText(MasukActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                    pDialog.dismiss();
+                    Toast.makeText(MasukActivity.this, "Koneksi gagal. Mohon periksa jaringan anda", Toast.LENGTH_SHORT).show();
                 }
             });
         }

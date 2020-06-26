@@ -3,8 +3,6 @@ package com.minjem.dumi.model;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
-import com.minjem.dumi.fragment.NotifikasiFragment;
 import com.minjem.dumi.fragment.PesanFragment;
 
 import org.jetbrains.annotations.NotNull;
@@ -20,14 +18,10 @@ public class PageAdapter extends FragmentPagerAdapter {
     @NotNull
     @Override
     public Fragment getItem(int position) {
-        switch (position){
-            case 0:
-                return new NotifikasiFragment();
-            case 1:
-                return new PesanFragment();
-            default:
-                return null;
+        if (position == 1) {
+            return new PesanFragment();
         }
+        return null;
     }
 
     @Override

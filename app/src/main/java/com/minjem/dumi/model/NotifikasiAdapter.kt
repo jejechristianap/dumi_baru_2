@@ -36,7 +36,7 @@ class NotifikasiAdapter (internal var mContext : Context, internal var list : Li
     }
 
     fun filter(new : MutableList<NotifikasiData>){
-        list = new.sortedByDescending { it.waktu.toString() }
+        list = new.sortedByDescending { it.id.toString() }
         notifyDataSetChanged()
     }
 

@@ -116,13 +116,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <ImageView
-            android:id="@+id/ivArrow"
-            android:src="@drawable/ic_keyboard_arrow_right_"
+        <Button
+            android:id="@+id/bGanti"
+            android:background="@drawable/button_outerline_blue"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:text="@string/ganti"
+            android:textAllCaps="false"
+            android:textColor="@color/colorBlue"
             android:layout_alignTop="@id/tvKotaTagihan"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_width="@dimen/_30sdp"
+            android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_30sdp"/>
 
         <EditText
