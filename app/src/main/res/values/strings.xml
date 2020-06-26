@@ -668,4 +668,14 @@
     <string name="selfiKtp">Selfie dengan KTP</string>
     <string name="info">Info!</string>
     <string name="pengajuan">Pengajuan pinjaman diatas tanggal 25, akan kami proses pada awal bulan berikutnya.</string>
+    <string name="foto_sk_cpns">Foto SK/CPNS</string>
+    <string name="topupOvo">Top Up OVO</string>
+    <string name="masukkan_idPel">Masukkan ID Pelanggan</string>
+    <string name="gagal">Gagal!</string>
+    <string name="koneksiGagal">Koneksi Gagal</string>
+    <string name="jumlah_tagihan">Jumlah Tagihan</string>
+    <string name="bulan_tagihan">Bulan Tagihan</string>
+    <string name="admin">Admin</string>
+    <string name="total_tagihan">Total Tagihan</string>
+    <string name="tunggakan">Tunggakan</string>
 </resources>

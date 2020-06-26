@@ -8,7 +8,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,19 +18,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.CustomProgressDialog
-import com.minjem.dumi.MainActivity
 import com.minjem.dumi.R
-import com.minjem.dumi.ecommerce.Adapter.PlnAdapter
+import com.minjem.dumi.ecommerce.adapter.PlnAdapter
 import com.minjem.dumi.ecommerce.Helper.PASSWORD
 import com.minjem.dumi.ecommerce.Helper.USERNAME
 import com.minjem.dumi.ecommerce.Helper.mDF
-import com.minjem.dumi.ecommerce.response.PlnData
+import com.minjem.dumi.ecommerce.response.PDAMData
 import com.minjem.dumi.ecommerce.transaction.RiwayatView
 import com.minjem.dumi.model.SharedPrefManager
 import kotlinx.android.synthetic.main.ecommerce_konfirmasi_pembayaran.*
 import kotlinx.android.synthetic.main.ecommerce_pln.view.*
 import kotlinx.android.synthetic.main.gagal.*
-import kotlinx.android.synthetic.main.recycler_view_notifikasi.*
 import kotlinx.android.synthetic.main.sukses.*
 import okhttp3.ResponseBody
 import org.json.JSONArray
@@ -73,7 +70,7 @@ class PlnFragment: Fragment() {
     private var noToken = ""
     private var informasiListrik = ""
     lateinit var dF : DecimalFormat
-    val list : MutableList<PlnData> = ArrayList()
+    val list : MutableList<PDAMData> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = layoutInflater.inflate(R.layout.ecommerce_pln,container,false)
@@ -131,7 +128,7 @@ class PlnFragment: Fragment() {
 
     private fun getPln(){
         progressDialog.show(mContext, "Loading...")
-        api.retrofit.getPln(USERNAME, PASSWORD).enqueue(object : Callback<ResponseBody> {
+        api.retrofit.getPPOB(USERNAME, PASSWORD).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("Error", t.message!!)
                 progressDialog.dialog.dismiss()
@@ -163,7 +160,7 @@ class PlnFragment: Fragment() {
 //                                    Log.d("Harga PLN Prabayar", "")
                                             list.forEachIndexed { index, plnData ->
                                                 if (plnData.ppob_produk == ppob_produk && plnData.ppob_nominal == ppob_nominal) {
-                                                    val pln = PlnData()
+                                                    val pln = PDAMData()
                                                     pln.ppob_grup = ppob_grup
                                                     pln.ppob_produk = ppob_produk
                                                     pln.ppob_kodeproduk = ppob_kodeproduk
@@ -176,7 +173,7 @@ class PlnFragment: Fragment() {
                                             }
                                         }
                                     } else {
-                                        val pln = PlnData()
+                                        val pln = PDAMData()
                                         pln.ppob_grup = ppob_grup
                                         pln.ppob_produk = ppob_produk
                                         pln.ppob_kodeproduk = ppob_kodeproduk
@@ -235,7 +232,7 @@ class PlnFragment: Fragment() {
         Log.d("Test", "Nomor: $noPelanggan, kode: $ppobKodeproduk")
 
         if (ppobKodeproduk != null) {
-            api.retrofit.cekTagihanPln(USERNAME, PASSWORD, ppobKodeproduk, noPelanggan).enqueue(object : Callback<ResponseBody>{
+            api.retrofit.cekTagihanPPOB(USERNAME, PASSWORD, ppobKodeproduk, noPelanggan).enqueue(object : Callback<ResponseBody>{
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     Log.e("Error", t.message!!)
                     progressDialog.dialog.dismiss()

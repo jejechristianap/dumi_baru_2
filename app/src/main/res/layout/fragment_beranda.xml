@@ -30,7 +30,7 @@
             android:layout_width="@dimen/_18sdp"
             android:layout_height="@dimen/_18sdp"/>
         <Button
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/tkbText"
             android:text="@string/tkb90"
             android:textAllCaps="false"
@@ -103,79 +103,77 @@
             <HorizontalScrollView
                 android:visibility="visible"
                 android:scrollbars="none"
-                android:layout_marginTop="@dimen/_8sdp"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_120sdp">
+                android:layout_height="@dimen/_150sdp">
                 <RelativeLayout
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
-
-
-
-                    <ImageView
+                    <RelativeLayout
+                        android:visibility="visible"
                         android:id="@+id/cardKilat"
-                        android:src="@drawable/card"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/_18sdp"
+                        android:background="@drawable/card"
                         android:layout_width="@dimen/_250sdp"
-                        android:layout_height="@dimen/_120sdp"/>
-                    <ImageView
-                        android:id="@+id/icKilat"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:layout_alignStart="@id/cardKilat"
-                        android:layout_alignTop="@id/cardKilat"
-                        android:src="@drawable/ic_kilat"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"/>
-                    <TextView
-                        android:text="@string/dumi_kilat"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:textSize="@dimen/_15ssp"
-                        android:textColor="@color/white"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_alignTop="@id/icKilat"
-                        android:layout_alignBottom="@id/icKilat"
-                        android:layout_toEndOf="@id/icKilat"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:id="@+id/kilatDesk"
-                        android:text="@string/dumi_kilat_deskripsi"
-                        android:textSize="@dimen/_10ssp"
-                        android:textColor="@color/white"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_alignEnd="@id/cardKilat"
-                        android:layout_alignStart="@id/icKilat"
-                        android:layout_below="@id/icKilat"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
-                    <Button
-                        android:id="@+id/kilatButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_alignStart="@id/icKilat"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginTop="@dimen/_7sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
-                        android:background="@drawable/button_lanjut_design"
-                        android:text="@string/ajukan"
-                        android:textAllCaps="false"
-                        android:textColor="@color/blueKilat" />
+                        android:layout_height="@dimen/_140sdp">
+                        <ImageView
+                            android:id="@+id/icKilat"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true"
+                            android:src="@drawable/ic_kilat"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"/>
+                        <TextView
+                            android:text="@string/dumi_kilat"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textSize="@dimen/_15ssp"
+                            android:textColor="@color/white"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_alignTop="@id/icKilat"
+                            android:layout_alignBottom="@id/icKilat"
+                            android:layout_toEndOf="@id/icKilat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
 
-                    <ImageView
-                        android:id="@+id/cardRegular"
-                        android:layout_width="@dimen/_250sdp"
-                        android:layout_height="@dimen/_120sdp"
-                        android:layout_toEndOf="@id/cardKilat"
-                        android:src="@drawable/card2" />
+                        <TextView
+                            android:id="@+id/kilatDesk"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@+id/kilatButton"
+                            android:layout_below="@id/icKilat"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_7sdp"
+                            android:text="@string/dumi_kilat_deskripsi"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11ssp" />
+                        <Button
+                            android:id="@+id/kilatButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_alignStart="@id/icKilat"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/button_lanjut_design"
+                            android:text="@string/ajukan"
+                            android:textAllCaps="false"
+                            android:textColor="@color/blueKilat" />
+                    </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/cardRegular"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/_18sdp"
+                    android:layout_toEndOf="@id/cardKilat"
+                    android:background="@drawable/card2"
+                    android:layout_width="@dimen/_250sdp"
+                    android:layout_height="@dimen/_140sdp">
                     <ImageView
                         android:id="@+id/icRegular"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:layout_alignStart="@id/cardRegular"
-                        android:layout_alignTop="@id/cardRegular"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
                         android:src="@drawable/ic_regular"
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_25sdp"/>
@@ -191,29 +189,33 @@
                         android:layout_toEndOf="@id/icRegular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
+
                     <TextView
                         android:id="@+id/regularDesk"
-                        android:text="@string/dumi_regular_deskripsi"
-                        android:textSize="@dimen/_10ssp"
-                        android:textColor="@color/white"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_alignEnd="@id/cardRegular"
-                        android:layout_alignStart="@id/icRegular"
-                        android:layout_below="@id/icRegular"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/regularButton"
+                        android:layout_below="@id/icRegular"
+                        android:layout_alignStart="@id/icRegular"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginBottom="@dimen/_7sdp"
+                        android:text="@string/dumi_regular_deskripsi"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11ssp" />
+
                     <Button
                         android:id="@+id/regularButton"
-                        android:text="@string/ajukan"
-                        android:textAllCaps="false"
-                        android:textColor="@color/purple"
-                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignStart="@id/icRegular"
                         android:layout_alignParentBottom="true"
                         android:background="@drawable/button_lanjut_design"
-                        android:layout_alignStart="@id/icRegular"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_20sdp"/>
+                        android:text="@string/ajukan"
+                        android:textAllCaps="false"
+                        android:textColor="@color/purple" />
+                </RelativeLayout>
                 </RelativeLayout>
             </HorizontalScrollView>
 

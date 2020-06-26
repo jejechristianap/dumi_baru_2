@@ -38,7 +38,7 @@ class SemuaEcommerceActivity : AppCompatActivity() {
         llDana.setOnClickListener { goTo("na") }
         llGrabPay.setOnClickListener { goTo("na") }
         llVouchergame.setOnClickListener { goTo("na") }
-        llPdam.setOnClickListener { goTo("na") }
+        llPdam.setOnClickListener { goTo("air") }
         llBpjs.setOnClickListener { goTo("na") }
         llTelkom.setOnClickListener { goTo("na") }
         llGas.setOnClickListener { goTo("na") }
@@ -62,6 +62,11 @@ class SemuaEcommerceActivity : AppCompatActivity() {
             "pln" -> {
                 intent = Intent(this, ECommerceActivity::class.java)
                 intent.putExtra("fragment", "pln")
+                startActivity(intent)
+            }
+            "air" -> {
+                intent = Intent (this, ECommerceActivity::class.java)
+                intent.putExtra("fragment", "air")
                 startActivity(intent)
             }
             else -> Toast.makeText(this, "Tunggu update kami selanjutanya...", Toast.LENGTH_SHORT).show()

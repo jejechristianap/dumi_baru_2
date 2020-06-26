@@ -1,4 +1,4 @@
-package com.minjem.dumi.ecommerce.Adapter
+package com.minjem.dumi.ecommerce.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.minjem.dumi.R
-import com.minjem.dumi.ecommerce.Helper.mDF
 import com.minjem.dumi.ecommerce.response.RiwayatPPOBData
 import kotlinx.android.synthetic.main.recycler_view_riwayat.view.*
 import java.text.DecimalFormat

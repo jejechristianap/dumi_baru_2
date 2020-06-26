@@ -669,8 +669,11 @@ public class PinjamanKilatActivity extends AppCompatActivity {
         editor.putString("tglMulai", tglPinjam);
         editor.putString("tglAkhir", tglAkhirPinjam);
         editor.putFloat("asuransi", asuransi);
+        editor.putString("activity", "kilat");
         editor.commit();
 
-        startActivity(new Intent(PinjamanKilatActivity.this, PersetujuanActivity.class));
+        Intent i = new Intent(PinjamanKilatActivity.this, PersetujuanActivity.class);
+        i.putExtra("activity", "kilat");
+        startActivity(i);
     }
 }

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.ActionBar
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -22,14 +21,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.hendi.pulsa.response.G_Pulsa
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.R
-import com.minjem.dumi.ecommerce.Adapter.A_pulsa
+import com.minjem.dumi.ecommerce.adapter.A_pulsa
 import com.minjem.dumi.ecommerce.Helper.PASSWORD
 import com.minjem.dumi.ecommerce.Helper.USERNAME
 import com.minjem.dumi.ecommerce.Helper.mDF
 import com.minjem.dumi.ecommerce.Helper.mProgress
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.minjem.dumi.model.SharedPrefManager
-import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.ecommerce_konfirmasi_pembayaran.*
 import kotlinx.android.synthetic.main.ecommerce_pulsa.view.*
 import kotlinx.android.synthetic.main.gagal.*
@@ -42,7 +40,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
-import java.util.*
 import kotlin.collections.ArrayList
 
 class PulsaFragment : Fragment(){

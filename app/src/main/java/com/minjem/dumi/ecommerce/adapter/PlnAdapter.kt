@@ -1,21 +1,17 @@
-package com.minjem.dumi.ecommerce.Adapter
+package com.minjem.dumi.ecommerce.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.icu.text.NumberFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.minjem.dumi.R
-import com.minjem.dumi.ecommerce.Helper.mDF
-import com.minjem.dumi.ecommerce.response.PlnData
-import kotlinx.android.synthetic.main.customlist_pulsa.view.*
+import com.minjem.dumi.ecommerce.response.PDAMData
 import kotlinx.android.synthetic.main.rv_listharga.view.*
 import java.text.DecimalFormat
-import java.util.*
 
-class PlnAdapter(private var mContext : Context, internal var list : List<PlnData>)
+class PlnAdapter(private var mContext : Context, internal var list : List<PDAMData>)
     : RecyclerView.Adapter<PlnAdapter.pln_holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): pln_holder {
         val a = LayoutInflater.from(mContext).inflate(R.layout.rv_listharga,parent,false)
@@ -32,7 +28,7 @@ class PlnAdapter(private var mContext : Context, internal var list : List<PlnDat
 
     inner class pln_holder (view : View) : RecyclerView.ViewHolder(view) {
         @SuppressLint("SetTextI18n")
-        fun data(item: PlnData) {
+        fun data(item: PDAMData) {
             item.ppob_nominal = item.ppob_nominal?.replace(".", "")
             item.ppob_admin = item.ppob_admin?.replace(".", "")
             val df = DecimalFormat("#,###")
@@ -47,8 +43,8 @@ class PlnAdapter(private var mContext : Context, internal var list : List<PlnDat
         }
     }
 
-    fun filter (new : MutableList<PlnData>){
-        /*val item = PlnData()
+    fun filter (new : MutableList<PDAMData>){
+        /*val item = PDAMData()
         item.ppob_nominal = item.ppob_nominal?.replace(".","")*/
         list = new.sortedBy {
             it.ppob_nominal!!.toInt()

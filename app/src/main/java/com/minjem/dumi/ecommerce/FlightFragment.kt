@@ -16,7 +16,7 @@ import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.CustomProgressDialog
 import com.minjem.dumi.R
-import com.minjem.dumi.ecommerce.Adapter.BandaraKotaAdapter
+import com.minjem.dumi.ecommerce.adapter.BandaraKotaAdapter
 import com.minjem.dumi.ecommerce.response.BandaraData
 import kotlinx.android.synthetic.main.ecommerce_flight.*
 import kotlinx.android.synthetic.main.ecommerce_flight.view.*

@@ -1,4 +1,4 @@
-package com.minjem.dumi.ecommerce.Adapter
+package com.minjem.dumi.ecommerce.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

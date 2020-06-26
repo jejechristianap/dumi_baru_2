@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return super.onKeyDown(keyCode, event);
     }
     protected void exitByBackKey() {
-       new AlertDialog.Builder(this)
+        new AlertDialog.Builder(this)
                 .setMessage("Apa anda yakin ingin keluar?")
                 .setPositiveButton("Ya", (arg0, arg1) -> {
                     SharedPrefManager.getInstance(getApplicationContext()).logout();

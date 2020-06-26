@@ -36,9 +36,9 @@ import java.io.File
 import java.io.IOException
 
 class PersetujuanActivity : AppCompatActivity() {
-    var fotoSkPath: String? = null
-    var fotoSkCpnsPath: String? = null
-    var fotoPaPath: String? = null
+    private var fotoSkPath = ""
+    private var fotoSkCpnsPath = ""
+    private var fotoPaPath = ""
     private var compressImgSkCpns: File? = null
     private var compressImgPa: File? = null
     private var compressImgSk: File? = null
@@ -48,11 +48,13 @@ class PersetujuanActivity : AppCompatActivity() {
         setContentView(R.layout.activity_persetujuan)
         val pref = applicationContext.getSharedPreferences("ajukanPinjaman", 0)
 
+        if (intent.getStringExtra("activity") == "regular"){
+            fotoSkCpnsPath = intent.getStringExtra("fotoSkCpns")!!
+            fotoPaPath = intent.getStringExtra("fotoPa")!!
+            fotoSkPath = intent.getStringExtra("fotoSk")!!
+            compressImg()
+        }
 
-        fotoSkCpnsPath = intent.getStringExtra("fotoSkCpns")
-        fotoPaPath = intent.getStringExtra("fotoPa")
-        fotoSkPath = intent.getStringExtra("fotoSk")
-        compressImg()
 
         cek_setuju.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             if (isChecked) {
@@ -62,6 +64,7 @@ class PersetujuanActivity : AppCompatActivity() {
                 ajukan_pinjaman_button.visibility = View.GONE
             }
         }
+
         ajukan_pinjaman_button.setOnClickListener {
             val namaBank = ""
             val noRek = ""
@@ -110,7 +113,9 @@ class PersetujuanActivity : AppCompatActivity() {
                         val status = obj.getBoolean("status")
                         if (status) {
                             pDialog.dismiss()
-                            if (fotoPaPath == null && fotoSkCpnsPath == null && fotoSkPath == null) {
+                            if (intent.getStringExtra("activity") == "regular"){
+                                uploadSurat()
+                            } else {
                                 val handler = Handler()
                                 handler.postDelayed({
                                     //Do something after 2s
@@ -118,8 +123,7 @@ class PersetujuanActivity : AppCompatActivity() {
                                 }, 3000)
                                 finish()
                                 startActivity(Intent(this@PersetujuanActivity, MainActivity::class.java))
-                            } else {
-                                uploadSurat()
+
                             }
                         } else {
                             Toast.makeText(this@PersetujuanActivity, "Mohon maaf terjadi kesalahan, silahkan coba beberapa saat lagi.", Toast.LENGTH_SHORT).show()
@@ -146,9 +150,9 @@ class PersetujuanActivity : AppCompatActivity() {
     }
 
     private fun compressImg(){
-        val fileSkCpns = File(fotoSkCpnsPath!!)
-        val filePa = File(fotoPaPath!!)
-        val fileSk = File(fotoSkPath!!)
+        val fileSkCpns = File(fotoSkCpnsPath)
+        val filePa = File(fotoPaPath)
+        val fileSk = File(fotoSkPath)
 
         fileSkCpns.let { imageFile -> lifecycleScope.launch {
             Log.d("SKCPNS Before Compress", "onActivityResult: ${String.format("Size : %s", FileUtils.getReadableFileSize(imageFile.length().toInt()))}")

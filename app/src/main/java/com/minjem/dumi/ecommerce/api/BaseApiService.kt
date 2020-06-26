@@ -36,15 +36,15 @@ interface BaseApiService {
 
     @FormUrlEncoded
     @POST("mmbc/ppob/daftarharga")
-    fun getPln(@Field("username") username : String,
-                 @Field("password") password : String) : Call<ResponseBody>
+    fun getPPOB(@Field("username") username : String,
+                @Field("password") password : String) : Call<ResponseBody>
 
     @FormUrlEncoded
     @POST("mmbc/ppob/cektagihan")
-    fun cekTagihanPln(@Field("username") username : String,
-                      @Field("password") password : String,
-                      @Field("kode_produk") kodeproduk : String,
-                      @Field("nomor_pelanggan") nomorpelanggan : String) : Call<ResponseBody>
+    fun cekTagihanPPOB(@Field("username") username : String,
+                       @Field("password") password : String,
+                       @Field("kode_produk") kodeproduk : String,
+                       @Field("nomor_pelanggan") nomorpelanggan : String) : Call<ResponseBody>
 
 
     @FormUrlEncoded

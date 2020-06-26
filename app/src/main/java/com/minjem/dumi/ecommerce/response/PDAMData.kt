@@ -1,6 +1,6 @@
 package com.minjem.dumi.ecommerce.response
 
-data class PlnData(
+data class PDAMData(
     var ppob_admin: String? = null,
     var ppob_debet: String? = null,
     var ppob_grup: String? = null,

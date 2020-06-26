@@ -1,6 +1,5 @@
 package com.minjem.dumi.ecommerce.transaction
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,21 +7,19 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.minjem.dumi.CustomProgressDialog
 import com.minjem.dumi.R
-import com.minjem.dumi.ecommerce.Adapter.RiwayatECommAdapter
+import com.minjem.dumi.ecommerce.adapter.RiwayatECommAdapter
 import com.minjem.dumi.ecommerce.Helper.PASSWORD
 import com.minjem.dumi.ecommerce.Helper.USERNAME
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.minjem.dumi.ecommerce.response.RiwayatPPOBData
 import com.minjem.dumi.model.SharedPrefManager
 import kotlinx.android.synthetic.main.activity_token_transaction.*
-import kotlinx.android.synthetic.main.recycler_view_riwayat.*
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.net.HttpRetryException
 
 class RiwayatView : AppCompatActivity() {
     lateinit var riwayatAdapter: RiwayatECommAdapter

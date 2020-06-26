@@ -13,12 +13,19 @@ class ECommerceActivity : AppCompatActivity() {
             val mFragment = intent.getStringExtra("fragment")
 //            val token = intent.getStringExtra("token")
 
-            if (mFragment == "pulsa"){
-                supportFragmentManager.beginTransaction().replace(R.id.fl_content,PulsaFragment()).commit()
-            } else if (mFragment == "pln"){
-                supportFragmentManager.beginTransaction().replace(R.id.fl_content, PlnFragment()).commit()
-            }else if (mFragment == "flight"){
-                supportFragmentManager.beginTransaction().replace(R.id.fl_content, FlightFragment()).commit()
+            when (mFragment) {
+                "pulsa" -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.fl_content,PulsaFragment()).commit()
+                }
+                "pln" -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.fl_content, PlnFragment()).commit()
+                }
+                "flight" -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.fl_content, FlightFragment()).commit()
+                }
+                "air" -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.fl_content, PDAMFragment()).commit()
+                }
             }
 
         }

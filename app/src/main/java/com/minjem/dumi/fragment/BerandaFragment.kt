@@ -24,7 +24,9 @@ import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity
 import com.minjem.dumi.jenispinjaman.PinjamanRegularActivity
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.retrofit.RetrofitClient
+import kotlinx.android.synthetic.main.fragment_beranda.*
 import kotlinx.android.synthetic.main.fragment_beranda.view.*
+import kotlinx.android.synthetic.main.fragment_beranda.view.textPulsa
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONException
@@ -39,31 +41,8 @@ import java.util.*
 class BerandaFragment : Fragment() {
     private var saldoUser = 0
     private var saldoTv: TextView? = null
-    private var pulsaTv: TextView? = null
-    private var plnTv: TextView? = null
-    private var gopayTv: TextView? = null
-    private var ovoTv: TextView? = null
-    private var hotelTv: TextView? = null
-    private var pesawatTv: TextView? = null
-    private var keretaTv: TextView? = null
-    private var semuaTv: TextView? = null
     private var localID: Locale? = null
     lateinit var formatRp: NumberFormat
-    private var kilatIv: ImageView? = null
-    private var regularIv: ImageView? = null
-    private var pulsaIv: ImageView? = null
-    private var plnIv: ImageView? = null
-    private var gopayIv: ImageView? = null
-    private var ovoIv: ImageView? = null
-    private var hotelIv: ImageView? = null
-    private var pesawatIv: ImageView? = null
-    private var keretaIv: ImageView? = null
-    private var semuaIv: ImageView? = null
-    private var kilatB: Button? = null
-    private var regularB: Button? = null
-    private var tkb: Button? = null
-    private var tkbt: Button? = null
-    private var riwayatButton: Button? = null
     private var touch = false
     lateinit var mView : View
     lateinit var mContext : Context
@@ -73,37 +52,11 @@ class BerandaFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.fragment_beranda, container, false)
         mContext = this.context!!
-        initView()
+//        initView()
         initOnTouch()
         return mView
     }
 
-    private fun initView() {
-        kilatIv = mView.findViewById(R.id.cardKilat)
-        regularIv = mView.findViewById(R.id.cardRegular)
-        kilatB = mView.findViewById(R.id.kilatButton)
-        regularB = mView.findViewById(R.id.regularButton)
-        tkb = mView.findViewById(R.id.tkb)
-        tkbt = mView.findViewById(R.id.tkbText)
-        saldoTv = mView.findViewById(R.id.saldoPayLater)
-        riwayatButton = mView.findViewById(R.id.riwayatButton)
-        pulsaIv = mView.findViewById(R.id.icPulsa)
-        pulsaTv = mView.findViewById(R.id.textPulsa)
-        plnIv = mView.findViewById(R.id.icPln)
-        plnTv = mView.findViewById(R.id.textPln)
-        gopayIv = mView.findViewById(R.id.icGopay)
-        gopayTv = mView.findViewById(R.id.textGopay)
-        ovoIv = mView.findViewById(R.id.icOvo)
-        ovoTv = mView.findViewById(R.id.textOvo)
-        hotelIv = mView.findViewById(R.id.icHotel)
-        hotelTv = mView.findViewById(R.id.textHotel)
-        pesawatIv = mView.findViewById(R.id.icPesawat)
-        pesawatTv = mView.findViewById(R.id.textPesawat)
-        keretaIv = mView.findViewById(R.id.icKereta)
-        keretaTv = mView.findViewById(R.id.textKereta)
-        semuaIv = mView.findViewById(R.id.icSemua)
-        semuaTv = mView.findViewById(R.id.textSemua)
-    }
 
     private fun initOnTouch() {
         mView.cardKilat.setOnClickListener { goTo("kilat") }
@@ -112,27 +65,27 @@ class BerandaFragment : Fragment() {
         mView.regularButton.setOnClickListener { goTo("regular") }
         mView.riwayatButton.setOnClickListener { goTo("riwayat") }
         mView.icPulsa.setOnClickListener { goTo("pulsa") }
-        pulsaTv!!.setOnClickListener { goTo("pulsa") }
-        plnIv!!.setOnClickListener { goTo("pln") }
-        plnTv!!.setOnClickListener { goTo("pln") }
-        gopayIv!!.setOnClickListener { goTo("na") }
-        gopayTv!!.setOnClickListener { goTo("na") }
-        ovoIv!!.setOnClickListener { goTo("na") }
-        ovoTv!!.setOnClickListener { goTo("na") }
-        hotelIv!!.setOnClickListener { goTo("na") }
-        hotelTv!!.setOnClickListener { goTo("na") }
-        pesawatIv!!.setOnClickListener { goTo("na") }
-        pesawatTv!!.setOnClickListener { goTo("na") }
-        keretaIv!!.setOnClickListener { goTo("na") }
-        keretaTv!!.setOnClickListener { goTo("na") }
-        semuaIv!!.setOnClickListener { goTo("semua") }
-        semuaTv!!.setOnClickListener { goTo("semua") }
-        tkb!!.setOnClickListener {
+        mView.textPulsa.setOnClickListener { goTo("pulsa") }
+        mView.icPln.setOnClickListener { goTo("pln") }
+        mView.textPln.setOnClickListener { goTo("pln") }
+        mView.icGopay.setOnClickListener { goTo("na") }
+        mView.textGopay.setOnClickListener { goTo("na") }
+        mView.icOvo.setOnClickListener { goTo("na") }
+        mView.textOvo.setOnClickListener { goTo("na") }
+        mView.icHotel.setOnClickListener { goTo("na") }
+        mView.textHotel.setOnClickListener { goTo("na") }
+        mView.icPesawat.setOnClickListener { goTo("na") }
+        mView.textPesawat.setOnClickListener { goTo("na") }
+        mView.icKereta.setOnClickListener { goTo("na") }
+        mView.textKereta.setOnClickListener { goTo("na") }
+        mView.icSemua.setOnClickListener { goTo("semua") }
+        mView.textSemua.setOnClickListener { goTo("semua") }
+        mView.tkb.setOnClickListener {
             if (touch) {
-                tkbt!!.visibility = View.GONE
+                mView.tkbText.visibility = View.VISIBLE
                 touch = false
             } else {
-                tkbt!!.visibility = View.VISIBLE
+                mView.tkbText.visibility = View.GONE
                 touch = true
             }
         }
@@ -174,9 +127,9 @@ class BerandaFragment : Fragment() {
 
     private fun saldo(){
             val idUser = SharedPrefManager.getInstance(activity).user.id
-            val nipBaru = SharedPrefManager.getInstance(activity).user.nip
+            val nipBaru : String? = SharedPrefManager.getInstance(activity).user.nip
             val api = RetrofitClient.getClient().create(BaseApiService::class.java)
-            val call = api.getSaldo(idUser, nipBaru, USERNAME, PASSWORD)
+            val call = api.getSaldo(idUser, nipBaru.toString(), USERNAME, PASSWORD)
             call.enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     if (response.isSuccessful) {
@@ -190,7 +143,7 @@ class BerandaFragment : Fragment() {
                                 Log.d("SaldoUser", "Saldo: $saldoUser")
                                 localID = Locale("in", "ID")
                                 formatRp = NumberFormat.getCurrencyInstance(localID!!)
-                                saldoTv!!.text = formatRp.format(saldoUser)
+                                mView.saldoPayLater.text = formatRp.format(saldoUser)
                             }
                         } catch (e: JSONException) {
                             e.printStackTrace()
