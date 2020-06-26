@@ -56,7 +56,14 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ecommerce.ECommerceActivity"
             android:windowSoftInputMode="adjustResize"/>
-
+        <activity
+            android:taskAffinity=""
+            android:name=".AlertDialogActivity" />
+        <receiver android:name=".InternetConnection">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.minjem.dumi.fileprovider"
