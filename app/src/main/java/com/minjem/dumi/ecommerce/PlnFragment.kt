@@ -8,10 +8,12 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -27,7 +29,9 @@ import com.minjem.dumi.ecommerce.response.PDAMData
 import com.minjem.dumi.ecommerce.transaction.RiwayatView
 import com.minjem.dumi.model.SharedPrefManager
 import kotlinx.android.synthetic.main.ecommerce_konfirmasi_pembayaran.*
+import kotlinx.android.synthetic.main.ecommerce_pln.*
 import kotlinx.android.synthetic.main.ecommerce_pln.view.*
+import kotlinx.android.synthetic.main.ecommerce_pln.view.rvPln
 import kotlinx.android.synthetic.main.gagal.*
 import kotlinx.android.synthetic.main.sukses.*
 import okhttp3.ResponseBody
@@ -58,6 +62,7 @@ class PlnFragment: Fragment() {
     private var idUser = 0;
     private var saldoUser = 0;
     private var itrx = 0;
+    lateinit var pb : PDAMData
     private var noInvoice = ""
     private var noMeter = ""
     private var nama = ""
@@ -82,32 +87,53 @@ class PlnFragment: Fragment() {
         mView.rvPln.adapter = plnAdapter
         plnAdapter.notifyDataSetChanged()
         api = HttpRetrofitClient
+        pb = PDAMData()
 
         /*Dialog*/
         mDialog = Dialog(mContext)
         dialogGagal = Dialog(mContext)
         dialogSukses = Dialog(mContext)
 
-        initImage()
-
-
+        initOnclick()
         getSaldo()
         getPln()
         rvClick()
         return mView
     }
 
-    private fun initImage(){
+    private fun initOnclick(){
+        mView.rvPln.visibility = View.VISIBLE
+        mView.bLanjutPln.visibility = View.GONE
+        mView.rlGagalPln.visibility = View.GONE
 
         mView.backPlnIv.setOnClickListener {
             activity!!.finish()
         }
 
-        mView.historyIv.setOnClickListener {
-            /*if (TextUtils.isEmpty(noInvoice)){
-                Toast.makeText(mContext, "Mohon maaf belum ada transaksi", Toast.LENGTH_LONG).show()
+        mView.rgPln.setOnCheckedChangeListener{ _, checkId ->
+            val radio: RadioButton = mView.findViewById(checkId)
+            if (radio.text == "Prabayar"){
+                mView.rvPln.visibility = View.VISIBLE
+                mView.rlGagalPln.visibility = View.GONE
+                mView.bLanjutPln.visibility = View.GONE
+
+            } else {
+                mView.rvPln.visibility = View.GONE
+                mView.bLanjutPln.visibility = View.VISIBLE
+//                cekTagihan()
+            }
+        }
+
+        mView.bLanjutPln.setOnClickListener {
+            if (TextUtils.isEmpty(mView.noMeter.text.toString())){
+                mView.noMeter.error = "Masukkan no meter!"
                 return@setOnClickListener
-            }*/
+            }
+            cekTagihan()
+        }
+
+        /*mView.historyIv.setOnClickListener {
+
 
             val i = Intent(mContext, RiwayatView::class.java)
             i.putExtra("invoice", noInvoice)
@@ -123,7 +149,7 @@ class PlnFragment: Fragment() {
             i.putExtra("informasi", informasiListrik)
             startActivity(i)
 
-        }
+        }*/
     }
 
     private fun getPln(){
@@ -184,6 +210,17 @@ class PlnFragment: Fragment() {
                                         list.add(pln)
                                     }
                                 }
+
+                                if (ppob_grup == "PLN Group" && ppob_produk == "PLN Bulanan" && ppob_status == "Ready"){
+                                    pb.ppob_grup = ppob_grup
+                                    pb.ppob_produk = ppob_produk
+                                    pb.ppob_kodeproduk = ppob_kodeproduk
+                                    pb.ppob_nominal = ppob_nominal
+                                    pb.ppob_admin = ppob_admin
+                                    pb.ppob_debet = ppob_debet
+                                    pb.ppob_status = ppob_status
+                                }
+
                                 plnAdapter.filter(list)
                                 mView.rvPln.adapter = plnAdapter
                                 plnAdapter.notifyDataSetChanged()
@@ -224,6 +261,36 @@ class PlnFragment: Fragment() {
                 }
             }
         }))
+    }
+
+    private fun cekTagihan(){
+        progressDialog.show(mContext, "Memuat...")
+        val TAG = "PLN Postpaid"
+
+        api.retrofit.cekTagihanPPOB(USERNAME, PASSWORD, pb.ppob_kodeproduk.toString(), mView.noMeter.text.toString())
+                .enqueue(object : Callback<ResponseBody>{
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        Log.e("Error", t.message!!)
+                        progressDialog.dialog.dismiss()
+                    }
+
+                    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                        if (response.isSuccessful){
+                            progressDialog.dialog.dismiss()
+                            val jsonObject = JSONObject(response.body()!!.string())
+                            if (jsonObject.getBoolean("status")){
+                                Log.d(TAG, "onResponse: ${jsonObject.getString("message")}")
+                                val jsonData = JSONObject(jsonObject.getString("data"))
+                                if (jsonData.getString("result") == "no"){
+                                    mView.rlGagalPln.visibility = View.VISIBLE
+                                    mView.tvGagalPln.text = jsonData.getString("reason")
+                                }
+
+                            }
+                        }
+                    }
+
+                })
     }
 
     private fun cekTagihan(ppobKodeproduk: String?) {

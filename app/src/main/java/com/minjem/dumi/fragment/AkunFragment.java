@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +30,7 @@ import com.minjem.dumi.akun.KebijakanPrivasiActivity;
 import com.minjem.dumi.akun.PusatBantuanActivity;
 import com.minjem.dumi.akun.RincianAkunActivity;
 import com.minjem.dumi.akun.UbahSandiActivity;
+import com.minjem.dumi.ecommerce.ECommerceActivity;
 import com.minjem.dumi.model.SharedPrefManager;
 import com.minjem.dumi.model.User;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -64,8 +67,13 @@ public class AkunFragment extends Fragment {
         photoIv = view.findViewById(R.id.photo_profile);
 
         photoIv.setOnClickListener(v -> {
-//            photoIv.setScaleType(ImageView.ScaleType.FIT_XY);
-
+            if (TextUtils.isEmpty(SharedPrefManager.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext()).getUser().getImageProfile())){
+                Toast.makeText(mContext, "Belum ada foto profile", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Intent intent = new Intent(mContext, ECommerceActivity.class);
+            intent.putExtra("fragment", "profile");
+            startActivity(intent);
         });
 
         /*Rincian Akun*/
@@ -118,7 +126,7 @@ public class AkunFragment extends Fragment {
                 .skipMemoryCache(true)
                 .transform(new CircleCrop(), new RoundedCorners(16))
                 .into(photoIv);
-        photoIv.setRotation(90);
+//        photoIv.setRotation(90);
 
 
     }

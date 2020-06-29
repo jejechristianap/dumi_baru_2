@@ -5,12 +5,12 @@ import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.minjem.dumi.model.SharedPrefManager
+import com.minjem.dumi.response.InternetConnection
 import kotlinx.android.synthetic.main.activity_halaman_depan.*
 
 class HalamanDepanActivity : AppCompatActivity() {
@@ -19,10 +19,11 @@ class HalamanDepanActivity : AppCompatActivity() {
     private val masukTv: TextView? = null
     lateinit var editor: SharedPreferences.Editor
     lateinit var pref: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_halaman_depan)
-        conn()
+//        conn()
 
         SharedPrefManager.getInstance(applicationContext).logout()
         daftarButton = findViewById(R.id.asn_akftif_button_daftar)

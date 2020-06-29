@@ -1,9 +1,6 @@
 package com.minjem.dumi.ecommerce
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -25,9 +22,8 @@ import com.minjem.dumi.ecommerce.Helper.USERNAME
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.minjem.dumi.ecommerce.response.PDAMData
 import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
-import kotlinx.android.synthetic.main.ecommerce_pln.view.*
-import kotlinx.android.synthetic.main.fragment_pdam.view.*
-import kotlinx.android.synthetic.main.fragment_pdam.view.rvPdam
+import kotlinx.android.synthetic.main.ecommerce_pdam.view.*
+import kotlinx.android.synthetic.main.ecommerce_pdam.view.rvPdam
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONException
@@ -37,11 +33,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.math.log
 
 class PDAMFragment : Fragment() {
     lateinit var mView : View
@@ -66,7 +59,7 @@ class PDAMFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        mView = inflater.inflate(R.layout.fragment_pdam, container, false)
+        mView = inflater.inflate(R.layout.ecommerce_pdam, container, false)
         mContext = this.context!!
 
         initView()

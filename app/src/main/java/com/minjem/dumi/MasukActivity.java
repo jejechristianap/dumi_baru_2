@@ -92,7 +92,7 @@ public class MasukActivity extends AppCompatActivity {
 
 
 
-    public static boolean isOnline(Context context) {
+    /*public static boolean isOnline(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         if (connectivityManager != null) {
@@ -114,7 +114,7 @@ public class MasukActivity extends AppCompatActivity {
             }
         }
         return false;
-    }
+    }*/
 
     @Override
     public void onBackPressed() {

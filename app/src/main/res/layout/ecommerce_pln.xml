@@ -1,60 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
-
-
-    <!--Blue Background-->
-    <View
-        android:id="@+id/view"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_155sdp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
-        android:id="@+id/backPlnIv"
-        android:layout_width="@dimen/_50sdp"
-        android:src="@drawable/ic_back_white"
-        android:padding="@dimen/_12sdp"
-        android:layout_height="0dp"
-        android:foreground="?selectableItemBackgroundBorderless"
-        android:clickable="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:focusable="true" />
-
-    <!--Prabayar & Bulanan background-->
-    <View
-        android:id="@+id/id_pascabayar_bc"
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:background="@color/colorBlue"
+        android:paddingStart="@dimen/_15sdp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="@dimen/_15sdp"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_marginTop="@dimen/_45sdp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:background="@drawable/biru_gelap"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <View
-        android:id="@+id/id_prabayar_bc"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_marginTop="@dimen/_45sdp"
-        android:background="@drawable/biru_corner"
-        app:layout_constraintEnd_toEndOf="@id/guideline3"
-        app:layout_constraintHeight_percent=".05"
-        app:layout_constraintStart_toStartOf="@id/guideline2"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_height="@dimen/_155sdp">
+        <ImageView
+            android:id="@+id/backPlnIv"
+            android:layout_width="@dimen/_30sdp"
+            android:src="@drawable/ic_back_white"
+            android:padding="@dimen/_5sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:foreground="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true" />
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/pln"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp" />
 
-    <ImageView
+        <RadioGroup
+            android:id="@+id/rgPln"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal"
+            android:background="@color/colorBlue"
+            android:layout_below="@id/tvTitle"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:checkedButton="@id/rbPrabayar"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/rbPrabayar"
+                android:background="@drawable/radio_flat_selector"
+                android:button="@android:color/transparent"
+                android:text="@string/prbayar"
+                android:textStyle="bold"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:gravity="center"
+                android:textColor="@drawable/radio_flat_text_selector"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_25sdp"/>
+
+            <RadioButton
+                android:id="@+id/rbBulanan"
+                android:background="@drawable/radio_flat_selector"
+                android:button="@android:color/transparent"
+                android:text="@string/bulanan"
+                android:textStyle="bold"
+                android:textSize="@dimen/_12ssp"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:textColor="@drawable/radio_flat_text_selector"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_25sdp"/>
+        </RadioGroup>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_65sdp"
+            android:layout_below="@id/rgPln"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/white_corner" />
+
+        <ImageView
+            android:id="@+id/id_image_operator"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_alignStart="@id/view"
+            android:layout_alignTop="@id/view"
+            android:layout_alignBottom="@id/view"
+            android:padding="@dimen/_2sdp"
+            android:src="@drawable/pln_logo"
+            android:background="@drawable/layout_rounded_home"/>
+
+        <TextView
+            android:id="@+id/id_nama_operator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_toEndOf="@id/id_image_operator"
+            android:layout_alignTop="@id/id_image_operator"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/no_meter"
+            android:textSize="@dimen/_15ssp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/noMeter"
+            android:layout_alignStart="@id/id_nama_operator"
+            android:layout_alignEnd="@id/view"
+            android:layout_below="@id/id_nama_operator"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/ex_token"
+            android:inputType="number"/>
+
+    </RelativeLayout>
+
+    <!--<ImageView
         android:visibility="gone"
         android:id="@+id/historyIv"
         android:src="@drawable/ic_note"
@@ -64,57 +132,9 @@
         app:layout_constraintEnd_toEndOf="@id/guideline4"
         app:layout_constraintTop_toTopOf="@id/title"
         android:layout_width="@dimen/_25sdp"
-        android:layout_height="@dimen/_25sdp"/>
+        android:layout_height="@dimen/_25sdp"/>-->
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/pln"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_16ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_26sdp"
-        android:gravity="center"
-        android:text="@string/prbayar"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_13ssp"
-        app:layout_constraintBottom_toBottomOf="@+id/id_prabayar_bc"
-        app:layout_constraintEnd_toEndOf="@+id/id_prabayar_bc"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/id_prabayar_bc" />
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_26sdp"
-        android:gravity="center"
-        android:text="@string/bulanan"
-        android:textColor="@color/abu_muda"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/id_pascabayar_bc"
-        app:layout_constraintEnd_toEndOf="@+id/id_pascabayar_bc"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/id_prabayar_bc" />
-
-    <!--Nomor meter View-->
-    <View
-        android:id="@+id/id_pulsa_bc"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_60sdp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/white_corner"
-        app:layout_constraintEnd_toEndOf="@id/guideline4"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/id_prabayar_bc"
-        app:layout_constraintVertical_bias="0.0" />
+    <!--
 
     <ImageView
         android:id="@+id/id_image_operator"
@@ -152,56 +172,61 @@
         app:layout_constraintBottom_toBottomOf="@id/id_pulsa_bc"
         app:layout_constraintEnd_toEndOf="@id/guideline6"
         app:layout_constraintStart_toStartOf="@id/guideline5"
-        app:layout_constraintTop_toBottomOf="@id/id_nama_operator" />
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.04" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.96" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.28" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintTop_toBottomOf="@id/id_nama_operator" />-->
 
     <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
         android:id="@+id/rvPln"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingTop="10dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guideline4"
-        app:layout_constraintStart_toEndOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/view"
+        android:layout_below="@id/rl"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
         tools:listitem="@layout/customlist_pulsa"
         android:focusable="true" />
+
+    <RelativeLayout
+        android:id="@+id/rlGagalPln"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bLanjutPln"
+        android:layout_below="@id/rl"
+        android:layout_alignParentTop="false"
+        android:padding="@dimen/_20sdp"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivGagal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+            android:contentDescription="@string/gagal"
+            android:src="@drawable/fail" />
+
+        <TextView
+            android:id="@+id/tvGagalPln"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivGagal"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:gravity="center"
+            android:text="@string/koneksiGagal"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_15ssp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/bLanjutPln"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_20sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_rounded_custom"
+        android:text="@string/lanjut"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_15ssp" />
 
     <Button
         android:id="@+id/pln_reload"
@@ -215,6 +240,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@+id/rl" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

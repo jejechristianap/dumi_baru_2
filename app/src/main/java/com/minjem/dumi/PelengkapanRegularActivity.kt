@@ -104,56 +104,6 @@ class PelengkapanRegularActivity : AppCompatActivity() {
         })
     }
 
-    /*private fun kirimFormat() {
-        myDialog = AlertDialog.Builder(this@PelengkapanRegularActivity)
-        myDialog!!.setCancelable(false)
-        inflater = LayoutInflater.from(this@PelengkapanRegularActivity)
-        view = inflater.inflate(R.layout.kirim_format_file, null)
-        myDialog!!.setView(view)
-        myDialog!!.setTitle("Contoh Format Dokumen")
-        myDialog!!.setNegativeButton("Tutup") { dialog: DialogInterface?, which: Int -> }
-        dialog = myDialog!!.create()
-        dialog!!.show()
-        val kirimEmailButton = view.findViewById<Button>(R.id.kirim_email_pdf_button)
-        val emailEt = view.findViewById<EditText>(R.id.kirim_email_pdf_et)
-        val pdfSkp = view.findViewById<Button>(R.id.draf_skp)
-        val pdfRek = view.findViewById<Button>(R.id.draf_rek_atasan)
-        val fileSk = File(this.cacheDir, "draft_skp.pdf")
-        val fileRek = File(this.cacheDir, "draft_rek.pdf")
-        val pdfSk = "draft_skp.pdf"
-        val pdfRekA = "draft_rek.pdf"
-
-        *//*pdfSkp.setOnClickListener(v -> {
-            *//*
-        *//*Intent i = new Intent(this, PdfViewerActivity.class);
-            i.putExtra("nameFile", "skp");
-            startActivity(i);*//*
-        *//*
-
-            new DownloadTask(PelengkapanRegularActivity.this, URL_SK);
-        });
-
-        pdfRek.setOnClickListener(v -> {
-            *//*
-        *//*Intent i = new Intent(this, PdfViewerActivity.class);
-            i.putExtra("nameFile", "rek");
-            startActivity(i);*//*
-        *//*
-            new DownloadTask(PelengkapanRegularActivity.this, URL_RA);
-        });*//*
-
-
-        *//*kirimEmailButton.setOnClickListener(v -> {
-            String email = emailEt.getText().toString();
-            if (TextUtils.isEmpty(email)){
-                emailEt.setError("Email tidak boleh kosong!");
-                return;
-            }
-            finish();
-
-        });*//*
-    }*/
-
     private fun fotoSk() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         // Ensure that there's a camera activity to handle the intent
@@ -340,13 +290,54 @@ class PelengkapanRegularActivity : AppCompatActivity() {
             Log.d("Compressor", "Compressed image save in " + it.path)
         }
     }
-
-
-    companion object {
-        private const val URL_SK = "http://minjem.com/wp-content/uploads/2020/04/Draft-Surat-Kuasa-Peminjam-1.pdf"
-        private const val URL_RA = "http://minjem.com/wp-content/uploads/2020/04/draftrekomendasiatasan.pdf"
-        var networkErrorMessage = "Internet tidak tersedia"
-        var checkInternetConnection = true
-        var showErrorMessage = true
-    }
 }
+
+/*private fun kirimFormat() {
+    myDialog = AlertDialog.Builder(this@PelengkapanRegularActivity)
+    myDialog!!.setCancelable(false)
+    inflater = LayoutInflater.from(this@PelengkapanRegularActivity)
+    view = inflater.inflate(R.layout.kirim_format_file, null)
+    myDialog!!.setView(view)
+    myDialog!!.setTitle("Contoh Format Dokumen")
+    myDialog!!.setNegativeButton("Tutup") { dialog: DialogInterface?, which: Int -> }
+    dialog = myDialog!!.create()
+    dialog!!.show()
+    val kirimEmailButton = view.findViewById<Button>(R.id.kirim_email_pdf_button)
+    val emailEt = view.findViewById<EditText>(R.id.kirim_email_pdf_et)
+    val pdfSkp = view.findViewById<Button>(R.id.draf_skp)
+    val pdfRek = view.findViewById<Button>(R.id.draf_rek_atasan)
+    val fileSk = File(this.cacheDir, "draft_skp.pdf")
+    val fileRek = File(this.cacheDir, "draft_rek.pdf")
+    val pdfSk = "draft_skp.pdf"
+    val pdfRekA = "draft_rek.pdf"
+
+    *//*pdfSkp.setOnClickListener(v -> {
+            *//*
+        *//*Intent i = new Intent(this, PdfViewerActivity.class);
+            i.putExtra("nameFile", "skp");
+            startActivity(i);*//*
+        *//*
+
+            new DownloadTask(PelengkapanRegularActivity.this, URL_SK);
+        });
+
+        pdfRek.setOnClickListener(v -> {
+            *//*
+        *//*Intent i = new Intent(this, PdfViewerActivity.class);
+            i.putExtra("nameFile", "rek");
+            startActivity(i);*//*
+        *//*
+            new DownloadTask(PelengkapanRegularActivity.this, URL_RA);
+        });*//*
+
+
+        *//*kirimEmailButton.setOnClickListener(v -> {
+            String email = emailEt.getText().toString();
+            if (TextUtils.isEmpty(email)){
+                emailEt.setError("Email tidak boleh kosong!");
+                return;
+            }
+            finish();
+
+        });*//*
+    }*/

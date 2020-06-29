@@ -54,10 +54,10 @@
         <LinearLayout
             android:id="@+id/data_nip"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
             android:orientation="vertical"
             android:visibility="visible">
 
@@ -159,7 +159,6 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="15sp"
                 tools:autoSizeStepGranularity="1sp" />
-
             <EditText
                 android:id="@+id/no_ktp_rincian"
                 android:layout_width="match_parent"
@@ -168,111 +167,6 @@
                 android:backgroundTint="@color/colorBlue"
                 android:inputType="number"
                 android:textStyle="bold"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="20sp"
-                tools:autoSizeStepGranularity="1sp"
-                tools:ignore="LabelFor" />
-
-            <!--Agama-->
-            <TextView
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/agama"
-                android:textColor="@color/black"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/agama_rincian"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:inputType="text"
-                android:textStyle="bold"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="20sp"
-                tools:autoSizeStepGranularity="1sp"
-                tools:ignore="LabelFor" />
-            <!--Jenis Kelamin-->
-            <TextView
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/jenis_kelamin"
-                app:autoSizeMinTextSize="8sp"
-                android:textColor="@color/black"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/jenis_kelamin_rincian"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:inputType="text"
-                android:textStyle="bold"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="20sp"
-                tools:autoSizeStepGranularity="1sp"
-                tools:ignore="LabelFor" />
-
-            <!--tempat lahir-->
-            <TextView
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/tempat_lahir"
-                app:autoSizeMinTextSize="8sp"
-                android:textColor="@color/black"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/tempat_lahir_rincian"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:inputType="textCapCharacters"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="20sp"
-                tools:autoSizeStepGranularity="1sp"
-                tools:ignore="LabelFor" />
-
-            <!--Status Kawin-->
-            <TextView
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/status_kawin"
-                app:autoSizeMinTextSize="8sp"
-                android:textColor="@color/black"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/status_kawin_rincian"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:inputType="textCapCharacters"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="20sp"
@@ -402,149 +296,6 @@
                 android:textStyle="bold"
                 tools:ignore="LabelFor" />
 
-            <!--RT-->
-            <TextView
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/rt"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                android:textColor="@color/black"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/rt_rincian"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:inputType="number"
-                android:textStyle="bold"
-                tools:ignore="LabelFor" />
-
-            <!--RW-->
-            <TextView
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/rw"
-                app:autoSizeMinTextSize="8sp"
-                android:textColor="@color/black"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/rw_rincian"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:inputType="number"
-                android:textStyle="bold"
-                tools:ignore="LabelFor" />
-
-            <!--Propinsi-->
-            <TextView
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/propinsi"
-                app:autoSizeMinTextSize="8sp"
-                android:textColor="@color/black"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/provinsi_rincian"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                android:inputType="text"
-                android:textStyle="bold"
-                tools:ignore="LabelFor" />
-
-            <!--Kota-->
-            <TextView
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/kota"
-                android:textColor="@color/black"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/kota_rincian"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                android:inputType="text"
-                android:textStyle="bold"
-                tools:ignore="LabelFor" />
-
-            <!--Kecamatan-->
-            <TextView
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/kecamatan"
-                android:textColor="@color/black"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/kecamatan_rincian"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                android:inputType="text"
-                android:textStyle="bold"
-                tools:ignore="LabelFor" />
-
-            <!--Kelurahan-->
-            <TextView
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="@dimen/marginTop10dp"
-                android:text="@string/kelurahan"
-                android:textColor="@color/black"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="15sp"
-                tools:autoSizeStepGranularity="1sp" />
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/kelurahan_rincian"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:backgroundTint="@color/colorBlue"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                android:inputType="text"
-                android:textStyle="bold"
-                tools:ignore="LabelFor" />
-
-            <!--Kode Pos-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -586,8 +337,263 @@
                 android:textStyle="bold"
                 tools:ignore="LabelFor" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"/>
+
+            <!--Agama-->
+            <!-- <TextView
+                 android:visibility="gone"
+                 android:layout_width="match_parent"
+                 android:layout_height="20dp"
+                 android:layout_marginTop="@dimen/marginTop10dp"
+                 android:text="@string/agama"
+                 android:textColor="@color/black"
+                 app:autoSizeMinTextSize="8sp"
+                 app:autoSizeTextType="uniform"
+                 tools:autoSizeMaxTextSize="15sp"
+                 tools:autoSizeStepGranularity="1sp" />
+             <EditText
+                 android:visibility="gone"
+                 android:id="@+id/agama_rincian"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:autofillHints=""
+                 android:backgroundTint="@color/colorBlue"
+                 android:inputType="text"
+                 android:textStyle="bold"
+                 app:autoSizeMinTextSize="8sp"
+                 app:autoSizeTextType="uniform"
+                 tools:autoSizeMaxTextSize="20sp"
+                 tools:autoSizeStepGranularity="1sp"
+                 tools:ignore="LabelFor" />-->
+
+            <!--Jenis Kelamin-->
+            <!--<TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/jenis_kelamin"
+                app:autoSizeMinTextSize="8sp"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/jenis_kelamin_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="text"
+                android:textStyle="bold"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />-->
+
+            <!--tempat lahir-->
+            <!--<TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/tempat_lahir"
+                app:autoSizeMinTextSize="8sp"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/tempat_lahir_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textCapCharacters"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />-->
+
+            <!--Status Kawin-->
+            <!--<TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/status_kawin"
+                app:autoSizeMinTextSize="8sp"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/status_kawin_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="textCapCharacters"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="20sp"
+                tools:autoSizeStepGranularity="1sp"
+                tools:ignore="LabelFor" />-->
+
+            <!--RT-->
+            <!--<TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/rt"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                android:textColor="@color/black"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/rt_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="number"
+                android:textStyle="bold"
+                tools:ignore="LabelFor" />-->
+
+            <!--RW-->
+            <!--<TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/rw"
+                app:autoSizeMinTextSize="8sp"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/rw_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="number"
+                android:textStyle="bold"
+                tools:ignore="LabelFor" />-->
+
+            <!--Propinsi-->
+            <!--<TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/propinsi"
+                app:autoSizeMinTextSize="8sp"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/provinsi_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                android:inputType="text"
+                android:textStyle="bold"
+                tools:ignore="LabelFor" />-->
+
+            <!--Kota-->
+            <!--<TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/kota"
+                android:textColor="@color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/kota_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                android:inputType="text"
+                android:textStyle="bold"
+                tools:ignore="LabelFor" />-->
+
+            <!--Kecamatan-->
+            <!--<TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/kecamatan"
+                android:textColor="@color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/kecamatan_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                android:inputType="text"
+                android:textStyle="bold"
+                tools:ignore="LabelFor" />-->
+
+            <!--Kelurahan-->
+            <!--<TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/marginTop10dp"
+                android:text="@string/kelurahan"
+                android:textColor="@color/black"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeTextType="uniform"
+                tools:autoSizeMaxTextSize="15sp"
+                tools:autoSizeStepGranularity="1sp" />
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/kelurahan_rincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                android:inputType="text"
+                android:textStyle="bold"
+                tools:ignore="LabelFor" />-->
+
+            <!--Kode Pos-->
+
+
             <!--Data Keluarga-->
-            <TextView
+           <!-- <TextView
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
@@ -602,10 +608,10 @@
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="20sp"
-                tools:autoSizeStepGranularity="1sp" />
+                tools:autoSizeStepGranularity="1sp" />-->
 
             <!--Status Hubungan-->
-            <TextView
+            <!--<TextView
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -625,10 +631,10 @@
                 android:backgroundTint="@color/colorBlue"
                 android:inputType="number"
                 android:textStyle="bold"
-                tools:ignore="LabelFor" />
+                tools:ignore="LabelFor" />-->
 
             <!--Nama Kerabat-->
-            <TextView
+            <!--<TextView
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -651,10 +657,10 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
-                tools:ignore="LabelFor" />
+                tools:ignore="LabelFor" />-->
 
             <!--No Ktp-->
-            <TextView
+            <!--<TextView
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -678,10 +684,10 @@
                 app:autoSizeTextType="uniform"
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
-                tools:ignore="LabelFor" />
+                tools:ignore="LabelFor" />-->
 
             <!--Nama Gadis Ibu-->
-            <TextView
+            <!--<TextView
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -698,7 +704,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:layout_marginBottom="50dp"
                 android:backgroundTint="@color/colorBlue"
                 android:inputType="textCapCharacters"
                 app:autoSizeMinTextSize="8sp"
@@ -706,6 +711,8 @@
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"
                 tools:ignore="LabelFor" />
+            -->
+
 
         </LinearLayout>
 
