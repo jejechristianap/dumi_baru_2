@@ -1,101 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+
+    <RelativeLayout
+        android:id="@+id/view"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/bg_beranda"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        android:layout_gravity="center"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="@dimen/_120sdp">
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tagihan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:layout_gravity="center"
-            android:text="@string/inbox"
-            android:textColor="@color/colorWhite"/>
-    </androidx.appcompat.widget.Toolbar>
+            android:layout_centerInParent="true"
+            android:padding="@dimen/_20sdp"
+            android:gravity="center"
+            android:text="@string/notifikasi"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glTopButton"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glStartVertical"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.06"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glCenterVertical"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glEndVertical"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.94"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glTopSecondHorizontal"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glBottomSecondHorizontal"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <View
-        app:layout_constraintBottom_toTopOf="@id/glTopButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:background="@color/colorBlue"
-        android:layout_width="0dp"
-        android:layout_height="0dp"/>
-    <View
-        app:layout_constraintBottom_toTopOf="@id/glBottomSecondHorizontal"
-        app:layout_constraintStart_toStartOf="@id/glStartVertical"
-        app:layout_constraintEnd_toEndOf="@id/glEndVertical"
-        app:layout_constraintTop_toBottomOf="@id/glTopSecondHorizontal"
-        android:background="@drawable/view_inbox_custom"
-        android:layout_width="0dp"
-        android:layout_height="0dp"/>
+    <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_alignBottom="@id/view"
+        android:layout_alignTop="@id/view"
+        android:background="@drawable/view_inbox_custom" />-->
     <View
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/glBottomSecondHorizontal"
-        app:layout_constraintStart_toEndOf="@id/glCenterVertical"
-        app:layout_constraintEnd_toEndOf="@id/glEndVertical"
-        app:layout_constraintTop_toBottomOf="@id/glTopSecondHorizontal"
-        android:background="@drawable/view_pesan_custom"
+         android:background="@drawable/view_pesan_custom"
         android:layout_width="0dp"
         android:layout_height="0dp"/>
 
     <TextView
-        app:layout_constraintStart_toEndOf="@id/glStartVertical"
-        app:layout_constraintEnd_toStartOf="@id/glEndVertical"
-        app:layout_constraintTop_toBottomOf="@id/glTopSecondHorizontal"
-        app:layout_constraintBottom_toTopOf="@id/glBottomSecondHorizontal"
         android:text="@string/notifikasi"
         android:gravity="center"
         android:textColor="@color/colorWhite"
@@ -104,10 +48,6 @@
 
     <TextView
         android:visibility="gone"
-        app:layout_constraintStart_toEndOf="@id/glCenterVertical"
-        app:layout_constraintEnd_toStartOf="@id/glEndVertical"
-        app:layout_constraintTop_toBottomOf="@id/glTopSecondHorizontal"
-        app:layout_constraintBottom_toTopOf="@id/glBottomSecondHorizontal"
         android:text="@string/pesan"
         android:gravity="center"
         android:textColor="@color/colorWhite"
@@ -119,10 +59,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/glTopButton" />
+        android:layout_below="@id/view"
+        android:layout_alignParentBottom="true"
+        />
 
 <!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srl"
@@ -258,7 +197,7 @@
          app:layout_constraintTop_toTopOf="@+id/glTopButton" />-->
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
     <!-- <androidx.constraintlayout.widget.Guideline
          android:id="@+id/guidelineStartV"
          android:orientation="vertical"

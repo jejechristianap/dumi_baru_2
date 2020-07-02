@@ -30,6 +30,7 @@ import com.minjem.dumi.api.UploadImageInterface
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.model.User
 import com.minjem.dumi.retrofit.RetrofitClient
+import com.minjem.dumi.util.FileUtils
 import id.zelory.compressor.Compressor.compress
 import kotlinx.android.synthetic.main.activity_rincian_akun.*
 import kotlinx.coroutines.launch
@@ -56,7 +57,7 @@ class RincianAkunActivity : AppCompatActivity() {
     lateinit var prop: UploadImageInterface
     lateinit var prefManager: User
     lateinit var pref: SharedPreferences
-    lateinit var filePicture: File
+    private var filePicture: File? = null
     lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -167,7 +168,7 @@ class RincianAkunActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         prefManager = SharedPrefManager.getInstance(Objects.requireNonNull(applicationContext)).user
-        val apiPhotoPath = intent.getStringExtra("photo_profile")
+        val apiPhotoPath = SharedPrefManager.getInstance(this).user.imageProfile
         Glide.with(this)
                 .load(apiPhotoPath)
                 .error(R.drawable.layout_round_corner_beranda)
@@ -178,17 +179,18 @@ class RincianAkunActivity : AppCompatActivity() {
     }
 
     private fun uploadProfile() {
-        val nipBaru = prefManager!!.nip
+        val nipBaru = prefManager.nip
 
         val nip = RequestBody.create(MediaType.parse("text/plain"), nipBaru)
+//        val fileReqBodyProfile = RequestBody.create(MediaType.parse("image/*"), filePicture!!)
 
+        val bodyProfile = MultipartBody.Part.createFormData("image_profile",
+                currentPhotoPath, RequestBody.create(MediaType.parse("image/*"), filePicture!!))
 
-        val fileReqBodyProfile = RequestBody.create(MediaType.parse("image/*"), filePicture)
-        val bodyProfile = MultipartBody.Part.createFormData("image_profile", currentPhotoPath, fileReqBodyProfile)
         val pDialog = ProgressDialog(this@RincianAkunActivity)
-        pDialog.setMessage("Sedang mengupload foto...")
+        pDialog.setMessage("Loading...")
         pDialog.show()
-        val call = prop!!.uploadProfile(nip, bodyProfile)
+        val call = prop.uploadProfile(nip, bodyProfile)
         call.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 try {
@@ -286,17 +288,25 @@ class RincianAkunActivity : AppCompatActivity() {
             when (requestCode) {
                 1 -> {
                     val compressFile = File(currentPhotoPath)
+                    Log.d("Camera", "onActivityResult: $currentPhotoPath")
                     compressFile.let { image ->
                         lifecycleScope.launch{
                             filePicture = compress(this@RincianAkunActivity, image)
+                            Log.d("Camera", "onActivityResult: ${filePicture.toString()}")
+                            comp()
                         }
                     }
-                    filePicture = File(currentPhotoPath)
-                    uploadProfile()
-
-
+//                    uploadProfile()
                 }
             }
+        }
+    }
+
+    private fun comp(){
+        filePicture?.let {
+            Log.d("Size", "setCompressedImage: ${String.format("Size : %s", FileUtils.getReadableFileSize(it.length().toInt()))}")
+            Log.d("Compressor", "Compressed image save in " + it.path)
+            uploadProfile()
         }
     }
 

@@ -63,7 +63,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
+                android:layout_height="@dimen/_22sdp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/tentukan_pinjaman"
                 android:textColor="@android:color/black"
@@ -73,21 +73,59 @@
                 tools:autoSizeMaxTextSize="20sp"
                 tools:autoSizeStepGranularity="1sp"/>
 
-
-            <TextView
-                android:id="@+id/rp_1jt_kilat"
+            <RelativeLayout
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:gravity="center"
-                android:text="@string/rp_1jt"
-                android:textColor="#000000"
-                android:textSize="@dimen/font_big"
-                app:autoSizeMinTextSize="6sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="30sp"
-                tools:autoSizeStepGranularity="1sp" />
+                android:layout_height="@dimen/_50sdp">
+                <TextView
+                    android:id="@+id/tvRp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/rp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20ssp"
+                    android:gravity="end|center"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="wrap_content"/>
+                <me.abhinay.input.CurrencyEditText
+                    android:id="@+id/etCurrency"
+                    android:layout_toEndOf="@id/tvRp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_50sdp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="start|center"
+                    android:text="@string/_0"
+                    android:inputType="number"
+                    android:background="@drawable/layout_rounded_home"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_20ssp" />
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tvMinKil"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/minimum_pinjaman_rp_1_000_000"
+                    android:textSize="@dimen/_8ssp"
+                    android:textColor="#B71C1C" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tvMaksKil"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/maksimum_pinjaman_rp_15_000_000"
+                    android:textSize="@dimen/_8ssp"
+                    android:textColor="#B71C1C" />
+            </RelativeLayout>
+
+
 
             <SeekBar
                 android:id="@+id/seekbar_kilat"
@@ -146,49 +184,55 @@
                 tools:autoSizeMaxTextSize="30sp"
                 tools:autoSizeStepGranularity="1sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+            <RadioGroup
+                android:id="@+id/rgKilat"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="horizontal"
-                android:weightSum="3">
-
-                <Button
-                    android:id="@+id/bulan_3_kilat"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/flat_selector"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_height="@dimen/_40sdp">
+                <RadioButton
+                    android:id="@+id/rbKilat3"
+                    android:background="@drawable/radio_pinjaman_selector"
+                    android:button="@android:color/transparent"
                     android:text="@string/bulan_3"
-                    android:textColor="#2196F3"
-                    android:textSize="@dimen/font_small" />
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:textColor="@drawable/radio_flat_selector_text_pinjaman"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_25sdp"/>
 
-                <Button
-                    android:id="@+id/bulan_6_kilat"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/flat_selector"
+                <RadioButton
+                    android:id="@+id/rbKilat6"
+                    android:background="@drawable/radio_pinjaman_selector"
+                    android:button="@android:color/transparent"
                     android:text="@string/bulan_6"
-                    android:textColor="#2196F3"
-                    android:textSize="@dimen/font_small" />
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textColor="@drawable/radio_flat_selector_text_pinjaman"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_25sdp"/>
 
-                <Button
-                    android:id="@+id/bulan_12_kilat"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/flat_selector"
+                <RadioButton
+                    android:id="@+id/rbKilat12"
+                    android:background="@drawable/radio_pinjaman_selector"
+                    android:button="@android:color/transparent"
                     android:text="@string/bulan_12"
-                    android:textColor="#2196F3"
-                    android:textSize="@dimen/font_small" />
-            </LinearLayout>
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textColor="@drawable/radio_flat_selector_text_pinjaman"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_25sdp"/>
+            </RadioGroup>
 
             <LinearLayout
                 android:layout_width="match_parent"
