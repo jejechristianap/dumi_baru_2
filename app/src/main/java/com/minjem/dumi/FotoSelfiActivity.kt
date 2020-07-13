@@ -17,15 +17,14 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
 import com.minjem.dumi.api.RegisterInterface
 import com.minjem.dumi.api.UploadImageInterface
 import com.minjem.dumi.ecommerce.Helper.mToast
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.minjem.dumi.retrofit.RetrofitClient
+import com.minjem.dumi.util.CustomProgressDialog
 import com.minjem.dumi.util.FileUtils
 import id.zelory.compressor.Compressor.compress
-import kotlinx.android.synthetic.main.activity_foto_ktp.*
 import kotlinx.android.synthetic.main.activity_foto_selfi.*
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
