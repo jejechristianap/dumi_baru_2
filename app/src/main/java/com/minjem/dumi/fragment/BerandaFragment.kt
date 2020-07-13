@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.minjem.dumi.SemuaEcommerceActivity
 import com.minjem.dumi.R
 import com.minjem.dumi.ecommerce.ECommerceActivity
@@ -24,6 +25,10 @@ import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity
 import com.minjem.dumi.jenispinjaman.PinjamanRegularActivity
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.retrofit.RetrofitClient
+import com.minjem.dumi.util.BottomSheetFragment
+import com.minjem.dumi.util.ConnectionHelper
+import com.minjem.dumi.util.InternetConnection
+import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
 import kotlinx.android.synthetic.main.fragment_beranda.*
 import kotlinx.android.synthetic.main.fragment_beranda.view.*
 import kotlinx.android.synthetic.main.fragment_beranda.view.textPulsa
@@ -47,18 +52,24 @@ class BerandaFragment : Fragment() {
     lateinit var mView : View
     lateinit var mContext : Context
     private val go: String? = null
+    lateinit var dView : View
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.fragment_beranda, container, false)
         mContext = this.context!!
 //        initView()
+//        initOnTouch()
         initOnTouch()
+        val network = InternetConnection(mContext)
+        network.observe(this, androidx.lifecycle.Observer { isConnected ->
+            if (!isConnected) dialogTkb("connection")
+        })
         return mView
     }
 
-
     private fun initOnTouch() {
+        saldo()
         mView.cardKilat.setOnClickListener { goTo("kilat") }
         mView.kilatButton.setOnClickListener { goTo("kilat") }
         mView.cardRegular.setOnClickListener { goTo("regular") }
@@ -81,14 +92,37 @@ class BerandaFragment : Fragment() {
         mView.icSemua.setOnClickListener { goTo("semua") }
         mView.textSemua.setOnClickListener { goTo("semua") }
         mView.tkb.setOnClickListener {
-            if (touch) {
-                mView.tkbText.visibility = View.VISIBLE
-                touch = false
-            } else {
-                mView.tkbText.visibility = View.GONE
-                touch = true
+            dialogTkb("tkb")
+        }
+    }
+
+    @SuppressLint("InflateParams")
+    private fun dialogTkb(s: String){
+        dView = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
+        val dialog = BottomSheetDialog(mContext, R.style.AppBottomSheetDialogTheme)
+        dialog.setContentView(dView)
+        dialog.show()
+        when(s){
+            "tkb" -> {
+                dView.rlDialogInstansi.visibility = View.VISIBLE
+                dView.rlGagal.visibility = View.GONE
+                dView.rlBerhasil.visibility = View.GONE
+            }
+            "connection" -> {
+                dView.rlGagal.visibility = View.VISIBLE
+                dView.rlBerhasil.visibility = View.GONE
+                dView.rlDialogInstansi.visibility = View.GONE
             }
         }
+
+        dView.bTutup.setOnClickListener {
+           dialog.dismiss()
+        }
+    }
+
+    private fun showBottomDialog(){
+        val bsf = BottomSheetFragment()
+        bsf.show(fragmentManager!!, bsf.tag)
     }
 
     private fun goTo(item: String) {
@@ -107,6 +141,11 @@ class BerandaFragment : Fragment() {
                 intent.putExtra("fragment", "pln")
                 startActivity(intent)
             }
+            "flight" -> {
+                intent = Intent(activity, ECommerceActivity::class.java)
+                intent.putExtra("fragment", "flight")
+                startActivity(intent)
+            }
             "semua" -> startActivity(Intent(activity, SemuaEcommerceActivity::class.java))
             else -> Toast.makeText(activity, "Tunggu update kami selanjutanya...", Toast.LENGTH_SHORT).show()
         }
@@ -121,7 +160,7 @@ class BerandaFragment : Fragment() {
     };*/
     override fun onStart() {
         super.onStart()
-        saldo()
+
     }
 
 
