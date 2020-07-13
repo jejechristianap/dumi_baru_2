@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/id_l_bar_digisign"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/abu_sedang"
+        android:layout_width="match_parent"
+        android:padding="@dimen/margin_large"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:background="@drawable/digisign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:padding="@dimen/margin_large"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/id_btn_data_digisign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="GET DATA" />
+
+            <TextView
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:textSize="@dimen/font_medium"
+                android:gravity="center"
+                android:text="Foto Selfi"
+                style="@style/textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/id_image_foto_diri_digisign"
+                android:background="@mipmap/ic_launcher"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/kotak_150"
+                android:layout_height="@dimen/kotak_150"/>
+
+            <Button
+                android:visibility="gone"
+                android:textAllCaps="false"
+                android:layout_gravity="center"
+                android:id="@+id/id_btn_foto_diri_digisign"
+                android:text="Foto Selfi"
+                android:layout_width="@dimen/kotak_200"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="@dimen/layout_large"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:textSize="@dimen/font_medium"
+                android:gravity="center"
+                android:text="Foto KTP"
+                style="@style/textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/id_image_foto_ktp_digisign"
+                android:background="@mipmap/ic_launcher"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/kotak_150"
+                android:layout_height="@dimen/kotak_150"/>
+
+            <Button
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:id="@+id/id_btn_foto_ktp_digisign"
+                android:text="Foto KTP"
+                android:textAllCaps="false"
+                android:layout_width="@dimen/kotak_200"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/id_l_tulis_digisign"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/id_l_nik_digi"
+                    android:layout_marginTop="@dimen/margin_large"
+                    style="@style/textInputLayoutAppearance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/id_nik_digisign"
+                        android:hint="NIK"
+                        android:textColor="@color/black"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/id_l_nama_digi"
+                    android:layout_marginTop="@dimen/margin_large"
+                    style="@style/textInputLayoutAppearance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/id_nama_digisign"
+                        android:hint="Nama"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/id_l_tgl_lahir_digi"
+                        style="@style/textInputLayoutAppearance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/id_tgl_lahir_digisign"
+                            android:hint="Tgl Lahir"
+                            android:enabled="false"
+                            android:textColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <View
+                        android:id="@+id/id_date_picker_digi"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_marginTop="@dimen/layout_large"
+                android:id="@+id/id_btn_registrasi_digisign"
+                android:text="Registrasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:layout_marginTop="@dimen/layout_large"
+                android:id="@+id/id_btn_aktivasi_digisign"
+                android:text="Aktivasi"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_large"/>
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+    <!--<androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/id_btn_get_digisign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="GET DATA"
+            app:layout_constraintTop_toBottomOf="@id/id_l_pass" />
+
+        <Button
+            android:id="@+id/id_btn_registrasi_digisign"
+            android:layout_marginTop="@dimen/layout_small"
+            android:text="REGISTRASI DIGISIGN"
+            app:layout_constraintTop_toBottomOf="@id/id_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/id_1"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="Nama"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_btn_get_digisign"
+            app:layout_constraintWidth_percent=".3" />
+
+        &lt;!&ndash;            <ImageView&ndash;&gt;
+        &lt;!&ndash;                android:id="@+id/id_image_ktp_digisign"&ndash;&gt;
+        &lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;
+        &lt;!&ndash;                android:layout_height="@dimen/kotak_200"&ndash;&gt;
+        &lt;!&ndash;                android:layout_marginTop="@dimen/layout_small"&ndash;&gt;
+        &lt;!&ndash;                android:background="@mipmap/ic_launcher"&ndash;&gt;
+        &lt;!&ndash;                app:layout_constraintTop_toBottomOf="@+id/id_14" />&ndash;&gt;
+
+        &lt;!&ndash;            <Button&ndash;&gt;
+        &lt;!&ndash;                android:id="@+id/id_btn_ktp"&ndash;&gt;
+        &lt;!&ndash;                android:text="KTP"&ndash;&gt;
+        &lt;!&ndash;                app:layout_constraintTop_toBottomOf="@id/id_image_ktp_digisign"&ndash;&gt;
+        &lt;!&ndash;                style="@style/button"&ndash;&gt;
+        &lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;
+        &lt;!&ndash;                android:layout_height="wrap_content"/>&ndash;&gt;
+
+
+        <TextView
+            android:id="@+id/id_nama_digisign"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:hint=": Nama"
+            app:layout_constraintStart_toEndOf="@id/id_1"
+            app:layout_constraintTop_toBottomOf="@id/id_btn_get_digisign"
+            app:layout_constraintWidth_percent=".7" />
+
+        <TextView
+            android:id="@+id/id_2"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="No telp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_1"
+            app:layout_constraintWidth_percent=".3" />
+
+        <TextView
+            android:id="@+id/id_no_telp_digisign"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint=": No telp"
+            app:layout_constraintStart_toEndOf="@id/id_2"
+            app:layout_constraintTop_toTopOf="@id/id_2"
+            app:layout_constraintWidth_percent=".7" />
+
+        <TextView
+            android:id="@+id/id_3"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="ID Ktp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_2"
+            app:layout_constraintWidth_percent=".3" />
+
+        <TextView
+            android:id="@+id/id_id_ktp_digisign"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint=": ID Ktp"
+            app:layout_constraintStart_toEndOf="@id/id_3"
+            app:layout_constraintTop_toTopOf="@id/id_3"
+            app:layout_constraintWidth_percent=".7" />
+
+        <TextView
+            android:id="@+id/id_4"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="Alamat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_3"
+            app:layout_constraintWidth_percent=".3" />
+
+        <TextView
+            android:id="@+id/id_alamat_digisign"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint=": Alamat"
+            app:layout_constraintStart_toEndOf="@id/id_4"
+            app:layout_constraintTop_toTopOf="@id/id_4"
+            app:layout_constraintWidth_percent=".7" />
+
+        <TextView
+            android:id="@+id/id_5"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="Jenis Kelamin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_4"
+            app:layout_constraintWidth_percent=".3" />
+
+        <TextView
+            android:id="@+id/id_jenis_kelamin_digisign"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint=": Jenis Kelamin"
+            app:layout_constraintStart_toEndOf="@id/id_5"
+            app:layout_constraintTop_toTopOf="@id/id_5"
+            app:layout_constraintWidth_percent=".7" />
+
+        <TextView
+            android:id="@+id/id_6"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="Kecamatan"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_5"
+            app:layout_constraintWidth_percent=".3" />
+
+        <TextView
+            android:id="@+id/id_kecamatan_digisign"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint=": Kecamatan"
+            app:layout_constraintStart_toEndOf="@id/id_6"
+            app:layout_constraintTop_toTopOf="@id/id_6"
+            app:layout_constraintWidth_percent=".7" />
+
+        <TextView
+            android:id="@+id/id_7"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="Kelurahan"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_6"
+            app:layout_constraintWidth_percent=".3" />
+
+        <TextView
+            android:id="@+id/id_kelurahan_digisign"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint=": Kelurahan"
+            app:layout_constraintStart_toEndOf="@id/id_7"
+            app:layout_constraintTop_toTopOf="@id/id_7"
+            app:layout_constraintWidth_percent=".7" />
+
+        <TextView
+            android:id="@+id/id_8"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="Kode pos"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_7"
+            app:layout_constraintWidth_percent=".3" />
+
+        <TextView
+            android:id="@+id/id_kodepos_digisign"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint=": kode pos"
+            app:layout_constraintStart_toEndOf="@id/id_8"
+            app:layout_constraintTop_toTopOf="@id/id_8"
+            app:layout_constraintWidth_percent=".7" />
+
+        <TextView
+            android:id="@+id/id_9"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="kota"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_8"
+            app:layout_constraintWidth_percent=".3" />
+
+        <TextView
+            android:id="@+id/id_kota_digisign"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint=": kota"
+            app:layout_constraintStart_toEndOf="@id/id_9"
+            app:layout_constraintTop_toTopOf="@id/id_9"
+            app:layout_constraintWidth_percent=".7" />
+
+        <TextView
+            android:id="@+id/id_10"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="Tgl lahir"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_9"
+            app:layout_constraintWidth_percent=".3" />
+
+        <TextView
+            android:id="@+id/id_tgl_lahir_digisign"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint=": Tgl lahir"
+            app:layout_constraintStart_toEndOf="@id/id_10"
+            app:layout_constraintTop_toTopOf="@id/id_10"
+            app:layout_constraintWidth_percent=".7" />
+
+        <TextView
+            android:id="@+id/id_11"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="Provinsi"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_10"
+            app:layout_constraintWidth_percent=".3" />
+
+        <TextView
+            android:id="@+id/id_provinsi_digisign"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint=": Provinsi"
+            app:layout_constraintStart_toEndOf="@id/id_11"
+            app:layout_constraintTop_toTopOf="@id/id_11"
+            app:layout_constraintWidth_percent=".7" />
+
+        <TextView
+            android:id="@+id/id_12"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="Tempat Lahir"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_11"
+            app:layout_constraintWidth_percent=".3" />
+
+        <TextView
+            android:id="@+id/id_tempat_lahir_digisign"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint=": Tempat Lahir"
+            app:layout_constraintStart_toEndOf="@id/id_12"
+            app:layout_constraintTop_toTopOf="@id/id_12"
+            app:layout_constraintWidth_percent=".7" />
+
+        <TextView
+            android:id="@+id/id_13"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="Email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_12"
+            app:layout_constraintWidth_percent=".3" />
+
+        <TextView
+            android:id="@+id/id_email_digisign"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint=": Email"
+            app:layout_constraintStart_toEndOf="@id/id_13"
+            app:layout_constraintTop_toTopOf="@id/id_13"
+            app:layout_constraintWidth_percent=".7" />
+
+        <TextView
+            android:id="@+id/id_14"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="Npwp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_13"
+            app:layout_constraintWidth_percent=".3" />
+
+        <TextView
+            android:id="@+id/id_npwp_digisign"
+            style="@style/textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint=": Npwp"
+            app:layout_constraintStart_toEndOf="@id/id_14"
+            app:layout_constraintTop_toTopOf="@id/id_14"
+            app:layout_constraintWidth_percent=".7" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/id_l_nip"
+            style="@style/textInputLayoutAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/id_nip_digisign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="NIP"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/id_l_pass"
+            app:layout_constraintTop_toBottomOf="@id/id_l_nip"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            style="@style/textInputLayoutAppearance">
+
+            <EditText
+                android:id="@+id/id_pass_digisign"
+                android:hint="Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+</LinearLayout>
