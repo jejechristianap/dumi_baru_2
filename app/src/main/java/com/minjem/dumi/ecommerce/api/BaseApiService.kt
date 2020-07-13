@@ -1,5 +1,7 @@
 package com.minjem.dumi.ecommerce.api
 
+import com.minjem.dumi.response.RUser
+import com.minjem.dumi.response.RDigisign
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -142,4 +144,72 @@ interface BaseApiService {
     fun uploadImages(@Part("nipBaru") nipBaru: RequestBody,
                      @Part image_ktp: MultipartBody.Part,
                      @Part image_selfi: MultipartBody.Part): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("api/user/get")
+    fun loginDumi(
+            @Field("nipBaru") nipBaru: String,
+            @Field("sandi") sandi: String
+    ): Call<RUser>
+
+    @FormUrlEncoded
+    @POST("api/digisign/register")
+    fun registrasiDigisignTanpaFoto(
+            @Field("nama") nama: String,
+            @Field("tlp") tlp: String,
+            @Field("idktp") idktp: String,
+            @Field("alamat") alamat: String,
+            @Field("jenis_kelamin") jenis_kelamin: String,
+            @Field("kecamatan") kecamatan: String,
+            @Field("kelurahan") kelurahan: String,
+            @Field("kode_pos") kode_pos: String,
+            @Field("kota") kota: String,
+            @Field("tgl_lahir") tgl_lahir: String,
+            @Field("provinci") provinci: String,
+            @Field("tmp_lahir") tmp_lahir: String,
+            @Field("email") email: String,
+            @Field("npwp") npwp: String,
+            @Field("fotoktp") fotoktp: String,
+            @Field("fotodiri") fotodiri: String,
+            @Field("ttd") ttd: String,
+            @Field("fotonpwp") fotonpwp: String,
+            @Field("is_foto") is_foto: Boolean
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("api/digisign/activation")
+    fun activationDigisign(
+            @Field("email") email: String
+    ): Call<ResponseBody>
+
+    @Multipart
+    @POST("api/digisign/register")
+    fun registrasiDigisignPakaiFoto(
+            @Part("nama") namaPns: RequestBody?,
+            @Part("tlp") no_hp: RequestBody?,
+            @Part("idktp") idktp: RequestBody?,
+            @Part("alamat") alamat: RequestBody?,
+            @Part("jenis_kelamin") jenis_kelamin: RequestBody?,
+            @Part("kecamatan") kecamatan: RequestBody?,
+            @Part("kelurahan") kelurahan: RequestBody?,
+            @Part("kode_pos") kode_pos: RequestBody?,
+            @Part("kota") kota: RequestBody?,
+            @Part("tgl_lahir") tgl_lahir: RequestBody?,
+            @Part("provinci") provinci: RequestBody?,
+            @Part("tmp_lahir") tmp_lahir: RequestBody?,
+            @Part("email") email: RequestBody?,
+            @Part("npwp") npwp: RequestBody?,
+            @Part("is_foto") is_foto: RequestBody?,
+            @Part fotoktp: MultipartBody.Part?,
+            @Part fotodiri: MultipartBody.Part?,
+            @Part ttd: MultipartBody.Part?,
+            @Part fotonpwp: MultipartBody.Part?
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("digisign/cek_aktivasi")
+    fun cekAktivasi(
+            @Field("nik") nik : String,
+            @Field("email") email: String
+    ) : Call<RDigisign>
 }

@@ -19,7 +19,8 @@
 
     </FrameLayout>
 
-    <androidx.viewpager.widget.ViewPager
+   <!-- For swipe layout
+   <androidx.viewpager.widget.ViewPager
         android:id="@+id/vpMain"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/fl_container" />
+        app:layout_constraintBottom_toBottomOf="@+id/fl_container" />-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -35,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:itemBackground="@android:color/white"
-        app:labelVisibilityMode="selected"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,6 +1,5 @@
 package com.minjem.dumi.fragment
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -9,23 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.minjem.dumi.CustomProgressDialog
+import com.minjem.dumi.util.CustomProgressDialog
 
 import com.minjem.dumi.R
 import com.minjem.dumi.api.StatusPinjamanInterface
-import com.minjem.dumi.ecommerce.Helper.mToast
-import com.minjem.dumi.ecommerce.response.BandaraData
 import com.minjem.dumi.model.NotifikasiAdapter
 import com.minjem.dumi.model.NotifikasiData
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.retrofit.RetrofitClient
-import kotlinx.android.synthetic.main.fragment_inbox.*
 import kotlinx.android.synthetic.main.fragment_inbox.view.*
 import okhttp3.ResponseBody
 import org.json.JSONArray
 
-import org.json.JSONException
 import org.json.JSONObject
 
 import java.util.ArrayList

@@ -672,7 +672,7 @@
     <string name="topupOvo">Top Up OVO</string>
     <string name="masukkan_idPel">Masukkan ID Pelanggan</string>
     <string name="gagal">Gagal!</string>
-    <string name="koneksiGagal">Koneksi Gagal</string>
+    <string name="koneksiGagal">Koneksi terputus!! Mohon periksa Wifi/Data anda.</string>
     <string name="jumlah_tagihan">Jumlah Tagihan</string>
     <string name="bulan_tagihan">Bulan Tagihan</string>
     <string name="admin">Admin</string>
@@ -685,4 +685,8 @@
     <string name="_0">0</string>
     <string name="minimum_pinjaman_rp_1_000_000">Minimum pinjaman Rp 1.000.000</string>
     <string name="maksimum_pinjaman_rp_15_000_000">Maksimum pinjaman Rp 15.000.000</string>
+    <string name="pastikan_intansi_anda_sudah_bekerja_sama">(*)Pastikan Intansi Anda Sudah Bekerja Sama</string>
+    <string name="daftar_instansi_yang_sudah_bekerja_sama_dengan_kami">Daftar Instansi yang sudah bekerja sama dengan kami:</string>
+    <string name="daftarInstansi">- Badan Kepegawaian Negara (BKN)\n- Dinas Pemuda Olahraga dan Pariwisata (SUMBAWA)</string>
+    <string name="tkb90Def">TKB90 adalah Tingkat Keberhasilan Bayar nasabah DUMI dalam waktu 90 hari sejak tanggal tagihan jatuh tempo.</string>
 </resources>

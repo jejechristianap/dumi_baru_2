@@ -37,7 +37,7 @@
 
     <color name="abu_muda_banget">#CBDDDCDC</color>
     <color name="biru_asin">#00add5</color>
-
+    <color name="transparant">#00FFFFFF</color>
     <color name="hijau_tosca">#29CCB1</color>
     <color name="merah">#F74F4F</color>
 </resources>

@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
-import com.minjem.dumi.CustomProgressDialog
+import com.minjem.dumi.util.CustomProgressDialog
 import com.minjem.dumi.R
 import com.minjem.dumi.ecommerce.adapter.BandaraKotaAdapter
 import com.minjem.dumi.ecommerce.response.BandaraData
@@ -198,6 +198,7 @@ class FlightFragment : Fragment() {
                         progressDialog.dialog.dismiss()
                     }
                 } else {
+                    Log.d("Bandara", "onResponse: ${response.body()!!.string()}")
                     progressDialog.dialog.dismiss()
                 }
             }

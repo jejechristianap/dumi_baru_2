@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.minjem.dumi.CustomProgressDialog
+import com.minjem.dumi.util.CustomProgressDialog
 import com.minjem.dumi.R
 import com.minjem.dumi.ecommerce.adapter.RiwayatECommAdapter
 import com.minjem.dumi.ecommerce.Helper.PASSWORD

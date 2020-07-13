@@ -15,6 +15,7 @@ import com.minjem.dumi.ecommerce.Helper.KOLOM
 import com.minjem.dumi.ecommerce.Helper.mToast
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.minjem.dumi.model.SharedPrefManager
+import com.minjem.dumi.util.CustomProgressDialog
 import kotlinx.android.synthetic.main.activity_data_pribadi.*
 import retrofit2.Callback
 import okhttp3.ResponseBody

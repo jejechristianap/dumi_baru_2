@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.ActionBar
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -19,17 +18,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
-import com.minjem.dumi.CustomProgressDialog
+import com.minjem.dumi.util.CustomProgressDialog
 import com.minjem.dumi.R
 import com.minjem.dumi.ecommerce.adapter.PlnAdapter
 import com.minjem.dumi.ecommerce.Helper.PASSWORD
 import com.minjem.dumi.ecommerce.Helper.USERNAME
 import com.minjem.dumi.ecommerce.Helper.mDF
 import com.minjem.dumi.ecommerce.response.PDAMData
-import com.minjem.dumi.ecommerce.transaction.RiwayatView
 import com.minjem.dumi.model.SharedPrefManager
 import kotlinx.android.synthetic.main.ecommerce_konfirmasi_pembayaran.*
-import kotlinx.android.synthetic.main.ecommerce_pln.*
 import kotlinx.android.synthetic.main.ecommerce_pln.view.*
 import kotlinx.android.synthetic.main.ecommerce_pln.view.rvPln
 import kotlinx.android.synthetic.main.gagal.*

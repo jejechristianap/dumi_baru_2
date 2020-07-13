@@ -17,7 +17,7 @@
         <LinearLayout
             android:id="@+id/nip_cek"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
@@ -36,6 +36,7 @@
                 tools:autoSizeMaxTextSize="40sp"
                 tools:autoSizeStepGranularity="1sp" />
             <RelativeLayout
+                android:id="@+id/rlInstansi"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:visibility="gone"
@@ -43,24 +44,26 @@
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/spinner_custom"
                 android:orientation="horizontal">
-                <Spinner
-                    android:id="@+id/daftar_sebagai_spinner"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:spinnerMode="dropdown" />
                 <ImageView
+                    android:id="@+id/ivArrowDown"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_arrow_down24dp" />
+
+                <TextView
+                    android:id="@+id/tvInfoInstansi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlue"
+                    android:layout_toStartOf="@+id/ivArrowDown"
+                    android:text="@string/pastikan_intansi_anda_sudah_bekerja_sama" />
             </RelativeLayout>
             <LinearLayout
                 android:id="@+id/cek_nip_layout"
@@ -138,7 +141,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="20dp"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"

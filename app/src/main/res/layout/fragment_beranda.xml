@@ -1,58 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/top_background"
-    android:orientation="vertical"
-    android:background="@color/grey_100">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_100"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_120sdp"
-        android:padding="@dimen/_15sdp"
-        android:background="@drawable/bg_beranda">
+        android:background="@drawable/bg_beranda"
+        android:padding="@dimen/_15sdp">
+
         <ImageView
             android:id="@+id/icDumi"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
             android:layout_width="@dimen/_60sdp"
             android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:src="@drawable/dumi_logo_white" />
+
         <Button
             android:id="@+id/tkb"
-            android:text="@string/qm"
-            android:textColor="@color/white"
-            android:background="@drawable/button_outerline_white"
-            android:foreground="@drawable/ripple_state"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_width="@dimen/_18sdp"
-            android:layout_height="@dimen/_18sdp"/>
+            android:background="@drawable/button_outerline_white"
+            android:foreground="@drawable/ripple_state"
+            android:text="@string/qm"
+            android:textColor="@color/white" />
+
         <Button
-            android:visibility="visible"
             android:id="@+id/tkbText"
-            android:text="@string/tkb90"
-            android:textAllCaps="false"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:textColor="@color/bluetkb"
-            android:textSize="@dimen/_8ssp"
-            android:layout_toStartOf="@id/tkb"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="0dp"
             android:layout_alignTop="@id/tkb"
             android:layout_alignBottom="@id/tkb"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toStartOf="@id/tkb"
             android:background="@drawable/button_rounded_tkb"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="0dp"/>
+            android:text="@string/tkb90"
+            android:textAllCaps="false"
+            android:textColor="@color/bluetkb"
+            android:textSize="@dimen/_8ssp"
+            android:visibility="visible" />
+
         <TextView
             android:id="@+id/saldoTv"
-            android:text="@string/saldo_pay_later"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_12ssp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/icDumi"
             android:layout_alignParentStart="true"
             android:layout_marginTop="@dimen/_12sdp"
-            android:layout_below="@id/icDumi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:text="@string/saldo_pay_later"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp" />
+
         <TextView
             android:id="@+id/saldoPayLater"
             android:layout_width="wrap_content"
@@ -62,8 +67,9 @@
             android:layout_gravity="center"
             android:fontFamily="sans-serif-medium"
             android:text="@string/rp_0"
-            android:textSize="@dimen/_20ssp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_20ssp" />
+
         <Button
             android:id="@+id/riwayatButton"
             android:layout_width="wrap_content"
@@ -71,8 +77,8 @@
             android:layout_alignTop="@id/saldoPayLater"
             android:layout_alignBottom="@id/saldoPayLater"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/button_lanjut_design"
             android:layout_gravity="center"
+            android:background="@drawable/button_lanjut_design"
             android:text="@string/riwayat"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary" />
@@ -80,11 +86,10 @@
 
 
     <ScrollView
-        android:scrollbars="none"
-        android:paddingStart="@dimen/_15sdp"
-        android:paddingEnd="@dimen/_15sdp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -93,49 +98,56 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="start|center"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:textSize="@dimen/_12ssp"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:gravity="start|center"
                 android:text="@string/pinjaman_multiguna"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_12ssp" />
 
             <HorizontalScrollView
-                android:visibility="visible"
-                android:scrollbars="none"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_150sdp">
+                android:layout_height="@dimen/_150sdp"
+                android:scrollbars="none"
+                android:visibility="visible">
+
                 <RelativeLayout
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
                     <RelativeLayout
-                        android:visibility="visible"
                         android:id="@+id/cardKilat"
-                        android:layout_centerVertical="true"
-                        android:padding="@dimen/_18sdp"
-                        android:background="@drawable/card"
                         android:layout_width="@dimen/_250sdp"
-                        android:layout_height="@dimen/_140sdp">
+                        android:layout_height="@dimen/_140sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/card"
+                        android:padding="@dimen/_18sdp"
+                        android:visibility="visible">
+
                         <ImageView
                             android:id="@+id/icKilat"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentStart="true"
-                            android:src="@drawable/ic_kilat"
                             android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"/>
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:src="@drawable/ic_kilat" />
+
                         <TextView
-                            android:text="@string/dumi_kilat"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:textSize="@dimen/_15ssp"
-                            android:textColor="@color/white"
-                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_alignTop="@id/icKilat"
                             android:layout_alignBottom="@id/icKilat"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:layout_toEndOf="@id/icKilat"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:gravity="center"
+                            android:text="@string/dumi_kilat"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_15ssp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/kilatDesk"
@@ -150,6 +162,7 @@
                             android:text="@string/dumi_kilat_deskripsi"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_11ssp" />
+
                         <Button
                             android:id="@+id/kilatButton"
                             android:layout_width="wrap_content"
@@ -162,66 +175,69 @@
                             android:textColor="@color/blueKilat" />
                     </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/cardRegular"
-                    android:layout_centerVertical="true"
-                    android:padding="@dimen/_18sdp"
-                    android:layout_toEndOf="@id/cardKilat"
-                    android:background="@drawable/card2"
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="@dimen/_140sdp">
-                    <ImageView
-                        android:id="@+id/icRegular"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:src="@drawable/ic_regular"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"/>
-                    <TextView
-                        android:text="@string/dumi_regular"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:textSize="@dimen/_15ssp"
-                        android:textColor="@color/white"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_alignTop="@id/icRegular"
-                        android:layout_alignBottom="@id/icRegular"
-                        android:layout_toEndOf="@id/icRegular"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                    <RelativeLayout
+                        android:id="@+id/cardRegular"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="@dimen/_140sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/cardKilat"
+                        android:background="@drawable/card2"
+                        android:padding="@dimen/_18sdp">
 
-                    <TextView
-                        android:id="@+id/regularDesk"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/regularButton"
-                        android:layout_below="@id/icRegular"
-                        android:layout_alignStart="@id/icRegular"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="@dimen/_6sdp"
-                        android:layout_marginBottom="@dimen/_7sdp"
-                        android:text="@string/dumi_regular_deskripsi"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_11ssp" />
+                        <ImageView
+                            android:id="@+id/icRegular"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:src="@drawable/ic_regular" />
 
-                    <Button
-                        android:id="@+id/regularButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_alignStart="@id/icRegular"
-                        android:layout_alignParentBottom="true"
-                        android:background="@drawable/button_lanjut_design"
-                        android:text="@string/ajukan"
-                        android:textAllCaps="false"
-                        android:textColor="@color/purple" />
-                </RelativeLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/icRegular"
+                            android:layout_alignBottom="@id/icRegular"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_toEndOf="@id/icRegular"
+                            android:gravity="center"
+                            android:text="@string/dumi_regular"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_15ssp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/regularDesk"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@+id/regularButton"
+                            android:layout_below="@id/icRegular"
+                            android:layout_alignStart="@id/icRegular"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_7sdp"
+                            android:text="@string/dumi_regular_deskripsi"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11ssp" />
+
+                        <Button
+                            android:id="@+id/regularButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_alignStart="@id/icRegular"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/button_lanjut_design"
+                            android:text="@string/ajukan"
+                            android:textAllCaps="false"
+                            android:textColor="@color/purple" />
+                    </RelativeLayout>
                 </RelativeLayout>
             </HorizontalScrollView>
 
 
             <!--Carousel  FF777777-->
-           <!-- <com.synnapps.carouselview.CarouselView
+            <!-- <com.synnapps.carouselview.CarouselView
                 android:visibility="visible"
                 android:id="@+id/caraouselViewPinjaman"
                 app:fillColor="@color/white"
@@ -374,7 +390,7 @@
             </LinearLayout>-->
 
             <!--Pinjaman pensiun-->
-           <!-- <LinearLayout
+            <!-- <LinearLayout
                 android:id="@+id/dumi_pensiun_bumn"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
@@ -514,20 +530,22 @@
             </LinearLayout>-->
 
             <TextView
-                android:gravity="start|center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_12ssp"
                 android:layout_marginTop="@dimen/_12sdp"
+                android:gravity="start|center"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_15sdp"
                 android:text="@string/pembelian_topup"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_12ssp" />
 
             <RelativeLayout
-                android:layout_marginTop="@dimen/_8sdp"
-                android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_8sdp">
 
                 <ImageView
                     android:id="@+id/icPulsa"
@@ -561,6 +579,7 @@
                     android:background="@drawable/layout_rounded_home"
                     android:padding="@dimen/_10sdp"
                     android:src="@drawable/ic_token_pln" />
+
                 <TextView
                     android:id="@+id/textPln"
                     android:layout_width="0dp"
@@ -630,6 +649,7 @@
                     android:background="@drawable/layout_rounded_home"
                     android:padding="@dimen/_10sdp"
                     android:src="@drawable/ic_hotel" />
+
                 <TextView
                     android:id="@+id/textHotel"
                     android:layout_width="0dp"
@@ -653,6 +673,7 @@
                     android:background="@drawable/layout_rounded_home"
                     android:padding="@dimen/_10sdp"
                     android:src="@drawable/ic_pesawat" />
+
                 <TextView
                     android:id="@+id/textPesawat"
                     android:layout_width="0dp"
@@ -676,6 +697,7 @@
                     android:background="@drawable/layout_rounded_home"
                     android:padding="@dimen/_10sdp"
                     android:src="@drawable/ic_kereta" />
+
                 <TextView
                     android:id="@+id/textKereta"
                     android:layout_width="0dp"
@@ -705,8 +727,8 @@
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
                     android:layout_alignTop="@id/icHotel"
-                    android:layout_toEndOf="@id/icKereta"
                     android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_toEndOf="@id/icKereta"
                     android:background="@drawable/layout_rounded_home"
                     android:padding="@dimen/_10sdp"
                     android:src="@drawable/ic_all" />

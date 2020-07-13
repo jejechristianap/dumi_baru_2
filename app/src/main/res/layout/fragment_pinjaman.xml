@@ -45,9 +45,8 @@
             android:textStyle="bold" />
 
     </RelativeLayout>
-
     <RelativeLayout
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/rlGagalTagihan"
         android:layout_below="@id/topView"
         android:layout_alignParentBottom="true"
@@ -73,447 +72,453 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </RelativeLayout>
-
-    <ScrollView
-        android:id="@+id/svTagihan"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srlTagihan"
         android:layout_below="@id/topView"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone">
-
-        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ScrollView
+            android:id="@+id/svTagihan"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_below="@id/topView"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/marginTop10dp"
-                android:orientation="horizontal"
-                android:weightSum="1">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/marginTop10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="0.4"
+                        android:gravity="center"
+                        android:text="@string/status_pinjaman"
+                        android:textColor="@color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/status_pinjaman"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="0.4"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginStart="20dp"
-                    android:layout_weight="0.4"
-                    android:gravity="center"
-                    android:text="@string/status_pinjaman"
-                    android:textColor="@color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="20sp"
-                    tools:autoSizeStepGranularity="1sp" />
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
 
-                <TextView
-                    android:id="@+id/status_pinjaman"
-                    android:layout_width="0dp"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:text="@string/pinjaman"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/tvPinjaman"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="end"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="15sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="#D2CECE" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginStart="20dp"
-                    android:layout_weight="0.4"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="20sp"
-                    tools:autoSizeStepGranularity="1sp" />
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:text="@string/tenor"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/tenor_pinjaman_bulan"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="end"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="15sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="#D2CECE" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:text="@string/bunga"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/bunga_pinjaman"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="end"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="15sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="#D2CECE" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:text="@string/angsuran_perbulan"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/angsuran_pinjaman"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="end"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="15sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="#D2CECE" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:text="@string/asuransi"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/asuransi_pinjaman"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="end"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="15sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="#D2CECE" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:text="@string/administrasi"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/administrasi_pinjaman"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="end"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="15sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="#D2CECE" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:text="@string/transfer_antar_bank"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/transfer_bank_pinjaman"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="end"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="15sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="#D2CECE" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:text="@string/jumlah_yang_diterima"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/jumlah_terima_pinjaman"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="end"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="15sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="#D2CECE" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:text="@string/tanggal_pengajuan"
+                        android:textColor="@android:color/black"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="20sp"
+                        tools:autoSizeStepGranularity="1sp" />
+
+                    <TextView
+                        android:id="@+id/tanggal_pengajuan_pinjaman"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="end"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:autoSizeMaxTextSize="15sp"
+                        tools:autoSizeStepGranularity="1sp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/pkButton"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="@dimen/_17sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/button_custom_design_darkblue"
+                    android:text="@string/pk"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:visibility="gone" />
+
             </LinearLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:text="@string/pinjaman"
-                    android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="20sp"
-                    tools:autoSizeStepGranularity="1sp" />
-
-                <TextView
-                    android:id="@+id/pinjaman"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="end"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:background="#D2CECE" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:text="@string/tenor"
-                    android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="20sp"
-                    tools:autoSizeStepGranularity="1sp" />
-
-                <TextView
-                    android:id="@+id/tenor_pinjaman_bulan"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="end"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:background="#D2CECE" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:text="@string/bunga"
-                    android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="20sp"
-                    tools:autoSizeStepGranularity="1sp" />
-
-                <TextView
-                    android:id="@+id/bunga_pinjaman"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="end"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:background="#D2CECE" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:text="@string/angsuran_perbulan"
-                    android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="20sp"
-                    tools:autoSizeStepGranularity="1sp" />
-
-                <TextView
-                    android:id="@+id/angsuran_pinjaman"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="end"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:background="#D2CECE" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:text="@string/asuransi"
-                    android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="20sp"
-                    tools:autoSizeStepGranularity="1sp" />
-
-                <TextView
-                    android:id="@+id/asuransi_pinjaman"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="end"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:background="#D2CECE" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:text="@string/administrasi"
-                    android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="20sp"
-                    tools:autoSizeStepGranularity="1sp" />
-
-                <TextView
-                    android:id="@+id/administrasi_pinjaman"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="end"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:background="#D2CECE" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:text="@string/transfer_antar_bank"
-                    android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="20sp"
-                    tools:autoSizeStepGranularity="1sp" />
-
-                <TextView
-                    android:id="@+id/transfer_bank_pinjaman"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="end"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:background="#D2CECE" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:text="@string/jumlah_yang_diterima"
-                    android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="20sp"
-                    tools:autoSizeStepGranularity="1sp" />
-
-                <TextView
-                    android:id="@+id/jumlah_terima_pinjaman"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="end"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:background="#D2CECE" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:text="@string/tanggal_pengajuan"
-                    android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="20sp"
-                    tools:autoSizeStepGranularity="1sp" />
-
-                <TextView
-                    android:id="@+id/tanggal_pengajuan_pinjaman"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="end"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/pkButton"
-                android:layout_width="@dimen/_150sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_17sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:background="@drawable/button_custom_design_darkblue"
-                android:text="@string/pk"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:visibility="gone" />
-
-        </LinearLayout>
-    </ScrollView>
 
 </RelativeLayout>

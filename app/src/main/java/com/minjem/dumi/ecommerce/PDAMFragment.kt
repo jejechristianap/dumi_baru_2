@@ -1,5 +1,6 @@
 package com.minjem.dumi.ecommerce
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -13,7 +14,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
-import com.minjem.dumi.CustomProgressDialog
+import com.minjem.dumi.util.CustomProgressDialog
 import com.minjem.dumi.R
 import com.minjem.dumi.ecommerce.Helper.KOLOM
 import com.minjem.dumi.ecommerce.adapter.PDAMAdapter
@@ -217,10 +218,11 @@ class PDAMFragment : Fragment() {
                 })
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun showBottomSheet(berhasil: Boolean){
         dView = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
         val dialog = BottomSheetDialog(mContext, R.style.AppBottomSheetDialogTheme)
-        dialog.setCancelable(false)
+//        dialog.setCancelable(false)
         dialog.setContentView(dView)
 
         if (berhasil){
@@ -230,10 +232,12 @@ class PDAMFragment : Fragment() {
                 dView.tvTunggakan.text= tunggakan
             }
 
-            val sdf = SimpleDateFormat("yyyyMM")
+            /*to change pattern date from the string json
+            * Ex. string you get 202009, the pattern will be like yyyyMM*/
+            val local = Locale("in", "ID")
+            val sdf = SimpleDateFormat("yyyyMM", local)
             val d = sdf.parse(blnTagihan)
-
-            sdf.applyPattern("MMM yyyy")
+            sdf.applyPattern("MMMM yyyy")
 
             dView.rlGagal.visibility = View.GONE
             dView.rlBerhasil.visibility = View.VISIBLE

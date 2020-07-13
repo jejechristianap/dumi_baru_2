@@ -22,7 +22,10 @@ import com.minjem.dumi.ecommerce.Helper.mToast
 import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.model.User
+import com.minjem.dumi.presenter.DigisignPrestImp
+import com.minjem.dumi.response.RDigisign
 import com.minjem.dumi.retrofit.RetrofitClient
+import com.minjem.dumi.view.DigisignView
 import kotlinx.android.synthetic.main.activity_pinjaman_kilat.*
 import kotlinx.android.synthetic.main.activity_pinjmana_reguler.*
 import me.abhinay.input.CurrencyEditText
@@ -38,7 +41,7 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PinjamanKilatActivity : AppCompatActivity() {
+class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
     lateinit var seekBar: SeekBar
     lateinit var jumlah: CurrencyEditText
     lateinit var back: ImageView
@@ -84,6 +87,7 @@ class PinjamanKilatActivity : AppCompatActivity() {
     lateinit var adminTv: TextView
     lateinit var asuransiTv: TextView
     private var rb = ""
+    lateinit var digisignPrestImp : DigisignPrestImp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,6 +104,8 @@ class PinjamanKilatActivity : AppCompatActivity() {
         getAsur12 = 0f
         getAsur24 = 0f
         getAsur36 = 0f
+
+        digisignPrestImp = DigisignPrestImp(this)
 
         prefManager = SharedPrefManager.getInstance(applicationContext).user
         pref = applicationContext.getSharedPreferences("ajukanPinjaman", 0) // 0 - for private mode
@@ -140,12 +146,10 @@ class PinjamanKilatActivity : AppCompatActivity() {
         jumlah.addTextChangedListener(object: TextWatcher{
             override fun afterTextChanged(s: Editable?) {
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                when{
+                when {
                     jumlah.cleanIntValue < 1000000 -> {
                         tvMinKil.visibility = View.VISIBLE
                         tvMaksKil.visibility = View.GONE
@@ -160,18 +164,13 @@ class PinjamanKilatActivity : AppCompatActivity() {
                     }
                 }
                 onCheckRadio()
-
             }
-
         })
-
 //        back = findViewById(R.id.back_kilat)
         back_kilat.setOnClickListener{
             val intent = Intent(this@PinjamanKilatActivity, MainActivity::class.java)
             startActivity(intent)
         }
-
-
 
         seekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             var progressValue = 0
@@ -322,7 +321,6 @@ class PinjamanKilatActivity : AppCompatActivity() {
                     }
                 }
             }
-
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 Log.d("RadioButton on Seekbar", (if(rbKilat3.isChecked) "radio 3" else if(rbKilat6.isChecked) "radio 6" else "radio 12"))
@@ -502,7 +500,10 @@ class PinjamanKilatActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
             }
-            pinjaman
+            digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
+                    ,SharedPrefManager.getInstance(this).user.email)
+
+//            pinjaman
         }
     }
 
@@ -557,28 +558,10 @@ class PinjamanKilatActivity : AppCompatActivity() {
            }
     }
 
-    /*if(statusId == 1){
-                                    Toast.makeText(PinjamanKilatActivity.this, "Anda sudah mengajukan pinjaman. Mohon menunggu info dari kami.", Toast.LENGTH_SHORT).show();
-                                    return;
-                                } else if (statusId == 2){
-                                    Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." + statusId, Toast.LENGTH_SHORT).show();
-                                    return;
-                                } else if (statusId == 3){
-                                    ajukanPinjaman();
-                                } else if (statusId == 4){
-                                    Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." + statusId, Toast.LENGTH_SHORT).show();
-                                    return;
-                                } else if (statusId == 5){
-                                    Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." + statusId, Toast.LENGTH_SHORT).show();
-                                    return;
-                                } else if(statusId == 6){
-
-                                }*/
-
     //        Toast.makeText(this, "NIp: " + nip, Toast.LENGTH_SHORT).show();
     private val pinjaman: Unit
         get() {
-            val nip = prefManager!!.nip
+            val nip = prefManager.nip
             //        Toast.makeText(this, "NIp: " + nip, Toast.LENGTH_SHORT).show();
             val status = RetrofitClient.getClient().create(StatusPinjamanInterface::class.java)
             val call = status.getPinjaman(nip)
@@ -596,33 +579,22 @@ class PinjamanKilatActivity : AppCompatActivity() {
                                     val jsonObject = jsonArray.getJSONObject(i)
                                     statusPinjaman.add(jsonObject.getInt("status"))
                                 }
-                                if (statusPinjaman.contains(1)) {
-                                    Toast.makeText(this@PinjamanKilatActivity, "Anda sudah mengajukan pinjaman. Mohon menunggu info dari kami.", Toast.LENGTH_SHORT).show()
-                                } else if (statusPinjaman.contains(2)) {
-                                    Toast.makeText(this@PinjamanKilatActivity, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show()
-                                } else if (statusPinjaman.contains(4)) {
-                                    Toast.makeText(this@PinjamanKilatActivity, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show()
-                                } else if (statusPinjaman.contains(5)) {
-                                    Toast.makeText(this@PinjamanKilatActivity, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show()
-                                } else {
-                                    /*if(statusId == 1){
-                                        Toast.makeText(PinjamanKilatActivity.this, "Anda sudah mengajukan pinjaman. Mohon menunggu info dari kami.", Toast.LENGTH_SHORT).show();
-                                        return;
-                                    } else if (statusId == 2){
-                                        Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." + statusId, Toast.LENGTH_SHORT).show();
-                                        return;
-                                    } else if (statusId == 3){
-                                        ajukanPinjaman();
-                                    } else if (statusId == 4){
-                                        Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." + statusId, Toast.LENGTH_SHORT).show();
-                                        return;
-                                    } else if (statusId == 5){
-                                        Toast.makeText(PinjamanKilatActivity.this, "Masih ada tagihan yang belum selesai, terima kasih." + statusId, Toast.LENGTH_SHORT).show();
-                                        return;
-                                    } else if(statusId == 6){
-
-                                    }*/
-                                    ajukanPinjaman()
+                                when {
+                                    statusPinjaman.contains(1) -> {
+                                        Toast.makeText(this@PinjamanKilatActivity, "Anda sudah mengajukan pinjaman. Mohon menunggu info dari kami.", Toast.LENGTH_SHORT).show()
+                                    }
+                                    statusPinjaman.contains(2) -> {
+                                        Toast.makeText(this@PinjamanKilatActivity, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show()
+                                    }
+                                    statusPinjaman.contains(4) -> {
+                                        Toast.makeText(this@PinjamanKilatActivity, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show()
+                                    }
+                                    statusPinjaman.contains(5) -> {
+                                        Toast.makeText(this@PinjamanKilatActivity, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show()
+                                    }
+                                    else -> {
+                                        ajukanPinjaman()
+                                    }
                                 }
                             } else {
                                 ajukanPinjaman()
@@ -662,8 +634,8 @@ class PinjamanKilatActivity : AppCompatActivity() {
                             val id = bung.getInt("id_bunga")
                             //                            Toast.makeText(PinjamanKilatActivity.this, "instansi: " + id, Toast.LENGTH_SHORT).show();
                             if (id == 1 && insker.contains("Badan Kepegawaian Negara")) {
-                                adminTv!!.text = "Biaya Administrasi 1%"
-                                asuransiTv!!.text = "Biaya Asuransi 1%"
+                                adminTv.text = "Biaya Administrasi 1%"
+                                asuransiTv.text = "Biaya Asuransi 1%"
                                 val bunga = bung.getDouble("bunga")
                                 val biayaAdmin = bung.getDouble("biaya_admin")
                                 val biayaAsuransi12 = bung.getDouble("biaya_asuransi_12")
@@ -683,8 +655,8 @@ class PinjamanKilatActivity : AppCompatActivity() {
                                          Asur36: $getAsur36
                                          """.trimIndent())
                             } else if (id == 2 && !insker.contains("Badan Kepegawaian Negara")) {
-                                adminTv!!.text = "Biaya Administrasi 2%"
-                                asuransiTv!!.text = "Biaya Asuransi 2%"
+                                adminTv.text = "Biaya Administrasi 2%"
+                                asuransiTv.text = "Biaya Asuransi 2%"
                                 val bunga = bung.getDouble("bunga")
                                 val biayaAdmin = bung.getDouble("biaya_admin")
                                 val biayaAsuransi12 = bung.getDouble("biaya_asuransi_12")
@@ -748,5 +720,19 @@ class PinjamanKilatActivity : AppCompatActivity() {
 
     companion object {
         const val DATE_FORMAT_2 = "yyyy-MM-dd"
+    }
+
+    override fun digiResponse(response: RDigisign) {
+        Log.d("Masuk Handler SUV >>>>"," ----------------------------------------- >>>>> RESPONSE")
+        if (response.data!!.isNotEmpty()){
+            mToast(this,"Selamat Akun Anda Sudah Teraktivasi")
+        } else {
+            mToast(this,"Belum Teraktivasi")
+        }
+
+    }
+
+    override fun digiError(error: String) {
+        Log.e("Error",error)
     }
 }

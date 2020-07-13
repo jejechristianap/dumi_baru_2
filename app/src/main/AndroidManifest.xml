@@ -64,6 +64,10 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>-->
+        <!--<service
+            android:name=".response.InternetConnection"
+            android:enabled="true"
+            android:exported="false"/>-->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.minjem.dumi.fileprovider"

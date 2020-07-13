@@ -148,11 +148,11 @@ public class DaftarActivity extends AppCompatActivity {
             }
         });
 
-        instansiSpinner = findViewById(R.id.daftar_sebagai_spinner);
+        /*instansiSpinner = findViewById(R.id.daftar_sebagai_spinner);
         instansiAdapter = new ArrayAdapter<>(DaftarActivity.this, R.layout.spinner_text, instansi);
         instansiAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
         instansiSpinner.setAdapter(instansiAdapter);
-
+*/
         pDialog = new ProgressDialog(DaftarActivity.this);
 
         /*Linear Layout*/

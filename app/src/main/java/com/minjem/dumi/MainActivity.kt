@@ -21,12 +21,14 @@ open class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        loadFragment(BerandaFragment())
+        loadFragment(BerandaFragment())
 //        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottom_navigation.setOnNavigationItemSelectedListener(this)
-//        vpMain.offscreenPageLimit = 5
+//
 
-        /*vpMain.addOnPageChangeListener(object : OnPageChangeListener {
+        /* For swipe layout
+        vpMain.offscreenPageLimit = 5
+        vpMain.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
             override fun onPageSelected(position: Int) {
                 when (position) {
@@ -42,6 +44,8 @@ open class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         })
         setupViewPager(vpMain)*/
     }
+
+
 
     private fun setupViewPager(viewPager: ViewPager) {
         val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
@@ -72,7 +76,9 @@ open class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         var fragment: Fragment? = null
         var index = 0
-        /*when (menuItem.itemId) {
+
+        /* Swipe layout
+        when (menuItem.itemId) {
             R.id.bottom_navigation_beranda -> {
                 index = 0
                 vpMain.currentItem = index

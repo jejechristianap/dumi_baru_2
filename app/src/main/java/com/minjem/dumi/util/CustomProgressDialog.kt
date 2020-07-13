@@ -1,4 +1,4 @@
-package com.minjem.dumi
+package com.minjem.dumi.util
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -11,6 +11,7 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
 import androidx.core.content.res.ResourcesCompat
+import com.minjem.dumi.R
 import kotlinx.android.synthetic.main.progress_bar.view.*
 
 class CustomProgressDialog {

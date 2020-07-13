@@ -123,11 +123,11 @@ public class DownloadTask {
         protected Void doInBackground(Void... arg0) {
             try {
                 URL url = new URL(downloadUrl);//Create Download URl
-                HttpURLConnection c = (HttpURLConnection) url.openConnection();//Open Url Connection
+                HttpURLConnection c = (HttpURLConnection) url.openConnection();//Open Url ConnectionHelper
                 c.setRequestMethod("GET");//Set Request Method to "GET" since we are grtting data
-                c.connect();//connect the URL Connection
+                c.connect();//connect the URL ConnectionHelper
 
-                //If Connection response is not OK then show Logs
+                //If ConnectionHelper response is not OK then show Logs
                 if (c.getResponseCode() != HttpURLConnection.HTTP_OK) {
                     Log.e(TAG, "Server returned HTTP " + c.getResponseCode()
                             + " " + c.getResponseMessage());
