@@ -49,7 +49,7 @@
                 android:id="@+id/noKtp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_alignParentStart="true"
                 android:layout_below="@id/dataPribadi"
                 android:textSize="@dimen/_12ssp"
@@ -67,10 +67,52 @@
                 tools:ignore="LabelFor" />
 
             <TextView
+            android:id="@+id/namaLengkap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/etNoKtp"
+            android:textSize="@dimen/_12ssp"
+            android:text="@string/nama_lengkap"/>
+            <EditText
+                android:id="@+id/etNamaLengkap"
+                android:layout_below="@id/namaLengkap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="number"
+                android:maxLength="16"
+                android:textColor="@android:color/black"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/tanggalLahir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/etNamaLengkap"
+                android:textSize="@dimen/_12ssp"
+                android:text="@string/tanggal_lahir"/>
+            <EditText
+                android:id="@+id/etTanggalLahir"
+                android:layout_below="@id/tanggalLahir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:backgroundTint="@color/colorBlue"
+                android:inputType="text"
+                android:maxLength="16"
+                android:textColor="@android:color/black"
+                tools:ignore="LabelFor" />
+
+            <TextView
                 android:id="@+id/pendidikanTerakhir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/etNoKtp"
+                android:layout_below="@id/etTanggalLahir"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
@@ -111,12 +153,11 @@
                 android:id="@+id/jumlahTanggungan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/etNoKtp"
+                android:layout_alignTop="@id/pendidikanTerakhir"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:textSize="@dimen/_12ssp"
-                android:text="@string/jumlah_tanggungan"/>
+                android:text="@string/jumlah_tanggungan"
+                android:textSize="@dimen/_12ssp" />
             <RelativeLayout
                 android:id="@+id/rlJumlahTanggungan"
                 android:layout_width="0dp"

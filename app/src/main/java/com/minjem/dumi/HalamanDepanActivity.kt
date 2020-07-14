@@ -29,20 +29,21 @@ class HalamanDepanActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_halaman_depan)
 //        conn()
-        checkCon()
+//        checkCon()
         /*val i = Intent(this, InternetConnection::class.java)
         startService(i)*/
-        /*val network = InternetConnection(applicationContext)
+        val network = InternetConnection(applicationContext)
         network.observe(this, Observer { isConnected ->
             if (isConnected){
 //                mToast(this, "Online")
 //                checkUpdate()
+                Log.d("Network", "onCreate: $isConnected")
             } else {
 //                mToast(this, "Offline")
                 ConnectionHelper.showAlert(this)
             }
 
-        })*/
+        })
 
         SharedPrefManager.getInstance(applicationContext).logout()
         daftarButton = findViewById(R.id.asn_akftif_button_daftar)

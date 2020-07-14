@@ -123,7 +123,7 @@
             <!--01 Description-->
             <LinearLayout
                 android:id="@+id/deskripsi_satu_ll"
-                android:background="@color/lightBlue"
+                android:background="@color/grey_100"
                 android:visibility="gone"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
@@ -202,7 +202,7 @@
             <!--02 Description-->
             <LinearLayout
                 android:id="@+id/deskripsi_dua_ll"
-                android:background="@color/lightBlue"
+                android:background="@color/grey_100"
                 android:visibility="gone"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
@@ -280,7 +280,7 @@
             <!--03 Description-->
             <LinearLayout
                 android:id="@+id/deskripsi_tiga_ll"
-                android:background="@color/lightBlue"
+                android:background="@color/grey_100"
                 android:visibility="gone"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
@@ -357,7 +357,7 @@
             <!--04 Description-->
             <LinearLayout
                 android:id="@+id/deskripsi_empat_ll"
-                android:background="@color/lightBlue"
+                android:background="@color/grey_100"
                 android:visibility="gone"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
@@ -434,7 +434,7 @@
             <!--05 Description-->
             <LinearLayout
                 android:id="@+id/deskripsi_lima_ll"
-                android:background="@color/lightBlue"
+                android:background="@color/grey_100"
                 android:visibility="gone"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"

@@ -16,10 +16,10 @@ class BantuanFragment : Fragment() {
     lateinit var c: Context
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        v = inflater.inflate(R.layout.fragment_bantuan, container, false)
+        v = inflater.inflate(R.layout.activity_pusat_bantuan, container, false)
         c = this.activity!!
         /*v.wvTtd.webViewClient = WebViewClient()
-        v.wvTtd.settings.javaScriptEnabled = true
+        v.wvTtd.settings.javaScriptEna-bled = true
         v.wvTtd.loadUrl("https://wv.tandatanganku.com/activationpage.html?act=FXvJGcLQWMzd1tNtAyoc4XRUT0h9EAsTqliRiBzel97uHbMRxXQLpIk7NCQNsoLMqp6yxKEYSAkFnlNsyOvUQUymmnb7mMg3E3SKUgufZTLHW%2BY1TYoqaJuTklB9o1TxkisxBe8RoYhjxg%2BtdQr5Sw%3D%3D")
 */
         return v

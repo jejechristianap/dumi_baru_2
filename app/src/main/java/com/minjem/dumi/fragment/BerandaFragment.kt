@@ -8,8 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -26,10 +24,8 @@ import com.minjem.dumi.jenispinjaman.PinjamanRegularActivity
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.retrofit.RetrofitClient
 import com.minjem.dumi.util.BottomSheetFragment
-import com.minjem.dumi.util.ConnectionHelper
 import com.minjem.dumi.util.InternetConnection
 import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
-import kotlinx.android.synthetic.main.fragment_beranda.*
 import kotlinx.android.synthetic.main.fragment_beranda.view.*
 import kotlinx.android.synthetic.main.fragment_beranda.view.textPulsa
 import okhttp3.ResponseBody
@@ -60,16 +56,26 @@ class BerandaFragment : Fragment() {
         mContext = this.context!!
 //        initView()
 //        initOnTouch()
+        mView.srlBeranda.setOnRefreshListener {
+            mView.srlBeranda.isRefreshing = true
+            refreshList()
+        }
         initOnTouch()
+        saldo()
         val network = InternetConnection(mContext)
         network.observe(this, androidx.lifecycle.Observer { isConnected ->
-            if (!isConnected) dialogTkb("connection")
+            if (isConnected){
+                Log.d("Network", "onCreateView: $isConnected")
+            } else {
+                dialogTkb("connection")
+            }
         })
         return mView
     }
 
     private fun initOnTouch() {
-        saldo()
+
+
         mView.cardKilat.setOnClickListener { goTo("kilat") }
         mView.kilatButton.setOnClickListener { goTo("kilat") }
         mView.cardRegular.setOnClickListener { goTo("regular") }
@@ -94,6 +100,11 @@ class BerandaFragment : Fragment() {
         mView.tkb.setOnClickListener {
             dialogTkb("tkb")
         }
+    }
+
+    private fun refreshList(){
+        mView.srlBeranda.isRefreshing = false
+        saldo()
     }
 
     @SuppressLint("InflateParams")
@@ -151,19 +162,6 @@ class BerandaFragment : Fragment() {
         }
     }
 
-    /*
-    ImageListener imageListener = (position, imageView) -> {
-        imageView.setImageResource(sampleImages[position]);
-        imageView.setOnClickListener(v -> {
-            Log.d("Position", "Pos: " + position);
-        });
-    };*/
-    override fun onStart() {
-        super.onStart()
-
-    }
-
-
     private fun saldo(){
             val idUser = SharedPrefManager.getInstance(activity).user.id
             val nipBaru : String? = SharedPrefManager.getInstance(activity).user.nip
@@ -193,7 +191,9 @@ class BerandaFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-
+                    val base = "Rp0"
+                    mView.saldoPayLater.text = base
+                    dialogTkb("connection")
                 }
             })
         }

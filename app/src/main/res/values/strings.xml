@@ -139,7 +139,7 @@
     <string name="dati">Dati (Seperti nama Kota/Desa) OPTIONAL</string>
     <string name="propinsi">Propinsi</string>
     <string name="bidang_usaha">Bidang Usaha</string>
-    <string name="tanggal_lahir">Tanggal Lahir, contoh (10-03-1996)</string>
+    <string name="tanggal_lahir">Tanggal Lahir</string>
     <string name="agama">Agama</string>
     <string name="mohon_lengkapi_data">Mohon Lengkapi Data Anda</string>
     <string name="email">Email</string>

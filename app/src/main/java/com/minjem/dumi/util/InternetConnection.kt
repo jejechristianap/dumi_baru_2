@@ -5,6 +5,7 @@ package com.minjem.dumi.util
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkInfo
@@ -19,17 +20,30 @@ class InternetConnection(private val context: Context): LiveData<Boolean>() {
     private var connectivityManager: ConnectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-    lateinit var  networkCallBack: ConnectivityManager.NetworkCallback
+    private lateinit var  networkCallBack: ConnectivityManager.NetworkCallback
 
     override fun onActive() {
         super.onActive()
         updateConnection()
-        connectivityManager.registerDefaultNetworkCallback(connectivityManagerCallback())
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ->{
+                connectivityManager.registerDefaultNetworkCallback(connectivityManagerCallback())
+            }
+            else -> {
+                context.registerReceiver(networkReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+            }
+        }
+
     }
 
     override fun onInactive() {
         super.onInactive()
-        connectivityManager.registerDefaultNetworkCallback(connectivityManagerCallback())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            connectivityManager.registerDefaultNetworkCallback(connectivityManagerCallback())
+        } else {
+            context.unregisterReceiver(networkReceiver)
+        }
+
     }
 
     private fun  connectivityManagerCallback(): ConnectivityManager.NetworkCallback{
