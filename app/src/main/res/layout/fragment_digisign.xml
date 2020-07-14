@@ -9,7 +9,7 @@
         android:id="@+id/id_l_bar_digisign"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/abu_sedang"
+        android:background="@color/colorBlue"
         android:layout_width="match_parent"
         android:padding="@dimen/margin_large"
         android:gravity="center"
@@ -53,14 +53,16 @@
 
             <ImageView
                 android:id="@+id/id_image_foto_diri_digisign"
-                android:background="@mipmap/ic_launcher"
+                android:src="@drawable/selfie_ktp"
                 android:layout_gravity="center"
                 android:layout_width="@dimen/kotak_150"
                 android:layout_height="@dimen/kotak_150"/>
 
             <Button
+                android:layout_marginTop="@dimen/_10sdp"
                 android:visibility="gone"
                 android:textAllCaps="false"
+                android:background="@drawable/button_masuk"
                 android:layout_gravity="center"
                 android:id="@+id/id_btn_foto_diri_digisign"
                 android:text="Foto Selfi"
@@ -79,7 +81,7 @@
 
             <ImageView
                 android:id="@+id/id_image_foto_ktp_digisign"
-                android:background="@mipmap/ic_launcher"
+                android:src="@drawable/ktp"
                 android:layout_gravity="center"
                 android:layout_width="@dimen/kotak_150"
                 android:layout_height="@dimen/kotak_150"/>
@@ -87,8 +89,10 @@
             <Button
                 android:visibility="gone"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:id="@+id/id_btn_foto_ktp_digisign"
                 android:text="Foto KTP"
+                android:background="@drawable/button_masuk"
                 android:textAllCaps="false"
                 android:layout_width="@dimen/kotak_200"
                 android:layout_height="wrap_content"/>
@@ -100,45 +104,48 @@
                 android:orientation="vertical"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputLayout
+                <!--<com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/id_l_nik_digi"
                     android:layout_marginTop="@dimen/margin_large"
                     style="@style/textInputLayoutAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/id_nik_digisign"
-                        android:hint="NIK"
-                        android:textColor="@color/black"
-                        android:inputType="number"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
 
-                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
+                </com.google.android.material.textfield.TextInputLayout>-->
+                <EditText
+                    android:id="@+id/id_nik_digisign"
+                    android:hint="NIK"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:textColor="@color/black"
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <!--<com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/id_l_nama_digi"
                     android:layout_marginTop="@dimen/margin_large"
                     style="@style/textInputLayoutAppearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/id_nama_digisign"
-                        android:hint="Nama"
-                        android:textColor="@color/black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
 
-                </com.google.android.material.textfield.TextInputLayout>
+
+                </com.google.android.material.textfield.TextInputLayout>-->
+
+                <EditText
+                    android:id="@+id/id_nama_digisign"
+                    android:hint="Nama"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_marginTop="@dimen/margin_large"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <!--<com.google.android.material.textfield.TextInputLayout
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:id="@+id/id_l_tgl_lahir_digi"
@@ -146,15 +153,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
-                            android:id="@+id/id_tgl_lahir_digisign"
-                            android:hint="Tgl Lahir"
-                            android:enabled="false"
-                            android:textColor="@color/black"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+
+                    </com.google.android.material.textfield.TextInputLayout>-->
+                    <EditText
+                        android:id="@+id/id_tgl_lahir_digisign"
+                        android:hint="Tgl Lahir"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:enabled="false"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
                     <View
                         android:id="@+id/id_date_picker_digi"
@@ -173,6 +183,7 @@
                 android:layout_marginTop="@dimen/layout_large"
                 android:id="@+id/id_btn_registrasi_digisign"
                 android:text="Registrasi"
+                android:background="@drawable/button_masuk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -180,6 +191,7 @@
                 android:layout_marginTop="@dimen/layout_large"
                 android:id="@+id/id_btn_aktivasi_digisign"
                 android:text="Aktivasi"
+                android:background="@drawable/button_masuk"
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

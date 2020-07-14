@@ -14,12 +14,17 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.appcompat.app.AppCompatActivity
 import com.minjem.dumi.MainActivity
 import com.minjem.dumi.PelengkapanRegularActivity
+import com.minjem.dumi.PersetujuanActivity
 import com.minjem.dumi.R
 import com.minjem.dumi.api.GetBungaInterface
 import com.minjem.dumi.api.StatusPinjamanInterface
+import com.minjem.dumi.ecommerce.ECommerceActivity
 import com.minjem.dumi.ecommerce.Helper.mToast
 import com.minjem.dumi.model.SharedPrefManager
+import com.minjem.dumi.presenter.DigisignPrestImp
+import com.minjem.dumi.response.RDigisign
 import com.minjem.dumi.retrofit.RetrofitClient
+import com.minjem.dumi.view.DigisignView
 import kotlinx.android.synthetic.main.activity_pinjaman_kilat.*
 import kotlinx.android.synthetic.main.activity_pinjmana_reguler.*
 import me.abhinay.input.CurrencyEditText
@@ -35,7 +40,7 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PinjamanRegularActivity : AppCompatActivity() {
+class PinjamanRegularActivity : AppCompatActivity(), DigisignView {
     lateinit var backRegular: ImageView
     lateinit var jumlahRegular: CurrencyEditText
     lateinit var seekbarRegular: SeekBar
@@ -90,6 +95,7 @@ class PinjamanRegularActivity : AppCompatActivity() {
     private var getAdministrasi = ""
     private var bkn = true
     private var rb = ""
+    lateinit var digisignPrestImp : DigisignPrestImp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,6 +108,7 @@ class PinjamanRegularActivity : AppCompatActivity() {
 
     private fun initView(){
         /*SharedPref ajukanPinjaman*/
+        digisignPrestImp = DigisignPrestImp(this)
         pref = applicationContext.getSharedPreferences("ajukanPinjaman", 0) // 0 - for private mode
         editor = pref.edit()
         plafond = 0
@@ -651,10 +658,35 @@ class PinjamanRegularActivity : AppCompatActivity() {
         editor.putString("tglAkhir", tglAkhirPinjam)
         editor.putFloat("asuransi", asuransi)
         editor.apply()
-        startActivity(Intent(this@PinjamanRegularActivity, PelengkapanRegularActivity::class.java))
+//        startActivity(Intent(this@PinjamanRegularActivity, PelengkapanRegularActivity::class.java))
+        digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
+                ,SharedPrefManager.getInstance(this).user.email)
 
         /*PinjamanKilatInterface pinjam = RetrofitClient.getClient().create(PinjamanKilatInterface.class);
         Call<ResponseBody> call = pinjam.ajukanPinjaman(nip, pinjamanUang, plafond, 0, BUNGA_PERBULAN,
                 bunga, admin, angsuran, BIAYA_TRANSFER, tujuan, tglPinjam, tglAkhirPinjam, "", sisa, asuransi, );*/
+    }
+
+    override fun digiResponse(response: RDigisign) {
+        Log.d("Masuk Handler SUV >>>>"," ----------------------------------------- >>>>> RESPONSE")
+        if (response.data!!.isNotEmpty()){
+            Log.d("Digisign", "digiResponse: Selamat Akun Anda Sudah Teraktivasi")
+            val i = Intent(this@PinjamanRegularActivity, PersetujuanActivity::class.java)
+            i.putExtra("activity", "kilat")
+            startActivity(i)
+        } else {
+//            mToast(this,"Belum Teraktivasi")
+            Log.d("Digisign", "Belum Teraktivasi")
+
+            val i = Intent(this, ECommerceActivity::class.java)
+            i.putExtra("fragment", "digisign")
+            i.putExtra("activity", "regular")
+            startActivity(i)
+        }
+
+    }
+
+    override fun digiError(error: String) {
+        Log.e("Error",error)
     }
 }

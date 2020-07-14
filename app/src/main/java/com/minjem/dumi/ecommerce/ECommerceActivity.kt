@@ -2,8 +2,10 @@ package com.minjem.dumi.ecommerce
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.minjem.dumi.R
 import com.minjem.dumi.akun.FullImageFragment
+import com.minjem.dumi.fragment.DigiSign
 
 class ECommerceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,10 +13,9 @@ class ECommerceActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ecommerce)
 
         if(savedInstanceState == null){
-            val mFragment = intent.getStringExtra("fragment")
-//            val token = intent.getStringExtra("token")
+            //            val token = intent.getStringExtra("token")
 
-            when (mFragment) {
+            when (intent.getStringExtra("fragment")) {
                 "pulsa" -> {
                     supportFragmentManager.beginTransaction().replace(R.id.fl_content,PulsaFragment()).commit()
                 }
@@ -27,8 +28,26 @@ class ECommerceActivity : AppCompatActivity() {
                 "air" -> {
                     supportFragmentManager.beginTransaction().replace(R.id.fl_content, PDAMFragment()).commit()
                 }
-                "profile" ->{
+                "profile" -> {
                     supportFragmentManager.beginTransaction().replace(R.id.fl_content, FullImageFragment()).commit()
+                }
+                "digisign" -> {
+                    if (intent.getStringExtra("activity") ==  "kilat"){
+                        Log.d("Ecommerce digisign", "onCreate: ${intent.getStringExtra("activity")}")
+                        val bundle = Bundle()
+                        bundle.putString("activity", "kilat")
+                        val fragobj = DigiSign()
+                        fragobj.arguments = bundle;
+                        supportFragmentManager.beginTransaction().replace(R.id.fl_content, fragobj).commit()
+                    } else {
+                        Log.d("Ecommerce digisign", "onCreate: ${intent.getStringExtra("activity")}")
+                        val bundle = Bundle()
+                        bundle.putString("activity", "regular")
+                        val fragobj = DigiSign()
+                        fragobj.arguments = bundle;
+                        supportFragmentManager.beginTransaction().replace(R.id.fl_content, fragobj).commit()
+                    }
+
                 }
             }
 

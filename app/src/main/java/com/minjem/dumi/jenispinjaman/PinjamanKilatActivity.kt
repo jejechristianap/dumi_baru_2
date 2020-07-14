@@ -18,8 +18,9 @@ import com.minjem.dumi.PersetujuanActivity
 import com.minjem.dumi.R
 import com.minjem.dumi.api.GetBungaInterface
 import com.minjem.dumi.api.StatusPinjamanInterface
+import com.minjem.dumi.ecommerce.ECommerceActivity
 import com.minjem.dumi.ecommerce.Helper.mToast
-import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity
+import com.minjem.dumi.fragment.DigiSign
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.model.User
 import com.minjem.dumi.presenter.DigisignPrestImp
@@ -27,7 +28,6 @@ import com.minjem.dumi.response.RDigisign
 import com.minjem.dumi.retrofit.RetrofitClient
 import com.minjem.dumi.view.DigisignView
 import kotlinx.android.synthetic.main.activity_pinjaman_kilat.*
-import kotlinx.android.synthetic.main.activity_pinjmana_reguler.*
 import me.abhinay.input.CurrencyEditText
 import okhttp3.ResponseBody
 import org.json.JSONArray
@@ -500,10 +500,8 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
                     return@setOnClickListener
                 }
             }
-            digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
-                    ,SharedPrefManager.getInstance(this).user.email)
 
-//            pinjaman
+            pinjaman
         }
     }
 
@@ -713,9 +711,11 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         editor.putFloat("asuransi", asuransi)
         editor.putString("activity", "kilat")
         editor.apply()
-        val i = Intent(this@PinjamanKilatActivity, PersetujuanActivity::class.java)
+        digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
+                ,SharedPrefManager.getInstance(this).user.email)
+        /*val i = Intent(this@PinjamanKilatActivity, PersetujuanActivity::class.java)
         i.putExtra("activity", "kilat")
-        startActivity(i)
+        startActivity(i)*/
     }
 
     companion object {
@@ -725,9 +725,18 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
     override fun digiResponse(response: RDigisign) {
         Log.d("Masuk Handler SUV >>>>"," ----------------------------------------- >>>>> RESPONSE")
         if (response.data!!.isNotEmpty()){
-            mToast(this,"Selamat Akun Anda Sudah Teraktivasi")
+            Log.d("Digisign", "digiResponse: Selamat Akun Anda Sudah Teraktivasi")
+            val i = Intent(this@PinjamanKilatActivity, PersetujuanActivity::class.java)
+            i.putExtra("activity", "kilat")
+            startActivity(i)
         } else {
-            mToast(this,"Belum Teraktivasi")
+//            mToast(this,"Belum Teraktivasi")
+            Log.d("Digisign", "Belum Teraktivasi")
+
+            val i = Intent(this, ECommerceActivity::class.java)
+            i.putExtra("fragment", "digisign")
+            i.putExtra("activity", "kilat")
+            startActivity(i)
         }
 
     }

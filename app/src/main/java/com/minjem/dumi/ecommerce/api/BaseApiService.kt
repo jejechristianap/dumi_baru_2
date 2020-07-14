@@ -146,14 +146,14 @@ interface BaseApiService {
                      @Part image_selfi: MultipartBody.Part): Call<ResponseBody>
 
     @FormUrlEncoded
-    @POST("api/user/get")
+    @POST("user/get")
     fun loginDumi(
             @Field("nipBaru") nipBaru: String,
             @Field("sandi") sandi: String
     ): Call<RUser>
 
     @FormUrlEncoded
-    @POST("api/digisign/register")
+    @POST("digisign/register")
     fun registrasiDigisignTanpaFoto(
             @Field("nama") nama: String,
             @Field("tlp") tlp: String,
@@ -177,13 +177,13 @@ interface BaseApiService {
     ): Call<ResponseBody>
 
     @FormUrlEncoded
-    @POST("api/digisign/activation")
+    @POST("digisign/activation")
     fun activationDigisign(
             @Field("email") email: String
     ): Call<ResponseBody>
 
     @Multipart
-    @POST("api/digisign/register")
+    @POST("digisign/register")
     fun registrasiDigisignPakaiFoto(
             @Part("nama") namaPns: RequestBody?,
             @Part("tlp") no_hp: RequestBody?,

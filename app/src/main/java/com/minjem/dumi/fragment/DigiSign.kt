@@ -31,15 +31,18 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.minjem.dumi.PelengkapanRegularActivity
+import com.minjem.dumi.PersetujuanActivity
 import com.minjem.dumi.R
 import com.minjem.dumi.ecommerce.Helper.mProgress
 import com.minjem.dumi.ecommerce.Helper.mToast
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
+import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.presenter.DigisignPrestImp
 import com.minjem.dumi.presenter.UserPrestImp
 import com.minjem.dumi.response.GUser
-import com.minjem.dumi.response.RUser
 import com.minjem.dumi.response.RDigisign
+import com.minjem.dumi.response.RUser
 import com.minjem.dumi.view.DigisignView
 import com.minjem.dumi.view.UserView
 import id.zelory.compressor.Compressor.compress
@@ -83,6 +86,7 @@ class DigiSign : Fragment(),UserView, DigisignView {
     lateinit var data : List<GUser>
     private var isfotoCapture = true
     private var diriAtauKtp = false
+    private var fromActivity: String? = null
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,7 +108,7 @@ class DigiSign : Fragment(),UserView, DigisignView {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = layoutInflater.inflate(R.layout.fragment_digisign,container,false)
-        userPrestImp.data("196209111983121001","123456")
+        userPrestImp.data(SharedPrefManager.getInstance(mContext).user.nip,SharedPrefManager.getInstance(mContext).user.password)
         v.id_btn_data_digisign.setOnClickListener {
             //userPrestImp.data(v.id_nip_digisign.text.toString(),v.id_pass_digisign.text.toString())
         }
@@ -225,7 +229,7 @@ class DigiSign : Fragment(),UserView, DigisignView {
                 var namaPns = RequestBody.create(MediaType.parse("text/plain"), data[0].namaPns!!)
                 val noHp = RequestBody.create(MediaType.parse("text/plain"), data[0].no_hp!!)
                 var noktp1 = RequestBody.create(MediaType.parse("text/plain"), data[0].noktp1!!)
-                val alamatKtp = RequestBody.create(MediaType.parse("text/plain"), data[0].alamat_ktp!!)
+                val alamatKtp = RequestBody.create(MediaType.parse("text/plain"), data[0].alamat_ktp.toString())
                 val jenisKelaminn = RequestBody.create(MediaType.parse("text/plain"), jenisKelamin)
                 val kecamatan = RequestBody.create(MediaType.parse("text/plain"), data[0].kecamatan!!)
                 val kelurahan = RequestBody.create(MediaType.parse("text/plain"), data[0].kelurahan!!)
@@ -479,7 +483,7 @@ class DigiSign : Fragment(),UserView, DigisignView {
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                             mContext,
-                            "com.hendi.pulsa.fileprovider", it
+                            "com.minjem.dumi.fileprovider", it
                     )
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                     startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
@@ -515,7 +519,7 @@ class DigiSign : Fragment(),UserView, DigisignView {
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == AppCompatActivity.RESULT_OK) {
 //            ivFotoKtp.setImageURI(Uri.parse(currentPhotoPath))
 
-            var foto = File("")
+            val foto: File
             if (diriAtauKtp){
                 foto = File(currentPhotoPathDiri)
                 Log.d("DIRI PHOTO LOCATION",foto.toString())
@@ -593,30 +597,29 @@ class DigiSign : Fragment(),UserView, DigisignView {
         Log.d("Response Fragment", response.message!!)
         data = response.data!!
         Log.d("DATA",data.toString())
+        Log.d("LOGIN", "response: ${SharedPrefManager.getInstance(mContext).user.imageKtp}, ${SharedPrefManager.getInstance(mContext).user.imageSelfi}")
 
         if (data.isNotEmpty()){
-            if (data[0].photo_selfi != null && data[0].photo_ktp != null){
+            if (TextUtils.isEmpty(data[0].photo_selfi.toString()) && TextUtils.isEmpty(data[0].photo_ktp.toString())){
+                isfotoCapture = false
+                v.id_btn_foto_diri_digisign.visibility = View.VISIBLE
+                v.id_btn_foto_ktp_digisign.visibility = View.VISIBLE
+                capturePhoto()
+            } else {
                 v.id_image_foto_diri_digisign.setBackgroundColor(Color.GRAY)
                 v.id_image_foto_ktp_digisign.setBackgroundColor(Color.GRAY)
 
                 Glide.with(mContext)
                         .load(data[0].photo_selfi)
-                        .placeholder(R.drawable.selfie_ktp)
                         .into(v.id_image_foto_diri_digisign)
 
                 Glide.with(mContext)
                         .load(data[0].photo_ktp)
-                        .placeholder(R.drawable.ktp)
                         .into(v.id_image_foto_ktp_digisign)
 
                 email   = data[0].email!!
                 nik     = data[0].noktp1!!
                 isfotoCapture = true
-            } else {
-                isfotoCapture = false
-                v.id_btn_foto_diri_digisign.visibility = View.VISIBLE
-                v.id_btn_foto_ktp_digisign.visibility = View.VISIBLE
-                capturePhoto()
             }
         } else {
             Log.d("IS FOTO CAPTURE","FALSE")
@@ -639,10 +642,21 @@ class DigiSign : Fragment(),UserView, DigisignView {
                 mToast(mContext,"Selamat Akun Anda Sudah Teraktivasi")
                 v.id_btn_registrasi_digisign.visibility = View.GONE
                 v.id_btn_aktivasi_digisign.visibility = View.GONE
+
             }
             Log.d("Masuk Handler SUV >>>>"," ----------------------------------------- >>>>> STOP")
             cekAktivasiToast = true
             cekAktivasi = true
+            Log.d("From Activity", "onCreate: ${arguments!!.getString("activity")}")
+            if (arguments!!.getString("activity") == "kilat"){
+                val i = Intent(mContext, PersetujuanActivity::class.java)
+                i.putExtra("activity", arguments!!.getString("activity").toString())
+                startActivity(i)
+            } else if(arguments!!.getString("activity") == "regular"){
+                val i = Intent(mContext, PelengkapanRegularActivity::class.java)
+                i.putExtra("activity", arguments!!.getString("activity").toString())
+                startActivity(i)
+            }
         } else {
             cekAktivasi = false
             v.id_btn_registrasi_digisign.visibility = View.GONE
