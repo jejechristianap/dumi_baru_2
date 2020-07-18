@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -18,7 +19,9 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -33,6 +36,7 @@ import com.minjem.dumi.retrofit.RetrofitClient
 import com.minjem.dumi.util.FileUtils
 import id.zelory.compressor.Compressor.compress
 import kotlinx.android.synthetic.main.activity_rincian_akun.*
+import kotlinx.android.synthetic.main.fragment_akun.view.*
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -60,16 +64,17 @@ class RincianAkunActivity : AppCompatActivity() {
     private var filePicture: File? = null
     lateinit var editor: SharedPreferences.Editor
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rincian_akun)
-        if (checkSelfPermission(Manifest.permission.CAMERA) ==
-                PackageManager.PERMISSION_DENIED ||
-                checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                PackageManager.PERMISSION_DENIED) {
-            val permission = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            val permission = arrayOf(Manifest.permission.CAMERA)
             requestPermissions(permission, 1)
         }
+
+        Glide.with(this).load(R.drawable.ic_camera_2).override(200, 200).into(takeImg)
         /*pref = applicationContext.getSharedPreferences("Profile", 0) // 0 - for private mode
         editor = pref.edit()*/
         prop = RetrofitClient.getClient().create(UploadImageInterface::class.java)
@@ -274,6 +279,7 @@ class RincianAkunActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             1 -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
             } else {
                 Toast.makeText(this, "Permission Denied...", Toast.LENGTH_SHORT).show()
             }

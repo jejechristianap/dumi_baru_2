@@ -1,6 +1,5 @@
 package com.minjem.dumi.api;
 
-import com.minjem.dumi.fragment.NotifikasiResponse;
 import com.minjem.dumi.model.Angsuran_Response;
 
 import okhttp3.ResponseBody;

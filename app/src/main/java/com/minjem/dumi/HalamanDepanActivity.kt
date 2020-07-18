@@ -2,11 +2,15 @@ package com.minjem.dumi
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
@@ -32,6 +36,11 @@ class HalamanDepanActivity : AppCompatActivity() {
 //        checkCon()
         /*val i = Intent(this, InternetConnection::class.java)
         startService(i)*/
+        if (checkPermssion()){
+            Log.d("TAG", "onCreate: ${checkPermssion()}")
+        } else {
+            requestPermission()
+        }
         val network = InternetConnection(applicationContext)
         network.observe(this, Observer { isConnected ->
             if (isConnected){
@@ -50,6 +59,30 @@ class HalamanDepanActivity : AppCompatActivity() {
         asn_akftif_button_daftar.setOnClickListener { startActivity(Intent(this@HalamanDepanActivity, DaftarActivity::class.java)) }
         masukButton = findViewById(R.id.masuk_button)
         masuk_button.setOnClickListener { startActivity(Intent(this@HalamanDepanActivity, MasukActivity::class.java)) }
+    }
+
+    private fun checkPermssion(): Boolean {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED){
+            return false
+        }
+        return true
+    }
+
+    private fun requestPermission(){
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA),
+                1)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            1 -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.d("PERMISSION", "onRequestPermissionsResult: $grantResults")
+            } else {
+                Toast.makeText(this, "Permission Denied...", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun checkUpdate() {

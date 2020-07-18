@@ -1,4 +1,4 @@
-package com.minjem.dumi.fragment
+package com.minjem.dumi.response
 
 import com.minjem.dumi.model.NotifikasiData
 

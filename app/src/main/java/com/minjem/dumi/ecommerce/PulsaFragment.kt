@@ -86,17 +86,19 @@ class PulsaFragment : Fragment(){
 
     private fun rvClick() {
         v.id_rv.addOnItemTouchListener(RecyclerItemClickListener(mContext,object : RecyclerItemClickListener.OnItemClickListener{
+            @RequiresApi(Build.VERSION_CODES.N)
             override fun onItemClick(view: View, position: Int) {
                 if (v.id_no_operator.text.toString().length > 8) {
                     popUp(position)
                 } else {
-                    v.id_no_operator.setError("No Kurang dari 9 Karakter !")
+                    v.id_no_operator.error = "No Kurang dari 9 Karakter !"
                     Toast.makeText(mContext,"No Kurang dari 9 Karakter !",Toast.LENGTH_SHORT).show()
                 }
             }
         }))
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
     private fun popUp(position: Int) {
         popup.setContentView(R.layout.ecommerce_konfirmasi_pembayaran)

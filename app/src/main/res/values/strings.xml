@@ -27,13 +27,13 @@
     <string name="pinjaman_multiguna">Pinjaman Multiguna</string>
     <string name="dumi_kilat">DUMI Kilat</string>
     <string name="nilai_pinjaman">Nilai Pinjaman</string>
-    <string name="rp_1jt_15jt">Rp 1.000.000 - 15.000.000</string>
+    <string name="rp_1jt_15jt">Rp 1.000.000 – 15.000.000</string>
     <string name="tenor">Tenor</string>
     <string name="tenor_bulan"><![CDATA[3, 6 & 12 bulan]]></string>
     <string name="ajukan">Ajukan</string>
     <string name="ajukan_sekarang">Ajukan Sekarang</string>
     <string name="dumi_regular">DUMI Regular</string>
-    <string name="rp_16jt_50jt">Rp 16.000.000 - 50.000.000</string>
+    <string name="rp_16jt_50jt">Rp 16.000.000 – 50.000.000</string>
     <string name="tenor_bulan_regular">12, 18, 24, 36 bulan</string>
     <string name="dumi_icon">DUMI Icon</string>
     <string name="semua_kategori">Semua Kategori</string>
@@ -210,9 +210,9 @@
     <string name="hubungi_kami">Hubungi Kami</string>
     <string name="email_kantor">cs@minjem.com</string>
     <string name="no_telp_kantor">(021) 8088281 ext. 4218</string>
-    <string name="wa_kantor">+62 813-1582-3033 (WhatsApp)</string>
+    <string name="wa_kantor">+62 813–1582–3033 (WhatsApp)</string>
     <string name="jam_operasional">Jam Operasional</string>
-    <string name="hari_operasional">Senin - Jumat (08.00 - 16.00 WIB)</string>
+    <string name="hari_operasional">Senin – Jumat (08.00 – 16.00 WIB)</string>
     <string name="alamat_kantor">Gedung Badan Kepegawaian Negara\nJl. Mayjen Sutoyo no.12, Cililitan, Jakarta\nTimur, DKI Jakarta 13640</string>
     <string name="disclaimer_deskripsi">
         <b>PERHATIAN:</b>\n\n\n

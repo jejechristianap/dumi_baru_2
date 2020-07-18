@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- TODO Remove the following "exclude" elements to make them a part of the auto backup -->
+    <!-- Exclude the shared preferences file that contains the GCM registrationId -->
+    <exclude
+        domain="sharedpref"
+        path="Daftar.xml" />
+    <exclude
+        domain="sharedpref"
+        path="shared.xml" />
+    <exclude
+        domain="sharedpref"
+        path="dumi_user.xml" />
+    <exclude
+        domain="sharedpref"
+        path="DATA.xml" />
+</full-backup-content>

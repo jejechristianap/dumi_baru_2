@@ -18,7 +18,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageView
+        android:visibility="gone"
         android:id="@+id/back_bantuan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,8 +28,7 @@
         android:padding="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back_white" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -116,8 +117,9 @@
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_weight="0.3"
+                    android:src="@drawable/ic_arrow_down24dp"
                     android:contentDescription="@string/arrow_down"
-                    android:src="@drawable/ic_arrow_down24dp" />
+                     />
 
             </LinearLayout>
             <!--01 Description-->
@@ -135,7 +137,7 @@
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/marginTop10dp"
-                    android:textColor="@color/grey_700"
+                    android:textColor="@color/black"
                     android:layout_weight="2.4"
                     android:text="@string/bantuan1"
                     app:autoSizeMinTextSize="8sp"
@@ -214,7 +216,7 @@
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/marginTop10dp"
-                    android:textColor="@color/grey_700"
+                    android:textColor="@color/black"
                     android:layout_weight="2.4"
                     android:text="@string/bantuan2"
                     app:autoSizeMinTextSize="8sp"
@@ -292,7 +294,7 @@
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/marginTop10dp"
-                    android:textColor="@color/grey_700"
+                    android:textColor="@color/black"
                     android:layout_weight="2.4"
                     android:text="@string/bantuan3"
                     app:autoSizeMinTextSize="8sp"
@@ -369,7 +371,7 @@
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/marginTop10dp"
-                    android:textColor="@color/grey_700"
+                    android:textColor="@color/black"
                     android:layout_weight="2.4"
                     android:text="@string/bantuan4"
                     app:autoSizeMinTextSize="8sp"
@@ -446,7 +448,7 @@
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/marginTop10dp"
-                    android:textColor="@color/grey_700"
+                    android:textColor="@color/black"
                     android:layout_weight="2.4"
                     android:text="@string/bantuan5"
                     app:autoSizeMinTextSize="8sp"
@@ -495,7 +497,7 @@
                     android:weightSum="3">
 
                     <ImageView
-                        android:src="@drawable/ic_email"
+                        android:id="@+id/ivEmail"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
@@ -531,7 +533,7 @@
                     android:weightSum="3">
 
                     <ImageView
-                        android:src="@drawable/ic_phone"
+                        android:id="@+id/ivTelepon"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
@@ -568,7 +570,7 @@
                     android:weightSum="3">
 
                     <ImageView
-                        android:src="@drawable/ic_wa"
+                        android:id="@+id/ivWa"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
@@ -619,7 +621,7 @@
                     android:weightSum="3">
 
                     <ImageView
-                        android:src="@drawable/ic_clock"
+                        android:id="@+id/ivJam"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
@@ -669,7 +671,7 @@
                     android:weightSum="3">
 
                     <ImageView
-                        android:src="@drawable/ic_placeholder"
+                        android:id="@+id/ivLokasi"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="5dp"

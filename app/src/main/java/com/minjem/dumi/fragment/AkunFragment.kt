@@ -27,6 +27,7 @@ import com.minjem.dumi.ecommerce.ECommerceActivity
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.model.User
 import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.activity_pusat_bantuan.view.*
 import kotlinx.android.synthetic.main.fragment_akun.view.*
 import java.util.*
 
@@ -42,16 +43,21 @@ class AkunFragment : Fragment() {
         mContext = this.activity!!
         v.tvNama.text = SharedPrefManager.getInstance(mContext).user.namaLengkap
 
+        Glide.with(this).load(R.drawable.ic_profil_user).override(200, 200).into(v.ivAkun)
+        Glide.with(this).load(R.drawable.ic_profil_reset_pass).override(200, 200).into(v.ivUbahSandi)
+        Glide.with(this).load(R.drawable.ic_profil_privacy_policy).override(200, 200).into(v.ivKebijakanPrivasi)
+        Glide.with(this).load(R.drawable.ic_profil_disclaimer).override(200, 200).into(v.ivDisclaimer)
+
         photoIv = v.findViewById(R.id.photo_profile)
-        v.photo_profile.setOnClickListener(View.OnClickListener { v: View? ->
+        v.photo_profile.setOnClickListener{
             if (TextUtils.isEmpty(SharedPrefManager.getInstance(mContext).user.imageProfile)) {
                 Toast.makeText(mContext, "Belum ada foto profile", Toast.LENGTH_SHORT).show()
-                return@OnClickListener
+                return@setOnClickListener
             }
             val intent = Intent(mContext, ECommerceActivity::class.java)
             intent.putExtra("fragment", "profile")
             startActivity(intent)
-        })
+        }
 
         /*Rincian Akun*/
         v.rincian_akun_ll.setOnClickListener {
@@ -61,13 +67,10 @@ class AkunFragment : Fragment() {
         }
         v.ubah_sandi_ll.setOnClickListener { startActivity(Intent(activity, UbahSandiActivity::class.java)) }
 
-        /*Kebijakan privasi*/
         v.kebijakan_privasi_ll.setOnClickListener {  startActivity(Intent(activity, KebijakanPrivasiActivity::class.java)) }
 
-        /*Pusat Bantuan*/
-        v.pusat_bantua_ll.setOnClickListener {  startActivity(Intent(activity, PusatBantuanActivity::class.java)) }
+//        v.pusat_bantua_ll.setOnClickListener {  startActivity(Intent(activity, PusatBantuanActivity::class.java)) }
 
-        /*Disclaimer*/
         v.disclaimer_ll.setOnClickListener {  startActivity(Intent(activity, DisclaimerActivity::class.java)) }
 
         /*Logout Button*/

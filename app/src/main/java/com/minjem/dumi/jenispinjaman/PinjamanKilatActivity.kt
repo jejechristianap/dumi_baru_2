@@ -711,11 +711,11 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         editor.putFloat("asuransi", asuransi)
         editor.putString("activity", "kilat")
         editor.apply()
-        digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
-                ,SharedPrefManager.getInstance(this).user.email)
-        /*val i = Intent(this@PinjamanKilatActivity, PersetujuanActivity::class.java)
+        /*digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
+                ,SharedPrefManager.getInstance(this).user.email)*/
+        val i = Intent(this@PinjamanKilatActivity, PersetujuanActivity::class.java)
         i.putExtra("activity", "kilat")
-        startActivity(i)*/
+        startActivity(i)
     }
 
     companion object {

@@ -39,7 +39,9 @@ class InternetConnection(private val context: Context): LiveData<Boolean>() {
     override fun onInactive() {
         super.onInactive()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            connectivityManager.registerDefaultNetworkCallback(connectivityManagerCallback())
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                connectivityManager.registerDefaultNetworkCallback(connectivityManagerCallback())
+            }
         } else {
             context.unregisterReceiver(networkReceiver)
         }

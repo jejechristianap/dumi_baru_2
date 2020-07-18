@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -19,10 +20,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.minjem.dumi.util.FileUtils
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.Compressor.compress
@@ -56,14 +60,12 @@ class PelengkapanRegularActivity : AppCompatActivity() {
     private var compressedImagePa: File? = null
     private var compressedImageSk: File? = null
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pelengkapan_regular)
-        if (checkSelfPermission(Manifest.permission.CAMERA) ==
-                PackageManager.PERMISSION_DENIED ||
-                checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                PackageManager.PERMISSION_DENIED) {
-            val permission = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            val permission = arrayOf(Manifest.permission.CAMERA)
             requestPermissions(permission, 1)
         }
         fotoPaPath = ""
@@ -253,6 +255,7 @@ class PelengkapanRegularActivity : AppCompatActivity() {
                         lifecycleScope.launch {
                             compressedImageSk = compress(this@PelengkapanRegularActivity, imageFile)
                             setCompressedImageSk()
+
                         }
                     }
                     /*ivSk!!.scaleType = ImageView.ScaleType.CENTER_CROP
@@ -262,8 +265,9 @@ class PelengkapanRegularActivity : AppCompatActivity() {
         }
     }
     private fun setCompressedImage() {
+        Glide.with(this).load(compressedImageSkcpns).override(200, 200).into(hasil_foto_skcpns)
         compressedImageSkcpns?.let {
-            hasil_foto_skcpns.setImageBitmap(BitmapFactory.decodeFile(it.absolutePath))
+//            hasil_foto_skcpns.setImageBitmap(BitmapFactory.decodeFile(it.absolutePath))
 //            compressedSizeTextView.text = String.format("Size : %s", getReadableFileSize(it.length()))
 //            Toast.makeText(this, "Compressed image save in " + it.path, Toast.LENGTH_LONG).show()
             Log.d("Size", "setCompressedImage: ${String.format("Size : %s", FileUtils.getReadableFileSize(it.length().toInt()))}")
@@ -272,8 +276,9 @@ class PelengkapanRegularActivity : AppCompatActivity() {
     }
 
     private fun setCompressedImagePa() {
+        Glide.with(this).load(compressedImagePa).override(200, 200).into(hasil_foto_pa)
         compressedImagePa?.let {
-            hasil_foto_pa.setImageBitmap(BitmapFactory.decodeFile(it.absolutePath))
+//            hasil_foto_pa.setImageBitmap(BitmapFactory.decodeFile(it.absolutePath))
 //            compressedSizeTextView.text = String.format("Size : %s", getReadableFileSize(it.length()))
 //            Toast.makeText(this, "Compressed image save in " + it.path, Toast.LENGTH_LONG).show()
             Log.d("Size", "setCompressedImage: ${String.format("Size : %s", FileUtils.getReadableFileSize(it.length().toInt()))}")
@@ -282,8 +287,9 @@ class PelengkapanRegularActivity : AppCompatActivity() {
     }
 
     private fun setCompressedImageSk() {
+        Glide.with(this).load(compressedImageSk).override(200, 200).into(hasil_foto_surat_kuasa)
         compressedImageSk?.let {
-            hasil_foto_surat_kuasa.setImageBitmap(BitmapFactory.decodeFile(it.absolutePath))
+//            hasil_foto_surat_kuasa.setImageBitmap(BitmapFactory.decodeFile(it.absolutePath))
 //            compressedSizeTextView.text = String.format("Size : %s", getReadableFileSize(it.length()))
 //            Toast.makeText(this, "Compressed image save in " + it.path, Toast.LENGTH_LONG).show()
             Log.d("Size", "setCompressedImage: ${String.format("Size : %s", FileUtils.getReadableFileSize(it.length().toInt()))}")

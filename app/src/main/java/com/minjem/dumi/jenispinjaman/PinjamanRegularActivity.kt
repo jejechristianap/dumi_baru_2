@@ -658,9 +658,9 @@ class PinjamanRegularActivity : AppCompatActivity(), DigisignView {
         editor.putString("tglAkhir", tglAkhirPinjam)
         editor.putFloat("asuransi", asuransi)
         editor.apply()
-//        startActivity(Intent(this@PinjamanRegularActivity, PelengkapanRegularActivity::class.java))
-        digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
-                ,SharedPrefManager.getInstance(this).user.email)
+        startActivity(Intent(this@PinjamanRegularActivity, PelengkapanRegularActivity::class.java))
+       /* digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
+                ,SharedPrefManager.getInstance(this).user.email)*/
 
         /*PinjamanKilatInterface pinjam = RetrofitClient.getClient().create(PinjamanKilatInterface.class);
         Call<ResponseBody> call = pinjam.ajukanPinjaman(nip, pinjamanUang, plafond, 0, BUNGA_PERBULAN,
