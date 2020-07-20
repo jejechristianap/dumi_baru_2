@@ -93,7 +93,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:backgroundTint="@color/darkBlue"
                     android:hint="@string/nama_ktp"
-                    android:inputType="textPersonName" />
+                    android:inputType="textCapCharacters" />
                 <TextView
                     android:id="@+id/daftar_tgl_lahir"
                     android:layout_width="match_parent"

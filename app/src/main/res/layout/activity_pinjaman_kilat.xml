@@ -19,16 +19,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-    android:id="@+id/back_kilat"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:contentDescription="@string/todo"
-    android:background="?attr/selectableItemBackgroundBorderless"
-    android:padding="15dp"
-    app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:srcCompat="@drawable/ic_back_white" />
+        android:id="@+id/back_kilat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/todo"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_white" />
 
     <TextView
         android:id="@+id/textView"
@@ -94,6 +94,7 @@
                     android:layout_toEndOf="@id/tvRp"
                     android:layout_alignParentEnd="true"
                     android:layout_width="wrap_content"
+                    android:maxLength="10"
                     android:layout_height="@dimen/_50sdp"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="start|center"

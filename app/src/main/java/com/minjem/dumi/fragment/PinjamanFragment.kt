@@ -1,6 +1,7 @@
 package com.minjem.dumi.fragment
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,16 +14,22 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.PerjanjianKreditView
 import com.minjem.dumi.R
+import com.minjem.dumi.adapter.HistoryPinjamanAdapter
 import com.minjem.dumi.api.StatusPinjamanInterface
 import com.minjem.dumi.model.DataPinjaman
+import com.minjem.dumi.model.RecyclerViewAdapter
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.model.User
 import com.minjem.dumi.retrofit.RetrofitClient
 import com.minjem.dumi.util.CustomProgressDialog
+import kotlinx.android.synthetic.main.ecommerce_flight_cityairport.*
 import kotlinx.android.synthetic.main.fragment_pinjaman.*
 import kotlinx.android.synthetic.main.fragment_pinjaman.view.*
+import kotlinx.android.synthetic.main.history_pinjaman.*
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONException
@@ -32,6 +39,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -54,23 +62,34 @@ class PinjamanFragment : Fragment() {
     private var tujuan = ""
     private var bungaRupiah = 0.0
     private var angsuran = 0.0
-    private var mContext: Context? = null
+    private lateinit var mContext: Context
     private var svTagihan: ScrollView? = null
     private var rlGagal: RelativeLayout? = null
     lateinit var v: View
     private val progressDialog = CustomProgressDialog()
     var list : MutableList<DataPinjaman> = ArrayList()
+    var listPinjaman : MutableList<DataPinjaman> = ArrayList()
     private val TAG = PinjamanFragment::class.qualifiedName
     private val dataPinjaman = DataPinjaman()
+    lateinit var mDialog: Dialog
+    lateinit var pinjamanAdapter: HistoryPinjamanAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_pinjaman, container, false)
-        mContext = this.activity
+        mContext = this.activity!!
+        mDialog = Dialog(mContext, R.style.DialogTheme)
+
+
         initView()
         initOnTouch()
         pinjaman
 
         return v
+    }
+
+    private fun refreshPinjaman(){
+        mDialog.srlHistoryPinjaman.isRefreshing = false
+        getPinjaman
     }
 
     private fun refreshList(){
@@ -94,6 +113,37 @@ class PinjamanFragment : Fragment() {
             srlTagihan.isRefreshing = true
             refreshList()
         }
+
+        v.ivHistoryPinjaman.setOnClickListener {
+            getHistoryPinjaman()
+        }
+    }
+
+    private fun getHistoryPinjaman(){
+        listPinjaman.clear()
+        mDialog.setContentView(R.layout.history_pinjaman)
+        mDialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        mDialog.rvHistoryPinjaman.layoutManager = GridLayoutManager(mContext, 1)
+        pinjamanAdapter = HistoryPinjamanAdapter(mContext, listPinjaman)
+        mDialog.rvHistoryPinjaman.adapter = pinjamanAdapter
+        pinjamanAdapter.notifyDataSetChanged()
+        mDialog.show()
+        getPinjaman
+        rvClick()
+        mDialog.srlHistoryPinjaman.setOnRefreshListener {
+            mDialog.srlHistoryPinjaman.isRefreshing = true
+            listPinjaman.clear()
+            refreshPinjaman()
+        }
+    }
+
+    private fun rvClick(){
+        mDialog.rvHistoryPinjaman.addOnItemTouchListener(RecyclerItemClickListener(mContext, object : RecyclerItemClickListener.OnItemClickListener{
+            override fun onItemClick(view: View, position: Int) {
+
+            }
+
+        }))
     }
 
     private fun initView(){
@@ -140,13 +190,11 @@ class PinjamanFragment : Fragment() {
                                     svTagihan!!.visibility = View.VISIBLE
                                     rlGagal!!.visibility = View.GONE
 
-
-
-                                    var jsonValues: List<JSONArray> = ArrayList()
                                     var max = -1
                                     for (i in 0 until jsonArray.length()) {
                                         val jsonObject = jsonArray.getJSONObject(i)
-                                        if (jsonObject.getInt("id") > max){
+
+                                        if (jsonObject.getInt("id") > max){  //Filter the highest id
                                             max = jsonObject.getInt("id")
                                             Log.d(TAG, "onResponse: max id $max")
                                             dataPinjaman.id = jsonObject.getInt("id")
@@ -161,7 +209,38 @@ class PinjamanFragment : Fragment() {
                                             dataPinjaman.asuransiRupiah = jsonObject.getInt("asuransiRupiah")
                                             dataPinjaman.transferRupiah = jsonObject.getInt("transferRupiah")
                                             dataPinjaman.diterimaRupiah = jsonObject.getInt("diterimaRupiah")
-                                            dataPinjaman.status = jsonObject.getInt("status")
+
+                                            when (jsonObject.getInt("status")) {
+                                                1 -> {
+                                                    statusPinjamanTv!!.text = "Pengajuan"
+                                                    v.pkButton.visibility = View.GONE
+                                                }
+                                                2 -> {
+                                                    statusPinjamanTv!!.text = "Disetujui"
+                                                    v.pkButton.visibility = View.VISIBLE
+                                                }
+                                                3 -> {
+                                                    statusPinjamanTv!!.text = "Ditolak"
+                                                    v.pkButton.visibility = View.GONE
+                                                }
+                                                4 -> {
+                                                    statusPinjamanTv!!.text = "Telah ditransfer"
+                                                    v.pkButton.visibility = View.GONE
+                                                }
+                                                5 -> {
+                                                    statusPinjamanTv!!.text = "Kredit berjalan"
+                                                    v.pkButton.visibility = View.GONE
+                                                }
+                                                6 -> {
+                                                    statusPinjamanTv!!.text = "Kredit Lunas"
+                                                    v.pkButton.visibility = View.GONE
+                                                }
+                                                else -> {
+                                                    statusPinjamanTv!!.text = "!!Dalam Proses Pengembangan!!"
+                                                    v.pkButton.visibility = View.GONE
+                                                }
+                                            }
+                                            dataPinjaman.status = jsonObject.getInt("status").toString()
                                             dataPinjaman.tglPengajuan = jsonObject.getString("tglPengajuan")
                                             dataPinjaman.tujuanPinjaman = jsonObject.getString("tujuanPinjaman")
                                             dataPinjaman.tgl_mulai_pinjaman = jsonObject.getString("tgl_mulai_pinjaman")
@@ -171,20 +250,9 @@ class PinjamanFragment : Fragment() {
                                         }
                                         Log.d(TAG, "onResponse: ${dataPinjaman.id}")
 
-                                        val statusId = jsonObject.getInt("status")
-                                        val pinjaman = jsonObject.getDouble("pinjaman")
-                                        var lamaPinjaman = jsonObject.getString("lamaPinjaman")
-                                        bungaRupiah = jsonObject.getDouble("bungaRupiah")
-                                        angsuran = jsonObject.getDouble("angsuranPerbulan")
-                                        val asuransi = jsonObject.getDouble("asuransiRupiah")
-                                        val adminRupiah = jsonObject.getDouble("administrasiRupiah")
-                                        val diterima = jsonObject.getDouble("diterimaRupiah")
-                                        tglPengajuan = jsonObject.getString("tglPengajuan")
-                                        tujuan = jsonObject.getString("tujuanPinjaman")
-
                                     }
+
                                     list.add(dataPinjaman)
-                                    filter(list)
                                     Log.d("Data Pinjaman", "onResponse: $list")
 
 
@@ -198,36 +266,7 @@ class PinjamanFragment : Fragment() {
                                     transferBankTv!!.text = formatRp!!.format(6500)
                                     tglPengajuanTv!!.text = dataPinjaman.tglPengajuan
 
-                                    when (dataPinjaman.status) {
-                                        1 -> {
-                                            statusPinjamanTv!!.text = "Pengajuan"
-                                            v.pkButton.visibility = View.GONE
-                                        }
-                                        2 -> {
-                                            statusPinjamanTv!!.text = "Disetujui"
-                                            v.pkButton.visibility = View.VISIBLE
-                                        }
-                                        3 -> {
-                                            statusPinjamanTv!!.text = "Pengajuan ditolak"
-                                            v.pkButton.visibility = View.GONE
-                                        }
-                                        4 -> {
-                                            statusPinjamanTv!!.text = "Telah ditransfer"
-                                            v.pkButton.visibility = View.GONE
-                                        }
-                                        5 -> {
-                                            statusPinjamanTv!!.text = "Kredit berjalan"
-                                            v.pkButton.visibility = View.GONE
-                                        }
-                                        6 -> {
-                                            statusPinjamanTv!!.text = "Kredit Lunas"
-                                            v.pkButton.visibility = View.GONE
-                                        }
-                                        else -> {
-                                            statusPinjamanTv!!.text = "!!Dalam Proses Pengembangan!!"
-                                            v.pkButton.visibility = View.GONE
-                                        }
-                                    }
+
                                 }
                             }
                         } catch (e: JSONException) {
@@ -257,6 +296,96 @@ class PinjamanFragment : Fragment() {
                     rlGagal!!.visibility = View.VISIBLE
                     svTagihan!!.visibility = View.GONE
                     tvGagal!!.text = "Mohon maaf koneksi gagal, silahkan cek koneksi anda"
+                    Toast.makeText(mContext, t.message, Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+    private val getPinjaman: Unit
+        get() {
+            progressDialog.show(mContext, "Loading...")
+            val nip = prefManager!!.nip
+            val status = RetrofitClient.getClient().create(StatusPinjamanInterface::class.java)
+            val call = status.getPinjaman(nip)
+            call.enqueue(object : Callback<ResponseBody> {
+                @SuppressLint("SetTextI18n")
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    if (response.isSuccessful) {
+                        try {
+                            progressDialog.dialog.dismiss()
+                            val obj = JSONObject(response.body()!!.string())
+                            val cek = obj.getBoolean("status")
+                            if (cek) {
+                                val data = obj.getString("data")
+                                val jsonArray = JSONArray(data)
+                                if (jsonArray.length() == 0) {
+
+                                } else {
+                                    var max = -1
+                                    for (i in 0 until jsonArray.length()) {
+                                        val jsonObject = jsonArray.getJSONObject(i)
+                                        val dp = DataPinjaman()
+                                        dp.id = jsonObject.getInt("id")
+                                        dp.nipBaru = jsonObject.getString("nipBaru")
+                                        dp.pinjaman = jsonObject.getInt("pinjaman")
+                                        dp.lamaPinjaman = jsonObject.getInt("lamaPinjaman")
+                                        dp.bungaPertahun = jsonObject.getInt("bungaPertahun")
+                                        dp.bungaPersen = jsonObject.getDouble("bungaPersen")
+                                        dp.bungaRupiah = jsonObject.getInt("bungaRupiah")
+                                        dp.administrasiRupiah = jsonObject.getInt("administrasiRupiah")
+                                        dp.angsuranPerbulan = jsonObject.getDouble("angsuranPerbulan")
+                                        dp.asuransiRupiah = jsonObject.getInt("asuransiRupiah")
+                                        dp.transferRupiah = jsonObject.getInt("transferRupiah")
+                                        dp.diterimaRupiah = jsonObject.getInt("diterimaRupiah")
+                                        var status = ""
+                                        when(jsonObject.getInt("status")){
+                                            1 -> status = "Pengajuan"
+                                            2 -> status = "Disetujui"
+                                            3 -> status = "Ditolak"
+                                            4 -> status = "Ditransfer"
+                                            5 -> status = "Kredit berjalan"
+                                            6 -> status = "Kredit Lunas"
+                                            else -> "!!Dalam Proses Pengembangan!!"
+                                        }
+                                        dp.status = status
+                                        val local = Locale("in", "ID")
+                                        val sdf = SimpleDateFormat("M/d/yyyy, HH:mm:ss a", local)
+                                        val d = sdf.parse(jsonObject.getString("tglPengajuan"))
+                                        sdf.applyPattern("d/MM/yyyy")
+                                        dp.tglPengajuan = sdf.format(d!!)
+                                        dp.tujuanPinjaman = jsonObject.getString("tujuanPinjaman")
+                                        dp.tgl_mulai_pinjaman = jsonObject.getString("tgl_mulai_pinjaman")
+                                        dp.tgl_akhir_pinjaman = jsonObject.getString("tgl_akhir_pinjaman")
+                                        dp.tgl_lunas = jsonObject.getString("tgl_lunas")
+                                        dp.nopk = jsonObject.getString("nopk")
+                                        listPinjaman.add(dp)
+
+                                    }
+                                    pinjamanAdapter.filter(listPinjaman)
+                                    mDialog.rvHistoryPinjaman.adapter = pinjamanAdapter
+                                    pinjamanAdapter.notifyDataSetChanged()
+                                    Log.d("List Pinjaman", "onResponse: $listPinjaman")
+
+                                }
+                            }
+                        } catch (e: JSONException) {
+                            progressDialog.dialog.dismiss()
+
+                            e.printStackTrace()
+                        } catch (e: IOException) {
+                            progressDialog.dialog.dismiss()
+
+                            e.printStackTrace()
+                        }
+                    } else {
+                        progressDialog.dialog.dismiss()
+
+                        Toast.makeText(mContext, "Mohon maaf server tidak terjangkau", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    progressDialog.dialog.dismiss()
+
                     Toast.makeText(mContext, t.message, Toast.LENGTH_SHORT).show()
                 }
             })

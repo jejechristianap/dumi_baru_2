@@ -22,7 +22,6 @@ class BandaraKotaAdapter (private var mContext : Context, internal var list : Li
     }
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BandaraHolder {
         val bandaraListView = LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_bandara, parent, false)
 

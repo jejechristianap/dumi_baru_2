@@ -75,6 +75,7 @@
             android:layout_below="@id/etNoKtp"
             android:textSize="@dimen/_12ssp"
             android:text="@string/nama_lengkap"/>
+
             <EditText
                 android:id="@+id/etNamaLengkap"
                 android:layout_below="@id/namaLengkap"
@@ -82,8 +83,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:backgroundTint="@color/colorBlue"
-                android:inputType="number"
-                android:maxLength="16"
+                android:inputType="textCapCharacters"
                 android:textColor="@android:color/black"
                 tools:ignore="LabelFor" />
 
@@ -96,14 +96,16 @@
                 android:layout_below="@id/etNamaLengkap"
                 android:textSize="@dimen/_12ssp"
                 android:text="@string/tanggal_lahir"/>
+
             <EditText
                 android:id="@+id/etTanggalLahir"
                 android:layout_below="@id/tanggalLahir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
+                android:textAllCaps="true"
                 android:backgroundTint="@color/colorBlue"
-                android:inputType="text"
+                android:inputType="date"
                 android:maxLength="16"
                 android:textColor="@android:color/black"
                 tools:ignore="LabelFor" />
@@ -228,7 +230,7 @@
                 android:layout_alignParentEnd="true"
                 android:autofillHints=""
                 android:backgroundTint="@color/colorBlue"
-                android:inputType="text"
+                android:inputType="textCapCharacters"
                 android:textColor="@android:color/black"
                 tools:ignore="LabelFor" />
 

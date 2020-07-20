@@ -87,6 +87,18 @@ class DigiSign : Fragment(),UserView, DigisignView {
     private var isfotoCapture = true
     private var diriAtauKtp = false
     private var fromActivity: String? = null
+    private var handler = Handler()
+    private val runnable: Runnable = object : Runnable {
+        override fun run() {
+            Log.d("Masuk Handler SUV >>>>",
+                    "----------------------------------------- >>>>> $cekAktivasi")
+            //digisignPrestImp.data(nik,email)
+            if (!cekAktivasi){
+                digisignPrestImp.data(nik,email)
+                handler.postDelayed(this, 5000)
+            }
+        }
+    }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -133,6 +145,9 @@ class DigiSign : Fragment(),UserView, DigisignView {
                 v.id_tgl_lahir_digisign.setText(sdf.format(now.time))
             }, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH))
             datePickerDialog.show()
+        }
+        v.id_btn_aktivasi_digisign.setOnClickListener {
+            handler.removeCallbacks(runnable)
         }
         return v
     }
@@ -310,26 +325,20 @@ class DigiSign : Fragment(),UserView, DigisignView {
             val result = jsonFile.getString("result")
             val notif = jsonFile.getString("notif")
             if (result == "00"){
-                val handler = Handler()
-                val runnable: Runnable = object : Runnable {
-                    override fun run() {
-                        Log.d("Masuk Handler SUV >>>>",
-                                "----------------------------------------- >>>>> $cekAktivasi")
-                        //digisignPrestImp.data(nik,email)
-                        if (!cekAktivasi){
-                            digisignPrestImp.data(nik,email)
-                            handler.postDelayed(this, 5000)
-                        }
-                    }
-                }
+                handler = Handler()
+
                 handler.postDelayed(runnable, 5000)
                 if (notif.contains("Berhasil")){
                     Log.d("Contains",notif)
                     webView(jsonFile,false)
+                    /*handler.removeCallbacks(runnable)
+                    handler.removeCallbacksAndMessages(null)*/
                 } else {
                     Log.d("else Contains",notif)
                     Toast.makeText(mContext,notif,Toast.LENGTH_LONG).show()
                     activation(data)
+                    /*handler.removeCallbacks(runnable)
+                    handler.removeCallbacksAndMessages(null)*/
                 }
             } else if(result == "14"){
                 Log.d("Result != 00",notif)

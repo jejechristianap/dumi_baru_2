@@ -45,6 +45,10 @@ open class DataPribadiActivity : AppCompatActivity() {
         currentPhoneNumber = FirebaseAuth.getInstance().currentUser!!.phoneNumber.toString()
         api = HttpRetrofitClient
         initSpinner()
+        val sp = getSharedPreferences("DATA", Context.MODE_PRIVATE)
+
+        etNamaLengkap.setText(sp.getString("namaPns", null))
+        etTanggalLahir.setText(sp.getString("tglLahir", null))
 
         backDataPribadi.setOnClickListener {
             exitByBackKey()

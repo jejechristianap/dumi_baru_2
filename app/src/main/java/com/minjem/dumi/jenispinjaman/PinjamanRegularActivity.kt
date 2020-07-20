@@ -658,9 +658,9 @@ class PinjamanRegularActivity : AppCompatActivity(), DigisignView {
         editor.putString("tglAkhir", tglAkhirPinjam)
         editor.putFloat("asuransi", asuransi)
         editor.apply()
-        startActivity(Intent(this@PinjamanRegularActivity, PelengkapanRegularActivity::class.java))
-       /* digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
-                ,SharedPrefManager.getInstance(this).user.email)*/
+//        startActivity(Intent(this@PinjamanRegularActivity, PelengkapanRegularActivity::class.java))
+        digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
+                ,SharedPrefManager.getInstance(this).user.email)
 
         /*PinjamanKilatInterface pinjam = RetrofitClient.getClient().create(PinjamanKilatInterface.class);
         Call<ResponseBody> call = pinjam.ajukanPinjaman(nip, pinjamanUang, plafond, 0, BUNGA_PERBULAN,
@@ -671,8 +671,8 @@ class PinjamanRegularActivity : AppCompatActivity(), DigisignView {
         Log.d("Masuk Handler SUV >>>>"," ----------------------------------------- >>>>> RESPONSE")
         if (response.data!!.isNotEmpty()){
             Log.d("Digisign", "digiResponse: Selamat Akun Anda Sudah Teraktivasi")
-            val i = Intent(this@PinjamanRegularActivity, PersetujuanActivity::class.java)
-            i.putExtra("activity", "kilat")
+            val i = Intent(this@PinjamanRegularActivity, PelengkapanRegularActivity::class.java)
+            i.putExtra("activity", "regular")
             startActivity(i)
         } else {
 //            mToast(this,"Belum Teraktivasi")

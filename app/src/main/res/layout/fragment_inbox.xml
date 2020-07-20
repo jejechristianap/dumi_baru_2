@@ -54,14 +54,22 @@
         android:layout_width="@dimen/zero"
         android:layout_height="@dimen/zero"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notifikasi_rv"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scrollbars="vertical"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srlNotif"
         android:layout_below="@id/view"
-        android:layout_alignParentBottom="true"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/notifikasi_rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scrollbars="vertical"
+            android:layout_below="@id/view"
+            android:layout_alignParentBottom="true"
+            />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
 <!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srl"

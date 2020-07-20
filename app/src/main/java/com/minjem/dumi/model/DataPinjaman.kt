@@ -13,7 +13,7 @@ data class DataPinjaman(
         var asuransiRupiah: Int? = null,
         var transferRupiah: Int? = null,
         var diterimaRupiah: Int? = null,
-        var status: Int? = null,
+        var status: String? = null,
         var tglPengajuan: String? = null,
         var tujuanPinjaman: String? = null,
         var tgl_mulai_pinjaman: String? = null,

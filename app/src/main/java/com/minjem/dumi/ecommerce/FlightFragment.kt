@@ -126,7 +126,6 @@ class FlightFragment : Fragment() {
     private fun cariBandara(){
         mDialog.setContentView(R.layout.ecommerce_flight_cityairport)
         mDialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-
         mDialog.rvCityAirport.layoutManager = GridLayoutManager(mContext, 1)
         bandaraAdapter = BandaraKotaAdapter(mContext, list)
         mDialog.rvCityAirport.adapter = bandaraAdapter

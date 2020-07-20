@@ -98,10 +98,10 @@ class RincianAkunActivity : AppCompatActivity() {
         val rt = prefManager.getRt()
         val rw = prefManager.getRw()
         val provinsi = prefManager.getPropinsi()
-        val kelurahan = prefManager.getKelurahan()
-        val kecamatan = prefManager.getKecamatan()
-        val kota = prefManager.getKota()
-        val alamat = prefManager.getAlamat()
+        val kelurahan = prefManager.kelurahan
+        val kecamatan = prefManager.kecamatan
+        val kota = prefManager.kota
+        val alamat = prefManager.alamat
         val kodePos = prefManager.getKodePos()
         val noTelp = prefManager.getNoTelp()
         val statushubungan = prefManager.getStatusHubungan()

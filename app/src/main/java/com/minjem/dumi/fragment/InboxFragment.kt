@@ -47,6 +47,11 @@ class InboxFragment : Fragment() {
         notifikasiAdapter = NotifikasiAdapter(mCOntext, list)
         mView.notifikasi_rv.adapter = notifikasiAdapter
 
+        mView.srlNotif.setOnRefreshListener {
+            mView.srlNotif.isRefreshing = true
+            refreshList()
+        }
+
         getNotif()
 
         /*mView.srl.setOnRefreshListener {
@@ -54,6 +59,12 @@ class InboxFragment : Fragment() {
             refreshList()
         }*/
         return mView
+    }
+
+    private fun refreshList(){
+        mView.srlNotif.isRefreshing = false
+        list.clear()
+        getNotif()
     }
 
 /*    private fun refreshList(){
