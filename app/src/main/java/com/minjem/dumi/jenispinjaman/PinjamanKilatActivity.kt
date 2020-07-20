@@ -20,7 +20,6 @@ import com.minjem.dumi.api.GetBungaInterface
 import com.minjem.dumi.api.StatusPinjamanInterface
 import com.minjem.dumi.ecommerce.ECommerceActivity
 import com.minjem.dumi.ecommerce.Helper.mToast
-import com.minjem.dumi.fragment.DigiSign
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.model.User
 import com.minjem.dumi.presenter.DigisignPrestImp
@@ -45,7 +44,7 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
     lateinit var seekBar: SeekBar
     lateinit var jumlah: CurrencyEditText
     lateinit var back: ImageView
-    private var pinjamanUang = 0
+    private var pinjamanUang = 1000000
     lateinit var angsuranTv: TextView
     lateinit var biayaAdminTv: TextView
     lateinit var biayaAsuransiTv: TextView
@@ -86,24 +85,21 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
     lateinit var prefManager: User
     lateinit var adminTv: TextView
     lateinit var asuransiTv: TextView
-    private var rb = ""
+    private var np = 1
     lateinit var digisignPrestImp : DigisignPrestImp
+    private var tujuan = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pinjaman_kilat)
         initView()
-        initTouch()
         getBunga()
+        numberPicker(np)
+        initTouch()
 
     }
 
     private fun initView(){
-        getBunga = 0f
-        getAdmin = 0f
-        getAsur12 = 0f
-        getAsur24 = 0f
-        getAsur36 = 0f
 
         digisignPrestImp = DigisignPrestImp(this)
 
@@ -111,11 +107,10 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         pref = applicationContext.getSharedPreferences("ajukanPinjaman", 0) // 0 - for private mode
         editor = pref.edit()
 
-        tujuanSpinner = findViewById(R.id.tujuan_pinjaman_spinner)
+        /*tujuanSpinner = findViewById(R.id.tujuan_pinjaman_spinner)
         tujuanAdapter = ArrayAdapter(this@PinjamanKilatActivity, R.layout.spinner_text, tujuanPinjaman)
         tujuanAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown)
-        tujuan_pinjaman_spinner.adapter = tujuanAdapter
-
+        tujuan_pinjaman_spinner.adapter = tujuanAdapter*/
 
         angsuranTv = findViewById(R.id.angsuran_perbulan_kilat)
         biayaAdminTv = findViewById(R.id.biaya_administrasi_kilat)
@@ -126,45 +121,123 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
 
         jumlah.setDecimals(false)
         jumlah.setSeparator(".")
-        jumlah.setText("1000000")
+        jumlah.setText("0")
         jumlah.requestFocus()
+
+        npBulan.minValue = 1
+        npBulan.maxValue = 12
+
+        npTujuan.minValue = 0
+        npTujuan.maxValue = tujuanPinjaman.size - 1
+        npTujuan.displayedValues = tujuanPinjaman
+
 
         adminTv = findViewById(R.id.admin_asn)
         asuransiTv = findViewById(R.id.asuransi_asn)
-        pinjamanUang = JUMLAH_PINJAMAN_DEFAULT
-        plafond = 0
+        /*plafond = 0
         bunga = 0f
         admin = 0f
         angsuran = 0f
         asuransi = 0f
-        sisa = 0f
+        sisa = 0f*/
         localID = Locale("in", "ID")
         formatRp = NumberFormat.getCurrencyInstance(localID)
         seekBar = findViewById(R.id.seekbar_kilat)
+        seekBar.max = 15
     }
 
     private fun initTouch(){
+
+        npBulan.setOnValueChangedListener { picker, oldVal, newVal ->
+            Log.d("NumberPicker", "initTouch: $picker, $oldVal, $newVal")
+            np = newVal
+            numberPicker(np)
+        }
+
+        npTujuan.setOnValueChangedListener { picker, oldVal, newVal ->
+            Log.d("NumberPicker Tujuan", "initTouch: $picker, $oldVal, ${tujuanPinjaman[newVal]}")
+            tujuan = tujuanPinjaman[newVal]
+        }
+
+
         jumlah.addTextChangedListener(object: TextWatcher{
             override fun afterTextChanged(s: Editable?) {
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                when {
-                    jumlah.cleanIntValue < 1000000 -> {
+                Log.d("jumlah", "onTextChanged: $s, $start, $before, $count, ${jumlah.cleanIntValue}")
+
+                /*in 0..999999 -> {
+                        seekBar.progress = 1
+                        seekBar.refreshDrawableState()
+                    }
+                    in 1000000..1999999 -> {
+                        seekBar.progress = 2
+                        seekBar.refreshDrawableState()
+                    }
+                    in 2000000..2999999 -> {
+                        seekBar.progress = 3
+                        seekBar.refreshDrawableState()
+                    }
+                    in 3000000..3999999 -> {
+                        seekBar.progress = 4
+                        seekBar.refreshDrawableState()
+                    }
+                    in 4000000..4999999 -> {
+                        seekBar.progress = 5
+                        seekBar.refreshDrawableState()
+                    }
+                    in 500000..5999999 -> {
+                        seekBar.progress = 6
+                        seekBar.refreshDrawableState()
+                    }
+                    in 7000000..7999999 -> {
+                        seekBar.progress = 7
+                        seekBar.refreshDrawableState()
+                    }
+                    in 8000000..8999999 -> {
+                        seekBar.progress = 8
+                        seekBar.refreshDrawableState()
+                    }
+                    in 9000000..9999999 -> {
+                        seekBar.progress = 9
+                        seekBar.refreshDrawableState()
+                    }
+                    in 10000000..10999999 -> {
+                        seekBar.progress = 10
+                        seekBar.refreshDrawableState()
+                    }
+                    in 11000000..11999999 -> {
+                        seekBar.progress = 11
+                        seekBar.refreshDrawableState()
+                    }
+                    in 12000000..12999999 -> {
+                        seekBar.progress = 12
+                        seekBar.refreshDrawableState()
+                    }
+                    in 13000000..13999999 -> {
+                        seekBar.progress = 13
+                        seekBar.refreshDrawableState()
+                    }
+                    in 14000000..14999999 -> {
+                        seekBar.progress = 14
+                        seekBar.refreshDrawableState()
+                    }
+                    15000000 ->{
+                        seekBar.progress = 15
+                        seekBar.refreshDrawableState()
+                    }*/
+                when (jumlah.cleanIntValue) {
+                    !in 1000000..15000000 -> {
                         tvMinKil.visibility = View.VISIBLE
                         tvMaksKil.visibility = View.GONE
                     }
-                    jumlah.cleanIntValue > 15000000 -> {
+                    in 1000000..15000000 -> {
                         tvMinKil.visibility = View.GONE
-                        tvMaksKil.visibility = View.VISIBLE
-                    }
-                    else -> {
-                        tvMinKil.visibility = View.GONE
-                        tvMaksKil.visibility = View.GONE
                     }
                 }
-                onCheckRadio()
+                numberPicker(np)
             }
         })
 //        back = findViewById(R.id.back_kilat)
@@ -173,16 +246,24 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
             startActivity(intent)
         }
 
+
         seekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             var progressValue = 0
+            var x = 0
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 progressValue = progress
-                angsuranTv.text = ""
+                Log.d("Progress Value", "onProgressChanged: $pinjamanUang")
+                Log.d("Progress Value", "onProgressChanged: $progressValue")
+                x = progressValue * pinjamanUang
+                Log.d("Progress Value", "onProgressChanged: $progressValue")
+                /*angsuranTv.text = ""
                 biayaAdminTv.text = ""
                 biayaAsuransiTv.text = ""
                 biayaTransferTv.text = ""
-                jumlahTerimaTv.text = ""
-                when (progressValue) {
+                jumlahTerimaTv.text = ""*/
+                jumlah.setText(x.toString())
+
+                /*when (progressValue) {
                     0 -> {
                         pinjamanUang = 1000000
                         jumlah.setText(pinjamanUang.toString())
@@ -320,13 +401,14 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
                         pinjamanUang = 15000000
                         jumlah.setText(pinjamanUang.toString())
                     }
-                }
+                }*/
             }
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
             override fun onStopTrackingTouch(seekBar: SeekBar) {
-                Log.d("RadioButton on Seekbar", (if(rbKilat3.isChecked) "radio 3" else if(rbKilat6.isChecked) "radio 6" else "radio 12"))
-                onCheckRadio()
-                when (progressValue) {
+                numberPicker(np)
+                x = progressValue * pinjamanUang
+                jumlah.setText(x.toString())
+                /*when (progressValue) {
                     0 -> {
                         pinjamanUang = 1000000
                         jumlah.setText(pinjamanUang.toString())
@@ -472,16 +554,18 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
                         jumlah.setText(pinjamanUang.toString())
                         return
                     }
-                }
+                }*/
             }
         })
 
-        rgKilat.setOnCheckedChangeListener{ _, checkId ->
+        /*rgKilat.setOnCheckedChangeListener{ _, checkId ->
             val radio: RadioButton = findViewById(checkId)
             rb = radio.text.toString()
             Log.d("RadioButton", if(rbKilat3.isChecked) "radio 3" else "radio lain")
             onCheckRadio()
-        }
+        }*/
+
+
 
 
         ajukanButton = findViewById(R.id.lanjut_button_kilat)
@@ -506,8 +590,21 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         }
     }
 
-    private fun onCheckRadio(){
-        when(rb){
+    private fun numberPicker(number: Int){
+        plafond = number
+        val pokok = jumlah.cleanDoubleValue.toFloat() / plafond.toFloat()
+        bunga = jumlah.cleanDoubleValue.toFloat() * getBunga / JUMLAH_BULAN_1_TAHUN
+        angsuran = pokok + bunga
+        admin = jumlah.cleanDoubleValue.toFloat() * getAdmin
+        asuransi = jumlah.cleanDoubleValue.toFloat() * getAsur12
+        val totalPengurangan = admin + asuransi + BIAYA_TRANSFER
+        sisa = jumlah.cleanDoubleValue.toFloat() - totalPengurangan
+        angsuranTv.text = formatRp.format(angsuran.toDouble())
+        biayaAdminTv.text = formatRp.format(admin.toDouble())
+        biayaAsuransiTv.text = formatRp.format(asuransi.toDouble())
+        biayaTransferTv.text = formatRp.format(BIAYA_TRANSFER.toDouble())
+        jumlahTerimaTv.text = formatRp.format(sisa.toDouble())
+        /*when(rb){
                "3" -> {
                    plafond = PEMBAYARAN_3_BULAN
                    val pokok = jumlah.cleanDoubleValue.toFloat() / plafond.toFloat()
@@ -554,7 +651,7 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
                    biayaTransferTv.text = formatRp.format(BIAYA_TRANSFER.toDouble())
                    jumlahTerimaTv.text = formatRp.format(sisa.toDouble())
                }
-           }
+           }*/
     }
 
     //        Toast.makeText(this, "NIp: " + nip, Toast.LENGTH_SHORT).show();
@@ -691,7 +788,7 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
     private fun ajukanPinjaman() {
         val user = SharedPrefManager.getInstance(applicationContext).user
         val nip = user.nip
-        val tujuan = tujuanSpinner.selectedItem.toString()
+//        val tujuan = tujuanSpinner.selectedItem.toString()
         val dateFormat = SimpleDateFormat(DATE_FORMAT_2)
         val c = Calendar.getInstance()
         val today = c.time
@@ -712,6 +809,7 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         editor.putFloat("asuransi", asuransi)
         editor.putString("activity", "kilat")
         editor.apply()
+        Log.d("AJUKAN", "ajukanPinjaman: $editor")
         digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
                 ,SharedPrefManager.getInstance(this).user.email)
         /*val i = Intent(this@PinjamanKilatActivity, PersetujuanActivity::class.java)

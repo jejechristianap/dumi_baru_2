@@ -111,6 +111,9 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.3.0-alpha01'
 
+    /*Number Picker*/
+    implementation 'com.shawnlin:number-picker:2.4.6'
+
 }
 repositories {
     mavenCentral()
