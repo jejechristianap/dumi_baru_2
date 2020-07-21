@@ -13,6 +13,7 @@ import com.minjem.dumi.ecommerce.Helper.USERNAME
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.minjem.dumi.ecommerce.response.RiwayatPPOBData
 import com.minjem.dumi.model.SharedPrefManager
+import kotlinx.android.synthetic.main.activity_pinjaman_kilat.*
 import kotlinx.android.synthetic.main.activity_token_transaction.*
 import okhttp3.ResponseBody
 import org.json.JSONArray
@@ -30,9 +31,13 @@ class RiwayatView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_token_transaction)
+        setSupportActionBar(toolbarRiwayatEcom)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.title = ""
+
         api = HttpRetrofitClient
         initView()
-        initOnClick()
         getRiwayat()
     }
 
@@ -55,10 +60,9 @@ class RiwayatView : AppCompatActivity() {
         riwayatAdapter.notifyDataSetChanged()
     }
 
-    private fun initOnClick(){
-        backTransaksiIv.setOnClickListener {
-            finish()
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun getRiwayat(){

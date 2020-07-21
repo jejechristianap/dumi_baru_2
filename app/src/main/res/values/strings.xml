@@ -28,7 +28,7 @@
     <string name="dumi_kilat">DUMI Kilat</string>
     <string name="nilai_pinjaman">Nilai Pinjaman</string>
     <string name="rp_1jt_15jt">Rp 1.000.000 – 15.000.000</string>
-    <string name="tenor">Tenor</string>
+    <string name="tenor">Tenor (Bulan)</string>
     <string name="tenor_bulan"><![CDATA[3, 6 & 12 bulan]]></string>
     <string name="ajukan">Ajukan</string>
     <string name="ajukan_sekarang">Ajukan Sekarang</string>

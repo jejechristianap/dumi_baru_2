@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,71 +7,61 @@
     android:background="#F5F5F5"
     tools:context=".jenispinjaman.PinjamanKilatActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/back_kilat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/todo"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back_white" />
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarKilat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                app:titleTextColor="@color/white"
+                android:theme="@style/ToolbarTheme"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dumi_kilat"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                android:gravity = "center"
+                android:id="@+id/toolbar_title" />
+        </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/pinjam_dumi"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        android:layout_margin="@dimen/_15sdp"
+        android:layout_below="@id/appbar"
+        android:layout_alignParentBottom="true"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/layout_rounded"
             android:orientation="vertical"
-            android:padding="30dp">
+            android:padding="@dimen/_15sdp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_22sdp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/tentukan_pinjaman"
+                android:textSize="@dimen/_14ssp"
                 android:textColor="@android:color/black"
                 android:gravity="center"
-                app:autoSizeMinTextSize="6sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="20sp"
-                tools:autoSizeStepGranularity="1sp"/>
+                />
 
             <RelativeLayout
                 android:layout_marginTop="@dimen/_10sdp"
@@ -163,6 +153,7 @@
 
             <RelativeLayout
                 android:gravity="center"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -180,11 +171,22 @@
                     android:layout_below="@id/tenor"
                     android:visibility="visible"
                     android:id="@+id/npBulan"
+                    android:theme="@style/DefaultNumberPickerTheme"
                     android:layout_alignStart="@id/tenor"
                     android:layout_alignEnd="@id/tenor"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:layout_alignStart="@id/npBulan"
+                    android:layout_alignTop="@id/npBulan"
+                    android:layout_alignBottom="@id/npBulan"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/seekbar_drawable_thumb"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"/>
 
                 <TextView
                     android:id="@+id/tujuan"
@@ -199,16 +201,16 @@
                 <NumberPicker
                     android:visibility="visible"
                     android:id="@+id/npTujuan"
+                    android:theme="@style/NumberPickerTheme"
                     android:layout_alignStart="@id/tujuan"
                     android:layout_alignEnd="@id/tujuan"
                     android:layout_below="@id/tujuan"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+
+
             </RelativeLayout>
-
-
-
 
             <RadioGroup
                 android:id="@+id/rgKilat"
@@ -261,187 +263,141 @@
                     android:layout_height="@dimen/_25sdp"/>
             </RadioGroup>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:layout_marginTop="@dimen/_5sdp">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="1.2"
+                    android:id="@+id/angsuran"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/angsuran_perbulan"
                     android:textColor="@android:color/black"
-                    app:autoSizeTextType="uniform"
-                    app:autoSizeMinTextSize="6sp"
-                    tools:autoSizeMaxTextSize="30sp"
-                    tools:autoSizeStepGranularity="1sp"/>
+                    android:textSize="@dimen/_12ssp"/>
 
                 <TextView
                     android:id="@+id/angsuran_perbulan_kilat"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="0.8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/angsuran"
                     android:gravity="end"
                     android:textColor="@android:color/black"
-                    app:autoSizeTextType="uniform"
-                    app:autoSizeMinTextSize="6sp"
-                    tools:autoSizeMaxTextSize="30sp"
-                    tools:autoSizeStepGranularity="1sp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                    android:textSize="@dimen/_12ssp" />
 
                 <TextView
                     android:id="@+id/admin_asn"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="1.2"
+                    android:layout_below="@id/angsuran"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/biaya_administrasi"
                     android:textColor="@android:color/black"
-                    app:autoSizeTextType="uniform"
-                    app:autoSizeMinTextSize="6sp"
-                    tools:autoSizeMaxTextSize="30sp"
-                    tools:autoSizeStepGranularity="1sp"/>
+                    android:textSize="@dimen/_12ssp"/>
 
                 <TextView
                     android:id="@+id/biaya_administrasi_kilat"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="0.8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/admin_asn"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/admin_asn"
                     android:gravity="end"
                     android:textColor="@android:color/black"
-                    app:autoSizeTextType="uniform"
-                    app:autoSizeMinTextSize="6sp"
-                    tools:autoSizeMaxTextSize="30sp"
-                    tools:autoSizeStepGranularity="1sp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                    android:textSize="@dimen/_12ssp" />
 
                 <TextView
                     android:id="@+id/asuransi_asn"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="1.2"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_below="@id/admin_asn"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_height="wrap_content"
                     android:text="@string/biaya_asuransi"
                     android:textColor="@android:color/black"
-                    app:autoSizeTextType="uniform"
-                    app:autoSizeMinTextSize="6sp"
-                    tools:autoSizeMaxTextSize="30sp"
-                    tools:autoSizeStepGranularity="1sp"/>
+                    android:textSize="@dimen/_12ssp"/>
 
                 <TextView
                     android:id="@+id/biaya_asuransi_kilat"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="0.8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/asuransi_asn"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/asuransi_asn"
                     android:gravity="end"
                     android:textColor="@android:color/black"
-                    app:autoSizeTextType="uniform"
-                    app:autoSizeMinTextSize="6sp"
-                    tools:autoSizeMaxTextSize="30sp"
-                    tools:autoSizeStepGranularity="1sp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                    android:textSize="@dimen/_12ssp" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="1.2"
+                    android:id="@+id/trf"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_below="@id/asuransi_asn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
                     android:text="@string/transfer_antar_bank"
                     android:textColor="@android:color/black"
-                    app:autoSizeTextType="uniform"
-                    app:autoSizeMinTextSize="6sp"
-                    tools:autoSizeMaxTextSize="30sp"
-                    tools:autoSizeStepGranularity="1sp"/>
+                    android:textSize="@dimen/_12ssp"/>
 
                 <TextView
                     android:id="@+id/biaya_transfer_antar_bank_kilat"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="0.8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/trf"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/trf"
                     android:gravity="end"
                     android:textColor="@android:color/black"
-                    app:autoSizeTextType="uniform"
-                    app:autoSizeMinTextSize="6sp"
-                    tools:autoSizeMaxTextSize="30sp"
-                    tools:autoSizeStepGranularity="1sp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                    android:textSize="@dimen/_12ssp" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="2"
+                    android:id="@+id/jml"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/trf"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:text="@string/jumlah_yang_diterima"
                     android:textColor="@android:color/black"
-                    android:gravity="center"
-                    app:autoSizeTextType="uniform"
-                    app:autoSizeMinTextSize="6sp"
-                    tools:autoSizeMaxTextSize="30sp"
-                    tools:autoSizeStepGranularity="1sp"
+                    android:textSize="@dimen/_15ssp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/jumlah_yang_diterima_kilat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/jml"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_18ssp" />
+            </RelativeLayout>
 
-            </LinearLayout>
 
-            <TextView
-                android:id="@+id/jumlah_yang_diterima_kilat"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:fontFamily="sans-serif-medium"
-                android:gravity="center"
-                android:paddingTop="15dp"
-                android:paddingBottom="5dp"
-                android:textColor="@android:color/black"
-                app:autoSizeTextType="uniform"
-                app:autoSizeMinTextSize="6sp"
-                tools:autoSizeMaxTextSize="35sp"
-                tools:autoSizeStepGranularity="1sp" />
+
 
             <Button
                 android:id="@+id/lanjut_button_kilat"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="100dp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:background="@drawable/button_rounded_custom"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/lanjut"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_15ssp" />
 
         </LinearLayout>
     </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

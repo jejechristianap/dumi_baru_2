@@ -92,6 +92,10 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pinjaman_kilat)
+        setSupportActionBar(toolbarKilat)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.title = ""
         initView()
         getBunga()
         numberPicker(np)
@@ -125,7 +129,7 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         jumlah.requestFocus()
 
         npBulan.minValue = 1
-        npBulan.maxValue = 12
+        npBulan.maxValue = 60
 
         npTujuan.minValue = 0
         npTujuan.maxValue = tujuanPinjaman.size - 1
@@ -144,6 +148,11 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         formatRp = NumberFormat.getCurrencyInstance(localID)
         seekBar = findViewById(R.id.seekbar_kilat)
         seekBar.max = 15
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun initTouch(){
@@ -240,12 +249,6 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
                 numberPicker(np)
             }
         })
-//        back = findViewById(R.id.back_kilat)
-        back_kilat.setOnClickListener{
-            val intent = Intent(this@PinjamanKilatActivity, MainActivity::class.java)
-            startActivity(intent)
-        }
-
 
         seekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             var progressValue = 0
@@ -256,315 +259,18 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
                 Log.d("Progress Value", "onProgressChanged: $progressValue")
                 x = progressValue * pinjamanUang
                 Log.d("Progress Value", "onProgressChanged: $progressValue")
-                /*angsuranTv.text = ""
-                biayaAdminTv.text = ""
-                biayaAsuransiTv.text = ""
-                biayaTransferTv.text = ""
-                jumlahTerimaTv.text = ""*/
+
                 jumlah.setText(x.toString())
 
-                /*when (progressValue) {
-                    0 -> {
-                        pinjamanUang = 1000000
-                        jumlah.setText(pinjamanUang.toString())
-                    }
-                    1 -> {
-                        pinjamanUang = 1500000
-                        jumlah.setText(pinjamanUang.toString())
-                    }
-                    2 -> {
-                        pinjamanUang = 2000000
-                        jumlah.setText(pinjamanUang.toString())
-                    }
-                    3 -> {
-                        pinjamanUang = 2500000
-                        jumlah.setText(pinjamanUang.toString())
-                    }
-                    4 -> {
-                        pinjamanUang = 3000000
-                        jumlah.setText(pinjamanUang.toString())
-                    }
-                    5 -> {
-                        pinjamanUang = 3500000
-                        jumlah.setText(pinjamanUang.toString())
-                    }
-                    6 -> {
-                        pinjamanUang = 4000000
-                        jumlah.setText(pinjamanUang.toString())
-                    }
-                    7 -> {
-                        pinjamanUang = 4500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    8 -> {
-                        pinjamanUang = 5000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    9 -> {
-                        pinjamanUang = 5500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    10 -> {
-                        pinjamanUang = 6000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    11 -> {
-                        pinjamanUang = 6500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    12 -> {
-                        pinjamanUang = 7000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    13 -> {
-                        pinjamanUang = 7500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    14 -> {
-                        pinjamanUang = 8000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    15 -> {
-                        pinjamanUang = 8500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    16 -> {
-                        pinjamanUang = 9000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    17 -> {
-                        pinjamanUang = 9500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    18 -> {
-                        pinjamanUang = 10000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    19 -> {
-                        pinjamanUang = 10500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    20 -> {
-                        pinjamanUang = 11000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    21 -> {
-                        pinjamanUang = 11500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    22 -> {
-                        pinjamanUang = 12000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    23 -> {
-                        pinjamanUang = 12500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    24 -> {
-                        pinjamanUang = 13000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    25 -> {
-                        pinjamanUang = 13500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    26 -> {
-                        pinjamanUang = 14000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    27 -> {
-                        pinjamanUang = 14500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    28 -> {
-                        pinjamanUang = 15000000
-                        jumlah.setText(pinjamanUang.toString())
-                    }
-                }*/
             }
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 numberPicker(np)
                 x = progressValue * pinjamanUang
                 jumlah.setText(x.toString())
-                /*when (progressValue) {
-                    0 -> {
-                        pinjamanUang = 1000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    1 -> {
-                        pinjamanUang = 1500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    2 -> {
-                        pinjamanUang = 2000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    3 -> {
-                        pinjamanUang = 2500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    4 -> {
-                        pinjamanUang = 3000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    5 -> {
-                        pinjamanUang = 3500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    6 -> {
-                        pinjamanUang = 4000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    7 -> {
-                        pinjamanUang = 4500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    8 -> {
-                        pinjamanUang = 5000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    9 -> {
-                        pinjamanUang = 5500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    10 -> {
-                        pinjamanUang = 6000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    11 -> {
-                        pinjamanUang = 6500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    12 -> {
-                        pinjamanUang = 7000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    13 -> {
-                        pinjamanUang = 7500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    14 -> {
-                        pinjamanUang = 8000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    15 -> {
-                        pinjamanUang = 8500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    16 -> {
-                        pinjamanUang = 9000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    17 -> {
-                        pinjamanUang = 9500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    18 -> {
-                        pinjamanUang = 10000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    19 -> {
-                        pinjamanUang = 10500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    20 -> {
-                        pinjamanUang = 11000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    21 -> {
-                        pinjamanUang = 11500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    22 -> {
-                        pinjamanUang = 12000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    23 -> {
-                        pinjamanUang = 12500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    24 -> {
-                        pinjamanUang = 13000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    25 -> {
-                        pinjamanUang = 13500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    26 -> {
-                        pinjamanUang = 14000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    27 -> {
-                        pinjamanUang = 14500000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                    28 -> {
-                        pinjamanUang = 15000000
-                        jumlah.setText(pinjamanUang.toString())
-                        return
-                    }
-                }*/
+
             }
         })
-
-        /*rgKilat.setOnCheckedChangeListener{ _, checkId ->
-            val radio: RadioButton = findViewById(checkId)
-            rb = radio.text.toString()
-            Log.d("RadioButton", if(rbKilat3.isChecked) "radio 3" else "radio lain")
-            onCheckRadio()
-        }*/
-
 
 
 
@@ -604,54 +310,6 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         biayaAsuransiTv.text = formatRp.format(asuransi.toDouble())
         biayaTransferTv.text = formatRp.format(BIAYA_TRANSFER.toDouble())
         jumlahTerimaTv.text = formatRp.format(sisa.toDouble())
-        /*when(rb){
-               "3" -> {
-                   plafond = PEMBAYARAN_3_BULAN
-                   val pokok = jumlah.cleanDoubleValue.toFloat() / plafond.toFloat()
-                   bunga = jumlah.cleanDoubleValue.toFloat() * getBunga / JUMLAH_BULAN_1_TAHUN
-                   angsuran = pokok + bunga
-                   admin = jumlah.cleanDoubleValue.toFloat() * getAdmin
-                   asuransi = jumlah.cleanDoubleValue.toFloat() * getAsur12
-                   val totalPengurangan = admin + asuransi + BIAYA_TRANSFER
-                   sisa = jumlah.cleanDoubleValue.toFloat() - totalPengurangan
-                   angsuranTv.text = formatRp.format(angsuran.toDouble())
-                   biayaAdminTv.text = formatRp.format(admin.toDouble())
-                   biayaAsuransiTv.text = formatRp.format(asuransi.toDouble())
-                   biayaTransferTv.text = formatRp.format(BIAYA_TRANSFER.toDouble())
-                   jumlahTerimaTv.text = formatRp.format(sisa.toDouble())
-               }
-               "6" -> {
-                   plafond = PEMBAYARAN_6_BULAN
-                   val pokok = jumlah.cleanDoubleValue.toFloat() / plafond.toFloat()
-                   bunga = jumlah.cleanDoubleValue.toFloat() * getBunga / JUMLAH_BULAN_1_TAHUN
-                   angsuran = pokok + bunga
-                   admin = jumlah.cleanDoubleValue.toFloat() * getAdmin
-                   asuransi = jumlah.cleanDoubleValue.toFloat() * getAsur12
-                   val totalPengurangan = admin + asuransi + BIAYA_TRANSFER
-                   sisa = jumlah.cleanDoubleValue.toFloat() - totalPengurangan
-                   angsuranTv.text = formatRp.format(angsuran.toDouble())
-                   biayaAdminTv.text = formatRp.format(admin.toDouble())
-                   biayaAsuransiTv.text = formatRp.format(asuransi.toDouble())
-                   biayaTransferTv.text = formatRp.format(BIAYA_TRANSFER.toDouble())
-                   jumlahTerimaTv.text = formatRp.format(sisa.toDouble())
-               }
-               "12" -> {
-                   plafond = PEMBAYARAN_12_BULAN
-                   val pokok = jumlah.cleanDoubleValue.toFloat() / plafond.toFloat()
-                   bunga = jumlah.cleanDoubleValue.toFloat() * getBunga / JUMLAH_BULAN_1_TAHUN
-                   angsuran = pokok + bunga
-                   admin = jumlah.cleanDoubleValue.toFloat() * getAdmin
-                   asuransi = jumlah.cleanDoubleValue.toFloat() * getAsur12
-                   val totalPengurangan = admin + asuransi + BIAYA_TRANSFER
-                   sisa = jumlah.cleanDoubleValue.toFloat() - totalPengurangan
-
-                   angsuranTv.text = formatRp.format(angsuran.toDouble())
-                   biayaAdminTv.text = formatRp.format(admin.toDouble())
-                   biayaAsuransiTv.text = formatRp.format(asuransi.toDouble())
-                   biayaTransferTv.text = formatRp.format(BIAYA_TRANSFER.toDouble())
-                   jumlahTerimaTv.text = formatRp.format(sisa.toDouble())
-               }
-           }*/
     }
 
     //        Toast.makeText(this, "NIp: " + nip, Toast.LENGTH_SHORT).show();
@@ -809,7 +467,7 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         editor.putFloat("asuransi", asuransi)
         editor.putString("activity", "kilat")
         editor.apply()
-        Log.d("AJUKAN", "ajukanPinjaman: $editor")
+        Log.d("AJUKAN", "ajukanPinjaman: $tujuan")
         digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
                 ,SharedPrefManager.getInstance(this).user.email)
         /*val i = Intent(this@PinjamanKilatActivity, PersetujuanActivity::class.java)

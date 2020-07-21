@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,23 +19,20 @@
             android:id="@+id/nip_cek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="32dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
                 android:text="@string/daftarkan_diri_anda"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                app:autoSizeMinTextSize="25sp"
-                app:autoSizeTextType="uniform"
-                tools:autoSizeMaxTextSize="40sp"
-                tools:autoSizeStepGranularity="1sp" />
+                android:textSize="@dimen/_20ssp"/>
             <RelativeLayout
                 android:id="@+id/rlInstansi"
                 android:layout_width="match_parent"
@@ -67,10 +65,10 @@
             </RelativeLayout>
             <LinearLayout
                 android:id="@+id/cek_nip_layout"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:orientation="vertical"
-                android:paddingStart="@dimen/_30sdp"
-                android:paddingEnd="@dimen/_30sdp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -79,9 +77,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autofillHints=""
+                    android:textSize="@dimen/_12ssp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:backgroundTint="@color/darkBlue"
-                    android:ems="10"
                     android:hint="@string/nip"
                     android:inputType="number" />
 
@@ -90,6 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autofillHints=""
+                    android:textSize="@dimen/_12ssp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:backgroundTint="@color/darkBlue"
                     android:hint="@string/nama_ktp"
@@ -109,7 +108,7 @@
                     />
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="@dimen/_1sdp"
                     android:layout_marginStart="@dimen/_3sdp"
                     android:layout_marginEnd="@dimen/_3sdp"
                     android:background="@color/colorBlue"
@@ -136,48 +135,35 @@
                 android:id="@+id/email_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="20dp"
+                android:layout_margin="@dimen/_20sdp"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:layout_marginTop="@dimen/marginTop10dp"
+                    android:layout_height="wrap_content"
                     android:text="@string/masukkan_email"
                     android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15dp"
-                    tools:autoSizeStepGranularity="1sp" />
+                    android:textSize="@dimen/_11ssp"/>
 
                 <EditText
                     android:id="@+id/email_daftar_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autofillHints=""
+                    android:textSize="@dimen/_12ssp"
                     android:backgroundTint="@color/darkBlue"
                     android:inputType="textEmailAddress"
                     android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="20sp"
-                    tools:autoSizeStepGranularity="1sp"
                     tools:ignore="LabelFor" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:layout_marginTop="@dimen/marginTop10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:text="@string/masukkan_password"
                     android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15dp"
-                    tools:autoSizeStepGranularity="1sp" />
+                    android:textSize="@dimen/_11ssp" />
 
                 <EditText
                     android:id="@+id/masuk_password_et"
@@ -187,22 +173,16 @@
                     android:backgroundTint="@color/darkBlue"
                     android:inputType="textPassword"
                     android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="20sp"
-                    tools:autoSizeStepGranularity="1sp"
+                    android:textSize="@dimen/_12ssp"
                     tools:ignore="LabelFor" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:layout_marginTop="@dimen/marginTop10dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:text="@string/ulangi_password"
                     android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="15dp"
-                    tools:autoSizeStepGranularity="1sp" />
+                    android:textSize="@dimen/_11ssp" />
 
                 <EditText
                     android:id="@+id/ulangi_password_et"
@@ -212,17 +192,15 @@
                     android:backgroundTint="@color/darkBlue"
                     android:inputType="textPassword"
                     android:textColor="@android:color/black"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="20sp"
-                    tools:autoSizeStepGranularity="1sp"
+                    android:textSize="@dimen/_12ssp"
                     tools:ignore="LabelFor" />
 
                 <CheckBox
                     android:id="@+id/show_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:textSize="@dimen/_11ssp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:text="@string/lihat_password"
                     android:theme="@style/MyCheckbox"
                     android:visibility="visible" />
@@ -237,42 +215,31 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="top"
-                        android:layout_marginTop="@dimen/marginTop10dp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:theme="@style/SCBSwitch" />
 
                     <TextView
                         android:id="@+id/setuju_tv"
                         android:layout_width="match_parent"
-                        android:layout_height="15dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/saya_setuju"
                         android:textColor="@color/black"
-                        android:textSize="12sp"
-                        app:autoSizeMinTextSize="8sp"
-                        app:autoSizeTextType="uniform"
-                        tools:autoSizeMaxTextSize="12sp"
-                        tools:autoSizeStepGranularity="1sp" />
+                        android:textSize="@dimen/_10ssp" />
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/lanjut_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_margin="@dimen/_20sdp"
                     android:background="@drawable/button_lanjut_design"
                     android:enabled="false"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/lanjut"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
-                    android:textSize="22sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/daftar_password_et" />
+                    android:textSize="@dimen/_12ssp"/>
             </LinearLayout>
         </LinearLayout>
 

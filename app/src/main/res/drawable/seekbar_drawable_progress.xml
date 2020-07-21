@@ -21,17 +21,17 @@
 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background" >
-        <shape android:shape="rectangle">
-            <stroke android:color="@color/colorBlue" android:width="@dimen/_2sdp" />
+        <shape android:shape="line">
+            <stroke android:color="@color/black" android:width="@dimen/_2sdp" />
             <solid android:color="@color/transparent"/>
             <corners android:radius="@dimen/_15sdp"/>
         </shape>
     </item>
     <item android:id="@android:id/progress">
         <clip android:clipOrientation="horizontal" android:gravity="left">
-            <shape android:shape="rectangle">
+            <shape android:shape="line">
 <!--                <stroke android:color="#ffe735" android:width="2dp" />-->
-                <solid android:color="@color/colorBlue"/>
+                <solid android:color="@color/black"/>
                 <corners android:radius="@dimen/_15sdp"/>
             </shape>
         </clip>
