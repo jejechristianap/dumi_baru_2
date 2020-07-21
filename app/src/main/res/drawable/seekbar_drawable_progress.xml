@@ -22,7 +22,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background" >
         <shape android:shape="line">
-            <stroke android:color="@color/black" android:width="@dimen/_2sdp" />
+            <stroke android:color="@color/black" android:width="@dimen/_1sdp" />
             <solid android:color="@color/transparent"/>
             <corners android:radius="@dimen/_15sdp"/>
         </shape>
@@ -30,7 +30,7 @@
     <item android:id="@android:id/progress">
         <clip android:clipOrientation="horizontal" android:gravity="left">
             <shape android:shape="line">
-<!--                <stroke android:color="#ffe735" android:width="2dp" />-->
+                <stroke android:color="#000000" android:width="1dp" />
                 <solid android:color="@color/black"/>
                 <corners android:radius="@dimen/_15sdp"/>
             </shape>

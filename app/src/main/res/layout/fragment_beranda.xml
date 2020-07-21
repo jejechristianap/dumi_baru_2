@@ -32,7 +32,6 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:background="@drawable/button_outerline_white"
-                    android:foreground="@drawable/ripple_state"
                     android:text="@string/qm"
                     android:textColor="@color/white" />
 

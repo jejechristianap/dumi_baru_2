@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -14,21 +15,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
-import com.minjem.dumi.util.CustomProgressDialog
 import com.minjem.dumi.R
-import com.minjem.dumi.ecommerce.adapter.PlnAdapter
 import com.minjem.dumi.ecommerce.Helper.PASSWORD
 import com.minjem.dumi.ecommerce.Helper.USERNAME
 import com.minjem.dumi.ecommerce.Helper.mDF
+import com.minjem.dumi.ecommerce.adapter.PlnAdapter
+import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.minjem.dumi.ecommerce.response.PDAMData
 import com.minjem.dumi.model.SharedPrefManager
+import com.minjem.dumi.util.CustomProgressDialog
 import kotlinx.android.synthetic.main.ecommerce_konfirmasi_pembayaran.*
 import kotlinx.android.synthetic.main.ecommerce_pln.view.*
-import kotlinx.android.synthetic.main.ecommerce_pln.view.rvPln
 import kotlinx.android.synthetic.main.gagal.*
 import kotlinx.android.synthetic.main.sukses.*
 import okhttp3.ResponseBody
@@ -78,6 +79,11 @@ class PlnFragment: Fragment() {
         mView = layoutInflater.inflate(R.layout.ecommerce_pln,container,false)
         mContext = this.context!!
 
+        mView.toolbarPln.title = ""
+        mView.toolbarPln.setNavigationIcon(R.drawable.ic_back_white)
+        mView.toolbarPln.setNavigationOnClickListener {
+            activity!!.finish()
+        }
         /*Recycler View PLN*/
         mView.rvPln.layoutManager = GridLayoutManager(mContext, 3)
         plnAdapter = PlnAdapter(mContext, list)
@@ -103,9 +109,7 @@ class PlnFragment: Fragment() {
         mView.bLanjutPln.visibility = View.GONE
         mView.rlGagalPln.visibility = View.GONE
 
-        mView.backPlnIv.setOnClickListener {
-            activity!!.finish()
-        }
+
 
         mView.rgPln.setOnCheckedChangeListener{ _, checkId ->
             val radio: RadioButton = mView.findViewById(checkId)
@@ -302,6 +306,7 @@ class PlnFragment: Fragment() {
                     progressDialog.dialog.dismiss()
                 }
 
+                @RequiresApi(Build.VERSION_CODES.N)
                 @SuppressLint("SetTextI18n")
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     if (response.isSuccessful){
@@ -346,6 +351,9 @@ class PlnFragment: Fragment() {
 
     }
 
+
+
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
     private fun rincianTransaksi(pos : Int){
         mDialog.setContentView(R.layout.ecommerce_konfirmasi_pembayaran)

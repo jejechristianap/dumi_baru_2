@@ -77,7 +77,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_20ssp"
                     android:gravity="end|center"
-                    android:layout_width="@dimen/_50sdp"
+                    android:layout_width="@dimen/_80sdp"
                     android:layout_height="wrap_content"/>
                 <me.abhinay.input.CurrencyEditText
                     android:id="@+id/etCurrency"
@@ -86,6 +86,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_50sdp"
                     android:fontFamily="sans-serif-medium"
+                    android:layout_marginEnd="@dimen/_20sdp"
                     android:gravity="start|center"
                     android:inputType="number"
                     android:background="@drawable/layout_rounded_home"
@@ -123,7 +124,7 @@
                 android:padding="@dimen/_5sdp"
                 android:progress="0"
                 android:progressDrawable="@drawable/seekbar_drawable_progress"
-                android:thumb="@drawable/seekbar_drawable_thumb" />
+                android:thumb="@drawable/ic_amount_dot" />
 
 
             <RelativeLayout

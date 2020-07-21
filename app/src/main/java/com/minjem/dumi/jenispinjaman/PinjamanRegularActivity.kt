@@ -100,7 +100,10 @@ class PinjamanRegularActivity : AppCompatActivity(), DigisignView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pinjmana_reguler)
-
+        setSupportActionBar(toolbarRegular)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.title = ""
         initView()
         getBunga()
         initTouch()
@@ -123,7 +126,6 @@ class PinjamanRegularActivity : AppCompatActivity(), DigisignView {
         getAsur12 = 0f
         getAsur24 = 0f
         getAsur36 = 0f
-        backRegular = findViewById(R.id.back_regular)
         /*Tujuan Pinjaman*/
         tujuanSpinner = findViewById(R.id.tujuan_pinjaman_reguler_spinner)
         tujuanAdapter = ArrayAdapter(this@PinjamanRegularActivity, R.layout.spinner_text, tujuanPinjaman)
@@ -149,12 +151,12 @@ class PinjamanRegularActivity : AppCompatActivity(), DigisignView {
         seekbarRegular = findViewById(R.id.seekbar_regular)
         lanjutButton = findViewById(R.id.lanjut_button_reguler)
     }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 
     private fun initTouch(){
-        backRegular.setOnClickListener{
-            val intent = Intent(this@PinjamanRegularActivity, MainActivity::class.java)
-            startActivity(intent)
-        }
 
         jumlahRegular.addTextChangedListener(object: TextWatcher{
             override fun afterTextChanged(s: Editable?) {

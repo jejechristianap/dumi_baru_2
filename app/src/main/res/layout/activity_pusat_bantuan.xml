@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:text="@string/bantuan"
+        android:textSize="@dimen/_15ssp"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"
@@ -56,23 +57,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <!--Subtitle-->
-            <LinearLayout
-                android:background="@color/colorBlue"
-                android:orientation="vertical"
-                android:padding="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:text="@string/bisa_kami_bantu"
-                    android:textColor="@color/colorWhite"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeTextType="uniform"
-                    tools:autoSizeMaxTextSize="23sp"
-                    tools:autoSizeStepGranularity="1sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"/>
 
-            </LinearLayout>
 
             <!--01-->
             <LinearLayout

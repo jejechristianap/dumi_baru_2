@@ -23,7 +23,6 @@
         android:src="@drawable/ic_back_white"
         android:padding="@dimen/_12sdp"
         android:layout_height="0dp"
-        android:foreground="?selectableItemBackgroundBorderless"
         android:clickable="true"
         android:focusable="true"
         android:contentDescription="@string/todo" />

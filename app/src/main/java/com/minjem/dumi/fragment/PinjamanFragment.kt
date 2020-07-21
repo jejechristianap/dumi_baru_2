@@ -135,6 +135,11 @@ class PinjamanFragment : Fragment() {
             listPinjaman.clear()
             refreshPinjaman()
         }
+        mDialog.toolbarRiwayatPinjaman.title = ""
+        mDialog.toolbarRiwayatPinjaman.setNavigationIcon(R.drawable.ic_back_white)
+        mDialog.toolbarRiwayatPinjaman.setNavigationOnClickListener {
+            mDialog.dismiss()
+        }
     }
 
     private fun rvClick(){

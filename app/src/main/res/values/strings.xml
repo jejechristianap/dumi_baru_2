@@ -691,4 +691,5 @@
     <string name="tkb90Def">TKB90 adalah Tingkat Keberhasilan Bayar nasabah DUMI dalam waktu 90 hari sejak tanggal tagihan jatuh tempo.</string>
     <string name="tanggal">Tanggal Pinjaman</string>
     <string name="jumlahPinjaman">Jumlah Pinjaman</string>
+    <string name="riwayat_pinjaman">Riwayat Pinjaman</string>
 </resources>

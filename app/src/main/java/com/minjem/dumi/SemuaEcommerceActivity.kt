@@ -11,16 +11,23 @@ import com.minjem.dumi.ecommerce.transaction.RiwayatView
 import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity
 import com.minjem.dumi.jenispinjaman.PinjamanRegularActivity
 import kotlinx.android.synthetic.main.activity_lihat_semua.*
+import kotlinx.android.synthetic.main.activity_pinjmana_reguler.*
 
 class SemuaEcommerceActivity : AppCompatActivity() {
     private var back: ImageView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lihat_semua)
-        back_semua_kategori.setOnClickListener {
+        toolbarSemua.title = ""
+        toolbarSemua.setNavigationIcon(R.drawable.ic_back_white)
+        toolbarSemua.setNavigationOnClickListener {
             finish()
         }
 
+        /*back_semua_kategori.setOnClickListener {
+            finish()
+        }
+*/
         initTouch()
     }
 

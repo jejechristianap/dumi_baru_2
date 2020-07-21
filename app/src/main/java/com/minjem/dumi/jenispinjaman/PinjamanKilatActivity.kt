@@ -177,66 +177,6 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 Log.d("jumlah", "onTextChanged: $s, $start, $before, $count, ${jumlah.cleanIntValue}")
 
-                /*in 0..999999 -> {
-                        seekBar.progress = 1
-                        seekBar.refreshDrawableState()
-                    }
-                    in 1000000..1999999 -> {
-                        seekBar.progress = 2
-                        seekBar.refreshDrawableState()
-                    }
-                    in 2000000..2999999 -> {
-                        seekBar.progress = 3
-                        seekBar.refreshDrawableState()
-                    }
-                    in 3000000..3999999 -> {
-                        seekBar.progress = 4
-                        seekBar.refreshDrawableState()
-                    }
-                    in 4000000..4999999 -> {
-                        seekBar.progress = 5
-                        seekBar.refreshDrawableState()
-                    }
-                    in 500000..5999999 -> {
-                        seekBar.progress = 6
-                        seekBar.refreshDrawableState()
-                    }
-                    in 7000000..7999999 -> {
-                        seekBar.progress = 7
-                        seekBar.refreshDrawableState()
-                    }
-                    in 8000000..8999999 -> {
-                        seekBar.progress = 8
-                        seekBar.refreshDrawableState()
-                    }
-                    in 9000000..9999999 -> {
-                        seekBar.progress = 9
-                        seekBar.refreshDrawableState()
-                    }
-                    in 10000000..10999999 -> {
-                        seekBar.progress = 10
-                        seekBar.refreshDrawableState()
-                    }
-                    in 11000000..11999999 -> {
-                        seekBar.progress = 11
-                        seekBar.refreshDrawableState()
-                    }
-                    in 12000000..12999999 -> {
-                        seekBar.progress = 12
-                        seekBar.refreshDrawableState()
-                    }
-                    in 13000000..13999999 -> {
-                        seekBar.progress = 13
-                        seekBar.refreshDrawableState()
-                    }
-                    in 14000000..14999999 -> {
-                        seekBar.progress = 14
-                        seekBar.refreshDrawableState()
-                    }
-                    15000000 ->{
-                        seekBar.progress = 15
-                        seekBar.refreshDrawableState()
-                    }*/
                 when (jumlah.cleanIntValue) {
                     !in 1000000..15000000 -> {
                         tvMinKil.visibility = View.VISIBLE

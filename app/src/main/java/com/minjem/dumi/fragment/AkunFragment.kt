@@ -82,6 +82,7 @@ class AkunFragment : Fragment() {
         return v
     }
 
+
     override fun onStart() {
         super.onStart()
         apiPhotoPath = SharedPrefManager.getInstance(mContext).user.imageProfile
