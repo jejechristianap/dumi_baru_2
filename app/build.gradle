@@ -11,8 +11,8 @@ android {
         applicationId "com.minjem.dumi"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 6
-        versionName "2.2.2"
+        versionCode 7
+        versionName "2.3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -113,6 +113,10 @@ dependencies {
 
     /*Number Picker*/
     implementation 'com.shawnlin:number-picker:2.4.6'
+
+    /*Shimmer Loading*/
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
 
 }
 repositories {
