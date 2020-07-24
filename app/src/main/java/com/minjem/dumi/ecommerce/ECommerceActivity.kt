@@ -1,10 +1,14 @@
 package com.minjem.dumi.ecommerce
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.minjem.dumi.R
+import com.minjem.dumi.SemuaEcommerceActivity
 import com.minjem.dumi.akun.FullImageFragment
+import com.minjem.dumi.ecommerce.Helper.mToast
 import com.minjem.dumi.fragment.DigiSign
 
 class ECommerceActivity : AppCompatActivity() {
@@ -16,16 +20,16 @@ class ECommerceActivity : AppCompatActivity() {
             //            val token = intent.getStringExtra("token")
 
             when (intent.getStringExtra("fragment")) {
-                "pulsa" -> {
+                "PULSA" -> {
                     supportFragmentManager.beginTransaction().replace(R.id.fl_content,PulsaFragment()).commit()
                 }
-                "pln" -> {
+                "PLN" -> {
                     supportFragmentManager.beginTransaction().replace(R.id.fl_content, PlnFragment()).commit()
                 }
-                "flight" -> {
+                "PESAWAT" -> {
                     supportFragmentManager.beginTransaction().replace(R.id.fl_content, FlightFragment()).commit()
                 }
-                "air" -> {
+                "PDAM" -> {
                     supportFragmentManager.beginTransaction().replace(R.id.fl_content, PDAMFragment()).commit()
                 }
                 "profile" -> {
@@ -47,8 +51,8 @@ class ECommerceActivity : AppCompatActivity() {
                         fragobj.arguments = bundle;
                         supportFragmentManager.beginTransaction().replace(R.id.fl_content, fragobj).commit()
                     }
-
                 }
+
             }
 
         }

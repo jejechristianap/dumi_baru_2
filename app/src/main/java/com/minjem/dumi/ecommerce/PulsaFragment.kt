@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.hendi.pulsa.response.G_Pulsa
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.R
@@ -119,17 +120,29 @@ class PulsaFragment : Fragment(){
 
         when(popup.id_provider_pulsa.text.toString()){
             "INDOSAT" ->{
-                popup.id_logo_pulsa.setBackgroundResource(R.drawable.indosat)}
+//                popup.id_logo_pulsa.setBackgroundResource(R.drawable.indosat)
+                Glide.with(mContext).load(R.drawable.indosat).override(200,200).into(popup.id_logo_pulsa)
+            }
             "TELKOMSEL" ->{
-                popup.id_logo_pulsa.setBackgroundResource(R.drawable.telkomsel)}
+//                popup.id_logo_pulsa.setBackgroundResource(R.drawable.telkomsel)
+                Glide.with(mContext).load(R.drawable.telkomsel).override(200,200).into(popup.id_logo_pulsa)
+            }
             "XL" ->{
-                popup.id_logo_pulsa.setBackgroundResource(R.drawable.xl)}
+//                popup.id_logo_pulsa.setBackgroundResource(R.drawable.xl)
+                Glide.with(mContext).load(R.drawable.xl).override(200,200).into(popup.id_logo_pulsa)
+            }
             "TRI" ->{
-                popup.id_logo_pulsa.setBackgroundResource(R.drawable.three)}
+//                popup.id_logo_pulsa.setBackgroundResource(R.drawable.three)
+                Glide.with(mContext).load(R.drawable.three).override(200,200).into(popup.id_logo_pulsa)
+            }
             "SMARTFREN" ->{
-                popup.id_logo_pulsa.setBackgroundResource(R.drawable.smartfren)}
+//                popup.id_logo_pulsa.setBackgroundResource(R.drawable.smartfren)
+                Glide.with(mContext).load(R.drawable.smartfren).override(200,200).into(popup.id_logo_pulsa)
+            }
             "AXIS" ->{
-                popup.id_logo_pulsa.setBackgroundResource(R.drawable.axis)}
+//                popup.id_logo_pulsa.setBackgroundResource(R.drawable.axis)
+                Glide.with(mContext).load(R.drawable.axis).override(200,200).into(id_logo_pulsa)
+            }
         }
 
         if (adapter.list[position].harga!!.toInt() > adapter.list[position].nominal!!.toInt()){
@@ -335,7 +348,8 @@ class PulsaFragment : Fragment(){
                         if (i.operator!!.contains("INDOSAT")){
                             result.add(i)
                             v.id_nama_operator.text = i.operator
-                            v.id_image_operator.setBackgroundResource(R.drawable.indosat)
+//                            v.id_image_operator.setBackgroundResource(R.drawable.indosat)
+                            Glide.with(mContext).load(R.drawable.indosat).override(200,200).into(v.id_image_operator)
                         }
                         masuk = true
                         adapter.filter(result)
@@ -347,7 +361,8 @@ class PulsaFragment : Fragment(){
                         if (i.operator!!.contains("TELKOMSEL")){
                             result.add(i)
                             v.id_nama_operator.text = i.operator
-                            v.id_image_operator.setBackgroundResource(R.drawable.telkomsel)
+//                            v.id_image_operator.setBackgroundResource(R.drawable.telkomsel)
+                            Glide.with(mContext).load(R.drawable.telkomsel).override(200,200).into(v.id_image_operator)
                         }
                         masuk = true
                         adapter.filter(result)
@@ -359,7 +374,8 @@ class PulsaFragment : Fragment(){
                         if (i.operator!!.contains("XL")){
                             result.add(i)
                             v.id_nama_operator.text = i.operator
-                            v.id_image_operator.setBackgroundResource(R.drawable.xl)
+//                            v.id_image_operator.setBackgroundResource(R.drawable.xl)
+                            Glide.with(mContext).load(R.drawable.xl).override(200,200).into(v.id_image_operator)
                         }
                         masuk = true
                         adapter.filter(result)
@@ -371,7 +387,8 @@ class PulsaFragment : Fragment(){
                         if (i.operator!!.contains("TRI")){
                             result.add(i)
                             v.id_nama_operator.text = i.operator
-                            v.id_image_operator.setBackgroundResource(R.drawable.three)
+//                            v.id_image_operator.setBackgroundResource(R.drawable.three)
+                            Glide.with(mContext).load(R.drawable.three).override(200,200).into(v.id_image_operator)
                         }
                         masuk = true
                         adapter.filter(result)
@@ -383,7 +400,8 @@ class PulsaFragment : Fragment(){
                         if (i.operator!!.contains("SMARTFREN")){
                             result.add(i)
                             v.id_nama_operator.text = i.operator
-                            v.id_image_operator.setBackgroundResource(R.drawable.smartfren)
+//                            v.id_image_operator.setBackgroundResource(R.drawable.smartfren)
+                            Glide.with(mContext).load(R.drawable.smartfren).override(200,200).into(v.id_image_operator)
                         }
                         masuk = true
                         adapter.filter(result)
@@ -395,7 +413,8 @@ class PulsaFragment : Fragment(){
                         if (i.operator!!.contains("AXIS")){
                             result.add(i)
                             v.id_nama_operator.text = i.operator
-                            v.id_image_operator.setBackgroundResource(R.drawable.axis)
+//                            v.id_image_operator.setBackgroundResource(R.drawable.axis)
+                            Glide.with(mContext).load(R.drawable.axis).override(200,200).into(v.id_image_operator)
                         }
                         masuk = true
                         adapter.filter(result)
@@ -418,7 +437,8 @@ class PulsaFragment : Fragment(){
                             if (i.operator!!.contains("TELKOMSEL")){
                                 result.add(i)
                                 v.id_nama_operator.text = i.operator
-                                v.id_image_operator.setBackgroundResource(R.drawable.telkomsel)
+//                                v.id_image_operator.setBackgroundResource(R.drawable.telkomsel)
+                                Glide.with(mContext).load(R.drawable.telkomsel).override(200,200).into(v.id_image_operator)
                             }
                             adapter.filter(result)
                             v.id_rv.adapter = adapter

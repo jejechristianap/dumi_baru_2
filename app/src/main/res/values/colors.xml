@@ -26,6 +26,7 @@
     <color name="softYellow">#FFF2D8</color>
     <color name="orange">#FF6969</color>
     <color name="softRed">#FFDAD8</color>
+    <color name="background">#dddddd</color>
 
     <!--Switch Color-->
     <color name="disable_forground_grey">#42221f1f</color>

@@ -97,7 +97,7 @@
             android:background="@drawable/white_corner" />
 
         <ImageView
-            android:id="@+id/id_image_operator"
+            android:id="@+id/ivPln"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_15sdp"
@@ -105,7 +105,6 @@
             android:layout_alignTop="@id/view"
             android:layout_alignBottom="@id/view"
             android:padding="@dimen/_2sdp"
-            android:src="@drawable/pln_logo"
             android:background="@drawable/layout_rounded_home"/>
 
         <TextView
@@ -113,8 +112,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:layout_toEndOf="@id/id_image_operator"
-            android:layout_alignTop="@id/id_image_operator"
+            android:layout_toEndOf="@id/ivPln"
+            android:layout_alignTop="@id/ivPln"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:text="@string/no_meter"

@@ -39,8 +39,8 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/_15sdp"
         android:layout_below="@id/appbar"
         android:layout_alignParentBottom="true"
@@ -121,7 +121,8 @@
                 android:id="@+id/seekbar_kilat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:progress="0"
                 android:progressDrawable="@drawable/seekbar_drawable_progress"
                 android:thumb="@drawable/ic_amount_dot" />
@@ -153,8 +154,9 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:gravity="center"
                 android:layout_marginTop="@dimen/_20sdp"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_15sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -165,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/tenor"
-                    android:textSize="@dimen/_14ssp"
+                    android:textSize="@dimen/_13ssp"
                     android:textColor="@android:color/black"
                     />
                 <NumberPicker
@@ -193,12 +195,11 @@
                     android:id="@+id/tujuan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/npBulan"
-                    android:layout_marginStart="@dimen/_25sdp"
                     android:fontFamily="sans-serif-medium"
+                    android:layout_alignParentEnd="true"
                     android:text="@string/tujuan_pinjaman"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_14ssp" />
+                    android:textSize="@dimen/_13ssp" />
                 <NumberPicker
                     android:visibility="visible"
                     android:id="@+id/npTujuan"

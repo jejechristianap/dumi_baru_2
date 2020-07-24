@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.R
 import com.minjem.dumi.ecommerce.Helper.PASSWORD
@@ -78,6 +79,7 @@ class PlnFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = layoutInflater.inflate(R.layout.ecommerce_pln,container,false)
         mContext = this.context!!
+        Glide.with(mContext).load(R.drawable.pln_logo).override(200,200).into(mView.ivPln)
 
         mView.toolbarPln.title = ""
         mView.toolbarPln.setNavigationIcon(R.drawable.ic_back_white)

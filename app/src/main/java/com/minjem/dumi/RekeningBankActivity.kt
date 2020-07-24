@@ -24,7 +24,7 @@ class RekeningBankActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rekening_bank)
-        getCityFromJsonData()
+        getBankData()
         setAutocompleteSpinnerList(bankList)
 
         backRekeningBank.setOnClickListener { finish() }
@@ -103,7 +103,7 @@ class RekeningBankActivity : AppCompatActivity() {
         }
     }
 
-    private fun getCityFromJsonData() {
+    private fun getBankData() {
         try {
 //            val jsonObject = JSONObject(getJsonDataFromLocalFile())
             val array = JSONArray(getJsonDataFromLocalFile())
@@ -118,7 +118,7 @@ class RekeningBankActivity : AppCompatActivity() {
 
     private fun setAutocompleteSpinnerList(arrayList: ArrayList<String>) {
 
-        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, arrayList)
+        val adapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, arrayList)
         actvNamaBank.setAdapter(adapter)
         hideKeyBoard()
     }
@@ -128,4 +128,5 @@ class RekeningBankActivity : AppCompatActivity() {
             Objects.requireNonNull(imm).toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
         }
     }
+
 }

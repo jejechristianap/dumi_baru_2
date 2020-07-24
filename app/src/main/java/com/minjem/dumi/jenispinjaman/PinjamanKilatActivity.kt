@@ -13,7 +13,6 @@ import android.view.View
 import android.widget.*
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.appcompat.app.AppCompatActivity
-import com.minjem.dumi.MainActivity
 import com.minjem.dumi.PersetujuanActivity
 import com.minjem.dumi.R
 import com.minjem.dumi.api.GetBungaInterface
@@ -176,8 +175,27 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 Log.d("jumlah", "onTextChanged: $s, $start, $before, $count, ${jumlah.cleanIntValue}")
-
-                when (jumlah.cleanIntValue) {
+                var n = s.toString()
+                n = n.replace(".", "")
+                val o = 0
+                val i: Int? = if(n != "") n.toInt() else 0
+                Log.d("jumlah", "onTextChanged: $n")
+                when (i) {
+                    /*0 -> {
+                        seekBar.progress = 0
+                    }
+                    in 1..999999 -> {
+                        seekBar.progress = 1
+                    }
+                    in 1000000..1999999 -> {
+                        seekBar.progress = 2
+                    }
+                    in 2000000..2999999 -> {
+                        seekBar.progress = 3
+                    }
+                    in 3000000..3999999 -> {
+                        seekBar.progress = 4
+                    }*/
                     !in 1000000..15000000 -> {
                         tvMinKil.visibility = View.VISIBLE
                         tvMaksKil.visibility = View.GONE
@@ -186,7 +204,11 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
                         tvMinKil.visibility = View.GONE
                     }
                 }
+                val y = seekBar.progress * pinjamanUang
+                Log.d("jumlah 2", "onTextChanged: $y")
+//                jumlah.setText(y.toString())
                 numberPicker(np)
+
             }
         })
 
@@ -198,7 +220,7 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
                 Log.d("Progress Value", "onProgressChanged: $pinjamanUang")
                 Log.d("Progress Value", "onProgressChanged: $progressValue")
                 x = progressValue * pinjamanUang
-                Log.d("Progress Value", "onProgressChanged: $progressValue")
+                Log.d("Progress Value", "onProgressChanged: $x")
 
                 jumlah.setText(x.toString())
 
