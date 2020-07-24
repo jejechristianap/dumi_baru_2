@@ -78,9 +78,10 @@
                     android:layout_height="wrap_content"
                     android:autofillHints=""
                     android:textSize="@dimen/_12ssp"
+                    android:maxLength="18"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:backgroundTint="@color/darkBlue"
-                    android:hint="@string/nip"
+                    android:hint="@string/nip_instansi"
                     android:inputType="number" />
 
                 <EditText

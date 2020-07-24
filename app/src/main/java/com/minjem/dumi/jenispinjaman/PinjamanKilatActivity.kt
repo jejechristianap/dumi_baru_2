@@ -253,7 +253,7 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
                     return@setOnClickListener
                 }
             }
-
+            Log.d("Jumlah pinjaman", "initTouch: ${jumlah.cleanDoubleValue}")
             pinjaman
         }
     }
@@ -417,7 +417,7 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         val dueDate = c.time
         val tglAkhirPinjam = dateFormat.format(dueDate)
         editor.putString("nip", nip)
-        editor.putFloat("pinjaman", pinjamanUang.toFloat())
+        editor.putFloat("pinjaman", jumlah.cleanIntValue.toFloat())
         editor.putInt("lamaPinjaman", plafond)
         editor.putFloat("bunga", bunga)
         editor.putFloat("admin", admin)
@@ -429,12 +429,12 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         editor.putFloat("asuransi", asuransi)
         editor.putString("activity", "kilat")
         editor.apply()
-        Log.d("AJUKAN", "ajukanPinjaman: $tujuan")
-        digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
-                ,SharedPrefManager.getInstance(this).user.email)
-        /*val i = Intent(this@PinjamanKilatActivity, PersetujuanActivity::class.java)
+        Log.d("AJUKAN", "ajukanPinjaman: ${jumlah.cleanIntValue.toFloat()}")
+        /*digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
+                ,SharedPrefManager.getInstance(this).user.email)*/
+        val i = Intent(this@PinjamanKilatActivity, PersetujuanActivity::class.java)
         i.putExtra("activity", "kilat")
-        startActivity(i)*/
+        startActivity(i)
     }
 
     companion object {

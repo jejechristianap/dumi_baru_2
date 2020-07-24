@@ -20,6 +20,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -44,6 +45,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;*/
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.minjem.dumi.akun.KebijakanPrivasiActivity;
 import com.minjem.dumi.api.CekNipBknInterface;
 import com.minjem.dumi.api.CekUserExist;
@@ -55,7 +57,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -74,26 +75,19 @@ import retrofit2.Response;
 public class DaftarActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 101;
-
     private EditText masukanNipEt;
-    private Button nipCheckBox;
+    private Button bCheckNip;
     private CheckBox showPassCheckBox;
-
     /*Hide Soft Keyboard*/
     private InputMethodManager imm;
-
     private LinearLayout dataNipLl;
     private LinearLayout cekNipLl;
     private LinearLayout emailPassLl;
-
     private Button lanjutButton, testButton;
     private EditText emailEt, passEt, ulangiPassEt;
-
     private String[] instansi = {"Pilih Mitra", "ASN AKTIF", "BUMN", "ASN PENSIUN"};
-
     private TextView syaratTv;
     private Switch setujuSwitch;
-
     private Spinner instansiSpinner;
     private ArrayAdapter<CharSequence> instansiAdapter;
 
@@ -165,7 +159,7 @@ public class DaftarActivity extends AppCompatActivity {
         imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
 
         masukanNipEt = findViewById(R.id.daftar_nip_et);
-        nipCheckBox = findViewById(R.id.cek_nip);
+        bCheckNip = findViewById(R.id.cek_nip);
         showPassCheckBox = findViewById(R.id.show_password);
 
         lanjutButton = findViewById(R.id.lanjut_button);
@@ -175,7 +169,7 @@ public class DaftarActivity extends AppCompatActivity {
 
 
 
-        nipCheckBox.setOnClickListener(v -> {
+        bCheckNip.setOnClickListener(v -> {
             cekUser();
         });
 
@@ -353,6 +347,20 @@ public class DaftarActivity extends AppCompatActivity {
             masukanNipEt.requestFocus();
             return;
         }
+        if(nip.length() < 15){
+            masukanNipEt.setError("Nomor NIP Salah!");
+            masukanNipEt.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(tanggalLahir.getText().toString())){
+            Toast.makeText(this, "Tanggal lahir masih kosong!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(namaPnsEt.getText().toString())){
+            namaPnsEt.setError("Harap isi nama anda!");
+            namaPnsEt.requestFocus();
+            return;
+        }
 
         pDialog.setMessage("Mohon Menunggu...");
         pDialog.show();
@@ -368,8 +376,6 @@ public class DaftarActivity extends AppCompatActivity {
                     if (!status) {
                         pDialog.dismiss();
                         Toast.makeText(DaftarActivity.this, obj.getString("message"), Toast.LENGTH_SHORT).show();
-
-
                     } else {
                         cekNip();
                     }
@@ -386,8 +392,25 @@ public class DaftarActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void dialogGagal(String ins){
+        View dialogView = getLayoutInflater().inflate(R.layout.bottom_sheet_layout, null);
+        BottomSheetDialog dialog = new BottomSheetDialog(this);
+        RelativeLayout rlGagalInstansi = dialogView.findViewById(R.id.rlDialogInstansi);
+        TextView tvGagalInstansi = dialogView.findViewById(R.id.tvInstansi);
+        Button bTutup = dialogView.findViewById(R.id.bTutup);
+        dialog.setContentView(dialogView);
+        dialog.show();
+        rlGagalInstansi.setVisibility(View.VISIBLE);
+        tvGagalInstansi.setText(ins);
+        bTutup.setOnClickListener(v -> {
+            rlGagalInstansi.setVisibility(View.GONE);
+            dialog.dismiss();
+        });
+    }
+
     /*Cek keterangan Nip*/
-    public void cekNip() {
+    private void cekNip() {
         String nip = masukanNipEt.getText().toString();
         String tglLahir = tanggalLahir.getText().toString();
         String namaPns = namaPnsEt.getText().toString();
@@ -396,14 +419,17 @@ public class DaftarActivity extends AppCompatActivity {
             masukanNipEt.requestFocus();
             return;
         }
-        if (TextUtils.isEmpty(tglLahir)){
-            tanggalLahir.setError("Kolom tidak boleh kosong...");
-            tanggalLahir.requestFocus();
-        }
         if (TextUtils.isEmpty(namaPns)){
             namaPnsEt.setError("Kolom tidak boleh kosong...");
             namaPnsEt.requestFocus();
+            return;
         }
+        if (TextUtils.isEmpty(tglLahir)){
+            tanggalLahir.setError("Kolom tidak boleh kosong...");
+            tanggalLahir.requestFocus();
+            return;
+        }
+
 
 
         CekNipBknInterface cek = RetrofitClient.getClient().create(CekNipBknInterface.class);
@@ -432,11 +458,12 @@ public class DaftarActivity extends AppCompatActivity {
                         editor.putString("dataBkn", data);
                         Log.d("Data", "unorNama: " + inskerNama  + "\nNama : " + namaPns + "\ntglLahir: " + tglLahir );
 
-                        Toast.makeText(DaftarActivity.this, "NIP anda ditemukan..", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DaftarActivity.this, "NIP Instansi anda ditemukan..", Toast.LENGTH_SHORT).show();
                         emailPassLl.setVisibility(View.VISIBLE);
                         emailEt.requestFocus();
                     }else{
-                        Toast.makeText(DaftarActivity.this, request.getString("data"), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(DaftarActivity.this, request.getString("data"), Toast.LENGTH_SHORT).show();
+                        dialogGagal(request.getString("data"));
                         emailPassLl.setVisibility(View.GONE);
                         masukanNipEt.setCursorVisible(true);
                         pDialog.dismiss();
@@ -452,6 +479,7 @@ public class DaftarActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(DaftarActivity.this, "Session Timeout", Toast.LENGTH_SHORT).show();
                 Log.d("Error", "onFailure: " + t.getMessage());
+                dialogGagal(t.getMessage());
                 pDialog.dismiss();
                 call.cancel();
             }

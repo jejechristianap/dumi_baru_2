@@ -87,7 +87,7 @@
     <string name="pinjaman">Pinjaman</string>
     <string name="daftar">Daftar</string>
     <string name="login">Login</string>
-    <string name="nip">NIP</string>
+    <string name="nip_instansi">NIP Instansi Anda</string>
     <string name="masukkan_nip">Masukkan NIP</string>
     <string name="masukkan_email">Masukkan Email</string>
     <string name="masukkan_password">Masukkan Password (Min 6 Karakter)</string>

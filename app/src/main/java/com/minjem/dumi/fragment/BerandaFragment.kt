@@ -123,14 +123,14 @@ class BerandaFragment : Fragment() {
         dialog.show()
         when(s){
             "tkb" -> {
-                dView.rlDialogInstansi.visibility = View.VISIBLE
+                dView.rlDialogTkb.visibility = View.VISIBLE
                 dView.rlGagal.visibility = View.GONE
                 dView.rlBerhasil.visibility = View.GONE
             }
             "connection" -> {
                 dView.rlGagal.visibility = View.VISIBLE
                 dView.rlBerhasil.visibility = View.GONE
-                dView.rlDialogInstansi.visibility = View.GONE
+                dView.rlDialogTkb.visibility = View.GONE
             }
         }
 
