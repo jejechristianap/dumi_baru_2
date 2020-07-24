@@ -3,18 +3,25 @@ package com.minjem.dumi
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.GridView
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.minjem.dumi.adapter.MenuBaseAdapter
 import com.minjem.dumi.ecommerce.ECommerceActivity
 import com.minjem.dumi.ecommerce.transaction.RiwayatView
 import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity
 import com.minjem.dumi.jenispinjaman.PinjamanRegularActivity
 import kotlinx.android.synthetic.main.activity_lihat_semua.*
 import kotlinx.android.synthetic.main.activity_pinjmana_reguler.*
+import kotlinx.android.synthetic.main.fragment_beranda.view.*
 
 class SemuaEcommerceActivity : AppCompatActivity() {
     private var back: ImageView? = null
+    private val menuTopup = MenuBaseAdapter("topup")
+    private val menuBulanan = MenuBaseAdapter("bulanan")
+    private val menuTravel = MenuBaseAdapter("travel")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lihat_semua)
@@ -23,15 +30,19 @@ class SemuaEcommerceActivity : AppCompatActivity() {
         toolbarSemua.setNavigationOnClickListener {
             finish()
         }
+        gvTopUp.adapter = menuTopup
+        gvTopUp.numColumns = 5
+        gvTopUp.stretchMode = GridView.STRETCH_COLUMN_WIDTH
 
-        /*back_semua_kategori.setOnClickListener {
-            finish()
-        }
-*/
-        initTouch()
+        gvBulanan.adapter = menuBulanan
+        gvBulanan.numColumns = 5
+
+        gvTravel.adapter = menuTravel
+        gvTravel.numColumns = 5
+
     }
 
-    private fun initTouch(){
+    /*private fun initTouch(){
         llIsiPulsa.setOnClickListener { goTo("pulsa") }
         llToken.setOnClickListener { goTo("pln") }
         llListrik.setOnClickListener { goTo("pln") }
@@ -57,7 +68,7 @@ class SemuaEcommerceActivity : AppCompatActivity() {
         llPelni.setOnClickListener { goTo("na") }
         llFerry.setOnClickListener { goTo("na") }
         llBus.setOnClickListener { goTo("na") }
-    }
+    }*/
     private fun goTo(item: String) {
         val intent: Intent
         when (item) {

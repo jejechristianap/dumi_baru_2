@@ -8,12 +8,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.minjem.dumi.SemuaEcommerceActivity
 import com.minjem.dumi.R
+import com.minjem.dumi.adapter.MenuBaseAdapter
 import com.minjem.dumi.ecommerce.ECommerceActivity
 import com.minjem.dumi.ecommerce.Helper.PASSWORD
 import com.minjem.dumi.ecommerce.Helper.USERNAME
@@ -49,6 +51,7 @@ class BerandaFragment : Fragment() {
     lateinit var mContext : Context
     private val go: String? = null
     lateinit var dView : View
+    private val menuAdapter = MenuBaseAdapter("beranda")
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -60,6 +63,11 @@ class BerandaFragment : Fragment() {
             mView.srlBeranda.isRefreshing = true
             refreshList()
         }
+
+        mView.gvMenuUtama.adapter = menuAdapter
+        mView.gvMenuUtama.numColumns = 4
+        mView.gvMenuUtama.stretchMode = GridView.STRETCH_COLUMN_WIDTH
+
         initOnTouch()
         saldo()
         val network = InternetConnection(mContext)
