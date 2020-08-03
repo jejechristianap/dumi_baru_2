@@ -11,4 +11,17 @@ class GDigisign {
     val document: String? = null
     val json_document: String? = null
     val created_at: String? = null
+    val result_activation: String? = null
+    val notif_activation: String? = null
+    val result_document: String? = null
+    val notif_document: String? = null
+    val info: String? = null
+    val link: String?  = null
+    val result_tandatangan: String? = null
+    val result_sign: String? = null
+    val status_tandatangan: String? = null
+    val document_id: String? = null
+
+
+
 }

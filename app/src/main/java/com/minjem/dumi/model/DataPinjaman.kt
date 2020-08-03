@@ -19,5 +19,15 @@ data class DataPinjaman(
         var tgl_mulai_pinjaman: String? = null,
         var tgl_akhir_pinjaman: String? = null,
         var tgl_lunas: String? = null,
-        var nopk: String? = null
+        var nopk: String? = null,
+        var registrasi: String? = null,
+        var notif_registrasi: String? = null,
+        var info_registrasi: String? = null,
+        var activation: String? = null,
+        var notif_activation: String? = null,
+        var pdf_send: String? = null,
+        var result_document: String? = null,
+        var sign_document: String? = null,
+        var status_document: String? = null
+
 )

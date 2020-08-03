@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.core.content.ContextCompat.startActivity
 import com.bumptech.glide.Glide
+import com.minjem.dumi.MainActivity
 import com.minjem.dumi.R
 import com.minjem.dumi.SemuaEcommerceActivity
 import com.minjem.dumi.ecommerce.ECommerceActivity
@@ -47,7 +48,7 @@ class MenuBaseAdapter(context: String): BaseAdapter() {
 
         v.ivMenu.setOnClickListener {
 
-            val i = Intent(context, ECommerceActivity::class.java)
+            var i = Intent(context, ECommerceActivity::class.java)
             i.putExtra("fragment", list[position].first)
             when (list[position].first){
                 "PULSA" -> {
@@ -56,7 +57,12 @@ class MenuBaseAdapter(context: String): BaseAdapter() {
                 "PLN" -> {
                     activity.startActivity(i)
                 }
-                "PDAM" ->{
+                "PDAM" -> {
+                    activity.startActivity(i)
+                }
+                "GOPAY" -> {
+                    i = Intent(context, MainActivity::class.java)
+                    i.putExtra("fragment", "pinjaman")
                     activity.startActivity(i)
                 }
                 "SEMUA" -> {

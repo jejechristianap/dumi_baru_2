@@ -36,7 +36,14 @@ class ECommerceActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().replace(R.id.fl_content, FullImageFragment()).commit()
                 }
                 "digisign" -> {
-                    if (intent.getStringExtra("activity") ==  "kilat"){
+                    val bundle = Bundle()
+                    bundle.putInt("idPinjaman", intent.getIntExtra("idPinjaman", 0))
+                    val fragobj = DigiSign()
+                    fragobj.arguments = bundle;
+                    supportFragmentManager.beginTransaction().replace(R.id.fl_content, fragobj).commit()
+
+
+                    /*if (intent.getStringExtra("activity") ==  "kilat"){
                         Log.d("Ecommerce digisign", "onCreate: ${intent.getStringExtra("activity")}")
                         val bundle = Bundle()
                         bundle.putString("activity", "kilat")
@@ -49,8 +56,8 @@ class ECommerceActivity : AppCompatActivity() {
                         bundle.putString("activity", "regular")
                         val fragobj = DigiSign()
                         fragobj.arguments = bundle;
-                        supportFragmentManager.beginTransaction().replace(R.id.fl_content, fragobj).commit()
-                    }
+                        supportFragmentManager.beginTransaction().replace(R.id.fl_content, fragobj).commit()*/
+//                    }
                 }
 
             }

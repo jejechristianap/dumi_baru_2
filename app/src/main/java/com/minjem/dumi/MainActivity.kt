@@ -3,6 +3,7 @@ package com.minjem.dumi
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
@@ -18,12 +19,18 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 open class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+    private var pinjaman = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         loadFragment(BerandaFragment())
 //        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottom_navigation.setOnNavigationItemSelectedListener(this)
+        Log.d("INTENT PINJAMAN", "onCreate: ${intent.getStringExtra("fragment")}")
+        if (intent.getStringExtra("fragment") == "pinjaman"){
+            loadFragment(PinjamanFragment())
+            pinjaman = true
+        }
 //
 
         /* For swipe layout
@@ -77,30 +84,8 @@ open class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         var fragment: Fragment? = null
         var index = 0
 
-        /* Swipe layout
-        when (menuItem.itemId) {
-            R.id.bottom_navigation_beranda -> {
-                index = 0
-                vpMain.currentItem = index
-            }
-            R.id.bottom_navigation_inbox -> {
-                index = 1
-                vpMain.currentItem = index
-            }
-            R.id.bottom_navigation_mitra -> {
-                index = 2
-                vpMain.currentItem = index
-            }
-            R.id.bottom_navigation_bantuan -> {
-                index = 3
-                vpMain.currentItem = index
-            }
-            R.id.bottom_navigation_akun -> {
-                index = 4
-                vpMain.currentItem = index
-            }
-        }
-*/
+        Log.d("MAIN", "onNavigationItemSelected: $menuItem")
+
         when (menuItem.itemId) {
             R.id.bottom_navigation_beranda -> fragment = BerandaFragment()
             R.id.bottom_navigation_inbox -> fragment = InboxFragment()
@@ -109,6 +94,31 @@ open class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
             R.id.bottom_navigation_akun -> fragment = AkunFragment()
         }
 //        vpMain.currentItem = index
+
+        /* Swipe layout
+               when (menuItem.itemId) {
+                   R.id.bottom_navigation_beranda -> {
+                       index = 0
+                       vpMain.currentItem = index
+                   }
+                   R.id.bottom_navigation_inbox -> {
+                       index = 1
+                       vpMain.currentItem = index
+                   }
+                   R.id.bottom_navigation_mitra -> {
+                       index = 2
+                       vpMain.currentItem = index
+                   }
+                   R.id.bottom_navigation_bantuan -> {
+                       index = 3
+                       vpMain.currentItem = index
+                   }
+                   R.id.bottom_navigation_akun -> {
+                       index = 4
+                       vpMain.currentItem = index
+                   }
+               }
+       */
         return loadFragment(fragment)
     }
 
@@ -124,12 +134,12 @@ open class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
     private fun exitByBackKey() {
         AlertDialog.Builder(this)
                 .setMessage("Apa anda yakin ingin keluar?")
-                .setPositiveButton("Ya") { arg0: DialogInterface?, arg1: Int ->
+                .setPositiveButton("Ya") { _: DialogInterface?, _: Int ->
                     SharedPrefManager.getInstance(applicationContext).logout()
                     finish()
                     startActivity(Intent(this@MainActivity, HalamanDepanActivity::class.java))
                 }
-                .setNegativeButton("Tidak") { arg0: DialogInterface?, arg1: Int -> }
+                .setNegativeButton("Tidak") { _: DialogInterface?, _: Int -> }
                 .show()
     }
 }

@@ -296,6 +296,7 @@ class PersetujuanActivity : AppCompatActivity() {
         // Send Notification
         val mBuilder = NotificationCompat.Builder(applicationContext, "notify_001")
         val ii = Intent(applicationContext, MainActivity::class.java)
+        ii.putExtra("pushnotif", "pinjaman")
         val pendingIntent = PendingIntent.getActivity(this@PersetujuanActivity, 0, ii, 0)
         val bigText = NotificationCompat.BigTextStyle()
         /*bigText.bigText("""Pengajuan anda berhasil kami terima. Proses dapat berlangsung 1-3 hari kerja setelah data anda terverifikasi, mohon menunggu.

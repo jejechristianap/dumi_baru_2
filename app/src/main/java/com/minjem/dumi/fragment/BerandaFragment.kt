@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.minjem.dumi.MainActivity
 import com.minjem.dumi.SemuaEcommerceActivity
 import com.minjem.dumi.R
 import com.minjem.dumi.adapter.MenuBaseAdapter
@@ -93,7 +94,7 @@ class BerandaFragment : Fragment() {
         mView.textPulsa.setOnClickListener { goTo("pulsa") }
         mView.icPln.setOnClickListener { goTo("pln") }
         mView.textPln.setOnClickListener { goTo("pln") }
-        mView.icGopay.setOnClickListener { goTo("na") }
+        mView.icGopay.setOnClickListener { goTo("pinjaman") }
         mView.textGopay.setOnClickListener { goTo("na") }
         mView.icOvo.setOnClickListener { goTo("na") }
         mView.textOvo.setOnClickListener { goTo("na") }
@@ -164,6 +165,10 @@ class BerandaFragment : Fragment() {
                 intent = Intent(activity, ECommerceActivity::class.java)
                 intent.putExtra("fragment", "flight")
                 startActivity(intent)
+            }
+            "pinjaman" -> {
+                intent = Intent(activity, MainActivity::class.java)
+                intent.putExtra("fragment", "pinjaman")
             }
             "semua" -> startActivity(Intent(activity, SemuaEcommerceActivity::class.java))
             else -> Toast.makeText(activity, "Tunggu update kami selanjutanya...", Toast.LENGTH_SHORT).show()

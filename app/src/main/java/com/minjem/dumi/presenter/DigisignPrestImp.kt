@@ -14,10 +14,10 @@ class DigisignPrestImp(view : DigisignView) : DigisignPrest {
         digiModel = view
     }
 
-    override fun data(nik: String, email: String) {
+    override fun data(nik: String, email: String, idPinjaman: Int) {
         val api = HttpRetrofitClient
 
-        api.retrofit.cekAktivasi(nik,email).enqueue(object : Callback<RDigisign> {
+        api.retrofit.cekAktivasi(nik,email, idPinjaman).enqueue(object : Callback<RDigisign> {
             override fun onFailure(call: Call<RDigisign>, t: Throwable) {
                 digiModel!!.digiError(t.message!!)
             }
@@ -31,4 +31,23 @@ class DigisignPrestImp(view : DigisignView) : DigisignPrest {
             }
         })
     }
+
+    /*override fun sign(email: String, documentId:String){
+        val api = HttpRetrofitClient
+
+        api.retrofit.signDocumentDigisign(email, documentId).enqueue(object : Callback<RDigisign>{
+            override fun onFailure(call: Call<RDigisign>, t: Throwable) {
+                digiModel!!.digiError(t.message!!)
+            }
+
+            override fun onResponse(call: Call<RDigisign>, response: Response<RDigisign>) {
+                if (response.isSuccessful){
+                    digiModel!!.digiResponse(response.body()!!)
+                } else {
+                    digiModel!!.digiError("Koneksi terputus, Mohon Ulangi lagi.")
+                }
+            }
+
+        })
+    }*/
 }

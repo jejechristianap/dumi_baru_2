@@ -40,32 +40,23 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
+    companion object {
+        const val DATE_FORMAT_2 = "yyyy-MM-dd"
+
+        val tujuanPinjaman = arrayOf("Renovasi Rumah", "Biaya Pendidikan", "Biaya Rumah Sakit",
+                "Jalan-jalan", "Biaya Pernikahan", "Modal Usaha", "Lainnya")
+    }
     lateinit var seekBar: SeekBar
     lateinit var jumlah: CurrencyEditText
-    lateinit var back: ImageView
     private var pinjamanUang = 1000000
     lateinit var angsuranTv: TextView
     lateinit var biayaAdminTv: TextView
     lateinit var biayaAsuransiTv: TextView
     lateinit var biayaTransferTv: TextView
     lateinit var jumlahTerimaTv: TextView
-    lateinit var bulan3: Button
-    lateinit var bulan6: Button
-    lateinit var bulan12: Button
     lateinit var ajukanButton: Button
-    lateinit var tujuanSpinner: Spinner
-    lateinit var tujuanAdapter: ArrayAdapter<CharSequence>
-    private val tujuanPinjaman = arrayOf("Renovasi Rumah", "Biaya Pendidikan", "Biaya Rumah Sakit",
-            "Jalan-jalan", "Biaya Pernikahan", "Modal Usaha", "Lainnya")
-    private val PEMBAYARAN_3_BULAN = 3
-    private val PEMBAYARAN_6_BULAN = 6
-    private val PEMBAYARAN_12_BULAN = 12
     private val JUMLAH_BULAN_1_TAHUN = 12
-    private val JUMLAH_PINJAMAN_DEFAULT = 1000000
-    private val BIAYA_ADMIN = 0.01.toFloat()
-    private val BIAYA_ASURANSI = 0.01.toFloat()
     private val BIAYA_TRANSFER = 6500f
-    private val BUNGA_PERBULAN = 0.099.toFloat()
     private var bunga = 0f
     private var admin = 0f
     private var angsuran = 0f
@@ -267,6 +258,7 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         asuransi = jumlah.cleanDoubleValue.toFloat() * getAsur12
         val totalPengurangan = admin + asuransi + BIAYA_TRANSFER
         sisa = jumlah.cleanDoubleValue.toFloat() - totalPengurangan
+
         angsuranTv.text = formatRp.format(angsuran.toDouble())
         biayaAdminTv.text = formatRp.format(admin.toDouble())
         biayaAsuransiTv.text = formatRp.format(asuransi.toDouble())
@@ -274,7 +266,6 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         jumlahTerimaTv.text = formatRp.format(sisa.toDouble())
     }
 
-    //        Toast.makeText(this, "NIp: " + nip, Toast.LENGTH_SHORT).show();
     private val pinjaman: Unit
         get() {
             val nip = prefManager.nip
@@ -322,7 +313,6 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
                         e.printStackTrace()
                     }
                 }
-
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {}
             })
         }
@@ -437,9 +427,7 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         startActivity(i)
     }
 
-    companion object {
-        const val DATE_FORMAT_2 = "yyyy-MM-dd"
-    }
+
 
     override fun digiResponse(response: RDigisign) {
         Log.d("Masuk Handler SUV >>>>"," ----------------------------------------- >>>>> RESPONSE")

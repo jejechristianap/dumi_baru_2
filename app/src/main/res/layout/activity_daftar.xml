@@ -117,6 +117,14 @@
                     app:layout_constraintEnd_toStartOf="@+id/guideline"
                     app:layout_constraintStart_toStartOf="parent" />
 
+                <DatePicker
+                    android:id="@+id/dpTglLahir"
+                    android:visibility="gone"
+                    android:datePickerMode="spinner"
+                    android:calendarViewShown="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
 
                 <Button
                     android:id="@+id/cek_nip"

@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -101,6 +102,7 @@ public class DaftarActivity extends AppCompatActivity {
     private EditText namaPnsEt;
     private int countDown = 0;
     private Calendar myCalendar;
+    private DatePicker dp;
 
     ProgressDialog pDialog;
 
@@ -166,7 +168,7 @@ public class DaftarActivity extends AppCompatActivity {
         emailEt = findViewById(R.id.email_daftar_et);
         passEt = findViewById(R.id.masuk_password_et);
         ulangiPassEt = findViewById(R.id.ulangi_password_et);
-
+        dp = findViewById(R.id.dpTglLahir);
 
 
         bCheckNip.setOnClickListener(v -> {
@@ -174,13 +176,16 @@ public class DaftarActivity extends AppCompatActivity {
         });
 
         myCalendar = Calendar.getInstance();
+
         final DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
-            // TODO Auto-generated method stub
+
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, monthOfYear);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             updateLabel();
         };
+
+
 
         tanggalLahir.setOnClickListener(v -> {
             // TODO Auto-generated method stub

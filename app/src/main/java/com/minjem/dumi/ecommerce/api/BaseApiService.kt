@@ -210,6 +210,14 @@ interface BaseApiService {
     @POST("digisign/cek_aktivasi")
     fun cekAktivasi(
             @Field("nik") nik : String,
-            @Field("email") email: String
+            @Field("email") email: String,
+            @Field("idPinjaman") idPinjaman: Int
     ) : Call<RDigisign>
+
+    @FormUrlEncoded
+    @POST("digisign/sign_document")
+    fun signDocumentDigisign(
+            @Field("email") email: String,
+            @Field("document_id") document_id: String
+    ): Call<ResponseBody>
 }

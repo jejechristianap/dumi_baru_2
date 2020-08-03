@@ -183,7 +183,6 @@
                         android:id="@+id/cardRegular"
                         android:layout_width="@dimen/_250sdp"
                         android:layout_height="@dimen/_140sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_centerVertical="true"
                         android:layout_toEndOf="@id/cardKilat"
                         android:background="@drawable/card2"
@@ -230,6 +229,64 @@
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/_20sdp"
                             android:layout_alignStart="@id/icRegular"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/button_lanjut_design"
+                            android:text="@string/ajukan"
+                            android:textAllCaps="false"
+                            android:textColor="@color/purple" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/cardUltimate"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="@dimen/_140sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/cardRegular"
+                        android:background="@drawable/card2"
+                        android:padding="@dimen/_18sdp">
+
+                        <ImageView
+                            android:id="@+id/icUltimate"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:src="@drawable/ic_regular" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/icUltimate"
+                            android:layout_alignBottom="@id/icUltimate"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_toEndOf="@id/icUltimate"
+                            android:gravity="center"
+                            android:text="@string/dumi_ultimate"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_15ssp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/ultimateDesk"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@+id/bUltimate"
+                            android:layout_below="@id/icUltimate"
+                            android:layout_alignStart="@id/icUltimate"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_7sdp"
+                            android:text="@string/dumi_regular_deskripsi"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11ssp" />
+
+                        <Button
+                            android:id="@+id/bUltimate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_alignStart="@id/icUltimate"
                             android:layout_alignParentBottom="true"
                             android:background="@drawable/button_lanjut_design"
                             android:text="@string/ajukan"

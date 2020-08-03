@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
-    tools:context=".jenispinjaman.PinjamanKilatActivity">
+    tools:context=".jenispinjaman.PinjamanUltimateActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_alignParentTop="true"
         android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -28,7 +27,7 @@
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dumi_kilat"
+                android:text="@string/dumi_ultimate"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15ssp"
                 android:gravity = "center"
@@ -42,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/appbar"
+        android:padding="@dimen/_15sdp"
         android:layout_alignParentBottom="true"
         android:scrollbars="none">
 
@@ -50,7 +50,6 @@
             android:layout_height="wrap_content"
             android:background="@drawable/layout_rounded"
             android:orientation="vertical"
-            android:layout_margin="@dimen/_15sdp"
             android:padding="@dimen/_15sdp">
 
             <TextView
@@ -77,10 +76,10 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_20ssp"
                     android:gravity="end|center"
-                    android:layout_width="@dimen/_80sdp"
+                    android:layout_width="@dimen/_70sdp"
                     android:layout_height="wrap_content"/>
                 <me.abhinay.input.CurrencyEditText
-                    android:id="@+id/etCurrency"
+                    android:id="@+id/etCurrencyUltimate"
                     android:layout_toEndOf="@id/tvRp"
                     android:layout_alignParentEnd="true"
                     android:layout_width="wrap_content"
@@ -99,7 +98,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/minimum_pinjaman_rp_1_000_000"
+                    android:text="@string/pinjaman_ultimate_rp51_000_000_rp100_000_000"
                     android:textSize="@dimen/_8ssp"
                     android:textColor="#B71C1C" />
 
@@ -115,10 +114,8 @@
                     android:textColor="#B71C1C" />
             </RelativeLayout>
 
-
-
             <SeekBar
-                android:id="@+id/seekbar_kilat"
+                android:id="@+id/sbUltimate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -126,32 +123,6 @@
                 android:progress="0"
                 android:progressDrawable="@drawable/seekbar_drawable_progress"
                 android:thumb="@drawable/ic_amount_dot" />
-
-
-            <RelativeLayout
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/spinner_custom"
-                android:orientation="horizontal">
-                <Spinner
-                    android:id="@+id/tujuan_pinjaman_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:spinnerMode="dropdown" />
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_arrow_down24dp" />
-            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_marginTop="@dimen/_20sdp"
@@ -173,7 +144,7 @@
                 <NumberPicker
                     android:layout_below="@id/tenor"
                     android:visibility="visible"
-                    android:id="@+id/npBulan"
+                    android:id="@+id/npBulanUltimate"
                     android:theme="@style/DefaultNumberPickerTheme"
                     android:layout_alignStart="@id/tenor"
                     android:layout_alignEnd="@id/tenor"
@@ -182,9 +153,9 @@
                     android:layout_height="wrap_content"/>
 
                 <ImageView
-                    android:layout_alignStart="@id/npBulan"
-                    android:layout_alignTop="@id/npBulan"
-                    android:layout_alignBottom="@id/npBulan"
+                    android:layout_alignStart="@id/npBulanUltimate"
+                    android:layout_alignTop="@id/npBulanUltimate"
+                    android:layout_alignBottom="@id/npBulanUltimate"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/seekbar_drawable_thumb"
@@ -202,7 +173,7 @@
                     android:textSize="@dimen/_13ssp" />
                 <NumberPicker
                     android:visibility="visible"
-                    android:id="@+id/npTujuan"
+                    android:id="@+id/npTujuanUltimate"
                     android:theme="@style/NumberPickerTheme"
                     android:layout_alignStart="@id/tujuan"
                     android:layout_alignEnd="@id/tujuan"
@@ -281,7 +252,7 @@
                     android:textSize="@dimen/_12ssp"/>
 
                 <TextView
-                    android:id="@+id/angsuran_perbulan_kilat"
+                    android:id="@+id/tvAngsuranPerbulanUltimate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -303,7 +274,7 @@
                     android:textSize="@dimen/_12ssp"/>
 
                 <TextView
-                    android:id="@+id/biaya_administrasi_kilat"
+                    android:id="@+id/tvAdminUltimate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/admin_asn"
@@ -326,7 +297,7 @@
                     android:textSize="@dimen/_12ssp"/>
 
                 <TextView
-                    android:id="@+id/biaya_asuransi_kilat"
+                    android:id="@+id/tvAsuransiUltimate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/asuransi_asn"
@@ -349,7 +320,7 @@
                     android:textSize="@dimen/_12ssp"/>
 
                 <TextView
-                    android:id="@+id/biaya_transfer_antar_bank_kilat"
+                    android:id="@+id/tvTrfUltimate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/trf"
@@ -373,7 +344,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/jumlah_yang_diterima_kilat"
+                    android:id="@+id/tvJumlahTerimaUltimate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -388,12 +359,11 @@
 
 
             <Button
-                android:id="@+id/lanjut_button_kilat"
+                android:id="@+id/bLanjutUltimate"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_15sdp"
                 android:background="@drawable/button_rounded_custom"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/lanjut"
@@ -403,4 +373,5 @@
 
         </LinearLayout>
     </ScrollView>
+
 </RelativeLayout>

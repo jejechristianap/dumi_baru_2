@@ -1,32 +1,43 @@
 package com.minjem.dumi.fragment
 
 import android.annotation.SuppressLint
+import android.app.ActionBar
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebViewClient
 import android.widget.RelativeLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
-import com.minjem.dumi.PerjanjianKreditView
 import com.minjem.dumi.R
 import com.minjem.dumi.adapter.HistoryPinjamanAdapter
 import com.minjem.dumi.api.StatusPinjamanInterface
+import com.minjem.dumi.ecommerce.ECommerceActivity
+import com.minjem.dumi.ecommerce.Helper.mProgress
+import com.minjem.dumi.ecommerce.Helper.mToast
+import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.minjem.dumi.model.DataPinjaman
-import com.minjem.dumi.model.RecyclerViewAdapter
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.model.User
+import com.minjem.dumi.presenter.DigisignPrestImp
+import com.minjem.dumi.response.RDigisign
 import com.minjem.dumi.retrofit.RetrofitClient
 import com.minjem.dumi.util.CustomProgressDialog
-import kotlinx.android.synthetic.main.ecommerce_flight_cityairport.*
+import com.minjem.dumi.view.DigisignView
+import kotlinx.android.synthetic.main.d_webview.*
 import kotlinx.android.synthetic.main.fragment_pinjaman.*
 import kotlinx.android.synthetic.main.fragment_pinjaman.view.*
 import kotlinx.android.synthetic.main.history_pinjaman.*
@@ -43,7 +54,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class PinjamanFragment : Fragment() {
+class PinjamanFragment : Fragment(), DigisignView {
     private var statusPinjamanTv: TextView? = null
     private var pinjamanTv: TextView? = null
     private var tenorPinjamanTv: TextView? = null
@@ -58,10 +69,6 @@ class PinjamanFragment : Fragment() {
     private var prefManager: User? = null
     private var localID: Locale? = null
     private var formatRp: NumberFormat? = null
-    private var tglPengajuan = ""
-    private var tujuan = ""
-    private var bungaRupiah = 0.0
-    private var angsuran = 0.0
     private lateinit var mContext: Context
     private var svTagihan: ScrollView? = null
     private var rlGagal: RelativeLayout? = null
@@ -73,13 +80,24 @@ class PinjamanFragment : Fragment() {
     private val dataPinjaman = DataPinjaman()
     lateinit var mDialog: Dialog
     lateinit var pinjamanAdapter: HistoryPinjamanAdapter
+    lateinit var digisignPrestImp : DigisignPrestImp
+    private lateinit var dWeb : Dialog
+    lateinit var dProgress : Dialog
+    private var idPinjaman = 0
+    private var documentId = ""
+    private var regis = false
+    private var activasion = false
+    private var pdfSend = ""
+    private var resultDocument = false
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_pinjaman, container, false)
         mContext = this.activity!!
         mDialog = Dialog(mContext, R.style.DialogTheme)
-
-
+        digisignPrestImp = DigisignPrestImp(this)
+        dWeb = Dialog(mContext)
+        dProgress = Dialog(mContext)
         initView()
         initOnTouch()
         pinjaman
@@ -98,15 +116,42 @@ class PinjamanFragment : Fragment() {
     }
 
     private fun initOnTouch(){
-       v.pkButton.setOnClickListener{
-            val i = Intent(activity, PerjanjianKreditView::class.java)
+       v.bRegisAktifasiDigisign.setOnClickListener{
+           AlertDialog.Builder(mContext)
+                   .setMessage("Kami bekerja sama dengan digisign untuk melakukan tandatangan digital, " +
+                           "apakah anda setuju? Jika anda setuju maka data anda akan kami kirim ke pihak digisign.")
+                   .setPositiveButton("Saya setuju") { _: DialogInterface?, _: Int ->
+                       mProgress(dProgress)
+                       digisignPrestImp.data(SharedPrefManager.getInstance(mContext).user.nip
+                               ,SharedPrefManager.getInstance(mContext).user.email, idPinjaman)
+                   }
+                   .setNegativeButton("Tidak") { _: DialogInterface?, _: Int -> }
+                   .show()
+
+
+
+            /*val i = Intent(activity, PerjanjianKreditView::class.java)
             i.putExtra("tanggal", dataPinjaman.tglPengajuan)
             i.putExtra("pinjaman", tvPinjaman.text.toString())
             i.putExtra("bunga", dataPinjaman.bungaRupiah)
             i.putExtra("angsuran", dataPinjaman.angsuranPerbulan)
             i.putExtra("tujuan", dataPinjaman.tujuanPinjaman)
             i.putExtra("tenor", tenor_pinjaman_bulan.text.toString())
-            startActivity(i)
+            startActivity(i)*/
+        }
+
+        v.bTtd.setOnClickListener {
+            if (!regis){
+                mToast(mContext, "Silahkan melakukan registrasi Digisign terlebih dahulu.")
+
+            } else {
+                if (!activasion){
+                    mToast(mContext, "Silahkan melakukan aktivasi Digisign terlebih dahulu.")
+                } else {
+                    getSignDocument(SharedPrefManager.getInstance(mContext).user.email, documentId)
+                }
+            }
+
         }
 
         v.srlTagihan.setOnRefreshListener {
@@ -172,7 +217,7 @@ class PinjamanFragment : Fragment() {
 
     private val pinjaman: Unit
         get() {
-            progressDialog.show(mContext!!, "Loading...")
+            progressDialog.show(mContext, "Loading...")
             val nip = prefManager!!.nip
             val status = RetrofitClient.getClient().create(StatusPinjamanInterface::class.java)
             val call = status.getPinjaman(nip)
@@ -195,6 +240,8 @@ class PinjamanFragment : Fragment() {
                                     svTagihan!!.visibility = View.VISIBLE
                                     rlGagal!!.visibility = View.GONE
 
+
+
                                     var max = -1
                                     for (i in 0 until jsonArray.length()) {
                                         val jsonObject = jsonArray.getJSONObject(i)
@@ -214,35 +261,80 @@ class PinjamanFragment : Fragment() {
                                             dataPinjaman.asuransiRupiah = jsonObject.getInt("asuransiRupiah")
                                             dataPinjaman.transferRupiah = jsonObject.getInt("transferRupiah")
                                             dataPinjaman.diterimaRupiah = jsonObject.getInt("diterimaRupiah")
+                                            dataPinjaman.registrasi = jsonObject.getString("registrasi")
+                                            dataPinjaman.notif_registrasi = jsonObject.getString("notif_registrasi")
+                                            dataPinjaman.info_registrasi = jsonObject.getString("info_registrasi")
+                                            dataPinjaman.activation = jsonObject.getString("activation")
+                                            dataPinjaman.notif_activation = jsonObject.getString("notif_activation")
+                                            dataPinjaman.pdf_send = jsonObject.getString("pdf_send")
+                                            dataPinjaman.result_document = jsonObject.getString("result_document")
+                                            dataPinjaman.sign_document = jsonObject.getString("sign_document")
+                                            dataPinjaman.status_document = jsonObject.getString("status_document")
+                                            idPinjaman = jsonObject.getInt("id")
+                                            documentId = jsonObject.getString("document_id")
+                                            pdfSend = jsonObject.getString("pdf_send")
 
                                             when (jsonObject.getInt("status")) {
                                                 1 -> {
                                                     statusPinjamanTv!!.text = "Pengajuan"
-                                                    v.pkButton.visibility = View.GONE
+                                                    v.bPkD.visibility = View.GONE
                                                 }
                                                 2 -> {
                                                     statusPinjamanTv!!.text = "Disetujui"
-                                                    v.pkButton.visibility = View.VISIBLE
+                                                    v.bPkD.visibility = View.VISIBLE
+                                                    if (jsonObject.getString("registrasi") == "00"){
+                                                        /*mToast(mContext, jsonObject.getString("notif_registrasi"))
+                                                        webView(jsonObject.getString("info_registrasi"), true)*/
+                                                        Log.d(TAG, "onResponse Registrasi: ${jsonObject.getString("registrasi")}")
+                                                        Log.d(TAG, "onResponse Activation: ${jsonObject.getString("activation")}")
+                                                        Log.d(TAG, "onResponse result_document: ${jsonObject.getString("result_document")}")
+                                                        regis = true
+                                                        v.bRegisAktifasiDigisign.setBackgroundResource(R.drawable.button_custom_design_darkblue)
+                                                        v.bTtd.setBackgroundResource(R.drawable.button_custom_design_grey)
+                                                    } else {
+                                                        regis = false
+                                                        v.bRegisAktifasiDigisign.setBackgroundResource(R.drawable.button_custom_design_darkblue)
+                                                        v.bTtd.setBackgroundResource(R.drawable.button_custom_design_grey)
+                                                    }
+
+                                                    if (jsonObject.getString("activation") == "00"){
+                                                        activasion = true
+
+                                                    } else {
+                                                        activasion = false
+                                                        v.bRegisAktifasiDigisign.setBackgroundResource(R.drawable.button_custom_design_darkblue)
+                                                        v.bTtd.setBackgroundResource(R.drawable.button_custom_design_grey)
+                                                    }
+
+                                                    if (jsonObject.getString("result_document") == "00"){
+                                                        resultDocument = true
+                                                        v.bRegisAktifasiDigisign.setBackgroundResource(R.drawable.button_custom_design_grey)
+                                                        v.bTtd.setBackgroundColor(R.drawable.button_custom_design_darkblue)
+                                                    } else {
+                                                        resultDocument = false
+                                                        v.bRegisAktifasiDigisign.setBackgroundResource(R.drawable.button_custom_design_darkblue)
+                                                        v.bTtd.setBackgroundResource(R.drawable.button_custom_design_grey)
+                                                    }
                                                 }
                                                 3 -> {
                                                     statusPinjamanTv!!.text = "Ditolak"
-                                                    v.pkButton.visibility = View.GONE
+                                                    v.bPkD.visibility = View.GONE
                                                 }
                                                 4 -> {
                                                     statusPinjamanTv!!.text = "Telah ditransfer"
-                                                    v.pkButton.visibility = View.GONE
+                                                    v.bPkD.visibility = View.GONE
                                                 }
                                                 5 -> {
                                                     statusPinjamanTv!!.text = "Kredit berjalan"
-                                                    v.pkButton.visibility = View.GONE
+                                                    v.bPkD.visibility = View.GONE
                                                 }
                                                 6 -> {
                                                     statusPinjamanTv!!.text = "Kredit Lunas"
-                                                    v.pkButton.visibility = View.GONE
+                                                    v.bPkD.visibility = View.GONE
                                                 }
                                                 else -> {
                                                     statusPinjamanTv!!.text = "!!Dalam Proses Pengembangan!!"
-                                                    v.pkButton.visibility = View.GONE
+                                                    v.bPkD.visibility = View.GONE
                                                 }
                                             }
                                             dataPinjaman.status = jsonObject.getInt("status").toString()
@@ -259,7 +351,6 @@ class PinjamanFragment : Fragment() {
 
                                     list.add(dataPinjaman)
                                     Log.d("Data Pinjaman", "onResponse: $list")
-
 
                                     pinjamanTv!!.text = formatRp!!.format(dataPinjaman.pinjaman)
                                     tenorPinjamanTv!!.text = "${dataPinjaman.lamaPinjaman} Bulan"
@@ -395,8 +486,141 @@ class PinjamanFragment : Fragment() {
                 }
             })
         }
-    private fun filter(new: MutableList<DataPinjaman>){
+    /*private fun filter(new: MutableList<DataPinjaman>){
         list = new.sortedBy { it.id } as MutableList<DataPinjaman>
+    }*/
 
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun webView(link: String?, boolean : Boolean) {
+        dWeb.setContentView(R.layout.d_webview)
+        dWeb.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dWeb.window!!.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT)
+        dWeb.window!!.attributes.windowAnimations = R.style.Animation_Design_BottomSheetDialog
+        dWeb.show()
+        dWeb.toolbarWvDigisign.title = ""
+        dWeb.toolbarWvDigisign.setNavigationIcon(R.drawable.ic_back_white)
+        dWeb.toolbarWvDigisign.setNavigationOnClickListener {
+            dWeb.dismiss()
+        }
+
+        if (boolean){
+            val url = link
+            Log.d("Activation WEB VIEW",url)
+            try {
+                val web = dWeb.id_webview_digisign
+                web.webViewClient = WebViewClient()
+                web.settings.loadWithOverviewMode = true
+                web.settings.useWideViewPort = true
+                web.settings.builtInZoomControls = true
+                web.settings.javaScriptEnabled = true
+                web.loadUrl(url)
+            } catch (e : IOException){
+                e.printStackTrace()
+            } catch (e : JSONException){
+                e.printStackTrace()
+            }
+        } else {
+            val url = link
+            Log.d("REGISTRATION WEB VIEW","$url")
+            try {
+                val web = dWeb.id_webview_digisign
+                web.webViewClient = WebViewClient()
+                web.settings.loadWithOverviewMode = true
+                web.settings.useWideViewPort = true
+                web.settings.builtInZoomControls = true
+                web.settings.javaScriptEnabled = true
+                web.loadUrl(url)
+            }catch (e: IOException){
+                e.printStackTrace()
+            } catch (e : JSONException){
+                e.printStackTrace()
+            }
+        }
+    }
+
+    override fun digiResponse(response: RDigisign) {
+        if (response.data!!.isNotEmpty()){
+            if (response.data[0].result == "00"){
+                if (response.data[0].result_activation == "00"){
+                    if (response.data[0].result_tandatangan == "00"){
+                        dProgress.dismiss()
+                        mToast(mContext,"Status Ttd: ${response.data[0].status_tandatangan}")
+                    } else {
+                        dProgress.dismiss()
+                        Log.d(TAG, "digiResponse: $documentId")
+                        getSignDocument(response.data[0].email.toString(), documentId)
+                        /*digisignPrestImp.sign(response.data[0].email.toString()
+                                ,response.data[0].document_id.toString())*/
+                    }
+                    dProgress.dismiss()
+
+                } else {
+                    dProgress.dismiss()
+                    webView(response.data[0].info, true)
+                   /* val i = Intent(mContext, ECommerceActivity::class.java)
+                    i.putExtra("fragment", "digisign")
+                    i.putExtra("activity", "kilat")
+                    startActivity(i)*/
+                }
+                dProgress.dismiss()
+            } else {
+                dProgress.dismiss()
+                Log.d("Digisign", "Belum Teraktivasi")
+                val i = Intent(mContext, ECommerceActivity::class.java)
+                i.putExtra("fragment", "digisign")
+                i.putExtra("idPinjaman", idPinjaman)
+                startActivity(i)
+            }
+        } else {
+//            mToast(this,"Belum Teraktivasi")
+            dProgress.dismiss()
+            Log.d("Digisign", "Belum Teraktivasi")
+            val i = Intent(mContext, ECommerceActivity::class.java)
+            i.putExtra("fragment", "digisign")
+            i.putExtra("idPinjaman", idPinjaman)
+            startActivity(i)
+
+        }
+    }
+
+    override fun digiError(error: String) {
+        dProgress.dismiss()
+        Log.e("Error",error)
+    }
+
+    private fun getSignDocument(email:String, documentId:String){
+        val api = HttpRetrofitClient
+        api.retrofit.signDocumentDigisign(email, documentId).enqueue(object : Callback<ResponseBody>{
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                dProgress.dismiss()
+                Log.e("Error", "${t.message}")
+            }
+
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful){
+                    val jsonObject = JSONObject(response.body()!!.string())
+                    if (jsonObject.getBoolean("status")){
+                        dProgress.dismiss()
+                        Log.d(TAG, "onResponse: ${jsonObject.getString("message")}")
+                        val jsonData = JSONObject(jsonObject.getString("data"))
+                        if (jsonData.getString("result") == "00"){
+                            dProgress.dismiss()
+                            webView(jsonData.getString("link"), true)
+                        } else {
+                            dProgress.dismiss()
+                        }
+                    } else {
+                        dProgress.dismiss()
+                        Log.d(TAG, "onResponse: ${jsonObject.getString("message")}")
+                        mToast(mContext, jsonObject.getString("message"))
+                    }
+                } else {
+                    dProgress.dismiss()
+                    mToast(mContext, response.message())
+                    Log.d(TAG, "onResponse: ${response.message()}")
+                }
+            }
+
+        })
     }
 }

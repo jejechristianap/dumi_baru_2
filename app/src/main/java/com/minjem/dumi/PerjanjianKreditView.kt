@@ -44,8 +44,8 @@ class PerjanjianKreditView : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun initTextView(){
-        var tanggal = hariTgl.substringBefore(",")
-        var date = tanggal.replace("/", "-")
+        val tanggal = hariTgl.substringBefore(",")
+        val date = tanggal.replace("/", "-")
 
         Log.d("Hari", "onCreate: $tanggal")
         val stringNama = "2. <b>$nama</b>, Warga Negara Indonesia, beralamat di ${SharedPrefManager.getInstance(this).user.alamat}, " +
@@ -65,7 +65,7 @@ class PerjanjianKreditView : AppCompatActivity() {
         pkTotalAngsuranTv.text = "4. Total Angsuran: ${format.format(angsuran)}"
         pkTujuanTv.text = "5. Tujuan Pinjaman: ${intent.getStringExtra("tujuan")}"
         pkJangkaWaktuTv.text = "6. Jangka Waktu: ${intent.getStringExtra("tenor")}"
-        namaPenerimaTv.text = Html.fromHtml("<b>$nama</b>")
+//        namaPenerimaTv.text = Html.fromHtml("<b>$nama</b>")
 
 
     }
