@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbarKilat"
+                android:id="@+id/toolbarUltimate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
@@ -263,7 +263,7 @@
                     android:textSize="@dimen/_12ssp" />
 
                 <TextView
-                    android:id="@+id/admin_asn"
+                    android:id="@+id/admin_asn_ultimate"
                     android:layout_below="@id/angsuran"
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -277,18 +277,18 @@
                     android:id="@+id/tvAdminUltimate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/admin_asn"
+                    android:layout_alignTop="@id/admin_asn_ultimate"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/admin_asn"
+                    android:layout_toEndOf="@id/admin_asn_ultimate"
                     android:gravity="end"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/_12ssp" />
 
                 <TextView
-                    android:id="@+id/asuransi_asn"
+                    android:id="@+id/asuransi_asn_ultimate"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_below="@id/admin_asn"
+                    android:layout_below="@id/admin_asn_ultimate"
                     android:layout_width="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_height="wrap_content"
@@ -300,10 +300,10 @@
                     android:id="@+id/tvAsuransiUltimate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/asuransi_asn"
+                    android:layout_alignTop="@id/asuransi_asn_ultimate"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/asuransi_asn"
+                    android:layout_toEndOf="@id/asuransi_asn_ultimate"
                     android:gravity="end"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/_12ssp" />
@@ -311,7 +311,7 @@
                 <TextView
                     android:id="@+id/trf"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_below="@id/asuransi_asn"
+                    android:layout_below="@id/asuransi_asn_ultimate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"

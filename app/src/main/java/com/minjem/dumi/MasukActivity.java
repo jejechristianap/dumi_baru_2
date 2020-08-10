@@ -225,13 +225,13 @@ public class MasukActivity extends AppCompatActivity {
     private void loginUser() {
         String nip = nipEt.getText().toString();
         String password = passEt.getText().toString();
-        pDialog.show();
+
 
         if (TextUtils.isEmpty(nip)) {
             nipEt.setError("Mohon masukkan NIP anda");
             nipEt.requestFocus();
             return;
-        } else if (nip.length() < 12) {
+        } else if (nip.length() < 10) {
             nipEt.setError("NIP SALAH");
             nipEt.requestFocus();
             return;
@@ -245,6 +245,8 @@ public class MasukActivity extends AppCompatActivity {
             passEt.setError(null);
         }
 
+
+        pDialog.show();
         LoginInterface cek = RetrofitClient.getClient().create(LoginInterface.class);
         Call<ResponseBody> call = cek.getUserLogin(nip, password);
         call.enqueue(new Callback<ResponseBody>() {

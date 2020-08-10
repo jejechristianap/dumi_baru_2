@@ -43,10 +43,10 @@ class AkunFragment : Fragment() {
         mContext = this.activity!!
         v.tvNama.text = SharedPrefManager.getInstance(mContext).user.namaLengkap
 
-        Glide.with(this).load(R.drawable.ic_profil_user).override(200, 200).into(v.ivAkun)
-        Glide.with(this).load(R.drawable.ic_profil_reset_pass).override(200, 200).into(v.ivUbahSandi)
-        Glide.with(this).load(R.drawable.ic_profil_privacy_policy).override(200, 200).into(v.ivKebijakanPrivasi)
-        Glide.with(this).load(R.drawable.ic_profil_disclaimer).override(200, 200).into(v.ivDisclaimer)
+        /*Glide.with(this).load(R.drawable.ic_profil_user).into(v.ivAkun)
+        Glide.with(this).load(R.drawable.ic_profil_reset_pass).into(v.ivUbahSandi)
+        Glide.with(this).load(R.drawable.ic_profil_privacy_policy).into(v.ivKebijakanPrivasi)
+        Glide.with(this).load(R.drawable.ic_profil_disclaimer).into(v.ivDisclaimer)*/
 
         photoIv = v.findViewById(R.id.photo_profile)
         v.photo_profile.setOnClickListener{
@@ -90,7 +90,8 @@ class AkunFragment : Fragment() {
         val reqOption = RequestOptions().signature(ObjectKey(System.currentTimeMillis()))
         Glide.with(mContext)
                 .load(apiPhotoPath)
-                .error(R.drawable.layout_round_corner_beranda)
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.ic_profil)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .transform(CircleCrop(), RoundedCorners(16))

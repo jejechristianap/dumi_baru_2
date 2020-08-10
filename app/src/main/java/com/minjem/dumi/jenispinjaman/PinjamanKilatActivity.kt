@@ -43,8 +43,12 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
     companion object {
         const val DATE_FORMAT_2 = "yyyy-MM-dd"
 
-        val tujuanPinjaman = arrayOf("Renovasi Rumah", "Biaya Pendidikan", "Biaya Rumah Sakit",
+        val TUJUAN_PINJAMAN = arrayOf("Renovasi Rumah", "Biaya Pendidikan", "Biaya Rumah Sakit",
                 "Jalan-jalan", "Biaya Pernikahan", "Modal Usaha", "Lainnya")
+
+        val JUMLAH_BULAN_1_TAHUN = 12
+
+        val BIAYA_TRANSFER = 6500f
     }
     lateinit var seekBar: SeekBar
     lateinit var jumlah: CurrencyEditText
@@ -55,8 +59,6 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
     lateinit var biayaTransferTv: TextView
     lateinit var jumlahTerimaTv: TextView
     lateinit var ajukanButton: Button
-    private val JUMLAH_BULAN_1_TAHUN = 12
-    private val BIAYA_TRANSFER = 6500f
     private var bunga = 0f
     private var admin = 0f
     private var angsuran = 0f
@@ -95,7 +97,7 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
 
     private fun initView(){
 
-        digisignPrestImp = DigisignPrestImp(this)
+//        digisignPrestImp = DigisignPrestImp(this)
 
         prefManager = SharedPrefManager.getInstance(applicationContext).user
         pref = applicationContext.getSharedPreferences("ajukanPinjaman", 0) // 0 - for private mode
@@ -122,8 +124,8 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         npBulan.maxValue = 60
 
         npTujuan.minValue = 0
-        npTujuan.maxValue = tujuanPinjaman.size - 1
-        npTujuan.displayedValues = tujuanPinjaman
+        npTujuan.maxValue = TUJUAN_PINJAMAN.size - 1
+        npTujuan.displayedValues = TUJUAN_PINJAMAN
 
 
         adminTv = findViewById(R.id.admin_asn)
@@ -154,8 +156,8 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
         }
 
         npTujuan.setOnValueChangedListener { picker, oldVal, newVal ->
-            Log.d("NumberPicker Tujuan", "initTouch: $picker, $oldVal, ${tujuanPinjaman[newVal]}")
-            tujuan = tujuanPinjaman[newVal]
+            Log.d("NumberPicker Tujuan", "initTouch: $picker, $oldVal, ${TUJUAN_PINJAMAN[newVal]}")
+            tujuan = TUJUAN_PINJAMAN[newVal]
         }
 
 

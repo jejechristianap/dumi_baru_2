@@ -9,6 +9,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,8 +20,11 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.R
 import com.minjem.dumi.adapter.HistoryPinjamanAdapter
@@ -28,6 +32,7 @@ import com.minjem.dumi.api.StatusPinjamanInterface
 import com.minjem.dumi.ecommerce.ECommerceActivity
 import com.minjem.dumi.ecommerce.Helper.mProgress
 import com.minjem.dumi.ecommerce.Helper.mToast
+import com.minjem.dumi.ecommerce.Helper.sBar
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.minjem.dumi.model.DataPinjaman
 import com.minjem.dumi.model.SharedPrefManager
@@ -38,6 +43,7 @@ import com.minjem.dumi.retrofit.RetrofitClient
 import com.minjem.dumi.util.CustomProgressDialog
 import com.minjem.dumi.view.DigisignView
 import kotlinx.android.synthetic.main.d_webview.*
+import kotlinx.android.synthetic.main.fragment_inbox.view.*
 import kotlinx.android.synthetic.main.fragment_pinjaman.*
 import kotlinx.android.synthetic.main.fragment_pinjaman.view.*
 import kotlinx.android.synthetic.main.history_pinjaman.*
@@ -53,6 +59,7 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.log
 
 class PinjamanFragment : Fragment(), DigisignView {
     private var statusPinjamanTv: TextView? = null
@@ -76,8 +83,10 @@ class PinjamanFragment : Fragment(), DigisignView {
     private val progressDialog = CustomProgressDialog()
     var list : MutableList<DataPinjaman> = ArrayList()
     var listPinjaman : MutableList<DataPinjaman> = ArrayList()
+    var listResult : MutableList<DataPinjaman> = ArrayList()
     private val TAG = PinjamanFragment::class.qualifiedName
     private val dataPinjaman = DataPinjaman()
+    private val sign = DataPinjaman()
     lateinit var mDialog: Dialog
     lateinit var pinjamanAdapter: HistoryPinjamanAdapter
     lateinit var digisignPrestImp : DigisignPrestImp
@@ -86,14 +95,26 @@ class PinjamanFragment : Fragment(), DigisignView {
     private var idPinjaman = 0
     private var documentId = ""
     private var regis = false
-    private var activasion = false
+    private var activation = false
     private var pdfSend = ""
     private var resultDocument = false
+    private var touch = false
+    var i = 0
+    val handler = Handler()
+    private var runnableCode: Runnable? = null
+    private var runnableActivation: Runnable? = null
+    private var ra = false
+    private var notif = ""
+    private var resultSign = ""
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_pinjaman, container, false)
         mContext = this.activity!!
+//        (activity as AppCompatActivity).setSupportActionBar(v.toolbarPinjaman)
+//        v.ctlPinjaman.title = "Pinjaman"
+        loadBg()
+
         mDialog = Dialog(mContext, R.style.DialogTheme)
         digisignPrestImp = DigisignPrestImp(this)
         dWeb = Dialog(mContext)
@@ -103,6 +124,10 @@ class PinjamanFragment : Fragment(), DigisignView {
         pinjaman
 
         return v
+    }
+
+    private fun loadBg(){
+//        Glide.with(mContext).load(R.drawable.bg_beranda).into(v.ivBgPinjaman)
     }
 
     private fun refreshPinjaman(){
@@ -115,19 +140,37 @@ class PinjamanFragment : Fragment(), DigisignView {
         pinjaman
     }
 
+
     private fun initOnTouch(){
        v.bRegisAktifasiDigisign.setOnClickListener{
-           AlertDialog.Builder(mContext)
-                   .setMessage("Kami bekerja sama dengan digisign untuk melakukan tandatangan digital, " +
-                           "apakah anda setuju? Jika anda setuju maka data anda akan kami kirim ke pihak digisign.")
-                   .setPositiveButton("Saya setuju") { _: DialogInterface?, _: Int ->
-                       mProgress(dProgress)
-                       digisignPrestImp.data(SharedPrefManager.getInstance(mContext).user.nip
-                               ,SharedPrefManager.getInstance(mContext).user.email, idPinjaman)
-                   }
-                   .setNegativeButton("Tidak") { _: DialogInterface?, _: Int -> }
-                   .show()
+           touch = true
+           if (activation){
+               sBar(v, "Selamat akun Digisign anda sudah teraktivasi.")
+               return@setOnClickListener
+           }
 
+           if (!regis){
+               AlertDialog.Builder(mContext)
+                       .setMessage("Kami bekerja sama dengan digisign untuk melakukan tandatangan digital, " +
+                               "apakah anda setuju? Jika anda setuju maka data anda akan kami kirim ke pihak digisign.")
+                       .setPositiveButton("Saya setuju") { _: DialogInterface?, _: Int ->
+                           mProgress(dProgress)
+                           digisignPrestImp.data(SharedPrefManager.getInstance(mContext).user.nip
+                                   ,SharedPrefManager.getInstance(mContext).user.email, idPinjaman)
+                       }
+                       .setNegativeButton("Tidak") { _: DialogInterface?, _: Int -> }
+                       .show()
+           } else {
+               mProgress(dProgress)
+               /*digisignPrestImp.data(SharedPrefManager.getInstance(mContext).user.nip
+                       ,SharedPrefManager.getInstance(mContext).user.email, idPinjaman)*/
+               val i = Intent(mContext, ECommerceActivity::class.java)
+               i.putExtra("fragment", "digisign")
+               i.putExtra("idPinjaman", idPinjaman)
+               i.putExtra("regis", "00")
+               startActivity(i)
+               dProgress.dismiss()
+           }
 
 
             /*val i = Intent(activity, PerjanjianKreditView::class.java)
@@ -142,13 +185,31 @@ class PinjamanFragment : Fragment(), DigisignView {
 
         v.bTtd.setOnClickListener {
             if (!regis){
-                mToast(mContext, "Silahkan melakukan registrasi Digisign terlebih dahulu.")
-
+                Snackbar.make(v, "Silahkan melakukan registrasi Digisign terlebih dahulu.", Snackbar.LENGTH_LONG).show()
             } else {
-                if (!activasion){
-                    mToast(mContext, "Silahkan melakukan aktivasi Digisign terlebih dahulu.")
+                if (!activation){
+                    Log.d(TAG, "initOnTouch: Aktivation digisign $activation")
+                    Snackbar.make(v, "Silahkan melakukan aktivasi Digisign terlebih dahulu.", Snackbar.LENGTH_LONG).show()
                 } else {
-                    getSignDocument(SharedPrefManager.getInstance(mContext).user.email, documentId)
+                    if (pdfSend == "OK"){
+                        if (resultDocument){
+                            mToast(mContext, "Selamat dokumen anda telah ditanda tangani.")
+                        } else {
+                            mProgress(dProgress)
+                            runnableCode = object : Runnable {
+                                override fun run() {
+                                    Log.d(TAG, "Handler >>>>>>>>>>>>>>>>>>>>>>>>>> START : Activation($activation)")
+                                    signPinjaman
+                                    handler.postDelayed(this, 3000)
+                                }
+                            }
+                            handler.post(runnableCode!!)
+                            Log.d(TAG, "PdfSend: $pdfSend Result: $resultDocument")
+                            getSignDocument(SharedPrefManager.getInstance(mContext).user.email, documentId)
+                        }
+                    } else{
+                        Snackbar.make(v, "Mohon menunggu, dokumen anda sedang kami proses.", Snackbar.LENGTH_LONG).show()
+                    }
                 }
             }
 
@@ -240,8 +301,6 @@ class PinjamanFragment : Fragment(), DigisignView {
                                     svTagihan!!.visibility = View.VISIBLE
                                     rlGagal!!.visibility = View.GONE
 
-
-
                                     var max = -1
                                     for (i in 0 until jsonArray.length()) {
                                         val jsonObject = jsonArray.getJSONObject(i)
@@ -285,36 +344,36 @@ class PinjamanFragment : Fragment(), DigisignView {
                                                     if (jsonObject.getString("registrasi") == "00"){
                                                         /*mToast(mContext, jsonObject.getString("notif_registrasi"))
                                                         webView(jsonObject.getString("info_registrasi"), true)*/
-                                                        Log.d(TAG, "onResponse Registrasi: ${jsonObject.getString("registrasi")}")
-                                                        Log.d(TAG, "onResponse Activation: ${jsonObject.getString("activation")}")
-                                                        Log.d(TAG, "onResponse result_document: ${jsonObject.getString("result_document")}")
+
                                                         regis = true
-                                                        v.bRegisAktifasiDigisign.setBackgroundResource(R.drawable.button_custom_design_darkblue)
-                                                        v.bTtd.setBackgroundResource(R.drawable.button_custom_design_grey)
+                                                        if (jsonObject.getString("activation") == "00"){
+                                                            activation = true
+
+                                                            if (jsonObject.getString("result_document") == "00"){
+                                                                resultDocument = true
+                                                                v.bRegisAktifasiDigisign.setBackgroundResource(R.drawable.button_custom_design_grey)
+                                                                v.bTtd.setBackgroundResource(R.drawable.button_custom_design_grey)
+
+                                                            } else {
+                                                                v.bRegisAktifasiDigisign.setBackgroundResource(R.drawable.button_custom_design_grey)
+                                                                v.bTtd.setBackgroundResource(R.drawable.button_custom_design_darkblue)
+                                                            }
+
+                                                        } else {
+                                                            activation = false
+                                                            v.bRegisAktifasiDigisign.setBackgroundResource(R.drawable.button_custom_design_darkblue)
+                                                            v.bTtd.setBackgroundResource(R.drawable.button_custom_design_grey)
+                                                        }
+
                                                     } else {
                                                         regis = false
                                                         v.bRegisAktifasiDigisign.setBackgroundResource(R.drawable.button_custom_design_darkblue)
                                                         v.bTtd.setBackgroundResource(R.drawable.button_custom_design_grey)
                                                     }
-
-                                                    if (jsonObject.getString("activation") == "00"){
-                                                        activasion = true
-
-                                                    } else {
-                                                        activasion = false
-                                                        v.bRegisAktifasiDigisign.setBackgroundResource(R.drawable.button_custom_design_darkblue)
-                                                        v.bTtd.setBackgroundResource(R.drawable.button_custom_design_grey)
-                                                    }
-
-                                                    if (jsonObject.getString("result_document") == "00"){
-                                                        resultDocument = true
-                                                        v.bRegisAktifasiDigisign.setBackgroundResource(R.drawable.button_custom_design_grey)
-                                                        v.bTtd.setBackgroundColor(R.drawable.button_custom_design_darkblue)
-                                                    } else {
-                                                        resultDocument = false
-                                                        v.bRegisAktifasiDigisign.setBackgroundResource(R.drawable.button_custom_design_darkblue)
-                                                        v.bTtd.setBackgroundResource(R.drawable.button_custom_design_grey)
-                                                    }
+                                                    Log.d(TAG, "onResponse Registrasi: ${jsonObject.getString("registrasi")}")
+                                                    Log.d(TAG, "onResponse Activation: ${jsonObject.getString("activation")}")
+                                                    Log.d(TAG, "onResponse result_document: ${jsonObject.getString("result_document")}")
+                                                    Log.d(TAG, "onResponse Result: $resultDocument")
                                                 }
                                                 3 -> {
                                                     statusPinjamanTv!!.text = "Ditolak"
@@ -486,6 +545,83 @@ class PinjamanFragment : Fragment(), DigisignView {
                 }
             })
         }
+
+    private val signPinjaman: Unit
+        get() {
+            val nip = prefManager!!.nip
+            val status = RetrofitClient.getClient().create(StatusPinjamanInterface::class.java)
+            val call = status.getPinjaman(nip)
+            call.enqueue(object : Callback<ResponseBody> {
+                @SuppressLint("SetTextI18n")
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    if (response.isSuccessful) {
+                        try {
+                            val obj = JSONObject(response.body()!!.string())
+                            val cek = obj.getBoolean("status")
+                            if (cek) {
+                                val data = obj.getString("data")
+                                val jsonArray = JSONArray(data)
+                                if (jsonArray.length() == 0) {
+                                    mToast(mContext, obj.getString("message"))
+                                } else {
+                                    var max = -1
+                                    var idResult = 0
+                                    var resultSign = ""
+                                    for (i in 0 until jsonArray.length()) {
+                                        val jsonObject = jsonArray.getJSONObject(i)
+                                        if (jsonObject.getInt("id") > max){
+                                            max = jsonObject.getInt("id")
+                                            Log.d(TAG, "onResponse: max id $max")
+                                            sign.id = jsonObject.getInt("id")
+                                            sign.registrasi = jsonObject.getString("registrasi")
+                                            sign.notif_registrasi = jsonObject.getString("notif_registrasi")
+                                            sign.info_registrasi = jsonObject.getString("info_registrasi")
+                                            sign.activation = jsonObject.getString("activation")
+                                            sign.notif_activation = jsonObject.getString("notif_activation")
+                                            sign.pdf_send = jsonObject.getString("pdf_send")
+                                            sign.result_document = jsonObject.getString("result_document")
+                                            sign.sign_document = jsonObject.getString("sign_document")
+                                            sign.status_document = jsonObject.getString("status_document")
+
+                                            val result = jsonObject.getString("result_document") == "00"
+                                            Log.d(TAG, "onResponse: result = $result >>>>> id ${jsonObject.getString("id")}")
+                                        }
+                                    }
+                                }
+                                listResult.add(sign)
+                                Log.d("Data Pinjaman", "onResponse: $listResult")
+                                if (sign.result_document == "00"){
+                                    dWeb.dismiss()
+                                    v.bTtd.setBackgroundResource(R.drawable.button_custom_design_grey)
+                                    Log.d(TAG, "onResponse: >>>>>>>>>>>>>>>>>>>>>>> STOP HANDLER")
+                                    handler.removeCallbacks(runnableCode!!)
+                                } else {
+                                    if (sign.activation == "00"){
+                                        if(ra){
+                                            ra = false
+                                            handler.removeCallbacks(runnableActivation!!)
+                                        }
+
+                                    }
+                                }
+                            }
+                        } catch (e: JSONException) {
+                            Log.e(TAG, "onResponse: ${e.message}")
+                            e.printStackTrace()
+                        } catch (e: IOException) {
+                            Log.e(TAG, "onResponse: ${e.message}")
+                            e.printStackTrace()
+                        }
+                    } else {
+                        Toast.makeText(mContext, "Mohon maaf server tidak terjangkau", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Toast.makeText(mContext, t.message, Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
     /*private fun filter(new: MutableList<DataPinjaman>){
         list = new.sortedBy { it.id } as MutableList<DataPinjaman>
     }*/
@@ -500,12 +636,22 @@ class PinjamanFragment : Fragment(), DigisignView {
         dWeb.toolbarWvDigisign.title = ""
         dWeb.toolbarWvDigisign.setNavigationIcon(R.drawable.ic_back_white)
         dWeb.toolbarWvDigisign.setNavigationOnClickListener {
-            dWeb.dismiss()
+            if (touch){
+                pinjaman
+                dWeb.dismiss()
+                handler.removeCallbacks(runnableActivation!!)
+                touch = false
+            } else {
+                pinjaman
+                handler.removeCallbacks(runnableCode!!)
+                dWeb.dismiss()
+            }
+
         }
 
         if (boolean){
             val url = link
-            Log.d("Activation WEB VIEW",url)
+            Log.d("Activation WEB VIEW",url!!)
             try {
                 val web = dWeb.id_webview_digisign
                 web.webViewClient = WebViewClient()
@@ -556,6 +702,17 @@ class PinjamanFragment : Fragment(), DigisignView {
 
                 } else {
                     dProgress.dismiss()
+                    ra = true
+                    runnableActivation = object : Runnable {
+                        override fun run() {
+                            Log.d(TAG, "looping run: >>>>>>>>>>>>>>>>>>>>>>>>>> $activation")
+                            signPinjaman
+                            handler.postDelayed(this, 3000)
+                        }
+                    }
+                    handler.post(runnableActivation!!)
+                    /*digisignPrestImp.data(SharedPrefManager.getInstance(mContext).user.nip
+                            ,SharedPrefManager.getInstance(mContext).user.email, idPinjaman)*/
                     webView(response.data[0].info, true)
                    /* val i = Intent(mContext, ECommerceActivity::class.java)
                     i.putExtra("fragment", "digisign")
@@ -603,11 +760,19 @@ class PinjamanFragment : Fragment(), DigisignView {
                         dProgress.dismiss()
                         Log.d(TAG, "onResponse: ${jsonObject.getString("message")}")
                         val jsonData = JSONObject(jsonObject.getString("data"))
-                        if (jsonData.getString("result") == "00"){
+                        resultSign = jsonData.getString("result")
+                        if (resultSign == "00"){
                             dProgress.dismiss()
                             webView(jsonData.getString("link"), true)
                         } else {
+//                            handler.removeCallbacks(runnableCode!!)
                             dProgress.dismiss()
+                            notif = jsonData.getString("notif")
+                            sBar(v, "$notif : $resultSign")
+                            if (resultSign == "05"){
+                                handler.removeCallbacks(runnableCode!!)
+                                Log.d(TAG, "onResponse: handler >>>>>>>>>>>>>>>>>>> STOP")
+                            }
                         }
                     } else {
                         dProgress.dismiss()

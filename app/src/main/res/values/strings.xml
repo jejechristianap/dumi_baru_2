@@ -67,8 +67,8 @@
     <string name="bulan_6">6</string>
     <string name="bulan_12">12</string>
     <string name="angsuran_perbulan">Angsuran Perbulan</string>
-    <string name="biaya_administrasi">Biaya Administrasi 1%</string>
-    <string name="biaya_asuransi">Biaya Asuransi 1%</string>
+    <string name="biaya_administrasi">Biaya Administrasi</string>
+    <string name="biaya_asuransi">Biaya Asuransi</string>
     <string name="jumlah_yang_diterima">Jumlah yang diterima</string>
     <string name="pinjaman_regular">Pinjaman Regular</string>
     <string name="todo">TODO</string>
@@ -461,7 +461,6 @@
     <string name="notifikasi">Notifikasi</string>
     <string name="pesan">Pesan</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="status_pinjaman">Status Pinjaman</string>
     <string name="tanggal_pengajuan">Tanggal Pengajuan</string>
@@ -696,4 +695,6 @@
     <string name="pinjaman_ultimate_rp51_000_000_rp100_000_000">Pinjaman Ultimate Rp51.000.000 - Rp100.000.000</string>
     <string name="digisign">DigiSign</string>
     <string name="daftar_aktivasi_digisign"><![CDATA[Daftar & Aktivasi Digisign]]></string>
+    <string name="dumi_ultimate_desk">Maksimal 100 juta rupiah dengan tenor maksimal 60 bulan. Bunga flat 9.9% per tahun.</string>
+    <string name="pilih">Pilih</string>
 </resources>

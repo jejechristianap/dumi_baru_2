@@ -43,7 +43,8 @@ class MenuBaseAdapter(context: String): BaseAdapter() {
 
         val activity  = parent.context as Activity
         val context = parent.context
-        Glide.with(context).load(list[position].second).override(100,100).into(v.ivMenu)
+//        Glide.with(context).load(list[position].second).override(100,100).into(v.ivMenu)
+        v.ivMenu.setImageResource(list[position].second)
         v.tvMenu.text = list[position].first
 
         v.ivMenu.setOnClickListener {

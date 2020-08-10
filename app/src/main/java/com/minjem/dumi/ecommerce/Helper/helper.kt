@@ -7,8 +7,10 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.icu.text.NumberFormat
 import android.os.Build
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.google.android.material.snackbar.Snackbar
 import com.minjem.dumi.R
 import java.text.DecimalFormat
 import java.util.*
@@ -38,3 +40,4 @@ fun mProgress(progress : Dialog) : Dialog {
 }
 
 fun mToast(mContext : Context, text : String, duration : Int = Toast.LENGTH_SHORT) = Toast.makeText(mContext,text,duration).show()
+fun sBar(view: View, text: String, duration: Int = Snackbar.LENGTH_LONG) = Snackbar.make(view,text, duration).show()

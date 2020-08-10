@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/view"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/bg_beranda"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarLayout"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_120sdp">
-        <TextView
-            android:id="@+id/tagihan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:padding="@dimen/_20sdp"
-            android:gravity="center"
-            android:text="@string/notifikasi"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/_18ssp"
-            android:textStyle="bold" />
-    </RelativeLayout>
 
-    <!--<View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_alignBottom="@id/view"
-        android:layout_alignTop="@id/view"
-        android:background="@drawable/view_inbox_custom" />-->
-    <View
-        android:visibility="gone"
-         android:background="@drawable/view_pesan_custom"
-        android:layout_width="0dp"
-        android:layout_height="0dp"/>
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/ctl"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/colorBlue"
+            app:expandedTitleMarginStart="@dimen/_30sdp"
+            app:expandedTitleMarginEnd="@dimen/_30sdp"
+            app:expandedTitleGravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:text="@string/notifikasi"
-        android:gravity="center"
-        android:textColor="@color/colorWhite"
-        android:layout_width="@dimen/zero"
-        android:layout_height="@dimen/zero"/>
+            <ImageView
+                android:id="@+id/ivBgInbox"
+                android:scaleType="centerCrop"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-    <TextView
-        android:visibility="gone"
-        android:text="@string/pesan"
-        android:gravity="center"
-        android:textColor="@color/colorWhite"
-        android:layout_width="@dimen/zero"
-        android:layout_height="@dimen/zero"/>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarInbox"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin">
+                <ImageView
+                    android:id="@+id/ivYuhu"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_history"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_gravity="end|center"
+                    android:layout_height="@dimen/_20sdp"/>
+            </androidx.appcompat.widget.Toolbar>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srlNotif"
         android:layout_below="@id/view"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/notifikasi_rv"
             android:layout_width="match_parent"
@@ -205,7 +205,7 @@
          app:layout_constraintTop_toTopOf="@+id/glTopButton" />-->
 
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
     <!-- <androidx.constraintlayout.widget.Guideline
          android:id="@+id/guidelineStartV"
          android:orientation="vertical"

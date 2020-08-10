@@ -24,6 +24,7 @@ import com.minjem.dumi.ecommerce.api.BaseApiService
 import com.minjem.dumi.ecommerce.transaction.RiwayatView
 import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity
 import com.minjem.dumi.jenispinjaman.PinjamanRegularActivity
+import com.minjem.dumi.jenispinjaman.PinjamanUltimateActivity
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.retrofit.RetrofitClient
 import com.minjem.dumi.util.BottomSheetFragment
@@ -89,6 +90,8 @@ class BerandaFragment : Fragment() {
         mView.kilatButton.setOnClickListener { goTo("kilat") }
         mView.cardRegular.setOnClickListener { goTo("regular") }
         mView.regularButton.setOnClickListener { goTo("regular") }
+        mView.cardUltimate.setOnClickListener { goTo("ultimate") }
+        mView.bUltimate.setOnClickListener { goTo("ultimate") }
         mView.riwayatButton.setOnClickListener { goTo("riwayat") }
         mView.icPulsa.setOnClickListener { goTo("pulsa") }
         mView.textPulsa.setOnClickListener { goTo("pulsa") }
@@ -150,6 +153,7 @@ class BerandaFragment : Fragment() {
         when (item) {
             "kilat" -> startActivity(Intent(activity, PinjamanKilatActivity::class.java))
             "regular" -> startActivity(Intent(activity, PinjamanRegularActivity::class.java))
+            "ultimate" -> startActivity(Intent(activity, PinjamanUltimateActivity::class.java))
             "riwayat" -> startActivity(Intent(activity, RiwayatView::class.java))
             "pulsa" -> {
                 intent = Intent(activity, ECommerceActivity::class.java)

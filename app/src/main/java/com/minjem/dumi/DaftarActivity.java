@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -57,11 +58,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
@@ -168,15 +166,12 @@ public class DaftarActivity extends AppCompatActivity {
         emailEt = findViewById(R.id.email_daftar_et);
         passEt = findViewById(R.id.masuk_password_et);
         ulangiPassEt = findViewById(R.id.ulangi_password_et);
-        dp = findViewById(R.id.dpTglLahir);
-
 
         bCheckNip.setOnClickListener(v -> {
             cekUser();
         });
 
         myCalendar = Calendar.getInstance();
-
         final DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
 
             myCalendar.set(Calendar.YEAR, year);
@@ -187,11 +182,13 @@ public class DaftarActivity extends AppCompatActivity {
 
 
 
+
+        tanggalLahir.setInputType(InputType.TYPE_NULL);
         tanggalLahir.setOnClickListener(v -> {
-            // TODO Auto-generated method stub
-            new DatePickerDialog(DaftarActivity.this, date, myCalendar
+            /*new DatePickerDialog(DaftarActivity.this, date, myCalendar
                     .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();*/
+            datePicker();
         });
 
         showPassCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -261,6 +258,38 @@ public class DaftarActivity extends AppCompatActivity {
         tanggalLahir.setText(sdf.format(myCalendar.getTime()));
     }
 
+    @SuppressLint("SetTextI18n")
+    private void datePicker(){
+        View dialogView = getLayoutInflater().inflate(R.layout.datepicker_dialog, null);
+        BottomSheetDialog dialog = new BottomSheetDialog(this);
+        Button bTutup = dialogView.findViewById(R.id.bPilih);
+        DatePicker dp = dialogView.findViewById(R.id.dpTglLahir);
+        dialog.setCancelable(false);
+        dialog.setContentView(dialogView);
+        dialog.show();
+
+        dp.init(
+                myCalendar.get(Calendar.YEAR),
+                myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH),
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    myCalendar.set(Calendar.YEAR, year);
+                    myCalendar.set(Calendar.MONTH, monthOfYear);
+                    myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    String myFormat = "dd-MM-yyyy"; //In which you need put here
+                    Locale localID = new Locale("in", "ID");
+                    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, localID);
+//                    tanggalLahir.setText(year+"-"+monthOfYear+"-"+dayOfMonth);
+                    tanggalLahir.setText(sdf.format(myCalendar.getTime()));
+
+                });
+
+
+        bTutup.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -270,10 +299,11 @@ public class DaftarActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), DataPribadiActivity.class);
             i.putExtra("namaKtp", namaPnsEt.getText().toString());
             startActivity(i);
+//            FirebaseAuth.getInstance().createUserWithEmailAndPassword()
         }
     }
 
-    private void getToken(){
+    /*private void getToken(){
         CekNipBknInterface token = RetrofitClient.getClient().create(CekNipBknInterface.class);
         Call<ResponseBody> call = token.getToken();
         call.enqueue(new Callback<ResponseBody>() {
@@ -311,7 +341,7 @@ public class DaftarActivity extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
     /*FireBase OTP UI*/
     private void doPhoneLogin() {
@@ -397,6 +427,7 @@ public class DaftarActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void dialogGagal(String ins){
         View dialogView = getLayoutInflater().inflate(R.layout.bottom_sheet_layout, null);

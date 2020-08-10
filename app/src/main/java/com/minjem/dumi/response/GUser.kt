@@ -23,7 +23,7 @@ data class GUser (
         val gajiPokok: String? = null,
         val penghasilan: String? = null,
         val sandi: String? = null,
-        val email: String? = null,
+        var email: String? = null,
         val no_hp: String? = null,
         val photo_ktp: String? = null,
         val photo_selfi: String? = null,

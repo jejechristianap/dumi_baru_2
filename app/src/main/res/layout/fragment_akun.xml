@@ -52,6 +52,7 @@
         <ImageView
             android:id="@+id/ivAkun"
             android:layout_width="0dp"
+            android:src="@drawable/ic_profil_user"
             android:layout_gravity="center"
             android:layout_height="@dimen/_25sdp"
             android:layout_weight="0.4"/>
@@ -97,6 +98,7 @@
         <ImageView
             android:id="@+id/ivUbahSandi"
             android:layout_width="0dp"
+            android:src="@drawable/ic_profil_reset_pass"
             android:layout_gravity="center"
             android:layout_height="@dimen/_25sdp"
             android:layout_weight="0.4"/>
@@ -144,6 +146,7 @@
         <ImageView
             android:id="@+id/ivKebijakanPrivasi"
             android:layout_width="0dp"
+            android:src="@drawable/ic_profil_privacy_policy"
             android:layout_gravity="center"
             android:layout_height="@dimen/_25sdp"
             android:layout_weight="0.4"/>
@@ -191,6 +194,7 @@
         <ImageView
             android:id="@+id/ivDisclaimer"
             android:layout_width="0dp"
+            android:src="@drawable/ic_profil_disclaimer"
             android:layout_gravity="center"
             android:layout_height="@dimen/_25sdp"
             android:layout_weight="0.4"/>

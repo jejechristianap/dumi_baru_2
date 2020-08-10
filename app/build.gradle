@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.minjem.dumi"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 7
         versionName "2.3.0"

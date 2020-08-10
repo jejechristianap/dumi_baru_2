@@ -6,8 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.snackbar.Snackbar
 import com.minjem.dumi.util.CustomProgressDialog
 
 import com.minjem.dumi.R
@@ -16,6 +21,7 @@ import com.minjem.dumi.model.NotifikasiAdapter
 import com.minjem.dumi.model.NotifikasiData
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.retrofit.RetrofitClient
+import kotlinx.android.synthetic.main.fragment_inbox.*
 import kotlinx.android.synthetic.main.fragment_inbox.view.*
 import okhttp3.ResponseBody
 import org.json.JSONArray
@@ -41,6 +47,18 @@ class InboxFragment : Fragment() {
         mView = inflater.inflate(R.layout.fragment_inbox, container, false)
         mCOntext = this.context!!
 
+        /*(activity as AppCompatActivity).setSupportActionBar(mView.toolbarInbox)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)*/
+        (activity as AppCompatActivity).setSupportActionBar(mView.toolbarInbox)
+        mView.ctl.title = "Inbox"
+//        TODO implement toolbar overflow below
+        mView.ivYuhu.setOnClickListener {
+            Snackbar.make(mView, "Yuhuuuuuuu", Snackbar.LENGTH_LONG).show()
+        }
+
+
+        loadBackdrop()
+
         list.clear()
         layoutManager = LinearLayoutManager(mCOntext)
         mView.notifikasi_rv.layoutManager = layoutManager
@@ -59,6 +77,10 @@ class InboxFragment : Fragment() {
             refreshList()
         }*/
         return mView
+    }
+
+    private fun loadBackdrop(){
+        Glide.with(mCOntext).load(R.drawable.bg_beranda).into(mView.ivBgInbox)
     }
 
     private fun refreshList(){

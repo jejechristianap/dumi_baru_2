@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet_"
+    app:behavior_hideable="true"
+    android:orientation="vertical"
+    android:padding="@dimen/_20sdp"
+    app:behavior_peekHeight="@dimen/_100sdp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:text="@string/tanggal_lahir"
+        android:gravity="center"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/colorBlue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <DatePicker
+        android:id="@+id/dpTglLahir"
+        android:layout_gravity="center"
+        android:datePickerMode="spinner"
+        android:theme="@style/DatePickerTheme"
+        android:calendarViewShown="false"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/bPilih"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_gravity="end"
+        android:background="@drawable/button_outerline_blue"
+        android:text="@string/pilih"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlue" />
+</LinearLayout>
+
+

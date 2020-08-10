@@ -21,7 +21,6 @@ class DataKeluargaActivity : AppCompatActivity() {
 
         val myCalendar = Calendar.getInstance()
         val date = OnDateSetListener { _: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int ->
-            // TODO Auto-generated method stub
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, monthOfYear)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -33,7 +32,6 @@ class DataKeluargaActivity : AppCompatActivity() {
         }
 
         tglLahirPasanganTv.setOnClickListener {
-            // TODO Auto-generated method stub
             DatePickerDialog(this@DataKeluargaActivity, date, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
                     myCalendar[Calendar.DAY_OF_MONTH]).show()
         }

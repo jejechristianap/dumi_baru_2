@@ -32,10 +32,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.minjem.dumi.MainActivity
-import com.minjem.dumi.PelengkapanRegularActivity
-import com.minjem.dumi.PersetujuanActivity
 import com.minjem.dumi.R
-import com.minjem.dumi.ecommerce.ECommerceActivity
 import com.minjem.dumi.ecommerce.Helper.mProgress
 import com.minjem.dumi.ecommerce.Helper.mToast
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
@@ -49,8 +46,8 @@ import com.minjem.dumi.view.DigisignView
 import com.minjem.dumi.view.UserView
 import id.zelory.compressor.Compressor.compress
 import kotlinx.android.synthetic.main.d_webview.*
+import kotlinx.android.synthetic.main.ecommerce_pln.view.*
 import kotlinx.android.synthetic.main.fragment_digisign.view.*
-import kotlinx.android.synthetic.main.history_pinjaman.*
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -65,6 +62,7 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class DigiSign : Fragment(),UserView, DigisignView {
     lateinit var v : View
@@ -77,6 +75,8 @@ class DigiSign : Fragment(),UserView, DigisignView {
     var currentPhotoPathKtp: String = ""
     private var compressedImageDiri: File? = null
     private var compressedImageKTP: File? = null
+    val handler = Handler()
+    private var runnableCode: Runnable? = null
 
     lateinit var dWeb : Dialog
     lateinit var dProgress : Dialog
@@ -91,6 +91,8 @@ class DigiSign : Fragment(),UserView, DigisignView {
     var CEK_AKTIVASI_TOAST = false
 
     var ISI_NIK_ULANG = false
+
+    var loop = false
 
     lateinit var data : List<GUser>
 
@@ -129,8 +131,27 @@ class DigiSign : Fragment(),UserView, DigisignView {
         v = layoutInflater.inflate(R.layout.fragment_digisign,container,false)
         userPrestImp.data("196209111983121001","123456")
 
+        if (arguments!!.getString("regis") == "00"){
+            val g = GUser()
+            g.email = SharedPrefManager.getInstance(mContext).user.email
+            val email = ArrayList<GUser>()
+            email.add(g)
+            activation()
+        }
+
+        v.toolbarDigisign.title = ""
+        v.toolbarDigisign.setNavigationIcon(R.drawable.ic_back_white)
+        v.toolbarDigisign.setNavigationOnClickListener {
+            if (loop){
+                activity!!.finish()
+                handler.removeCallbacks(runnableCode!!)
+            } else {
+                activity!!.finish()
+            }
+
+        }
+
         v.id_btn_data_digisign.setOnClickListener {
-            //userPrestImp.data(v.id_nip_digisign.text.toString(),v.id_pass_digisign.text.toString())
         }
 
         v.id_btn_registrasi_digisign.setOnClickListener {
@@ -145,7 +166,7 @@ class DigiSign : Fragment(),UserView, DigisignView {
 
         v.id_date_picker_digi.setOnClickListener {
             val now = Calendar.getInstance()
-            val datepicker = DatePickerDialog(mContext, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            val datepicker = DatePickerDialog(mContext, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
 
                 now.set(Calendar.YEAR, year)
                 now.set(Calendar.MONTH, month)
@@ -162,7 +183,7 @@ class DigiSign : Fragment(),UserView, DigisignView {
         }
 
         v.id_btn_aktivasi_digisign.setOnClickListener {
-            activation(data_activation)
+            activation()
         }
 
 
@@ -359,35 +380,43 @@ class DigiSign : Fragment(),UserView, DigisignView {
             val result = jsonFile.getString("result")
             val notif = jsonFile.getString("notif")
             if (result == "00"){
-
-                val handler = Handler()
-                val runnable: Runnable = object : Runnable {
+                loop = true
+                runnableCode = object : Runnable {
                     override fun run() {
-                        Log.d("Masuk Handler SUV >>>>","----------------------------------------- >>>>> " + CEK_AKTIVASI.toString())
-                        //digisignPrestImp.data(nik,email)
-
-                        if (!CEK_AKTIVASI){
-                            digisignPrestImp.data(nik,email, arguments!!.getInt("idPinjaman"))
-                            handler.postDelayed(this, 5000)
-                        }
+                        Log.d("Digisign ", "looping run: >>>>>>>>>>>>>>>>>>>>>>>>>> Start")
+                        digisignPrestImp.data(nik,email, arguments!!.getInt("idPinjaman"))
+                        handler.postDelayed(this, 3000)
                     }
                 }
 
-                handler.postDelayed(runnable, 5000)
+
+                /*val runnable: Runnable = object : Runnable {
+                    override fun run() {
+                        Log.d("Masuk Handler SUV >>>>", "----------------------------------------- >>>>> $CEK_AKTIVASI")
+                        //digisignPrestImp.data(nik,email)
+                        digisignPrestImp.data(nik,email, arguments!!.getInt("idPinjaman"))
+                        handler.postDelayed(this, 5000)
+                        *//*if (!CEK_AKTIVASI){
+
+                        }*//*
+                    }
+                }*/
+
+                handler.post(runnableCode!!)
 
                 if (notif.contains("Berhasil")){
                     Log.d("Contains",notif)
-
-                    webView(jsonFile,false)
+                    activation()
+//                    webView(jsonFile,false)
                 } else {
                     Log.d("else Contains",notif)
                     Toast.makeText(mContext,notif,Toast.LENGTH_LONG).show()
-                    activation(data)
+                    activation()
                 }
             } else if(result == "14"){
                 Log.d("Result != 00",notif)
                 Toast.makeText(mContext,notif,Toast.LENGTH_LONG).show()
-                activation(data)
+                activation()
             } else if (result == "12"){
                 Toast.makeText(mContext,notif,Toast.LENGTH_LONG).show()
 
@@ -440,12 +469,12 @@ class DigiSign : Fragment(),UserView, DigisignView {
         }
     }
 
-    private fun activation(data: List<GUser>) {
+    private fun activation() {
         Log.d("AKTIVASI FUNC","MASUK")
 
         v.id_btn_registrasi_digisign.visibility = View.GONE
         v.id_btn_aktivasi_digisign.visibility = View.VISIBLE
-        api.retrofit.activationDigisign(data[0].email!!).enqueue(object : Callback<ResponseBody>{
+        api.retrofit.activationDigisign(SharedPrefManager.getInstance(mContext).user.email).enqueue(object : Callback<ResponseBody>{
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("Activation","ERROR")
                 Log.e("Activation",t.message!!)
@@ -464,7 +493,6 @@ class DigiSign : Fragment(),UserView, DigisignView {
                                 val note = dataResponse.getString("notif")
                                 v.id_btn_registrasi_digisign.visibility = View.GONE
                                 Toast.makeText(mContext,note,Toast.LENGTH_LONG).show()
-
                             }
                         } else {
 
@@ -709,25 +737,27 @@ class DigiSign : Fragment(),UserView, DigisignView {
         if(response.data!!.isNotEmpty()){
             if (response.data[0].result == "00"){
                 if (response.data[0].result_activation == "00"){
-                    dWeb.dismiss()
+                    loop = false
                     CEK_AKTIVASI = true
+                    handler.removeCallbacks(runnableCode!!)
+                    dWeb.dismiss()
                     CEK_AKTIVASI_TOAST = true
                     mToast(mContext,"Selamat Akun Anda Sudah Teraktivasi")
                     v.id_btn_registrasi_digisign.visibility = View.GONE
                     v.id_btn_aktivasi_digisign.visibility = View.GONE
                     activity!!.finish()
+                }
+
+                /*if (response.data[0].result_activation == "00"){
 
                 } else {
                     dProgress.dismiss()
-                    Log.d("Masuk Handler SUV >>>>","----------------------------------------- >>>>> STOP")
-                    CEK_AKTIVASI_TOAST = false
-                    CEK_AKTIVASI = false
-                    /* val i = Intent(mContext, ECommerceActivity::class.java)
-                     i.putExtra("fragment", "digisign")
-                     i.putExtra("activity", "kilat")
-                     startActivity(i)*/
-                }
+                }*/
                 dProgress.dismiss()
+            } else {
+                Log.d("Masuk Handler SUV >>>>","----------------------------------------- >>>>> STOP")
+                CEK_AKTIVASI_TOAST = false
+                CEK_AKTIVASI = false
             }
 
         } else {

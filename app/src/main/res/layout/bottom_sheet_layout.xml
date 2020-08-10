@@ -244,4 +244,19 @@
             android:layout_height="wrap_content"/>
     </RelativeLayout>
 
+    <!--<RelativeLayout
+        android:visibility="visible"
+        android:id="@+id/dpDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <DatePicker
+            android:id="@+id/dpTglLahir"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>-->
+
 </LinearLayout>

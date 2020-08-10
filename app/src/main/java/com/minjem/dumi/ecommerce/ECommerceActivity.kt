@@ -38,6 +38,7 @@ class ECommerceActivity : AppCompatActivity() {
                 "digisign" -> {
                     val bundle = Bundle()
                     bundle.putInt("idPinjaman", intent.getIntExtra("idPinjaman", 0))
+                    bundle.putString("regis", intent.getStringExtra("regis"))
                     val fragobj = DigiSign()
                     fragobj.arguments = bundle;
                     supportFragmentManager.beginTransaction().replace(R.id.fl_content, fragobj).commit()
