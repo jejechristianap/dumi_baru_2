@@ -90,7 +90,7 @@ class AkunFragment : Fragment() {
         val reqOption = RequestOptions().signature(ObjectKey(System.currentTimeMillis()))
         Glide.with(mContext)
                 .load(apiPhotoPath)
-                .placeholder(R.drawable.placeholder)
+                .placeholder(R.drawable.ic_profil)
                 .error(R.drawable.ic_profil)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)

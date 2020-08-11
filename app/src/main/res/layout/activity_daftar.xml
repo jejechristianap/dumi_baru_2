@@ -146,6 +146,7 @@
                     android:text="@string/cek_nip"
                     android:background="@drawable/button_design_login_register"
                     android:visibility="visible" />
+
             </LinearLayout>
 
 
@@ -224,6 +225,7 @@
                     android:visibility="visible" />
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -251,8 +253,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_20sdp"
-                    android:background="@drawable/button_lanjut_design"
-                    android:enabled="false"
+                    android:background="@drawable/button_design_login_register"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/lanjut"
                     android:textAllCaps="false"

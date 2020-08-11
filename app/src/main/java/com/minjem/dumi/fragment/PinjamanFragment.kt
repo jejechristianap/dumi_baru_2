@@ -20,10 +20,8 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.R
@@ -43,10 +41,9 @@ import com.minjem.dumi.retrofit.RetrofitClient
 import com.minjem.dumi.util.CustomProgressDialog
 import com.minjem.dumi.view.DigisignView
 import kotlinx.android.synthetic.main.d_webview.*
-import kotlinx.android.synthetic.main.fragment_inbox.view.*
 import kotlinx.android.synthetic.main.fragment_pinjaman.*
 import kotlinx.android.synthetic.main.fragment_pinjaman.view.*
-import kotlinx.android.synthetic.main.history_pinjaman.*
+import kotlinx.android.synthetic.main.dialog_history_pinjaman.*
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONException
@@ -59,7 +56,6 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.math.log
 
 class PinjamanFragment : Fragment(), DigisignView {
     private var statusPinjamanTv: TextView? = null
@@ -113,7 +109,6 @@ class PinjamanFragment : Fragment(), DigisignView {
         mContext = this.activity!!
 //        (activity as AppCompatActivity).setSupportActionBar(v.toolbarPinjaman)
 //        v.ctlPinjaman.title = "Pinjaman"
-        loadBg()
 
         mDialog = Dialog(mContext, R.style.DialogTheme)
         digisignPrestImp = DigisignPrestImp(this)
@@ -126,9 +121,7 @@ class PinjamanFragment : Fragment(), DigisignView {
         return v
     }
 
-    private fun loadBg(){
-//        Glide.with(mContext).load(R.drawable.bg_beranda).into(v.ivBgPinjaman)
-    }
+
 
     private fun refreshPinjaman(){
         mDialog.srlHistoryPinjaman.isRefreshing = false
@@ -227,7 +220,7 @@ class PinjamanFragment : Fragment(), DigisignView {
 
     private fun getHistoryPinjaman(){
         listPinjaman.clear()
-        mDialog.setContentView(R.layout.history_pinjaman)
+        mDialog.setContentView(R.layout.dialog_history_pinjaman)
         mDialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         mDialog.rvHistoryPinjaman.layoutManager = GridLayoutManager(mContext, 1)
         pinjamanAdapter = HistoryPinjamanAdapter(mContext, listPinjaman)
@@ -278,7 +271,8 @@ class PinjamanFragment : Fragment(), DigisignView {
 
     private val pinjaman: Unit
         get() {
-            progressDialog.show(mContext, "Loading...")
+//            progressDialog.show(mContext, "Loading...")
+            mProgress(dProgress)
             val nip = prefManager!!.nip
             val status = RetrofitClient.getClient().create(StatusPinjamanInterface::class.java)
             val call = status.getPinjaman(nip)
@@ -287,7 +281,7 @@ class PinjamanFragment : Fragment(), DigisignView {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     if (response.isSuccessful) {
                         try {
-                            progressDialog.dialog.dismiss()
+                            dProgress.dismiss()
                             val obj = JSONObject(response.body()!!.string())
                             val cek = obj.getBoolean("status")
                             if (cek) {
@@ -425,20 +419,20 @@ class PinjamanFragment : Fragment(), DigisignView {
                                 }
                             }
                         } catch (e: JSONException) {
-                            progressDialog.dialog.dismiss()
+                            dProgress.dismiss()
                             rlGagal!!.visibility = View.VISIBLE
                             svTagihan!!.visibility = View.GONE
                             tvGagal!!.text = "Mohon maaf, koneksi gagal."
                             e.printStackTrace()
                         } catch (e: IOException) {
-                            progressDialog.dialog.dismiss()
+                            dProgress.dismiss()
                             rlGagal!!.visibility = View.VISIBLE
                             svTagihan!!.visibility = View.GONE
                             tvGagal!!.text = "Mohon maaf, koneksi gagal."
                             e.printStackTrace()
                         }
                     } else {
-                        progressDialog.dialog.dismiss()
+                        dProgress.dismiss()
                         rlGagal!!.visibility = View.VISIBLE
                         svTagihan!!.visibility = View.GONE
                         tvGagal!!.text = "Mohon maaf koneksi gagal, silahkan cek koneksi anda"
@@ -447,7 +441,7 @@ class PinjamanFragment : Fragment(), DigisignView {
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    progressDialog.dialog.dismiss()
+                    dProgress.dismiss()
                     rlGagal!!.visibility = View.VISIBLE
                     svTagihan!!.visibility = View.GONE
                     tvGagal!!.text = "Mohon maaf koneksi gagal, silahkan cek koneksi anda"
@@ -457,7 +451,7 @@ class PinjamanFragment : Fragment(), DigisignView {
         }
     private val getPinjaman: Unit
         get() {
-            progressDialog.show(mContext, "Loading...")
+            mProgress(dProgress)
             val nip = prefManager!!.nip
             val status = RetrofitClient.getClient().create(StatusPinjamanInterface::class.java)
             val call = status.getPinjaman(nip)
@@ -466,7 +460,7 @@ class PinjamanFragment : Fragment(), DigisignView {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     if (response.isSuccessful) {
                         try {
-                            progressDialog.dialog.dismiss()
+                            dProgress.dismiss()
                             val obj = JSONObject(response.body()!!.string())
                             val cek = obj.getBoolean("status")
                             if (cek) {
@@ -523,23 +517,23 @@ class PinjamanFragment : Fragment(), DigisignView {
                                 }
                             }
                         } catch (e: JSONException) {
-                            progressDialog.dialog.dismiss()
+                            dProgress.dismiss()
 
                             e.printStackTrace()
                         } catch (e: IOException) {
-                            progressDialog.dialog.dismiss()
+                            dProgress.dismiss()
 
                             e.printStackTrace()
                         }
                     } else {
-                        progressDialog.dialog.dismiss()
+                        dProgress.dismiss()
 
                         Toast.makeText(mContext, "Mohon maaf server tidak terjangkau", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    progressDialog.dialog.dismiss()
+                    dProgress.dismiss()
 
                     Toast.makeText(mContext, t.message, Toast.LENGTH_SHORT).show()
                 }

@@ -697,4 +697,8 @@
     <string name="daftar_aktivasi_digisign"><![CDATA[Daftar & Aktivasi Digisign]]></string>
     <string name="dumi_ultimate_desk">Maksimal 100 juta rupiah dengan tenor maksimal 60 bulan. Bunga flat 9.9% per tahun.</string>
     <string name="pilih">Pilih</string>
+    <string name="verifikasi_email">Verifikasi Email</string>
+    <string name="pastikan_email_sudah_benar">Pastikan email sudah benar</string>
+    <string name="kirim_kode_verifikasi">Kirim Kode Verifikasi</string>
+    <string name="masukkan_kode_verifikasi_anda">Masukkan Kode Verifikasi Anda</string>
 </resources>

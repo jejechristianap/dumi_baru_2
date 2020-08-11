@@ -22,7 +22,7 @@ import com.minjem.dumi.ecommerce.Helper.PASSWORD
 import com.minjem.dumi.ecommerce.Helper.USERNAME
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.minjem.dumi.ecommerce.response.PDAMData
-import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
+import kotlinx.android.synthetic.main.dialog_bottom_sheet_layout.view.*
 import kotlinx.android.synthetic.main.ecommerce_pdam.view.*
 import kotlinx.android.synthetic.main.ecommerce_pdam.view.rvPdam
 import okhttp3.ResponseBody
@@ -220,7 +220,7 @@ class PDAMFragment : Fragment() {
 
     @SuppressLint("SimpleDateFormat")
     private fun showBottomSheet(berhasil: Boolean){
-        dView = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
+        dView = layoutInflater.inflate(R.layout.dialog_bottom_sheet_layout, null)
         val dialog = BottomSheetDialog(mContext, R.style.AppBottomSheetDialogTheme)
 //        dialog.setCancelable(false)
         dialog.setContentView(dView)

@@ -19,6 +19,7 @@ import com.minjem.dumi.api.GetBungaInterface
 import com.minjem.dumi.api.StatusPinjamanInterface
 import com.minjem.dumi.ecommerce.ECommerceActivity
 import com.minjem.dumi.ecommerce.Helper.mToast
+import com.minjem.dumi.ecommerce.Helper.sBar
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.model.User
 import com.minjem.dumi.presenter.DigisignPrestImp
@@ -290,17 +291,22 @@ class PinjamanKilatActivity : AppCompatActivity(), DigisignView {
                                 }
                                 when {
                                     statusPinjaman.contains(1) -> {
-                                        Toast.makeText(this@PinjamanKilatActivity, "Anda sudah mengajukan pinjaman. Mohon menunggu info dari kami.", Toast.LENGTH_SHORT).show()
+//                                        Toast.makeText(this@PinjamanKilatActivity, "Anda sudah mengajukan pinjaman. Mohon menunggu info dari kami.", Toast.LENGTH_SHORT).show()
+                                        sBar(findViewById(android.R.id.content), "Anda sudah mengajukan pinjaman. Mohon menunggu info dari kami.")
                                     }
                                     statusPinjaman.contains(2) -> {
-                                        Toast.makeText(this@PinjamanKilatActivity, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show()
+//                                        Toast.makeText(this@PinjamanKilatActivity, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show()
+                                        sBar(findViewById(android.R.id.content), "Masih ada tagihan yang belum selesai, terima kasih.")
                                     }
                                     statusPinjaman.contains(4) -> {
-                                        Toast.makeText(this@PinjamanKilatActivity, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show()
+//                                        Toast.makeText(this@PinjamanKilatActivity, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show()
+                                        sBar(findViewById(android.R.id.content), "Masih ada tagihan yang belum selesai, terima kasih.")
                                     }
                                     statusPinjaman.contains(5) -> {
-                                        Toast.makeText(this@PinjamanKilatActivity, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show()
+//                                        Toast.makeText(this@PinjamanKilatActivity, "Masih ada tagihan yang belum selesai, terima kasih.", Toast.LENGTH_SHORT).show()
+                                        sBar(findViewById(android.R.id.content), "Masih ada tagihan yang belum selesai, terima kasih.")
                                     }
+
                                     else -> {
                                         ajukanPinjaman()
                                     }

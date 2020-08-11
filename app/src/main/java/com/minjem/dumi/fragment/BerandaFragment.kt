@@ -29,7 +29,7 @@ import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.retrofit.RetrofitClient
 import com.minjem.dumi.util.BottomSheetFragment
 import com.minjem.dumi.util.InternetConnection
-import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
+import kotlinx.android.synthetic.main.dialog_bottom_sheet_layout.view.*
 import kotlinx.android.synthetic.main.fragment_beranda.view.*
 import kotlinx.android.synthetic.main.fragment_beranda.view.textPulsa
 import okhttp3.ResponseBody
@@ -121,7 +121,7 @@ class BerandaFragment : Fragment() {
 
     @SuppressLint("InflateParams")
     private fun dialogTkb(s: String){
-        dView = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
+        dView = layoutInflater.inflate(R.layout.dialog_bottom_sheet_layout, null)
         val dialog = BottomSheetDialog(mContext, R.style.AppBottomSheetDialogTheme)
         dialog.setContentView(dView)
         dialog.show()
