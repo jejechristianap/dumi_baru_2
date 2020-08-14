@@ -20,6 +20,7 @@ import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity.Companion.JUMLAH_BULA
 import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity.Companion.TUJUAN_PINJAMAN
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.retrofit.RetrofitClient
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_pinjaman_ultimate.*
 import okhttp3.ResponseBody
 import org.json.JSONArray
@@ -115,10 +116,14 @@ class PinjamanUltimateActivity : AppCompatActivity() {
             var progressValue = 0
             var x = 0
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                progressValue = if (progress == 0) 1 else progress
+                progressValue = progress
                 Log.d("Progress Value", "onProgressChanged: $baseStepPinjaman")
                 Log.d("Progress Value", "onProgressChanged: $progressValue")
-                x = (progressValue * baseStepPinjaman) + basePinjamanUltimate
+                x = if(progressValue > 0){
+                    (progressValue * baseStepPinjaman) + basePinjamanUltimate
+                } else {
+                    basePinjamanUltimate + 1000000
+                }
                 Log.d("Progress Value", "onProgressChanged: $x")
                 etCurrencyUltimate.setText(x.toString())
             }
@@ -128,9 +133,13 @@ class PinjamanUltimateActivity : AppCompatActivity() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 numberPicker(np)
-                x = (progressValue * baseStepPinjaman) + basePinjamanUltimate
-                if (x == 0) x = basePinjamanUltimate else  x
-                etCurrencyUltimate.setText(x.toString())            }
+                x = if(progressValue > 0){
+                    (progressValue * baseStepPinjaman) + basePinjamanUltimate
+                } else {
+                    basePinjamanUltimate + 1000000
+                }
+                etCurrencyUltimate.setText(x.toString())
+            }
         })
 
         bLanjutUltimate.setOnClickListener {
@@ -142,10 +151,11 @@ class PinjamanUltimateActivity : AppCompatActivity() {
             when {
                 etCurrencyUltimate.cleanIntValue < 51000000 -> {
                     mToast(this, getString(R.string.minimum_pinjaman_rp_1_000_000))
+                    Toasty.warning(this, "Pinjaman Ultimate minimal Rp51.000.0000", Toast.LENGTH_LONG, true)
                     return@setOnClickListener
                 }
                 etCurrencyUltimate.cleanIntValue > 100000000 -> {
-                    mToast(this, getString(R.string.maksimum_pinjaman_rp_15_000_000))
+                    Toasty.warning(this, "Pinjaman Ultimate maksimal Rp100.000.0000", Toast.LENGTH_LONG, true)
                     return@setOnClickListener
                 }
             }
