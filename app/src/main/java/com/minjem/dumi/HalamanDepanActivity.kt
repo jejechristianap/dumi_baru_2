@@ -41,6 +41,11 @@ class HalamanDepanActivity : AppCompatActivity() {
 //        checkCon()
         /*val i = Intent(this, InternetConnection::class.java)
         startService(i)*/
+        Log.d("Update app", "onCreate: ${intent.getStringExtra("appVersion")}")
+        if (intent.getStringExtra("appVersion") == "update"){
+
+            forceUpdate()
+        }
         if (checkPermssion()){
             Log.d("TAG", "onCreate: ${checkPermssion()}")
         } else {
@@ -62,8 +67,8 @@ class HalamanDepanActivity : AppCompatActivity() {
         SharedPrefManager.getInstance(applicationContext).logout()
         daftarButton = findViewById(R.id.asn_akftif_button_daftar)
         asn_akftif_button_daftar.setOnClickListener {
-            forceUpdate()
-//            startActivity(Intent(this@HalamanDepanActivity, DaftarActivity::class.java))
+
+            startActivity(Intent(this@HalamanDepanActivity, DaftarActivity::class.java))
         }
         masukButton = findViewById(R.id.masuk_button)
         masuk_button.setOnClickListener { startActivity(Intent(this@HalamanDepanActivity, MasukActivity::class.java)) }
@@ -72,6 +77,7 @@ class HalamanDepanActivity : AppCompatActivity() {
     private fun forceUpdate(){
         val dialog = AlertDialog.Builder(this)
                 .setTitle("New version available")
+                .setCancelable(false)
                 .setMessage("Please, update app to new version to continue reposting.")
                 .setPositiveButton("Update") { _, _ ->
                     val appPackageName = packageName // getPackageName() from Context or Activity object

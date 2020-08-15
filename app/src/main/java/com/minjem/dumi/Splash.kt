@@ -19,6 +19,7 @@ class Splash : Activity() {
     private val api = RetrofitClient
     val versionCode_ = BuildConfig.VERSION_CODE
     val versionName_ = BuildConfig.VERSION_NAME
+    var appVersion = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_dumi)
@@ -26,7 +27,7 @@ class Splash : Activity() {
 
         Handler().postDelayed({
             val mainIntent = Intent(this@Splash, HalamanDepanActivity::class.java)
-
+            mainIntent.putExtra("appVersion", appVersion)
             this@Splash.startActivity(mainIntent)
             finish()
         }, SPLASH_DISPLAY_LENGTH.toLong())
@@ -53,8 +54,10 @@ class Splash : Activity() {
                             if (appName == "DUMI"){
                                 if (versionCode == versionCode_){
                                     Log.d(TAG, "versionCodeApi: $versionCode | versionCodeApp: $versionCode_ | UPDATED")
+                                    appVersion = "updated"
                                 } else {
                                     Log.d(TAG, "versionCodeApi: $versionCode | versionCodeApp: $versionCode_ | NEW UPDATE")
+                                    appVersion = "update"
                                 }
                             }
                         }

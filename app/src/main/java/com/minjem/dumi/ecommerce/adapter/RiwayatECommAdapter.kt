@@ -32,7 +32,6 @@ class RiwayatECommAdapter(private var mContext: Context, internal var list: List
                 itemView.waktuTv.text = item.created_at
                 itemView.noTokenTv.text = item.no_tujuan
             }
-
         }
     }
 
