@@ -25,7 +25,7 @@ class RiwayatECommAdapter(private var mContext: Context, internal var list: List
                 itemView.hargaTv.text = "Rp${rpFromat.format(item.ppob_totalbayar!!.toInt())}"
                 itemView.waktuTv.text = item.created_at
                 itemView.noTokenTv.text = item.ppob_stroomtoken
-            } else{
+            } else if(tipe == "PULSA"){
                 itemView.iconRiwayatIv.setImageResource(R.drawable.ic_pulsa)
                 itemView.tipeTv.text = item.tipe
                 itemView.hargaTv.text = "Rp${rpFromat.format(item.harga!!.toInt())}"

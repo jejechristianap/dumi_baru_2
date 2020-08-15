@@ -83,18 +83,34 @@ class RiwayatView : AppCompatActivity() {
                             if (jsonObject.getBoolean("status")){
                                 val jsonArray = JSONArray(jsonObject.getString("data"))
                                 if (jsonArray.length() != 0){
+                                    var operator = ""
+                                    var no_tujuan = ""
+                                    var harga = ""
+                                    var invoice = ""
+                                    var ppob_namapelanggan = ""
+                                    var ppob_nomorpelanggan = ""
+                                    var ppob_stroomtoken = ""
+                                    var ppob_tarifdaya = ""
+                                    var ppob_totalbayar = ""
                                     for (i in 0 until jsonArray.length()){
                                         val tipe = jsonArray.getJSONObject(i).getString("tipe")
-                                        val operator = jsonArray.getJSONObject(i).getString("operator")
-                                        val no_tujuan = jsonArray.getJSONObject(i).getString("no_tujuan")
-                                        val harga = jsonArray.getJSONObject(i).getString("harga")
-                                        val invoice = jsonArray.getJSONObject(i).getString("invoice")
-                                        val ppob_namapelanggan = jsonArray.getJSONObject(i).getString("ppob_namapelanggan")
-                                        val ppob_nomorpelanggan = jsonArray.getJSONObject(i).getString("ppob_nomorpelanggan")
-                                        val ppob_stroomtoken = jsonArray.getJSONObject(i).getString("ppob_stroomtoken")
-                                        val ppob_tarifdaya = jsonArray.getJSONObject(i).getString("ppob_tarifdaya")
-                                        val ppob_totalbayar = jsonArray.getJSONObject(i).getString("ppob_totalbayar")
-                                        val created_at = jsonArray.getJSONObject(i).getString("created_at")
+                                        val created_at = jsonArray.getJSONObject(i).optString("created_at")
+                                        when(tipe){
+                                            "PLN" -> {
+                                                invoice = jsonArray.getJSONObject(i).optString("invoice")
+                                                ppob_namapelanggan = jsonArray.getJSONObject(i).optString("ppob_namapelanggan")
+                                                ppob_nomorpelanggan = jsonArray.getJSONObject(i).optString("ppob_nomorpelanggan")
+                                                ppob_stroomtoken = jsonArray.getJSONObject(i).optString("ppob_stroomtoken")
+                                                ppob_tarifdaya = jsonArray.getJSONObject(i).optString("ppob_tarifdaya")
+                                                ppob_totalbayar = jsonArray.getJSONObject(i).optString("ppob_totalbayar")
+                                            }
+                                            "PULSA" -> {
+                                                operator = jsonArray.getJSONObject(i).optString("operator", "")
+                                                no_tujuan = jsonArray.getJSONObject(i).optString("no_tujuan")
+                                                harga = jsonArray.getJSONObject(i).optString("harga")
+                                                invoice = jsonArray.getJSONObject(i).optString("invoice")
+                                            }
+                                        }
 
                                         val riwayat = RiwayatPPOBData()
                                         riwayat.tipe = tipe

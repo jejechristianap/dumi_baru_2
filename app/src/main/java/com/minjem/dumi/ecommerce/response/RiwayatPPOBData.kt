@@ -18,4 +18,6 @@ class RiwayatPPOBData {
     var ppob_tarifdaya : String? = null
     var ppob_totalbayar : String? = null
     var created_at : String? = null
+
+
 }
