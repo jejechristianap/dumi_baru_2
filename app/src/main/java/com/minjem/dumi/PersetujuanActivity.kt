@@ -103,7 +103,7 @@ class PersetujuanActivity : AppCompatActivity() {
             val pDialog = ProgressDialog(this)
             pDialog.setMessage("Memuat Data...")
             pDialog.show()
-            val pinjam = RetrofitClient.getClient().create(PinjamanKilatInterface::class.java)
+            val pinjam = RetrofitClient.client.create(PinjamanKilatInterface::class.java)
             val call = pinjam.ajukanPinjaman(nip, pinjaman, plafond.toFloat(), 0f,
                     9.9f, bunga, admin, angsuran, 6500f, tujuan,
                     tglMulai, tglAkhir, "", diterima, asuransi, namaBank, noRek, pemilik)
@@ -177,7 +177,7 @@ class PersetujuanActivity : AppCompatActivity() {
         val pDialog = ProgressDialog(this@PersetujuanActivity)
         pDialog.setMessage("Memuat data...")
         pDialog.show()
-        val info = RetrofitClient.getClient().create(BaseApiService::class.java)
+        val info = RetrofitClient.client.create(BaseApiService::class.java)
         val call = info.info
         call.enqueue(object: Callback<ResponseBody>{
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -210,7 +210,7 @@ class PersetujuanActivity : AppCompatActivity() {
     private fun uploadSurat() {
         val pref = SharedPrefManager.getInstance(applicationContext).user
         val nip = pref.nip
-        val service = RetrofitClient.getClient().create(UploadImageInterface::class.java)
+        val service = RetrofitClient.client.create(UploadImageInterface::class.java)
 
         /*val fileSkCpns = File(fotoSkCpnsPath!!)
         val filePa = File(fotoPaPath!!)

@@ -184,7 +184,7 @@ class PinjamanUltimateActivity : AppCompatActivity() {
     }
 
     private fun getBungaValue(){
-        RetrofitClient.getClient().create(GetBungaInterface::class.java)
+        RetrofitClient.client.create(GetBungaInterface::class.java)
                 .bunga.enqueue(object : Callback<ResponseBody> {
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                         Log.d("Get Bunga", "onFailure: ${t.message.toString()}")
@@ -232,7 +232,7 @@ class PinjamanUltimateActivity : AppCompatActivity() {
 
     private val pinjaman: Unit
     get(){
-        val status = RetrofitClient.getClient().create(StatusPinjamanInterface::class.java)
+        val status = RetrofitClient.client.create(StatusPinjamanInterface::class.java)
                 .getPinjaman(SharedPrefManager.getInstance(this).user.nip)
                 .enqueue(object : Callback<ResponseBody>{
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

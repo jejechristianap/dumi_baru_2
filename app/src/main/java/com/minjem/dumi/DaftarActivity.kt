@@ -33,17 +33,20 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.minjem.dumi.akun.KebijakanPrivasiActivity
+import com.minjem.dumi.api.BaseApiService
 import com.minjem.dumi.api.CekNipBknInterface
 import com.minjem.dumi.api.CekUserExist
 import com.minjem.dumi.ecommerce.Helper.mProgress
 import com.minjem.dumi.ecommerce.Helper.mToast
 import com.minjem.dumi.ecommerce.Helper.sBar
 import com.minjem.dumi.retrofit.RetrofitClient
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_daftar.*
 import kotlinx.android.synthetic.main.dialog_bottom_email_verification.view.*
 import kotlinx.android.synthetic.main.dialog_datepicker.view.*
 import kotlinx.android.synthetic.main.dialog_syaratketentuan.*
 import okhttp3.ResponseBody
+import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -265,9 +268,8 @@ class DaftarActivity : AppCompatActivity() {
         mDialog.bVerifikasiEmail.setOnClickListener {
             if (check){
 //                sBar(v, "Tunggu yaaww")
-//                emailVerification(email_daftar_et.text.toString())
-                mProgress(dProgress)
-                auth.createUserWithEmailAndPassword(email_daftar_et.text.toString(), masuk_password_et.text.toString())
+                emailVerification(email_daftar_et.text.toString())
+                /*auth.createUserWithEmailAndPassword(email_daftar_et.text.toString(), masuk_password_et.text.toString())
                         .addOnCompleteListener(this){task ->
                             if (task.isSuccessful){
                                 Log.d("SIGNUP EMAIL", "dialogSyaratKetentuan: success")
@@ -289,7 +291,7 @@ class DaftarActivity : AppCompatActivity() {
                                 mToast(this, "Failed")
 
                             }
-                        }
+                        }*/
 
             } else {
                 sBar(v, "Mohon menyetujui syarat dan ketentuan kami.")
@@ -308,22 +310,21 @@ class DaftarActivity : AppCompatActivity() {
 
 
         dv.bEmailVerification.setOnClickListener {
-            if (!count){
-                count = true
 
+            if (!count){
+                mProgress(dProgress)
+                count = true
+                code = ""
                 for (i in 0 until 5){
                     val random = (1..9).random()
                     code += random.toString()
                 }
                 Log.d("Random Number", "NumberCode: $code")
-                startTimeCounter(dv)
-                dv.etVerifikasiEmail.isEnabled = false
-                dv.bEmailVerification.setBackgroundResource(R.drawable.button_outerline_grey)
-                dv.bEmailVerification.setTextColor(Color.GRAY)
-                dv.bEmailVerification.text = "Kirim ulang"
-                dv.rlVerifikasiKode.visibility = View.VISIBLE
+
+                sendVerification(dv.etVerifikasiEmail.text.toString(), dv)
+
             } else {
-                mToast(this, "Mohon menunggu waktu habis")
+                Toasty.error(this, "Mohon menunggu waktu habis", Toast.LENGTH_LONG, true).show()
             }
         }
 
@@ -342,19 +343,65 @@ class DaftarActivity : AppCompatActivity() {
         var counter = 59
         val countTime: TextView = view.findViewById(R.id.countTime)
         object : CountDownTimer(60000, 1000) {
+            @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
                 countTime.text = "$counter detik"
                 counter--
             }
             override fun onFinish() {
                 countTime.text = ""
-                code = ""
                 view.etVerifikasiEmail.isEnabled = true
                 view.bEmailVerification.setBackgroundResource(R.drawable.button_outerline_blue)
                 view.bEmailVerification.setTextColor(Color.parseColor("#1560db"))
                 count = false
             }
         }.start()
+    }
+
+    private fun sendVerification(email: String, dv: View){
+        val send = RetrofitClient.client?.create(BaseApiService::class.java)
+        val call = send?.sendCodeVerification(email, code)
+        call!!.enqueue(object : Callback<ResponseBody> {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                dProgress.dismiss()
+                Log.e("Send code verification", "onFailure: failed")
+                count = false
+            }
+
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful){
+                    val jsonObject = JSONObject(response.body()!!.string())
+                    if (jsonObject.getBoolean("status")){
+                        val jsonArray = JSONArray(jsonObject.getString("data"))
+                        val jsonAccepted = JSONArray(jsonArray.getJSONObject(0).getString("accepted"))
+                        if (jsonAccepted.length() == 0){
+                            Log.d("Send code verification", "onResponse: Failure")
+                            count = false
+                            dProgress.dismiss()
+                        } else {
+                            dProgress.dismiss()
+                            dv.etVerifikasiEmail.isEnabled = false
+                            dv.bEmailVerification.setBackgroundResource(R.drawable.button_outerline_grey)
+                            dv.bEmailVerification.setTextColor(Color.GRAY)
+                            dv.bEmailVerification.text = "Kirim ulang"
+                            dv.rlVerifikasiKode.visibility = View.VISIBLE
+                            startTimeCounter(dv)
+                            Toasty.success(this@DaftarActivity, "Email verifikasi berhasil dikirim, silahkan cek email anda.", Toast.LENGTH_LONG, true).show()
+                        }
+                    } else {
+                        count = false
+                        Toasty.error(this@DaftarActivity, "Email verifikasi gagal dikirim, pastikan email anda sudah benar!", Toast.LENGTH_LONG, true).show()
+                    }
+                    dProgress.dismiss()
+                } else {
+                    dProgress.dismiss()
+                    count = false
+                    Toasty.warning(this@DaftarActivity, "Koneksi ke server gagal, mohon cek koneksi anda.", Toast.LENGTH_LONG, true).show()
+                    Log.e("Send code verification", "onResponse: ${response.message()}")
+                }
+            }
+
+        })
     }
 
     private fun dialogGagal(ins: String?) {
@@ -465,7 +512,7 @@ class DaftarActivity : AppCompatActivity() {
         }
         mProgress(dProgress)
 
-        val cekUser = RetrofitClient.getClient().create(CekUserExist::class.java)
+        val cekUser = RetrofitClient.client.create(CekUserExist::class.java)
         val call = cekUser.cekUser(nip)
         call.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -513,7 +560,7 @@ class DaftarActivity : AppCompatActivity() {
             daftar_tgl_lahir.requestFocus()
             return
         }
-        val cek = RetrofitClient.getClient().create(CekNipBknInterface::class.java)
+        val cek = RetrofitClient.client.create(CekNipBknInterface::class.java)
         val call = cek.getBkn(nip, tglLahir, namaPns)
         call.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {

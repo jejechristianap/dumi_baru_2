@@ -131,7 +131,7 @@ class MasukActivity : AppCompatActivity() {
             startActivity(Intent(this@MasukActivity, MainActivity::class.java))
         } else {
             mProgress(dProgress)
-            val cekUser = RetrofitClient.getClient().create(CekUserExist::class.java)
+            val cekUser = RetrofitClient.client!!.create(CekUserExist::class.java)
             val call = cekUser.cekUser(nip)
             call.enqueue(object : Callback<ResponseBody?> {
                 override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
@@ -185,9 +185,9 @@ class MasukActivity : AppCompatActivity() {
         } else {
             passEt.error = null
         }
-        val cek = RetrofitClient.getClient().create(LoginInterface::class.java)
-        val call = cek.getUserLogin(nip, password)
-        call.enqueue(object : Callback<ResponseBody> {
+        val cek = RetrofitClient.client?.create(LoginInterface::class.java)
+        val call = cek?.getUserLogin(nip, password)
+        call!!.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 try {
                     val obj = JSONObject(response.body()!!.string())

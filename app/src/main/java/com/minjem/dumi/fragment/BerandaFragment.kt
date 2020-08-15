@@ -182,7 +182,7 @@ class BerandaFragment : Fragment() {
     private fun saldo(){
             val idUser = SharedPrefManager.getInstance(activity).user.id
             val nipBaru : String? = SharedPrefManager.getInstance(activity).user.nip
-            val api = RetrofitClient.getClient().create(BaseApiService::class.java)
+            val api = RetrofitClient.client.create(BaseApiService::class.java)
             val call = api.getSaldo(idUser, nipBaru.toString(), USERNAME, PASSWORD)
             call.enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {

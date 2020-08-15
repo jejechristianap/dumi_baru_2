@@ -499,7 +499,7 @@ class PinjamanRegularActivity : AppCompatActivity(), DigisignView {
         pDialog.show()
         val pref = SharedPrefManager.getInstance(applicationContext).user
         val insker = pref.inskerKerja
-        val bunga = RetrofitClient.getClient().create(GetBungaInterface::class.java)
+        val bunga = RetrofitClient.client.create(GetBungaInterface::class.java)
         val call = bunga.bunga
         call.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -569,7 +569,7 @@ class PinjamanRegularActivity : AppCompatActivity(), DigisignView {
         get() {
             val pref = SharedPrefManager.getInstance(applicationContext).user
             val nip = pref.nip
-            val status = RetrofitClient.getClient().create(StatusPinjamanInterface::class.java)
+            val status = RetrofitClient.client.create(StatusPinjamanInterface::class.java)
             val call = status.getPinjaman(nip)
             call.enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {

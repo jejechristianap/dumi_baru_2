@@ -1,5 +1,7 @@
 package com.minjem.dumi.api;
 
+import com.hendi.pulsa.response.Response;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -28,5 +30,13 @@ public interface BaseApiService {
 
     @GET("info/regular")
     Call<ResponseBody> getInfo();
+
+    @FormUrlEncoded
+    @POST("auth/email_auth")
+    Call<ResponseBody> sendCodeVerification(@Field("email") String email,
+                                            @Field("code_verification") String code);
+
+    @GET("config/get")
+    Call<ResponseBody> getVersionApp();
 
 }

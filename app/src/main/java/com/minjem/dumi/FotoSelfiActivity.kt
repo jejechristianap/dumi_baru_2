@@ -218,8 +218,8 @@ class FotoSelfiActivity : AppCompatActivity() {
 
 
 
-        val regis = RetrofitClient.getClient().create(RegisterInterface::class.java)
-        val call = regis.createUser(sp.getString("nip", "")!!.toString()
+        val regis = RetrofitClient.client?.create(RegisterInterface::class.java)
+        val call = regis?.createUser(sp.getString("nip", "")!!.toString()
                 , sp.getString("email", "")!!.toString()
                 , sp.getString("pass", "")!!.toString()
                 ,sp.getString("noTelp", "")!!.toString(),
@@ -276,7 +276,7 @@ class FotoSelfiActivity : AppCompatActivity() {
                 sp.getString("noRekening", "")!!.toString()
         )
 
-        call.enqueue(object : Callback<ResponseBody>{
+        call!!.enqueue(object : Callback<ResponseBody>{
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("Error", t.message!!)
                 progressDialog.dialog.dismiss()
@@ -330,9 +330,9 @@ class FotoSelfiActivity : AppCompatActivity() {
                 currentPhotoPath,
                 RequestBody.create(MediaType.parse("image/*"), compressedImageSelfi!!))
 
-        val upload = RetrofitClient.getClient().create(UploadImageInterface::class.java)
-        val call = upload.uploadImages(bodyNip, bodyKtp, bodySelfi)
-        call.enqueue(object: Callback<ResponseBody>{
+        val upload = RetrofitClient.client?.create(UploadImageInterface::class.java)
+        val call = upload?.uploadImages(bodyNip, bodyKtp, bodySelfi)
+        call!!.enqueue(object: Callback<ResponseBody>{
              override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("Error", t.message!!)
                 progressDialog.dialog.dismiss()

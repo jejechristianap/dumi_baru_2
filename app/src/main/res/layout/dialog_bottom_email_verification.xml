@@ -90,7 +90,7 @@
         <Button
             android:id="@+id/bVerfikasiKode"
             android:layout_below="@id/etKodeVerifikasi"
-            android:text="@string/kirim_kode_verifikasi"
+            android:text="@string/verifikasi_kode"
             android:layout_marginEnd="@dimen/_10sdp"
             android:textColor="@color/colorBlue"
             android:layout_gravity="bottom|start"

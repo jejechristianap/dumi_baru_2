@@ -1,13 +1,17 @@
 package com.minjem.dumi
 
+import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -21,6 +25,7 @@ import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.util.ConnectionHelper
 import com.minjem.dumi.util.InternetConnection
 import kotlinx.android.synthetic.main.activity_halaman_depan.*
+
 
 class HalamanDepanActivity : AppCompatActivity() {
     private var daftarButton: Button? = null
@@ -56,9 +61,30 @@ class HalamanDepanActivity : AppCompatActivity() {
 
         SharedPrefManager.getInstance(applicationContext).logout()
         daftarButton = findViewById(R.id.asn_akftif_button_daftar)
-        asn_akftif_button_daftar.setOnClickListener { startActivity(Intent(this@HalamanDepanActivity, DaftarActivity::class.java)) }
+        asn_akftif_button_daftar.setOnClickListener {
+            forceUpdate()
+//            startActivity(Intent(this@HalamanDepanActivity, DaftarActivity::class.java))
+        }
         masukButton = findViewById(R.id.masuk_button)
         masuk_button.setOnClickListener { startActivity(Intent(this@HalamanDepanActivity, MasukActivity::class.java)) }
+    }
+
+    private fun forceUpdate(){
+        val dialog = AlertDialog.Builder(this)
+                .setTitle("New version available")
+                .setMessage("Please, update app to new version to continue reposting.")
+                .setPositiveButton("Update") { _, _ ->
+                    val appPackageName = packageName // getPackageName() from Context or Activity object
+                    try {
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
+                    } catch (anfe: ActivityNotFoundException) {
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")))
+                    }
+                }.setNegativeButton("No, thanks") { _, _ ->
+                    finish()
+                    moveTaskToBack(true)
+                }.create()
+        dialog.show()
     }
 
     private fun checkPermssion(): Boolean {

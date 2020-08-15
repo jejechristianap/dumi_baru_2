@@ -100,7 +100,7 @@ class InboxFragment : Fragment() {
 
 
     private fun getNotif() {
-        val cek = RetrofitClient.getClient().create(StatusPinjamanInterface::class.java)
+        val cek = RetrofitClient.client.create(StatusPinjamanInterface::class.java)
 
         mProgress(dProgress)
         val prefManager = SharedPrefManager.getInstance(activity!!.applicationContext).user

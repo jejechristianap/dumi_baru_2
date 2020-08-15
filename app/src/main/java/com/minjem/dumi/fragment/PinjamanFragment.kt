@@ -274,7 +274,7 @@ class PinjamanFragment : Fragment(), DigisignView {
 //            progressDialog.show(mContext, "Loading...")
             mProgress(dProgress)
             val nip = prefManager!!.nip
-            val status = RetrofitClient.getClient().create(StatusPinjamanInterface::class.java)
+            val status = RetrofitClient.client.create(StatusPinjamanInterface::class.java)
             val call = status.getPinjaman(nip)
             call.enqueue(object : Callback<ResponseBody> {
                 @SuppressLint("SetTextI18n")
@@ -453,7 +453,7 @@ class PinjamanFragment : Fragment(), DigisignView {
         get() {
             mProgress(dProgress)
             val nip = prefManager!!.nip
-            val status = RetrofitClient.getClient().create(StatusPinjamanInterface::class.java)
+            val status = RetrofitClient.client.create(StatusPinjamanInterface::class.java)
             val call = status.getPinjaman(nip)
             call.enqueue(object : Callback<ResponseBody> {
                 @SuppressLint("SetTextI18n")
@@ -543,7 +543,7 @@ class PinjamanFragment : Fragment(), DigisignView {
     private val signPinjaman: Unit
         get() {
             val nip = prefManager!!.nip
-            val status = RetrofitClient.getClient().create(StatusPinjamanInterface::class.java)
+            val status = RetrofitClient.client.create(StatusPinjamanInterface::class.java)
             val call = status.getPinjaman(nip)
             call.enqueue(object : Callback<ResponseBody> {
                 @SuppressLint("SetTextI18n")

@@ -77,7 +77,7 @@ class RincianAkunActivity : AppCompatActivity() {
         Glide.with(this).load(R.drawable.ic_camera_2).override(200, 200).into(takeImg)
         /*pref = applicationContext.getSharedPreferences("Profile", 0) // 0 - for private mode
         editor = pref.edit()*/
-        prop = RetrofitClient.getClient().create(UploadImageInterface::class.java)
+        prop = RetrofitClient.client.create(UploadImageInterface::class.java)
 //        imgDpIv = findViewById(R.id.img_dp_iv)
 //        takeImg = findViewById(R.id.takeImg)
 //        back = findViewById(R.id.back_rincian)
