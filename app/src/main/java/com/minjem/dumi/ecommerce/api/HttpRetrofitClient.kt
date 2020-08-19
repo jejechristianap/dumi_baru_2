@@ -3,7 +3,6 @@
 package com.minjem.dumi.ecommerce.api
 
 
-import com.minjem.dumi.retrofit.RetrofitClient
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -13,22 +12,11 @@ import java.util.concurrent.TimeUnit
 
 object HttpRetrofitClient {
 
-    val instanse : Retrofit by lazy {
+    private val instance : Retrofit by lazy {
 
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
-//        val sslContext = SSLContext.getInstance("SSL")
-//        var keyStore = readKeyStore()
-//        val trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
-//        trustManagerFactory.init(keyStore)
-//        val keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm())
-//        keyManagerFactory.init(keyStore, "keystore_pass".toCharArray())
-//        sslContext.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), SecureRandom())
-//        client.setSslSocketFactory(sslContext.socketFactory)
-
-//        val ok = UnsafeOkHttpClient.getUnsafeOkHttpClient()
-//        val unsafe = RetrofitClient.getUnsafeOkHttpClient()
 
         val okHttp = OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
@@ -46,6 +34,6 @@ object HttpRetrofitClient {
                 .build()
     }
 
-    val retrofit : BaseApiService get() = instanse.create(BaseApiService::class.java)
+    val retrofit : BaseApiService get() = instance.create(BaseApiService::class.java)
 
 }

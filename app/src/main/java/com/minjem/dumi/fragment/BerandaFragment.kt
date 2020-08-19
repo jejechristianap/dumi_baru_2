@@ -97,7 +97,7 @@ class BerandaFragment : Fragment() {
         mView.textPulsa.setOnClickListener { goTo("pulsa") }
         mView.icPln.setOnClickListener { goTo("pln") }
         mView.textPln.setOnClickListener { goTo("pln") }
-        mView.icGopay.setOnClickListener { goTo("pinjaman") }
+        mView.icGopay.setOnClickListener { goTo("na") }
         mView.textGopay.setOnClickListener { goTo("na") }
         mView.icOvo.setOnClickListener { goTo("na") }
         mView.textOvo.setOnClickListener { goTo("na") }

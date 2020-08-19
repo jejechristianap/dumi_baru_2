@@ -3,6 +3,7 @@ package com.minjem.dumi.ecommerce.transaction
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.minjem.dumi.util.CustomProgressDialog
@@ -65,14 +66,25 @@ class RiwayatView : AppCompatActivity() {
         return true
     }
 
+    override fun onResume() {
+        super.onResume()
+        shimmerFrameLayout.startShimmerAnimation()
+    }
+
+    override fun onPause() {
+        shimmerFrameLayout.stopShimmerAnimation()
+        super.onPause()
+    }
+
     private fun getRiwayat(){
-        progressDialog.show(this, "Memuat data...")
+//        progressDialog.show(this, "Memuat data...")
         val idNasabah = SharedPrefManager.getInstance(this).user.id
         api.retrofit.getRiwayat(USERNAME, PASSWORD, idNasabah)
                 .enqueue(object: Callback<ResponseBody>{
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                         Log.e("Error", t.message!!)
-                        progressDialog.dialog.dismiss()
+//                        progressDialog.dialog.dismiss()
+                        shimmerFrameLayout.visibility = View.GONE
                     }
 
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -111,6 +123,9 @@ class RiwayatView : AppCompatActivity() {
                                                 invoice = jsonArray.getJSONObject(i).optString("invoice")
                                             }
                                         }
+                                        shimmerFrameLayout.stopShimmerAnimation()
+                                        shimmerFrameLayout.visibility = View.GONE
+                                        riwayatRv.visibility = View.VISIBLE
 
                                         val riwayat = RiwayatPPOBData()
                                         riwayat.tipe = tipe
@@ -129,19 +144,22 @@ class RiwayatView : AppCompatActivity() {
                                         riwayatAdapter.filter(list)
                                         riwayatRv.adapter = riwayatAdapter
                                         riwayatAdapter.notifyDataSetChanged()
-                                        progressDialog.dialog.dismiss()
+//                                        progressDialog.dialog.dismiss()
                                     }
                                 } else {
+                                    shimmerFrameLayout.visibility = View.GONE
                                     Toast.makeText(this@RiwayatView, "Mohon maaf belum ada transaksi", Toast.LENGTH_LONG).show()
-                                    progressDialog.dialog.dismiss()
+//                                    progressDialog.dialog.dismiss()
                                 }
 
                             } else {
-                                progressDialog.dialog.dismiss()
+                                shimmerFrameLayout.visibility = View.GONE
+//                                progressDialog.dialog.dismiss()
                                 Log.d("Status riwayat", jsonObject.getString("message"))
                             }
                         } else {
-                            progressDialog.dialog.dismiss()
+                            shimmerFrameLayout.visibility = View.GONE
+//                            progressDialog.dialog.dismiss()
                         }
                     }
 
