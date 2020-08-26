@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_130sdp"
+    android:background="@color/colorPrimary"
+    android:padding="@dimen/_18sdp">
+
+    <ImageView
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:src="@drawable/dumi_logo_white"
+        android:textColor="@android:color/white"
+        android:layout_alignParentTop="true"/>
+
+    <ImageView
+        android:id="@+id/ivPhotoProfile"
+        android:background="@drawable/circle_bg"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/ic_profil"
+        android:layout_alignParentBottom="true"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"/>
+
+    <TextView
+        android:id="@+id/tvNamaPns"
+        android:text="@string/nama_pns"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="@dimen/_12ssp"
+        android:layout_alignTop="@id/ivPhotoProfile"
+        android:layout_toEndOf="@id/ivPhotoProfile"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/ivNoNip"
+        android:text="@string/nip_baru"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="@dimen/_12ssp"
+        android:layout_alignBottom="@id/ivPhotoProfile"
+        android:layout_toEndOf="@id/ivPhotoProfile"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

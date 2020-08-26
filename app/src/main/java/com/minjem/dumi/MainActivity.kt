@@ -3,11 +3,14 @@ package com.minjem.dumi
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.system.Os.close
 import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
@@ -18,20 +21,49 @@ import com.minjem.dumi.model.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-open class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+open class MainActivity : AppCompatActivity(){
     private var pinjaman = false
+    private lateinit var mToggle: ActionBarDrawerToggle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        // memunculkan tombol burger menu
+        setSupportActionBar(toolbarMain)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
         loadFragment(BerandaFragment())
-//        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        // untuk toggle open dan close navigation
+        mToggle = ActionBarDrawerToggle(this, drawer_layout, R.string.open, R.string.close)
+        // tambahkan mToggle ke drawer_layout sebagai pengendali open dan close drawer
+        drawer_layout.addDrawerListener(mToggle)
+        mToggle.syncState()
+
+        nav_view.setNavigationItemSelectedListener{
+            when(it.itemId){
+                R.id.bottom_navigation_beranda ->{
+                    println("Beranda Clicked")
+                    loadFragment(BerandaFragment())
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    true
+                }
+                R.id.bottom_navigation_inbox ->{
+                    println("Inbox Clicked")
+                    loadFragment(InboxFragment())
+
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    true
+                }
+                else -> true
+            }
+        }
+
+        /*loadFragment(BerandaFragment())
         bottom_navigation.setOnNavigationItemSelectedListener(this)
         Log.d("INTENT PINJAMAN", "onCreate: ${intent.getStringExtra("fragment")}")
         if (intent.getStringExtra("fragment") == "pinjaman"){
             loadFragment(PinjamanFragment())
             pinjaman = true
-        }
-//
+        }*/
 
         /* For swipe layout
         vpMain.offscreenPageLimit = 5
@@ -52,9 +84,21 @@ open class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         setupViewPager(vpMain)*/
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return mToggle.onOptionsItemSelected(item)
+    }
 
+    private fun loadFragment(fragment: Fragment?): Boolean {
+        if (fragment != null) {
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.fl_container, fragment)
+                    .commit()
+            return true
+        }
+        return false
+    }
 
-    private fun setupViewPager(viewPager: ViewPager) {
+    /*private fun setupViewPager(viewPager: ViewPager) {
         val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
         val fragmentHome = BerandaFragment()
         val fragmentInbox = InboxFragment()
@@ -70,15 +114,7 @@ open class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         viewPager.adapter = viewPagerAdapter
     }
 
-    private fun loadFragment(fragment: Fragment?): Boolean {
-        if (fragment != null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.fl_container, fragment)
-                    .commit()
-            return true
-        }
-        return false
-    }
+
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         var fragment: Fragment? = null
@@ -95,7 +131,7 @@ open class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         }
 //        vpMain.currentItem = index
 
-        /* Swipe layout
+        *//* Swipe layout
                when (menuItem.itemId) {
                    R.id.bottom_navigation_beranda -> {
                        index = 0
@@ -118,9 +154,9 @@ open class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
                        vpMain.currentItem = index
                    }
                }
-       */
+       *//*
         return loadFragment(fragment)
-    }
+    }*/
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

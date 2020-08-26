@@ -129,7 +129,7 @@ class DigiSign : Fragment(),UserView, DigisignView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         v = layoutInflater.inflate(R.layout.fragment_digisign,container,false)
-        userPrestImp.data("196209111983121001","123456")
+        userPrestImp.data(SharedPrefManager.getInstance(mContext).user.nip,SharedPrefManager.getInstance(mContext).user.password)
 
         if (arguments!!.getString("regis") == "00"){
             val g = GUser()
