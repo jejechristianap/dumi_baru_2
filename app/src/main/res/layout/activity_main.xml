@@ -43,8 +43,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:itemBackground="@color/yellow"
+            android:background="@color/colorBlue"
             android:fitsSystemWindows="true"
+            app:itemTextColor="@color/white"
+            app:itemIconTint="@color/white"
             app:headerLayout="@layout/nav_header"
             app:menu="@menu/bottom_navigation_menu"/>
 

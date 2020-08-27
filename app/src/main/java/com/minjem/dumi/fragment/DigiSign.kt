@@ -35,6 +35,7 @@ import com.minjem.dumi.MainActivity
 import com.minjem.dumi.R
 import com.minjem.dumi.ecommerce.Helper.mProgress
 import com.minjem.dumi.ecommerce.Helper.mToast
+import com.minjem.dumi.ecommerce.Helper.sBar
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.presenter.DigisignPrestImp
@@ -379,6 +380,7 @@ class DigiSign : Fragment(),UserView, DigisignView {
             val jsonFile = dataResponse.getJSONObject("JSONFile")
             val result = jsonFile.getString("result")
             val notif = jsonFile.getString("notif")
+
             if (result == "00"){
                 loop = true
                 runnableCode = object : Runnable {
@@ -431,6 +433,9 @@ class DigiSign : Fragment(),UserView, DigisignView {
 
             } else if (result == "93"){
                 Toast.makeText(mContext,notif,Toast.LENGTH_LONG).show()
+                capture_photo()
+            } else if( result == "28"){
+                sBar(v, jsonFile.getString("info"))
                 capture_photo()
             } else if(result == "05") {
                 Toast.makeText(mContext,"Hubungi Admin DUMI, Data foto tidak ditemukan !",Toast.LENGTH_SHORT).show()

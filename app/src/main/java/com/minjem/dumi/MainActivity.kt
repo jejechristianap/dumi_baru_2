@@ -41,15 +41,27 @@ open class MainActivity : AppCompatActivity(){
         nav_view.setNavigationItemSelectedListener{
             when(it.itemId){
                 R.id.bottom_navigation_beranda ->{
-                    println("Beranda Clicked")
                     loadFragment(BerandaFragment())
                     drawer_layout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.bottom_navigation_inbox ->{
-                    println("Inbox Clicked")
                     loadFragment(InboxFragment())
-
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    true
+                }
+                R.id.bottom_navigation_mitra -> {
+                    loadFragment(PinjamanFragment())
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    true
+                }
+                R.id.bottom_navigation_bantuan -> {
+                    loadFragment(BantuanFragment())
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    true
+                }
+                R.id.bottom_navigation_akun -> {
+                    loadFragment(AkunFragment())
                     drawer_layout.closeDrawer(GravityCompat.START)
                     true
                 }
