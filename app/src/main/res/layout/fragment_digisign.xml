@@ -47,7 +47,7 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/id_btn_data_digisign"
                 android:layout_width="match_parent"

@@ -8,6 +8,7 @@
     android:layout_height="match_parent">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
+        app:elevation="0dp"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
         android:layout_height="wrap_content">
@@ -23,6 +24,15 @@
                 app:titleTextColor="@color/white"
                 android:theme="@style/ToolbarTheme"
                 app:layout_constraintTop_toTopOf="parent"/>
+            <!--
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/dumi_logo_white"
+                android:textColor="@android:color/white"/>
+                -->
         </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>

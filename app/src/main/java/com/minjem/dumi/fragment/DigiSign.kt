@@ -18,6 +18,7 @@ import android.os.Handler
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.minjem.dumi.MainActivity
 import com.minjem.dumi.R
 import com.minjem.dumi.ecommerce.Helper.mProgress
@@ -48,6 +50,7 @@ import com.minjem.dumi.view.UserView
 import id.zelory.compressor.Compressor.compress
 import kotlinx.android.synthetic.main.d_webview.*
 import kotlinx.android.synthetic.main.ecommerce_pln.view.*
+import kotlinx.android.synthetic.main.fragment_digisign.*
 import kotlinx.android.synthetic.main.fragment_digisign.view.*
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
@@ -153,11 +156,13 @@ class DigiSign : Fragment(),UserView, DigisignView {
         }
 
         v.id_btn_data_digisign.setOnClickListener {
+            activation()
         }
 
         v.id_btn_registrasi_digisign.setOnClickListener {
             if (ISI_NIK_ULANG){
                 if (validasiInput()){
+                    v.id_l_tulis_digisign.visibility = View.GONE
                     registrasi_DIGISIGN(data)
                 }
             } else {
@@ -271,6 +276,8 @@ class DigiSign : Fragment(),UserView, DigisignView {
                         try {
                             Log.d("RESPONSE DIGISIGN",response.body().toString())
                             val jsonResult = JSONObject(response.body()!!.string())
+                            val jsonData = jsonResult.getJSONObject("data").getJSONObject("JSONFile")
+//                            sBar(v, jsonData.getString("notif"))
 
                             resultDigisign(jsonResult,data)
 
@@ -420,14 +427,18 @@ class DigiSign : Fragment(),UserView, DigisignView {
                 Toast.makeText(mContext,notif,Toast.LENGTH_LONG).show()
                 activation()
             } else if (result == "12"){
-                Toast.makeText(mContext,notif,Toast.LENGTH_LONG).show()
+//                Toast.makeText(mContext, jsonFile.getString("info"),Toast.LENGTH_LONG).show()
 
-                if (notif.toLowerCase().contains("nik") || notif.toLowerCase().contains("nama") || notif.toLowerCase().contains("tanggal lahir")){
+                if (notif.toLowerCase().contains("nik") && notif.toLowerCase().contains("nama") && notif.toLowerCase().contains("tanggal lahir")){
                     Toast.makeText(mContext,notif,Toast.LENGTH_LONG).show()
                     v.id_l_tulis_digisign.visibility = View.VISIBLE
                     ISI_NIK_ULANG = true
+                } else if (notif.toLowerCase().contains("nik")) {
+                    Toast.makeText(mContext,"Silahkan Foto Selfi dan KTP ulang",Toast.LENGTH_LONG).show()
+                    v.id_l_tulis_digisign.visibility = View.VISIBLE
+                    capture_photo()
                 } else {
-                    Toast.makeText(mContext,"Verifikasi photo gagal, Coba ulangi lagi",Toast.LENGTH_LONG).show()
+                    Toast.makeText(mContext,"Silahkan Foto Selfi dan KTP ulang",Toast.LENGTH_LONG).show()
                     capture_photo()
                 }
 
@@ -439,6 +450,12 @@ class DigiSign : Fragment(),UserView, DigisignView {
                 capture_photo()
             } else if(result == "05") {
                 Toast.makeText(mContext,"Hubungi Admin DUMI, Data foto tidak ditemukan !",Toast.LENGTH_SHORT).show()
+            } else if(result == "15") {
+                Toast.makeText(mContext,notif,Toast.LENGTH_SHORT).show()
+            } else if(result == "FE") {
+                Toast.makeText(mContext,"$notif. Silakan isi kembali NIK, Nama, Tanggal Lahir Anda. ",Toast.LENGTH_LONG).show()
+                v.id_l_tulis_digisign.visibility = View.VISIBLE
+                ISI_NIK_ULANG = true
             } else{
                 Toast.makeText(mContext,"Koneksi terputus, Coba ulangi lagi !",Toast.LENGTH_SHORT).show()
             }
@@ -479,6 +496,7 @@ class DigiSign : Fragment(),UserView, DigisignView {
 
         v.id_btn_registrasi_digisign.visibility = View.GONE
         v.id_btn_aktivasi_digisign.visibility = View.VISIBLE
+
         api.retrofit.activationDigisign(SharedPrefManager.getInstance(mContext).user.email).enqueue(object : Callback<ResponseBody>{
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Log.e("Activation","ERROR")
@@ -709,8 +727,16 @@ class DigiSign : Fragment(),UserView, DigisignView {
             if (data[0].photo_selfi != null && data[0].photo_ktp != null){
                 v.id_image_foto_diri_digisign.setBackgroundColor(Color.GRAY)
                 v.id_image_foto_ktp_digisign.setBackgroundColor(Color.GRAY)
-                Glide.with(mContext).load(data[0].photo_selfi).into(v.id_image_foto_diri_digisign)
-                Glide.with(mContext).load(data[0].photo_ktp).into(v.id_image_foto_ktp_digisign)
+                Glide.with(mContext)
+                        .load(data[0].photo_selfi)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(v.id_image_foto_diri_digisign)
+                Glide.with(mContext)
+                        .load(data[0].photo_ktp)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(v.id_image_foto_ktp_digisign)
 
                 email   = data[0].email!!
                 nik     = data[0].noktp1!!
@@ -750,6 +776,9 @@ class DigiSign : Fragment(),UserView, DigisignView {
                     mToast(mContext,"Selamat Akun Anda Sudah Teraktivasi")
                     v.id_btn_registrasi_digisign.visibility = View.GONE
                     v.id_btn_aktivasi_digisign.visibility = View.GONE
+                    val i = Intent(mContext, MainActivity::class.java)
+                    i.putExtra("navigation", "PinjamanFragment")
+                    startActivity(i)
                     activity!!.finish()
                 }
 
@@ -778,4 +807,5 @@ class DigiSign : Fragment(),UserView, DigisignView {
         CEK_AKTIVASI = false
         Log.e("Error",text)
     }
+
 }

@@ -31,7 +31,16 @@ open class MainActivity : AppCompatActivity(){
         setSupportActionBar(toolbarMain)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
-        loadFragment(BerandaFragment())
+
+        when(intent.getStringExtra("navigation")){
+            "PinjamanFragment" -> {
+                loadFragment(PinjamanFragment())
+            }
+            else -> {
+                loadFragment(BerandaFragment())
+                supportActionBar?.title = "Beranda"
+            }
+        }
         // untuk toggle open dan close navigation
         mToggle = ActionBarDrawerToggle(this, drawer_layout, R.string.open, R.string.close)
         // tambahkan mToggle ke drawer_layout sebagai pengendali open dan close drawer
@@ -42,26 +51,31 @@ open class MainActivity : AppCompatActivity(){
             when(it.itemId){
                 R.id.bottom_navigation_beranda ->{
                     loadFragment(BerandaFragment())
+                    supportActionBar?.title = "Beranda"
                     drawer_layout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.bottom_navigation_inbox ->{
                     loadFragment(InboxFragment())
+                    supportActionBar?.title = "Inbox"
                     drawer_layout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.bottom_navigation_mitra -> {
                     loadFragment(PinjamanFragment())
+                    supportActionBar?.title = "Pinjaman"
                     drawer_layout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.bottom_navigation_bantuan -> {
                     loadFragment(BantuanFragment())
+                    supportActionBar?.title = "Bantuan"
                     drawer_layout.closeDrawer(GravityCompat.START)
                     true
                 }
                 R.id.bottom_navigation_akun -> {
                     loadFragment(AkunFragment())
+                    supportActionBar?.title = "Akun"
                     drawer_layout.closeDrawer(GravityCompat.START)
                     true
                 }

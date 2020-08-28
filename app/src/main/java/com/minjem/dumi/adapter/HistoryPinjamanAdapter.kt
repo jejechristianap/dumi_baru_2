@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.minjem.dumi.R
-import com.minjem.dumi.model.DataPinjaman
+import com.minjem.dumi.dataclass.DataPinjaman
 import kotlinx.android.synthetic.main.recycler_view_history_pinjaman.view.*
 import java.text.DecimalFormat
 
@@ -50,7 +50,7 @@ class HistoryPinjamanAdapter (mContext: Context, internal var list : List<DataPi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryPinjamanAdapter.PinjamanHolder {
-        val pinjamanView = LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_history_pinjaman, parent, false)
+        val pinjamanView = LayoutInflater.from(parent.context).inflate(R.layout.gridview_menu, parent, false)
         return PinjamanHolder(pinjamanView)
     }
 

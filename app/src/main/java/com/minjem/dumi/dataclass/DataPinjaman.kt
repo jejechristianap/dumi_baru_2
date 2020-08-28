@@ -1,4 +1,4 @@
-package com.minjem.dumi.model
+package com.minjem.dumi.dataclass
 
 data class DataPinjaman(
         var id: Int? = null,

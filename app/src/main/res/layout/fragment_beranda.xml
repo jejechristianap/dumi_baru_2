@@ -4,11 +4,348 @@
     android:id="@+id/top_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_100"
+    android:background="@drawable/gradient_home_background"
     android:orientation="vertical">
+    <ScrollView
+        android:visibility="gone"
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:padding="@dimen/_15sdp"
+        android:layout_alignParentBottom="true"
+        android:scrollbars="none">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_15sdp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_22sdp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/tentukan_pinjaman"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                />
+
+            <RelativeLayout
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp">
+                <TextView
+                    android:id="@+id/tvRp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/rp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_20ssp"
+                    android:gravity="end|center"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="wrap_content"/>
+                <me.abhinay.input.CurrencyEditText
+                    android:id="@+id/etCurrencyUltimate"
+                    android:layout_toEndOf="@id/tvRp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_50sdp"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:gravity="start|center"
+                    android:backgroundTint="@color/white"
+                    android:inputType="number"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_20ssp" />
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tvMinKil"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pinjaman_ultimate_rp51_000_000_rp100_000_000"
+                    android:textSize="@dimen/_8ssp"
+                    android:textColor="#B71C1C" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tvMaksKil"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/maksimum_pinjaman_rp_15_000_000"
+                    android:textSize="@dimen/_8ssp"
+                    android:textColor="#B71C1C" />
+            </RelativeLayout>
+
+            <SeekBar
+                android:id="@+id/sbUltimate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:progress="0"
+                android:progressDrawable="@drawable/seekbar_drawable_progress"
+                android:thumb="@drawable/ic_amount_dot" />
+
+            <RelativeLayout
+                android:layout_marginTop="@dimen/_20sdp"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tenor"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/tenor"
+                    android:textSize="@dimen/_13ssp"
+                    android:textColor="@color/white"
+                    />
+                <NumberPicker
+                    android:layout_below="@id/tenor"
+                    android:visibility="visible"
+                    android:id="@+id/npBulanUltimate"
+                    android:theme="@style/DefaultNumberPickerTheme"
+                    android:layout_alignStart="@id/tenor"
+                    android:layout_alignEnd="@id/tenor"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:layout_alignStart="@id/npBulanUltimate"
+                    android:layout_alignTop="@id/npBulanUltimate"
+                    android:layout_alignBottom="@id/npBulanUltimate"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/seekbar_drawable_thumb"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"/>
+
+                <TextView
+                    android:id="@+id/tujuan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/tujuan_pinjaman"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_13ssp" />
+                <NumberPicker
+                    android:visibility="visible"
+                    android:id="@+id/npTujuanUltimate"
+                    android:theme="@style/NumberPickerTheme"
+                    android:layout_alignStart="@id/tujuan"
+                    android:layout_alignEnd="@id/tujuan"
+                    android:layout_below="@id/tujuan"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+            <RadioGroup
+                android:id="@+id/rgKilat"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_height="@dimen/_40sdp">
+                <RadioButton
+                    android:id="@+id/rbKilat3"
+                    android:background="@drawable/radio_pinjaman_selector"
+                    android:button="@android:color/transparent"
+                    android:text="@string/bulan_3"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:textColor="@drawable/radio_flat_selector_text_pinjaman"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_25sdp"/>
+
+                <RadioButton
+                    android:id="@+id/rbKilat6"
+                    android:background="@drawable/radio_pinjaman_selector"
+                    android:button="@android:color/transparent"
+                    android:text="@string/bulan_6"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textColor="@drawable/radio_flat_selector_text_pinjaman"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_25sdp"/>
+
+                <RadioButton
+                    android:id="@+id/rbKilat12"
+                    android:background="@drawable/radio_pinjaman_selector"
+                    android:button="@android:color/transparent"
+                    android:text="@string/bulan_12"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textColor="@drawable/radio_flat_selector_text_pinjaman"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_25sdp"/>
+            </RadioGroup>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <TextView
+                    android:id="@+id/angsuran"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/angsuran_perbulan"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_12ssp"/>
+
+                <TextView
+                    android:id="@+id/tvAngsuranPerbulanUltimate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/angsuran"
+                    android:gravity="end"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/admin_asn_ultimate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/angsuran"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="@string/biaya_administrasi"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/tvAdminUltimate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/admin_asn_ultimate"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/admin_asn_ultimate"
+                    android:gravity="end"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/asuransi_asn_ultimate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/admin_asn_ultimate"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="@string/biaya_asuransi"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/tvAsuransiUltimate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/asuransi_asn_ultimate"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/asuransi_asn_ultimate"
+                    android:gravity="end"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/trf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/asuransi_asn_ultimate"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="@string/transfer_antar_bank"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/tvTrfUltimate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/trf"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/trf"
+                    android:gravity="end"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/jml"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/trf"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/jumlah_yang_diterima"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvJumlahTerimaUltimate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/jml"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_18ssp" />
+            </RelativeLayout>
+
+
+
+
+            <Button
+                android:id="@+id/bLanjutUltimate"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/button_rounded_custom"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/lanjut"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_15ssp" />
+
+        </LinearLayout>
+    </ScrollView>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srlBeranda"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_120sdp">
 
@@ -88,6 +425,7 @@
             </RelativeLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <ScrollView
+        android:visibility="visible"
         android:layout_below="@id/srlBeranda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -308,7 +646,7 @@
                 android:textSize="@dimen/_12ssp" />
 
 
-            <GridView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/gvMenuUtama"
                 tools:listitem="@layout/gridview_menu"
                 android:layout_width="match_parent"

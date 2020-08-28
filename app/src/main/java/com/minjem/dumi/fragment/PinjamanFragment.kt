@@ -27,12 +27,12 @@ import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.R
 import com.minjem.dumi.adapter.HistoryPinjamanAdapter
 import com.minjem.dumi.api.StatusPinjamanInterface
+import com.minjem.dumi.dataclass.DataPinjaman
 import com.minjem.dumi.ecommerce.ECommerceActivity
 import com.minjem.dumi.ecommerce.Helper.mProgress
 import com.minjem.dumi.ecommerce.Helper.mToast
 import com.minjem.dumi.ecommerce.Helper.sBar
 import com.minjem.dumi.ecommerce.api.HttpRetrofitClient
-import com.minjem.dumi.model.DataPinjaman
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.model.User
 import com.minjem.dumi.presenter.DigisignPrestImp
@@ -41,9 +41,9 @@ import com.minjem.dumi.retrofit.RetrofitClient
 import com.minjem.dumi.util.CustomProgressDialog
 import com.minjem.dumi.view.DigisignView
 import kotlinx.android.synthetic.main.d_webview.*
+import kotlinx.android.synthetic.main.dialog_history_pinjaman.*
 import kotlinx.android.synthetic.main.fragment_pinjaman.*
 import kotlinx.android.synthetic.main.fragment_pinjaman.view.*
-import kotlinx.android.synthetic.main.dialog_history_pinjaman.*
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONException
@@ -99,6 +99,7 @@ class PinjamanFragment : Fragment(), DigisignView {
     val handler = Handler()
     private var runnableCode: Runnable? = null
     private var runnableActivation: Runnable? = null
+    private var rc = false
     private var ra = false
     private var notif = ""
     private var resultSign = ""
@@ -191,9 +192,16 @@ class PinjamanFragment : Fragment(), DigisignView {
                             mProgress(dProgress)
                             runnableCode = object : Runnable {
                                 override fun run() {
-                                    Log.d(TAG, "Handler >>>>>>>>>>>>>>>>>>>>>>>>>> START : Activation($activation)")
-                                    signPinjaman
-                                    handler.postDelayed(this, 3000)
+                                    try {
+                                        rc = true
+                                        Log.d(TAG, "Handler >>>>>>>>>>>>>>>>>>>>>>>>>> START : Activation($activation)")
+                                        signPinjaman
+                                        handler.postDelayed(this, 3000)
+                                    } catch (e: Exception) {
+                                        e.printStackTrace()
+                                        rc = false
+                                    }
+
                                 }
                             }
                             handler.post(runnableCode!!)
@@ -630,11 +638,11 @@ class PinjamanFragment : Fragment(), DigisignView {
         dWeb.toolbarWvDigisign.title = ""
         dWeb.toolbarWvDigisign.setNavigationIcon(R.drawable.ic_back_white)
         dWeb.toolbarWvDigisign.setNavigationOnClickListener {
-            if (touch){
+            if (ra){
                 pinjaman
                 dWeb.dismiss()
                 handler.removeCallbacks(runnableActivation!!)
-                touch = false
+                ra = false
             } else {
                 pinjaman
                 handler.removeCallbacks(runnableCode!!)
@@ -699,14 +707,22 @@ class PinjamanFragment : Fragment(), DigisignView {
                     ra = true
                     runnableActivation = object : Runnable {
                         override fun run() {
-                            Log.d(TAG, "looping run: >>>>>>>>>>>>>>>>>>>>>>>>>> $activation")
-                            signPinjaman
-                            handler.postDelayed(this, 3000)
+                            try {
+                                ra = true
+                                Log.d(TAG, "looping run: >>>>>>>>>>>>>>>>>>>>>>>>>> $activation")
+                                signPinjaman
+                                handler.postDelayed(this, 3000)
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                ra = false
+                            }
+
                         }
                     }
                     handler.post(runnableActivation!!)
                     /*digisignPrestImp.data(SharedPrefManager.getInstance(mContext).user.nip
                             ,SharedPrefManager.getInstance(mContext).user.email, idPinjaman)*/
+
                     webView(response.data[0].info, true)
                    /* val i = Intent(mContext, ECommerceActivity::class.java)
                     i.putExtra("fragment", "digisign")

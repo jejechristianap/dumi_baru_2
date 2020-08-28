@@ -12,14 +12,20 @@ import android.widget.GridView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.MainActivity
-import com.minjem.dumi.SemuaEcommerceActivity
 import com.minjem.dumi.R
+import com.minjem.dumi.SemuaEcommerceActivity
+import com.minjem.dumi.adapter.EcommerceMenuAdapter
 import com.minjem.dumi.adapter.MenuBaseAdapter
+import com.minjem.dumi.dataclass.DataEcommerce
 import com.minjem.dumi.ecommerce.ECommerceActivity
 import com.minjem.dumi.ecommerce.Helper.PASSWORD
 import com.minjem.dumi.ecommerce.Helper.USERNAME
+import com.minjem.dumi.ecommerce.Helper.sBar
+import com.minjem.dumi.ecommerce.adapter.PlnAdapter
 import com.minjem.dumi.ecommerce.api.BaseApiService
 import com.minjem.dumi.ecommerce.transaction.RiwayatView
 import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity
@@ -30,8 +36,8 @@ import com.minjem.dumi.retrofit.RetrofitClient
 import com.minjem.dumi.util.BottomSheetFragment
 import com.minjem.dumi.util.InternetConnection
 import kotlinx.android.synthetic.main.dialog_bottom_sheet_layout.view.*
+import kotlinx.android.synthetic.main.ecommerce_pln.view.*
 import kotlinx.android.synthetic.main.fragment_beranda.view.*
-import kotlinx.android.synthetic.main.fragment_beranda.view.textPulsa
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONException
@@ -54,22 +60,22 @@ class BerandaFragment : Fragment() {
     private val go: String? = null
     lateinit var dView : View
     private val menuAdapter = MenuBaseAdapter("beranda")
+    lateinit var eAdapter: EcommerceMenuAdapter
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.fragment_beranda, container, false)
         mContext = this.context!!
-//        initView()
-//        initOnTouch()
+        initView()
         mView.srlBeranda.setOnRefreshListener {
             mView.srlBeranda.isRefreshing = true
             refreshList()
         }
 
-        mView.gvMenuUtama.adapter = menuAdapter
-        mView.gvMenuUtama.numColumns = 4
-        mView.gvMenuUtama.stretchMode = GridView.STRETCH_COLUMN_WIDTH
-
+        eAdapter = EcommerceMenuAdapter(mContext, generateMenu())
+        mView.gvMenuUtama.layoutManager = GridLayoutManager(mContext, 4)
+        mView.gvMenuUtama.adapter = eAdapter
+        rvClick()
         initOnTouch()
         saldo()
         val network = InternetConnection(mContext)
@@ -83,8 +89,32 @@ class BerandaFragment : Fragment() {
         return mView
     }
 
-    private fun initOnTouch() {
+    private fun initView(){
 
+
+
+    }
+
+    private fun generateMenu(): List<DataEcommerce> {
+        return listOf(DataEcommerce("PULSA", R.drawable.ic_pulsa),
+                DataEcommerce("PLN", R.drawable.ic_token_pln),
+                DataEcommerce("GOPAY", R.drawable.ic_gopay),
+                DataEcommerce("OVO", R.drawable.ic_ovo),
+                DataEcommerce("HOTEL", R.drawable.ic_hotel),
+                DataEcommerce("PESAWAT", R.drawable.ic_pesawat),
+                DataEcommerce("KERETA", R.drawable.ic_kereta),
+                DataEcommerce("SEMUA", R.drawable.ic_all))
+    }
+
+    private fun rvClick(){
+        mView.gvMenuUtama.addOnItemTouchListener(RecyclerItemClickListener(mContext, object: RecyclerItemClickListener.OnItemClickListener{
+            override fun onItemClick(view: View, position: Int) {
+                sBar(mView, eAdapter.list[position].title.toString())
+            }
+        }))
+    }
+
+    private fun initOnTouch() {
 
         mView.cardKilat.setOnClickListener { goTo("kilat") }
         mView.kilatButton.setOnClickListener { goTo("kilat") }
