@@ -1,21 +1,17 @@
 package com.minjem.dumi
 
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.minjem.dumi.DaftarActivity
 import com.minjem.dumi.api.CekUserExist
 import com.minjem.dumi.api.LoginInterface
 import com.minjem.dumi.ecommerce.Helper.mProgress
-import com.minjem.dumi.model.PreferenceHelper
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.model.User
 import com.minjem.dumi.retrofit.RetrofitClient
@@ -32,7 +28,6 @@ class MasukActivity : AppCompatActivity() {
     lateinit var masukButton: Button
     lateinit var nipEt: EditText
     lateinit var passEt: EditText
-    private val preferenceHelper: PreferenceHelper? = null
     lateinit var daftarDisiniTv: TextView
     lateinit var dProgress: Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -237,7 +232,28 @@ class MasukActivity : AppCompatActivity() {
                                     tempatLahir, tanggalLahir, statusKawin, jumlahTanggungan, pendidikan, ketTitle,
                                     insker, statusRumah, alamat, rt, rw, propinsi, kota, kecamatan, kelurahan,
                                     kodePos, statusHubungan, namaPenanggung, noKtpPenanggung, namaIbu, noHp, imageKtp,
-                                    imageSelfi, imageProfile, statusTopup, saldo, saldo_max)
+                                    imageSelfi, imageProfile, statusTopup, saldo, saldo_max,
+                                    userObj.getString("nama_bank"),
+                                    userObj.optInt("maksimal_angsuran", 0),
+                                    userObj.optInt("cicilan_pertahun", 0),
+                                    userObj.optInt("maksimal_pinjaman", 0),
+                                    userObj.optInt("maksimal_tenor", 0),
+                                    userObj.optInt("plafond_1", 0),
+                                    userObj.optInt("plafond_2", 0),
+                                    userObj.optInt("plafond_3", 0),
+                                    userObj.optInt("plafond_4", 0),
+                                    userObj.optInt("plafond_5", 0),
+                                    userObj.optInt("plafond_6", 0),
+                                    userObj.optInt("plafond_7", 0),
+                                    userObj.optInt("plafond_8", 0),
+                                    userObj.optInt("plafond_9", 0),
+                                    userObj.optInt("plafond_10", 0),
+                                    userObj.optInt("plafond_11", 0),
+                                    userObj.optInt("plafond_12", 0),
+                                    userObj.optInt("plafond_13", 0),
+                                    userObj.optInt("plafond_14", 0),
+                                    userObj.optInt("plafond_15", 0)
+                            )
                             SharedPrefManager.getInstance(applicationContext).userLogin(user)
                         }
                         finish()

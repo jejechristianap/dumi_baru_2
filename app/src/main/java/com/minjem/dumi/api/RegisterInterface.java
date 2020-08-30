@@ -65,6 +65,10 @@ public interface RegisterInterface {
             @Field("tglLahirPasangan") String tglLahirPasangan,
             @Field("namaBank") String namaBank,
             @Field("namaRekening") String namaRekening,
-            @Field("noRekening") String noRekening
+            @Field("noRekening") String noRekening,
+            @Field("nama_bank") String nama_bank,
+            @Field("golongan") String golongan,
+            @Field("namaJabatan") String namaJabatan,
+            @Field("tmtCpns") String tmtCpns
        );
 }

@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
@@ -20,6 +21,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -57,7 +59,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class PinjamanFragment : Fragment(), DigisignView {
+class PinjamanFragment : Fragment(), DigisignView/*, Toolbar.OnMenuItemClickListener*/ {
     private var statusPinjamanTv: TextView? = null
     private var pinjamanTv: TextView? = null
     private var tenorPinjamanTv: TextView? = null
@@ -110,6 +112,9 @@ class PinjamanFragment : Fragment(), DigisignView {
         mContext = this.activity!!
 //        (activity as AppCompatActivity).setSupportActionBar(v.toolbarPinjaman)
 //        v.ctlPinjaman.title = "Pinjaman"
+        /*val toolbar = activity!!.findViewById<View>(R.id.toolbarMain) as Toolbar
+        toolbar.inflateMenu(R.menu.menu_toolbar_pinjaman)
+        toolbar.setOnMenuItemClickListener(this)*/
 
         mDialog = Dialog(mContext, R.style.DialogTheme)
         digisignPrestImp = DigisignPrestImp(this)
@@ -136,6 +141,8 @@ class PinjamanFragment : Fragment(), DigisignView {
 
 
     private fun initOnTouch(){
+//        val view = activity.findViewById(R.id.mainActivity)
+
        v.bRegisAktifasiDigisign.setOnClickListener{
            touch = true
            if (activation){
@@ -221,12 +228,14 @@ class PinjamanFragment : Fragment(), DigisignView {
             refreshList()
         }
 
-        v.ivHistoryPinjaman.setOnClickListener {
-            getHistoryPinjaman()
-        }
+//        v.ivHistoryPinjaman.setOnClickListener {
+//            getHistoryPinjaman()
+//        }
     }
 
-    private fun getHistoryPinjaman(){
+
+    fun getHistoryPinjaman(){
+//        Log.d("Pinjaman Fragment", "getHistoryPinjaman: $test")
         listPinjaman.clear()
         mDialog.setContentView(R.layout.dialog_history_pinjaman)
         mDialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -273,6 +282,7 @@ class PinjamanFragment : Fragment(), DigisignView {
         jumlahTerimaTv = v.findViewById(R.id.jumlah_terima_pinjaman)
         tglPengajuanTv = v.findViewById(R.id.tanggal_pengajuan_pinjaman)
         svTagihan = v.findViewById(R.id.svTagihan)
+
         rlGagal = v.findViewById(R.id.rlGagalTagihan)
         tvGagal = v.findViewById(R.id.tvGagalTagihan)
     }
@@ -798,4 +808,15 @@ class PinjamanFragment : Fragment(), DigisignView {
 
         })
     }
+
+    /*override fun onMenuItemClick(item: MenuItem?): Boolean {
+        when (item!!.itemId) {
+            R.id.actionRiwayatPinjaman -> {
+                getHistoryPinjaman()
+                return true
+            }
+
+        }
+        return false
+    }*/
 }

@@ -11,6 +11,7 @@
         android:id="@+id/layout_image"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_120sdp"
+        android:visibility="gone"
         android:background="@drawable/bg_beranda"
         android:gravity="center"
         android:orientation="vertical">

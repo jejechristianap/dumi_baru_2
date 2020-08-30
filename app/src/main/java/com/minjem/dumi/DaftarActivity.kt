@@ -7,10 +7,8 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.SystemClock
 import android.text.Html
 import android.text.InputType
 import android.text.TextUtils
@@ -22,14 +20,12 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.AuthUI.IdpConfig.PhoneBuilder
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.minjem.dumi.akun.KebijakanPrivasiActivity
@@ -84,23 +80,7 @@ class DaftarActivity : AppCompatActivity() {
         setuju_tv.text = Html.fromHtml(getString(R.string.saya_setuju))
         setuju_tv.setOnClickListener {  startActivity(Intent(this, KebijakanPrivasiActivity::class.java)) }
 
-        /*setuju_switch.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-            if (isChecked) {
-                lanjut_button.isEnabled = true
-                lanjut_button!!.setBackgroundResource(R.drawable.button_design_login_register)
-            } else {
-                lanjut_button.isEnabled = false
-                lanjut_button!!.setBackgroundResource(R.drawable.button_lanjut_design)
-            }
-        }*/
 
-        /*instansiSpinner = findViewById(R.id.daftar_sebagai_spinner);
-        instansiAdapter = new ArrayAdapter<>(DaftarActivity.this, R.layout.spinner_text, instansi);
-        instansiAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
-        instansiSpinner.setAdapter(instansiAdapter);
-        */
-
-//        pDialog = ProgressDialog(this@DaftarActivity)
 
 
         /*Hide Soft Keyboard*/
@@ -226,7 +206,6 @@ class DaftarActivity : AppCompatActivity() {
                 val i = Intent(applicationContext, DataPribadiActivity::class.java)
                 i.putExtra("namaKtp", daftar_nama_pns!!.text.toString())
                 startActivity(i)
-                //            FirebaseAuth.getInstance().createUserWithEmailAndPassword()
             }
         }
 
@@ -431,45 +410,6 @@ class DaftarActivity : AppCompatActivity() {
         startActivityForResult(intent, RC_SIGN_IN)
     }
 
-    /*private void getToken(){
-        CekNipBknInterface token = RetrofitClient.getClient().create(CekNipBknInterface.class);
-        Call<ResponseBody> call = token.getToken();
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
-                if (response.isSuccessful()){
-                    try {
-                        assert response.body() != null;
-                        JSONObject jsonObject = new JSONObject(response.body().string());
-                        String data = jsonObject.getString("data");
-                        JSONObject request = new JSONObject(data);
-                        Log.d("Data", "onResponse: " + data);
-                        if (jsonObject.getBoolean("status")){
-//                            Toast.makeText(DaftarActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-//                            JSONObject data = jsonObject.getJSONObject("data");
-                            accessToken = request.getString("access_token");
-                            countDown = request.getInt("expires_in");
-
-                            Log.d("Token", "onResponse: " + accessToken);
-
-                            cekUser();
-                        } else {
-                            Toast.makeText(DaftarActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-                        }
-
-                    } catch (JSONException | IOException e) {
-                        progressBar.setVisibility(View.GONE);
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-    }*/
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
@@ -584,6 +524,10 @@ class DaftarActivity : AppCompatActivity() {
                             editor.putString("tempatLahir", tempatLahir)
                             editor.putString("jenisKelamin", jenisKelamin)
                             editor.putString("dataBkn", data)
+                            editor.putString("nama_bank", jsonData.getString("nama_bank"))
+                            editor.putString("golongan", jsonData.getString("golRuangAkhir"))
+                            editor.putString("namaJabatan", jsonData.getString("jabatanStrukturalNama"))
+                            editor.putString("tmtCpns", jsonData.getString("tmtJabatan"))
                             Log.d("Data", "unorNama: $inskerNama\nNama : $namaPns\ntglLahir: $tglLahir")
                             Toast.makeText(this@DaftarActivity, "NIP Instansi anda ditemukan..", Toast.LENGTH_SHORT).show()
                             email_password.visibility = View.VISIBLE
@@ -629,4 +573,44 @@ class DaftarActivity : AppCompatActivity() {
                         ")+"
         )
     }
+
+    /*private void getToken(){
+        CekNipBknInterface token = RetrofitClient.getClient().create(CekNipBknInterface.class);
+        Call<ResponseBody> call = token.getToken();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                if (response.isSuccessful()){
+                    try {
+                        assert response.body() != null;
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        String data = jsonObject.getString("data");
+                        JSONObject request = new JSONObject(data);
+                        Log.d("Data", "onResponse: " + data);
+                        if (jsonObject.getBoolean("status")){
+//                            Toast.makeText(DaftarActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+//                            JSONObject data = jsonObject.getJSONObject("data");
+                            accessToken = request.getString("access_token");
+                            countDown = request.getInt("expires_in");
+
+                            Log.d("Token", "onResponse: " + accessToken);
+
+                            cekUser();
+                        } else {
+                            Toast.makeText(DaftarActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                        }
+
+                    } catch (JSONException | IOException e) {
+                        progressBar.setVisibility(View.GONE);
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }*/
 }

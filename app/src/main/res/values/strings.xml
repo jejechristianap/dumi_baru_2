@@ -88,7 +88,7 @@
     <string name="pinjaman">Pinjaman</string>
     <string name="daftar">Daftar</string>
     <string name="login">Login</string>
-    <string name="nip_instansi">NIP Instansi Anda</string>
+    <string name="nip_instansi">NIP Instansi</string>
     <string name="masukkan_nip">Masukkan NIP</string>
     <string name="masukkan_email">Masukkan Email</string>
     <string name="masukkan_password">Masukkan Password (Min 6 Karakter)</string>
@@ -164,7 +164,6 @@
     <string name="test">Test</string>
     <string name="dumi_bumn">DUMI BUMN</string>
     <string name="dumi_bumn_des">Pinjaman dana sampai Rp50.000.00 untuk pegawai BUMN</string>
-    <string name="kembali">Kembali</string>
     <string name="logout">Logout</string>
     <string name="cek_daftar_harga">Cek Daftar Harga Pulsa</string>
     <string name="instansi_kerja">Instansi Kerja</string>
@@ -716,4 +715,6 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="hitung">Hitung</string>
+    <string name="kembali">Kembali</string>
 </resources>

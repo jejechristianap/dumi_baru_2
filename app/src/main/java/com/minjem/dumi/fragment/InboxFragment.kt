@@ -49,15 +49,14 @@ class InboxFragment : Fragment() {
         dProgress = Dialog(mContext)
         /*(activity as AppCompatActivity).setSupportActionBar(mView.toolbarInbox)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)*/
-        (activity as AppCompatActivity).setSupportActionBar(mView.toolbarInbox)
+        /*(activity as AppCompatActivity).setSupportActionBar(mView.toolbarInbox)
         mView.ctl.title = "Inbox"
-//        TODO implement toolbar overflow below
         mView.ivYuhu.setOnClickListener {
             Snackbar.make(mView, "Yuhuuuuuuu", Snackbar.LENGTH_LONG).show()
-        }
+        }*/
 
 
-        loadBackdrop()
+//        loadBackdrop()
 
         list.clear()
         layoutManager = LinearLayoutManager(mContext)
@@ -79,9 +78,9 @@ class InboxFragment : Fragment() {
         return mView
     }
 
-    private fun loadBackdrop(){
+    /*private fun loadBackdrop(){
         Glide.with(mContext).load(R.drawable.bg_beranda).into(mView.ivBgInbox)
-    }
+    }*/
 
     private fun refreshList(){
         mView.srlNotif.isRefreshing = false

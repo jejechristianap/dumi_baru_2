@@ -24,8 +24,8 @@ class HistoryPinjamanAdapter (mContext: Context, internal var list : List<DataPi
             val df = DecimalFormat("#,###")
             val bulan = "${item.lamaPinjaman} Bulan"
             val jumlah = "Rp${df.format(item.pinjaman)}"
-            c
-            when(item.status){
+
+            /*when(item.status){
                 "Pengajuan" -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.yellow, null))
                 "Disetujui" -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.green, null))
                 "Ditolak" -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.orange, null))
@@ -33,7 +33,7 @@ class HistoryPinjamanAdapter (mContext: Context, internal var list : List<DataPi
                 "Kredit berjalan"  -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.green, null))
                 "Kredit Lunas" -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.green, null))
                 else -> "!!Dalam Proses Pengembangan!!"
-            }
+            }*/
             itemView.tvTujuan.text = item.tujuanPinjaman
             itemView.tvTanggalPinjaman.text = item.tglPengajuan
             itemView.tvJumlahPinjaman.text = jumlah
@@ -50,7 +50,7 @@ class HistoryPinjamanAdapter (mContext: Context, internal var list : List<DataPi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryPinjamanAdapter.PinjamanHolder {
-        val pinjamanView = LayoutInflater.from(parent.context).inflate(R.layout.gridview_menu, parent, false)
+        val pinjamanView = LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_history_pinjaman, parent, false)
         return PinjamanHolder(pinjamanView)
     }
 

@@ -16,11 +16,11 @@
         android:text="@string/tutup"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:textColor="#E91E63"
+        android:textColor="@color/bluetkb"
         android:layout_gravity="end"
         android:textAllCaps="false"
         android:padding="@dimen/_10sdp"
-        android:background="@drawable/button_outerline_red"
+        android:background="@drawable/button_outerline_blue"
         android:textSize="@dimen/_10ssp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

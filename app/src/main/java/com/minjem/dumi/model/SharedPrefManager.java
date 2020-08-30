@@ -41,6 +41,27 @@ public class SharedPrefManager {
     private static final String SALDO = "saldo";
     private static final String SALDO_MAX = "saldo_max";
 
+    private static final String NAMA_BANK = "nama_bank";
+    private static final String MAKSIMAL_ANGSURAN = "maksimal_angsuran";
+    private static final String CICILAN_PERTAHUN = "cicilan_pertahun";
+    private static final String maksimal_pinjaman = "maksimal_pinjaman";
+    private static final String maksimal_tenor = "maksimal_tenor";
+    private static final String plafond_1 = "plafond_1";
+    private static final String plafond_2 = "plafond_2";
+    private static final String plafond_3 = "plafond_3";
+    private static final String plafond_4 = "plafond_4";
+    private static final String plafond_5 = "plafond_5";
+    private static final String plafond_6 = "plafond_6";
+    private static final String plafond_7 = "plafond_7";
+    private static final String plafond_8 = "plafond_8";
+    private static final String plafond_9 = "plafond_9";
+    private static final String plafond_10 = "plafond_10";
+    private static final String plafond_11 = "plafond_11";
+    private static final String plafond_12 = "plafond_12";
+    private static final String plafond_13 = "plafond_13";
+    private static final String plafond_14 = "plafond_14";
+    private static final String plafond_15 = "plafond_15";
+
     private static SharedPrefManager mInstance;
     private static Context mCtx;
 
@@ -95,6 +116,32 @@ public class SharedPrefManager {
         editor.putInt(STATUS_TOPUP, user.getStatus_topup());
         editor.putInt(SALDO, user.getSaldo());
         editor.putInt(SALDO_MAX, user.getSaldo_max());
+
+        editor.putString(NAMA_BANK, user.getNama_bank());
+        editor.putInt(MAKSIMAL_ANGSURAN, user.getMaksimal_angsuran());
+        editor.putInt(CICILAN_PERTAHUN, user.getCicilan_pertahun());
+        editor.putInt(maksimal_pinjaman, user.getMaksimal_pinjaman());
+        editor.putInt(maksimal_tenor, user.getMaksimal_tenor());
+        editor.putInt(plafond_1, user.getPlafond_1());
+        editor.putInt(plafond_2, user.getPlafond_2());
+        editor.putInt(plafond_3, user.getPlafond_3());
+        editor.putInt(plafond_4, user.getPlafond_4());
+        editor.putInt(plafond_5, user.getPlafond_5());
+        editor.putInt(plafond_6, user.getPlafond_6());
+        editor.putInt(plafond_7, user.getPlafond_7());
+        editor.putInt(plafond_8, user.getPlafond_8());
+        editor.putInt(plafond_9, user.getPlafond_9());
+        editor.putInt(plafond_10, user.getPlafond_10());
+        editor.putInt(plafond_11, user.getPlafond_11());
+        editor.putInt(plafond_12, user.getPlafond_12());
+        editor.putInt(plafond_13, user.getPlafond_13());
+        editor.putInt(plafond_14, user.getPlafond_14());
+        editor.putInt(plafond_15, user.getPlafond_15());
+
+
+
+
+
         editor.apply();
     }
 
@@ -143,7 +190,36 @@ public class SharedPrefManager {
                 sharedPreferences.getString(PHOTO_PROFILE, null),
                 sharedPreferences.getInt(STATUS_TOPUP, 0),
                 sharedPreferences.getInt(SALDO, 0),
-                sharedPreferences.getInt(SALDO_MAX, 0)
+                sharedPreferences.getInt(SALDO_MAX, 0),
+
+                sharedPreferences.getString(NAMA_BANK, ""),
+                sharedPreferences.getInt(MAKSIMAL_ANGSURAN, 0),
+                sharedPreferences.getInt(CICILAN_PERTAHUN, 0),
+                sharedPreferences.getInt(maksimal_pinjaman, 0),
+                sharedPreferences.getInt(maksimal_tenor, 0),
+                sharedPreferences.getInt(plafond_1, 0),
+                sharedPreferences.getInt(plafond_2, 0),
+                sharedPreferences.getInt(plafond_3, 0),
+                sharedPreferences.getInt(plafond_4, 0),
+                sharedPreferences.getInt(plafond_5, 0),
+                sharedPreferences.getInt(plafond_6, 0),
+                sharedPreferences.getInt(plafond_7, 0),
+                sharedPreferences.getInt(plafond_8, 0),
+                sharedPreferences.getInt(plafond_9, 0),
+                sharedPreferences.getInt(plafond_10, 0),
+                sharedPreferences.getInt(plafond_11, 0),
+                sharedPreferences.getInt(plafond_12, 0),
+                sharedPreferences.getInt(plafond_13, 0),
+                sharedPreferences.getInt(plafond_14, 0),
+                sharedPreferences.getInt(plafond_15, 0)
+
+
+
+
+
+
+
+
         );
     }
 

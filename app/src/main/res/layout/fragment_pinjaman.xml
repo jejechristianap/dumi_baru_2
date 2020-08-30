@@ -2,12 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fPinjaman"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="2"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:id="@+id/topView"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
@@ -51,10 +52,10 @@
             android:textStyle="bold" />
 
     </RelativeLayout>
+    -->
     <RelativeLayout
         android:visibility="gone"
         android:id="@+id/rlGagalTagihan"
-        android:layout_below="@id/topView"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -80,14 +81,13 @@
     </RelativeLayout>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srlTagihan"
-        android:layout_below="@id/topView"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ScrollView
             android:id="@+id/svTagihan"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_below="@id/topView"
             android:layout_alignParentBottom="true"
             android:visibility="gone">
 

@@ -273,7 +273,11 @@ class FotoSelfiActivity : AppCompatActivity() {
                 sp.getString("tglLahirPasangan", "")!!.toString(),
                 sp.getString("namaBank", "")!!.toString(),
                 sp.getString("namaRekening", "")!!.toString(),
-                sp.getString("noRekening", "")!!.toString()
+                sp.getString("noRekening", "")!!.toString(),
+                sp.getString("nama_bank", "")!!.toString(),
+                sp.getString("golongan", "")!!.toString(),
+                sp.getString("namaJabatan", "")!!.toString(),
+                sp.getString("tmtCpns", "")!!.toString()
         )
 
         call!!.enqueue(object : Callback<ResponseBody>{

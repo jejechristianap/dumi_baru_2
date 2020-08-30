@@ -85,29 +85,29 @@ class RincianAkunActivity : AppCompatActivity() {
 
 //        Button kembaliButton = findViewById(R.id.kembali_button);
         prefManager = SharedPrefManager.getInstance(applicationContext).user
-        val noKtp = prefManager.getNoKtp()
-        val nama = prefManager.getNamaLengkap()
-        val agama = prefManager.getAgama()
-        val jenisKl = prefManager.getJenisKelamin()
-        val tempatTglLhr = prefManager.getTempatLahir() + ", " + prefManager.getTanggalLahir()
-        val statusKawin = prefManager.getStatusKawin()
-        val jmlTang = prefManager.getJumlahTanggungan()
-        val title = prefManager.getTitle() + " (" + prefManager.getKetTitle() + ")"
-        val insker = prefManager.getInskerKerja()
-        val statusRumah = prefManager.getStatusRumah()
-        val rt = prefManager.getRt()
-        val rw = prefManager.getRw()
-        val provinsi = prefManager.getPropinsi()
+        val noKtp = prefManager.noKtp
+        val nama = prefManager.namaLengkap
+        val agama = prefManager.agama
+        val jenisKl = prefManager.jenisKelamin
+        val tempatTglLhr = prefManager.tempatLahir + ", " + prefManager.tanggalLahir
+        val statusKawin = prefManager.statusKawin
+        val jmlTang = prefManager.jumlahTanggungan
+        val title = prefManager.title + " (" + prefManager.ketTitle + ")"
+        val insker = prefManager.inskerKerja
+        val statusRumah = prefManager.statusRumah
+        val rt = prefManager.rt
+        val rw = prefManager.rw
+        val provinsi = prefManager.propinsi
         val kelurahan = prefManager.kelurahan
         val kecamatan = prefManager.kecamatan
         val kota = prefManager.kota
         val alamat = prefManager.alamat
-        val kodePos = prefManager.getKodePos()
-        val noTelp = prefManager.getNoTelp()
-        val statushubungan = prefManager.getStatusHubungan()
-        val namaKerabat = prefManager.getNamaPenanggung()
-        val noKtpKerabat = prefManager.getNoKtpPenanggung()
-        val namaIbu = prefManager.getNamaIbu()
+        val kodePos = prefManager.kodePos
+        val noTelp = prefManager.noTelp
+        val statushubungan = prefManager.statusHubungan
+        val namaKerabat = prefManager.namaPenanggung
+        val noKtpKerabat = prefManager.noKtpPenanggung
+        val namaIbu = prefManager.namaIbu
 
 
 

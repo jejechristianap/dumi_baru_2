@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_home_background"
     android:orientation="vertical">
+
     <ScrollView
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:padding="@dimen/_15sdp"
         android:layout_alignParentBottom="true"
         android:scrollbars="none">
 
@@ -49,17 +49,18 @@
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="wrap_content"/>
                 <me.abhinay.input.CurrencyEditText
-                    android:id="@+id/etCurrencyUltimate"
+                    android:id="@+id/cetJumlahPinjaman"
                     android:layout_toEndOf="@id/tvRp"
                     android:layout_alignParentEnd="true"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_50sdp"
                     android:fontFamily="sans-serif-medium"
                     android:layout_marginEnd="@dimen/_20sdp"
-                    android:gravity="start|center"
+                    android:gravity="center"
+                    android:maxLength="11"
                     android:backgroundTint="@color/white"
                     android:inputType="number"
-                    android:textColor="#000000"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_20ssp" />
                 <TextView
                     android:visibility="gone"
@@ -85,7 +86,7 @@
             </RelativeLayout>
 
             <SeekBar
-                android:id="@+id/sbUltimate"
+                android:id="@+id/sbPinjaman"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -114,7 +115,7 @@
                 <NumberPicker
                     android:layout_below="@id/tenor"
                     android:visibility="visible"
-                    android:id="@+id/npBulanUltimate"
+                    android:id="@+id/npTenorPinjaman"
                     android:theme="@style/DefaultNumberPickerTheme"
                     android:layout_alignStart="@id/tenor"
                     android:layout_alignEnd="@id/tenor"
@@ -123,9 +124,9 @@
                     android:layout_height="wrap_content"/>
 
                 <ImageView
-                    android:layout_alignStart="@id/npBulanUltimate"
-                    android:layout_alignTop="@id/npBulanUltimate"
-                    android:layout_alignBottom="@id/npBulanUltimate"
+                    android:layout_alignStart="@id/npTenorPinjaman"
+                    android:layout_alignTop="@id/npTenorPinjaman"
+                    android:layout_alignBottom="@id/npTenorPinjaman"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/seekbar_drawable_thumb"
@@ -143,7 +144,7 @@
                     android:textSize="@dimen/_13ssp" />
                 <NumberPicker
                     android:visibility="visible"
-                    android:id="@+id/npTujuanUltimate"
+                    android:id="@+id/npTujuanPinjaman"
                     android:theme="@style/NumberPickerTheme"
                     android:layout_alignStart="@id/tujuan"
                     android:layout_alignEnd="@id/tujuan"
@@ -207,6 +208,7 @@
             </RadioGroup>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp">
@@ -325,27 +327,24 @@
                     android:textSize="@dimen/_18ssp" />
             </RelativeLayout>
 
-
-
-
             <Button
-                android:id="@+id/bLanjutUltimate"
+                android:id="@+id/bHitungPinjaman"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:background="@drawable/button_rounded_custom"
+                android:background="@drawable/button_rounded_tkb"
                 android:fontFamily="sans-serif-medium"
-                android:text="@string/lanjut"
+                android:text="@string/hitung"
                 android:textAllCaps="false"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/_15ssp" />
 
         </LinearLayout>
     </ScrollView>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srlBeranda"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_120sdp">
 
@@ -425,7 +424,7 @@
             </RelativeLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <ScrollView
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_below="@id/srlBeranda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -16,32 +16,31 @@
 
     <ImageView
         android:id="@+id/ivPhotoProfile"
-        android:background="@drawable/circle_white"
-        android:padding="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:src="@drawable/ic_profil"
+        android:layout_marginTop="@dimen/_20sdp"
         android:layout_below="@id/iv"
         android:layout_width="@dimen/_35sdp"
         android:layout_height="@dimen/_35sdp"/>
 
     <TextView
         android:id="@+id/tvNamaPns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvNip"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_toEndOf="@id/ivPhotoProfile"
+        android:layout_alignParentEnd="true"
         android:text="@string/nama_pns"
         android:textColor="@color/white"
-        android:textStyle="bold"
         android:textSize="@dimen/_12ssp"
-        android:layout_alignTop="@id/ivPhotoProfile"
-        android:layout_toEndOf="@id/ivPhotoProfile"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:textStyle="bold" />
     <TextView
-        android:id="@+id/ivNoNip"
+        android:id="@+id/tvNip"
         android:text="@string/nip_baru"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="@dimen/_12ssp"
         android:layout_alignBottom="@id/ivPhotoProfile"
+        android:layout_alignParentEnd="true"
         android:layout_toEndOf="@id/ivPhotoProfile"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_width="wrap_content"
