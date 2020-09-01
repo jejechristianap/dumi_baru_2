@@ -2,7 +2,6 @@ package com.minjem.dumi
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -17,7 +16,7 @@ import retrofit2.Response
 class Splash : Activity() {
     private val SPLASH_DISPLAY_LENGTH = 1000
     private val api = RetrofitClient
-    val versionCode_ = BuildConfig.VERSION_CODE
+    val versionCodeDevice = BuildConfig.VERSION_CODE
     val versionName_ = BuildConfig.VERSION_NAME
     var appVersion = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,12 +51,12 @@ class Splash : Activity() {
                             val versionCode = jsonArray.getJSONObject(i).getInt("versionCode")
                             Log.d(TAG, "appName: $appName, versionName: $versionName, versionCode: $versionCode")
                             if (appName == "DUMI"){
-                                if (versionCode == versionCode_){
-                                    Log.d(TAG, "versionCodeApi: $versionCode | versionCodeApp: $versionCode_ | UPDATED")
-                                    appVersion = "updated"
+                                appVersion = if (versionCodeDevice >= versionCode){
+                                    Log.d(TAG, "versionCodeApi: $versionCode | versionCodeApp: $versionCodeDevice | UPDATED")
+                                    "updated"
                                 } else {
-                                    Log.d(TAG, "versionCodeApi: $versionCode | versionCodeApp: $versionCode_ | NEW UPDATE")
-                                    appVersion = "update"
+                                    Log.d(TAG, "versionCodeApi: $versionCode | versionCodeApp: $versionCodeDevice | NEW UPDATE")
+                                    "update"
                                 }
                             }
                         }
