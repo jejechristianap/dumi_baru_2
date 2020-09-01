@@ -717,4 +717,6 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="hitung">Hitung</string>
     <string name="kembali">Kembali</string>
+    <string name="bulan">Bulan</string>
+    <string name="minimal_pinjaman">Minimal Pinjaman</string>
 </resources>

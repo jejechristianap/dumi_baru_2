@@ -1,6 +1,7 @@
 package com.minjem.dumi.api;
 
 import com.hendi.pulsa.response.Response;
+import com.minjem.dumi.response.HistoryResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -38,5 +39,11 @@ public interface BaseApiService {
 
     @GET("config/get")
     Call<ResponseBody> getVersionApp();
+
+    @FormUrlEncoded
+    @POST("pinjaman/get")
+    Call<HistoryResponse> getPinjaman(
+            @Field("nipBaru") String nipBaru
+    );
 
 }

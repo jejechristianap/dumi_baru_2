@@ -141,5 +141,5 @@ object RetrofitClient {
             throw RuntimeException(e)
         }
 
-    val retro : BaseApiService get() = client!!.create(BaseApiService::class.java)
+    val retro : BaseApiService get() = client.create(BaseApiService::class.java)
 }

@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="android:listDivider">@color/white</item>
+        <item name="listPreferredItemPaddingLeft">18dp</item>
 <!--        <item name="windowActionBar">false</item>-->
 <!--        <item name="android:navigationBarColor">@color/white</item>-->
     </style>
