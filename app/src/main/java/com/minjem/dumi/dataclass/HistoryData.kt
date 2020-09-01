@@ -1,6 +1,6 @@
 package com.minjem.dumi.dataclass
 
-data class DataPinjaman(
+data class HistoryData(
         var id: Int? = null,
         var nipBaru: String? = null,
         var pinjaman: Int? = null,
@@ -10,10 +10,10 @@ data class DataPinjaman(
         var bungaRupiah: Int? = null,
         var administrasiRupiah: Int? = null,
         var angsuranPerbulan: Double? = null,
-        var asuransiRupiah: Int? = null,
+        var asuransiRupiah: Double? = null,
         var transferRupiah: Int? = null,
         var diterimaRupiah: Int? = null,
-        var status: String? = null,
+        var status: Int? = null,
         var tglPengajuan: String? = null,
         var tujuanPinjaman: String? = null,
         var tgl_mulai_pinjaman: String? = null,

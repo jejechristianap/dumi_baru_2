@@ -5,39 +5,48 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.minjem.dumi.R
-import com.minjem.dumi.dataclass.DataPinjaman
+import com.minjem.dumi.dataclass.HistoryData
 import kotlinx.android.synthetic.main.recycler_view_history_pinjaman.view.*
 import java.text.DecimalFormat
 
-class HistoryPinjamanAdapter (mContext: Context, internal var list : List<DataPinjaman>)
+class HistoryPinjamanAdapter (mContext: Context, internal var list : List<HistoryData>)
     : RecyclerView.Adapter<HistoryPinjamanAdapter.PinjamanHolder>() {
     private var mExpandedPosition = -1
     val c = mContext
 
     inner class PinjamanHolder (view : View) :RecyclerView.ViewHolder(view){
         @SuppressLint("SetTextI18n")
-        fun data(item : DataPinjaman){
+        fun data(item : HistoryData){
             val df = DecimalFormat("#,###")
             val bulan = "${item.lamaPinjaman} Bulan"
             val jumlah = "Rp${df.format(item.pinjaman)}"
 
-            /*when(item.status){
-                "Pengajuan" -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.yellow, null))
-                "Disetujui" -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.green, null))
-                "Ditolak" -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.orange, null))
-                "Ditransfer" -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.green, null))
-                "Kredit berjalan"  -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.green, null))
-                "Kredit Lunas" -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.green, null))
+            val status = when(item.status){
+                1 -> "Pengajuan"
+                2 -> "Disetujui"
+                3 -> "Ditolak"
+                4 -> "Ditransfer"
+                5 -> "Kredit berjalan"
+                6 -> "Kredit Lunas"
                 else -> "!!Dalam Proses Pengembangan!!"
-            }*/
+            }
+
+            when(item.status){
+                1 -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.yellow, null))
+                2 -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.green, null))
+                3 -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.orange, null))
+                4 -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.green, null))
+                5  -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.green, null))
+                6 -> itemView.tvStatusPinjaman.setTextColor(ResourcesCompat.getColor(c.resources, R.color.green, null))
+                else -> "!!Dalam Proses Pengembangan!!"
+            }
             itemView.tvTujuan.text = item.tujuanPinjaman
             itemView.tvTanggalPinjaman.text = item.tglPengajuan
             itemView.tvJumlahPinjaman.text = jumlah
-            itemView.tvStatusPinjaman.text = item.status
+            itemView.tvStatusPinjaman.text = status
             itemView.tvTenor.text = bulan
             itemView.tvBunga.text = "Rp${df.format(item.bungaRupiah)}"
             itemView.tvAngsuran.text = "Rp${df.format(item.angsuranPerbulan)}"
@@ -70,7 +79,7 @@ class HistoryPinjamanAdapter (mContext: Context, internal var list : List<DataPi
         }
     }
 
-    fun filter (new : MutableList<DataPinjaman>){
+    fun filter (new : MutableList<HistoryData>){
         list = new.sortedByDescending { it.id?.toString() }
         notifyDataSetChanged()
     }
