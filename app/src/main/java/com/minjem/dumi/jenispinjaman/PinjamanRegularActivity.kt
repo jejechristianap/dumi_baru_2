@@ -661,12 +661,6 @@ class PinjamanRegularActivity : AppCompatActivity(), DigisignView {
         editor.putFloat("asuransi", asuransi)
         editor.apply()
         startActivity(Intent(this@PinjamanRegularActivity, PelengkapanRegularActivity::class.java))
-        /*digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
-                ,SharedPrefManager.getInstance(this).user.email)*/
-
-        /*PinjamanKilatInterface pinjam = RetrofitClient.getClient().create(PinjamanKilatInterface.class);
-        Call<ResponseBody> call = pinjam.ajukanPinjaman(nip, pinjamanUang, plafond, 0, BUNGA_PERBULAN,
-                bunga, admin, angsuran, BIAYA_TRANSFER, tujuan, tglPinjam, tglAkhirPinjam, "", sisa, asuransi, );*/
     }
 
     override fun digiResponse(response: RDigisign) {

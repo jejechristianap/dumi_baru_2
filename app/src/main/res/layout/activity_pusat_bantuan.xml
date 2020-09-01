@@ -29,8 +29,6 @@
         android:text="@string/bantuan"
         android:textSize="@dimen/_15ssp"
         android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.432" />
@@ -41,7 +39,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,35 +91,36 @@
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_weight="0.3"
-                    android:src="@drawable/ic_arrow_down24dp"
                     android:contentDescription="@string/arrow_down"
-                     />
+                    android:src="@drawable/ic_arrow_down24dp" />
 
             </LinearLayout>
             <!--01 Description-->
             <LinearLayout
                 android:id="@+id/deskripsi_satu_ll"
-                android:background="@color/grey_100"
-                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:background="@color/grey_100"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:visibility="gone">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/marginTop10dp"
-                    android:textColor="@color/black"
                     android:layout_weight="2.4"
                     android:text="@string/bantuan1"
+                    android:textColor="@color/black"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     tools:autoSizeMaxTextSize="15sp"
                     tools:autoSizeStepGranularity="1sp" />
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -180,26 +179,28 @@
             <!--02 Description-->
             <LinearLayout
                 android:id="@+id/deskripsi_dua_ll"
-                android:background="@color/grey_100"
-                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:background="@color/grey_100"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:visibility="gone">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/marginTop10dp"
-                    android:textColor="@color/black"
                     android:layout_weight="2.4"
                     android:text="@string/bantuan2"
+                    android:textColor="@color/black"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     tools:autoSizeMaxTextSize="15sp"
                     tools:autoSizeStepGranularity="1sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -258,26 +259,28 @@
             <!--03 Description-->
             <LinearLayout
                 android:id="@+id/deskripsi_tiga_ll"
-                android:background="@color/grey_100"
-                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:background="@color/grey_100"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:visibility="gone">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/marginTop10dp"
-                    android:textColor="@color/black"
                     android:layout_weight="2.4"
                     android:text="@string/bantuan3"
+                    android:textColor="@color/black"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     tools:autoSizeMaxTextSize="15sp"
                     tools:autoSizeStepGranularity="1sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -335,26 +338,28 @@
             <!--04 Description-->
             <LinearLayout
                 android:id="@+id/deskripsi_empat_ll"
-                android:background="@color/grey_100"
-                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:background="@color/grey_100"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:visibility="gone">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/marginTop10dp"
-                    android:textColor="@color/black"
                     android:layout_weight="2.4"
                     android:text="@string/bantuan4"
+                    android:textColor="@color/black"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     tools:autoSizeMaxTextSize="15sp"
                     tools:autoSizeStepGranularity="1sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -412,26 +417,28 @@
             <!--05 Description-->
             <LinearLayout
                 android:id="@+id/deskripsi_lima_ll"
-                android:background="@color/grey_100"
-                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:background="@color/grey_100"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:visibility="gone">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/marginTop10dp"
-                    android:textColor="@color/black"
                     android:layout_weight="2.4"
                     android:text="@string/bantuan5"
+                    android:textColor="@color/black"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     tools:autoSizeMaxTextSize="15sp"
                     tools:autoSizeStepGranularity="1sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -441,27 +448,27 @@
                 android:background="#D2CECE" />
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:padding="5dp"
                 android:background="@color/grey_100"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:padding="5dp">
 
                 <!--Sub Title Hubungi Kami-->
                 <TextView
-                    android:text="@string/hubungi_kami"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="@dimen/marginTop10dp"
                     android:layout_marginEnd="20dp"
+                    android:text="@string/hubungi_kami"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
+                    tools:autoSizeStepGranularity="1sp" />
                 <!--Email Kantor-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -484,6 +491,7 @@
                         app:autoSizeTextType="uniform"
                         tools:autoSizeMaxTextSize="23sp"
                         tools:autoSizeStepGranularity="1sp" />
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="20dp"
@@ -575,18 +583,19 @@
 
                 <!--Sub Title Operasional-->
                 <TextView
-                    android:text="@string/jam_operasional"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
+                    android:text="@string/jam_operasional"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
+                    tools:autoSizeStepGranularity="1sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
@@ -608,6 +617,7 @@
                         app:autoSizeTextType="uniform"
                         tools:autoSizeMaxTextSize="23sp"
                         tools:autoSizeStepGranularity="1sp" />
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="20dp"
@@ -624,25 +634,26 @@
                 </LinearLayout>
                 <!--Sub Title Alamat-->
                 <TextView
-                    android:text="@string/alamat"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
+                    android:text="@string/alamat"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeTextType="uniform"
                     tools:autoSizeMaxTextSize="15sp"
-                    tools:autoSizeStepGranularity="1sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
+                    tools:autoSizeStepGranularity="1sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginBottom="20dp"
                     android:layout_marginTop="@dimen/marginTop10dp"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
                     android:orientation="horizontal"
                     android:weightSum="3">
 
@@ -657,6 +668,7 @@
                         app:autoSizeTextType="uniform"
                         tools:autoSizeMaxTextSize="23sp"
                         tools:autoSizeStepGranularity="1sp" />
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="70dp"
@@ -671,10 +683,11 @@
                 </LinearLayout>
 
             </LinearLayout>
+
             <View
-                android:layout_marginBottom="55dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_marginBottom="55dp" />
 
 
         </LinearLayout>

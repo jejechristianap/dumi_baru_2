@@ -31,14 +31,14 @@
         android:layout_alignParentEnd="true"
         android:text="@string/nama_pns"
         android:textColor="@color/white"
-        android:textSize="@dimen/_12ssp"
+        android:textSize="@dimen/_11ssp"
         android:textStyle="bold" />
     <TextView
         android:id="@+id/tvNip"
         android:text="@string/nip_baru"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:textSize="@dimen/_12ssp"
+        android:textSize="@dimen/_10ssp"
         android:layout_alignBottom="@id/ivPhotoProfile"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@id/ivPhotoProfile"

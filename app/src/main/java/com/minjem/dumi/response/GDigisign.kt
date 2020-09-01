@@ -21,7 +21,4 @@ class GDigisign {
     val result_sign: String? = null
     val status_tandatangan: String? = null
     val document_id: String? = null
-
-
-
 }

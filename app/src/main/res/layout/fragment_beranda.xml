@@ -1,18 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/top_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_home_background"
-    android:orientation="vertical">
+    android:background="@drawable/gradient_home_background">
+    <!--<HorizontalScrollView
+        android:id="@+id/hsvInfoPinjaman"
+        android:layout_width="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_height="@dimen/_100sdp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:scrollbars="none"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/cardKilat"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/card"
+                android:padding="@dimen/_18sdp"
+                android:visibility="visible">
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cardRegular"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/cardKilat"
+                android:background="@drawable/card2"
+                android:padding="@dimen/_18sdp">
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </HorizontalScrollView>-->
 
     <ScrollView
         android:visibility="visible"
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:scrollbars="none">
 
@@ -20,325 +62,343 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/_15sdp">
-
-            <TextView
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMinimalPinjaman"
+                android:orientation="horizontal"
+                android:scrollbars="none"
+                android:visibility="visible"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_22sdp"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/tentukan_pinjaman"
-                android:textSize="@dimen/_14ssp"
-                android:textColor="@color/white"
-                android:gravity="center"
-                />
-
-            <RelativeLayout
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp">
-                <TextView
-                    android:id="@+id/tvRp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentTop="true"
-                    android:text="@string/rp"
-                    android:layout_marginEnd="@dimen/_2sdp"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_20ssp"
-                    android:gravity="end|center"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="wrap_content"/>
-                <me.abhinay.input.CurrencyEditText
-                    android:id="@+id/cetJumlahPinjaman"
-                    android:layout_toEndOf="@id/tvRp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_50sdp"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:gravity="center"
-                    android:maxLength="11"
-                    android:backgroundTint="@color/white"
-                    android:inputType="number"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_20ssp" />
-                <TextView
-                    android:visibility="gone"
-                    android:id="@+id/tvMinKil"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pinjaman_ultimate_rp51_000_000_rp100_000_000"
-                    android:textSize="@dimen/_8ssp"
-                    android:textColor="#B71C1C" />
-
-                <TextView
-                    android:visibility="gone"
-                    android:id="@+id/tvMaksKil"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/maksimum_pinjaman_rp_15_000_000"
-                    android:textSize="@dimen/_8ssp"
-                    android:textColor="#B71C1C" />
-            </RelativeLayout>
-
-            <SeekBar
-                android:id="@+id/sbPinjaman"
+                tools:listitem="@layout/recycler_view_min_pinjaman_tenor"
+                android:layout_height="@dimen/_130sdp"/>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:progress="0"
-                android:progressDrawable="@drawable/seekbar_drawable_progress"
-                android:thumb="@drawable/ic_amount_dot" />
-
-            <RelativeLayout
-                android:layout_marginTop="@dimen/_20sdp"
                 android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_15sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:orientation="vertical">
                 <TextView
-                    android:id="@+id/tenor"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_22sdp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="@string/tenor"
-                    android:textSize="@dimen/_13ssp"
+                    android:text="@string/tentukan_pinjaman"
+                    android:textSize="@dimen/_14ssp"
                     android:textColor="@color/white"
+                    android:gravity="center"
                     />
-                <NumberPicker
-                    android:layout_below="@id/tenor"
-                    android:visibility="visible"
-                    android:id="@+id/npTenorPinjaman"
-                    android:theme="@style/DefaultNumberPickerTheme"
-                    android:layout_alignStart="@id/tenor"
-                    android:layout_alignEnd="@id/tenor"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
 
-                <ImageView
-                    android:layout_alignStart="@id/npTenorPinjaman"
-                    android:layout_alignTop="@id/npTenorPinjaman"
-                    android:layout_alignBottom="@id/npTenorPinjaman"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/seekbar_drawable_thumb"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"/>
-
-                <TextView
-                    android:id="@+id/tujuan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_alignParentEnd="true"
-                    android:text="@string/tujuan_pinjaman"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_13ssp" />
-                <NumberPicker
-                    android:visibility="visible"
-                    android:id="@+id/npTujuanPinjaman"
-                    android:theme="@style/NumberPickerTheme"
-                    android:layout_alignStart="@id/tujuan"
-                    android:layout_alignEnd="@id/tujuan"
-                    android:layout_below="@id/tujuan"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-
-            </RelativeLayout>
-
-            <RadioGroup
-                android:id="@+id/rgKilat"
-                android:visibility="gone"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:gravity="center_horizontal"
-                android:layout_height="@dimen/_40sdp">
-                <RadioButton
-                    android:id="@+id/rbKilat3"
-                    android:background="@drawable/radio_pinjaman_selector"
-                    android:button="@android:color/transparent"
-                    android:text="@string/bulan_3"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12ssp"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:gravity="center"
-                    android:textColor="@drawable/radio_flat_selector_text_pinjaman"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_25sdp"/>
-
-                <RadioButton
-                    android:id="@+id/rbKilat6"
-                    android:background="@drawable/radio_pinjaman_selector"
-                    android:button="@android:color/transparent"
-                    android:text="@string/bulan_6"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12ssp"
-                    android:gravity="center"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:textColor="@drawable/radio_flat_selector_text_pinjaman"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_25sdp"/>
-
-                <RadioButton
-                    android:id="@+id/rbKilat12"
-                    android:background="@drawable/radio_pinjaman_selector"
-                    android:button="@android:color/transparent"
-                    android:text="@string/bulan_12"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12ssp"
-                    android:gravity="center"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:textColor="@drawable/radio_flat_selector_text_pinjaman"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_25sdp"/>
-            </RadioGroup>
-
-            <RelativeLayout
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp">
-
-                <TextView
-                    android:id="@+id/angsuran"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/angsuran_perbulan"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_12ssp"/>
-
-                <TextView
-                    android:id="@+id/tvAngsuranPerbulanUltimate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/angsuran"
-                    android:gravity="end"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_12ssp" />
-
-                <TextView
-                    android:id="@+id/admin_asn_ultimate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/angsuran"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="@string/biaya_administrasi"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_12ssp" />
-
-                <TextView
-                    android:id="@+id/tvAdminUltimate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/admin_asn_ultimate"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/admin_asn_ultimate"
-                    android:gravity="end"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_12ssp" />
-
-                <TextView
-                    android:id="@+id/asuransi_asn_ultimate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/admin_asn_ultimate"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="@string/biaya_asuransi"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_12ssp" />
-
-                <TextView
-                    android:id="@+id/tvAsuransiUltimate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/asuransi_asn_ultimate"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/asuransi_asn_ultimate"
-                    android:gravity="end"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_12ssp" />
-
-                <TextView
-                    android:id="@+id/trf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/asuransi_asn_ultimate"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="@string/transfer_antar_bank"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_12ssp" />
-
-                <TextView
-                    android:id="@+id/tvTrfUltimate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/trf"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_toEndOf="@id/trf"
-                    android:gravity="end"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_12ssp" />
-
-                <TextView
-                    android:id="@+id/jml"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/trf"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:text="@string/jumlah_yang_diterima"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_15ssp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvJumlahTerimaUltimate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <RelativeLayout
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@id/jml"
-                    android:fontFamily="sans-serif-medium"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_18ssp" />
-            </RelativeLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp">
+                    <TextView
+                        android:id="@+id/tvRp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/rp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_20ssp"
+                        android:gravity="end|center"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="wrap_content"/>
+                    <me.abhinay.input.CurrencyEditText
+                        android:id="@+id/cetJumlahPinjaman"
+                        android:layout_toEndOf="@id/tvRp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_50sdp"
+                        android:fontFamily="sans-serif-medium"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:gravity="center"
+                        android:maxLength="11"
+                        android:backgroundTint="@color/white"
+                        android:inputType="number"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_20ssp" />
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/tvMinKil"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pinjaman_ultimate_rp51_000_000_rp100_000_000"
+                        android:textSize="@dimen/_8ssp"
+                        android:textColor="#B71C1C" />
 
-            <Button
-                android:id="@+id/bHitungPinjaman"
-                style="?android:attr/buttonBarButtonStyle"
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/tvMaksKil"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/maksimum_pinjaman_rp_15_000_000"
+                        android:textSize="@dimen/_8ssp"
+                        android:textColor="#B71C1C" />
+                </RelativeLayout>
+
+                <SeekBar
+                    android:id="@+id/sbPinjaman"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/seekbar_drawable_progress"
+                    android:thumb="@drawable/ic_amount_dot" />
+
+                <RelativeLayout
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:paddingStart="@dimen/_15sdp"
+                    android:paddingEnd="@dimen/_15sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tenor"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/tenor"
+                        android:textSize="@dimen/_13ssp"
+                        android:textColor="@color/white"
+                        />
+                    <NumberPicker
+                        android:layout_below="@id/tenor"
+                        android:visibility="visible"
+                        android:id="@+id/npTenorPinjaman"
+                        android:theme="@style/DefaultNumberPickerTheme"
+                        android:layout_alignStart="@id/tenor"
+                        android:layout_alignEnd="@id/tenor"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:layout_alignStart="@id/npTenorPinjaman"
+                        android:layout_alignTop="@id/npTenorPinjaman"
+                        android:layout_alignBottom="@id/npTenorPinjaman"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/seekbar_drawable_thumb"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"/>
+
+                    <TextView
+                        android:id="@+id/tujuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/tujuan_pinjaman"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_13ssp" />
+                    <NumberPicker
+                        android:visibility="visible"
+                        android:id="@+id/npTujuanPinjaman"
+                        android:theme="@style/NumberPickerTheme"
+                        android:layout_alignStart="@id/tujuan"
+                        android:layout_alignEnd="@id/tujuan"
+                        android:layout_below="@id/tujuan"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                </RelativeLayout>
+
+                <RadioGroup
+                    android:id="@+id/rgKilat"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
+                    android:layout_height="@dimen/_40sdp">
+                    <RadioButton
+                        android:id="@+id/rbKilat3"
+                        android:background="@drawable/radio_pinjaman_selector"
+                        android:button="@android:color/transparent"
+                        android:text="@string/bulan_3"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_12ssp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:gravity="center"
+                        android:textColor="@drawable/radio_flat_selector_text_pinjaman"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_25sdp"/>
+
+                    <RadioButton
+                        android:id="@+id/rbKilat6"
+                        android:background="@drawable/radio_pinjaman_selector"
+                        android:button="@android:color/transparent"
+                        android:text="@string/bulan_6"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_12ssp"
+                        android:gravity="center"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:textColor="@drawable/radio_flat_selector_text_pinjaman"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_25sdp"/>
+
+                    <RadioButton
+                        android:id="@+id/rbKilat12"
+                        android:background="@drawable/radio_pinjaman_selector"
+                        android:button="@android:color/transparent"
+                        android:text="@string/bulan_12"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_12ssp"
+                        android:gravity="center"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:textColor="@drawable/radio_flat_selector_text_pinjaman"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_25sdp"/>
+                </RadioGroup>
+
+                <RelativeLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp">
+
+                    <TextView
+                        android:id="@+id/angsuran"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/angsuran_perbulan"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_12ssp"/>
+
+                    <TextView
+                        android:id="@+id/tvAngsuranPerbulanUltimate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/angsuran"
+                        android:gravity="end"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <TextView
+                        android:id="@+id/admin_asn_ultimate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/angsuran"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/biaya_administrasi"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <TextView
+                        android:id="@+id/tvAdminUltimate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/admin_asn_ultimate"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/admin_asn_ultimate"
+                        android:gravity="end"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <TextView
+                        android:id="@+id/asuransi_asn_ultimate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/admin_asn_ultimate"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/biaya_asuransi"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <TextView
+                        android:id="@+id/tvAsuransiUltimate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/asuransi_asn_ultimate"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/asuransi_asn_ultimate"
+                        android:gravity="end"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <TextView
+                        android:id="@+id/trf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/asuransi_asn_ultimate"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/transfer_antar_bank"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <TextView
+                        android:id="@+id/tvTrfUltimate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/trf"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@id/trf"
+                        android:gravity="end"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <TextView
+                        android:id="@+id/jml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/trf"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:text="@string/jumlah_yang_diterima"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_15ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvJumlahTerimaUltimate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/jml"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_18ssp" />
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/bHitungPinjaman"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/button_rounded_tkb"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/hitung"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/_15ssp" />
+            </LinearLayout>
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:background="@drawable/button_rounded_tkb"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/hitung"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/_15ssp" />
+                android:layout_height="@dimen/_130sdp"/>
 
         </LinearLayout>
     </ScrollView>
@@ -423,7 +483,7 @@
                     android:textColor="@color/colorPrimary" />
             </RelativeLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    <ScrollView
+    <!--<ScrollView
         android:visibility="gone"
         android:layout_below="@id/srlBeranda"
         android:layout_width="match_parent"
@@ -434,7 +494,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <!--Pinjaman Multiguna-->
+            &lt;!&ndash;Pinjaman Multiguna&ndash;&gt;
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -447,191 +507,6 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_12ssp" />
 
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_150sdp"
-                android:scrollbars="none"
-                android:visibility="visible">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:id="@+id/cardKilat"
-                        android:layout_width="@dimen/_250sdp"
-                        android:layout_height="@dimen/_140sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/card"
-                        android:padding="@dimen/_18sdp"
-                        android:visibility="visible">
-
-                        <ImageView
-                            android:id="@+id/icKilat"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:src="@drawable/ic_kilat" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignTop="@id/icKilat"
-                            android:layout_alignBottom="@id/icKilat"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_toEndOf="@id/icKilat"
-                            android:gravity="center"
-                            android:text="@string/dumi_kilat"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_15ssp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/kilatDesk"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_above="@+id/kilatButton"
-                            android:layout_below="@id/icKilat"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginBottom="@dimen/_7sdp"
-                            android:text="@string/dumi_kilat_deskripsi"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_11ssp" />
-
-                        <Button
-                            android:id="@+id/kilatButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_alignStart="@id/icKilat"
-                            android:layout_alignParentBottom="true"
-                            android:background="@drawable/button_lanjut_design"
-                            android:text="@string/ajukan"
-                            android:textAllCaps="false"
-                            android:textColor="@color/blueKilat" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/cardRegular"
-                        android:layout_width="@dimen/_250sdp"
-                        android:layout_height="@dimen/_140sdp"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@id/cardKilat"
-                        android:background="@drawable/card2"
-                        android:padding="@dimen/_18sdp">
-
-                        <ImageView
-                            android:id="@+id/icRegular"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:src="@drawable/ic_regular" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignTop="@id/icRegular"
-                            android:layout_alignBottom="@id/icRegular"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_toEndOf="@id/icRegular"
-                            android:gravity="center"
-                            android:text="@string/dumi_regular"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_15ssp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/regularDesk"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_above="@+id/regularButton"
-                            android:layout_below="@id/icRegular"
-                            android:layout_alignStart="@id/icRegular"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginBottom="@dimen/_7sdp"
-                            android:text="@string/dumi_regular_deskripsi"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_11ssp" />
-
-                        <Button
-                            android:id="@+id/regularButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_alignStart="@id/icRegular"
-                            android:layout_alignParentBottom="true"
-                            android:background="@drawable/button_lanjut_design"
-                            android:text="@string/ajukan"
-                            android:textAllCaps="false"
-                            android:textColor="@color/purple" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/cardUltimate"
-                        android:layout_width="@dimen/_250sdp"
-                        android:layout_height="@dimen/_140sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@id/cardRegular"
-                        android:background="@drawable/card2"
-                        android:padding="@dimen/_18sdp">
-
-                        <ImageView
-                            android:id="@+id/icUltimate"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:src="@drawable/ic_regular" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignTop="@id/icUltimate"
-                            android:layout_alignBottom="@id/icUltimate"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_toEndOf="@id/icUltimate"
-                            android:gravity="center"
-                            android:text="@string/dumi_ultimate"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_15ssp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/ultimateDesk"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_above="@+id/bUltimate"
-                            android:layout_below="@id/icUltimate"
-                            android:layout_alignStart="@id/icUltimate"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginBottom="@dimen/_7sdp"
-                            android:text="@string/dumi_ultimate_desk"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_11ssp" />
-
-                        <Button
-                            android:id="@+id/bUltimate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_alignStart="@id/icUltimate"
-                            android:layout_alignParentBottom="true"
-                            android:background="@drawable/button_lanjut_design"
-                            android:text="@string/ajukan"
-                            android:textAllCaps="false"
-                            android:textColor="@color/purple" />
-                    </RelativeLayout>
-                </RelativeLayout>
-            </HorizontalScrollView>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -643,13 +518,6 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_12ssp" />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/gvMenuUtama"
-                tools:listitem="@layout/gridview_menu"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_200sdp"/>
 
             <RelativeLayout
                 android:visibility="gone"
@@ -822,7 +690,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_8ssp" />
 
-                <!--<com.balysv.materialripple.MaterialRippleLayout
+                &lt;!&ndash;<com.balysv.materialripple.MaterialRippleLayout
                     android:id="@+id/semua"
                     app:mrl_rippleOverlay="true"
                     android:layout_alignTop="@id/icHotel"
@@ -831,7 +699,7 @@
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp">
 
-                </com.balysv.materialripple.MaterialRippleLayout>-->
+                </com.balysv.materialripple.MaterialRippleLayout>&ndash;&gt;
 
                 <ImageView
                     android:id="@+id/icSemua"
@@ -857,6 +725,15 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_8ssp" />
             </RelativeLayout>
+
         </LinearLayout>
-    </ScrollView>
-</RelativeLayout>
+    </ScrollView>-->
+    <Button
+        android:id="@+id/persistentBtn"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Persistent Bottom Sheet" />
+    <include layout="@layout/bottom_sheet_ecommerce_menu"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

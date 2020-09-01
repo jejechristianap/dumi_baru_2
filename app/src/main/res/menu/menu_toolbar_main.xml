@@ -2,6 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/actionHistory"
+        android:title="@string/riwayat_pinjaman"
+        android:visible="false"
+        android:icon="@drawable/ic_history"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/ah"
+        android:title="@string/riwayat_pinjaman"
+        android:icon="@drawable/ic_bell24"
+        android:visible="false"
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/actionLogout"

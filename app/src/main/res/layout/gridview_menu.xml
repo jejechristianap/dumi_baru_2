@@ -5,7 +5,6 @@
     android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/ivMenu"
-        android:layout_marginTop="@dimen/_10sdp"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_centerHorizontal="true"
@@ -21,10 +20,15 @@
         android:layout_below="@id/ivMenu"
         android:layout_alignStart="@id/ivMenu"
         android:layout_alignEnd="@id/ivMenu"
-        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_3sdp"
         android:gravity="center"
         android:text="@string/pulsa"
         android:textColor="@color/black"
         android:textSize="@dimen/_8ssp" />
+
+    <View
+        android:layout_below="@id/tvMenu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"/>
 
 </RelativeLayout>

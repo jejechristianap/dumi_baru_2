@@ -76,9 +76,9 @@ class PelengkapanRegularActivity : AppCompatActivity() {
         uploadPaBt = findViewById(R.id.upload_pa)
         uploadSuratKBt = findViewById(R.id.upload_surat_kuasa_button)
         lanjutBt = findViewById(R.id.lanjut_button_foto)*/
-        upload_sk_button.setOnClickListener(View.OnClickListener { v: View? -> fotoSk() })
-        upload_pa.setOnClickListener(View.OnClickListener { v: View? -> fotoPa() })
-        upload_surat_kuasa_button.setOnClickListener(View.OnClickListener { v: View? -> fotoSurat() })
+        upload_sk_button.setOnClickListener { fotoSk() }
+        upload_pa.setOnClickListener { fotoPa() }
+        upload_surat_kuasa_button.setOnClickListener { fotoSurat() }
         /*kirimFormatButton = findViewById(R.id.kirim_format_pdf_button)
         kirimFormatButton.setOnClickListener(View.OnClickListener { v: View? -> kirimFormat() })*/
         lanjut_button_foto.setOnClickListener(View.OnClickListener { v: View? ->

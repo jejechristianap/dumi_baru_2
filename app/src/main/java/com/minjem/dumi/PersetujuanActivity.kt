@@ -20,6 +20,7 @@ import com.minjem.dumi.ecommerce.Helper.mToast
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.retrofit.RetrofitClient
 import com.minjem.dumi.util.FileUtils
+import es.dmoral.toasty.Toasty
 import id.zelory.compressor.Compressor.compress
 import kotlinx.android.synthetic.main.activity_persetujuan.*
 import kotlinx.coroutines.launch
@@ -34,6 +35,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class PersetujuanActivity : AppCompatActivity() {
     private var fotoSkPath = ""
@@ -65,8 +68,21 @@ class PersetujuanActivity : AppCompatActivity() {
                 ajukan_pinjaman_button.visibility = View.GONE
             }
         }
+        val dateFormat = SimpleDateFormat("dd")
+        val c = Calendar.getInstance()
+        val today = c.time
+        val tglPinjam = dateFormat.format(today)
+        Log.d("TANGGAL", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> $tglPinjam")
 
         ajukan_pinjaman_button.setOnClickListener {
+            if (tglPinjam.toInt() > 25){
+                Toasty.info(this, "Pinjaman hanya bisa diajukan dari tanggal 1 - 25 setiap bulannya.", Toast.LENGTH_LONG, true).show()
+                bBeranda.visibility = View.VISIBLE
+                return@setOnClickListener
+            } else {
+                bBeranda.visibility = View.GONE
+            }
+
             val namaBank = ""
             val noRek = ""
             val pemilik = ""
@@ -144,6 +160,10 @@ class PersetujuanActivity : AppCompatActivity() {
                     pDialog.dismiss()
                 }
             })
+        }
+
+        bBeranda.setOnClickListener {
+            startActivity(Intent(this@PersetujuanActivity, MainActivity::class.java))
         }
     }
 

@@ -12,7 +12,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
@@ -21,7 +20,6 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -29,7 +27,7 @@ import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.R
 import com.minjem.dumi.adapter.HistoryPinjamanAdapter
 import com.minjem.dumi.api.StatusPinjamanInterface
-import com.minjem.dumi.dataclass.DataPinjaman
+import com.minjem.dumi.dataclass.HistoryData
 import com.minjem.dumi.ecommerce.ECommerceActivity
 import com.minjem.dumi.ecommerce.Helper.mProgress
 import com.minjem.dumi.ecommerce.Helper.mToast
@@ -79,12 +77,12 @@ class PinjamanFragment : Fragment(), DigisignView/*, Toolbar.OnMenuItemClickList
     private var rlGagal: RelativeLayout? = null
     lateinit var v: View
     private val progressDialog = CustomProgressDialog()
-    var list : MutableList<DataPinjaman> = ArrayList()
-    var listPinjaman : MutableList<DataPinjaman> = ArrayList()
-    var listResult : MutableList<DataPinjaman> = ArrayList()
+    var list : MutableList<HistoryData> = ArrayList()
+    var listPinjaman : MutableList<HistoryData> = ArrayList()
+    var listResult : MutableList<HistoryData> = ArrayList()
     private val TAG = PinjamanFragment::class.qualifiedName
-    private val dataPinjaman = DataPinjaman()
-    private val sign = DataPinjaman()
+    private val dataPinjaman = HistoryData()
+    private val sign = HistoryData()
     lateinit var mDialog: Dialog
     lateinit var pinjamanAdapter: HistoryPinjamanAdapter
     lateinit var digisignPrestImp : DigisignPrestImp
@@ -234,8 +232,7 @@ class PinjamanFragment : Fragment(), DigisignView/*, Toolbar.OnMenuItemClickList
     }
 
 
-    fun getHistoryPinjaman(){
-//        Log.d("Pinjaman Fragment", "getHistoryPinjaman: $test")
+    private fun getHistoryPinjaman(){
         listPinjaman.clear()
         mDialog.setContentView(R.layout.dialog_history_pinjaman)
         mDialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -329,7 +326,7 @@ class PinjamanFragment : Fragment(), DigisignView/*, Toolbar.OnMenuItemClickList
                                             dataPinjaman.bungaRupiah = jsonObject.getInt("bungaRupiah")
                                             dataPinjaman.administrasiRupiah = jsonObject.getInt("administrasiRupiah")
                                             dataPinjaman.angsuranPerbulan = jsonObject.getDouble("angsuranPerbulan")
-                                            dataPinjaman.asuransiRupiah = jsonObject.getInt("asuransiRupiah")
+                                            dataPinjaman.asuransiRupiah = jsonObject.getDouble("asuransiRupiah")
                                             dataPinjaman.transferRupiah = jsonObject.getInt("transferRupiah")
                                             dataPinjaman.diterimaRupiah = jsonObject.getInt("diterimaRupiah")
                                             dataPinjaman.registrasi = jsonObject.getString("registrasi")
@@ -408,7 +405,7 @@ class PinjamanFragment : Fragment(), DigisignView/*, Toolbar.OnMenuItemClickList
                                                     v.bPkD.visibility = View.GONE
                                                 }
                                             }
-                                            dataPinjaman.status = jsonObject.getInt("status").toString()
+                                            dataPinjaman.status = jsonObject.getInt("status")
                                             dataPinjaman.tglPengajuan = jsonObject.getString("tglPengajuan")
                                             dataPinjaman.tujuanPinjaman = jsonObject.getString("tujuanPinjaman")
                                             dataPinjaman.tgl_mulai_pinjaman = jsonObject.getString("tgl_mulai_pinjaman")
@@ -490,7 +487,7 @@ class PinjamanFragment : Fragment(), DigisignView/*, Toolbar.OnMenuItemClickList
                                     var max = -1
                                     for (i in 0 until jsonArray.length()) {
                                         val jsonObject = jsonArray.getJSONObject(i)
-                                        val dp = DataPinjaman()
+                                        val dp = HistoryData()
                                         dp.id = jsonObject.getInt("id")
                                         dp.nipBaru = jsonObject.getString("nipBaru")
                                         dp.pinjaman = jsonObject.getInt("pinjaman")
@@ -500,7 +497,7 @@ class PinjamanFragment : Fragment(), DigisignView/*, Toolbar.OnMenuItemClickList
                                         dp.bungaRupiah = jsonObject.getInt("bungaRupiah")
                                         dp.administrasiRupiah = jsonObject.getInt("administrasiRupiah")
                                         dp.angsuranPerbulan = jsonObject.getDouble("angsuranPerbulan")
-                                        dp.asuransiRupiah = jsonObject.getInt("asuransiRupiah")
+                                        dp.asuransiRupiah = jsonObject.getDouble("asuransiRupiah")
                                         dp.transferRupiah = jsonObject.getInt("transferRupiah")
                                         dp.diterimaRupiah = jsonObject.getInt("diterimaRupiah")
                                         var status = ""
@@ -513,7 +510,7 @@ class PinjamanFragment : Fragment(), DigisignView/*, Toolbar.OnMenuItemClickList
                                             6 -> status = "Kredit Lunas"
                                             else -> "!!Dalam Proses Pengembangan!!"
                                         }
-                                        dp.status = status
+//                                        dp.status = status
                                         val local = Locale("in", "ID")
                                         val sdf = SimpleDateFormat("M/d/yyyy, HH:mm:ss a", local)
                                         val d = sdf.parse(jsonObject.getString("tglPengajuan"))
@@ -634,8 +631,8 @@ class PinjamanFragment : Fragment(), DigisignView/*, Toolbar.OnMenuItemClickList
                 }
             })
         }
-    /*private fun filter(new: MutableList<DataPinjaman>){
-        list = new.sortedBy { it.id } as MutableList<DataPinjaman>
+    /*private fun filter(new: MutableList<HistoryData>){
+        list = new.sortedBy { it.id } as MutableList<HistoryData>
     }*/
 
     @SuppressLint("SetJavaScriptEnabled")
