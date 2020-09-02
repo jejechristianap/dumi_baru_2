@@ -9,7 +9,6 @@ import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -17,9 +16,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.gson.JsonArray
-import com.mahc.custombottomsheetbehavior.BottomSheetBehaviorGoogleMapsLike
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
 import com.minjem.dumi.adapter.HistoryPinjamanAdapter
 import com.minjem.dumi.dataclass.HistoryData
@@ -31,8 +27,6 @@ import com.minjem.dumi.presenter.HistoryPinjamanPresImp
 import com.minjem.dumi.response.HistoryResponse
 import com.minjem.dumi.view.HistoryPinjamanView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.bottom_sheet_ecommerce_menu.*
 import kotlinx.android.synthetic.main.dialog_history_pinjaman.*
 import kotlinx.android.synthetic.main.nav_header.view.*
 
