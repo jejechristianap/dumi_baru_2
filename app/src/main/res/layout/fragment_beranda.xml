@@ -46,7 +46,6 @@
             </RelativeLayout>
         </RelativeLayout>
     </HorizontalScrollView>-->
-
     <ScrollView
         android:visibility="visible"
         android:id="@+id/scrollView2"

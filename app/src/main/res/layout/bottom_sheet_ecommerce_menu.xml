@@ -10,18 +10,19 @@
     app:behavior_hideable="false"
     app:behavior_peekHeight="@dimen/_120sdp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-    <TextView
+    <ImageView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_height="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:gravity="bottom|center_horizontal"
-        android:text="—"
+        android:src="@drawable/ic_strippp"
         android:textAlignment="center"
         android:textSize="@dimen/_20ssp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvEcommerce"
+        android:layout_marginTop="@dimen/_10sdp"
         tools:listitem="@layout/gridview_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
