@@ -46,7 +46,7 @@
             android:layout_above="@+id/tvMinimalPinjaman"
             android:layout_alignStart="@id/tvMinimalPinjaman"
             android:layout_alignParentEnd="true"
-            android:text="@string/minimal_pinjaman"
+            android:text="@string/maksimal_pinjaman"
             android:textColor="@color/white"
             android:textSize="@dimen/_8ssp" />
 
