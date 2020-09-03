@@ -719,4 +719,5 @@
     <string name="kembali">Kembali</string>
     <string name="bulan">Bulan</string>
     <string name="minimal_pinjaman">Minimal Pinjaman</string>
+    <string name="maksimal_pinjaman">Maksimal Pinjaman</string>
 </resources>
