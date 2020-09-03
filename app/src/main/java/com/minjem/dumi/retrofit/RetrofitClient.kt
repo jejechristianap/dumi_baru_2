@@ -15,6 +15,7 @@ import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
 object RetrofitClient {
+    private const val BASE_LOCAL = "http://app.minjem.biz.id/api/"
     private const val BASE_URL = "https://api.minjem.biz.id/api/"
     private const val BASE_URL_PULSA = "http://klikmbc.co.id/"
     private const val BASE_URL_OTP = "http://api.nusasms.com/api/v3/sendsms/"
@@ -32,7 +33,7 @@ object RetrofitClient {
                 .writeTimeout(180, TimeUnit.SECONDS)
                 .build()
         Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(BASE_LOCAL) //TODO untuk ke production jangan lupa ganti base local ke BASE_URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
