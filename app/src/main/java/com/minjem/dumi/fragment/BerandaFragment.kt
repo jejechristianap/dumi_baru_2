@@ -15,7 +15,6 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
@@ -33,6 +32,7 @@ import com.minjem.dumi.ecommerce.Helper.spm
 import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.retrofit.RetrofitClient
+import com.minjem.dumi.util.KeyboardUtils
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.bottom_sheet_ecommerce_menu.view.*
 import kotlinx.android.synthetic.main.dialog_bottom_hitung.view.*
@@ -68,7 +68,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
     private var getAsur24 = 0f
     private var getAsur36 = 0f
     private var npTenor = 1
-    private var npTujuan = ""
+    private var npTujuan = "Renovasi Rumah"
     lateinit var localID: Locale
     lateinit var formatRp: NumberFormat
     private val listPlafond: MutableList<PlafondKreditData> = ArrayList()
@@ -86,7 +86,22 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
         initView()
         getBunga()
         initOnTouch()
-        rvClick()
+        rvClickTenor()
+        rvClickMenu()
+
+
+        KeyboardUtils.addKeyboardToggleListener(activity) { isVisible ->
+            Log.d("keyboard", "keyboard visible: $isVisible")
+            /*if (isVisible){
+                mView.persistent_bottom_sheet.visibility = View.GONE
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            } else {
+                mView.persistent_bottom_sheet.visibility = View.VISIBLE
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }*/
+        }
+
+
         /*val toolbar = activity!!.findViewById<View>(R.id.toolbarMain) as Toolbar
         toolbar.inflateMenu(R.menu.menu_toolbar_main)
         toolbar.setOnMenuItemClickListener(this)*/
@@ -125,7 +140,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
             }
 
             plafondAdapater.filter(listPlafond)
-            mView.rvMinimalPinjaman.adapter = plafondAdapater
+            mView.rvMaksimalPinjaman.adapter = plafondAdapater
             plafondAdapater.notifyDataSetChanged()
         }
         Log.d("ArrayList >>>>>>>>>>>>>>>>>>>> ", listPlafond.toString())
@@ -134,19 +149,26 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
     }
 
     private fun initView(){
+        bottomSheetBehavior = BottomSheetBehavior.from<LinearLayout>(mView.persistent_bottom_sheet)
+
         if (spm(mContext).nama_bank == "BNI"){
-            mView.rvMinimalPinjaman.visibility = View.VISIBLE
-            mView.rvMinimalPinjaman.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
+            mView.rvMaksimalPinjaman.visibility = View.VISIBLE
+            mView.llPinjaman.visibility = View.GONE
+            bottomSheetBehavior.peekHeight = activity!!.resources.getDimension(R.dimen._180sdp).toInt()
+//            mView.rvMinimalPinjaman.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
+            mView.rvMaksimalPinjaman.layoutManager = GridLayoutManager(mContext, 2)
             plafondAdapater = MinPinTenAdapter(mContext, listPlafond)
-            mView.rvMinimalPinjaman.adapter = plafondAdapater
+            mView.rvMaksimalPinjaman.adapter = plafondAdapater
             plafondAdapater.notifyDataSetChanged()
             initPlafondView()
         } else {
-            mView.rvMinimalPinjaman.visibility = View.GONE
+            bottomSheetBehavior.peekHeight = activity!!.resources.getDimension(R.dimen._90sdp).toInt()
+            mView.llPinjaman.visibility = View.VISIBLE
+            mView.rvMaksimalPinjaman.visibility = View.GONE
         }
         loadingP = Dialog(mContext)
 
-        bottomSheetBehavior = BottomSheetBehavior.from<LinearLayout>(mView.persistent_bottom_sheet)
+
 //        mView.gvMenuUtama.layoutManager = GridLayoutManager(mContext, 4)
         mView.rvEcommerce.layoutManager = GridLayoutManager(mContext, 4)
         eAdapter = EcommerceMenuAdapter(mContext, generateMenu())
@@ -219,7 +241,16 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
         )
     }
 
-    private fun rvClick(){
+    private fun rvClickTenor(){
+        mView.rvMaksimalPinjaman.addOnItemTouchListener(RecyclerItemClickListener(mContext, object: RecyclerItemClickListener.OnItemClickListener{
+            override fun onItemClick(view: View, position: Int) {
+                sBar(mView, plafondAdapater.list[position].plafond.toString())
+                hitungPinjaman(plafondAdapater.list[position].plafond!!, plafondAdapater.list[position].minimal_pinjaman!!.toFloat())
+            }
+        }))
+    }
+
+    private fun rvClickMenu(){
         mView.rvEcommerce.addOnItemTouchListener(RecyclerItemClickListener(mContext, object: RecyclerItemClickListener.OnItemClickListener{
             override fun onItemClick(view: View, position: Int) {
                 sBar(mView, eAdapter.list[position].title.toString())
@@ -235,7 +266,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
             } else {
                 mView.cetJumlahPinjaman.error = null
             }
-            hitungPinjaman()
+            hitungPinjaman(0, 0f)
         }
 
         mView.sbPinjaman.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
@@ -259,9 +290,9 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
 
         })
 
-        mView.persistentBtn.setOnClickListener{
+        /*mView.persistentBtn.setOnClickListener{
             expandCollapseSheet()
-        }
+        }*/
 
         bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback(){
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -471,18 +502,33 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
 
         }
 
-    private fun hitungPinjaman(){
-        val pokok = mView.cetJumlahPinjaman.cleanDoubleValue.toFloat() / npTenor
-        bunga = mView.cetJumlahPinjaman.cleanDoubleValue.toFloat() * getBunga / PinjamanKilatActivity.JUMLAH_BULAN_1_TAHUN
+    private fun hitungPinjaman(tenor: Int, jumlah: Float){
+        val pokok: Float
+        var jmlPinjaman = 0f
+        when{
+            tenor != 0 -> {
+                npTenor = tenor
+                jmlPinjaman = jumlah
+            }
+            tenor == 0 -> {
+                jmlPinjaman = mView.cetJumlahPinjaman.cleanDoubleValue.toFloat()
+            }
+        }
+        pokok =  jmlPinjaman / npTenor
+        bunga = jmlPinjaman * getBunga / PinjamanKilatActivity.JUMLAH_BULAN_1_TAHUN
         angsuran = pokok + bunga
-        admin = mView.cetJumlahPinjaman.cleanDoubleValue.toFloat() * getAdmin
-        asuransi = mView.cetJumlahPinjaman.cleanDoubleValue.toFloat() * getAsur12
+        admin = jmlPinjaman * getAdmin
+        asuransi = jmlPinjaman * getAsur12
         val totalPengurangan = admin + asuransi + PinjamanKilatActivity.BIAYA_TRANSFER
-        sisa = mView.cetJumlahPinjaman.cleanDoubleValue.toFloat() - totalPengurangan
-        Log.d("Asuransi", "numberPicker: $getAsur12")
-
-        Log.d("Hitung Pinjaman", "Angsuran: $angsuran\n" +
-                "Admin: $admin\n Asuransi: $asuransi\n Jumlah Terima: $sisa")
+        sisa = jmlPinjaman - totalPengurangan
+        Log.d("Asuransi", ": $getAsur12")
+        Log.d("Hitung Pinjaman",
+                "\nPokok: $pokok\n" +
+                        "Tenor: $npTenor" +
+                        "Angsuran: $angsuran\n" +
+                        "Admin: $admin\n" +
+                        "Asuransi: $asuransi\n" +
+                        "Jumlah Terima: $sisa")
 
         hitungDialog(angsuran.toDouble(), admin.toDouble(), asuransi.toDouble(), PinjamanKilatActivity.BIAYA_TRANSFER.toDouble(), sisa.toDouble())
 

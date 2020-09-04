@@ -15,7 +15,7 @@ import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
 object RetrofitClient {
-    private const val BASE_LOCAL = "http://app.minjem.biz.id/api/"
+    private const val BASE_LOCAL = "http://app.minjem.biz.id/api/" //Untuk testing di server local
     private const val BASE_URL = "https://api.minjem.biz.id/api/"
     private const val BASE_URL_PULSA = "http://klikmbc.co.id/"
     private const val BASE_URL_OTP = "http://api.nusasms.com/api/v3/sendsms/"
@@ -33,7 +33,7 @@ object RetrofitClient {
                 .writeTimeout(180, TimeUnit.SECONDS)
                 .build()
         Retrofit.Builder()
-                .baseUrl(BASE_LOCAL) //TODO untuk ke production jangan lupa ganti base local ke BASE_URL
+                .baseUrl(BASE_URL) //TODO untuk ke production jangan lupa ganti base local ke BASE_URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
@@ -110,7 +110,7 @@ object RetrofitClient {
         }
 
     // Create a trust manager that does not validate certificate chains
-    val unsafeOkHttpClient:
+    private val unsafeOkHttpClient:
 
     // Install the all-trusting trust manager
 
@@ -136,7 +136,7 @@ object RetrofitClient {
             val sslSocketFactory = sslContext.socketFactory
             val builder = OkHttpClient.Builder()
             builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
-            builder.hostnameVerifier { hostname: String?, session: SSLSession? -> true }
+            builder.hostnameVerifier { _: String?, _: SSLSession? -> true }
             builder
         } catch (e: Exception) {
             throw RuntimeException(e)

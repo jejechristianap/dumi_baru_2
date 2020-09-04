@@ -6,46 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_home_background">
-    <!--<HorizontalScrollView
-        android:id="@+id/hsvInfoPinjaman"
-        android:layout_width="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_height="@dimen/_100sdp"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        android:scrollbars="none"
-        android:visibility="gone">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:id="@+id/cardKilat"
-                android:layout_width="@dimen/_200sdp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_centerVertical="true"
-                android:background="@drawable/card"
-                android:padding="@dimen/_18sdp"
-                android:visibility="visible">
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/cardRegular"
-                android:layout_width="@dimen/_200sdp"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/cardKilat"
-                android:background="@drawable/card2"
-                android:padding="@dimen/_18sdp">
-
-
-            </RelativeLayout>
-        </RelativeLayout>
-    </HorizontalScrollView>-->
     <ScrollView
         android:visibility="visible"
         android:id="@+id/scrollView2"
@@ -62,17 +22,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMinimalPinjaman"
-                android:orientation="horizontal"
+                android:id="@+id/rvMaksimalPinjaman"
+                android:layout_width="match_parent"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:layout_height="wrap_content"
                 android:scrollbars="none"
                 android:visibility="visible"
-                android:layout_width="match_parent"
-                tools:listitem="@layout/recycler_view_min_pinjaman_tenor"
-                android:layout_height="@dimen/_130sdp"/>
+                tools:listitem="@layout/recycler_view_min_pinjaman_tenor" />
+
             <LinearLayout
+                android:id="@+id/llPinjaman"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_15sdp"
                 android:orientation="vertical">
@@ -401,7 +366,17 @@
 
         </LinearLayout>
     </ScrollView>
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <Button
+        android:id="@+id/persistentBtn"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Persistent Bottom Sheet" />
+
+    <include layout="@layout/bottom_sheet_ecommerce_menu"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <!--<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srlBeranda"
         android:visibility="gone"
         android:layout_width="match_parent"
@@ -481,7 +456,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary" />
             </RelativeLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
     <!--<ScrollView
         android:visibility="gone"
         android:layout_below="@id/srlBeranda"
@@ -727,12 +702,44 @@
 
         </LinearLayout>
     </ScrollView>-->
-    <Button
-        android:id="@+id/persistentBtn"
-        android:visibility="gone"
+
+    <!--<HorizontalScrollView
+        android:id="@+id/hsvInfoPinjaman"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Persistent Bottom Sheet" />
-    <include layout="@layout/bottom_sheet_ecommerce_menu"/>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:layout_alignParentTop="true"
+        android:layout_height="@dimen/_100sdp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:scrollbars="none"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/cardKilat"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/card"
+                android:padding="@dimen/_18sdp"
+                android:visibility="visible">
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cardRegular"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/cardKilat"
+                android:background="@drawable/card2"
+                android:padding="@dimen/_18sdp">
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </HorizontalScrollView>-->

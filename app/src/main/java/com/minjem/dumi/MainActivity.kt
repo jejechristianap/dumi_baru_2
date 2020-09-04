@@ -127,10 +127,15 @@ open class MainActivity : AppCompatActivity(), HistoryPinjamanView{
                     historyPresImp.history(spm(this).nip)
                     true
                 }
+                R.id.actionHistoryEcommerce -> {
+
+                    true
+                }
                 R.id.actionLogout -> {
                     SharedPrefManager.getInstance(applicationContext).logout()
-                    finish()
-                    startActivity(Intent(this@MainActivity, HalamanDepanActivity::class.java))
+//                    finish()
+//                    startActivity(Intent(this@MainActivity, HalamanDepanActivity::class.java))
+                    exitByBackKey()
                     true
                 }
                 else -> super.onOptionsItemSelected(it)

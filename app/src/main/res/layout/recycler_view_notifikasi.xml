@@ -4,58 +4,50 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tvHeaderNotif"
+        android:textColor="@color/grey_700"
+        android:textStyle="bold"
+        android:background="@color/grey_300"
+        android:text="@string/riwayat"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingEnd="@dimen/_15sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:textSize="@dimen/_12ssp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-    <TextView
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:id="@+id/id_notif"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:id="@+id/token_notif"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="@dimen/_10sdp"
+            android:id="@+id/judul_notif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/isi_notif"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <TextView
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:id="@+id/judul_notif"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:id="@+id/isi_notif"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:id="@+id/statusTv_notif"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:id="@+id/waktu_notif"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:id="@+id/id_nasabah_notif"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
+    </LinearLayout>
     <View
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
+        android:background="@color/grey_100"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="3dp"
-        android:background="@color/colorPrimary" />
+        android:layout_height="@dimen/_1sdp"/>
+
+   <!-- <TextView
+        android:id="@+id/tvWaktu"
+        android:layout_gravity="end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />-->
+
 
 </LinearLayout>

@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.minjem.dumi.R
 import com.minjem.dumi.dataclass.PlafondKreditData
@@ -19,12 +21,46 @@ class MinPinTenAdapter (private var c: Context, internal var list: List<PlafondK
         fun data(item: PlafondKreditData){
             val localID = Locale("in", "ID")
             val rp = NumberFormat.getCurrencyInstance(localID)
+            rp.maximumFractionDigits = 0
             var plafond = ""
             var min = ""
             plafond = item.plafond.toString()
             min = rp.format(item.minimal_pinjaman!!)
+            when(plafond.toInt()){
+                12 -> {
+                    DrawableCompat.setTint(
+                            DrawableCompat.wrap(itemView.ivStrip.drawable),
+                            ContextCompat.getColor(c, R.color.greenCard)
+                    )
+                }
+                24 -> {
+                    DrawableCompat.setTint(
+                            DrawableCompat.wrap(itemView.ivStrip.drawable),
+                            ContextCompat.getColor(c, R.color.yellowCard)
+                    )
+                }
+                36 -> {
+                    DrawableCompat.setTint(
+                            DrawableCompat.wrap(itemView.ivStrip.drawable),
+                            ContextCompat.getColor(c, R.color.orangeCard)
+                    )
+                }
+                48 -> {
+                    DrawableCompat.setTint(
+                            DrawableCompat.wrap(itemView.ivStrip.drawable),
+                            ContextCompat.getColor(c, R.color.redCard)
+                    )
+                }
+                60 -> {
+                    DrawableCompat.setTint(
+                            DrawableCompat.wrap(itemView.ivStrip.drawable),
+                            ContextCompat.getColor(c, R.color.purpleCard)
+                    )
+                }
+            }
             itemView.tvJangkaWaktu.text = plafond
             itemView.tvMinimalPinjaman.text = min
+
         }
 
     }

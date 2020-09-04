@@ -16,7 +16,7 @@
     <color name="grey_100">#EAEAEA</color>
     <color name="grey_300">#E0E0E0</color>
     <color name="grey_500">#BDBDBD</color>
-    <color name="grey_700">#747474</color>
+    <color name="grey_700">#959595</color>
     <color name="grey_1000">#444444</color>
     <color name="black">#000000</color>
     <color name="dialogBackground">#60000000</color>
@@ -28,6 +28,13 @@
     <color name="softRed">#FFDAD8</color>
     <color name="background">#dddddd</color>
     <color name="colorGrey">#dddddd</color>
+
+    <color name="greenCard">#80DD55</color>
+    <color name="yellowCard">#FFDB1C</color>
+    <color name="orangeCard">#FF891C</color>
+    <color name="redCard">#FF5656</color>
+    <color name="purpleCard">#8D1CFF</color>
+
 
     <!--Switch Color-->
     <color name="disable_forground_grey">#42221f1f</color>
