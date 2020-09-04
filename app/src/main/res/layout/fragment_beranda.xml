@@ -30,14 +30,14 @@
                 android:paddingEnd="@dimen/_5sdp"
                 android:layout_height="wrap_content"
                 android:scrollbars="none"
-                android:visibility="visible"
+                android:visibility="gone"
                 tools:listitem="@layout/recycler_view_min_pinjaman_tenor" />
 
             <LinearLayout
                 android:id="@+id/llPinjaman"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_15sdp"
                 android:orientation="vertical">
@@ -127,7 +127,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
-                        android:text="@string/tenor"
+                        android:text="@string/tenor_bulan"
                         android:textSize="@dimen/_13ssp"
                         android:textColor="@color/white"
                         />

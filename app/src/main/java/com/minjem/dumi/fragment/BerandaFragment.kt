@@ -244,7 +244,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
     private fun rvClickTenor(){
         mView.rvMaksimalPinjaman.addOnItemTouchListener(RecyclerItemClickListener(mContext, object: RecyclerItemClickListener.OnItemClickListener{
             override fun onItemClick(view: View, position: Int) {
-                sBar(mView, plafondAdapater.list[position].plafond.toString())
+//                sBar(mView, plafondAdapater.list[position].plafond.toString())
                 hitungPinjaman(plafondAdapater.list[position].plafond!!, plafondAdapater.list[position].minimal_pinjaman!!.toFloat())
             }
         }))

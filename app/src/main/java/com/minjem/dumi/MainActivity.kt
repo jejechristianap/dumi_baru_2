@@ -181,6 +181,10 @@ open class MainActivity : AppCompatActivity(), HistoryPinjamanView{
                     drawer_layout.closeDrawer(GravityCompat.START)
                     true
                 }
+                R.id.actionKeluar -> {
+                    exitByBackKey()
+                    true
+                }
                 else -> true
             }
         }
