@@ -128,7 +128,7 @@ class InboxFragment : Fragment() {
                             data.waktu = waktu
                             list.add(data)
                         }
-                        notifikasiAdapter.filter(list)
+//                        notifikasiAdapter.filter(list)
                         mView.notifikasi_rv.adapter = notifikasiAdapter
                         notifikasiAdapter.notifyDataSetChanged()
                         dProgress.dismiss()
