@@ -7,18 +7,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import com.minjem.dumi.util.CustomProgressDialog
 
 import com.minjem.dumi.R
 import com.minjem.dumi.api.StatusPinjamanInterface
 import com.minjem.dumi.ecommerce.Helper.mProgress
-import com.minjem.dumi.model.NotifikasiAdapter
-import com.minjem.dumi.model.NotifikasiData
+import com.minjem.dumi.adapter.NotifikasiAdapter
+import com.minjem.dumi.dataclass.NotifikasiData
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.retrofit.RetrofitClient
 import kotlinx.android.synthetic.main.fragment_inbox.view.*
@@ -49,13 +46,6 @@ class InboxFragment : Fragment() {
         dProgress = Dialog(mContext)
         /*(activity as AppCompatActivity).setSupportActionBar(mView.toolbarInbox)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)*/
-        /*(activity as AppCompatActivity).setSupportActionBar(mView.toolbarInbox)
-        mView.ctl.title = "Inbox"
-        mView.ivYuhu.setOnClickListener {
-            Snackbar.make(mView, "Yuhuuuuuuu", Snackbar.LENGTH_LONG).show()
-        }*/
-
-
 //        loadBackdrop()
 
         list.clear()

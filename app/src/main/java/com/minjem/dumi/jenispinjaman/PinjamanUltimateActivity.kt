@@ -10,7 +10,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.SeekBar
 import android.widget.Toast
-import com.minjem.dumi.PelengkapanRegularActivity
+import com.minjem.dumi.SuratPelengkapActivity
 import com.minjem.dumi.R
 import com.minjem.dumi.api.GetBungaInterface
 import com.minjem.dumi.api.StatusPinjamanInterface
@@ -311,7 +311,7 @@ class PinjamanUltimateActivity : AppCompatActivity() {
         Log.d("AJUKAN", "ajukanPinjaman: ${etCurrencyUltimate.cleanIntValue.toFloat()}")
         /*digisignPrestImp.data(SharedPrefManager.getInstance(this).user.nip
                 ,SharedPrefManager.getInstance(this).user.email)*/
-        val i = Intent(this, PelengkapanRegularActivity::class.java)
+        val i = Intent(this, SuratPelengkapActivity::class.java)
         i.putExtra("activity", "reguler")
         startActivity(i)
     }

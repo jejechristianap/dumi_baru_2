@@ -1,4 +1,4 @@
-package com.minjem.dumi.model
+package com.minjem.dumi.adapter
 
 
 import android.content.Context
@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 import com.minjem.dumi.R
+import com.minjem.dumi.dataclass.NotifikasiData
 import kotlinx.android.synthetic.main.recycler_view_notifikasi.view.*
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -18,18 +19,17 @@ import java.util.*
 class NotifikasiAdapter (internal var mContext : Context, internal var list : List<NotifikasiData>) :
         RecyclerView.Adapter<NotifikasiAdapter.HolderList>(){
     private var notif = list
-    inner class HolderList (view : View) : RecyclerView.ViewHolder(view) {
+    class HolderList (view : View) : RecyclerView.ViewHolder(view) {
         var headerText: TextView = itemView.tvHeaderNotif
-        fun Data(item: NotifikasiData, position: Int) {
+        fun data(item: NotifikasiData) {
             itemView.judul_notif.text = item.judul
             itemView.isi_notif.text = item.isi
             itemView.tvHeaderNotif.text = item.waktu
-//            itemView.tvWaktu.text = item.waktu
         }
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotifikasiAdapter.HolderList {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderList {
         val v = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_notifikasi,parent,false)
 
         return HolderList(v)
@@ -39,8 +39,8 @@ class NotifikasiAdapter (internal var mContext : Context, internal var list : Li
         return list.size
     }
 
-    override fun onBindViewHolder(holder: NotifikasiAdapter.HolderList, position: Int) {
-        holder.Data(list[position],position)
+    override fun onBindViewHolder(holder: HolderList, position: Int) {
+        holder.data(list[position])
         val waktu = notif[position].waktu!!
         val local = Locale("in", "ID")
         Log.d("NOTIFIKASI ===================> ", "onBindViewHolder: $waktu")

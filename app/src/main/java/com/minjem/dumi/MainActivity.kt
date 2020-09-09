@@ -148,6 +148,7 @@ open class MainActivity : AppCompatActivity(), HistoryPinjamanView{
                     loadFragment(BerandaFragment())
                     position = "Beranda"
                     toolbarMenu.findItem(R.id.actionHistory).isVisible = false
+//                    toolbarMenu.findItem(R.id.actionHistoryEcommerce).isVisible = true
                     supportActionBar?.title = position
                     drawer_layout.closeDrawer(GravityCompat.START)
                     true

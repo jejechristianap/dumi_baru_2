@@ -12,9 +12,7 @@ import android.view.View
 import android.widget.*
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.appcompat.app.AppCompatActivity
-import com.minjem.dumi.MainActivity
-import com.minjem.dumi.PelengkapanRegularActivity
-import com.minjem.dumi.PersetujuanActivity
+import com.minjem.dumi.SuratPelengkapActivity
 import com.minjem.dumi.R
 import com.minjem.dumi.api.GetBungaInterface
 import com.minjem.dumi.api.StatusPinjamanInterface
@@ -25,7 +23,6 @@ import com.minjem.dumi.presenter.DigisignPrestImp
 import com.minjem.dumi.response.RDigisign
 import com.minjem.dumi.retrofit.RetrofitClient
 import com.minjem.dumi.view.DigisignView
-import kotlinx.android.synthetic.main.activity_pinjaman_kilat.*
 import kotlinx.android.synthetic.main.activity_pinjmana_reguler.*
 import me.abhinay.input.CurrencyEditText
 import okhttp3.ResponseBody
@@ -660,14 +657,14 @@ class PinjamanRegularActivity : AppCompatActivity(), DigisignView {
         editor.putString("tglAkhir", tglAkhirPinjam)
         editor.putFloat("asuransi", asuransi)
         editor.apply()
-        startActivity(Intent(this@PinjamanRegularActivity, PelengkapanRegularActivity::class.java))
+        startActivity(Intent(this@PinjamanRegularActivity, SuratPelengkapActivity::class.java))
     }
 
     override fun digiResponse(response: RDigisign) {
         Log.d("Masuk Handler SUV >>>>"," ----------------------------------------- >>>>> RESPONSE")
         if (response.data!!.isNotEmpty()){
             Log.d("Digisign", "digiResponse: Selamat Akun Anda Sudah Teraktivasi")
-            val i = Intent(this@PinjamanRegularActivity, PelengkapanRegularActivity::class.java)
+            val i = Intent(this@PinjamanRegularActivity, SuratPelengkapActivity::class.java)
             i.putExtra("activity", "regular")
             startActivity(i)
         } else {

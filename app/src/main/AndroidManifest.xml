@@ -30,7 +30,7 @@
         <activity android:name=".PerjanjianKreditView" />
         <activity android:name=".ecommerce.transaction.RiwayatView" />
         <activity android:name=".PdfViewerActivity" />
-        <activity android:name=".PelengkapanRegularActivity" />
+        <activity android:name=".SuratPelengkapActivity" />
         <activity android:name=".akun.UbahSandiActivity" />
         <activity android:name=".akun.KebijakanPrivasiActivity" />
         <activity android:name=".akun.DisclaimerActivity" />
@@ -88,6 +88,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-    </application>
 
+        <meta-data android:name="minimum_period_repayment" android:value="@string/min_period_repayment"/>
+        <meta-data android:name="maximum_period_repayment" android:value="@string/max_period_repayment"/>
+        <meta-data android:name="maximum_apr" android:value="@string/max_apr"/>
+        <meta-data android:name="ex_total_cost" android:value="@string/ex_total_cost_of_the_loan"/>
+    </application>
 </manifest>

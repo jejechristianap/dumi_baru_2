@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mdi.stockin.ApiHelper.RecyclerItemClickListener
-import com.minjem.dumi.PelengkapanRegularActivity
+import com.minjem.dumi.SuratPelengkapActivity
 import com.minjem.dumi.R
 import com.minjem.dumi.adapter.EcommerceMenuAdapter
 import com.minjem.dumi.adapter.MinPinTenAdapter
@@ -26,6 +26,7 @@ import com.minjem.dumi.api.GetBungaInterface
 import com.minjem.dumi.api.StatusPinjamanInterface
 import com.minjem.dumi.dataclass.DataEcommerce
 import com.minjem.dumi.dataclass.PlafondKreditData
+import com.minjem.dumi.ecommerce.ECommerceActivity
 import com.minjem.dumi.ecommerce.Helper.mProgress
 import com.minjem.dumi.ecommerce.Helper.sBar
 import com.minjem.dumi.ecommerce.Helper.spm
@@ -33,6 +34,7 @@ import com.minjem.dumi.jenispinjaman.PinjamanKilatActivity
 import com.minjem.dumi.model.SharedPrefManager
 import com.minjem.dumi.retrofit.RetrofitClient
 import com.minjem.dumi.util.KeyboardUtils
+import com.minjem.dumi.view.RcOnClick
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.bottom_sheet_ecommerce_menu.view.*
 import kotlinx.android.synthetic.main.dialog_bottom_hitung.view.*
@@ -49,7 +51,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
+class BerandaFragment : Fragment(), RcOnClick /*, Toolbar.OnMenuItemClickListener*/{
     private var saldoUser = 0
     lateinit var mView : View
     lateinit var mContext : Context
@@ -77,6 +79,8 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
     lateinit var editor: SharedPreferences.Editor
     lateinit var pref: SharedPreferences
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
+    private var isBni = false
+    private var jmlPinjaman: Float = 0f
 
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")
@@ -87,8 +91,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
         getBunga()
         initOnTouch()
         rvClickTenor()
-        rvClickMenu()
-
+        rvClickEcommerce()
 
         KeyboardUtils.addKeyboardToggleListener(activity) { isVisible ->
             Log.d("keyboard", "keyboard visible: $isVisible")
@@ -118,9 +121,8 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
     }
 
     private fun initPlafondView(){
-//         Plafondview adapter
-//        val values: List<IntArray> = ArrayList(2)
-        val lp = arrayListOf(spm(mContext).plafond_1,
+        val lp = arrayListOf(
+                spm(mContext).plafond_1,
                 spm(mContext).plafond_2, spm(mContext).plafond_3,
                 spm(mContext).plafond_4, spm(mContext).plafond_5,
                 spm(mContext).plafond_6, spm(mContext).plafond_7,
@@ -143,7 +145,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
             mView.rvMaksimalPinjaman.adapter = plafondAdapater
             plafondAdapater.notifyDataSetChanged()
         }
-        Log.d("ArrayList >>>>>>>>>>>>>>>>>>>> ", listPlafond.toString())
+        Log.d("ArrayList >>>>>>>>>>>>>>>>>>>> ", listPlafond.size.toString())
         Log.d("ArrayList LP >>>>>>>>>>>>>>>>>>>> ", lp.toString())
         Log.d("ArrayList Lb >>>>>>>>>>>>>>>>>>>> ", lb.toString())
     }
@@ -152,6 +154,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
         bottomSheetBehavior = BottomSheetBehavior.from<LinearLayout>(mView.persistent_bottom_sheet)
 
         if (spm(mContext).nama_bank == "BNI"){
+            isBni = true
             mView.rvMaksimalPinjaman.visibility = View.VISIBLE
             mView.llPinjaman.visibility = View.GONE
             bottomSheetBehavior.peekHeight = activity!!.resources.getDimension(R.dimen._180sdp).toInt()
@@ -186,11 +189,11 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
 
         when(SharedPrefManager.getInstance(mContext).user.nama_bank){
             "MANTAP" -> {
-                mView.npTenorPinjaman.minValue = 1
-                mView.npTenorPinjaman.maxValue = 180
+                mView.npTenorPinjaman.minValue = 3
+                mView.npTenorPinjaman.maxValue = 60
             }
             "BNI" -> {
-                mView.npTenorPinjaman.minValue = 1
+                mView.npTenorPinjaman.minValue = 12
                 mView.npTenorPinjaman.maxValue = SharedPrefManager.getInstance(mContext).user.maksimal_tenor * 12
             }
         }
@@ -244,16 +247,29 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
     private fun rvClickTenor(){
         mView.rvMaksimalPinjaman.addOnItemTouchListener(RecyclerItemClickListener(mContext, object: RecyclerItemClickListener.OnItemClickListener{
             override fun onItemClick(view: View, position: Int) {
-//                sBar(mView, plafondAdapater.list[position].plafond.toString())
                 hitungPinjaman(plafondAdapater.list[position].plafond!!, plafondAdapater.list[position].minimal_pinjaman!!.toFloat())
             }
         }))
     }
 
-    private fun rvClickMenu(){
+    private fun rvClickEcommerce(){
         mView.rvEcommerce.addOnItemTouchListener(RecyclerItemClickListener(mContext, object: RecyclerItemClickListener.OnItemClickListener{
             override fun onItemClick(view: View, position: Int) {
-                sBar(mView, eAdapter.list[position].title.toString())
+                when(eAdapter.list[position].title){
+                    "PULSA" -> {
+                        val intent = Intent(activity, ECommerceActivity::class.java)
+                        intent.putExtra("fragment", "PULSA")
+                        startActivity(intent)
+                    }
+                    "PLN" -> {
+                        val intent = Intent(activity, ECommerceActivity::class.java)
+                        intent.putExtra("fragment", "PLN")
+                        startActivity(intent)
+                    }
+                    else -> {
+                        sBar(mView, "Coming soon")
+                    }
+                }
             }
         }))
     }
@@ -266,7 +282,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
             } else {
                 mView.cetJumlahPinjaman.error = null
             }
-            hitungPinjaman(0, 0f)
+            hitungPinjaman(npTenor, mView.cetJumlahPinjaman.cleanDoubleValue.toFloat())
         }
 
         mView.sbPinjaman.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
@@ -321,35 +337,6 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
             }
 
         })
-
-        /*mView.cardKilat.setOnClickListener { goTo("kilat") }
-        mView.kilatButton.setOnClickListener { goTo("kilat") }
-        mView.cardRegular.setOnClickListener { goTo("regular") }
-        mView.regularButton.setOnClickListener { goTo("regular") }
-        mView.cardUltimate.setOnClickListener { goTo("ultimate") }
-        mView.bUltimate.setOnClickListener { goTo("ultimate") }
-        mView.riwayatButton.setOnClickListener { goTo("riwayat") }
-        mView.icPulsa.setOnClickListener { goTo("pulsa") }
-        mView.textPulsa.setOnClickListener { goTo("pulsa") }
-        mView.icPln.setOnClickListener { goTo("pln") }
-        mView.textPln.setOnClickListener { goTo("pln") }
-        mView.icGopay.setOnClickListener { goTo("na") }
-        mView.textGopay.setOnClickListener { goTo("na") }
-        mView.icOvo.setOnClickListener { goTo("na") }
-        mView.textOvo.setOnClickListener { goTo("na") }
-        mView.icHotel.setOnClickListener { goTo("na") }
-        mView.textHotel.setOnClickListener { goTo("na") }
-        mView.icPesawat.setOnClickListener { goTo("na") }
-        mView.textPesawat.setOnClickListener { goTo("na") }
-        mView.icKereta.setOnClickListener { goTo("na") }
-        mView.textKereta.setOnClickListener { goTo("na") }
-        mView.icSemua.setOnClickListener { goTo("semua") }
-        mView.textSemua.setOnClickListener { goTo("semua") }
-        mView.tkb.setOnClickListener {
-            dialogTkb("tkb")
-        }*/
-
-
     }
 
     private fun expandCollapseSheet() {
@@ -441,7 +428,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
 
     private val pinjaman: Unit
         get(){
-            val status = RetrofitClient.client.create(StatusPinjamanInterface::class.java)
+            RetrofitClient.client.create(StatusPinjamanInterface::class.java)
                     .getPinjaman(SharedPrefManager.getInstance(mContext).user.nip)
                     .enqueue(object : Callback<ResponseBody>{
                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -503,8 +490,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
         }
 
     private fun hitungPinjaman(tenor: Int, jumlah: Float){
-        val pokok: Float
-        var jmlPinjaman = 0f
+        jmlPinjaman = 0f
         when{
             tenor != 0 -> {
                 npTenor = tenor
@@ -514,7 +500,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
                 jmlPinjaman = mView.cetJumlahPinjaman.cleanDoubleValue.toFloat()
             }
         }
-        pokok =  jmlPinjaman / npTenor
+        val pokok: Float = jmlPinjaman / npTenor
         bunga = jmlPinjaman * getBunga / PinjamanKilatActivity.JUMLAH_BULAN_1_TAHUN
         angsuran = pokok + bunga
         admin = jmlPinjaman * getAdmin
@@ -522,7 +508,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
         val totalPengurangan = admin + asuransi + PinjamanKilatActivity.BIAYA_TRANSFER
         sisa = jmlPinjaman - totalPengurangan
         Log.d("Asuransi", ": $getAsur12")
-        Log.d("Hitung Pinjaman",
+        Log.d("Hitung Pinjaman, jumlah pinjaman: ${jmlPinjaman.toDouble()}",
                 "\nPokok: $pokok\n" +
                         "Tenor: $npTenor" +
                         "Angsuran: $angsuran\n" +
@@ -532,12 +518,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
 
         hitungDialog(angsuran.toDouble(), admin.toDouble(), asuransi.toDouble(), PinjamanKilatActivity.BIAYA_TRANSFER.toDouble(), sisa.toDouble())
 
-        /*tvAngsuranPerbulanUltimate.text = formatRp.format(angsuran.toDouble())
-        tvAdminUltimate.text = formatRp.format(admin.toDouble())
-        tvAsuransiUltimate.text = formatRp.format(asuransi.toDouble())
-        tvTrfUltimate.text = formatRp.format(PinjamanKilatActivity.BIAYA_TRANSFER.toDouble())
-        tvJumlahTerimaUltimate.text = formatRp.format(sisa.toDouble())*/
-//        dialogTkb()
+
     }
 
     private fun ajukanPinjaman() {
@@ -555,6 +536,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
         editor = pref.edit()
         Log.d("Pinjaman",
                 """
+                    jumlah: $jmlPinjaman
                     nip: $nip
                     Pinjaman: ${mView.cetJumlahPinjaman.cleanIntValue}
                     Plafond: $npTenor
@@ -570,7 +552,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
                     asurans: $asuransi
                     """.trimIndent())
         editor.putString("nip", nip)
-        editor.putFloat("pinjaman", mView.cetJumlahPinjaman.cleanDoubleValue.toFloat())
+        editor.putFloat("pinjaman", jmlPinjaman)
         editor.putInt("lamaPinjaman", npTenor)
         editor.putFloat("bunga", bunga)
         editor.putFloat("admin", admin)
@@ -581,7 +563,7 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
         editor.putString("tglAkhir", tglAkhirPinjam)
         editor.putFloat("asuransi", asuransi)
         editor.apply()
-        startActivity(Intent(mContext, PelengkapanRegularActivity::class.java))
+        startActivity(Intent(mContext, SuratPelengkapActivity::class.java))
     }
 
 
@@ -615,6 +597,11 @@ class BerandaFragment : Fragment() /*, Toolbar.OnMenuItemClickListener*/{
             "semua" -> startActivity(Intent(activity, SemuaEcommerceActivity::class.java))
             else -> Toast.makeText(activity, "Tunggu update kami selanjutanya...", Toast.LENGTH_SHORT).show()
         }*/
+    }
+
+    override fun onPlafondClick(view: View, plafond: PlafondKreditData) {
+        Log.d("Plafond", "onPlafondClick: Clicked")
+//        hitungPinjaman(plafond.plafond!!, plafond.minimal_pinjaman!!.toFloat())
     }
 
     /*override fun onMenuItemClick(item: MenuItem?): Boolean {

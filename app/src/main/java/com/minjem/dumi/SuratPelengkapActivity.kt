@@ -2,11 +2,8 @@ package com.minjem.dumi
 
 import android.Manifest
 import android.app.Activity
-import android.app.ProgressDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -14,41 +11,28 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.minjem.dumi.util.FileUtils
-import id.zelory.compressor.Compressor
 import id.zelory.compressor.Compressor.compress
-import kotlinx.android.synthetic.main.activity_foto_ktp.*
 import kotlinx.android.synthetic.main.activity_pelengkapan_regular.*
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
-import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
 //import com.github.barteksc.pdfviewer.PDFView;
 //import org.apache.commons.io.IOUtils;
-class PelengkapanRegularActivity : AppCompatActivity() {
-    private var uploadSkBt: ImageView? = null
-    private var uploadPaBt: ImageView? = null
-    private var uploadSuratKBt: ImageView? = null
-    private var lanjutBt: Button? = null
-    private var ivSkCpns: ImageView? = null
-    private var ivPa: ImageView? = null
-    private var ivSk: ImageView? = null
+class SuratPelengkapActivity : AppCompatActivity() {
     lateinit var fotoSkCpnsPath: String
     lateinit var fotoPaPath: String
     lateinit var fotoSkPath: String
@@ -71,6 +55,9 @@ class PelengkapanRegularActivity : AppCompatActivity() {
         fotoPaPath = ""
         fotoSkCpnsPath = ""
         fotoSkPath = ""
+        compressedImageSkcpns = File("")
+        compressedImagePa = File("")
+        compressedImageSk = File("")
 
         /*uploadSkBt = findViewById(R.id.upload_sk_button)
         uploadPaBt = findViewById(R.id.upload_pa)
@@ -82,15 +69,15 @@ class PelengkapanRegularActivity : AppCompatActivity() {
         /*kirimFormatButton = findViewById(R.id.kirim_format_pdf_button)
         kirimFormatButton.setOnClickListener(View.OnClickListener { v: View? -> kirimFormat() })*/
         lanjut_button_foto.setOnClickListener(View.OnClickListener { v: View? ->
-            if (TextUtils.isEmpty(fotoSkCpnsPath)) {
-                Toast.makeText(this, "Foto SK Kosong", Toast.LENGTH_SHORT).show()
+            if (TextUtils.isEmpty(compressedImageSkcpns.toString())) {
+                Toast.makeText(this, "Foto SK CPNS Kosong", Toast.LENGTH_SHORT).show()
                 return@OnClickListener
             }
-            if (TextUtils.isEmpty(fotoPaPath)) {
+            if (TextUtils.isEmpty(compressedImagePa.toString())) {
                 Toast.makeText(this, "Foto Persetujuan Atasan Kosong", Toast.LENGTH_SHORT).show()
                 return@OnClickListener
             }
-            if (TextUtils.isEmpty(fotoSkPath)) {
+            if (TextUtils.isEmpty(compressedImageSk.toString())) {
                 Toast.makeText(this, "Foto Surat Kuasa Kosong", Toast.LENGTH_SHORT).show()
                 return@OnClickListener
             }
@@ -231,7 +218,7 @@ class PelengkapanRegularActivity : AppCompatActivity() {
                     val skcpns = File(fotoSkCpnsPath)
                     skcpns.let {imageFile ->
                         lifecycleScope.launch {
-                            compressedImageSkcpns = compress(this@PelengkapanRegularActivity, imageFile)
+                            compressedImageSkcpns = compress(this@SuratPelengkapActivity, imageFile)
                             setCompressedImage()
                         }
                     }
@@ -242,7 +229,7 @@ class PelengkapanRegularActivity : AppCompatActivity() {
                     val pa = File(fotoPaPath)
                     pa.let { imageFile ->
                         lifecycleScope.launch {
-                            compressedImagePa = compress(this@PelengkapanRegularActivity, imageFile)
+                            compressedImagePa = compress(this@SuratPelengkapActivity, imageFile)
                             setCompressedImagePa()
                         }
                     }
@@ -253,7 +240,7 @@ class PelengkapanRegularActivity : AppCompatActivity() {
                     val sk = File(fotoSkPath)
                     sk.let { imageFile ->
                         lifecycleScope.launch {
-                            compressedImageSk = compress(this@PelengkapanRegularActivity, imageFile)
+                            compressedImageSk = compress(this@SuratPelengkapActivity, imageFile)
                             setCompressedImageSk()
 
                         }
@@ -299,9 +286,9 @@ class PelengkapanRegularActivity : AppCompatActivity() {
 }
 
 /*private fun kirimFormat() {
-    myDialog = AlertDialog.Builder(this@PelengkapanRegularActivity)
+    myDialog = AlertDialog.Builder(this@SuratPelengkapActivity)
     myDialog!!.setCancelable(false)
-    inflater = LayoutInflater.from(this@PelengkapanRegularActivity)
+    inflater = LayoutInflater.from(this@SuratPelengkapActivity)
     view = inflater.inflate(R.layout.kirim_format_file, null)
     myDialog!!.setView(view)
     myDialog!!.setTitle("Contoh Format Dokumen")
@@ -324,7 +311,7 @@ class PelengkapanRegularActivity : AppCompatActivity() {
             startActivity(i);*//*
         *//*
 
-            new DownloadTask(PelengkapanRegularActivity.this, URL_SK);
+            new DownloadTask(SuratPelengkapActivity.this, URL_SK);
         });
 
         pdfRek.setOnClickListener(v -> {
@@ -333,7 +320,7 @@ class PelengkapanRegularActivity : AppCompatActivity() {
             i.putExtra("nameFile", "rek");
             startActivity(i);*//*
         *//*
-            new DownloadTask(PelengkapanRegularActivity.this, URL_RA);
+            new DownloadTask(SuratPelengkapActivity.this, URL_RA);
         });*//*
 
 

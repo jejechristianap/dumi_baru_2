@@ -720,4 +720,9 @@
     <string name="bulan">Bulan</string>
     <string name="minimal_pinjaman">Minimal Pinjaman</string>
     <string name="maksimal_pinjaman">Maksimal Pinjaman</string>
+    <string name="min_period_repayment">Minimum period for repayment since the approval is 3 months</string>
+    <string name="max_period_repayment">Maximum period for repayment since the approval is 60 months</string>
+    <string name="max_apr">Lending money with APR 9.9% a year with low interest rate 2% from the first installment</string>
+    <string name="ex_total_cost_of_the_loan">Example, Loan Rp10.000.000 with 12 Months installments Est. IDR 249.166,67/month</string>
+
 </resources>

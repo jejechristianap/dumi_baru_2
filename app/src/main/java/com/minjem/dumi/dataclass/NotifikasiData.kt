@@ -1,4 +1,4 @@
-package com.minjem.dumi.model
+package com.minjem.dumi.dataclass
 
 class NotifikasiData {
     var id: Int? = null

@@ -9,16 +9,17 @@
         android:icon="@drawable/ic_history"
         app:showAsAction="ifRoom"/>
 
-    <item
+    <!--<item
         android:id="@+id/ah"
         android:title="@string/riwayat_pinjaman"
         android:icon="@drawable/ic_bell24"
         android:visible="false"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom"/>-->
     <item
         android:id="@+id/actionHistoryEcommerce"
         android:icon="@drawable/ic_bell24"
         android:title="@string/riwayat"
+        android:visible="false"
         app:showAsAction="ifRoom"/>
 
     <item

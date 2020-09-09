@@ -39,7 +39,7 @@
 
     <RelativeLayout
         android:id="@+id/rl"
-        android:background="@color/colorBlue"
+        android:background="@color/colorPrimary"
         android:layout_below="@id/appbar"
         android:paddingStart="@dimen/_15sdp"
         android:layout_alignParentStart="true"
@@ -53,7 +53,7 @@
             android:id="@+id/rgPln"
             android:layout_marginTop="@dimen/_10sdp"
             android:orientation="horizontal"
-            android:background="@color/colorBlue"
+            android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:gravity="center_horizontal"
             android:checkedButton="@id/rbPrabayar"

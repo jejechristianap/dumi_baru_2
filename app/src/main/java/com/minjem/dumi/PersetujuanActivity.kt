@@ -290,10 +290,10 @@ class PersetujuanActivity : AppCompatActivity() {
         val pendingIntent = PendingIntent.getActivity(this@PersetujuanActivity, 0, ii, 0)
         val bigText = NotificationCompat.BigTextStyle()
         bigText.bigText(message)
-        bigText.setSummaryText("Pengajuan Pinjaman Kilat")
+        bigText.setSummaryText("Pengajuan Pinjaman")
         mBuilder.setContentIntent(pendingIntent)
         mBuilder.setSmallIcon(R.drawable.dumi_logo_real)
-        mBuilder.setContentTitle("Pinjaman Kilat")
+        mBuilder.setContentTitle("Pengajuan Pinjaman")
         mBuilder.priority = Notification.PRIORITY_MAX
         mBuilder.setStyle(bigText)
         mBuilder.setAutoCancel(true)
@@ -312,19 +312,20 @@ class PersetujuanActivity : AppCompatActivity() {
         mNotificationManager.notify(0, mBuilder.build())
     }
 
-    private fun pushNotificationRegular() {
+    fun pushNotificationRegular() {
         // Send Notification
         val mBuilder = NotificationCompat.Builder(applicationContext, "notify_001")
         val ii = Intent(applicationContext, MainActivity::class.java)
+        ii.putExtra("navigation", "PinjamanFragment")
         ii.putExtra("pushnotif", "pinjaman")
         val pendingIntent = PendingIntent.getActivity(this@PersetujuanActivity, 0, ii, 0)
         val bigText = NotificationCompat.BigTextStyle()
         /*bigText.bigText("""Pengajuan anda berhasil kami terima. Proses dapat berlangsung 1-3 hari kerja setelah data anda terverifikasi, mohon menunggu.
                     """.trimIndent())*/
-        bigText.setSummaryText("Pengajuan Pinjaman Regular")
+        bigText.setSummaryText("Pengajuan anda berhasil kami terima. Proses dapat berlangsung 1-3 hari kerja setelah data anda terverifikasi, mohon menunggu. Terima kasih")
         mBuilder.setContentIntent(pendingIntent)
         mBuilder.setSmallIcon(R.drawable.dumi_logo_real)
-        mBuilder.setContentTitle("Pinjaman Regular")
+        mBuilder.setContentTitle("Pengajuan Pinjaman")
         mBuilder.priority = Notification.PRIORITY_MAX
         mBuilder.setStyle(bigText)
         mBuilder.setAutoCancel(true)

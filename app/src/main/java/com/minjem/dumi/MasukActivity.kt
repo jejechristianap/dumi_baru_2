@@ -261,7 +261,7 @@ class MasukActivity : AppCompatActivity() {
                         dProgress.dismiss()
                     } else {
                         dProgress.dismiss()
-                        Toast.makeText(this@MasukActivity, "NIP/Password Salah!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MasukActivity, obj.getString("message") , Toast.LENGTH_SHORT).show()
                         nipEt!!.requestFocus()
                         passEt!!.requestFocus()
                     }

@@ -4,20 +4,23 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.minjem.dumi.R
 import com.minjem.dumi.dataclass.PlafondKreditData
-import com.minjem.dumi.ecommerce.response.PDAMData
+import com.minjem.dumi.view.RcOnClick
 import kotlinx.android.synthetic.main.recycler_view_min_pinjaman_tenor.view.*
 import java.text.NumberFormat
 import java.util.*
 
 class MinPinTenAdapter (private var c: Context, internal var list: List<PlafondKreditData>)
     : RecyclerView.Adapter<MinPinTenAdapter.MinPinTenHolder>(){
+    var plafondListener: RcOnClick? = null
 
     inner class MinPinTenHolder(view: View): RecyclerView.ViewHolder(view){
+        var plafond: LinearLayout = itemView.listPlafond
         fun data(item: PlafondKreditData){
             val localID = Locale("in", "ID")
             val rp = NumberFormat.getCurrencyInstance(localID)
@@ -76,11 +79,12 @@ class MinPinTenAdapter (private var c: Context, internal var list: List<PlafondK
 
     override fun onBindViewHolder(holder: MinPinTenAdapter.MinPinTenHolder, position: Int) {
         holder.data(list[position])
+        holder.plafond.listPlafond.setOnClickListener {
+            plafondListener?.onPlafondClick(it, list[position])
+        }
     }
 
     fun filter (new : MutableList<PlafondKreditData>){
-        /*val item = PDAMData()
-        item.ppob_nominal = item.ppob_nominal?.replace(".","")*/
         list = new.sortedBy {
             it.plafond
         }
